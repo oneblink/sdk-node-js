@@ -4,8 +4,7 @@
 /* ::
 
 export type options = {
-  formsAccessKey: string,
-  formsSecret: string
+  accessKey: string,
+  secret: string
 }
-
 */

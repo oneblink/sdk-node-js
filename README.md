@@ -12,18 +12,18 @@ require in the SDK:
 const OneblinkSDK = require('@oneblink/sdk')
 ```
 
-initialise the SDK object:
+initialise the SDK object for Forms:
 
 ```javascript
-const FORMS_KEY = '12345'
-const FORMS_SECRET = 'abcd'
-const oneblink = new OneblinkSDK({
-  formsAccessKey: FORMS_KEY,
-  formsSecret: FORMS_SECRET
+const ACCESS_KEY = '12345'
+const SECRET = 'abcd'
+const oneblink = new Oneblink.Forms({
+  accessKey: ACCESS_KEY,
+  Secret: SECRET
 })
 ```
 
-The OneblinkSDK currently exposes the following function:
+The Oneblink SDK currently exposes the following function:
 
 ```javascript
 generateFormUrl(formId, externalId)
