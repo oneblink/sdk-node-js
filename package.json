@@ -6,6 +6,8 @@
     "url": "https://github.com/blinkmobile/oneblink-sdk-js/issues"
   },
   "dependencies": {
+    "aws-sdk": "2.251.1",
+    "axios": "0.18.0",
     "jsonwebtoken": "8.2.2"
   },
   "devDependencies": {
