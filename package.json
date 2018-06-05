@@ -1,0 +1,17 @@
+{
+  "name": "@oneblink/sdk",
+  "version": "0.0.1",
+  "description": "SDK for using OneBlink services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "aaron@blinkmobile.com.au",
+  "license": "ISC",
+  "dependencies": {
+    "jsonwebtoken": "8.2.2"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.73.0"
+  }
+}
