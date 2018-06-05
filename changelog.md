@@ -1,5 +1,5 @@
 # Changelog
 
-## [Unreleased]
+## Unreleased
 
-### Intial Release
+### Initial Release

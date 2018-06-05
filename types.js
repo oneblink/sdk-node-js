@@ -2,9 +2,9 @@
 'use strict'
 
 /* ::
-
-export type options = {
+export type ConstructorOptions = {
   accessKey: string,
-  secret: string
+  secretKey: string,
+  formsRendererHostname?: string
 }
 */
