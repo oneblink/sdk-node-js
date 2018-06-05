@@ -5,7 +5,8 @@
 export type ConstructorOptions = {
   accessKey: string,
   secretKey: string,
-  formsRendererHostname?: string
+  formsRendererHostname?: string,
+  oneBlinkAPIOrigin: string
 }
 
 export type Credentials = {

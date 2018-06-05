@@ -13,7 +13,8 @@ describe('Forms SDK Class', () => {
       const forms = new Forms({
         accessKey: '123',
         secretKey: 'abc',
-        formsRendererHostname: 'https://domain.com'
+        formsRendererHostname: 'https://domain.com',
+        oneBlinkAPIOrigin: 'https://domain.api.com'
       })
       const result = forms.generateFormUrl(1, 'blah blah')
       expect(new Date(result.expiry)).toBeInstanceOf(Date)
@@ -33,7 +34,8 @@ describe('Forms SDK Class', () => {
     test('should generate url and expiry for without external id', () => {
       const forms = new Forms({
         accessKey: '123',
-        secretKey: 'abc'
+        secretKey: 'abc',
+        oneBlinkAPIOrigin: 'https://domain.api.com'
       })
       const result = forms.generateFormUrl(2)
 
