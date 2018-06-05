@@ -17,7 +17,8 @@ export type Credentials = {
 
 export type S3 = {
   bucket: string,
-  key: string
+  key: string,
+  region: string
 }
 
 export type RetrievalData = {
