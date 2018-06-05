@@ -1,23 +1,27 @@
 # OneBlink SDK
 
-## installation
+OneBlink SDK to serve as an entry point for all OneBlink Services in NodeJS
 
-`npm i @oneblink/sdk --save`
+## Installation
 
-## usage
-
-require in the SDK:
-
-````javascript
-const OneblinkSDK = require('@oneblink/sdk')
+```sh
+npm install @oneblink/sdk --save
 ```
 
-initialise the SDK object for Forms:
+## Usage
+
+Require in the SDK:
+
+```javascript
+const OneBlink = require('@oneblink/sdk')
+```
+
+Initialise the SDK object for Forms:
 
 ```javascript
 const ACCESS_KEY = '12345'
 const SECRET = 'abcd'
-const oneblink = new Oneblink.Forms({
+const oneblink = new OneBlink.Forms({
   accessKey: ACCESS_KEY,
   Secret: SECRET
 })
@@ -32,7 +36,7 @@ generateFormUrl(formId, externalId)
 | Parameter | Description
 |---|---|
 | `formId` | The exact id of the form you wish to generate a URL for |
-| `externalId` | (optional) The external identifier of the form or form submission you wish to use, this will be given back to you in the query string 
+| `externalId` | (optional) The external identifier of the form or form submission you wish to use, this will be given back to you in the query string
 
 Response Object:
 
