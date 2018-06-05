@@ -5,6 +5,6 @@
 export type ConstructorOptions = {
   accessKey: string,
   secretKey: string,
-  formsRendererHostname: string
+  formsRendererHostname?: string
 }
 */

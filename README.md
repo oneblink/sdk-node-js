@@ -20,10 +20,10 @@ Initialise the SDK object for Forms:
 
 ```javascript
 const ACCESS_KEY = '12345'
-const SECRET = 'abcd'
+const SECRET_KEY = 'abcd'
 const oneblink = new OneBlink.Forms({
   accessKey: ACCESS_KEY,
-  Secret: SECRET
+  secretKey: SECRET_KEY
 })
 ```
 
@@ -42,9 +42,8 @@ Response Object:
 
 ```json
 {
-  "formUrl": "https://forms.oneblink.io/1?externalId=123456abc",
-  "jwt": "qwertyuiop098765432",
-  "jwtExpiry": "2018-01-01T23:00:00"
+  "formUrl": "https://forms.oneblink.io/1?externalId=123456abc&access_key=qwertyuiop098765432",
+  "expiry": "2018-06-05T09:09:46.227Z"
 }
 ```
 
