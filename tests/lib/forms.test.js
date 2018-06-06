@@ -13,6 +13,7 @@ describe('Forms SDK Class', () => {
       const forms = new Forms({
         accessKey: '123',
         secretKey: 'abc',
+        oneBlinkAPIOrigin: 'https://domain.api.com',
         formsRendererOrigin: 'https://domain.com'
       })
       const result = forms.generateFormUrl(1, 'blah blah')
@@ -33,7 +34,8 @@ describe('Forms SDK Class', () => {
     test('should generate url and expiry for without external id', () => {
       const forms = new Forms({
         accessKey: '123',
-        secretKey: 'abc'
+        secretKey: 'abc',
+        oneBlinkAPIOrigin: 'https://domain.api.com'
       })
       const result = forms.generateFormUrl(2)
 
