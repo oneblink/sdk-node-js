@@ -9,14 +9,20 @@ const Forms = require('../../lib/forms.js')
 
 describe('Forms SDK Class', () => {
   describe('generateFormUrl()', () => {
-    test('should generate url and expiry for with external id', () => {
-      const forms = new Forms({
-        accessKey: '123',
-        secretKey: 'abc',
-        oneBlinkAPIOrigin: 'https://domain.api.com',
-        formsRendererOrigin: 'https://domain.com'
-      })
+    const forms = new Forms({
+      accessKey: '123',
+      secretKey: 'abc',
+      formsRendererOrigin: 'https://domain.com'
+    })
+
+    test('should throw correct validation errors', () => {
+      expect(() => forms.generateFormUrl()).toThrow('Must supply "formId" as a number')
+      expect(() => forms.generateFormUrl(1, 1)).toThrow('Must supply "externalId" as a string or not at all')
+    })
+
+    test('should generate url and expiry with external id', () => {
       const result = forms.generateFormUrl(1, 'blah blah')
+
       expect(new Date(result.expiry)).toBeInstanceOf(Date)
 
       const parsedUrl = new URL(result.formUrl)
@@ -31,11 +37,10 @@ describe('Forms SDK Class', () => {
       expect(searchParams.externalId).toBe('blah blah')
     })
 
-    test('should generate url and expiry for without external id', () => {
+    test('should generate url and expiry without external id', () => {
       const forms = new Forms({
         accessKey: '123',
-        secretKey: 'abc',
-        oneBlinkAPIOrigin: 'https://domain.api.com'
+        secretKey: 'abc'
       })
       const result = forms.generateFormUrl(2)
 
@@ -49,6 +54,24 @@ describe('Forms SDK Class', () => {
       const searchParams = querystring.parse(search)
       expect(searchParams.access_key).toBeDefined()
       expect(searchParams.externalId).toBeUndefined()
+    })
+  })
+
+  describe('getSubmissionData()', () => {
+    const forms = new Forms({
+      accessKey: '123',
+      secretKey: 'abc',
+      oneBlinkAPIOrigin: 'https://domain.api.com'
+    })
+
+    describe('should reject with correct validation errors for', () => {
+      test('"formId"', () => {
+        return expect(forms.getSubmissionData()).rejects.toThrow('Must supply "formId" as a number')
+      })
+
+      test('"submissionId"', () => {
+        return expect(forms.getSubmissionData(1)).rejects.toThrow('Must supply "submissionId" as a string')
+      })
     })
   })
 })
