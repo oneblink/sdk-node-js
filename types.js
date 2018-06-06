@@ -5,7 +5,7 @@
 export type ConstructorOptions = {
   accessKey: string,
   secretKey: string,
-  formsRendererHostname?: string,
+  formsRendererOrigin?: string,
   oneBlinkAPIOrigin: string
 }
 
@@ -23,6 +23,6 @@ export type S3 = {
 
 export type RetrievalData = {
   credentials: Credentials,
-  s3: S3
+  s3: S3  
 }
 */

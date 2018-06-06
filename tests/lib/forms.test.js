@@ -13,8 +13,8 @@ describe('Forms SDK Class', () => {
       const forms = new Forms({
         accessKey: '123',
         secretKey: 'abc',
-        formsRendererHostname: 'https://domain.com',
-        oneBlinkAPIOrigin: 'https://domain.api.com'
+        oneBlinkAPIOrigin: 'https://domain.api.com',
+        formsRendererOrigin: 'https://domain.com'
       })
       const result = forms.generateFormUrl(1, 'blah blah')
       expect(new Date(result.expiry)).toBeInstanceOf(Date)
