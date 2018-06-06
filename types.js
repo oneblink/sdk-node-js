@@ -3,10 +3,10 @@
 
 /* ::
 export type ConstructorOptions = {
-  accessKey: string,
-  secretKey: string,
-  formsRendererOrigin?: string,
-  oneBlinkAPIOrigin?: string
+  accessKey: mixed,
+  secretKey: mixed,
+  formsRendererOrigin?: mixed,
+  oneBlinkAPIOrigin?: mixed
 }
 
 export type AWSCredentials = {
@@ -23,4 +23,68 @@ export type FormRetrievalData = {
     region: string
   }
 }
+
+export type BaseSearchResult = {
+  meta: {
+    "limit": null,
+    "offset": null,
+    "nextOffset": null
+  }
+}
+
+export type FormElement = {
+  type: 'camera' |
+    'checkboxes' |
+    'date' |
+    'datetime' |
+    'heading' |
+    'location' |
+    'number' |
+    'radio' |
+    'select' |
+    'draw' |
+    'text' |
+    'textarea' |
+    'time',
+  name: string,
+  label: string,
+  required: boolean,
+  multi?: boolean,
+  minNumber?: number,
+  maxNumber?: number,
+  headingType?: number,
+  fromDate?: string,
+  toDate?: string,
+  options?: Array<{
+    id: string,
+    value: string
+  }>
+}
+
+export type Form = {
+  id: number,
+  name: string,
+  description?: string,
+  organisationId: string,
+  elements: FormElement[],
+  isAuthenticated: boolean,
+  isPublished: boolean,
+  submissionEvents?: Array<FormSubmissionEvent>
+}
+
+export type FormSubmissionEvent = {
+  id: number,
+  type: 'CALLBACK',
+  configuration: Object
+}
+
+export type FormsSearchResult = {
+  forms: Form[]
+} & BaseSearchResult
+
+export type FormsSearchOptions = {
+  organisationId?: mixed,
+  isPublished?: mixed
+}
+
 */
