@@ -10,8 +10,5 @@
   },
   "plugins": [
     "node"
-  ],
-  "rules": {
-    "no-console": "off"
-  }
+  ]
 }
