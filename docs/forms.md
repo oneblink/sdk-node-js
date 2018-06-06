@@ -30,7 +30,7 @@ const forms = new OneBlink.Forms(options)
 | Parameter | Required | Type | Description
 |---|---|---|---|
 | `formId` | Yes | `number` | The exact id of the form you wish to generate a URL for |
-| `externalId` | No | `string` | The external identifier of the form or form submission you wish to use, this will be given back to you in the query string |
+| `externalId` | No | `string` | The external identifier of the form submission you wish to use, this identifier will be returned to you with a submissionId after a successful submission to allow you to retrieve the data later |
 
 ### Result
 
@@ -58,7 +58,7 @@ const formUrl = result.formUrl
 | Parameter | Required | Type | Description
 |---|---|---|---|
 | `formId` | Yes | `number` | The exact id of the form you wish to generate a URL for |
-| `submissionId` | Yes | `string` | The submission id generated after a successful form submission |
+| `submissionId` | Yes | `string` | The submission identifier generated after a successful form submission, this will be return to you after a successful forms submission via a callback URL |
 
 ### Result (Resolved Promise)
 
