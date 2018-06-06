@@ -10,4 +10,9 @@ npm install @oneblink/sdk --save
 
 ## Usage
 
--   [Documentation](./docs/README.md)
+-   [Usage Documentation](./docs/README.md)
+-   [Form Submissions](./docs/form-submissions.md)
+
+## Internal Documentation
+
+-   [Development](./docs/development.md)

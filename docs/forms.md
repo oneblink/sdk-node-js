@@ -1,4 +1,4 @@
-# OneBlink SDK | Forms
+# OneBlink SDK | Forms Class
 
 ## Constructor
 
@@ -6,8 +6,6 @@
 |---|---|---|---|
 | `options.accessKey` | Yes | `string` | Access key provided by OneBlink. |
 | `options.secretKey` | Yes | `string` | Secret key provided by OneBlink. |
-| `options.formsRendererOrigin` | No | `string` | The Origin of the Forms Renderer. Should only be used for development and testing purposes. |
-| `options.oneBlinkAPIOrigin` | No | `string` | The Origin of the OneBlink API. Should only be used for development and testing purposes. |
 
 ### Example
 
@@ -21,25 +19,7 @@ const options = {
 const forms = new OneBlink.Forms(options)
 ```
 
-## Functions
-
-### `generateFormUrl(formId, externalId)`
-
-### Parameters
-
-| Parameter | Required | Type | Description
-|---|---|---|---|
-| `formId` | Yes | `number` | The exact id of the form you wish to generate a URL for |
-| `externalId` | No | `string` | The external identifier of the form submission you wish to use, this identifier will be returned to you with a submissionId after a successful submission to allow you to retrieve the data later |
-
-### Result
-
-```json
-{
-  "formUrl": "https://forms.oneblink.io/1?externalId=123456abc&access_key=qwertyuiop098765432",
-  "expiry": "2018-06-05T09:09:46.227Z"
-}
-```
+## Generate Form URL
 
 ### Example
 
@@ -51,9 +31,40 @@ const formUrl = result.formUrl
 // Use form URL here...
 ```
 
-### `getSubmissionData(formId, submissionId)`
-
 ### Parameters
+
+| Parameter | Required | Type | Description
+|---|---|---|---|
+| `formId` | Yes | `number` | The exact id of the form you wish to generate a URL for |
+| `externalId` | No | `string` | The external identifier of the form submission you wish to use, this identifier will be returned to you with the submissionId after a successful submission to allow you to retrieve the data later |
+
+### Result
+
+```json
+{
+  "formUrl": "https://forms.oneblink.io/1?externalId=123456abc&access_key=qwertyuiop098765432",
+  "expiry": "2018-06-05T09:09:46.227Z"
+}
+```
+
+## Get Submission Data
+
+### Example
+
+```javascript
+const formId = 1
+const submissionId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+forms.getSubmissionData(formId, submissionId)
+  .then((result) => {
+    const definition = result.definition
+    const submission = result.submission
+  })
+  .catch((error) => {
+    // Handle error here
+  })
+```
+
+#### Parameters
 
 | Parameter | Required | Type | Description
 |---|---|---|---|
@@ -82,29 +93,28 @@ const formUrl = result.formUrl
 }
 ```
 
+## Search Forms
+
 ### Example
 
 ```javascript
-const formId = 1
-const submissionId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
-forms.getSubmissionData(formId, submissionId)
+const organisationId = '0101010101010'
+const isPublished = true
+forms.getSubmissionData(organisationId, isPublished)
   .then((result) => {
-    const definition = result.definition
-    const submission = result.submission
+    const forms = result.forms
   })
   .catch((error) => {
     // Handle error here
   })
 ```
 
-### `search(organisationId, isPublished)`
-
 ### Parameters
 
 | Parameter | Required | Type | Description
 |---|---|---|---|
-| `organisationId` | Yes | `string` | The exact id of the organisation you wish to return a list of forms from |
-| `isPublished` | No | `boolean` | Return published forms or unpublished forms. If not supplied, all forms will be returned |
+| `organisationId` | Yes | `string` | The exact id of the organisation you wish to return a list of forms from. This value is available from the OneBlink Console in the URL bar. |
+| `isPublished` | No | `boolean` | Return published forms or unpublished forms. If not supplied, all forms will be returned. |
 
 ### Result (Resolved Promise)
 
@@ -128,18 +138,4 @@ forms.getSubmissionData(formId, submissionId)
     }
   ]
 }
-```
-
-### Example
-
-```javascript
-const organisationId = '0101010101010'
-const isPublished = true
-forms.getSubmissionData(organisationId, isPublished)
-  .then((result) => {
-    const forms = result.forms
-  })
-  .catch((error) => {
-    // Handle error here
-  })
 ```
