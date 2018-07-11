@@ -99,7 +99,9 @@ forms.getSubmissionData(formId, submissionId)
 
 ```javascript
 const options = {
-  isPublished: true
+  isPublished: true,
+  isAuthenticated: true,
+  name: 'Form Name'
 }
 forms.search(options)
   .then((result) => {
@@ -115,7 +117,9 @@ forms.search(options)
 | Parameter | Required | Type | Description
 |---|---|---|---|
 | `options` | No | `Object` | Search options. |
+| `options.isAuthenticated` | No | `boolean` | Return authenticated forms or unauthenticated forms. If not supplied, all forms will be returned. |
 | `options.isPublished` | No | `boolean` | Return published forms or unpublished forms. If not supplied, all forms will be returned. |
+| `options.name` | No | `string` | Search on the name property of a form. Can be a prefix, suffix or partial match. |
 
 ### Result (Resolved Promise)
 
