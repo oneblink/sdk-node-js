@@ -83,8 +83,9 @@ export type FormsSearchResult = {
 } & BaseSearchResult
 
 export type FormsSearchOptions = {
-  organisationId?: mixed,
-  isPublished?: mixed
+  isAuthenticated?: mixed,
+  isPublished?: mixed,
+  name?: mixed
 }
 
 */

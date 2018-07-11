@@ -98,9 +98,10 @@ forms.getSubmissionData(formId, submissionId)
 ### Example
 
 ```javascript
-const organisationId = '0101010101010'
-const isPublished = true
-forms.getSubmissionData(organisationId, isPublished)
+const options = {
+  isPublished: true
+}
+forms.search(options)
   .then((result) => {
     const forms = result.forms
   })
@@ -113,8 +114,8 @@ forms.getSubmissionData(organisationId, isPublished)
 
 | Parameter | Required | Type | Description
 |---|---|---|---|
-| `organisationId` | Yes | `string` | The exact id of the organisation you wish to return a list of forms from. This value is available from the OneBlink Console in the URL bar. |
-| `isPublished` | No | `boolean` | Return published forms or unpublished forms. If not supplied, all forms will be returned. |
+| `options` | No | `Object` | Search options. |
+| `options.isPublished` | No | `boolean` | Return published forms or unpublished forms. If not supplied, all forms will be returned. |
 
 ### Result (Resolved Promise)
 
