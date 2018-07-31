@@ -6,6 +6,7 @@
 |---|---|---|---|
 | `options.accessKey` | Yes | `string` | Access key provided by OneBlink. |
 | `options.secretKey` | Yes | `string` | Secret key provided by OneBlink. |
+| `options.formsRendererOrigin` | Yes | `string` | The Origin of the Forms Renderer provided by OneBlink. E.g. `https://organisation.forms.oneblink.io` |
 
 ### Example
 

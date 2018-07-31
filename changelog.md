@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+-   `options.formsRendererOrigin` as required option to Forms Class Constructor
+
 ## 0.1.0 (2018-07-11)
 
 ### Added
