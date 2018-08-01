@@ -5,29 +5,55 @@
 const querystring = require('querystring')
 const { URL } = require('url')
 
-const Forms = require('../../lib/forms.js')
-
 describe('Forms SDK Class', () => {
   describe('generateFormUrl()', () => {
+    jest.mock('../../lib/one-blink-api.js', () => {
+      return class {
+        /* ::
+        accessKey: string
+        secretKey: string
+        */
+        constructor (
+          apiOrigin,
+          accessKey,
+          secretKey
+        ) {
+          this.accessKey = accessKey
+          this.secretKey = secretKey
+        }
+
+        searchRequest () {
+          return Promise.resolve({
+            organisations: [{
+              formsHostname: 'forms.oneblink.io'
+            }]
+          })
+        }
+      }
+    })
+
+    const Forms = require('../../lib/forms.js')
     const forms = new Forms({
       accessKey: '123',
-      secretKey: 'abc',
-      formsRendererOrigin: 'https://domain.com'
+      secretKey: 'abc'
     })
 
-    test('should throw correct validation errors', () => {
-      expect(() => forms.generateFormUrl()).toThrow('Must supply "formId" as a number')
-      expect(() => forms.generateFormUrl(1, 1)).toThrow('Must supply "externalId" as a string or not at all')
+    test('should reject with correct validation errors for "formId"', () => {
+      return expect(forms.generateFormUrl()).rejects.toThrow('Must supply "formId" as a number')
     })
 
-    test('should generate url and expiry with external id', () => {
-      const result = forms.generateFormUrl(1, 'blah blah')
+    test('should reject with correct validation errors for "externalId"', () => {
+      return expect(forms.generateFormUrl(1, 1)).rejects.toThrow('Must supply "externalId" as a string or not at all')
+    })
+
+    test('should generate url and expiry with external id', async () => {
+      const result = await forms.generateFormUrl(1, 'blah blah')
 
       expect(new Date(result.expiry)).toBeInstanceOf(Date)
 
       const parsedUrl = new URL(result.formUrl)
       expect(parsedUrl.protocol).toBe('https:')
-      expect(parsedUrl.hostname).toBe('domain.com')
+      expect(parsedUrl.hostname).toBe('forms.oneblink.io')
       expect(parsedUrl.pathname).toBe('/1')
 
       // need to remove the ? from the query string
@@ -37,12 +63,8 @@ describe('Forms SDK Class', () => {
       expect(searchParams.externalId).toBe('blah blah')
     })
 
-    test('should generate url and expiry without external id', () => {
-      const forms = new Forms({
-        accessKey: '123',
-        secretKey: 'abc'
-      })
-      const result = forms.generateFormUrl(2)
+    test('should generate url and expiry without external id', async () => {
+      const result = await forms.generateFormUrl(2)
 
       const parsedUrl = new URL(result.formUrl)
       expect(parsedUrl.protocol).toBe('https:')
@@ -58,6 +80,7 @@ describe('Forms SDK Class', () => {
   })
 
   describe('getSubmissionData()', () => {
+    const Forms = require('../../lib/forms.js')
     const forms = new Forms({
       accessKey: '123',
       secretKey: 'abc',

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Changed
+
+-   `forms.generateFormUrl(formId, externalId)` to return a promise that will resolve with the same value as before
+
 ## 0.1.0 (2018-07-11)
 
 ### Added

@@ -5,7 +5,6 @@
 export type ConstructorOptions = {
   accessKey: mixed,
   secretKey: mixed,
-  formsRendererOrigin?: mixed,
   oneBlinkAPIOrigin?: mixed
 }
 
@@ -88,4 +87,11 @@ export type FormsSearchOptions = {
   name?: mixed
 }
 
+export type S3SubmissionData = {
+  submission: {
+    [name: string]: any
+  },
+  definition: Form,
+  submissionTimestamp: string
+}
 */
