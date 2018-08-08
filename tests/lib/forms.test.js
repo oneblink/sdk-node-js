@@ -54,7 +54,7 @@ describe('Forms SDK Class', () => {
       const parsedUrl = new URL(result.formUrl)
       expect(parsedUrl.protocol).toBe('https:')
       expect(parsedUrl.hostname).toBe('forms.oneblink.io')
-      expect(parsedUrl.pathname).toBe('/1')
+      expect(parsedUrl.pathname).toBe('/forms/1')
 
       // need to remove the ? from the query string
       const search = parsedUrl.search.slice(1)
@@ -69,7 +69,7 @@ describe('Forms SDK Class', () => {
       const parsedUrl = new URL(result.formUrl)
       expect(parsedUrl.protocol).toBe('https:')
       expect(parsedUrl.hostname).toBe('forms.oneblink.io')
-      expect(parsedUrl.pathname).toBe('/2')
+      expect(parsedUrl.pathname).toBe('/forms/2')
 
       // need to remove the ? from the query string
       const search = parsedUrl.search.slice(1)

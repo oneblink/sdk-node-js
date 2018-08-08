@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fixed
+
+-   Path of forms renderer URL to match `/forms/{formId}`
+
 ## 0.2.0 (2018-08-07)
 
 ### Changed
