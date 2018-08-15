@@ -23,7 +23,7 @@ export type FormRetrievalData = {
   }
 }
 
-export type PrefillMeta = {
+export type PreFillMeta = {
   credentials: AWSCredentials,
   s3: {
     bucket: string,

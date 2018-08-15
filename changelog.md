@@ -4,7 +4,7 @@
 
 ### Added
 
-- `Forms.prefillData` data to allow pre-filling form data
+-   Pre filled data argument to `forms.generateFormUrl()` function
 
 ### Fixed
 
