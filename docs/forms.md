@@ -146,3 +146,36 @@ forms.search(options)
   ]
 }
 ```
+
+## Pre-filling form Data
+
+### Example
+
+```javascript
+const formId = 1
+const data = {
+  fieldName1: 'device name',
+  fieldName2: 'device description'
+}
+
+forms.prefillData(formId, data)
+  .then((result) => {
+    
+  })
+  .catch((error) => {
+    // Handle error here
+  })
+```
+
+#### Parameters
+
+| Parameter | Required | Type | Description
+|---|---|---|---|
+| `formId` | Yes | `number` | The exact id of the form you wish to generate a URL for |
+| `data` | Yes | `object` | An object with the form field names as keys and the prefill data as the values |
+
+### Result (Resolved Promise)
+
+```json
+{ }
+```
