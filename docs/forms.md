@@ -26,7 +26,11 @@ const forms = new OneBlink.Forms(options)
 ```javascript
 const formId = 1
 const externalId = 'My Custom Identifier'
-forms.generateFormUrl(formId, externalId)
+const preFilledData = {
+  'FieldName1' : 'A Machine',
+  'FieldName2' : 'Room B'
+}
+forms.generateFormUrl(formId, externalId, preFilledData)
   .then((result) => {
     const formUrl = result.formUrl
     // Use form URL here...
@@ -39,12 +43,13 @@ forms.generateFormUrl(formId, externalId)
 |---|---|---|---|
 | `formId` | Yes | `number` | The exact id of the form you wish to generate a URL for |
 | `externalId` | No | `string` | The external identifier of the form submission you wish to use, this identifier will be returned to you with the submissionId after a successful submission to allow you to retrieve the data later |
+| `preFilledData` | No | `Object` |  An object with the form field names as keys and the prefill data as the values |
 
 ### Result (Resolved Promise)
 
 ```json
 {
-  "formUrl": "https://organisation.forms.oneblink.io/1?externalId=123456abc&access_key=qwertyuiop098765432",
+  "formUrl": "https://organisation.forms.oneblink.io/1?externalId=123456abc&access_key=qwertyuiop098765432&preFillFormDataId=123",
   "expiry": "2018-06-05T09:09:46.227Z"
 }
 ```

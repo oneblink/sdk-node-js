@@ -23,6 +23,15 @@ export type FormRetrievalData = {
   }
 }
 
+export type PreFillMeta = {
+  credentials: AWSCredentials,
+  s3: {
+    bucket: string,
+    key: string,
+    region: string
+  }
+}
+
 export type BaseSearchResult = {
   meta: {
     "limit": null,

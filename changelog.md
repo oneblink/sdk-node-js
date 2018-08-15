@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+-   Pre filled data argument to `forms.generateFormUrl()` function
+
 ### Fixed
 
 -   Path of forms renderer URL to match `/forms/{formId}`
