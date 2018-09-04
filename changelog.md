@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.1 (2018-09-04)
+
 ### Added
 
 -   Pre filled data argument to `forms.generateFormUrl()` function
