@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Added
+
+-   `Organisations` classes
+-   `Keys` class
+
 ## 0.2.1 (2018-09-04)
 
 ### Added
