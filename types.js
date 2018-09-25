@@ -103,4 +103,32 @@ export type S3SubmissionData = {
   definition: Form,
   submissionTimestamp: string
 }
+
+export type Key = {
+  id: string,
+  secret: string | void,
+  name: string,
+  privilege: {
+    'API HOSTING'?: 'DEPLOYMENT',
+    'PDF'?: 'BUILDER',
+    'WEB APP HOSTING'?: 'DEPLOYMENT',
+    'FORMS'?: 'FaaS'
+  },
+  links: {
+    organisations: string
+  }
+}
+
+export type Organisation = {
+  id: string,
+  name: string,
+  formsHostname: string,
+  formsCloudFrontDistributionOrigin?: string,
+  beeFormsCustomer: boolean,
+  createdAt: string,
+  tags: string[],
+  links: {
+    awsAccounts: string[]
+  }
+}
 */
