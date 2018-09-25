@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.2 (2018-09-25)
+
 ### Added
 
 -   `Organisations` classes
