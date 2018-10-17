@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.3 (2018-10-17)
+
 ### Added
 
 -   `forms.getForm()` function
