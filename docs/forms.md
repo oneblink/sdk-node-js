@@ -100,6 +100,39 @@ forms.getSubmissionData(formId, submissionId)
 }
 ```
 
+## Get Single Form
+
+### Example
+
+```javascript
+const formId = 1
+forms.getForm(formId)
+  .then((form) => {
+    // Use form here...
+  })
+```
+
+### Parameters
+
+| Parameter | Required | Type | Description
+|---|---|---|---|
+| `formId` | Yes | `number` | The exact id of the form you wish to get |
+
+### Result (Resolved Promise)
+
+```json
+{
+  "id": 1,
+  "name": "testsform",
+  "description": "a form",
+  "organisationId": "0101010101010",
+  "elements": [],
+  "isAuthenticated": false,
+  "isPublished": true,
+  "submissionEvents": []
+}
+```
+
 ## Search Forms
 
 ### Example
