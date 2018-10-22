@@ -32,7 +32,7 @@ describe('Forms SDK Class', () => {
       }
     })
 
-    const Forms = require('../../lib/forms.js')
+    const Forms = require('../../classes/Forms.js')
     const forms = new Forms({
       accessKey: '123',
       secretKey: 'abc'
@@ -80,7 +80,7 @@ describe('Forms SDK Class', () => {
   })
 
   describe('getSubmissionData()', () => {
-    const Forms = require('../../lib/forms.js')
+    const Forms = require('../../classes/Forms.js')
     const forms = new Forms({
       accessKey: '123',
       secretKey: 'abc',
@@ -99,7 +99,7 @@ describe('Forms SDK Class', () => {
   })
 
   describe('getForm()', () => {
-    const Forms = require('../../lib/forms.js')
+    const Forms = require('../../classes/Forms.js')
     const forms = new Forms({
       accessKey: '123',
       secretKey: 'abc',

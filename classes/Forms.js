@@ -11,11 +11,11 @@ import type {
 } from '../types.js'
 */
 
-const generateFormUrl = require('./generate-form-url.js')
-const generateJWT = require('./generate-jwt.js')
-const submissionData = require('./retrieve-submission-data.js')
-const OneBlinkAPI = require('./one-blink-api.js')
-const setPreFillData = require('./pre-fill-data')
+const generateFormUrl = require('../lib/generate-form-url.js')
+const generateJWT = require('../lib/generate-jwt.js')
+const submissionData = require('../lib/retrieve-submission-data.js')
+const OneBlinkAPI = require('../lib/one-blink-api.js')
+const setPreFillData = require('../lib/pre-fill-data')
 
 module.exports = class Forms extends OneBlinkAPI {
   constructor (
