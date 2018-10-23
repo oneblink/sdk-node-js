@@ -8,7 +8,7 @@ import type {
 } from '../types.js'
 */
 
-const OneBlinkAPI = require('./one-blink-api.js')
+const OneBlinkAPI = require('../lib/one-blink-api.js')
 
 module.exports = class Organisations extends OneBlinkAPI {
   constructor (

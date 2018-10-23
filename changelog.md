@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+-   `forms.generateSubmissionDataUrl()` function
+
 ## 0.2.3 (2018-10-17)
 
 ### Added

@@ -3,7 +3,7 @@
 'use strict'
 
 describe('Organisations SDK Class', () => {
-  const Organisations = require('../../lib/organisations.js')
+  const Organisations = require('../../classes/Organisations.js')
   const organisations = new Organisations({
     accessKey: '123',
     secretKey: 'abc'
