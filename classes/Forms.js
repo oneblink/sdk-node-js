@@ -68,7 +68,8 @@ module.exports = class Forms extends OneBlinkAPI {
 
   async generateSubmissionDataUrl (
     formId /* : ?mixed */,
-    submissionId /* : ?mixed */
+    submissionId /* : ?mixed */,
+    expiryInSeconds /* : ?mixed */
   ) /* : Promise<{ url: string }> */ {
     if (typeof formId !== 'number') {
       return Promise.reject(new TypeError('Must supply "formId" as a number'))
@@ -76,8 +77,11 @@ module.exports = class Forms extends OneBlinkAPI {
     if (typeof submissionId !== 'string') {
       return Promise.reject(new TypeError('Must supply "submissionId" as a string'))
     }
+    if (typeof expiryInSeconds !== 'number') {
+      return Promise.reject(new TypeError('Must supply "expiryInSeconds" as a number'))
+    }
 
-    return super.postRequest(`/forms/${formId}/retrieval-url/${submissionId}`)
+    return super.postRequest(`/forms/${formId}/retrieval-url/${submissionId}?expirySeconds=${expiryInSeconds}`)
   }
 
   getSubmissionData (

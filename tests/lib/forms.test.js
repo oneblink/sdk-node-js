@@ -114,6 +114,10 @@ describe('Forms SDK Class', () => {
       test('"submissionId"', () => {
         return expect(forms.generateSubmissionDataUrl(1)).rejects.toThrow('Must supply "submissionId" as a string')
       })
+
+      test('"expiryInSeconds"', () => {
+        return expect(forms.generateSubmissionDataUrl(1, '123')).rejects.toThrow('Must supply "expiryInSeconds" as a number')
+      })
     })
   })
 

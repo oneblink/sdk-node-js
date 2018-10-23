@@ -61,7 +61,8 @@ forms.generateFormUrl(formId, externalId, preFilledData)
 ```javascript
 const formId = 1
 const submissionId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
-forms.generateSubmissionDataUrl(formId, submissionId)
+const expiryInSeconds = 300
+forms.generateSubmissionDataUrl(formId, submissionId, expiryInSeconds)
   .then((result) => {
     const submissionDataUrl = result.url
     // Use URL here...
@@ -74,6 +75,7 @@ forms.generateSubmissionDataUrl(formId, submissionId)
 |---|---|---|---|
 | `formId` | Yes | `number` | The exact id of the form you wish to generate a URL for |
 | `submissionId` | Yes | `string` | The submission identifier generated after a successful form submission, this will be return to you after a successful forms submission via a callback URL |
+| `expiryInSeconds` | Yes | `number` | The number of seconds the signed URL should be valid for |
 
 ### Result (Resolved Promise)
 
