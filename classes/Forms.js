@@ -80,6 +80,9 @@ module.exports = class Forms extends OneBlinkAPI {
     if (typeof expiryInSeconds !== 'number') {
       return Promise.reject(new TypeError('Must supply "expiryInSeconds" as a number'))
     }
+    if (expiryInSeconds < 900) {
+      return Promise.reject(new TypeError('"expiryInSeconds" must be greater than or equal to 900'))
+    }
 
     return super.postRequest(`/forms/${formId}/retrieval-url/${submissionId}?expirySeconds=${expiryInSeconds}`)
   }

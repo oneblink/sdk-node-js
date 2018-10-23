@@ -118,6 +118,10 @@ describe('Forms SDK Class', () => {
       test('"expiryInSeconds"', () => {
         return expect(forms.generateSubmissionDataUrl(1, '123')).rejects.toThrow('Must supply "expiryInSeconds" as a number')
       })
+
+      test('minimum "expiryInSeconds"', () => {
+        return expect(forms.generateSubmissionDataUrl(1, '123', 600)).rejects.toThrow('"expiryInSeconds" must be greater than or equal to 900')
+      })
     })
   })
 
