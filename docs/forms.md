@@ -54,6 +54,35 @@ forms.generateFormUrl(formId, externalId, preFilledData)
 }
 ```
 
+## Generate Submission Data URL
+
+### Example
+
+```javascript
+const formId = 1
+const submissionId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+forms.generateSubmissionDataUrl(formId, submissionId)
+  .then((result) => {
+    const submissionDataUrl = result.url
+    // Use URL here...
+  })
+```
+
+### Parameters
+
+| Parameter | Required | Type | Description
+|---|---|---|---|
+| `formId` | Yes | `number` | The exact id of the form you wish to generate a URL for |
+| `submissionId` | Yes | `string` | The submission identifier generated after a successful form submission, this will be return to you after a successful forms submission via a callback URL |
+
+### Result (Resolved Promise)
+
+```json
+{
+  "url": "https://domain.io/path?query=string",
+}
+```
+
 ## Get Submission Data
 
 ### Example
@@ -75,7 +104,7 @@ forms.getSubmissionData(formId, submissionId)
 
 | Parameter | Required | Type | Description
 |---|---|---|---|
-| `formId` | Yes | `number` | The exact id of the form you wish to generate a URL for |
+| `formId` | Yes | `number` | The exact id of the form you wish to get submission data for |
 | `submissionId` | Yes | `string` | The submission identifier generated after a successful form submission, this will be return to you after a successful forms submission via a callback URL |
 
 ### Result (Resolved Promise)

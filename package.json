@@ -35,6 +35,7 @@
   },
   "files": [
     "lib",
+    "classes",
     "index.js",
     "types.js"
   ],

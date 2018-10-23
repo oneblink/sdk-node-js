@@ -11,11 +11,11 @@ import type {
 } from '../types.js'
 */
 
-const generateFormUrl = require('./generate-form-url.js')
-const generateJWT = require('./generate-jwt.js')
-const submissionData = require('./retrieve-submission-data.js')
-const OneBlinkAPI = require('./one-blink-api.js')
-const setPreFillData = require('./pre-fill-data')
+const generateFormUrl = require('../lib/generate-form-url.js')
+const generateJWT = require('../lib/generate-jwt.js')
+const submissionData = require('../lib/retrieve-submission-data.js')
+const OneBlinkAPI = require('../lib/one-blink-api.js')
+const setPreFillData = require('../lib/pre-fill-data')
 
 module.exports = class Forms extends OneBlinkAPI {
   constructor (
@@ -47,7 +47,7 @@ module.exports = class Forms extends OneBlinkAPI {
 
     let preFillFormDataId
     if (preFillData) {
-      const preFillMeta = await super.getRequest(`/forms/${formId}/pre-fill-credentials`)
+      const preFillMeta = await super.postRequest(`/forms/${formId}/pre-fill-credentials`)
       await setPreFillData(preFillMeta, preFillData)
       preFillFormDataId = preFillMeta.preFillFormDataId
     }
@@ -66,6 +66,20 @@ module.exports = class Forms extends OneBlinkAPI {
     }
   }
 
+  async generateSubmissionDataUrl (
+    formId /* : ?mixed */,
+    submissionId /* : ?mixed */
+  ) /* : Promise<{ url: string }> */ {
+    if (typeof formId !== 'number') {
+      return Promise.reject(new TypeError('Must supply "formId" as a number'))
+    }
+    if (typeof submissionId !== 'string') {
+      return Promise.reject(new TypeError('Must supply "submissionId" as a string'))
+    }
+
+    return super.postRequest(`/forms/${formId}/retrieval-url/${submissionId}`)
+  }
+
   getSubmissionData (
     formId /* : ?mixed */,
     submissionId /* : ?mixed */
@@ -77,7 +91,7 @@ module.exports = class Forms extends OneBlinkAPI {
       return Promise.reject(new TypeError('Must supply "submissionId" as a string'))
     }
 
-    return super.getRequest(`/forms/${formId}/retrieval-credentials/${submissionId}`)
+    return super.postRequest(`/forms/${formId}/retrieval-credentials/${submissionId}`)
       .then((credentials) => submissionData.getSubmissionData(credentials))
   }
 
