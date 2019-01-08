@@ -38,6 +38,10 @@ module.exports = class Forms extends OneBlinkAPI {
       throw new TypeError('Must supply "formId" as a number')
     }
 
+    if (externalId && typeof externalId !== 'string') {
+      throw new TypeError('Must supply "externalId" as a string or not at all')
+    }
+
     const formResults = await super.getRequest(`/forms/${formId}`)
 
     if (!formResults || !formResults.formsAppIds.length) {
@@ -48,10 +52,6 @@ module.exports = class Forms extends OneBlinkAPI {
 
     if (!appResults || !appResults.hostname) {
       throw new Error('Access Denied. The "accessKey" and "secretKey" provided may have been revoked.')
-    }
-
-    if (externalId && typeof externalId !== 'string') {
-      throw new TypeError('Must supply "externalId" as a string or not at all')
     }
 
     let preFillFormDataId
