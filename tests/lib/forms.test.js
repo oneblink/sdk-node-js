@@ -22,12 +22,20 @@ describe('Forms SDK Class', () => {
           this.secretKey = secretKey
         }
 
-        searchRequest () {
-          return Promise.resolve({
-            organisations: [{
-              formsHostname: 'forms.oneblink.io'
-            }]
-          })
+        getRequest (path) {
+          if (path === '/forms/1') {
+            return Promise.resolve({
+              'id': 1,
+              'name': 'Emptiness',
+              'formsAppIds': [1, 2]
+            })
+          } else {
+            return Promise.resolve({
+              'id': 1,
+              'name': 'appname',
+              'hostname': 'orgname-appname.apps.oneblink.io'
+            })
+          }
         }
       }
     })
@@ -53,7 +61,7 @@ describe('Forms SDK Class', () => {
 
       const parsedUrl = new URL(result.formUrl)
       expect(parsedUrl.protocol).toBe('https:')
-      expect(parsedUrl.hostname).toBe('forms.oneblink.io')
+      expect(parsedUrl.hostname).toBe('orgname-appname.apps.oneblink.io')
       expect(parsedUrl.pathname).toBe('/forms/1')
 
       // need to remove the ? from the query string
@@ -64,12 +72,12 @@ describe('Forms SDK Class', () => {
     })
 
     test('should generate url and expiry without external id', async () => {
-      const result = await forms.generateFormUrl(2)
+      const result = await forms.generateFormUrl(1)
 
       const parsedUrl = new URL(result.formUrl)
       expect(parsedUrl.protocol).toBe('https:')
-      expect(parsedUrl.hostname).toBe('forms.oneblink.io')
-      expect(parsedUrl.pathname).toBe('/forms/2')
+      expect(parsedUrl.hostname).toBe('orgname-appname.apps.oneblink.io')
+      expect(parsedUrl.pathname).toBe('/forms/1')
 
       // need to remove the ? from the query string
       const search = parsedUrl.search.slice(1)

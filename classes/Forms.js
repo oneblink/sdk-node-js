@@ -34,15 +34,24 @@ module.exports = class Forms extends OneBlinkAPI {
     externalId /* : ?mixed */,
     preFillData /* : ?mixed */
   ) /* : Promise<{ expiry: string, formUrl: string }> */ {
-    const organisationsResults = await super.searchRequest(`/organisations`)
     if (typeof formId !== 'number') {
       throw new TypeError('Must supply "formId" as a number')
     }
+
+    const formResults = await super.getRequest(`/forms/${formId}`)
+
+    if (!formResults || !formResults.formsAppIds.length) {
+      throw new Error('Access Denied. The "accessKey" and "secretKey" provided may have been revoked.')
+    }
+
+    const appResults = await super.getRequest(`/forms-apps/${formResults.formsAppIds[0]}`)
+
+    if (!appResults || !appResults.hostname) {
+      throw new Error('Access Denied. The "accessKey" and "secretKey" provided may have been revoked.')
+    }
+
     if (externalId && typeof externalId !== 'string') {
       throw new TypeError('Must supply "externalId" as a string or not at all')
-    }
-    if (!organisationsResults.organisations || !organisationsResults.organisations.length) {
-      throw new Error('Access Denied. The "accessKey" and "secretKey" provided may have been revoked.')
     }
 
     let preFillFormDataId
@@ -56,7 +65,7 @@ module.exports = class Forms extends OneBlinkAPI {
 
     const token = generateJWT(this.accessKey, this.secretKey, jwtExpiry)
 
-    const formUrl = generateFormUrl(`https://${organisationsResults.organisations[0].formsHostname}/forms`, formId, token, externalId, preFillFormDataId)
+    const formUrl = generateFormUrl(`https://${appResults.hostname}/forms`, formId, token, externalId, preFillFormDataId)
 
     const expiry = new Date(Date.now() + (jwtExpiry * 1000)).toISOString()
 
