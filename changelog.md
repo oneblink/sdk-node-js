@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.5 (2018-01-14)
+
 ### Changed
 
 -   Changed `generateFormUrl()` function to get hostname via `appId`
