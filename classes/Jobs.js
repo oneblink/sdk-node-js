@@ -3,7 +3,7 @@
 
 const OneBlinkAPI = require('../lib/one-blink-api.js')
 
-module.exports = class Forms extends OneBlinkAPI {
+module.exports = class Jobs extends OneBlinkAPI {
   constructor (
     options /* : ConstructorOptions */
   ) {
