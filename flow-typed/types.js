@@ -2,19 +2,19 @@
 'use strict'
 
 /* ::
-export type ConstructorOptions = {
+declare type ConstructorOptions = {
   accessKey: mixed,
   secretKey: mixed,
   oneBlinkAPIOrigin?: mixed
 }
 
-export type AWSCredentials = {
+declare type AWSCredentials = {
   AccessKeyId: string,
   SecretAccessKey: string,
   SessionToken: string
 }
 
-export type FormRetrievalData = {
+declare type FormRetrievalData = {
   credentials: AWSCredentials,
   s3: {
     bucket: string,
@@ -23,7 +23,7 @@ export type FormRetrievalData = {
   }
 }
 
-export type PreFillMeta = {
+declare type PreFillMeta = {
   credentials: AWSCredentials,
   s3: {
     bucket: string,
@@ -32,7 +32,7 @@ export type PreFillMeta = {
   }
 }
 
-export type BaseSearchResult = {
+declare type BaseSearchResult = {
   meta: {
     "limit": null,
     "offset": null,
@@ -40,7 +40,7 @@ export type BaseSearchResult = {
   }
 }
 
-export type FormElement = {
+declare type FormElement = {
   type: 'camera' |
     'checkboxes' |
     'date' |
@@ -69,7 +69,7 @@ export type FormElement = {
   }>
 }
 
-export type Form = {
+declare type Form = {
   id: number,
   name: string,
   description?: string,
@@ -80,23 +80,23 @@ export type Form = {
   submissionEvents?: Array<FormSubmissionEvent>
 }
 
-export type FormSubmissionEvent = {
+declare type FormSubmissionEvent = {
   id: number,
   type: 'CALLBACK',
   configuration: Object
 }
 
-export type FormsSearchResult = {
+declare type FormsSearchResult = {
   forms: Form[]
 } & BaseSearchResult
 
-export type FormsSearchOptions = {
+declare type FormsSearchOptions = {
   isAuthenticated?: mixed,
   isPublished?: mixed,
   name?: mixed
 }
 
-export type S3SubmissionData = {
+declare type S3SubmissionData = {
   submission: {
     [name: string]: any
   },
@@ -104,7 +104,7 @@ export type S3SubmissionData = {
   submissionTimestamp: string
 }
 
-export type Key = {
+declare type Key = {
   id: string,
   secret: string | void,
   name: string,
@@ -119,7 +119,7 @@ export type Key = {
   }
 }
 
-export type Organisation = {
+declare type Organisation = {
   id: string,
   name: string,
   formsHostname: string,

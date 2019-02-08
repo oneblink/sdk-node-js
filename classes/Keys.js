@@ -1,13 +1,6 @@
 // @flow
 'use strict'
 
-/* ::
-import type {
-  ConstructorOptions,
-  Key
-} from '../types.js'
-*/
-
 const OneBlinkAPI = require('../lib/one-blink-api.js')
 
 module.exports = class Keys extends OneBlinkAPI {
