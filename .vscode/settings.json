@@ -1,3 +1,4 @@
 {
-  "javascript.format.insertSpaceBeforeFunctionParenthesis": true
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "javascript.format.insertSpaceAfterConstructor": true
 }
