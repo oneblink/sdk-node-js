@@ -131,4 +131,23 @@ declare type Organisation = {
     awsAccounts: string[]
   }
 }
+
+declare type NewJob = {
+  username: string,
+  formId: number,
+  externalId?: string,
+  preFillFormDataId?: string,
+  details?: {
+    key?: string,
+    title?: string,
+    description?: string,
+    type?: string
+  }
+}
+
+declare type Job = NewJob & {
+  id: string,
+  isSubmitted: false,
+  createdAt: string
+}
 */
