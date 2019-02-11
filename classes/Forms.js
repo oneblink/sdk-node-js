@@ -1,16 +1,6 @@
 // @flow
 'use strict'
 
-/* ::
-import type {
-  Form,
-  ConstructorOptions,
-  FormsSearchOptions,
-  FormsSearchResult,
-  S3SubmissionData
-} from '../types.js'
-*/
-
 const generateFormUrl = require('../lib/generate-form-url.js')
 const generateJWT = require('../lib/generate-jwt.js')
 const submissionData = require('../lib/retrieve-submission-data.js')
