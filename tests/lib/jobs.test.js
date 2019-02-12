@@ -73,7 +73,10 @@ describe('Jobs SDK Class', () => {
         const jobs = new Jobs(constructorOptions)
         await jobs.createJob({
           username: 'username',
-          formId: 1
+          formId: 1,
+          details: {
+            title: 'A title'
+          }
         })
 
         expect(mockPostRequest).toBeCalledTimes(1)
@@ -93,7 +96,10 @@ describe('Jobs SDK Class', () => {
         const jobs = new Jobs(constructorOptions)
         const options = {
           username: 'username',
-          formId: 1
+          formId: 1,
+          details: {
+            title: 'A title'
+          }
         }
         const preFillData = {
           text_element: 'abc',
