@@ -35,10 +35,10 @@
     "npm": ">=6"
   },
   "files": [
+    "flow-typed",
     "lib",
     "classes",
-    "index.js",
-    "types.js"
+    "index.js"
   ],
   "homepage": "https://github.com/blinkmobile/oneblink-sdk-js",
   "keywords": [],
