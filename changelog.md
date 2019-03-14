@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.6 (2019-03-14)
+
 ### Added
 
 -   `Jobs` class with `createJob()` and `deleteJob()` functions
