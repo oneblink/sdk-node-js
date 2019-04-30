@@ -210,8 +210,75 @@ forms.search(options)
       "elements": [],
       "isAuthenticated": false,
       "isPublished": true,
-      "submissionEvents": []
+      "submissionEvents": [],
+      "postSubmissionAction": "FORMS_LIBRARY",
+      "isInfoPage": false,
+
     }
   ]
 }
+```
+
+## Validate Form
+
+### Example
+
+```javascript
+  const form = {
+    "id": 1,
+    "name": "testsform",
+    "description": "a form",
+    "organisationId": "0101010101010",
+    "elements": [],
+    "isAuthenticated": false,
+    "isPublished": true,
+    "submissionEvents": [],
+    "postSubmissionAction": "FORMS_LIBRARY",
+    "formsAppIds": [1, 2, 3]
+  }
+
+  const validatedForm = forms.validateForm(form)
+
+  return validatedForm
+```
+
+### Parameters
+
+| Parameter | Required | Type | Description
+|---|---|---|---|
+| `name` | yes | `string` | Name of the form. |
+| `description` | No | `string` | A description of the form. |
+| `organisationId` | yes | `string` | The organisation ID the form belong to. |
+| `formsAppIds` | yes | `number[]` | ID's of any Forms Apps that the form is included in. |
+| `elements` | yes | an array of valid [FormElements](../lib/forms-schema.js) | All elements contained within the form itself. |
+| `isAuthenticated` | yes | `boolean` | Whether or not the form can only be viewed by an Authenticated user. |
+| `isMultiPage` | yes | `boolean` | Whether or not the form contains multiple pages. |
+| `isPublished` | yes | `boolean` | Whether or not the form is visible within the Forms Apps it's included in. |
+| `submissionEvents` | No | an array of valid [SubmissionEvents](../lib/forms-schema.js) | Events that occur/trigger on a valid successful submission. |
+| `createdAt` | No | `Date` | Date that the form was created. |
+| `updatedAt` | No | `Date` | Date that the form was last updated. |
+| `postSubmissionAction` | Yes | `string` | The action for the Form to take on a successful submission. |
+| `redirectUrl` | No | `string` | The URL the form will redirect to if configured to do so by the `postSubmissionActions`. |
+| `organisation` | No | `Object` | Details of the Organisation the form belongs to. |
+| `isInfoPage` | Yes | `boolean` | Whether or not the Form is an Info Page. |
+
+### Result
+
+```json
+
+    { 
+      "id": 1,
+      "name": "testsform",
+      "description": "a form",
+      "organisationId": "0101010101010",
+      "elements": [],
+      "isAuthenticated": false,
+      "isPublished": true,
+      "submissionEvents": [],
+      "postSubmissionAction": "FORMS_LIBRARY",
+      "formsAppIds": [ 1, 2, 3 ],
+      "isMultiPage": false,
+      "isInfoPage": false 
+  }
+
 ```
