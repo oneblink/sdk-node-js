@@ -2,20 +2,20 @@
 
 [Back to all Elements](../README.md)
 
-## Text Element
+## Time Element
 
-Allow the user to enter a value in a single-line text input.
+Allow the user to select a time. Submission data will be in [ISO_8601 Timestamp](https://en.wikipedia.org/wiki/ISO_8601) format.
 
 | Property       | Required | Type      | Default  | Description                                                                              |
 | -------------- | -------- | --------- | -------- | ---------------------------------------------------------------------------------------- |
-| `type`         | Yes      | `string`  | `'text'` | The type of Form Element.                                                                |
+| `type`         | Yes      | `string`  | `'time'` | The type of Form Element.                                                                |
 | `name`         | Yes      | `string`  |          | The key that will be assigned a value in the submission data when the form is submitted. |
 | `label`        | Yes      | `string`  |          | Display text presented to the user above the input by default.                           |
 | `defaultValue` | No       | `string`  |          | A default value when the form is opened.                                                 |
-| `required`     | Yes      | `boolean` | `false`  | Determine if this input requires a value entered by the user (`true`) or not (`false`).  |
+| `required`     | Yes      | `boolean` | `false`  | Determine if this input requires a time selected by the user (`true`) or not (`false`).  |
 | `readOnly`     | Yes      | `boolean` | `false`  | Determine if this input can be edited by the user (`false`) or not (`true`).             |
 
-Text element also inherits the properties of the following:
+Time element also inherits the properties of the following:
 
 -   [Base Element](./base-element.md)
 -   [Lookup Element](./lookup-element.md)
@@ -25,10 +25,9 @@ Text element also inherits the properties of the following:
 ```JSON
 {
   "id": "b1311ae0-6bb7-11e9-a923-1681be663d3e",
-  "type": "text",
-  "name": "fullName",
-  "label": "Please Enter Your Full Name",
-  "defaultValue": "John Smith",
+  "type": "time",
+  "name": "timeOfDeath",
+  "label": "Time of Death",
   "required": true,
   "readOnly": false
 }
