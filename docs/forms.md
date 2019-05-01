@@ -326,17 +326,4 @@ Please refer to our Form Element Definitions found [here](./form-elements/README
 
 ### Result (Resolved Promise)
 
-```json
-{ 
-  "name": "my test element",
-  "id": "f3a6dd75-1bea-4df1-8f93-e4e44c2dbdb2",
-  "type": "text",
-  "required": false,
-  "label": "text",
-  "conditionallyShow": false,
-  "readOnly": false,
-  "requiresAllConditionallyShowPredicates": false,
-  "isDataLookup": false,
-  "isElementLookup": false 
-}
-```
+[A valid Form Element](./form-elements/README.md)

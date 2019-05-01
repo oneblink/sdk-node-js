@@ -152,13 +152,13 @@ module.exports = class Forms extends OneBlinkAPI {
     return super.getRequest(`/forms/${formId}`)
   }
 
-  static async validateForm (form /* : mixed */) /* : Promise<Form> */ {
-    const validatedForm = await validateWithFormSchema(form)
+  static validateForm (form /* : mixed */) /* : Form */ {
+    const validatedForm = validateWithFormSchema(form)
     return validatedForm
   }
 
-  static async generateFormElement (formElementGenerationData /* : mixed */) /* : Promise<FormElement> */ {
-    const formElement = await generateFormElement(formElementGenerationData)
+  static generateFormElement (formElementGenerationData /* : mixed */) /* : FormElement */ {
+    const formElement = generateFormElement(formElementGenerationData)
     return formElement
   }
 }
