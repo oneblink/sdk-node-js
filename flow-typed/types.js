@@ -41,6 +41,7 @@ declare type BaseSearchResult = {
 }
 
 declare type FormElement = {
+  id: string,
   type: 'camera' |
     'checkboxes' |
     'date' |
@@ -73,6 +74,7 @@ declare type FormElement = {
     operator?: string,
     value?: number
   }>,
+  requiresAllConditionallyShowPredicates?: boolean,
   multi?: boolean,
   minNumber?: number,
   maxNumber?: number,
@@ -89,7 +91,9 @@ declare type FormElement = {
   elements?: Array<FormElement>,
   minSets?: number,
   maxSets?: number,
-  defaultValue?: any
+  defaultValue?: any,
+  isDataLookup?: boolean,
+  isElementLookup?: boolean
 }
 
 declare type Form = {

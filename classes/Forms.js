@@ -7,7 +7,7 @@ const submissionData = require('../lib/retrieve-submission-data.js')
 const OneBlinkAPI = require('../lib/one-blink-api.js')
 const setPreFillData = require('../lib/pre-fill-data')
 const { validateWithFormSchema } = require('../lib/forms-validation.js')
-
+const generateFormElement = require('../lib/generate-form-element.js')
 module.exports = class Forms extends OneBlinkAPI {
   constructor (
     options /* : ConstructorOptions */
@@ -155,5 +155,10 @@ module.exports = class Forms extends OneBlinkAPI {
   static async validateForm (form /* : mixed */) /* : Promise<Form> */ {
     const validatedForm = await validateWithFormSchema(form)
     return validatedForm
+  }
+
+  static async generateFormElement (formElementGenerationData /* : mixed */) /* : Promise<FormElement> */ {
+    const formElement = await generateFormElement(formElementGenerationData)
+    return formElement
   }
 }

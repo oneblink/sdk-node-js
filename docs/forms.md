@@ -297,3 +297,46 @@ OneBlink.Forms.validateForm(form)
   "isInfoPage": false 
 }
 ```
+
+## Generate Form Element
+
+`generateFormElement()` is a static method available on the forms class, used for both creating and validating a OneBlink Form Element.
+
+The method will set reasonable defaults for any values not passed to it, and validate ones that are against our Element Schema.
+
+### Example
+
+```javascript
+const element = {
+  "name": "my test element"
+}
+
+OneBlink.Forms.generateFormElement(element)
+  .then(generatedElement => {
+    // generated/validated element can be accessed here
+  })
+  .catch(error => {
+    // element is not valid
+  })
+```
+
+### Parameters
+
+Please refer to our Form Element Definitions found [here](./form-elements/README.md)
+
+### Result (Resolved Promise)
+
+```json
+{ 
+  "name": "my test element",
+  "id": "f3a6dd75-1bea-4df1-8f93-e4e44c2dbdb2",
+  "type": "text",
+  "required": false,
+  "label": "text",
+  "conditionallyShow": false,
+  "readOnly": false,
+  "requiresAllConditionallyShowPredicates": false,
+  "isDataLookup": false,
+  "isElementLookup": false 
+}
+```
