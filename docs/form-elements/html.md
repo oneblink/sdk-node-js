@@ -17,10 +17,11 @@ HTML element also inherits the properties of the following:
 
 -   [Base Element](./base-element.md)
 
-## Example
+### Example
 
 ```JSON
 {
+  "id": "b1311ae0-6bb7-11e9-a923-1681be663d3e",
   "type": "html",
   "name": "information",
   "label": "Information",
