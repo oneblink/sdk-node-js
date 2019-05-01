@@ -53,20 +53,43 @@ declare type FormElement = {
     'draw' |
     'text' |
     'textarea' |
-    'time',
+    'time' |
+    'repeatableSet' |
+    'html' |
+    'barcodeScanner' |
+    'captcha' |
+    'page' |
+    'email' |
+    'file',
   name: string,
   label: string,
   required: boolean,
+  readOnly: boolean,
+  conditionallyShow: boolean,
+  conditionallyShowPredicates?: Array<{
+    elementId: string,
+    type: 'OPTIONS' | 'NUMERIC',
+    optionIds?: string[],
+    operator?: string,
+    value?: number
+  }>,
   multi?: boolean,
   minNumber?: number,
   maxNumber?: number,
   headingType?: number,
   fromDate?: string,
   toDate?: string,
+  optionsType? : 'custom' | 'dynamic',
+  dynamicOptionSetId?: number,
   options?: Array<{
+    optionId: string,
     id: string,
     value: string
-  }>
+  }>,
+  elements?: Array<FormElement>,
+  minSets?: number,
+  maxSets?: number,
+  defaultValue?: any
 }
 
 declare type Form = {
@@ -74,15 +97,22 @@ declare type Form = {
   name: string,
   description?: string,
   organisationId: string,
+  formsAppIds: number[],
   elements: FormElement[],
   isAuthenticated: boolean,
+  isMultiPage: boolean,
   isPublished: boolean,
-  submissionEvents?: Array<FormSubmissionEvent>
+  submissionEvents?: Array<FormSubmissionEvent>,
+  createdAt?: Date,
+  updatedAt?: Date,
+  postSubmissionAction: string,
+  redirectUrl? : string,
+  organisation? : Organisation,
+  isInfoPage: boolean
 }
 
 declare type FormSubmissionEvent = {
-  id: number,
-  type: 'CALLBACK',
+  type: 'CALLBACK' | 'PDF' | 'SPOTTO' | 'ONEBLINK_API',
   configuration: Object
 }
 

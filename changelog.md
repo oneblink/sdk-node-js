@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+-   ON-4044 # added `validateForm()` function for validating a form schema
+
 ## 0.2.6 (2019-03-14)
 
 ### Added

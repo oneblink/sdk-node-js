@@ -6,6 +6,7 @@ const generateJWT = require('../lib/generate-jwt.js')
 const submissionData = require('../lib/retrieve-submission-data.js')
 const OneBlinkAPI = require('../lib/one-blink-api.js')
 const setPreFillData = require('../lib/pre-fill-data')
+const { validateWithFormSchema } = require('../lib/forms-validation.js')
 
 module.exports = class Forms extends OneBlinkAPI {
   constructor (
@@ -149,5 +150,10 @@ module.exports = class Forms extends OneBlinkAPI {
     }
 
     return super.getRequest(`/forms/${formId}`)
+  }
+
+  static async validateForm (form /* : mixed */) /* : Promise<Form> */ {
+    const validatedForm = await validateWithFormSchema(form)
+    return validatedForm
   }
 }
