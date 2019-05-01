@@ -219,27 +219,35 @@ forms.search(options)
 }
 ```
 
+## Static Functions
+___
 ## Validate Form
+
+`validateForm()` is a static method available on the forms class, used for validating a OneBlink compatible Forms Definition.
 
 ### Example
 
 ```javascript
-  const form = {
-    "id": 1,
-    "name": "testsform",
-    "description": "a form",
-    "organisationId": "0101010101010",
-    "elements": [],
-    "isAuthenticated": false,
-    "isPublished": true,
-    "submissionEvents": [],
-    "postSubmissionAction": "FORMS_LIBRARY",
-    "formsAppIds": [1, 2, 3]
-  }
+const form = {
+  "id": 1,
+  "name": "testsform",
+  "description": "a form",
+  "organisationId": "0101010101010",
+  "elements": [],
+  "isAuthenticated": false,
+  "isPublished": true,
+  "submissionEvents": [],
+  "postSubmissionAction": "FORMS_LIBRARY",
+  "formsAppIds": [1, 2, 3]
+}
 
-  const validatedForm = forms.validateForm(form)
-
-  return validatedForm
+OneBlink.Forms.validateForm(form)
+  .then(validatedForm => {
+    // validated form can be accessed here
+  })
+  .catch(error => {
+    // form is not valid
+  })
 ```
 
 ### Parameters
@@ -250,35 +258,42 @@ forms.search(options)
 | `description` | No | `string` | A description of the form. |
 | `organisationId` | yes | `string` | The organisation ID the form belong to. |
 | `formsAppIds` | yes | `number[]` | ID's of any Forms Apps that the form is included in. |
-| `elements` | yes | an array of valid [FormElements](../lib/forms-schema.js) | All elements contained within the form itself. |
+| `elements` | yes | [`FormElement`](./form-elements/README.md)`[]` | All elements contained within the form itself. |
 | `isAuthenticated` | yes | `boolean` | Whether or not the form can only be viewed by an Authenticated user. |
 | `isMultiPage` | yes | `boolean` | Whether or not the form contains multiple pages. |
 | `isPublished` | yes | `boolean` | Whether or not the form is visible within the Forms Apps it's included in. |
-| `submissionEvents` | No | an array of valid [SubmissionEvents](../lib/forms-schema.js) | Events that occur/trigger on a valid successful submission. |
+| `submissionEvents` | No | `SubmissionEvent[]` | Events that occur/trigger on a valid successful submission. |
+| `submissionEvents[].type` | Yes | `'CALLBACK' | 'PDF' | 'SPOTTO' | 'ONEBLINK_API'` | The type of submission event. |
+| `submissionEvents[].configuration` | Yes | `mixed` | Configuration specific to the type of submission event. |
+| `submissionEvents[].configuration.url` | If `type` is `CALLBACK` | `string` | URL that the callback is made to. |
+| `submissionEvents[].configuration.secret` |  If `type` is `CALLBACK` or `ONEBLINK_API` | `string` | Secret string used for verifying the authenticity of the request made from the OneBlink system. |
+| `submissionEvents[].configuration.email` |  If `type` is `PDF` | `string` | The email in which a PDF copy of the form submission will be sent. |
+| `submissionEvents[].configuration.pdfFileName` |  If `type` is `PDF` | `string` | The name of the PDF file sent to the configured email address. |
+| `submissionEvents[].configuration.emailSubjectLine` |  If `type` is `PDF` | `string` | The subject line of the email sent to the configured email address. |
+| `submissionEvents[].configuration.apiId` |  If `type` is `ONEBLINK_API` | `string` | The ID of the OneBlink hosted API that a callback is made to on submission. |
+| `submissionEvents[].configuration.apiEnvironment` |  If `type` is `ONEBLINK_API` | `string` | The environment of the specified OneBlink hosted API to recieve the callback. |
+| `submissionEvents[].configuration.apiEnvironmentRoute` |  If `type` is `ONEBLINK_API` | `string` | The route of the specified API and Environment to recieve the callback payload. |
 | `createdAt` | No | `Date` | Date that the form was created. |
 | `updatedAt` | No | `Date` | Date that the form was last updated. |
 | `postSubmissionAction` | Yes | `string` | The action for the Form to take on a successful submission. |
 | `redirectUrl` | No | `string` | The URL the form will redirect to if configured to do so by the `postSubmissionActions`. |
-| `organisation` | No | `Object` | Details of the Organisation the form belongs to. |
 | `isInfoPage` | Yes | `boolean` | Whether or not the Form is an Info Page. |
 
 ### Result
 
 ```json
-
-    { 
-      "id": 1,
-      "name": "testsform",
-      "description": "a form",
-      "organisationId": "0101010101010",
-      "elements": [],
-      "isAuthenticated": false,
-      "isPublished": true,
-      "submissionEvents": [],
-      "postSubmissionAction": "FORMS_LIBRARY",
-      "formsAppIds": [ 1, 2, 3 ],
-      "isMultiPage": false,
-      "isInfoPage": false 
-  }
-
+{ 
+  "id": 1,
+  "name": "testsform",
+  "description": "a form",
+  "organisationId": "0101010101010",
+  "elements": [],
+  "isAuthenticated": false,
+  "isPublished": true,
+  "submissionEvents": [],
+  "postSubmissionAction": "FORMS_LIBRARY",
+  "formsAppIds": [ 1, 2, 3 ],
+  "isMultiPage": false,
+  "isInfoPage": false 
+}
 ```
