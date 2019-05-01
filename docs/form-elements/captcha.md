@@ -1,6 +1,6 @@
 # OneBlink SDK | Form Element Definitions
 
-[Back to all Elements](../README.md)
+[Back to all Elements](./README.md)
 
 ## Captcha (Not a Robot) Element
 
