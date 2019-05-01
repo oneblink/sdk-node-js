@@ -6,11 +6,11 @@
 
 All the user to select GPS coordinates on an interactive map.
 
-| Property | Required | Type     | Default      | Description                                                |
-| -------- | -------- | -------- | ------------ | ---------------------------------------------------------- |
-| `type`   | Yes      | `string` | `'location'` | The type of Form Element.                                  |
-| `name`   | Yes      | `string` |              | The key that will be assigned a value in the format below. |
-| `label`  | Yes      | `string` |              | Display text to identify the element.                      |
+| Property | Required | Type     | Default      | Description                                                                       |
+| -------- | -------- | -------- | ------------ | --------------------------------------------------------------------------------- |
+| `type`   | Yes      | `string` | `'location'` | The type of Form Element.                                                         |
+| `name`   | Yes      | `string` |              | The key that will be assigned a value in the format below in the submission data. |
+| `label`  | Yes      | `string` |              | Display text presented to the user above the map by default.                      |
 
 Location element also inherits the properties of the following:
 
