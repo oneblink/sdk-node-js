@@ -241,13 +241,9 @@ const form = {
   "formsAppIds": [1, 2, 3]
 }
 
-OneBlink.Forms.validateForm(form)
-  .then(validatedForm => {
-    // validated form can be accessed here
-  })
-  .catch(error => {
-    // form is not valid
-  })
+const validatedForm = OneBlink.Forms.validateForm(form)
+
+return validatedForm
 ```
 
 ### Parameters
@@ -311,19 +307,15 @@ const element = {
   "name": "my test element"
 }
 
-OneBlink.Forms.generateFormElement(element)
-  .then(generatedElement => {
-    // generated/validated element can be accessed here
-  })
-  .catch(error => {
-    // element is not valid
-  })
+const generatedElement = OneBlink.Forms.generateFormElement(element)
+
+return generatedElement
 ```
 
 ### Parameters
 
 Please refer to our Form Element Definitions found [here](./form-elements/README.md)
 
-### Result (Resolved Promise)
+### Result
 
 [A valid Form Element](./form-elements/README.md)
