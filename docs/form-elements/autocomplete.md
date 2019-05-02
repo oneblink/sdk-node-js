@@ -1,23 +1,25 @@
 # OneBlink SDK | Form Element Definitions
 
-[Back to all Elements](../README.md)
+[Back to all Elements](./README.md)
 
 ## Autocomplete Element
 
-Returns a list containing a value/values to the user, predicted based off of the user's input.
+Allows the user to select a single option from a list of options which can be filtered by the user with a single-line text input.
 
-| Property       | Required | Type      | Default          | Description                                                                                        |
-| -------------- | -------- | --------- | ---------------- | -------------------------------------------------------------------------------------------------- |
-| `type`         | Yes      | `string`  | `'autocomplete'` | The type of Form Element. |
+| Property       | Required | Type      | Default          | Description                                                                              |
+| -------------- | -------- | --------- | ---------------- | ---------------------------------------------------------------------------------------- |
+| `type`         | Yes      | `string`  | `'autocomplete'` | The type of Form Element.                                                                |
 | `name`         | Yes      | `string`  |                  | The key that will be assigned a value in the submission data when the form is submitted. |
-| `label`        | Yes      | `string`  |                  | Display text to identify the element. |
-| `defaultValue` | Yes      | `string`  |                  | The default text to display. |
-| `readOnly`     | Yes      | `Boolean` | `false`          | Whether the element's input is editable within the form. |
+| `label`        | Yes      | `string`  |                  | Display text presented to the user above the input by default.                           |
+| `defaultValue` | Yes      | `string`  |                  | The identifier of an option to be selected when the form is opened.                      |
+| `required`     | Yes      | `boolean` | `false`          | Determine if this element requires an option to be selected (`true`) or not (`false`).   |
+| `readOnly`     | Yes      | `boolean` | `false`          | Determine if this selected option be changed by the user (`false`) or not (`true`).      |
 
 Autocomplete element also inherits the properties of the following:
 
 -   [Base Element](./base-element.md)
 -   [Options Element](./options-element.md)
+-   [Lookup Element](./lookup-element.md)
 
 ### Example
 
@@ -27,22 +29,25 @@ Autocomplete element also inherits the properties of the following:
   "type": "autocomplete",
   "name": "Address",
   "label": "Address",
-  "defaultValue": "123 Blink St, Gosford NSW, 2250",
+  "defaultValue": "954af543-f500-4476-9403-f2ebc6c2260e",
+  "required": true,
+  "readOnly": false,
   "options": [
     {
-      "id": "b1311ae0-6bb7-11e9-a923-1681be663d3e",
+      "id": "954af543-f500-4476-9403-f2ebc6c2260e",
       "value": "124 Blink St, Gosford NSW, 2250",
-      "label": "124 Blink St, Gosford NSW, 2250",
-      "attributes": [
-        {
-          "optionIds": [
-            "b1311ae0-6bb7-11e9-a923-1681be663d3e",
-            "b1311ae0-6bb7-11e9-a923-1681be663d3e",
-            "b1311ae0-6bb7-11e9-a923-1681be663d3e"
-          ],
-          "elementId": "b1311ae0-6bb7-11e9-a923-1681be663d3e"
-        }
-      ]
+      "label": "124 Blink St, Gosford NSW, 2250"
+    },
+    {
+      "id": "51a282e8-4134-4d69-a18a-10440d5f4e12",
+      "value": "126 Blink St, Gosford NSW, 2250",
+      "label": "126 Blink St, Gosford NSW, 2250"
+    },
+    {
+      "id": "cf61d95f-658c-409f-b57e-d9c74d0fb9d1",
+      "value": "128 Blink St, Gosford NSW, 2250",
+      "label": "128 Blink St, Gosford NSW, 2250"
+
     }
   ]
 }

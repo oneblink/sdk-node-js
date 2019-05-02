@@ -1,8 +1,8 @@
 # OneBlink SDK | Form Element Definitions
 
-[Back to all Elements](../README.md)
+[Back to all Elements](./README.md)
 
-## HTML Element
+## HTML (Information) Element
 
 Display information to the user formatted using [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML).
 
@@ -10,7 +10,7 @@ Display information to the user formatted using [HTML](https://developer.mozilla
 | -------------- | -------- | -------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | `type`         | Yes      | `string` | `'html'` | The type of Form Element.                                                                                                                |
 | `name`         | Yes      | `string` |          | The key that will be assigned a value `true` (if the element is shown) or `false` (if the element is hidden) when the form is submitted. |
-| `label`        | Yes      | `string` |          | Display text to identify the element.                                                                                                    |
+| `label`        | Yes      | `string` |          | Friendly text to identify the element.                                                                                                   |
 | `defaultValue` | Yes      | `string` |          | The HTML to display.                                                                                                                     |
 
 HTML element also inherits the properties of the following:
