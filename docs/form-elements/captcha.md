@@ -4,7 +4,7 @@
 
 ## Captcha (Not a Robot) Element
 
-Force the user to proved they are not a robot.
+Force the user to prove they are not a robot.
 
 | Property | Required | Type     | Default     | Description                                                                              |
 | -------- | -------- | -------- | ----------- | ---------------------------------------------------------------------------------------- |
