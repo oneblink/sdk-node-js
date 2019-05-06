@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+-   `elementLookupFormId` property to Lookup form elements
+
 ## 0.2.7 (2019-05-06)
 
 ### Added
