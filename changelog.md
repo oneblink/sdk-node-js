@@ -6,9 +6,12 @@
 
 ### Added
 
+-   ON-4090 # added `form` and `infoPage` element types
+
+### Added
+
 -   ON-4044 # added `validateForm()` function for validating a form schema
 -   ON-4039 # added `generateFormElement()` function for generating & validating a form element
--   ON-4090 # added `form` and `infoPage` element types
 
 ## 0.2.6 (2019-03-14)
 
