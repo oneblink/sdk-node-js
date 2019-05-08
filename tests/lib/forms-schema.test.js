@@ -377,16 +377,12 @@ describe('Valid Form Schema with Pages', () => {
           },
           {
             'id': 'b8a635eb-d28c-4f18-b400-5e2b458e76e9',
-            'name': 'form',
             'type': 'form',
-            'label': 'form',
             'formId': 1
           },
           {
             'id': '1495d816-e2b5-4b99-b378-fa7cd46e034c',
-            'name': 'info page',
             'type': 'infoPage',
-            'label': 'infopage',
             'formId': 2
           },
           {

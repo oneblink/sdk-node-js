@@ -64,8 +64,8 @@ declare type FormElement = {
     'file' |
     'form' |
     'infoPage',
-  name: string,
-  label: string,
+  name?: string,
+  label?: string,
   required: boolean,
   readOnly: boolean,
   conditionallyShow: boolean,
