@@ -376,6 +376,20 @@ describe('Valid Form Schema with Pages', () => {
             ]
           },
           {
+            'id': 'b8a635eb-d28c-4f18-b400-5e2b458e76e9',
+            'name': 'form',
+            'type': 'form',
+            'label': 'form',
+            'formId': 1
+          },
+          {
+            'id': '1495d816-e2b5-4b99-b378-fa7cd46e034c',
+            'name': 'info page',
+            'type': 'infoPage',
+            'label': 'infopage',
+            'formId': 2
+          },
+          {
             'id': '042508a4-4a8d-4684-9fd3-640a5018697e',
             'name': 'data_lookup_text',
             'label': 'Data Lookup text',
@@ -1438,7 +1452,7 @@ test('should error if page element has child page element', () => {
     abortEarly: false
   })
 
-  expect(error.details[0].message).toContain('"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete]')
+  expect(error.details[0].message).toContain('"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage]')
 })
 
 test('should error if page element has no elements', () => {
@@ -1507,7 +1521,7 @@ test('should error if isMultiPage is set to false', () => {
     abortEarly: false
   })
 
-  expect(error.details[0].message).toContain('"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete]')
+  expect(error.details[0].message).toContain('"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage]')
 })
 
 test('should allow multiple pages', () => {
@@ -1647,7 +1661,7 @@ test('should error if isMultiPage is false even if all root elements are pages',
     abortEarly: false
   })
 
-  expect(error.details[0].message).toBe('"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete]')
+  expect(error.details[0].message).toBe('"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage]')
 })
 
 test('should error if image element does not have a default value', () => {

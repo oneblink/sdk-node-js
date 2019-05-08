@@ -61,7 +61,9 @@ declare type FormElement = {
     'captcha' |
     'page' |
     'email' |
-    'file',
+    'file' |
+    'form' |
+    'infoPage',
   name: string,
   label: string,
   required: boolean,
@@ -93,7 +95,8 @@ declare type FormElement = {
   maxSets?: number,
   defaultValue?: any,
   isDataLookup?: boolean,
-  isElementLookup?: boolean
+  isElementLookup?: boolean,
+  formId?: number
 }
 
 declare type Form = {
