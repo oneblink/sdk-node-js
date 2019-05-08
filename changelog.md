@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+-   ON-4090 # added `form` and `infoPage` element types
+
 ## 0.2.7 (2019-05-06)
 
 ### Added
