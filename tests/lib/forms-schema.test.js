@@ -2535,3 +2535,467 @@ describe('Data Lookup enabled', () => {
     expect(error.details[0].message).toBe('"Element Lookup Url" is required')
   })
 })
+
+describe('invalid property removal', () => {
+  const createForm = (props) => {
+    return {
+      'id': 1,
+      'name': 'Inspection',
+      'formsAppIds': [1],
+      'organisationId': '59cc888b8969af000fb50ddb',
+      'postSubmissionAction': 'FORMS_LIBRARY',
+      'isMultiPage': true,
+      'submissionEvents': [
+        {
+          'type': 'CALLBACK',
+          'configuration': {
+            'url': 'https://domain.io/path',
+            'secret': 'abc123'
+          }
+        }
+      ],
+      'elements': [
+        {
+          'id': '119b04c3-f2ad-4994-a525-e7189eb67a79',
+          'type': 'page',
+          'label': 'page1',
+          'elements': [
+            Object.assign({}, {
+              'id': 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+              'name': 'Title',
+              'label': 'Large Heading',
+              'type': 'heading',
+              'required': false,
+              'headingType': 1
+            }, props),
+            Object.assign({}, {
+              'id': 'b1a24856-f3a9-4e2e-8ce4-70e92cfe99f0',
+              'name': 'Location',
+              'label': 'Where Was It?',
+              'type': 'location',
+              'required': false
+            }, props),
+            Object.assign({}, {
+              'id': 'c3b61176-4332-4731-9643-191e5e204767',
+              'name': 'signature',
+              'label': 'Signature',
+              'type': 'draw',
+              'required': false
+            }, props),
+            Object.assign({}, {
+              'id': '4527e000-e5b0-4f4f-9007-7fbfeba7042f',
+              'name': 'heading',
+              'label': 'Medium Heading',
+              'type': 'heading',
+              'required': false,
+              'headingType': 3
+            }, props),
+            Object.assign({}, {
+              'id': '9014e80c-3c68-4adb-a333-1be04ebc95ee',
+              'name': 'radio',
+              'label': 'Radio Buttons',
+              'type': 'radio',
+              'required': false,
+              'buttons': false,
+              'defaultValue': '8be1f1dd-ec3f-4537-bb70-f0f1c7c31b26',
+              'options': [
+                {
+                  'id': '8be1f1dd-ec3f-4537-bb70-f0f1c7c31b26',
+                  'value': 'ONEvalue',
+                  'label': 'One'
+                },
+                {
+                  'id': '0729643a-5ffe-416d-8d4b-337e73e96714',
+                  'value': 'twovalue',
+                  'label': 'Two'
+                },
+                {
+                  'id': 'ada69988-a8b5-4a5e-84be-e998ea27287a',
+                  'value': 'threevalue',
+                  'label': 'Three'
+                }
+              ]
+            }, props),
+            Object.assign({}, {
+              'id': '01c69734-2543-4cc5-a3ef-d12de468475a',
+              'name': 'Text_Area',
+              'label': 'Text Areass',
+              'type': 'textarea',
+              'required': false,
+              'defaultValue': 'Multi line text'
+            }, props),
+            Object.assign({}, {
+              'id': '24de3c4f-3f7a-4296-8d9a-35cfbac7300d',
+              'name': 'Date',
+              'label': 'Date',
+              'type': 'date',
+              'required': false,
+              'defaultValue': '2018-08-16T00:00:00.000Z'
+            }, props),
+            Object.assign({}, {
+              'id': 'b30792a6-1074-45fe-b599-2dd76ad3addc',
+              'name': 'Camer',
+              'label': 'Camer',
+              'type': 'camera',
+              'required': false
+            }, props),
+            Object.assign({}, {
+              'id': 'dc070d4b-2577-4c49-b682-dafa482b334a',
+              'name': 'Check_Boxes',
+              'label': 'Check Boxes',
+              'type': 'checkboxes',
+              'required': false,
+              'buttons': false,
+              'defaultValue': [
+                '25ec5754-0d9a-4783-82d4-fd6ecce35d2f',
+                '14988191-a741-4a1f-984c-62ca86729808'
+              ],
+              'options': [
+                {
+                  'id': '25ec5754-0d9a-4783-82d4-fd6ecce35d2f',
+                  'value': 'ONEvalue',
+                  'label': 'One'
+                },
+                {
+                  'id': '14988191-a741-4a1f-984c-62ca86729808',
+                  'value': 'twovalue',
+                  'label': 'Two'
+                },
+                {
+                  'id': '869a3234-53c3-4dfe-95af-7b6d449fbc2d',
+                  'value': 'threevalue',
+                  'label': 'Three'
+                }
+              ]
+            }, props),
+            Object.assign({}, {
+              'id': '398de8c3-104e-427f-bd90-099c00fd5d5b',
+              'name': 'Date_and_Time',
+              'label': 'Date and Time',
+              'type': 'datetime',
+              'required': false,
+              'defaultValue': '2018-08-16T05:28:26.448Z'
+            }, props),
+            Object.assign({}, {
+              'id': 'b941ea2d-965c-4d40-8c1d-e5a231fc18ba',
+              'name': 'Numbers_and_more',
+              'label': 'Numbers and more',
+              'type': 'number',
+              'required': false,
+              'isSlider': false,
+              'defaultValue': 3
+            }, props),
+            Object.assign({}, {
+              'id': 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              'name': 'Numbers_and_more_slider',
+              'label': 'Numbers and more (Slider)',
+              'type': 'number',
+              'required': false,
+              'minNumber': 1,
+              'maxNumber': 6,
+              'isSlider': true,
+              'defaultValue': 3
+            }, props),
+            Object.assign({}, {
+              'id': '811710b0-bc78-11e8-9131-a774f238a892',
+              'name': 'checkboxes with attributes',
+              'label': 'checkboxes with attributes',
+              'type': 'checkboxes',
+              'optionsType': 'DYNAMIC',
+              'dynamicOptionSetId': 1,
+              'attributesMapping': [
+                {
+                  'attribute': 'State',
+                  'elementId': 'fd9c80d5-d56d-4e8d-ab8e-e70c531c77c2'
+                },
+                {
+                  'attribute': 'Country',
+                  'elementId': 'cc6daf4c-fa10-44e4-8d51-4f56febc9ab0'
+                }
+              ]
+            }, props),
+            Object.assign({}, {
+              'id': '8e4d819b-97fa-438d-b613-a092d38c3b27',
+              'name': 'My_Select',
+              'label': 'My Select',
+              'type': 'select',
+              'required': false,
+              'multi': false,
+              'defaultValue': '9e50b6e5-52b7-48ab-ab86-542ccba82205',
+              'options': [
+                {
+                  'id': '9e50b6e5-52b7-48ab-ab86-542ccba82205',
+                  'value': 'ONE',
+                  'label': 'one'
+                },
+                {
+                  'id': '5c82ef40-779a-46fb-8860-c9b4969518ec',
+                  'value': 'TWO',
+                  'label': 'two'
+                },
+                {
+                  'id': '55568d62-6ac5-4504-a88d-e2311a026776',
+                  'value': 'THREE',
+                  'label': 'three'
+                }
+              ]
+            }, props),
+            Object.assign({}, {
+              'id': '8e4d819b-97fa-438d-b613-a092d38c3b23',
+              'name': 'My_Multi_Select',
+              'label': 'My Select',
+              'type': 'select',
+              'required': false,
+              'multi': true,
+              'defaultValue': [
+                '9e50b6e5-52b7-48ab-ab86-542ccba82205',
+                '5c82ef40-779a-46fb-8860-c9b4969518ec'
+              ],
+              'optionsType': 'CUSTOM',
+              'conditionallyShowOptions': true,
+              'conditionallyShowOptionsElementIds': [
+                'dc070d4b-2577-4c49-b682-dafa482b334a'
+              ],
+              'options': [
+                {
+                  'attributes': [
+                    {
+                      'elementId': 'dc070d4b-2577-4c49-b682-dafa482b334a',
+                      'optionIds': ['33633fe8-10a8-478b-a24b-49c029c4292c']
+                    },
+                    {
+                      'elementId': 'dc070d4b-2577-4c49-b682-dafa482b334a',
+                      'optionIds': ['7e7dd403-baad-4a63-8482-8b0f9dc6c4e7']
+                    }
+                  ],
+                  'id': 'fa0f2864-d812-4610-a6e7-a48666ef5c2f',
+                  'label': '123 Fake Street',
+                  'value': '123 Fake Street'
+                }
+              ]
+            }, props),
+            Object.assign({}, {
+              'id': '59b723a9-00e2-493f-8d76-84ea71a178ee',
+              'name': 'Just_Text',
+              'label': 'Just Text',
+              'type': 'text',
+              'required': false,
+              'defaultValue': 'single line text',
+              'conditionallyShow': true,
+              'requiresAllConditionallyShowPredicates': true,
+              'conditionallyShowPredicates': [
+                {
+                  'elementId': '8e4d819b-97fa-438d-b613-a092d38c3b23',
+                  'optionIds': [
+                    '9e50b6e5-52b7-48ab-ab86-542ccba82205'
+                  ]
+                },
+                {
+                  'elementId': '8e4d819b-97fa-438d-b613-a092d38c3b27',
+                  'optionIds': [
+                    '5c82ef40-779a-46fb-8860-c9b4969518ec'
+                  ]
+                }
+              ]
+            }, props),
+            Object.assign({}, {
+              'id': '67dd8946-89dd-43b6-9b04-aca333a12c29',
+              'name': 'Test_on_multi_lines',
+              'label': 'Test on multi lines',
+              'type': 'textarea',
+              'required': false,
+              'defaultValue': 'multi line text'
+            }, props),
+            Object.assign({}, {
+              'id': '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
+              'name': 'What_was_the_time',
+              'label': 'What was the time',
+              'type': 'time',
+              'required': false,
+              'defaultValue': '1970-01-01T05:28:26.448Z'
+            }, props),
+            Object.assign({}, {
+              'id': '2424f4ea-35a0-47ee-9c22-ef8e16cb5103',
+              'name': 'More_Information',
+              'label': 'More Information',
+              'type': 'html',
+              'defaultValue': '<p><b>bold text here<b></p>'
+            }, props),
+            Object.assign({}, {
+              'id': '2424f4ea-35a0-47ee-9c22-ef8e16cb9999',
+              'name': 'calculation',
+              'label': 'calculations',
+              'type': 'calculation',
+              'calculation': '(69*69)+58008',
+              'defaultValue': '<p><b>{result}<b></p>'
+            }, props),
+            Object.assign({}, {
+              'id': '2424f4ea-35a0-47ee-9c22-ef8e16cb7103',
+              'name': 'Barcode_Scanner',
+              'label': 'Please Scan Barcode of Box',
+              'type': 'barcodeScanner',
+              'required': false,
+              'defaultValue': '123ABC098ZYX'
+            }, props),
+            Object.assign({}, {
+              'id': 'bb1b3d16-f3e1-4833-a273-19ea18e00582',
+              'name': 'Samples',
+              'label': 'Collect samples',
+              'type': 'repeatableSet',
+              'minSetEntries': 0,
+              'maxSetEntries': 5,
+              'addSetEntryLabel': 'Add an entry',
+              'removeSetEntryLabel': 'Remove this entry',
+              'elements': [
+                {
+                  'id': '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+                  'name': 'What_was_the_time',
+                  'label': 'What was the time',
+                  'type': 'time',
+                  'required': false,
+                  'defaultValue': '1970-01-01T05:28:26.448Z'
+                }
+              ]
+            }, props),
+            Object.assign({}, {
+              'id': 'a5289278-5cb4-4103-90b6-f67dde84dee7',
+              'name': 'email',
+              'label': 'email',
+              'type': 'email',
+              'defaultValue': 'developers@oneblink.io'
+            }, props),
+            Object.assign({}, {
+              'id': 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
+              'name': 'My_Cat',
+              'label': 'My Cat',
+              'type': 'image',
+              'defaultValue': 'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg'
+            }, props),
+            Object.assign({}, {
+              'id': 'b527bcea-dc84-477f-a5ee-d34abfec92fa',
+              'name': 'file',
+              'label': 'file',
+              'type': 'file'
+            }, props),
+            Object.assign({}, {
+              'id': 'b527bcea-dc84-477f-a5ee-d34abfec92fb',
+              'name': 'telephone',
+              'label': 'telephone',
+              'type': 'telephone'
+            }, props),
+            Object.assign({}, {
+              'id': '042508a4-4a8d-4684-9fd3-640a5018697d',
+              'name': 'autocomplete',
+              'label': 'autocomplete',
+              'type': 'autocomplete',
+              'options': [
+                {
+                  'id': '9e50b6e5-52b7-48ab-ab86-542ccba82205',
+                  'value': 'ONE',
+                  'label': 'one'
+                },
+                {
+                  'id': '5c82ef40-779a-46fb-8860-c9b4969518ec',
+                  'value': 'TWO',
+                  'label': 'two'
+                },
+                {
+                  'id': '55568d62-6ac5-4504-a88d-e2311a026776',
+                  'value': 'THREE',
+                  'label': 'three'
+                }
+              ]
+            }, props),
+            Object.assign({}, {
+              'id': 'b8a635eb-d28c-4f18-b400-5e2b458e76e9',
+              'type': 'form',
+              'formId': 1
+            }, props),
+            Object.assign({}, {
+              'id': '1495d816-e2b5-4b99-b378-fa7cd46e034c',
+              'type': 'infoPage',
+              'formId': 2
+            }, props),
+            Object.assign({}, {
+              'id': '042508a4-4a8d-4684-9fd3-640a5018697e',
+              'name': 'data_lookup_text',
+              'label': 'Data Lookup text',
+              'type': 'text',
+              'isDataLookup': true,
+              'dataLookupUrl': 'https://oneblink.io'
+            }, props),
+            Object.assign({}, {
+              'id': '93624277-22cb-46f2-88f0-035b9837e09d',
+              'name': 'element_lookup_text',
+              'label': 'Element Lookup text',
+              'type': 'text',
+              'isElementLookup': true,
+              'elementLookupUrl': 'https://oneblink.io'
+            }, props),
+            Object.assign({}, {
+              'id': 'f138d54f-c30f-49d8-9d2c-a8191643a887',
+              'name': 'both_types_lookup_text',
+              'label': 'Both Types Lookup text',
+              'type': 'text',
+              'isElementLookup': true,
+              'elementLookupUrl': 'https://oneblink.io',
+              'isDataLookup': true,
+              'dataLookupUrl': 'https://oneblink.io'
+            }, props)
+          ]
+        }
+      ]
+    }
+  }
+
+  test('should remove properties that are not part of the schema', () => {
+    const extraProps = {
+      withExtra: 'props',
+      shouldBe: 'removed',
+      especially: ['really', 'wrong', 1337, { boo: 'yah' }],
+      things: {
+        whee: 'doh!',
+        elements: ['muhahahahaha']
+      }
+    }
+    const form = createForm(extraProps)
+    const { value: result } = Joi.validate(form, formSchema, { stripUnknown: true })
+
+    result.elements[0].elements.forEach((element) => {
+      expect(element).toEqual(expect.not.objectContaining(extraProps))
+    })
+  })
+
+  test('should strip out properties that are not valid for the element type', () => {
+    const shouldBeRemoved = {
+      'minSetEntries': 2,
+      'maxSetEntries': -1,
+      'isSlider': true,
+      'minNumber': 0,
+      'maxNumber': -32,
+      'attributesMapping': [{}],
+      preCalculationDisplay: 'asfdsafsaf',
+      'calculation': '1 + 1 = window'
+    }
+
+    const { error, value } = Joi.validate({
+      'id': 1,
+      'name': 'Inspection',
+      'formsAppIds': [1],
+      'organisationId': '59cc888b8969af000fb50ddb',
+      'postSubmissionAction': 'FORMS_LIBRARY',
+      'submissionEvents': [],
+      'elements': [
+        Object.assign({}, {
+          'id': 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
+          'name': 'My_Cat',
+          'label': 'My Cat',
+          'type': 'image',
+          'defaultValue': 'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg'
+        }, shouldBeRemoved)
+      ]
+    }, formSchema)
+    expect(error).toBeFalsy()
+    expect(value.elements[0]).toEqual(expect.not.objectContaining(shouldBeRemoved))
+  })
+})
