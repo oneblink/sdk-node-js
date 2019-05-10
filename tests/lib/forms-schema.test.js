@@ -2986,7 +2986,7 @@ describe('invalid property removal', () => {
       'postSubmissionAction': 'FORMS_LIBRARY',
       'submissionEvents': [],
       'elements': [
-        Object.assign({
+        Object.assign({}, {
           'id': 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
           'name': 'My_Cat',
           'label': 'My Cat',
