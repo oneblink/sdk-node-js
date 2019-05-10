@@ -5,6 +5,7 @@
 ### Added
 
 -   ON-4090 # added `form` and `infoPage` element types
+-   ON-4098 # Strip out unwanted properties from form elements
 
 ## 0.2.7 (2019-05-06)
 

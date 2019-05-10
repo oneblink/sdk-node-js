@@ -2965,4 +2965,37 @@ describe('invalid property removal', () => {
       expect(element).toEqual(expect.not.objectContaining(extraProps))
     })
   })
+
+  test('should strip out properties that are not valid for the element type', () => {
+    const shouldBeRemoved = {
+      'minSetEntries': 2,
+      'maxSetEntries': -1,
+      'isSlider': true,
+      'minNumber': 0,
+      'maxNumber': -32,
+      'attributesMapping': [{}],
+      preCalculationDisplay: 'asfdsafsaf',
+      'calculation': '1 + 1 = window'
+    }
+
+    const { error, value } = Joi.validate({
+      'id': 1,
+      'name': 'Inspection',
+      'formsAppIds': [1],
+      'organisationId': '59cc888b8969af000fb50ddb',
+      'postSubmissionAction': 'FORMS_LIBRARY',
+      'submissionEvents': [],
+      'elements': [
+        Object.assign({
+          'id': 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
+          'name': 'My_Cat',
+          'label': 'My Cat',
+          'type': 'image',
+          'defaultValue': 'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg'
+        }, shouldBeRemoved)
+      ]
+    }, formSchema)
+    expect(error).toBeFalsy()
+    expect(value.elements[0]).toEqual(expect.not.objectContaining(shouldBeRemoved))
+  })
 })
