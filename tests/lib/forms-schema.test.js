@@ -4,7 +4,7 @@
 
 const Joi = require('joi')
 
-const { formSchema } = require('../../lib/forms-schema.js')
+const { formSchema, elementSchema } = require('../../lib/forms-schema.js')
 
 describe('Valid Form Schema with Pages', () => {
   const result = Joi.validate({
@@ -422,7 +422,11 @@ describe('Valid Form Schema with Pages', () => {
 
   test('should default "readOnly" to "false" for all elements', () => {
     result.value.elements[0].elements.forEach((element) => {
-      expect(element.readOnly).toBe(false)
+      if (element.type === 'form' || element.type === 'infoPage') {
+        expect(element.readOnly).toBeUndefined()
+      } else {
+        expect(element.readOnly).toBe(false)
+      }
     })
   })
 })
@@ -1813,7 +1817,7 @@ test('should require restricted barcode types if restrictBarcodeTypes boolean is
     abortEarly: false
   })
 
-  expect(error.details[0].message).toBe('"Form Element - Barcode Scanner - restrictedBarcodeTypesArray" is required')
+  expect(error.details[0].message).toBe('"Form Element - Barcode Scanner - restrictedBarcodeTypes" is required')
 })
 
 test('should throw error if postSubmissionAction is an invalid type', () => {
@@ -2997,5 +3001,49 @@ describe('invalid property removal', () => {
     }, formSchema)
     expect(error).toBeFalsy()
     expect(value.elements[0]).toEqual(expect.not.objectContaining(shouldBeRemoved))
+  })
+
+  test('should strip out `redirectUrl` if `postSubmissionAction` is not "URL"', () => {
+    const { error, value } = Joi.validate({
+      'id': 1,
+      'name': 'Inspection',
+      'formsAppIds': [1],
+      'organisationId': '59cc888b8969af000fb50ddb',
+      'postSubmissionAction': 'FORMS_LIBRARY',
+      'redirectUrl': 123,
+      'submissionEvents': [],
+      'elements': []
+    }, formSchema)
+    expect(error).toBeFalsy()
+    expect(value).toEqual({
+      'id': 1,
+      'name': 'Inspection',
+      'formsAppIds': [1],
+      'organisationId': '59cc888b8969af000fb50ddb',
+      'postSubmissionAction': 'FORMS_LIBRARY',
+      'submissionEvents': [],
+      'elements': [],
+      'isAuthenticated': false,
+      'isInfoPage': false,
+      'isMultiPage': false,
+      'isPublished': false
+    })
+  })
+
+  test('should strip out "name" and "label" for `form` element type', () => {
+    const { error, value } = Joi.validate({
+      'id': 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
+      'type': 'form',
+      'name': 'name',
+      'label': 'label',
+      'formId': 1
+    }, elementSchema)
+    expect(error).toBeFalsy()
+    expect(value).toEqual({
+      'id': 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
+      'type': 'form',
+      'formId': 1,
+      'conditionallyShow': false
+    })
   })
 })
