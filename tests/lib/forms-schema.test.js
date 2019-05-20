@@ -378,11 +378,13 @@ describe('Valid Form Schema with Pages', () => {
           {
             'id': 'b8a635eb-d28c-4f18-b400-5e2b458e76e9',
             'type': 'form',
+            'name': 'form',
             'formId': 1
           },
           {
             'id': '1495d816-e2b5-4b99-b378-fa7cd46e034c',
             'type': 'infoPage',
+            'name': 'infoPage',
             'formId': 2
           },
           {
@@ -2913,11 +2915,13 @@ describe('invalid property removal', () => {
             Object.assign({}, {
               'id': 'b8a635eb-d28c-4f18-b400-5e2b458e76e9',
               'type': 'form',
+              'name': 'form',
               'formId': 1
             }, props),
             Object.assign({}, {
               'id': '1495d816-e2b5-4b99-b378-fa7cd46e034c',
               'type': 'infoPage',
+              'name': 'infoPage',
               'formId': 2
             }, props),
             Object.assign({}, {
@@ -3030,7 +3034,7 @@ describe('invalid property removal', () => {
     })
   })
 
-  test('should strip out "name" and "label" for `form` element type', () => {
+  test('should strip out label" for `form` element type', () => {
     const { error, value } = Joi.validate({
       'id': 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
       'type': 'form',
@@ -3042,6 +3046,7 @@ describe('invalid property removal', () => {
     expect(value).toEqual({
       'id': 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
       'type': 'form',
+      'name': 'name',
       'formId': 1,
       'conditionallyShow': false
     })
