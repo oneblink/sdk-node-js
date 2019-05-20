@@ -216,4 +216,11 @@ declare type FormsApp = {
     subject?: string
   }
 }
+
+declare type FormsAppUser = {
+  id: number,
+  email: string,
+  formsAppId: number,
+  createdAt: string
+}
 */

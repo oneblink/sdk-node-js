@@ -3,7 +3,9 @@
 ## Functions
 
 -   [`createFormsApp()`](#createFormsApp())
+-   [`createUser()`](#createUser())
 -   [`deleteFormsApp()`](#deleteFormsApp())
+-   [`deleteUser()`](#deleteUser())
 -   [`getFormsApp()`](#getFormsApp())
 -   [`updateFormsApp()`](#updateFormsApp())
 -   [`updateStyles()`](#updateStyles())
@@ -87,6 +89,44 @@ formsAppsSDK.createFormsApp(formsApp)
 }
 ```
 
+## `createUser()`
+
+Create a Forms App User
+
+### Example
+
+```javascript
+const formsAppUser = {
+  'email': 'email@domain.io',
+  'formsAppId': 1,
+  'generatePassword': true
+}
+formsAppsSDK.createUser(formsAppUser)
+  .then((savedFormsAppUser) => {
+    // Use Forms App User here...
+  })
+```
+
+### Parameters
+
+| Parameter                       | Required | Type      | Description                                                                                                                                                           |
+| ------------------------------- | -------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `formsAppUser`                  | Yes      | `Object`  | Forms App User properties                                                                                                                                             |
+| `formsAppUser.email`            | Yes      | `string`  | Email address of the Forms App User                                                                                                                                   |
+| `formsAppUser.formsAppId`       | Yes      | `number`  | The exact Forms App identifier the Forms App User is associated with                                                                                                  |
+| `formsAppUser.generatePassword` | Yes      | `boolean` | Determine if a password is generated for the Forms App User (`true`) or not (`false`). Specify `false` if the user is using a social provider (e.g. Google) to login. |
+
+### Result (Resolved Promise)
+
+```json
+{
+  "id": 1,
+  "email": "email@domain.io",
+  "formsAppId": 1,
+  "createdAt": "2018-06-01T00:00:00.000Z",
+}
+```
+
 ## `deleteFormsApp()`
 
 Delete a Forms App by its identifier
@@ -106,6 +146,32 @@ formsAppsSDK.deleteFormsApp(formsAppId)
 | Parameter   | Required | Type     | Description                                              |
 | ----------- | -------- | -------- | -------------------------------------------------------- |
 | `formAppId` | Yes      | `number` | The exact identifier of the Forms App you wish to delete |
+
+### Result (Resolved Promise)
+
+```js
+undefined
+```
+
+## `deleteUser()`
+
+Delete a Forms App User by its identifier
+
+### Example
+
+```javascript
+const formsAppUserId = 1
+formsAppsSDK.deleteUser(formsAppUserId)
+  .then(() => {
+    // Forms App User has been deleted...
+  })
+```
+
+### Parameters
+
+| Parameter        | Required | Type     | Description                                            |
+| ---------------- | -------- | -------- | ------------------------------------------------------ |
+| `formsAppUserId` | Yes      | `number` | The exact Forms App User identifier you wish to delete |
 
 ### Result (Resolved Promise)
 

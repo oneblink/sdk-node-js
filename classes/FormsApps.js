@@ -63,4 +63,20 @@ module.exports = class FormsApps extends OneBlinkAPI {
 
     return super.putRequest(`${basePath}/${formsAppId}/styles`, data)
   }
+
+  async createUser (
+    data /* : ?mixed */
+  ) /* : Promise<FormsAppUser> */ {
+    return super.postRequest('/appUsers', data)
+  }
+
+  async deleteUser (
+    formsAppUserId /* : ?mixed */
+  ) /* : Promise<void> */ {
+    if (typeof formsAppUserId !== 'number') {
+      return Promise.reject(new TypeError('Must supply "formsAppUserId" as a number'))
+    }
+
+    return super.deleteRequest(`/appUsers/${formsAppUserId}`)
+  }
 }
