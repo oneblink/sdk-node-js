@@ -6,10 +6,11 @@
 
 Allow the user to use elements from a info page
 
-| Property       | Required | Type      | Default      | Description                                                                              |
-| -------------- | -------- | --------- | ------------ | ---------------------------------------------------------------------------------------- |
-| `type`         | Yes      | `string`  | `'infoPage'` | The type of Form Element.                                                                |
-| `formId`       | Yes      | `number`  |              | The id of the Info Page whose elements should be included.                               |
+| Property | Required | Type     | Default      | Description                                                          |
+| -------- | -------- | -------- | ------------ | -------------------------------------------------------------------- |
+| `type`   | Yes      | `string` | `'infoPage'` | The type of Form Element.                                            |
+| `name`   | Yes      | `string` |              | The key that will be assigned an object with the embedded form data. |
+| `formId` | Yes      | `number` |              | The id of the Info Page whose elements should be included.           |
 
 Info Page element also inherits the properties of the following:
 
