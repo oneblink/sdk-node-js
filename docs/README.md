@@ -4,6 +4,8 @@
 
 -   [Forms](./forms.md)
 
+-   [Forms Apps](./forms-apps.md)
+
 -   [Jobs](./jobs.md)
 
 -   [Keys](./keys.md)
