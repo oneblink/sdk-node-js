@@ -8,19 +8,14 @@ const OneBlinkAPI = require('../lib/one-blink-api.js')
 const setPreFillData = require('../lib/pre-fill-data')
 const { validateWithFormSchema } = require('../lib/forms-validation.js')
 const generateFormElement = require('../lib/generate-form-element.js')
+
 module.exports = class Forms extends OneBlinkAPI {
-  constructor (
-    options /* : ConstructorOptions */
-  ) {
+  constructor(options /* : ConstructorOptions */) {
     options = options || {}
-    super(
-      options.oneBlinkAPIOrigin,
-      options.accessKey,
-      options.secretKey
-    )
+    super(options.oneBlinkAPIOrigin, options.accessKey, options.secretKey)
   }
 
-  async generateFormUrl (
+  async generateFormUrl(
     formId /* : ?mixed */,
     externalId /* : ?mixed */,
     preFillData /* : ?mixed */
@@ -37,7 +32,9 @@ module.exports = class Forms extends OneBlinkAPI {
 
     let preFillFormDataId
     if (preFillData) {
-      const preFillMeta = await super.postRequest(`/forms/${formId}/pre-fill-credentials`)
+      const preFillMeta = await super.postRequest(
+        `/forms/${formId}/pre-fill-credentials`
+      )
       await setPreFillData(preFillMeta, preFillData)
       preFillFormDataId = preFillMeta.preFillFormDataId
     }
@@ -46,9 +43,15 @@ module.exports = class Forms extends OneBlinkAPI {
 
     const token = generateJWT(this.accessKey, this.secretKey, jwtExpiry)
 
-    const formUrl = generateFormUrl(`https://${hostname}/forms`, formId, token, externalId, preFillFormDataId)
+    const formUrl = generateFormUrl(
+      `https://${hostname}/forms`,
+      formId,
+      token,
+      externalId,
+      preFillFormDataId
+    )
 
-    const expiry = new Date(Date.now() + (jwtExpiry * 1000)).toISOString()
+    const expiry = new Date(Date.now() + jwtExpiry * 1000).toISOString()
 
     return {
       formUrl,
@@ -56,33 +59,42 @@ module.exports = class Forms extends OneBlinkAPI {
     }
   }
 
-  async getHostname (
-    formId /* : number */
-  ) {
+  async getHostname(formId /* : number */) {
     try {
       const formResults = await super.getRequest(`/forms/${formId}`)
 
       if (!formResults || !formResults.formsAppIds.length) {
-        throw new Error('Access Denied. The "accessKey" and "secretKey" provided may have been revoked.')
+        throw new Error(
+          'Access Denied. The "accessKey" and "secretKey" provided may have been revoked.'
+        )
       }
 
-      const appResults = await super.getRequest(`/forms-apps/${formResults.formsAppIds[0]}`)
+      const appResults = await super.getRequest(
+        `/forms-apps/${formResults.formsAppIds[0]}`
+      )
 
       if (!appResults || !appResults.hostname) {
-        throw new Error('Access Denied. The "accessKey" and "secretKey" provided may have been revoked.')
+        throw new Error(
+          'Access Denied. The "accessKey" and "secretKey" provided may have been revoked.'
+        )
       }
 
       return appResults.hostname
     } catch (e) {
       const organisationsResults = await super.searchRequest(`/organisations`)
-      if (!organisationsResults.organisations || !organisationsResults.organisations.length) {
-        throw new Error('Access Denied. The "accessKey" and "secretKey" provided may have been revoked.')
+      if (
+        !organisationsResults.organisations ||
+        !organisationsResults.organisations.length
+      ) {
+        throw new Error(
+          'Access Denied. The "accessKey" and "secretKey" provided may have been revoked.'
+        )
       }
       return organisationsResults.organisations[0].formsHostname
     }
   }
 
-  async generateSubmissionDataUrl (
+  async generateSubmissionDataUrl(
     formId /* : ?mixed */,
     submissionId /* : ?mixed */,
     expiryInSeconds /* : ?mixed */
@@ -91,19 +103,27 @@ module.exports = class Forms extends OneBlinkAPI {
       return Promise.reject(new TypeError('Must supply "formId" as a number'))
     }
     if (typeof submissionId !== 'string') {
-      return Promise.reject(new TypeError('Must supply "submissionId" as a string'))
+      return Promise.reject(
+        new TypeError('Must supply "submissionId" as a string')
+      )
     }
     if (typeof expiryInSeconds !== 'number') {
-      return Promise.reject(new TypeError('Must supply "expiryInSeconds" as a number'))
+      return Promise.reject(
+        new TypeError('Must supply "expiryInSeconds" as a number')
+      )
     }
     if (expiryInSeconds < 900) {
-      return Promise.reject(new TypeError('"expiryInSeconds" must be greater than or equal to 900'))
+      return Promise.reject(
+        new TypeError('"expiryInSeconds" must be greater than or equal to 900')
+      )
     }
 
-    return super.postRequest(`/forms/${formId}/retrieval-url/${submissionId}?expirySeconds=${expiryInSeconds}`)
+    return super.postRequest(
+      `/forms/${formId}/retrieval-url/${submissionId}?expirySeconds=${expiryInSeconds}`
+    )
   }
 
-  getSubmissionData (
+  getSubmissionData(
     formId /* : ?mixed */,
     submissionId /* : ?mixed */
   ) /* : Promise<S3SubmissionData> */ {
@@ -111,14 +131,19 @@ module.exports = class Forms extends OneBlinkAPI {
       return Promise.reject(new TypeError('Must supply "formId" as a number'))
     }
     if (typeof submissionId !== 'string') {
-      return Promise.reject(new TypeError('Must supply "submissionId" as a string'))
+      return Promise.reject(
+        new TypeError('Must supply "submissionId" as a string')
+      )
     }
 
-    return super.postRequest(`/forms/${formId}/retrieval-credentials/${submissionId}`)
-      .then((credentials) => submissionData.getSubmissionData(credentials))
+    return super
+      .postRequest(`/forms/${formId}/retrieval-credentials/${submissionId}`)
+      .then(credentials => submissionData.getSubmissionData(credentials))
   }
 
-  search (options /* : ?FormsSearchOptions */) /* : Promise<FormsSearchResult> */ {
+  search(
+    options /* : ?FormsSearchOptions */
+  ) /* : Promise<FormsSearchResult> */ {
     options = options || {}
 
     let searchParams = {}
@@ -144,20 +169,27 @@ module.exports = class Forms extends OneBlinkAPI {
     return super.searchRequest(`/forms`, searchParams)
   }
 
-  getForm (formId /* : ?mixed */) /* : Promise<Form> */ {
+  getForm(
+    formId /* : ?mixed */,
+    injectForms /* : ?boolean */
+  ) /* : Promise<Form> */ {
     if (typeof formId !== 'number') {
       return Promise.reject(new TypeError('Must supply "formId" as a number'))
     }
 
-    return super.getRequest(`/forms/${formId}`)
+    return super.searchRequest(`/forms/${formId}`, {
+      injectForms: injectForms || false
+    })
   }
 
-  static validateForm (form /* : mixed */) /* : Form */ {
+  static validateForm(form /* : mixed */) /* : Form */ {
     const validatedForm = validateWithFormSchema(form)
     return validatedForm
   }
 
-  static generateFormElement (formElementGenerationData /* : mixed */) /* : FormElement */ {
+  static generateFormElement(
+    formElementGenerationData /* : mixed */
+  ) /* : FormElement */ {
     const formElement = generateFormElement(formElementGenerationData)
     return formElement
   }
