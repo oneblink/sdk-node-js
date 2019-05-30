@@ -10,5 +10,8 @@
   },
   "plugins": [
     "node"
-  ]
+  ],
+  "rules": {
+    "space-before-function-paren": "off"
+  }
 }

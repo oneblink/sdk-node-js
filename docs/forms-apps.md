@@ -2,13 +2,14 @@
 
 ## Functions
 
--   [`createFormsApp()`](#createFormsApp())
--   [`createUser()`](#createUser())
--   [`deleteFormsApp()`](#deleteFormsApp())
--   [`deleteUser()`](#deleteUser())
--   [`getFormsApp()`](#getFormsApp())
--   [`updateFormsApp()`](#updateFormsApp())
--   [`updateStyles()`](#updateStyles())
+- [`createFormsApp()`](<#createformsapp()>)
+- [`createUser()`](<#createuser()>)
+- [`deleteFormsApp()`](<#deleteformsapp()>)
+- [`deleteUser()`](<#deleteuser()>)
+- [`getFormsApp()`](<#getformsapp()>)
+- [`getMyFormsApp()`](<#getmyformsapp()>)
+- [`updateFormsApp()`](<#updateformsapp()>)
+- [`updateStyles()`](<#updatestyles()>)
 
 ## Constructor
 
@@ -37,19 +38,18 @@ Create a Forms App
 
 ```javascript
 const formsApp = {
-  'name': 'My Application',
-  'hostname': 'customer-my.app.oneblink.io',
-  'pwaSettings': {
-    'homeScreenName': 'App',
-    'splashScreenName': 'Application'
+  name: 'My Application',
+  hostname: 'customer-my.app.oneblink.io',
+  pwaSettings: {
+    homeScreenName: 'App',
+    splashScreenName: 'Application'
   },
-  'organisationId': 'ABCDEFGHIJKL123456789012',
-  'formIds': []
+  organisationId: 'ABCDEFGHIJKL123456789012',
+  formIds: []
 }
-formsAppsSDK.createFormsApp(formsApp)
-  .then((savedFormsApp) => {
-    // Use Forms App here...
-  })
+formsAppsSDK.createFormsApp(formsApp).then(savedFormsApp => {
+  // Use Forms App here...
+})
 ```
 
 ### Parameters
@@ -97,14 +97,13 @@ Create a Forms App User
 
 ```javascript
 const formsAppUser = {
-  'email': 'email@domain.io',
-  'formsAppId': 1,
-  'generatePassword': true
+  email: 'email@domain.io',
+  formsAppId: 1,
+  generatePassword: true
 }
-formsAppsSDK.createUser(formsAppUser)
-  .then((savedFormsAppUser) => {
-    // Use Forms App User here...
-  })
+formsAppsSDK.createUser(formsAppUser).then(savedFormsAppUser => {
+  // Use Forms App User here...
+})
 ```
 
 ### Parameters
@@ -123,7 +122,7 @@ formsAppsSDK.createUser(formsAppUser)
   "id": 1,
   "email": "email@domain.io",
   "formsAppId": 1,
-  "createdAt": "2018-06-01T00:00:00.000Z",
+  "createdAt": "2018-06-01T00:00:00.000Z"
 }
 ```
 
@@ -135,10 +134,9 @@ Delete a Forms App by its identifier
 
 ```javascript
 const formsAppId = 1
-formsAppsSDK.deleteFormsApp(formsAppId)
-  .then(() => {
-    // Forms App has been deleted...
-  })
+formsAppsSDK.deleteFormsApp(formsAppId).then(() => {
+  // Forms App has been deleted...
+})
 ```
 
 ### Parameters
@@ -161,10 +159,9 @@ Delete a Forms App User by its identifier
 
 ```javascript
 const formsAppUserId = 1
-formsAppsSDK.deleteUser(formsAppUserId)
-  .then(() => {
-    // Forms App User has been deleted...
-  })
+formsAppsSDK.deleteUser(formsAppUserId).then(() => {
+  // Forms App User has been deleted...
+})
 ```
 
 ### Parameters
@@ -187,10 +184,9 @@ Get a single Forms App by its identifier
 
 ```javascript
 const formsAppId = 1
-formsAppsSDK.getFormsApp(formsAppId)
-  .then((formsApp) => {
-    // Use Forms App here...
-  })
+formsAppsSDK.getFormsApp(formsAppId).then(formsApp => {
+  // Use Forms App here...
+})
 ```
 
 ### Parameters
@@ -226,6 +222,29 @@ formsAppsSDK.getFormsApp(formsAppId)
 }
 ```
 
+## `getMyFormsApp()`
+
+Get a single Forms App for the Bearer token of a Forms App User
+
+### Example
+
+```javascript
+const bearerToken = ''
+formsAppsSDK.getMyFormsApp(bearerToken).then(formsApp => {
+  // Use Forms App here...
+})
+```
+
+### Parameters
+
+| Parameter     | Required | Type     | Description                                                                    |
+| ------------- | -------- | -------- | ------------------------------------------------------------------------------ |
+| `bearerToken` | Yes      | `string` | The Bearer token in the `Authorization` header from a request from an App User |
+
+### Result (Resolved Promise)
+
+Same as [`getFormsApp()`](<#getformsapp()>)
+
 ## `updateFormsApp()`
 
 Update a Forms App
@@ -234,23 +253,22 @@ Update a Forms App
 
 ```javascript
 const formsApp = {
-  'id': 1,
-  'name': 'My Application',
-  'hostname': 'customer-my.app.oneblink.io',
-  'oAuthClientId': '123456789012abcdefghijkl',
-  'pwaSettings': {
-    'homeScreenName': 'App',
-    'splashScreenName': 'Application'
+  id: 1,
+  name: 'My Application',
+  hostname: 'customer-my.app.oneblink.io',
+  oAuthClientId: '123456789012abcdefghijkl',
+  pwaSettings: {
+    homeScreenName: 'App',
+    splashScreenName: 'Application'
   },
-  'createdAt': '2018-06-01T00:00:00.000Z',
-  'updatedAt': '2019-05-17T05:49:14.000Z',
-  'organisationId': 'ABCDEFGHIJKL123456789012',
-  'formIds': []
+  createdAt: '2018-06-01T00:00:00.000Z',
+  updatedAt: '2019-05-17T05:49:14.000Z',
+  organisationId: 'ABCDEFGHIJKL123456789012',
+  formIds: []
 }
-formsAppsSDK.updateFormsApp(formsApp)
-  .then((savedFormsApp) => {
-    // Use Forms App here...
-  })
+formsAppsSDK.updateFormsApp(formsApp).then(savedFormsApp => {
+  // Use Forms App here...
+})
 ```
 
 ### Parameters
@@ -301,16 +319,15 @@ Update a Forms App
 ```javascript
 const formsAppId = 1
 const styles = {
-  'foregroundColour': '#E8E8E8',
-  'highlightColour': '#0000FF',
-  'contrastColour': '#FFFFFF',
-  'customCss': '.ob-button { border-radius: 10px; }',
-  'logoUrl': 'http://logo.com/path/to/image.png'
+  foregroundColour: '#E8E8E8',
+  highlightColour: '#0000FF',
+  contrastColour: '#FFFFFF',
+  customCss: '.ob-button { border-radius: 10px; }',
+  logoUrl: 'http://logo.com/path/to/image.png'
 }
-formsAppsSDK.updateStyles(formsAppId, styles)
-  .then(() => {
-    // Styles have been updated...
-  })
+formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
+  // Styles have been updated...
+})
 ```
 
 ### Parameters
