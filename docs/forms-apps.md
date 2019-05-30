@@ -2,14 +2,14 @@
 
 ## Functions
 
-- [`createFormsApp()`](<#createformsapp()>)
-- [`createUser()`](<#createuser()>)
-- [`deleteFormsApp()`](<#deleteformsapp()>)
-- [`deleteUser()`](<#deleteuser()>)
-- [`getFormsApp()`](<#getformsapp()>)
-- [`getMyFormsApp()`](<#getmyformsapp()>)
-- [`updateFormsApp()`](<#updateformsapp()>)
-- [`updateStyles()`](<#updatestyles()>)
+- [`createFormsApp()`](<#createformsapp>)
+- [`createUser()`](<#createuser>)
+- [`deleteFormsApp()`](<#deleteformsapp>)
+- [`deleteUser()`](<#deleteuser>)
+- [`getFormsApp()`](<#getformsapp>)
+- [`getMyFormsApp()`](<#getmyformsapp>)
+- [`updateFormsApp()`](<#updateformsapp>)
+- [`updateStyles()`](<#updatestyles>)
 
 ## Constructor
 
