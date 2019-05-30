@@ -4,7 +4,7 @@
 
 ### Added
 
-- [`getMyFormsApp()`](<./docs/forms-apps.md#getmyformsapp()>) function
+- [`getMyFormsApp()`](./docs/forms-apps.md#getmyformsapp) function
 
 ## 0.2.8 (2019-05-23)
 
