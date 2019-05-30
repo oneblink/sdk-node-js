@@ -1,5 +1,18 @@
 # OneBlink SDK | Forms Class
 
+## Instance Functions
+
+- [`generateFormUrl()`](#generateformurl)
+- [`generateSubmissionDataUrl()`](#generatesubmissiondataurl)
+- [`getSubmissionData()`](#getsubmissiondata)
+- [`getForm()`](#getform)
+- [`search()`](#search)
+
+## Static Functions
+
+- [`validateForm()`](#validateform)
+- [`generateFormElement()`](#generateformelement)
+
 ## Constructor
 
 | Parameter | Required | Type | Description
@@ -19,7 +32,7 @@ const options = {
 const forms = new OneBlink.Forms(options)
 ```
 
-## Generate Form URL
+## `generateFormUrl()`
 
 ### Example
 
@@ -54,7 +67,7 @@ forms.generateFormUrl(formId, externalId, preFilledData)
 }
 ```
 
-## Generate Submission Data URL
+## `generateSubmissionDataUrl()`
 
 ### Example
 
@@ -85,7 +98,7 @@ forms.generateSubmissionDataUrl(formId, submissionId, expiryInSeconds)
 }
 ```
 
-## Get Submission Data
+## `getSubmissionData()`
 
 ### Example
 
@@ -131,13 +144,14 @@ forms.getSubmissionData(formId, submissionId)
 }
 ```
 
-## Get Single Form
+## `getForm()`
 
 ### Example
 
 ```javascript
 const formId = 1
-forms.getForm(formId)
+const injectForms = false
+forms.getForm(formId, injectForms)
   .then((form) => {
     // Use form here...
   })
@@ -164,7 +178,7 @@ forms.getForm(formId)
 }
 ```
 
-## Search Forms
+## `search()`
 
 ### Example
 
@@ -219,9 +233,7 @@ forms.search(options)
 }
 ```
 
-## Static Functions
-___
-## Validate Form
+## `validateForm()`
 
 `validateForm()` is a static method available on the forms class, used for validating a OneBlink compatible Forms Definition.
 
@@ -294,7 +306,7 @@ return validatedForm
 }
 ```
 
-## Generate Form Element
+## `generateFormElement()`
 
 `generateFormElement()` is a static method available on the forms class, used for both creating and validating a OneBlink Form Element.
 
