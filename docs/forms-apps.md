@@ -99,7 +99,10 @@ Create a Forms App User
 const formsAppUser = {
   email: 'email@domain.io',
   formsAppId: 1,
-  generatePassword: true
+  generatePassword: true,
+  additionalParams: {
+    company: "Company Name"
+  }
 }
 formsAppsSDK.createUser(formsAppUser).then(savedFormsAppUser => {
   // Use Forms App User here...
@@ -114,6 +117,7 @@ formsAppsSDK.createUser(formsAppUser).then(savedFormsAppUser => {
 | `formsAppUser.email`            | Yes      | `string`  | Email address of the Forms App User                                                                                                                                   |
 | `formsAppUser.formsAppId`       | Yes      | `number`  | The exact Forms App identifier the Forms App User is associated with                                                                                                  |
 | `formsAppUser.generatePassword` | Yes      | `boolean` | Determine if a password is generated for the Forms App User (`true`) or not (`false`). Specify `false` if the user is using a social provider (e.g. Google) to login. |
+| `formsAppUser.additionalParams` | No      | `Object` | Additional parameters to be passed to the welcome email template for the form app matching the `formsAppId` |
 
 ### Result (Resolved Promise)
 
