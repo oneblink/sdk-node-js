@@ -31,7 +31,7 @@ module.exports = class FormsApps extends OneBlinkAPI {
       )
     }
 
-    return super.oneBlinkAPI
+    return this.oneBlinkAPI
       .get('/my-forms-app', {
         headers: {
           Authorization: `Bearer ${formsAppUserToken}`
