@@ -54,20 +54,20 @@ formsAppsSDK.createFormsApp(formsApp).then(savedFormsApp => {
 
 ### Parameters
 
-| Parameter                                | Required | Type       | Description                                                                                                                  |
-| ---------------------------------------- | -------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `formsApp`                               | Yes      | `Object`   | Forms App properties                                                                                                         |
-| `formsApp.name`                          | Yes      | `string`   | Name of the forms app                                                                                                        |
-| `formsApp.hostname`                      | Yes      | `string`   | Hostname (domain) for the forms app                                                                                          |
-| `formsApp.organisationId`                | Yes      | `string`   | The exact organisation identifier the forms app is associated with                                                           |
-| `formsApp.formIds`                       | Yes      | `number[]` | The identifiers of the forms that are in the forms app. The order of the forms is respected when rendering the list of forms |
-| `formsApp.pwaSettings`                   | Yes      | `Object`   | Forms App progressive web app setting properties                                                                             |
-| `formsApp.pwaSettings.homeScreenName`    | No       | `string`   | The text beneath the app icon when installed as a progressive web app on mobile devices                                      |
-| `formsApp.pwaSettings.splashScreenName`  | No       | `string`   | The text on the splash screen when installed as a progressive web app on mobile devices                                      |
-| `formsApp.pwaSettings.homeScreenIconUrl` | No       | `string`   | The absolute URL to the app icon that is displayed when installed as a progressive web app on mobile devices                 |
-| `formsApp.welcomeEmail`                  | No       | `Object`   | Forms App custom welcome email properties                                                                                    |
-| `formsApp.welcomeEmail.subject`          | No       | `string`   | The subject to use when sending welcome emails to new app users                                                              |
-| `formsApp.welcomeEmail.body`             | No       | `string`   | The HTML to use when sending welcome emails to new app users                                                                 |
+| Parameter                                | Required | Type       | Description                                                                                                                                                                                          |
+| ---------------------------------------- | -------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `formsApp`                               | Yes      | `Object`   | Forms App properties                                                                                                                                                                                 |
+| `formsApp.name`                          | Yes      | `string`   | Name of the forms app                                                                                                                                                                                |
+| `formsApp.hostname`                      | Yes      | `string`   | Hostname (domain) for the forms app                                                                                                                                                                  |
+| `formsApp.organisationId`                | Yes      | `string`   | The exact organisation identifier the forms app is associated with                                                                                                                                   |
+| `formsApp.formIds`                       | Yes      | `number[]` | The identifiers of the forms that are in the forms app. The order of the forms is respected when rendering the list of forms                                                                         |
+| `formsApp.pwaSettings`                   | Yes      | `Object`   | Forms App progressive web app setting properties                                                                                                                                                     |
+| `formsApp.pwaSettings.homeScreenName`    | No       | `string`   | The text beneath the app icon when installed as a progressive web app on mobile devices                                                                                                              |
+| `formsApp.pwaSettings.splashScreenName`  | No       | `string`   | The text on the splash screen when installed as a progressive web app on mobile devices                                                                                                              |
+| `formsApp.pwaSettings.homeScreenIconUrl` | No       | `string`   | The absolute URL to the app icon that is displayed when installed as a progressive web app on mobile devices                                                                                         |
+| `formsApp.welcomeEmail`                  | No       | `Object`   | Forms App custom welcome email properties                                                                                                                                                            |
+| `formsApp.welcomeEmail.subject`          | No       | `string`   | The subject to use when sending welcome emails to new app users                                                                                                                                      |
+| `formsApp.welcomeEmail.body`             | No       | `string`   | A [mustache](http://mustache.github.io/#demo) template to use when sending welcome emails to new app users. See [`createUser()`](#createuser) for passing additional parameters for a specific user. |
 
 ### Result (Resolved Promise)
 
@@ -100,8 +100,8 @@ const formsAppUser = {
   email: 'email@domain.io',
   formsAppId: 1,
   generatePassword: true,
-  additionalParams: {
-    company: "Company Name"
+  welcomeEmailParameters: {
+    company: 'Company Name'
   }
 }
 formsAppsSDK.createUser(formsAppUser).then(savedFormsAppUser => {
@@ -111,13 +111,27 @@ formsAppsSDK.createUser(formsAppUser).then(savedFormsAppUser => {
 
 ### Parameters
 
-| Parameter                       | Required | Type      | Description                                                                                                                                                           |
-| ------------------------------- | -------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `formsAppUser`                  | Yes      | `Object`  | Forms App User properties                                                                                                                                             |
-| `formsAppUser.email`            | Yes      | `string`  | Email address of the Forms App User                                                                                                                                   |
-| `formsAppUser.formsAppId`       | Yes      | `number`  | The exact Forms App identifier the Forms App User is associated with                                                                                                  |
-| `formsAppUser.generatePassword` | Yes      | `boolean` | Determine if a password is generated for the Forms App User (`true`) or not (`false`). Specify `false` if the user is using a social provider (e.g. Google) to login. |
-| `formsAppUser.additionalParams` | No      | `Object` | Additional parameters to be passed to the welcome email template for the form app matching the `formsAppId` |
+| Parameter                             | Required | Type      | Description                                                                                                                                                           |
+| ------------------------------------- | -------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `formsAppUser`                        | Yes      | `Object`  | Forms App User properties                                                                                                                                             |
+| `formsAppUser.email`                  | Yes      | `string`  | Email address of the Forms App User                                                                                                                                   |
+| `formsAppUser.formsAppId`             | Yes      | `number`  | The exact Forms App identifier the Forms App User is associated with                                                                                                  |
+| `formsAppUser.generatePassword`       | Yes      | `boolean` | Determine if a password is generated for the Forms App User (`true`) or not (`false`). Specify `false` if the user is using a social provider (e.g. Google) to login. |
+| `formsAppUser.welcomeEmailParameters` | No       | `Object`  | Additional parameters to be passed to the welcome email template for the form app matching the `formsAppId`                                                           |
+
+#### Welcome Email Parameters
+
+The following parameters for the welcome email [mustache](http://mustache.github.io/#demo) template are already taken and will be overridden if supplied:
+
+| Parameter              | type      | Description                                                                                           |
+| ---------------------- | --------- | ----------------------------------------------------------------------------------------------------- |
+| `formsAppUrl`          | `string`  | The URL for the Forms App, use this to allow your new user to click the a link and open the Forms App |
+| `formsAppName`         | `string`  | The name of the Forms App                                                                             |
+| `coloursHighlight`     | `string`  | The `highlightColour` set in the `styles` for the Forms App                                           |
+| `coloursContrast`      | `string`  | The `contrastColour` set in the `styles` for the Forms App                                            |
+| `displayPassword`      | `boolean` | Determine if a password will be included in the welcome email (`true`) or not (`false`)               |
+| `showExistingPassword` | `boolean` | Determine if a the user already has a password in the system (`true`) or not (`false`)                |
+| `password`             | `string`  | The new users temporary password                                                                      |
 
 ### Result (Resolved Promise)
 
@@ -277,22 +291,22 @@ formsAppsSDK.updateFormsApp(formsApp).then(savedFormsApp => {
 
 ### Parameters
 
-| Parameter                                | Required | Type       | Description                                                                                                                  |
-| ---------------------------------------- | -------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `formsApp`                               | Yes      | `Object`   | Forms App properties                                                                                                         |
-| `formsApp.id`                            | Yes      | `number`   | Identifier of the forms app                                                                                                  |
-| `formsApp.name`                          | Yes      | `string`   | Name of the forms app                                                                                                        |
-| `formsApp.hostname`                      | Yes      | `string`   | Hostname (domain) for the forms app                                                                                          |
-| `formsApp.organisationId`                | Yes      | `string`   | The exact organisation identifier the forms app is associated with                                                           |
-| `formsApp.oAuthClientId`                 | Yes      | `string`   | The identifier of the OAuth Client for the forms app **(Do not change this)**.                                               |
-| `formsApp.formIds`                       | Yes      | `number[]` | The identifiers of the forms that are in the forms app. The order of the forms is respected when rendering the list of forms |
-| `formsApp.pwaSettings`                   | Yes      | `Object`   | Forms App progressive web app setting properties                                                                             |
-| `formsApp.pwaSettings.homeScreenName`    | No       | `string`   | The text beneath the app icon when installed as a progressive web app on mobile devices                                      |
-| `formsApp.pwaSettings.splashScreenName`  | No       | `string`   | The text on the splash screen when installed as a progressive web app on mobile devices                                      |
-| `formsApp.pwaSettings.homeScreenIconUrl` | No       | `string`   | The absolute URL to the app icon that is displayed when installed as a progressive web app on mobile devices                 |
-| `formsApp.welcomeEmail`                  | No       | `Object`   | Forms App custom welcome email properties                                                                                    |
-| `formsApp.welcomeEmail.subject`          | No       | `string`   | The subject to use when sending welcome emails to new app users                                                              |
-| `formsApp.welcomeEmail.body`             | No       | `string`   | The HTML to use when sending welcome emails to new app users                                                                 |
+| Parameter                                | Required | Type       | Description                                                                                                                                                                                          |
+| ---------------------------------------- | -------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `formsApp`                               | Yes      | `Object`   | Forms App properties                                                                                                                                                                                 |
+| `formsApp.id`                            | Yes      | `number`   | Identifier of the forms app                                                                                                                                                                          |
+| `formsApp.name`                          | Yes      | `string`   | Name of the forms app                                                                                                                                                                                |
+| `formsApp.hostname`                      | Yes      | `string`   | Hostname (domain) for the forms app                                                                                                                                                                  |
+| `formsApp.organisationId`                | Yes      | `string`   | The exact organisation identifier the forms app is associated with                                                                                                                                   |
+| `formsApp.oAuthClientId`                 | Yes      | `string`   | The identifier of the OAuth Client for the forms app **(Do not change this)**.                                                                                                                       |
+| `formsApp.formIds`                       | Yes      | `number[]` | The identifiers of the forms that are in the forms app. The order of the forms is respected when rendering the list of forms                                                                         |
+| `formsApp.pwaSettings`                   | Yes      | `Object`   | Forms App progressive web app setting properties                                                                                                                                                     |
+| `formsApp.pwaSettings.homeScreenName`    | No       | `string`   | The text beneath the app icon when installed as a progressive web app on mobile devices                                                                                                              |
+| `formsApp.pwaSettings.splashScreenName`  | No       | `string`   | The text on the splash screen when installed as a progressive web app on mobile devices                                                                                                              |
+| `formsApp.pwaSettings.homeScreenIconUrl` | No       | `string`   | The absolute URL to the app icon that is displayed when installed as a progressive web app on mobile devices                                                                                         |
+| `formsApp.welcomeEmail`                  | No       | `Object`   | Forms App custom welcome email properties                                                                                                                                                            |
+| `formsApp.welcomeEmail.subject`          | No       | `string`   | The subject to use when sending welcome emails to new app users                                                                                                                                      |
+| `formsApp.welcomeEmail.body`             | No       | `string`   | A [mustache](http://mustache.github.io/#demo) template to use when sending welcome emails to new app users. See [`createUser()`](#createuser) for passing additional parameters for a specific user. |
 
 ### Result (Resolved Promise)
 
