@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.9 (2019-06-03)
+
 ### Added
 
 - [`getMyFormsApp()`](./docs/forms-apps.md#getmyformsapp) function
