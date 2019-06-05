@@ -25,8 +25,10 @@ module.exports = class Forms extends OneBlinkAPI {
       throw new TypeError('Must supply "formId" as a number')
     }
 
-    if (typeof expiryInSeconds !== 'number') {
-      throw new TypeError('Must supply "expiryInSeconds" as a number')
+    if (expiryInSeconds !== undefined && typeof expiryInSeconds !== 'number') {
+      throw new TypeError(
+        'Must supply "expiryInSeconds" as a number or not at all'
+      )
     }
 
     if (externalId && typeof externalId !== 'string') {
