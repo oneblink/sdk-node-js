@@ -43,7 +43,9 @@ const preFilledData = {
   'FieldName1' : 'A Machine',
   'FieldName2' : 'Room B'
 }
-forms.generateFormUrl(formId, externalId, preFilledData)
+const expiryInSeconds = 36800
+
+forms.generateFormUrl(formId, externalId, preFilledData, expiryInSeconds)
   .then((result) => {
     const formUrl = result.formUrl
     // Use form URL here...
@@ -57,6 +59,7 @@ forms.generateFormUrl(formId, externalId, preFilledData)
 | `formId` | Yes | `number` | The exact id of the form you wish to generate a URL for |
 | `externalId` | No | `string` | The external identifier of the form submission you wish to use, this identifier will be returned to you with the submissionId after a successful submission to allow you to retrieve the data later |
 | `preFilledData` | No | `Object` |  An object with the form field names as keys and the prefill data as the values |
+| `expiryInSeconds` | No | `number` |  The time in seconds until the generated form URL is no longer valid. This is set to `28800` seconds (8 hours) by default. |
 
 ### Result (Resolved Promise)
 

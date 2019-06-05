@@ -18,10 +18,15 @@ module.exports = class Forms extends OneBlinkAPI {
   async generateFormUrl(
     formId /* : ?mixed */,
     externalId /* : ?mixed */,
-    preFillData /* : ?mixed */
+    preFillData /* : ?mixed */,
+    expiryInSeconds /* : ?mixed */
   ) /* : Promise<{ expiry: string, formUrl: string }> */ {
     if (typeof formId !== 'number') {
       throw new TypeError('Must supply "formId" as a number')
+    }
+
+    if (typeof expiryInSeconds !== 'number') {
+      throw new TypeError('Must supply "expiryInSeconds" as a number')
     }
 
     if (externalId && typeof externalId !== 'string') {
@@ -39,7 +44,7 @@ module.exports = class Forms extends OneBlinkAPI {
       preFillFormDataId = preFillMeta.preFillFormDataId
     }
     // Default expiry for token is 8 hours
-    const jwtExpiry = 28800
+    const jwtExpiry = expiryInSeconds || 28800
 
     const token = generateJWT(this.accessKey, this.secretKey, jwtExpiry)
 

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- ON-4232 # Added `expiryInSeconds` parameter to `generateFormUrl()` function
+
 ## 0.2.9 (2019-06-03)
 
 ### Added
