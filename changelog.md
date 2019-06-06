@@ -21,15 +21,15 @@ const formsSDK = new OneBlink.Forms(options)
 
 -const formId = 1
 -const externalId = 'My Custom Identifier'
--const preFilledData = {
+-const preFillData = {
 -  'FieldName1' : 'A Machine',
 -  'FieldName2' : 'Room B'
 -}
--formsSDK.generateFormUrl(formId, externalId, preFilledData)
+-formsSDK.generateFormUrl(formId, externalId, preFillData)
 +formsSDK.generateFormUrl({
 +  formId: 1,
 +  externalId: 'My Custom Identifier',
-+  preFilledData: {
++  preFillData: {
 +    'FieldName1' : 'A Machine',
 +    'FieldName2' : 'Room B'
 +  }
