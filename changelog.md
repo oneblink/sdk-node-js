@@ -6,7 +6,7 @@
 
 ### Changed
 
-- ON-4232 # Forms.generateFormUrl() now takes and object with the following properties:
+- ON-4232 # Forms.generateFormUrl() now takes an object with the following properties:
   - formId
   - externalId
   - preFillData
