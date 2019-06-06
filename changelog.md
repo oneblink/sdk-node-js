@@ -2,15 +2,39 @@
 
 ## Unreleased
 
-## Breaking Change
+### Breaking Changes
 
-### Changed
+- [`Forms.generateFormUrl()`](./docs/forms.md#generateformurl)) now takes an object with the following properties
+  - `formId`
+  - `externalId`
+  - `preFillData`
+  - `expiryInSeconds`
 
-- ON-4232 # Forms.generateFormUrl() now takes an object with the following properties:
-  - formId
-  - externalId
-  - preFillData
-  - expiryInSeconds
+```diff
+const OneBlink = require('@oneblink/sdk')
+
+const options = {
+  accessKey: '123455678901ABCDEFGHIJKL',
+  secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL'
+}
+const formsSDK = new OneBlink.Forms(options)
+
+-const formId = 1
+-const externalId = 'My Custom Identifier'
+-const preFilledData = {
+-  'FieldName1' : 'A Machine',
+-  'FieldName2' : 'Room B'
+-}
+-formsSDK.generateFormUrl(formId, externalId, preFilledData)
++formsSDK.generateFormUrl({
++  formId: 1,
++  externalId: 'My Custom Identifier',
++  preFilledData: {
++    'FieldName1' : 'A Machine',
++    'FieldName2' : 'Room B'
++  }
++})
+```
 
 ## 0.2.9 (2019-06-03)
 
