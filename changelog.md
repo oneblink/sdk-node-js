@@ -2,9 +2,15 @@
 
 ## Unreleased
 
-### Added
+## Breaking Change
 
-- ON-4232 # Added `expiryInSeconds` parameter to `generateFormUrl()` function
+### Changed
+
+- ON-4232 # Forms.generateFormUrl() now takes and object with the following properties:
+  - formId
+  - externalId
+  - preFillData
+  - expiryInSeconds
 
 ## 0.2.9 (2019-06-03)
 
