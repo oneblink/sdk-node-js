@@ -1,4 +1,3 @@
-
 // @flow
 'use strict'
 
@@ -13,27 +12,23 @@ describe('Forms SDK Class', () => {
         accessKey: string
         secretKey: string
         */
-        constructor (
-          apiOrigin,
-          accessKey,
-          secretKey
-        ) {
+        constructor(apiOrigin, accessKey, secretKey) {
           this.accessKey = accessKey
           this.secretKey = secretKey
         }
 
-        getRequest (path) {
+        getRequest(path) {
           if (path === '/forms/1') {
             return Promise.resolve({
-              'id': 1,
-              'name': 'Emptiness',
-              'formsAppIds': [1, 2]
+              id: 1,
+              name: 'Emptiness',
+              formsAppIds: [1, 2]
             })
           } else {
             return Promise.resolve({
-              'id': 1,
-              'name': 'appname',
-              'hostname': 'orgname-appname.apps.oneblink.io'
+              id: 1,
+              name: 'appname',
+              hostname: 'orgname-appname.apps.oneblink.io'
             })
           }
         }
@@ -47,15 +42,22 @@ describe('Forms SDK Class', () => {
     })
 
     test('should reject with correct validation errors for "formId"', () => {
-      return expect(forms.generateFormUrl()).rejects.toThrow('Must supply "formId" as a number')
+      return expect(forms.generateFormUrl({ formId: 'asdf' })).rejects.toThrow(
+        'Must supply "formId" as a number'
+      )
     })
 
     test('should reject with correct validation errors for "externalId"', () => {
-      return expect(forms.generateFormUrl(1, 1)).rejects.toThrow('Must supply "externalId" as a string or not at all')
+      return expect(
+        forms.generateFormUrl({ formId: 1, externalId: 1 })
+      ).rejects.toThrow('Must supply "externalId" as a string or not at all')
     })
 
     test('should generate url and expiry with external id', async () => {
-      const result = await forms.generateFormUrl(1, 'blah blah')
+      const result = await forms.generateFormUrl({
+        formId: 1,
+        externalId: 'blah blah'
+      })
 
       expect(new Date(result.expiry)).toBeInstanceOf(Date)
 
@@ -72,7 +74,7 @@ describe('Forms SDK Class', () => {
     })
 
     test('should generate url and expiry without external id', async () => {
-      const result = await forms.generateFormUrl(1)
+      const result = await forms.generateFormUrl({ formId: 1 })
 
       const parsedUrl = new URL(result.formUrl)
       expect(parsedUrl.protocol).toBe('https:')
@@ -97,11 +99,15 @@ describe('Forms SDK Class', () => {
 
     describe('should reject with correct validation errors for', () => {
       test('"formId"', () => {
-        return expect(forms.getSubmissionData()).rejects.toThrow('Must supply "formId" as a number')
+        return expect(forms.getSubmissionData()).rejects.toThrow(
+          'Must supply "formId" as a number'
+        )
       })
 
       test('"submissionId"', () => {
-        return expect(forms.getSubmissionData(1)).rejects.toThrow('Must supply "submissionId" as a string')
+        return expect(forms.getSubmissionData(1)).rejects.toThrow(
+          'Must supply "submissionId" as a string'
+        )
       })
     })
   })
@@ -116,19 +122,29 @@ describe('Forms SDK Class', () => {
 
     describe('should reject with correct validation errors for', () => {
       test('"formId"', () => {
-        return expect(forms.generateSubmissionDataUrl()).rejects.toThrow('Must supply "formId" as a number')
+        return expect(forms.generateSubmissionDataUrl()).rejects.toThrow(
+          'Must supply "formId" as a number'
+        )
       })
 
       test('"submissionId"', () => {
-        return expect(forms.generateSubmissionDataUrl(1)).rejects.toThrow('Must supply "submissionId" as a string')
+        return expect(forms.generateSubmissionDataUrl(1)).rejects.toThrow(
+          'Must supply "submissionId" as a string'
+        )
       })
 
       test('"expiryInSeconds"', () => {
-        return expect(forms.generateSubmissionDataUrl(1, '123')).rejects.toThrow('Must supply "expiryInSeconds" as a number')
+        return expect(
+          forms.generateSubmissionDataUrl(1, '123')
+        ).rejects.toThrow('Must supply "expiryInSeconds" as a number')
       })
 
       test('minimum "expiryInSeconds"', () => {
-        return expect(forms.generateSubmissionDataUrl(1, '123', 600)).rejects.toThrow('"expiryInSeconds" must be greater than or equal to 900')
+        return expect(
+          forms.generateSubmissionDataUrl(1, '123', 600)
+        ).rejects.toThrow(
+          '"expiryInSeconds" must be greater than or equal to 900'
+        )
       })
     })
   })
@@ -143,7 +159,9 @@ describe('Forms SDK Class', () => {
 
     describe('should reject with correct validation errors for', () => {
       test('"formId"', () => {
-        return expect(forms.getForm('123')).rejects.toThrow('Must supply "formId" as a number')
+        return expect(forms.getForm('123')).rejects.toThrow(
+          'Must supply "formId" as a number'
+        )
       })
     })
   })

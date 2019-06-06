@@ -16,30 +16,50 @@ module.exports = class Forms extends OneBlinkAPI {
   }
 
   async generateFormUrl(
-    formId /* : ?mixed */,
-    externalId /* : ?mixed */,
-    preFillData /* : ?mixed */
+    parameters /* : {
+      formId: ?mixed,
+      externalId?: ?mixed,
+      preFillData? : ?mixed,
+      expiryInSeconds?: ?mixed
+    } */
   ) /* : Promise<{ expiry: string, formUrl: string }> */ {
-    if (typeof formId !== 'number') {
-      throw new TypeError('Must supply "formId" as a number')
+    if (typeof parameters !== 'object') {
+      throw new TypeError('Parameters not provided.')
     }
 
+    const expiryInSeconds = parameters.expiryInSeconds
+    if (
+      expiryInSeconds !== undefined &&
+      typeof expiryInSeconds !== 'number'
+    ) {
+      throw new TypeError(
+        'Must supply "expiryInSeconds" as a number or not at all'
+      )
+    }
+
+    const externalId = parameters.externalId
     if (externalId && typeof externalId !== 'string') {
       throw new TypeError('Must supply "externalId" as a string or not at all')
+    }
+
+    const formId = parameters.formId
+    if (typeof formId !== 'number') {
+      throw new TypeError('Must supply "formId" as a number')
     }
 
     const hostname = await this.getHostname(formId)
 
     let preFillFormDataId
-    if (preFillData) {
+    if (parameters.preFillData) {
       const preFillMeta = await super.postRequest(
         `/forms/${formId}/pre-fill-credentials`
       )
-      await setPreFillData(preFillMeta, preFillData)
+      await setPreFillData(preFillMeta, parameters.preFillData)
       preFillFormDataId = preFillMeta.preFillFormDataId
     }
+
     // Default expiry for token is 8 hours
-    const jwtExpiry = 28800
+    const jwtExpiry = expiryInSeconds || 28800
 
     const token = generateJWT(this.accessKey, this.secretKey, jwtExpiry)
 

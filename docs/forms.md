@@ -37,13 +37,17 @@ const forms = new OneBlink.Forms(options)
 ### Example
 
 ```javascript
-const formId = 1
-const externalId = 'My Custom Identifier'
-const preFilledData = {
-  'FieldName1' : 'A Machine',
-  'FieldName2' : 'Room B'
+const parameters = {
+  formId: 1,
+  externalId: 'My Custom Identifier',
+  preFilledData: {
+    'FieldName1' : 'A Machine',
+    'FieldName2' : 'Room B'
+  },
+  expiryInSeconds: 36800
 }
-forms.generateFormUrl(formId, externalId, preFilledData)
+
+forms.generateFormUrl(parameters)
   .then((result) => {
     const formUrl = result.formUrl
     // Use form URL here...
@@ -54,9 +58,11 @@ forms.generateFormUrl(formId, externalId, preFilledData)
 
 | Parameter | Required | Type | Description
 |---|---|---|---|
-| `formId` | Yes | `number` | The exact id of the form you wish to generate a URL for |
-| `externalId` | No | `string` | The external identifier of the form submission you wish to use, this identifier will be returned to you with the submissionId after a successful submission to allow you to retrieve the data later |
-| `preFilledData` | No | `Object` |  An object with the form field names as keys and the prefill data as the values |
+| `parameters` | Yes | `Object` | An object containing all parameters to be passed to the function |
+| `parameters.formId` | Yes | `number` | The exact id of the form you wish to generate a URL for |
+| `parameters.externalId` | No | `string` | The external identifier of the form submission you wish to use, this identifier will be returned to you with the submissionId after a successful submission to allow you to retrieve the data later |
+| `parameters.preFilledData` | No | `Object` |  An object with the form field names as keys and the prefill data as the values |
+| `parameters.expiryInSeconds` | No | `number` |  The time in seconds until the generated form URL is no longer valid. This is set to `28800` seconds (8 hours) by default. |
 
 ### Result (Resolved Promise)
 
