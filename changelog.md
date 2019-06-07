@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+# 0.3.0 (2019-06-07)
+
 ### Breaking Changes
 
 - [`Forms.generateFormUrl()`](./docs/forms.md#generateformurl)) now takes an object with the following properties
