@@ -39,6 +39,7 @@ const forms = new OneBlink.Forms(options)
 ```javascript
 const parameters = {
   formId: 1,
+  formsAppId: 2,
   externalId: 'My Custom Identifier',
   preFillData: {
     'FieldName1' : 'A Machine',
@@ -60,6 +61,7 @@ forms.generateFormUrl(parameters)
 |---|---|---|---|
 | `parameters` | Yes | `Object` | An object containing all parameters to be passed to the function |
 | `parameters.formId` | Yes | `number` | The exact id of the form you wish to generate a URL for |
+| `parameters.formsAppId` | No | `number` |  The exact id of the forms app you wish to generate a URL for. This is set to the first forms app the form was added to by default. |
 | `parameters.externalId` | No | `string` | The external identifier of the form submission you wish to use, this identifier will be returned to you with the submissionId after a successful submission to allow you to retrieve the data later |
 | `parameters.preFillData` | No | `Object` |  An object with the form field names as keys and the prefill data as the values |
 | `parameters.expiryInSeconds` | No | `number` |  The time in seconds until the generated form URL is no longer valid. This is set to `28800` seconds (8 hours) by default. |

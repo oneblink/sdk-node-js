@@ -18,6 +18,7 @@ module.exports = class Forms extends OneBlinkAPI {
   async generateFormUrl(
     parameters /* : {
       formId: ?mixed,
+      formsAppId?: ?mixed,
       externalId?: ?mixed,
       preFillData? : ?mixed,
       expiryInSeconds?: ?mixed
@@ -28,10 +29,7 @@ module.exports = class Forms extends OneBlinkAPI {
     }
 
     const expiryInSeconds = parameters.expiryInSeconds
-    if (
-      expiryInSeconds !== undefined &&
-      typeof expiryInSeconds !== 'number'
-    ) {
+    if (expiryInSeconds !== undefined && typeof expiryInSeconds !== 'number') {
       throw new TypeError(
         'Must supply "expiryInSeconds" as a number or not at all'
       )
@@ -47,7 +45,25 @@ module.exports = class Forms extends OneBlinkAPI {
       throw new TypeError('Must supply "formId" as a number')
     }
 
-    const hostname = await this.getHostname(formId)
+    let formsAppId = parameters.formsAppId
+    if (
+      typeof formsAppId !== 'number' &&
+      formsAppId !== undefined &&
+      formsAppId !== null
+    ) {
+      throw new TypeError('Must supply "formsAppId" as a number or not at all')
+    }
+
+    if (typeof formsAppId !== 'number') {
+      const form = await super.getRequest(`/forms/${formId}`)
+      formsAppId = form.formsAppIds[0]
+    }
+
+    if (typeof formsAppId !== 'number') {
+      throw new Error('This form has been added to a forms app yet.')
+    }
+
+    const formsApp = await super.getRequest(`/forms-apps/${formsAppId}`)
 
     let preFillFormDataId
     if (parameters.preFillData) {
@@ -64,7 +80,7 @@ module.exports = class Forms extends OneBlinkAPI {
     const token = generateJWT(this.accessKey, this.secretKey, jwtExpiry)
 
     const formUrl = generateFormUrl(
-      `https://${hostname}/forms`,
+      `https://${formsApp.hostname}/forms`,
       formId,
       token,
       externalId,
@@ -76,41 +92,6 @@ module.exports = class Forms extends OneBlinkAPI {
     return {
       formUrl,
       expiry
-    }
-  }
-
-  async getHostname(formId /* : number */) {
-    try {
-      const formResults = await super.getRequest(`/forms/${formId}`)
-
-      if (!formResults || !formResults.formsAppIds.length) {
-        throw new Error(
-          'Access Denied. The "accessKey" and "secretKey" provided may have been revoked.'
-        )
-      }
-
-      const appResults = await super.getRequest(
-        `/forms-apps/${formResults.formsAppIds[0]}`
-      )
-
-      if (!appResults || !appResults.hostname) {
-        throw new Error(
-          'Access Denied. The "accessKey" and "secretKey" provided may have been revoked.'
-        )
-      }
-
-      return appResults.hostname
-    } catch (e) {
-      const organisationsResults = await super.searchRequest(`/organisations`)
-      if (
-        !organisationsResults.organisations ||
-        !organisationsResults.organisations.length
-      ) {
-        throw new Error(
-          'Access Denied. The "accessKey" and "secretKey" provided may have been revoked.'
-        )
-      }
-      return organisationsResults.organisations[0].formsHostname
     }
   }
 

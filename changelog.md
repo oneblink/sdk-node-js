@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- `formsAppId` options to [`Forms.generateFormUrl()`](./docs/forms.md#generateformurl))
+
 # 0.3.0 (2019-06-07)
 
 ### Breaking Changes
