@@ -53,6 +53,12 @@ describe('Forms SDK Class', () => {
       ).rejects.toThrow('Must supply "externalId" as a string or not at all')
     })
 
+    test('should reject with correct validation errors for "formsAppId"', () => {
+      return expect(
+        forms.generateFormUrl({ formId: 1, formsAppId: 'abc' })
+      ).rejects.toThrow('Must supply "formsAppId" as a number or not at all')
+    })
+
     test('should generate url and expiry with external id', async () => {
       const result = await forms.generateFormUrl({
         formId: 1,
