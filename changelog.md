@@ -7,6 +7,7 @@
 ### Added
 
 - `formsAppId` options to [`Forms.generateFormUrl()`](./docs/forms.md#generateformurl))
+- `isDraft` property to form submission events
 
 # 0.3.0 (2019-06-07)
 
