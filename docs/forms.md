@@ -4,8 +4,9 @@
 
 - [`generateFormUrl()`](#generateformurl)
 - [`generateSubmissionDataUrl()`](#generatesubmissiondataurl)
-- [`getSubmissionData()`](#getsubmissiondata)
+- [`getDraftData()`](#getdraftdata)
 - [`getForm()`](#getform)
+- [`getSubmissionData()`](#getsubmissiondata)
 - [`search()`](#search)
 
 ## Static Functions
@@ -151,6 +152,53 @@ forms.getSubmissionData(formId, submissionId)
   }
 }
 ```
+
+## `getDraftData()`
+
+### Example
+
+```javascript
+const formId = 1
+const draftDataId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+forms.getDraftData(formId, draftDataId)
+  .then((result) => {
+    const definition = result.definition
+    const draftData = result.submission
+  })
+  .catch((error) => {
+    // Handle error here
+  })
+```
+
+#### Parameters
+
+| Parameter | Required | Type | Description
+|---|---|---|---|
+| `formId` | Yes | `number` | The exact id of the form you wish to get submission data for |
+| `draftDataId` | Yes | `string` | The draft data identifier generated after the successful save of a draft, this will be returned to you after a successful draft save via a callback URL |
+
+### Result (Resolved Promise)
+
+```json
+{
+  "definition": {
+    "id": 1,
+    "name": "Form Name",
+    "elements": [
+      {
+        "label": "Enter Comment Here",
+        "name": "comment",
+        "type": "text",
+        "required": true
+      }
+    ]
+  },
+  "submission": {
+    "comment": "This is my comment that I entered during completion of the form"
+  }
+}
+```
+
 
 ## `getForm()`
 
