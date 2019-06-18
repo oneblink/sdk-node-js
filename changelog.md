@@ -2,13 +2,16 @@
 
 ## Unreleased
 
+### Added
+
+- `isDraft` property to form submission events
+- [`Forms.getDraftData()`](./docs/forms.md#getdraftdata)
+
 # 0.3.1 (2019-06-18)
 
 ### Added
 
 - `formsAppId` options to [`Forms.generateFormUrl()`](./docs/forms.md#generateformurl)
-- `isDraft` property to form submission events
-- [`Forms.getDraftData()`](./docs/forms.md#getdraftdata)
 
 # 0.3.0 (2019-06-07)
 
