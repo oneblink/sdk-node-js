@@ -124,6 +124,25 @@ module.exports = class Forms extends OneBlinkAPI {
     )
   }
 
+  async getDraftData(
+    formId /* : ?mixed */,
+    draftDataId /* : ?mixed */
+  ) /* : Promise<S3SubmissionData> */ {
+    if (typeof formId !== 'number') {
+      return Promise.reject(new TypeError('Must supply "formId" as a number'))
+    }
+    if (typeof draftDataId !== 'string') {
+      return Promise.reject(
+        new TypeError('Must supply "draftDataId" as a string')
+      )
+    }
+
+    const credentials = await super.postRequest(
+      `/forms/${formId}/download-draft-data-credentials/${draftDataId}`
+    )
+    return submissionData.getSubmissionData(credentials)
+  }
+
   getSubmissionData(
     formId /* : ?mixed */,
     submissionId /* : ?mixed */

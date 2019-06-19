@@ -95,6 +95,29 @@ describe('Forms SDK Class', () => {
     })
   })
 
+  describe('getDraftData()', () => {
+    const Forms = require('../../classes/Forms.js')
+    const forms = new Forms({
+      accessKey: '123',
+      secretKey: 'abc',
+      oneBlinkAPIOrigin: 'https://domain.api.com'
+    })
+
+    describe('should reject with correct validation errors for', () => {
+      test('"formId"', () => {
+        return expect(forms.getDraftData()).rejects.toThrow(
+          'Must supply "formId" as a number'
+        )
+      })
+
+      test('"draftDataId"', () => {
+        return expect(forms.getDraftData(1)).rejects.toThrow(
+          'Must supply "draftDataId" as a string'
+        )
+      })
+    })
+  })
+
   describe('getSubmissionData()', () => {
     const Forms = require('../../classes/Forms.js')
     const forms = new Forms({
