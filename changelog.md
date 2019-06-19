@@ -5,7 +5,7 @@
 ### Added
 
 - `isDraft` property to form submission events
-- [`Forms.getDraftData()`](./docs/forms.md#getdraftdata)
+- `isDraft` parameter to [`Forms.getSubmissionData()`](./docs/forms.md#getsubmissiondata)
 
 # 0.3.1 (2019-06-18)
 
