@@ -223,4 +223,30 @@ declare type FormsAppUser = {
   formsAppId: number,
   createdAt: string
 }
+
+type RolePrivileges = {
+  ANALYTICS?: 'ANALYST' | 'READER',
+  API_HOSTING?: 'MANAGER' | 'DEVELOPER' | 'READONLY',
+  AUTH?: 'MANAGER' | 'READONLY',
+  BUILDBOT?: 'BUILDER',
+  FORMS?: 'MANAGER' | 'READONLY',
+  FORM_SUBMISSIONS?: 'READONLY',
+  FORM_OPTIONS_SETS?: 'MANAGER' | 'READONLY',
+  FORMS_APPS?: 'MANAGER' | 'READONLY',
+  FORMS_APP_STYLES?: 'MANAGER' | 'READONLY',
+  FORMS_APP_USERS?: 'MANAGER' | 'READONLY',
+  KEYS?: 'MANAGER' | 'READONLY',
+  WEB_APP_HOSTING?: 'MANAGER' | 'DEVELOPER' | 'READONLY'
+}
+
+type Role = {
+  id: number,
+  name: string,
+  description: string,
+  privilege: RolePrivileges,
+  organisationId: string,
+  createdAt: string,
+  updatedAt: string
+}
 */
+

@@ -6,6 +6,7 @@
 
 - `isDraft` property to form submission events
 - `isDraft` parameter to [`Forms.getSubmissionData()`](./docs/forms.md#getsubmissiondata)
+- [`TeamMembers`](./docs/team-members.md) class
 
 # 0.3.1 (2019-06-18)
 
