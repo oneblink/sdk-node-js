@@ -38,9 +38,9 @@ teamMembersSDK.getTeamMemberRole(email).then(role => {
 
 ### Parameters
 
-| Parameter | Required | Type     | Description                                      |
-| --------- | -------- | -------- | ------------------------------------------------ |
-| `email`   | Yes      | `string` | The email address the team member users to login |
+| Parameter | Required | Type     | Description                                     |
+| --------- | -------- | -------- | ----------------------------------------------- |
+| `email`   | Yes      | `string` | The email address the team member uses to login |
 
 ### Result (Resolved Promise)
 
