@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+# 0.3.2 (2019-06-20)
+
 ### Added
 
 - `isDraft` property to form submission events
