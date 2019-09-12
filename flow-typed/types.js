@@ -83,7 +83,7 @@ declare type FormElement = {
   headingType?: number,
   fromDate?: string,
   toDate?: string,
-  optionsType? : 'custom' | 'dynamic',
+  optionsType? : 'custom' | 'dynamic' | 'search',
   dynamicOptionSetId?: number,
   options?: Array<{
     optionId: string,
@@ -96,7 +96,8 @@ declare type FormElement = {
   defaultValue?: any,
   isDataLookup?: boolean,
   isElementLookup?: boolean,
-  formId?: number
+  formId?: number,
+  searchUrl?: string
 }
 
 declare type Form = {
