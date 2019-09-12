@@ -12,6 +12,7 @@
     "node"
   ],
   "rules": {
-    "space-before-function-paren": "off"
+    "space-before-function-paren": "off",
+    "quote-props": [1, "as-needed"]
   }
 }
