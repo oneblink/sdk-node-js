@@ -4,7 +4,7 @@
 
 ### Added
 
-- ON-4438 # Added `SEARCH` options type and `searchUrl` property for autocomplete element
+- Added `SEARCH` options type and `searchUrl` property for autocomplete element
 
 # 0.3.2 (2019-06-20)
 
