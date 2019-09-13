@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- Added `SEARCH` options type and `searchUrl` property for autocomplete element
+
 # 0.3.2 (2019-06-20)
 
 ### Added
