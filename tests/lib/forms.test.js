@@ -12,12 +12,12 @@ describe('Forms SDK Class', () => {
         accessKey: string
         secretKey: string
         */
-        constructor(apiOrigin, accessKey, secretKey) {
+        constructor (apiOrigin, accessKey, secretKey) {
           this.accessKey = accessKey
           this.secretKey = secretKey
         }
 
-        getRequest(path) {
+        getRequest (path) {
           if (path === '/forms/1') {
             return Promise.resolve({
               id: 1,

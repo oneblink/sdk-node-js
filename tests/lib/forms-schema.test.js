@@ -3618,6 +3618,128 @@ describe('invalid property removal', () => {
       },
       elementSchema
     )
-    expect(error.message).toBe('child "searchUrl" fails because ["Search URL" is required]')
+    expect(error.message).toBe(
+      'child "searchUrl" fails because ["Search URL" is required]'
+    )
   })
+})
+
+test('should allow restrictFileTypes and restrictedFileTypes properties for File element', () => {
+  const result = Joi.validate(
+    {
+      id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+      name: 'files',
+      label: 'Files',
+      type: 'file',
+      required: false,
+      restrictFileTypes: false
+    },
+    elementSchema
+  )
+  expect(result.error).toBe(null)
+
+  const { error, value } = Joi.validate(
+    {
+      id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+      name: 'files',
+      label: 'Files',
+      type: 'file',
+      required: false,
+      restrictFileTypes: true,
+      restrictedFileTypes: ['png', 'jpg', 'gif']
+    },
+    elementSchema
+  )
+  expect(error).toBeFalsy()
+  expect(value).toEqual({
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'files',
+    label: 'Files',
+    type: 'file',
+    readOnly: false,
+    conditionallyShow: false,
+    required: false,
+    restrictFileTypes: true,
+    restrictedFileTypes: ['png', 'jpg', 'gif']
+  })
+})
+
+test('should strip restrictedFileTypes if restrictFileTypes is false', () => {
+  const { error, value } = Joi.validate(
+    {
+      id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+      name: 'files',
+      label: 'Files',
+      type: 'file',
+      required: false,
+      restrictFileTypes: false,
+      restrictedFileTypes: ['png']
+    },
+    elementSchema
+  )
+  expect(error).toBeFalsy()
+  expect(value).toEqual({
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'files',
+    label: 'Files',
+    type: 'file',
+    readOnly: false,
+    conditionallyShow: false,
+    required: false,
+    restrictFileTypes: false
+  })
+})
+
+test('should only allow strings in restrictedFileTypes', () => {
+  const { error } = Joi.validate(
+    {
+      id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+      name: 'files',
+      label: 'Files',
+      type: 'file',
+      required: false,
+      restrictFileTypes: true,
+      restrictedFileTypes: [{ fileType: 'png' }]
+    },
+    elementSchema
+  )
+  expect(error.message).toBe(
+    'child "restrictedFileTypes" fails because ["Restricted File Types" at position 0 fails because ["restricted file type" must be a string]]'
+  )
+})
+
+test('should throw error if restrictFileTypes is true and restrictedFileTypes is null', () => {
+  const { error } = Joi.validate(
+    {
+      id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+      name: 'files',
+      label: 'Files',
+      type: 'file',
+      required: false,
+      restrictFileTypes: true,
+      restrictedFileTypes: null
+
+    },
+    elementSchema
+  )
+  expect(error.message).toBe(
+    'child "restrictedFileTypes" fails because ["Restricted File Types" must be an array]'
+  )
+})
+
+test('should throw error if restrictFileTypes is true and restrictedFileTypes is undefined', () => {
+  const { error } = Joi.validate(
+    {
+      id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+      name: 'files',
+      label: 'Files',
+      type: 'file',
+      required: false,
+      restrictFileTypes: true
+    },
+    elementSchema
+  )
+  expect(error.message).toBe(
+    'child "restrictedFileTypes" fails because ["Restricted File Types" is required]'
+  )
 })
