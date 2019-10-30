@@ -7,14 +7,14 @@ const OneBlinkAPI = require('../lib/one-blink-api.js')
 const setPreFillData = require('../lib/pre-fill-data.js')
 
 const newJobSchema = Joi.object().label('options').required().keys({
-  'username': Joi.string().required(),
-  'formId': Joi.number().required().min(1),
-  'externalId': Joi.string(),
-  'details': Joi.object().required().keys({
-    'key': Joi.string(),
-    'title': Joi.string().required(),
-    'description': Joi.string(),
-    'type': Joi.string()
+  username: Joi.string().required(),
+  formId: Joi.number().required().min(1),
+  externalId: Joi.string(),
+  details: Joi.object().required().keys({
+    key: Joi.string(),
+    title: Joi.string().required(),
+    description: Joi.string(),
+    type: Joi.string()
   })
 })
 

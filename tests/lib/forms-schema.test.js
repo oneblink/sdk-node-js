@@ -3624,7 +3624,7 @@ describe('invalid property removal', () => {
   })
 })
 
-test.only('should allow restrictFileTypes and restrictedFileTypes properties for File element', () => {
+test('should allow restrictFileTypes and restrictedFileTypes properties for File element', () => {
   const result = Joi.validate(
     {
       id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -3664,7 +3664,7 @@ test.only('should allow restrictFileTypes and restrictedFileTypes properties for
   })
 })
 
-test.only('should strip restrictedFileTypes if restrictFileTypes is false', () => {
+test('should strip restrictedFileTypes if restrictFileTypes is false', () => {
   const { error, value } = Joi.validate(
     {
       id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -3690,7 +3690,7 @@ test.only('should strip restrictedFileTypes if restrictFileTypes is false', () =
   })
 })
 
-test.only('should only allow strings in restrictedFileTypes', () => {
+test('should only allow strings in restrictedFileTypes', () => {
   const { error } = Joi.validate(
     {
       id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -3705,5 +3705,41 @@ test.only('should only allow strings in restrictedFileTypes', () => {
   )
   expect(error.message).toBe(
     'child "restrictedFileTypes" fails because ["Restricted File Types" at position 0 fails because ["restricted file type" must be a string]]'
+  )
+})
+
+test('should throw error if restrictFileTypes is true and restrictedFileTypes is null', () => {
+  const { error } = Joi.validate(
+    {
+      id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+      name: 'files',
+      label: 'Files',
+      type: 'file',
+      required: false,
+      restrictFileTypes: true,
+      restrictedFileTypes: null
+
+    },
+    elementSchema
+  )
+  expect(error.message).toBe(
+    'child "restrictedFileTypes" fails because ["Restricted File Types" must be an array]'
+  )
+})
+
+test('should throw error if restrictFileTypes is true and restrictedFileTypes is undefined', () => {
+  const { error } = Joi.validate(
+    {
+      id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+      name: 'files',
+      label: 'Files',
+      type: 'file',
+      required: false,
+      restrictFileTypes: true
+    },
+    elementSchema
+  )
+  expect(error.message).toBe(
+    'child "restrictedFileTypes" fails because ["Restricted File Types" is required]'
   )
 })
