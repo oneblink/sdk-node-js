@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+# 0.3.4 (2019-11-04)
+
 ### Added
 
 - Added `restrictFileTypes` and `restrictedFileTypes` properties for file element
