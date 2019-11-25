@@ -226,6 +226,7 @@ forms.getForm(formId, injectForms).then(form => {
 {
   "id": 1,
   "name": "testsform",
+  "environmentId": 1,
   "description": "a form",
   "organisationId": "0101010101010",
   "elements": [],
@@ -277,6 +278,7 @@ forms
     {
       "id": 1,
       "name": "testsform",
+      "environmentId": 1,
       "description": "a form",
       "organisationId": "0101010101010",
       "elements": [],
@@ -300,6 +302,7 @@ forms
 const form = {
   id: 1,
   name: 'testsform',
+  environmentId: 1,
   description: 'a form',
   organisationId: '0101010101010',
   elements: [],
@@ -343,6 +346,7 @@ return validatedForm
 | `postSubmissionAction`                                 | Yes                                       | `string`                                         | The action for the Form to take on a successful submission.                                     |
 | `redirectUrl`                                          | No                                        | `string`                                         | The URL the form will redirect to if configured to do so by the `postSubmissionActions`.        |
 | `isInfoPage`                                           | Yes                                       | `boolean`                                        | Whether or not the Form is an Info Page.                                                        |
+| `environmentId`                                        | Yes                                       | `number`                                         | the environment the form has been placed in                                                     |
 
 ### Result
 
@@ -359,7 +363,8 @@ return validatedForm
   "postSubmissionAction": "FORMS_LIBRARY",
   "formsAppIds": [1, 2, 3],
   "isMultiPage": false,
-  "isInfoPage": false
+  "isInfoPage": false,
+  "environmentId": 1
 }
 ```
 
