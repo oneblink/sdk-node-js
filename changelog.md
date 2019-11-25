@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- Added form schema validation for `environmentId` in Forms and FormsApps
+
 # 0.3.4 (2019-11-04)
 
 ### Added

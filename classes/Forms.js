@@ -60,7 +60,7 @@ module.exports = class Forms extends OneBlinkAPI {
     }
 
     if (typeof formsAppId !== 'number') {
-      throw new Error('This form has been added to a forms app yet.')
+      throw new Error('This form has not been added to a forms app yet.')
     }
 
     const formsApp = await super.getRequest(`/forms-apps/${formsAppId}`)
