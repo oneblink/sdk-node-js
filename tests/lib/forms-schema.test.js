@@ -392,7 +392,7 @@ describe('Valid Form Schema with Pages', () => {
               label: 'Data Lookup text',
               type: 'text',
               isDataLookup: true,
-              dataLookupUrl: 'https://oneblink.io'
+              dataLookupId: 1
             },
             {
               id: '93624277-22cb-46f2-88f0-035b9837e09d',
@@ -400,7 +400,7 @@ describe('Valid Form Schema with Pages', () => {
               label: 'Element Lookup text',
               type: 'text',
               isElementLookup: true,
-              elementLookupUrl: 'https://oneblink.io'
+              elementLookupId: 2
             },
             {
               id: 'f138d54f-c30f-49d8-9d2c-a8191643a887',
@@ -408,9 +408,9 @@ describe('Valid Form Schema with Pages', () => {
               label: 'Both Types Lookup text',
               type: 'text',
               isElementLookup: true,
-              elementLookupUrl: 'https://oneblink.io',
+              elementLookupId: 2,
               isDataLookup: true,
-              dataLookupUrl: 'https://oneblink.io'
+              dataLookupId: 1
             }
           ]
         }
@@ -2791,7 +2791,7 @@ describe('Conditional Predicates', () => {
 })
 
 describe('Data Lookup enabled', () => {
-  test('should allow url for data lookup enabled type', () => {
+  test('should allow id for data lookup enabled type', () => {
     const { error } = Joi.validate(
       {
         id: 1,
@@ -2813,7 +2813,7 @@ describe('Data Lookup enabled', () => {
             required: true,
             conditionallyShow: false,
             isDataLookup: true,
-            dataLookupUrl: 'https://oneblink.io'
+            dataLookupId: 1
           }
         ],
         isAuthenticated: true,
@@ -2829,7 +2829,7 @@ describe('Data Lookup enabled', () => {
     expect(error).toBe(null)
   })
 
-  test('should require url if data lookup boolean is true', () => {
+  test('should require id if data lookup boolean is true', () => {
     const { error } = Joi.validate(
       {
         id: 1,
@@ -2863,10 +2863,10 @@ describe('Data Lookup enabled', () => {
       }
     )
 
-    expect(error.details[0].message).toBe('"Data Lookup Url" is required')
+    expect(error.details[0].message).toBe('"Data Lookup Id" is required')
   })
 
-  test('should require url if element lookup boolean is true', () => {
+  test('should require id if element lookup boolean is true', () => {
     const { error } = Joi.validate(
       {
         id: 1,
@@ -2900,7 +2900,7 @@ describe('Data Lookup enabled', () => {
       }
     )
 
-    expect(error.details[0].message).toBe('"Element Lookup Url" is required')
+    expect(error.details[0].message).toBe('"Element Lookup Id" is required')
   })
 })
 
@@ -3408,7 +3408,7 @@ describe('invalid property removal', () => {
                 label: 'Data Lookup text',
                 type: 'text',
                 isDataLookup: true,
-                dataLookupUrl: 'https://oneblink.io'
+                dataLookupId: 1
               },
               props
             ),
@@ -3420,7 +3420,7 @@ describe('invalid property removal', () => {
                 label: 'Element Lookup text',
                 type: 'text',
                 isElementLookup: true,
-                elementLookupUrl: 'https://oneblink.io'
+                elementLookupId: 2
               },
               props
             ),
@@ -3432,9 +3432,9 @@ describe('invalid property removal', () => {
                 label: 'Both Types Lookup text',
                 type: 'text',
                 isElementLookup: true,
-                elementLookupUrl: 'https://oneblink.io',
+                elementLookupId: 2,
                 isDataLookup: true,
-                dataLookupUrl: 'https://oneblink.io'
+                dataLookupId: 1
               },
               props
             )
