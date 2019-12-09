@@ -6,6 +6,10 @@
 
 - Added form schema validation for `formsAppEnvironmentId` in Forms and FormsApps
 
+### Changed
+
+- element and data lookup configuration
+
 # 0.3.4 (2019-11-04)
 
 ### Added
