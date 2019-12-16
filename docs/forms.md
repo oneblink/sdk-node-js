@@ -229,6 +229,7 @@ forms.getForm(formId, injectForms).then(form => {
   "formsAppEnvironmentId": 1,
   "description": "a form",
   "organisationId": "0101010101010",
+  "formsAppEnvironmentId": 1,
   "elements": [],
   "isAuthenticated": false,
   "isPublished": true,
@@ -281,6 +282,7 @@ forms
       "formsAppEnvironmentId": 1,
       "description": "a form",
       "organisationId": "0101010101010",
+      "formsAppEnvironmentId": 1,
       "elements": [],
       "isAuthenticated": false,
       "isPublished": true,
@@ -305,6 +307,7 @@ const form = {
   formsAppEnvironmentId: 1,
   description: 'a form',
   organisationId: '0101010101010',
+  formsAppEnvironmentId: 1,
   elements: [],
   isAuthenticated: false,
   isPublished: true,
@@ -325,6 +328,7 @@ return validatedForm
 | `name`                                                 | yes                                       | `string`                                         | Name of the form.                                                                               |
 | `description`                                          | No                                        | `string`                                         | A description of the form.                                                                      |
 | `organisationId`                                       | yes                                       | `string`                                         | The organisation ID the form belong to.                                                         |
+| `formsAppEnvironmentId`                                | yes                                       | `number`                                         | The forms app environment ID the form belong to.                                                |
 | `formsAppIds`                                          | yes                                       | `number[]`                                       | ID's of any Forms Apps that the form is included in.                                            |
 | `elements`                                             | yes                                       | [`FormElement`](./form-elements/README.md)`[]`   | All elements contained within the form itself.                                                  |
 | `isAuthenticated`                                      | yes                                       | `boolean`                                        | Whether or not the form can only be viewed by an Authenticated user.                            |
@@ -346,7 +350,7 @@ return validatedForm
 | `postSubmissionAction`                                 | Yes                                       | `string`                                         | The action for the Form to take on a successful submission.                                     |
 | `redirectUrl`                                          | No                                        | `string`                                         | The URL the form will redirect to if configured to do so by the `postSubmissionActions`.        |
 | `isInfoPage`                                           | Yes                                       | `boolean`                                        | Whether or not the Form is an Info Page.                                                        |
-| `formsAppEnvironmentId`                                        | Yes                                       | `number`                                         | the environment the form has been placed in                                                     |
+| `formsAppEnvironmentId`                                | Yes                                       | `number`                                         | the environment the form has been placed in                                                     |
 
 ### Result
 
@@ -356,6 +360,7 @@ return validatedForm
   "name": "testsform",
   "description": "a form",
   "organisationId": "0101010101010",
+  "formsAppEnvironmentId": 1,
   "elements": [],
   "isAuthenticated": false,
   "isPublished": true,

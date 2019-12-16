@@ -45,6 +45,7 @@ const formsApp = {
     splashScreenName: 'Application'
   },
   organisationId: 'ABCDEFGHIJKL123456789012',
+  formsAppEnvironmentId: 1,
   formIds: []
 }
 formsAppsSDK.createFormsApp(formsApp).then(savedFormsApp => {
@@ -60,6 +61,7 @@ formsAppsSDK.createFormsApp(formsApp).then(savedFormsApp => {
 | `formsApp.name`                          | Yes      | `string`   | Name of the forms app                                                                                                                                                                                |
 | `formsApp.hostname`                      | Yes      | `string`   | Hostname (domain) for the forms app                                                                                                                                                                  |
 | `formsApp.organisationId`                | Yes      | `string`   | The exact organisation identifier the forms app is associated with                                                                                                                                   |
+| `formsApp.formsAppEnvironmentId`         | Yes      | `number`   | The exact forms app environment identifier the forms app is associated with                                                                                                                          |
 | `formsApp.formIds`                       | Yes      | `number[]` | The identifiers of the forms that are in the forms app. The order of the forms is respected when rendering the list of forms                                                                         |
 | `formsApp.pwaSettings`                   | Yes      | `Object`   | Forms App progressive web app setting properties                                                                                                                                                     |
 | `formsApp.pwaSettings.homeScreenName`    | No       | `string`   | The text beneath the app icon when installed as a progressive web app on mobile devices                                                                                                              |
@@ -85,6 +87,7 @@ formsAppsSDK.createFormsApp(formsApp).then(savedFormsApp => {
   "createdAt": "2018-06-01T00:00:00.000Z",
   "updatedAt": "2019-05-17T05:49:14.000Z",
   "organisationId": "ABCDEFGHIJKL123456789012",
+  "formsAppEnvironmentId": 1,
   "formIds": []
 }
 ```
@@ -236,6 +239,7 @@ formsAppsSDK.getFormsApp(formsAppId).then(formsApp => {
   "createdAt": "2018-06-01T00:00:00.000Z",
   "updatedAt": "2019-05-17T05:49:14.000Z",
   "organisationId": "ABCDEFGHIJKL123456789012",
+  "formsAppEnvironmentId": 1,
   "formIds": []
 }
 ```
@@ -282,6 +286,7 @@ const formsApp = {
   createdAt: '2018-06-01T00:00:00.000Z',
   updatedAt: '2019-05-17T05:49:14.000Z',
   organisationId: 'ABCDEFGHIJKL123456789012',
+  formsAppEnvironmentId: 1,
   formIds: []
 }
 formsAppsSDK.updateFormsApp(formsApp).then(savedFormsApp => {
@@ -298,6 +303,7 @@ formsAppsSDK.updateFormsApp(formsApp).then(savedFormsApp => {
 | `formsApp.name`                          | Yes      | `string`   | Name of the forms app                                                                                                                                                                                |
 | `formsApp.hostname`                      | Yes      | `string`   | Hostname (domain) for the forms app                                                                                                                                                                  |
 | `formsApp.organisationId`                | Yes      | `string`   | The exact organisation identifier the forms app is associated with                                                                                                                                   |
+| `formsApp.formsAppEnvironmentId`         | Yes      | `number`   | The exact forms app environment identifier the forms app is associated with                                                                                                                          |
 | `formsApp.oAuthClientId`                 | Yes      | `string`   | The identifier of the OAuth Client for the forms app **(Do not change this)**.                                                                                                                       |
 | `formsApp.formIds`                       | Yes      | `number[]` | The identifiers of the forms that are in the forms app. The order of the forms is respected when rendering the list of forms                                                                         |
 | `formsApp.pwaSettings`                   | Yes      | `Object`   | Forms App progressive web app setting properties                                                                                                                                                     |
@@ -324,6 +330,7 @@ formsAppsSDK.updateFormsApp(formsApp).then(savedFormsApp => {
   "createdAt": "2018-06-01T00:00:00.000Z",
   "updatedAt": "2019-05-17T05:49:14.000Z",
   "organisationId": "ABCDEFGHIJKL123456789012",
+  "formsAppEnvironmentId": 1,
   "formIds": []
 }
 ```
