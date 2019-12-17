@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+# 0.4.0 (2019-12-18)
+
 ### Added
 
 - Added form schema validation for `formsAppEnvironmentId` in Forms and FormsApps
