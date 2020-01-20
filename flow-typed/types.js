@@ -249,5 +249,22 @@ type Role = {
   createdAt: string,
   updatedAt: string
 }
+
+declare type JobsSearchOptions = {
+  username?: string,
+  externalId?: string,
+  formId?: number,
+  isSubmitted?: boolean,
+  limit?: number,
+  offset?: number
+}
+
+declare type JobsSearchResult = {
+  meta: {
+  limit: number,
+  offset: number
+  },
+  jobs: Job[]
+}
 */
 

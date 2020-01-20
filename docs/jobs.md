@@ -39,10 +39,9 @@ const preFillData = {
   text_element: 'abc',
   number_element: 123
 }
-jobs.createJob(newJob, preFillData)
-  .then((job) => {
-    // job.id can be used to delete the Job
-  })
+jobs.createJob(newJob, preFillData).then(job => {
+  // job.id can be used to delete the Job
+})
 ```
 
 ### Parameters
@@ -53,12 +52,12 @@ jobs.createJob(newJob, preFillData)
 | `newJob.username`            | Yes      | `string` | The identifier of the User to assign the Job to                                                                                                                                                       |
 | `newJob.formId`              | Yes      | `number` | The identifier of the Form the User must complete                                                                                                                                                     |
 | `newJob.externalId`          | No       | `string` | The external identifier of the form submission you wish to use, this identifier will be returned to you with the `submissionId` after a successful submission to allow you to retrieve the data later |
-| `newJob.details`             | Yes       | `Object` | Extra Job details that will be displayed to the User                                                                                                                                                  |
+| `newJob.details`             | Yes      | `Object` | Extra Job details that will be displayed to the User                                                                                                                                                  |
 | `newJob.details.key`         | No       | `string` | A key for the User the identify the Job                                                                                                                                                               |
 | `newJob.details.title`       | Yes      | `string` | A title for the User the identify the Job                                                                                                                                                             |
 | `newJob.details.description` | No       | `string` | A short description of the what the job may entail                                                                                                                                                    |
 | `newJob.details.type`        | No       | `string` | A type for the User to categorise the Job                                                                                                                                                             |
-| `preFillData`                | No       | `Object` | key/value pairs  with the form field names as keys and the pre-fill data as the values                                                                                                                |
+| `preFillData`                | No       | `Object` | key/value pairs with the form field names as keys and the pre-fill data as the values                                                                                                                 |
 
 ### Result (Resolved Promise)
 
@@ -85,18 +84,70 @@ jobs.createJob(newJob, preFillData)
 
 ```javascript
 const jobId = 'f73985fd-2dba-4bf7-abbe-e204889f5216'
-jobs.deleteJob(jobId)
-  .then(() => {
-    // Job has been deleted
-  })
+jobs.deleteJob(jobId).then(() => {
+  // Job has been deleted
+})
 ```
 
 ### Parameters
 
-| Parameter | Required | Type     | Description                             |
-| --------- | -------- | -------- | --------------------------------------- |
-| `keyId`   | Yes      | `string` | The exact id of the key you wish to get |
+| Parameter | Required | Type     | Description                                |
+| --------- | -------- | -------- | ------------------------------------------ |
+| `jobId`   | Yes      | `string` | The exact id of the job you wish to delete |
 
 ### Result (Resolved Promise)
 
--   No return value (`undefined`)
+- No return value (`undefined`)
+
+## Search
+
+### Example
+
+```javascript
+const results = await jobs.search({
+  username: 'user@domain.io',
+  formId: 10
+})
+
+// an array of jobs
+const jobs = results.jobs
+```
+
+### Parameters
+
+| Parameter             | Required | Type      | Description                                                                           |
+| --------------------- | -------- | --------- | ------------------------------------------------------------------------------------- |
+| `options`             | No       | `Object`  | Search options                                                                        |
+| `options.externalId`  | No       | `string`  | The `externalId` property of a job                                                    |
+| `options.formId`      | No       | `number`  | The `formId` matching the form that a job was created for                             |
+| `options.username`    | No       | `string`  | The `username` that the job was assigned to                                           |
+| `options.isSubmitted` | No       | `boolean` | Whether the job has been submitted or not                                             |
+| `options.limit`       | No       | `number`  | Limit the number of jobs returned                                                     |
+| `options.offset`      | No       | `number`  | Skip a specific number of results, used in conjunction with `limit` to enforce paging |
+
+### Result (Resolved Promise)
+
+```json
+{
+  "meta": {
+    "limit": null,
+    "offset": null
+  },
+  "jobs": [
+    {
+      "id": "f73985fd-2dba-4bf7-abbe-e204889f5216",
+      "isSubmitted": false,
+      "createdAt": "2019-02-10T23:00:35.566Z",
+      "username": "user@domain.io",
+      "formId": 10,
+      "externalId": "your-job-identifier",
+      "details": {
+        "key": "JOB-123",
+        "title": "Job Title",
+        "description": "Job description",
+        "type": "Type"
+      }
+    }
+  ]
+}
+```

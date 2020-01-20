@@ -1,4 +1,3 @@
-
 // @flow
 'use strict'
 
@@ -19,36 +18,46 @@ describe('Jobs SDK Class', () => {
 
       describe('should reject with correct validation errors for "username"', () => {
         test('required', () => {
-          return expect(jobs.createJob({})).rejects.toThrow('"username" is required')
+          return expect(jobs.createJob({})).rejects.toThrow(
+            '"username" is required'
+          )
         })
         test('string', () => {
-          return expect(jobs.createJob({
-            username: 123
-          })).rejects.toThrow('"username" must be a string')
+          return expect(
+            jobs.createJob({
+              username: 123
+            })
+          ).rejects.toThrow('"username" must be a string')
         })
       })
 
       describe('should reject with correct validation errors for "formId"', () => {
         test('required', () => {
-          return expect(jobs.createJob({
-            username: 'username'
-          })).rejects.toThrow('"formId" is required')
+          return expect(
+            jobs.createJob({
+              username: 'username'
+            })
+          ).rejects.toThrow('"formId" is required')
         })
         test('string', () => {
-          return expect(jobs.createJob({
-            username: 'username',
-            formId: 'abc'
-          })).rejects.toThrow('"formId" must be a number')
+          return expect(
+            jobs.createJob({
+              username: 'username',
+              formId: 'abc'
+            })
+          ).rejects.toThrow('"formId" must be a number')
         })
       })
 
       describe('should reject with correct validation errors for "externalId"', () => {
         test('string', () => {
-          return expect(jobs.createJob({
-            username: 'username',
-            formId: 1,
-            externalId: 123
-          })).rejects.toThrow('"externalId" must be a string')
+          return expect(
+            jobs.createJob({
+              username: 'username',
+              formId: 1,
+              externalId: 123
+            })
+          ).rejects.toThrow('"externalId" must be a string')
         })
       })
     })
@@ -62,12 +71,18 @@ describe('Jobs SDK Class', () => {
       afterAll(reset)
 
       test('should not call pre-fill data endpoints', async () => {
-        const mockPostRequest = jest.fn().mockImplementation(() => Promise.resolve({}))
-        jest.mock('../../lib/one-blink-api.js', () => class {
-          postRequest () {
-            return mockPostRequest()
-          }
-        })
+        const mockPostRequest = jest
+          .fn()
+          .mockImplementation(() => Promise.resolve({}))
+        jest.mock(
+          '../../lib/one-blink-api.js',
+          () =>
+            class {
+              postRequest() {
+                return mockPostRequest()
+              }
+            }
+        )
 
         const Jobs = require('../../classes/Jobs.js')
         const jobs = new Jobs(constructorOptions)
@@ -83,13 +98,21 @@ describe('Jobs SDK Class', () => {
       })
 
       test('should call pre-fill data endpoints', async () => {
-        const mockPostRequest = jest.fn().mockImplementation(() => Promise.resolve({}))
-        jest.mock('../../lib/one-blink-api.js', () => class {
-          postRequest () {
-            return mockPostRequest()
-          }
-        })
-        const mockSetPreFillData = jest.fn().mockImplementation(() => Promise.resolve())
+        const mockPostRequest = jest
+          .fn()
+          .mockImplementation(() => Promise.resolve({}))
+        jest.mock(
+          '../../lib/one-blink-api.js',
+          () =>
+            class {
+              postRequest() {
+                return mockPostRequest()
+              }
+            }
+        )
+        const mockSetPreFillData = jest
+          .fn()
+          .mockImplementation(() => Promise.resolve())
         jest.mock('../../lib/pre-fill-data.js', () => mockSetPreFillData)
 
         const Jobs = require('../../classes/Jobs.js')
@@ -118,7 +141,84 @@ describe('Jobs SDK Class', () => {
     const jobs = new Jobs(constructorOptions)
 
     test('should reject with correct validation errors for "jobId"', () => {
-      return expect(jobs.deleteJob()).rejects.toThrow('Must supply "jobId" as a string')
+      return expect(jobs.deleteJob()).rejects.toThrow(
+        'Must supply "jobId" as a string'
+      )
+    })
+  })
+
+  describe('search()', () => {
+    const reset = () => {
+      jest.resetModules()
+      jest.clearAllMocks()
+    }
+    beforeEach(reset)
+    afterAll(reset)
+    const Jobs = require('../../classes/Jobs.js')
+    const jobs = new Jobs(constructorOptions)
+    test('should reject form id', () => {
+      return expect(jobs.search({ formId: 'ten' })).rejects.toThrow(
+        'formId must be provided as a number or not at all'
+      )
+    })
+
+    test('should reject externalId', () => {
+      return expect(jobs.search({ externalId: 12345 })).rejects.toThrow(
+        'externalId must be provided as a string or not at all'
+      )
+    })
+
+    test('should reject username', () => {
+      return expect(jobs.search({ username: 12345 })).rejects.toThrow(
+        'username must be provided as a string or not at all'
+      )
+    })
+
+    test('should reject isSubmitted', () => {
+      return expect(jobs.search({ isSubmitted: 'maybe?' })).rejects.toThrow(
+        'isSubmitted must be provided as a boolean or not at all'
+      )
+    })
+
+    test('should reject limit', () => {
+      return expect(jobs.search({ limit: 'infinite' })).rejects.toThrow(
+        'limit must be provided as a number or not at all'
+      )
+    })
+
+    test('should reject offset', () => {
+      return expect(jobs.search({ offset: 'a little bit' })).rejects.toThrow(
+        'offset must be provided as a number or not at all'
+      )
+    })
+
+    test('should make search call successfully', async () => {
+      const mockSearchRequest = jest
+        .fn()
+        .mockImplementation(() => Promise.resolve({}))
+      jest.mock(
+        '../../lib/one-blink-api.js',
+        () =>
+          class {
+            searchRequest() {
+              return mockSearchRequest()
+            }
+          }
+      )
+
+      const Jobs = require('../../classes/Jobs.js')
+      const jobs = new Jobs(constructorOptions)
+
+      await jobs.search({
+        externalId: 'abc',
+        formId: 1,
+        username: 'user@domain.io',
+        isSubmitted: false,
+        offset: 1,
+        limit: 100
+      })
+
+      return expect(mockSearchRequest).toHaveBeenCalledTimes(1)
     })
   })
 })
