@@ -65,7 +65,7 @@ module.exports = class Jobs extends OneBlinkAPI {
     return super.deleteRequest(`/jobs/${jobId}`)
   }
 
-  async search(
+  async searchJobs(
     options /* : ?mixed */
   ) /* : Promise<JobsSearchResult> */ {
     let searchOptions = {}
