@@ -11,6 +11,7 @@
 ### Added
 
 - Added [`search()`](./docs/jobs#search) function to Jobs class
+- Added `priority` as optional parameter to `searchJobs` function
 
 # 0.4.0 (2019-12-18)
 

@@ -105,6 +105,13 @@ module.exports = class Jobs extends OneBlinkAPI {
         searchOptions = Object.assign(searchOptions, { formId: options.formId })
       }
 
+      if (options.priority) {
+        if (typeof options.priority !== 'number') {
+          throw new TypeError(`priority must be provided as a number or not at all`)
+        }
+        searchOptions = Object.assign(searchOptions, { priority: options.priority })
+      }
+
       if (options.limit) {
         if (typeof options.limit !== 'number') {
           throw new TypeError(`limit must be provided as a number or not at all`)
