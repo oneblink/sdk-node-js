@@ -99,12 +99,12 @@ jobs.deleteJob(jobId).then(() => {
 
 - No return value (`undefined`)
 
-## Search
+## Search Jobs
 
 ### Example
 
 ```javascript
-const results = await jobs.search({
+const results = await jobs.searchJobs({
   username: 'user@domain.io',
   formId: 10
 })

@@ -157,39 +157,39 @@ describe('Jobs SDK Class', () => {
     const Jobs = require('../../classes/Jobs.js')
     const jobs = new Jobs(constructorOptions)
     test('should reject form id', () => {
-      return expect(jobs.search({ formId: 'ten' })).rejects.toThrow(
+      return expect(jobs.searchJobs({ formId: 'ten' })).rejects.toThrow(
         'formId must be provided as a number or not at all'
       )
     })
 
     test('should reject externalId', () => {
-      return expect(jobs.search({ externalId: 12345 })).rejects.toThrow(
+      return expect(jobs.searchJobs({ externalId: 12345 })).rejects.toThrow(
         'externalId must be provided as a string or not at all'
       )
     })
 
     test('should reject username', () => {
-      return expect(jobs.search({ username: 12345 })).rejects.toThrow(
+      return expect(jobs.searchJobs({ username: 12345 })).rejects.toThrow(
         'username must be provided as a string or not at all'
       )
     })
 
     test('should reject isSubmitted', () => {
-      return expect(jobs.search({ isSubmitted: 'maybe?' })).rejects.toThrow(
+      return expect(jobs.searchJobs({ isSubmitted: 'maybe?' })).rejects.toThrow(
         'isSubmitted must be provided as a boolean or not at all'
       )
     })
 
     test('should reject limit', () => {
-      return expect(jobs.search({ limit: 'infinite' })).rejects.toThrow(
+      return expect(jobs.searchJobs({ limit: 'infinite' })).rejects.toThrow(
         'limit must be provided as a number or not at all'
       )
     })
 
     test('should reject offset', () => {
-      return expect(jobs.search({ offset: 'a little bit' })).rejects.toThrow(
-        'offset must be provided as a number or not at all'
-      )
+      return expect(
+        jobs.searchJobs({ offset: 'a little bit' })
+      ).rejects.toThrow('offset must be provided as a number or not at all')
     })
 
     test('should make search call successfully', async () => {
@@ -209,7 +209,7 @@ describe('Jobs SDK Class', () => {
       const Jobs = require('../../classes/Jobs.js')
       const jobs = new Jobs(constructorOptions)
 
-      await jobs.search({
+      await jobs.searchJobs({
         externalId: 'abc',
         formId: 1,
         username: 'user@domain.io',
