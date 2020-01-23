@@ -15,6 +15,7 @@ const newJobSchema = Joi.object()
       .required()
       .min(1),
     externalId: Joi.string(),
+    priority: Joi.number(),
     details: Joi.object()
       .required()
       .keys({

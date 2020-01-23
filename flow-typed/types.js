@@ -175,6 +175,7 @@ declare type NewJob = {
   formId: number,
   externalId?: string,
   preFillFormDataId?: string,
+  priority?: number,
   details?: {
     key?: string,
     title?: string,

@@ -5,6 +5,7 @@
 ### Added
 
 - Added [`search()`](./docs/jobs#search) function to Jobs class
+- Added `priority` as optional property to `createJob` function
 
 # 0.4.0 (2019-12-18)
 

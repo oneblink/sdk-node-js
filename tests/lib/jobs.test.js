@@ -60,6 +60,18 @@ describe('Jobs SDK Class', () => {
           ).rejects.toThrow('"externalId" must be a string')
         })
       })
+
+      describe('should reject with correct validation errors for "priority"', () => {
+        test('string', () => {
+          return expect(
+            jobs.createJob({
+              username: 'username',
+              formId: 1,
+              priority: 'one'
+            })
+          ).rejects.toThrow('"priority" must be a number')
+        })
+      })
     })
 
     describe('API Calls', () => {
