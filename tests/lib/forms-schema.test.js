@@ -343,7 +343,9 @@ describe('Valid Form Schema with Pages', () => {
               id: 'b527bcea-dc84-477f-a5ee-d34abfec92fa',
               name: 'file',
               label: 'file',
-              type: 'file'
+              type: 'file',
+              minEntries: 1,
+              maxEntries: 2
             },
             {
               id: 'b527bcea-dc84-477f-a5ee-d34abfec92fb',
@@ -3778,7 +3780,6 @@ test('should throw error if restrictFileTypes is true and restrictedFileTypes is
       required: false,
       restrictFileTypes: true,
       restrictedFileTypes: null
-
     },
     elementSchema
   )
@@ -3801,5 +3802,23 @@ test('should throw error if restrictFileTypes is true and restrictedFileTypes is
   )
   expect(error.message).toBe(
     'child "restrictedFileTypes" fails because ["Restricted File Types" is required]'
+  )
+})
+
+test('should throw error if minEntries is greater than maxEntries', () => {
+  const { error } = Joi.validate(
+    {
+      id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+      name: 'files',
+      label: 'Files',
+      type: 'file',
+      required: false,
+      minEntries: 3,
+      maxEntries: 2
+    },
+    elementSchema
+  )
+  expect(error.message).toContain(
+    'child "maxEntries" fails because ["Form Element - Maximum number of files" must be larger than or equal to 3]'
   )
 })

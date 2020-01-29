@@ -97,7 +97,11 @@ declare type FormElement = {
   isDataLookup?: boolean,
   isElementLookup?: boolean,
   formId?: number,
-  searchUrl?: string
+  searchUrl?: string,
+  restrictFileTypes?: boolean,
+  restrictedFileTypes?: string[],
+  minEntries?: number,
+  maxEntries?: number
 }
 
 declare type Form = {
