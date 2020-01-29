@@ -3693,7 +3693,6 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
       name: 'files',
       label: 'Files',
       type: 'file',
-      required: false,
       restrictFileTypes: false
     },
     elementSchema
@@ -3706,7 +3705,6 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
       name: 'files',
       label: 'Files',
       type: 'file',
-      required: false,
       restrictFileTypes: true,
       restrictedFileTypes: ['png', 'jpg', 'gif']
     },
@@ -3720,7 +3718,6 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
     type: 'file',
     readOnly: false,
     conditionallyShow: false,
-    required: false,
     restrictFileTypes: true,
     restrictedFileTypes: ['png', 'jpg', 'gif']
   })
@@ -3733,7 +3730,6 @@ test('should strip restrictedFileTypes if restrictFileTypes is false', () => {
       name: 'files',
       label: 'Files',
       type: 'file',
-      required: false,
       restrictFileTypes: false,
       restrictedFileTypes: ['png']
     },
@@ -3747,7 +3743,6 @@ test('should strip restrictedFileTypes if restrictFileTypes is false', () => {
     type: 'file',
     readOnly: false,
     conditionallyShow: false,
-    required: false,
     restrictFileTypes: false
   })
 })
@@ -3759,7 +3754,6 @@ test('should only allow strings in restrictedFileTypes', () => {
       name: 'files',
       label: 'Files',
       type: 'file',
-      required: false,
       restrictFileTypes: true,
       restrictedFileTypes: [{ fileType: 'png' }]
     },
@@ -3777,7 +3771,6 @@ test('should throw error if restrictFileTypes is true and restrictedFileTypes is
       name: 'files',
       label: 'Files',
       type: 'file',
-      required: false,
       restrictFileTypes: true,
       restrictedFileTypes: null
     },
@@ -3795,7 +3788,6 @@ test('should throw error if restrictFileTypes is true and restrictedFileTypes is
       name: 'files',
       label: 'Files',
       type: 'file',
-      required: false,
       restrictFileTypes: true
     },
     elementSchema
@@ -3812,7 +3804,6 @@ test('should throw error if minEntries is greater than maxEntries', () => {
       name: 'files',
       label: 'Files',
       type: 'file',
-      required: false,
       minEntries: 3,
       maxEntries: 2
     },
