@@ -2,12 +2,15 @@
 
 ## Unreleased
 
+### Added
+
+- Added `minEntries` and `maxEntries` to `File` element
+
 # 0.4.1 (2020-01-30)
 
 ### Added
 
 - Added [`search()`](./docs/jobs#search) function to Jobs class
-- Added `minEntries` and `maxEntries` to `File` element
 
 # 0.4.0 (2019-12-18)
 
