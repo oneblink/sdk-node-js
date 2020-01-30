@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+# 0.4.1 (2020-01-30)
+
 ### Added
 
 - Added [`search()`](./docs/jobs#search) function to Jobs class
