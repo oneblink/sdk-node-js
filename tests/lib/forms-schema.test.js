@@ -343,7 +343,9 @@ describe('Valid Form Schema with Pages', () => {
               id: 'b527bcea-dc84-477f-a5ee-d34abfec92fa',
               name: 'file',
               label: 'file',
-              type: 'file'
+              type: 'file',
+              minEntries: 1,
+              maxEntries: 2
             },
             {
               id: 'b527bcea-dc84-477f-a5ee-d34abfec92fb',
@@ -3691,7 +3693,6 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
       name: 'files',
       label: 'Files',
       type: 'file',
-      required: false,
       restrictFileTypes: false
     },
     elementSchema
@@ -3704,7 +3705,6 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
       name: 'files',
       label: 'Files',
       type: 'file',
-      required: false,
       restrictFileTypes: true,
       restrictedFileTypes: ['png', 'jpg', 'gif']
     },
@@ -3718,7 +3718,6 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
     type: 'file',
     readOnly: false,
     conditionallyShow: false,
-    required: false,
     restrictFileTypes: true,
     restrictedFileTypes: ['png', 'jpg', 'gif']
   })
@@ -3731,7 +3730,6 @@ test('should strip restrictedFileTypes if restrictFileTypes is false', () => {
       name: 'files',
       label: 'Files',
       type: 'file',
-      required: false,
       restrictFileTypes: false,
       restrictedFileTypes: ['png']
     },
@@ -3745,7 +3743,6 @@ test('should strip restrictedFileTypes if restrictFileTypes is false', () => {
     type: 'file',
     readOnly: false,
     conditionallyShow: false,
-    required: false,
     restrictFileTypes: false
   })
 })
@@ -3757,7 +3754,6 @@ test('should only allow strings in restrictedFileTypes', () => {
       name: 'files',
       label: 'Files',
       type: 'file',
-      required: false,
       restrictFileTypes: true,
       restrictedFileTypes: [{ fileType: 'png' }]
     },
@@ -3775,10 +3771,8 @@ test('should throw error if restrictFileTypes is true and restrictedFileTypes is
       name: 'files',
       label: 'Files',
       type: 'file',
-      required: false,
       restrictFileTypes: true,
       restrictedFileTypes: null
-
     },
     elementSchema
   )
@@ -3794,12 +3788,28 @@ test('should throw error if restrictFileTypes is true and restrictedFileTypes is
       name: 'files',
       label: 'Files',
       type: 'file',
-      required: false,
       restrictFileTypes: true
     },
     elementSchema
   )
   expect(error.message).toBe(
     'child "restrictedFileTypes" fails because ["Restricted File Types" is required]'
+  )
+})
+
+test('should throw error if minEntries is greater than maxEntries', () => {
+  const { error } = Joi.validate(
+    {
+      id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+      name: 'files',
+      label: 'Files',
+      type: 'file',
+      minEntries: 3,
+      maxEntries: 2
+    },
+    elementSchema
+  )
+  expect(error.message).toContain(
+    'child "maxEntries" fails because ["Form Element - Maximum number of files" must be larger than or equal to 3]'
   )
 })
