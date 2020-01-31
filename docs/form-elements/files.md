@@ -8,7 +8,7 @@ Allow the user upload a array of files from their device.
 
 | Property     | Required | Type     | Default   | Description                                                                              |
 | ------------ | -------- | -------- | --------- | ---------------------------------------------------------------------------------------- |
-| `type`       | Yes      | `string` | `'file's` | The type of Form Element.                                                                |
+| `type`       | Yes      | `string` | `'files'` | The type of Form Element.                                                                |
 | `name`       | Yes      | `string` |           | The key that will be assigned a value in the submission data when the form is submitted. |
 | `label`      | Yes      | `string` |           | Display text presented to the user above the input by default.                           |
 | `minEntries` | No       | `string` |           | Minimum number of files required                                                         |
