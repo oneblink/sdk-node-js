@@ -340,10 +340,16 @@ describe('Valid Form Schema with Pages', () => {
                 'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg'
             },
             {
-              id: 'b527bcea-dc84-477f-a5ee-d34abfec92fa',
+              id: '8788a2ea-a108-4362-bc37-4bf1f9d64b97',
               name: 'file',
               label: 'file',
-              type: 'file',
+              type: 'file'
+            },
+            {
+              id: 'b527bcea-dc84-477f-a5ee-d34abfec92fa',
+              name: 'files',
+              label: 'files',
+              type: 'files',
               minEntries: 1,
               maxEntries: 2
             },
@@ -1623,7 +1629,7 @@ test('should error if page element has child page element', () => {
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage]'
+    '"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage, files]'
   )
 })
 
@@ -1706,7 +1712,7 @@ test('should error if isMultiPage is set to false', () => {
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage]'
+    '"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage, files]'
   )
 })
 
@@ -1863,7 +1869,7 @@ test('should error if isMultiPage is false even if all root elements are pages',
   )
 
   expect(error.details[0].message).toBe(
-    '"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage]'
+    '"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage, files]'
   )
 })
 
@@ -3692,7 +3698,7 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
       id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
       name: 'files',
       label: 'Files',
-      type: 'file',
+      type: 'files',
       restrictFileTypes: false
     },
     elementSchema
@@ -3704,7 +3710,7 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
       id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
       name: 'files',
       label: 'Files',
-      type: 'file',
+      type: 'files',
       restrictFileTypes: true,
       restrictedFileTypes: ['png', 'jpg', 'gif']
     },
@@ -3715,7 +3721,7 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
     id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
     name: 'files',
     label: 'Files',
-    type: 'file',
+    type: 'files',
     readOnly: false,
     conditionallyShow: false,
     restrictFileTypes: true,
@@ -3729,7 +3735,7 @@ test('should strip restrictedFileTypes if restrictFileTypes is false', () => {
       id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
       name: 'files',
       label: 'Files',
-      type: 'file',
+      type: 'files',
       restrictFileTypes: false,
       restrictedFileTypes: ['png']
     },
@@ -3740,7 +3746,7 @@ test('should strip restrictedFileTypes if restrictFileTypes is false', () => {
     id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
     name: 'files',
     label: 'Files',
-    type: 'file',
+    type: 'files',
     readOnly: false,
     conditionallyShow: false,
     restrictFileTypes: false
@@ -3753,7 +3759,7 @@ test('should only allow strings in restrictedFileTypes', () => {
       id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
       name: 'files',
       label: 'Files',
-      type: 'file',
+      type: 'files',
       restrictFileTypes: true,
       restrictedFileTypes: [{ fileType: 'png' }]
     },
@@ -3770,7 +3776,7 @@ test('should throw error if restrictFileTypes is true and restrictedFileTypes is
       id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
       name: 'files',
       label: 'Files',
-      type: 'file',
+      type: 'files',
       restrictFileTypes: true,
       restrictedFileTypes: null
     },
@@ -3787,7 +3793,7 @@ test('should throw error if restrictFileTypes is true and restrictedFileTypes is
       id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
       name: 'files',
       label: 'Files',
-      type: 'file',
+      type: 'files',
       restrictFileTypes: true
     },
     elementSchema
@@ -3803,7 +3809,7 @@ test('should throw error if minEntries is greater than maxEntries', () => {
       id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
       name: 'files',
       label: 'Files',
-      type: 'file',
+      type: 'files',
       minEntries: 3,
       maxEntries: 2
     },

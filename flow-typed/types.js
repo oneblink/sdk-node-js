@@ -63,7 +63,8 @@ declare type FormElement = {
     'email' |
     'file' |
     'form' |
-    'infoPage',
+    'infoPage' |
+    'files',
   name?: string,
   label?: string,
   required: boolean,
