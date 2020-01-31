@@ -27,7 +27,6 @@ File element also inherits the properties of the following:
   "type": "file",
   "name": "supportingDocument",
   "label": "Please Upload your Supporting Documentation",
-  "minEntries": 1,
-  "maxEntries": 2
+  "required": true
 }
 ```
