@@ -4,7 +4,7 @@
 
 ### Added
 
-- Added `minEntries` and `maxEntries` to `File` element
+- Added `Files` element
 
 # 0.4.1 (2020-01-30)
 
