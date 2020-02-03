@@ -5,13 +5,13 @@
 ### Added
 
 - Added `Files` element
+- Added `priority` as optional parameter to `searchJobs` function
 
 # 0.4.1 (2020-01-30)
 
 ### Added
 
 - Added [`search()`](./docs/jobs#search) function to Jobs class
-- Added `priority` as optional parameter to `searchJobs` function
 
 # 0.4.0 (2019-12-18)
 
