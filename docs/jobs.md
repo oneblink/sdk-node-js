@@ -28,18 +28,20 @@ const newJob = {
   username: 'user@domain.io',
   formId: 1,
   externalId: 'your-job-identifier',
-  priority: 3,
   details: {
     key: 'JOB-123',
     title: 'Job Title',
     description: 'Job description',
-    type: 'Type'
+    type: 'Type',
+    priority: 3
   }
 }
+
 const preFillData = {
   text_element: 'abc',
   number_element: 123
 }
+
 jobs.createJob(newJob, preFillData).then(job => {
   // job.id can be used to delete the Job
 })
@@ -53,12 +55,12 @@ jobs.createJob(newJob, preFillData).then(job => {
 | `newJob.username`            | Yes      | `string` | The identifier of the User to assign the Job to                                                                                                                                                       |
 | `newJob.formId`              | Yes      | `number` | The identifier of the Form the User must complete                                                                                                                                                     |
 | `newJob.externalId`          | No       | `string` | The external identifier of the form submission you wish to use, this identifier will be returned to you with the `submissionId` after a successful submission to allow you to retrieve the data later |
-| `newJob.priority`            | Yes      | `number` | Value used to order jobs by priority in the OneBlink system                                                                                                                                           |
 | `newJob.details`             | Yes      | `Object` | Extra Job details that will be displayed to the User                                                                                                                                                  |
 | `newJob.details.key`         | No       | `string` | A key for the User to identify the Job                                                                                                                                                                |
 | `newJob.details.title`       | Yes      | `string` | A title for the User to identify the Job                                                                                                                                                              |
 | `newJob.details.description` | No       | `string` | A short description of what the job may entail                                                                                                                                                        |
 | `newJob.details.type`        | No       | `string` | A type for the User to categorise the Job                                                                                                                                                             |
+| `newJob.details.priority`    | no       | `number` | Value used to order jobs by priority in the OneBlink system                                                                                                                                           |
 | `preFillData`                | No       | `Object` | key/value pairs with the form field names as keys and the pre-fill data as the values                                                                                                                 |
 
 ### Result (Resolved Promise)
@@ -71,12 +73,12 @@ jobs.createJob(newJob, preFillData).then(job => {
   "username": "user@domain.io",
   "formId": 1,
   "externalId": "your-job-identifier",
-  "priority": 3,
   "details": {
     "key": "JOB-123",
     "title": "Job Title",
     "description": "Job description",
-    "type": "Type"
+    "type": "Type",
+    "priority": 3
   }
 }
 ```

@@ -67,7 +67,10 @@ describe('Jobs SDK Class', () => {
             jobs.createJob({
               username: 'username',
               formId: 1,
-              priority: 'one'
+              details: {
+                title: 'job title',
+                priority: 'one'
+              }
             })
           ).rejects.toThrow('"priority" must be a number')
         })

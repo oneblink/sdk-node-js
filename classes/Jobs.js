@@ -15,14 +15,14 @@ const newJobSchema = Joi.object()
       .required()
       .min(1),
     externalId: Joi.string(),
-    priority: Joi.number(),
     details: Joi.object()
       .required()
       .keys({
         key: Joi.string(),
         title: Joi.string().required(),
         description: Joi.string(),
-        type: Joi.string()
+        type: Joi.string(),
+        priority: Joi.number()
       })
   })
 
@@ -53,7 +53,7 @@ module.exports = class Jobs extends OneBlinkAPI {
       newJob.preFillFormDataId = preFillMeta.preFillFormDataId
     }
 
-    const job /* : Job */ = await super.postRequest('/jobs', newJob)
+    const job = await super.postRequest/*:: <NewJob, Job> */('/jobs', newJob)
 
     return job
   }

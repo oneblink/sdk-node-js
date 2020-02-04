@@ -179,14 +179,13 @@ declare type NewJob = {
   username: string,
   formId: number,
   externalId?: string,
-  priority?: number,
   preFillFormDataId?: string,
-  priority?: number,
-  details?: {
+  details: {
+    title: string,
     key?: string,
-    title?: string,
     description?: string,
-    type?: string
+    type?: string,
+    priority?: number
   }
 }
 
