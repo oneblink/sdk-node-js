@@ -192,12 +192,6 @@ describe('Jobs SDK Class', () => {
       )
     })
 
-    test('should reject priority', () => {
-      return expect(
-        jobs.searchJobs({ priority: 'very important!!!' })
-      ).rejects.toThrow('priority must be provided as a number or not at all')
-    })
-
     test('should reject limit', () => {
       return expect(jobs.searchJobs({ limit: 'infinite' })).rejects.toThrow(
         'limit must be provided as a number or not at all'

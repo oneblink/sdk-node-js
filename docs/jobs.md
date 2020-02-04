@@ -125,7 +125,6 @@ const jobs = results.jobs
 | `options.formId`      | No       | `number`  | The `formId` matching the form that a job was created for                             |
 | `options.username`    | No       | `string`  | The `username` that the job was assigned to                                           |
 | `options.isSubmitted` | No       | `boolean` | Whether the job has been submitted or not                                             |
-| `options.priority`    | No       | `number`  | The priority given to the job when the job was first created                          |
 | `options.limit`       | No       | `number`  | Limit the number of jobs returned                                                     |
 | `options.offset`      | No       | `number`  | Skip a specific number of results, used in conjunction with `limit` to enforce paging |
 
@@ -145,12 +144,12 @@ const jobs = results.jobs
       "username": "user@domain.io",
       "formId": 10,
       "externalId": "your-job-identifier",
-      "priority": 3,
       "details": {
         "key": "JOB-123",
         "title": "Job Title",
         "description": "Job description",
-        "type": "Type"
+        "type": "Type",
+        "priority": 3
       }
     }
   ]
