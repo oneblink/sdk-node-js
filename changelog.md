@@ -5,7 +5,6 @@
 ### Added
 
 - Added `Files` element
-- Added `priority` as optional parameter to `searchJobs` function
 - Added `priority` as optional parameter to `createJob` function
 
 # 0.4.1 (2020-01-30)

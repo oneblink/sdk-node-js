@@ -15,14 +15,14 @@ const newJobSchema = Joi.object()
       .required()
       .min(1),
     externalId: Joi.string(),
-    priority: Joi.number(),
     details: Joi.object()
       .required()
       .keys({
         key: Joi.string(),
         title: Joi.string().required(),
         description: Joi.string(),
-        type: Joi.string()
+        type: Joi.string(),
+        priority: Joi.number()
       })
   })
 
@@ -53,7 +53,7 @@ module.exports = class Jobs extends OneBlinkAPI {
       newJob.preFillFormDataId = preFillMeta.preFillFormDataId
     }
 
-    const job /* : Job */ = await super.postRequest('/jobs', newJob)
+    const job = await super.postRequest/*:: <NewJob, Job> */('/jobs', newJob)
 
     return job
   }
@@ -104,13 +104,6 @@ module.exports = class Jobs extends OneBlinkAPI {
           throw new TypeError(`formId must be provided as a number or not at all`)
         }
         searchOptions = Object.assign(searchOptions, { formId: options.formId })
-      }
-
-      if (options.priority) {
-        if (typeof options.priority !== 'number') {
-          throw new TypeError(`priority must be provided as a number or not at all`)
-        }
-        searchOptions = Object.assign(searchOptions, { priority: options.priority })
       }
 
       if (options.limit) {

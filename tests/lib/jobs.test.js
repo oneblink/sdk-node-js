@@ -67,7 +67,10 @@ describe('Jobs SDK Class', () => {
             jobs.createJob({
               username: 'username',
               formId: 1,
-              priority: 'one'
+              details: {
+                title: 'job title',
+                priority: 'one'
+              }
             })
           ).rejects.toThrow('"priority" must be a number')
         })
@@ -190,12 +193,6 @@ describe('Jobs SDK Class', () => {
       return expect(jobs.searchJobs({ isSubmitted: 'maybe?' })).rejects.toThrow(
         'isSubmitted must be provided as a boolean or not at all'
       )
-    })
-
-    test('should reject priority', () => {
-      return expect(
-        jobs.searchJobs({ priority: 'very important!!!' })
-      ).rejects.toThrow('priority must be provided as a number or not at all')
     })
 
     test('should reject limit', () => {
