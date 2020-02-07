@@ -4,8 +4,9 @@
 
 ### Added
 
-- Added `Files` element
-- Added `priority` as optional parameter to `createJob` function
+- `Files` element
+- `priority` as optional parameter to `createJob` function
+- `device` property to example of form submission data
 
 # 0.4.1 (2020-01-30)
 
