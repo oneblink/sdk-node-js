@@ -151,6 +151,34 @@ forms
   },
   "submission": {
     "comment": "This is my comment that I entered during completion of the form"
+  },
+  "submissionTimestamp": "2020-02-07T01:04:37.718Z",
+  "formsAppId": 1,
+  "user": {
+    "userId": "1234abcd-1234-abcd-1234-1234abcd1234",
+    "email": "user@email.com",
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "fullName": "Jane Smith",
+    "picture": "https://example.com/image.png",
+    "username": "user@email.com",
+    "providerType": "Google",
+    "providerUserId": "123456789098765432123",
+    "isSAMLUser": false
+  },
+  "device": {
+    "type": "BROWSER",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "appVersion": "5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36",
+    "cookieEnabled": true,
+    "hardwareConcurrency": 8,
+    "language": "en-GB",
+    "maxTouchPoints": 0,
+    "platform": "MacIntel",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36",
+    "vendor": "Google Inc.",
+    "webdriver": false
   }
 }
 ```
