@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+# 0.4.2 (2020-02-13)
+
 ### Added
 
 - `Files` element
