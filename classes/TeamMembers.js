@@ -2,11 +2,15 @@
 'use strict'
 
 const OneBlinkAPI = require('../lib/one-blink-api.js')
-
+const getRegionUrl = require('../lib/region')
 module.exports = class TeamMembers extends OneBlinkAPI {
   constructor(options /* : ConstructorOptions */) {
     options = options || {}
-    super(options.oneBlinkAPIOrigin, options.accessKey, options.secretKey)
+    super(
+      getRegionUrl(options.regionCode, options.oneBlinkAPIOrigin),
+      options.accessKey,
+      options.secretKey
+    )
   }
 
   async getTeamMemberRole(email /* : ?mixed */) /* : Promise<Role | null> */ {
