@@ -2,10 +2,12 @@
 
 ## Constructor
 
-| Parameter | Required | Type | Description
-|---|---|---|---|
-| `options.accessKey` | Yes | `string` | Access key provided by OneBlink. |
-| `options.secretKey` | Yes | `string` | Secret key provided by OneBlink. |
+| Parameter                   | Required | Type     | Description                                                                  |
+| --------------------------- | -------- | -------- | ---------------------------------------------------------------------------- |
+| `options.accessKey`         | Yes      | `string` | Access key provided by OneBlink.                                             |
+| `options.secretKey`         | Yes      | `string` | Secret key provided by OneBlink.                                             |
+| `options.regionCode`        | No       | `string` | Sets the default apiOrigin to the region appropriate value. Defaults to `AU` |
+| `options.oneBLinkAPIOrigin` | No       | `string` | Overrides the apiOrigin set by default or regionCode.                        |
 
 ### Example
 
@@ -25,17 +27,16 @@ const keys = new OneBlink.Keys(options)
 
 ```javascript
 const keyId = '123455678901ABCDEFGHIJKL'
-keys.getKey(keyId)
-  .then((key) => {
-    // Use key here...
-  })
+keys.getKey(keyId).then(key => {
+  // Use key here...
+})
 ```
 
 ### Parameters
 
-| Parameter | Required | Type | Description
-|---|---|---|---|
-| `keyId` | Yes | `string` | The exact id of the key you wish to get |
+| Parameter | Required | Type     | Description                             |
+| --------- | -------- | -------- | --------------------------------------- |
+| `keyId`   | Yes      | `string` | The exact id of the key you wish to get |
 
 ### Result (Resolved Promise)
 
