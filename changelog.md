@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- Added [`searchSubmissions()`](./docs/forms#searchSubmissions) function to Form class
+
 # 0.4.2 (2020-02-13)
 
 ### Added
