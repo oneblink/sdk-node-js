@@ -7,6 +7,7 @@
 - [`getForm()`](#getform)
 - [`getSubmissionData()`](#getsubmissiondata)
 - [`search()`](#search)
+- [`searchSubmissions()`](#searchSubmissions)
 
 ## Static Functions
 
@@ -317,6 +318,71 @@ forms
       "submissionEvents": [],
       "postSubmissionAction": "FORMS_LIBRARY",
       "isInfoPage": false
+    }
+  ]
+}
+```
+
+## `searchSubmissions()`
+
+Search for details on submissions that match the search parameters.
+Then use the information to fetch the actual submission data, if it is still available
+
+### Example
+
+```javascript
+const options = {
+  formId: 1,
+  submissionDateFrom: '2018-08-16T05:28:26.448Z',
+  submissionDateTo: '2019-08-16T05:28:26.448Z'
+}
+forms
+  .searchSubmissions(options)
+  .then(result => {
+    const submissionDetails = result.formSubmissionMeta
+    return Promise.all(
+      submissionDetails.map(metaData =>
+        forms.getSubmissionData(metaData.formId, metaData.submissionId)
+      )
+    )
+  })
+  .then(submissions => {
+    // something...
+  })
+  .catch(error => {
+    // Handle error here
+  })
+```
+
+### Parameters
+
+| Parameter                    | Required | Type     | Description                                     |
+| ---------------------------- | -------- | -------- | ----------------------------------------------- |
+| `options`                    | Yes      | `Object` | Search options.                                 |
+| `options.formId`             | Yes      | `number` | Search for Submissions for a particular form Id |
+| `options.submissionDateFrom` | No       | `string` | Search for Submissions starting at this date    |
+| `options.submissionDateTo`   | No       | `string` | Search for Submissions ending on this date      |
+
+### Result (Resolved Promise)
+
+```json
+{
+  "meta": {
+    "limit": 10,
+    "offset": 0,
+    "nextOffset": 10
+  },
+  "formSubmissionMeta": [
+    {
+      "submissionId": "f1eadc2b-79c8-4f97-8d92-cde64b34911f",
+      "formId": 123,
+      "formName": "name of form",
+      "dateTimeSubmitted": "2020-01-01",
+      "user": "John Smith",
+      "key": {
+        "id": "identifier",
+        "name": "key name"
+      }
     }
   ]
 }

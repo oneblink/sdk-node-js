@@ -267,10 +267,34 @@ declare type JobsSearchOptions = {
 
 declare type JobsSearchResult = {
   meta: {
-  limit: number,
-  offset: number
+    limit: number,
+    offset: number
   },
   jobs: Job[]
+}
+
+declare type FormSubmissionMetadata = {
+  submissionId: string,
+  formId: number,
+  formName: string,
+  dateTimeSubmitted: string,
+  user?: FormSubmissionMetaUserDetails,
+  key?: {
+    id: string,
+    name: string
+  }
+}
+
+declare type FormSubmissionHistorySearchResults = BaseSearchResult & {
+  formSubmissionMeta: FormSubmissionMetadata[]
+}
+
+declare type FormSubmissionHistorySearchParameters = {
+  formId: number,
+  submissionDateFrom?: string,
+  submissionDateTo?: string,
+  limit?: number,
+  offset?: number
 }
 */
 

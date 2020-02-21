@@ -176,6 +176,43 @@ module.exports = class Forms extends OneBlinkAPI {
     return super.searchRequest(`/forms`, searchParams)
   }
 
+  searchSubmissions(
+    options /* : FormSubmissionHistorySearchParameters */
+  ) /* : Promise<FormSubmissionHistorySearchResults> */ {
+    let searchParams = {}
+
+    if (typeof options.formId === 'number') {
+      searchParams = Object.assign(searchParams, {
+        formId: options.formId
+      })
+    } else {
+      throw new Error('formId must be a number and is required')
+    }
+
+    if (typeof options.submissionDateFrom === 'string') {
+      searchParams = Object.assign(searchParams, {
+        submissionDateFrom: options.submissionDateFrom
+      })
+    }
+
+    if (typeof options.submissionDateTo === 'string') {
+      searchParams = Object.assign(searchParams, {
+        submissionDateTo: options.submissionDateTo
+      })
+    }
+
+    searchParams = Object.assign(searchParams, {
+      offset:
+        typeof options.offset === 'number' ? Math.max(0, options.offset) : 0,
+      limit:
+        typeof options.limit === 'number'
+          ? Math.max(1, options.limit)
+          : undefined
+    })
+
+    return super.searchRequest(`/form-submission-meta`, searchParams)
+  }
+
   getForm(
     formId /* : ?mixed */,
     injectForms /* : ?boolean */
