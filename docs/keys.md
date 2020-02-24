@@ -6,7 +6,7 @@
 | -------------------- | -------- | -------- | ---------------------------------------------------------------------------- |
 | `options.accessKey`  | Yes      | `string` | Access key provided by OneBlink.                                             |
 | `options.secretKey`  | Yes      | `string` | Secret key provided by OneBlink.                                             |
-| `options.regionCode` | No       | `string` | Sets the default apiOrigin to the region appropriate value. Defaults to `AU` |
+| `options.regionCode` | No       | `'AU' | 'US'` | Sets the default apiOrigin to the region appropriate value. Defaults to `AU` |
 
 ### Example
 
