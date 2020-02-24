@@ -48,17 +48,6 @@ describe('Region URL selecting', () => {
       )
     })
 
-    test('should use the AU apiOrigin for the api by default', () => {
-      const forms = new Forms({
-        accessKey: '123',
-        secretKey: 'abc',
-        regionCode: null
-      })
-      return expect(forms.oneBlinkAPI.defaults.baseURL).toBe(
-        'https://auth-api.blinkm.io'
-      )
-    })
-
     test('should use the provided custom apiOrigin for the api', () => {
       const forms = new Forms({
         accessKey: '123',
