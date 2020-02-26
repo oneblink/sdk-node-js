@@ -2,11 +2,11 @@
 
 ## Constructor
 
-| Parameter            | Required | Type     | Description                                                                  |
-| -------------------- | -------- | -------- | ---------------------------------------------------------------------------- |
-| `options.accessKey`  | Yes      | `string` | Access key provided by OneBlink.                                             |
-| `options.secretKey`  | Yes      | `string` | Secret key provided by OneBlink.                                             |
-| `options.regionCode` | No       | `'AU' | 'US'` | Sets the default apiOrigin to the region appropriate value. Defaults to `AU` |
+| Parameter           | Required | Type                       | Description                                                                        |
+| ------------------- | -------- | -------------------------- | ---------------------------------------------------------------------------------- |
+| `options.accessKey` | Yes      | `string`                   | Access key provided by OneBlink.                                                   |
+| `options.secretKey` | Yes      | `string`                   | Secret key provided by OneBlink.                                                   |
+| `options.tenant`    | No       | `'ONEBLINK' | 'CIVICPLUS'` | Sets the default apiOrigin to the tenant appropriate value. Defaults to `ONEBLINK` |
 
 ### Example
 

@@ -5,22 +5,22 @@ describe('Region URL selecting', () => {
   describe('Use correct apiOrigin', () => {
     const Forms = require('../../classes/Forms.js')
 
-    test('should use the US apiOrigin for the api', () => {
+    test('should use the CIVICPLUS apiOrigin for the api', () => {
       const forms = new Forms({
         accessKey: '123',
         secretKey: 'abc',
-        regionCode: 'US'
+        tenant: 'civicplus'
       })
       return expect(forms.oneBlinkAPI.defaults.baseURL).toBe(
         'https://us-auth-api.blinkm.io'
       )
     })
 
-    test('should use the AU apiOrigin for the api', () => {
+    test('should use the ONEBLINK apiOrigin for the api', () => {
       const forms = new Forms({
         accessKey: '123',
         secretKey: 'abc',
-        regionCode: 'AU'
+        tenant: 'oneblink'
       })
       return expect(forms.oneBlinkAPI.defaults.baseURL).toBe(
         'https://auth-api.blinkm.io'
@@ -33,12 +33,12 @@ describe('Region URL selecting', () => {
           new Forms({
             accessKey: '123',
             secretKey: 'abc',
-            regionCode: 'CA'
+            tenant: 'SomeOtherCompany'
           })
       ).toThrow()
     })
 
-    test('should use the AU apiOrigin for the api by default', () => {
+    test('should use the ONEBLINK apiOrigin for the api by default', () => {
       const forms = new Forms({
         accessKey: '123',
         secretKey: 'abc'

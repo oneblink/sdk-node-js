@@ -3,14 +3,14 @@
 
 const OneBlinkAPI = require('../lib/one-blink-api.js')
 const oneBlinkAPIErrorHandler = require('../lib/one-blink-api-error-handler.js')
-const getRegionUrl = require('../lib/region')
+const getTenantUrl = require('../lib/tenant')
 const basePath = `/forms-apps`
 
 module.exports = class FormsApps extends OneBlinkAPI {
   constructor(options /* : ConstructorOptions */) {
     options = options || {}
     super(
-      getRegionUrl(options.regionCode, options.oneBlinkAPIOrigin),
+      getTenantUrl(options.tenant, options.oneBlinkAPIOrigin),
       options.accessKey,
       options.secretKey
     )
