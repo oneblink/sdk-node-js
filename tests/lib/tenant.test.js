@@ -12,7 +12,7 @@ describe('Region URL selecting', () => {
         tenant: 'civicplus'
       })
       return expect(forms.oneBlinkAPI.defaults.baseURL).toBe(
-        'https://us-auth-api.blinkm.io'
+        'https://auth-api.transform.civicplus.com'
       )
     })
 
