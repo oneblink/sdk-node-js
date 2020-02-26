@@ -30,7 +30,7 @@ module.exports = class Jobs extends OneBlinkAPI {
   constructor(options /* : ConstructorOptions */) {
     options = options || {}
     super(
-      getTenantUrl(options.tenant, options.oneBlinkAPIOrigin),
+      getTenantUrl(options.tenantName, options.oneBlinkAPIOrigin),
       options.accessKey,
       options.secretKey
     )

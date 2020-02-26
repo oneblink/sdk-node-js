@@ -6,7 +6,7 @@ declare type ConstructorOptions = {
   accessKey: mixed,
   secretKey: mixed,
   oneBlinkAPIOrigin?: mixed,
-  tenant?: string
+  tenantName?: string
 }
 
 declare type AWSCredentials = {
