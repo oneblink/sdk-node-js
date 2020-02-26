@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+# 0.4.3 (2020-02-26)
+
 ### Added
 
 - Added [`searchSubmissions()`](./docs/forms#searchSubmissions) function to Form class
