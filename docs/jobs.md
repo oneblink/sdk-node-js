@@ -16,7 +16,7 @@ const OneBlink = require('@oneblink/sdk')
 const options = {
   accessKey: '123455678901ABCDEFGHIJKL',
   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-  regionCode: `US`
+  tenant: `ONEBLINK`
 }
 const jobs = new OneBlink.Jobs(options)
 ```

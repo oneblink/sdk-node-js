@@ -28,7 +28,8 @@ const OneBlink = require('@oneblink/sdk')
 
 const options = {
   accessKey: '123455678901ABCDEFGHIJKL',
-  secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL'
+  secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+  tenant: `ONEBLINK`
 }
 const forms = new OneBlink.Forms(options)
 ```
