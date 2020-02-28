@@ -2,10 +2,11 @@
 
 ## Constructor
 
-| Parameter | Required | Type | Description
-|---|---|---|---|
-| `options.accessKey` | Yes | `string` | Access key provided by OneBlink. |
-| `options.secretKey` | Yes | `string` | Secret key provided by OneBlink. |
+| Parameter           | Required | Type                       | Description                                                                        |
+| ------------------- | -------- | -------------------------- | ---------------------------------------------------------------------------------- |
+| `options.accessKey` | Yes      | `string`                   | Access key provided by OneBlink.                                                   |
+| `options.secretKey` | Yes      | `string`                   | Secret key provided by OneBlink.                                                   |
+| `options.tenant`    | No       | `'ONEBLINK' | 'CIVICPLUS'` | Sets the default apiOrigin to the tenant appropriate value. Defaults to `ONEBLINK` |
 
 ### Example
 
@@ -14,7 +15,8 @@ const OneBlink = require('@oneblink/sdk')
 
 const options = {
   accessKey: '123455678901ABCDEFGHIJKL',
-  secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL'
+  secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+  tenant: `ONEBLINK`
 }
 const organisations = new OneBlink.Organisations(options)
 ```
@@ -25,17 +27,16 @@ const organisations = new OneBlink.Organisations(options)
 
 ```javascript
 const organisationId = 'ABCDEFGHIJKL123455678901'
-organisations.getOrganisations(organisationId)
-  .then((organisation) => {
-    // Use organisation here...
-  })
+organisations.getOrganisations(organisationId).then(organisation => {
+  // Use organisation here...
+})
 ```
 
 ### Parameters
 
-| Parameter | Required | Type | Description
-|---|---|---|---|
-| `organisationId` | Yes | `string` | The exact id of the organisation you wish to get |
+| Parameter        | Required | Type     | Description                                      |
+| ---------------- | -------- | -------- | ------------------------------------------------ |
+| `organisationId` | Yes      | `string` | The exact id of the organisation you wish to get |
 
 ### Result (Resolved Promise)
 
@@ -45,13 +46,9 @@ organisations.getOrganisations(organisationId)
   "name": "Organisation Name",
   "createdAt": "2017-09-28T05:28:43.000Z",
   "links": {
-    "awsAccounts": [
-      "ABCDEFG55678901HIJKL1234"
-    ]
+    "awsAccounts": ["ABCDEFG55678901HIJKL1234"]
   },
-  "tags": [
-    "Organisation Tag"
-  ],
+  "tags": ["Organisation Tag"],
   "formsHostname": "example.forms.oneblink.io",
   "beeFormsCustomer": false
 }

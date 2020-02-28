@@ -2,10 +2,11 @@
 
 ## Constructor
 
-| Parameter | Required | Type | Description
-|---|---|---|---|
-| `options.accessKey` | Yes | `string` | Access key provided by OneBlink. |
-| `options.secretKey` | Yes | `string` | Secret key provided by OneBlink. |
+| Parameter           | Required | Type                       | Description                                                                        |
+| ------------------- | -------- | -------------------------- | ---------------------------------------------------------------------------------- |
+| `options.accessKey` | Yes      | `string`                   | Access key provided by OneBlink.                                                   |
+| `options.secretKey` | Yes      | `string`                   | Secret key provided by OneBlink.                                                   |
+| `options.tenant`    | No       | `'ONEBLINK' | 'CIVICPLUS'` | Sets the default apiOrigin to the tenant appropriate value. Defaults to `ONEBLINK` |
 
 ### Example
 
@@ -14,7 +15,8 @@ const OneBlink = require('@oneblink/sdk')
 
 const options = {
   accessKey: '123455678901ABCDEFGHIJKL',
-  secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL'
+  secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+  tenant: `ONEBLINK`
 }
 const keys = new OneBlink.Keys(options)
 ```
@@ -25,17 +27,16 @@ const keys = new OneBlink.Keys(options)
 
 ```javascript
 const keyId = '123455678901ABCDEFGHIJKL'
-keys.getKey(keyId)
-  .then((key) => {
-    // Use key here...
-  })
+keys.getKey(keyId).then(key => {
+  // Use key here...
+})
 ```
 
 ### Parameters
 
-| Parameter | Required | Type | Description
-|---|---|---|---|
-| `keyId` | Yes | `string` | The exact id of the key you wish to get |
+| Parameter | Required | Type     | Description                             |
+| --------- | -------- | -------- | --------------------------------------- |
+| `keyId`   | Yes      | `string` | The exact id of the key you wish to get |
 
 ### Result (Resolved Promise)
 

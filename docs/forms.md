@@ -16,10 +16,11 @@
 
 ## Constructor
 
-| Parameter           | Required | Type     | Description                      |
-| ------------------- | -------- | -------- | -------------------------------- |
-| `options.accessKey` | Yes      | `string` | Access key provided by OneBlink. |
-| `options.secretKey` | Yes      | `string` | Secret key provided by OneBlink. |
+| Parameter           | Required | Type                       | Description                                                                        |
+| ------------------- | -------- | -------------------------- | ---------------------------------------------------------------------------------- |
+| `options.accessKey` | Yes      | `string`                   | Access key provided by OneBlink.                                                   |
+| `options.secretKey` | Yes      | `string`                   | Secret key provided by OneBlink.                                                   |
+| `options.tenant`    | No       | `'ONEBLINK' | 'CIVICPLUS'` | Sets the default apiOrigin to the tenant appropriate value. Defaults to `ONEBLINK` |
 
 ### Example
 
@@ -28,7 +29,8 @@ const OneBlink = require('@oneblink/sdk')
 
 const options = {
   accessKey: '123455678901ABCDEFGHIJKL',
-  secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL'
+  secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+  tenant: `ONEBLINK`
 }
 const forms = new OneBlink.Forms(options)
 ```
