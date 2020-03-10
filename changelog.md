@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- `TRIM` submission event to forms schema
+
 # 0.4.3 (2020-02-26)
 
 ### Added
