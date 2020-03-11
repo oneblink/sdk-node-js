@@ -7,7 +7,7 @@ module.exports = class Organisations extends OneBlinkAPI {
   constructor(options /* : ConstructorOptions */) {
     options = options || {}
     super(
-      getTenantUrl(options.tenantName, options.oneBlinkAPIOrigin),
+      getTenantUrl(options.tenant, options.oneBlinkAPIOrigin),
       options.accessKey,
       options.secretKey
     )

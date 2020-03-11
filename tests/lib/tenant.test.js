@@ -9,7 +9,7 @@ describe('Region URL selecting', () => {
       const forms = new Forms({
         accessKey: '123',
         secretKey: 'abc',
-        tenantName: 'civicplus'
+        tenant: 'civicplus'
       })
       return expect(forms.oneBlinkAPI.defaults.baseURL).toBe(
         'https://auth-api.transform.civicplus.com'
@@ -20,7 +20,7 @@ describe('Region URL selecting', () => {
       const forms = new Forms({
         accessKey: '123',
         secretKey: 'abc',
-        tenantName: 'oneblink'
+        tenant: 'oneblink'
       })
       return expect(forms.oneBlinkAPI.defaults.baseURL).toBe(
         'https://auth-api.blinkm.io'
@@ -33,7 +33,7 @@ describe('Region URL selecting', () => {
           new Forms({
             accessKey: '123',
             secretKey: 'abc',
-            tenantName: 'SomeOtherCompany'
+            tenant: 'SomeOtherCompany'
           })
       ).toThrow()
     })
