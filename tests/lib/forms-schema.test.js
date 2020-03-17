@@ -2616,6 +2616,45 @@ describe('SPOTTO submission event', () => {
   })
 })
 
+describe('TRIM submission event', () => {
+  test('should allow TRIM submission event', () => {
+    const { error } = Joi.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [],
+        isAuthenticated: true,
+        isPublished: true,
+        submissionEvents: [
+          {
+            type: 'TRIM',
+            configuration: {
+              url: 'https://domain.io',
+              container: '123abc',
+              username: 'user',
+              password: 'pass',
+              recordTypeUri: 1,
+              actionUri: 2,
+              locationUri: 3
+            }
+          }
+        ]
+      },
+      formSchema,
+      {
+        abortEarly: false
+      }
+    )
+    expect(error).toBeNull()
+  })
+})
+
 describe('Conditional Predicates', () => {
   test('should allow both OPTIONS and NUMERIC conditional types', () => {
     const { error } = Joi.validate(
