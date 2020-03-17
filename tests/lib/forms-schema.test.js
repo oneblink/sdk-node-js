@@ -2636,12 +2636,24 @@ describe('TRIM submission event', () => {
             type: 'TRIM',
             configuration: {
               url: 'https://domain.io',
-              container: '123abc',
+              container: {
+                uri: 4,
+                label: 'URI Label'
+              },
               username: 'user',
               password: 'pass',
-              recordTypeUri: 1,
-              actionUri: 2,
-              locationUri: 3
+              recordType: {
+                uri: 1,
+                label: 'Record Type Label'
+              },
+              actionDefinition: {
+                uri: 2,
+                label: 'Action Definition Label'
+              },
+              location: {
+                uri: 3,
+                label: 'Location Label'
+              }
             }
           }
         ]
