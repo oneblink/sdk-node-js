@@ -2637,7 +2637,7 @@ describe('TRIM submission event', () => {
             configuration: {
               url: 'https://domain.io',
               container: {
-                uri: '123abc',
+                uri: 4,
                 label: 'URI Label'
               },
               username: 'user',
