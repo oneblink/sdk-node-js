@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Removed
+
+- Regex for apiId in the form submission
+
 ### Added
 
 - `TRIM` submission event to forms schema
