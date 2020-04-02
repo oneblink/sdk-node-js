@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+# 0.4.4 (2020-04-02)
+
 ### Removed
 
 - Regex for apiId in the form submission
