@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+# 0.4.5 (2020-04-03)
+
+### Fixed
+
+- `0.4.4` being published with `--tag beta`
+
 # 0.4.4 (2020-04-02)
 
 ### Removed
