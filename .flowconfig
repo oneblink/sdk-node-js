@@ -1,6 +1,5 @@
 [ignore]
-<PROJECT_ROOT>/node_modules/config-chain/*
-<PROJECT_ROOT>/node_modules/iterall/*
+<PROJECT_ROOT>/node_modules/.*
 
 [include]
 
@@ -10,4 +9,6 @@ flow-typed
 [lints]
 
 [options]
+module.file_ext=.js
+module.file_ext=.json
 suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe
