@@ -9,4 +9,3 @@
 1.  After a successful form submission, you server will be called via the endpoint specified during form creation with a `submissionId` and `externalId`
 
 1.  Use the OneBlink `submissionId` with the [`getSubmissionData()`](./forms.md#GetSubmissionData) function to retrieve the submission data.
-

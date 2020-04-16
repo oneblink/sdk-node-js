@@ -12,23 +12,23 @@ describe('Forms SDK Class', () => {
         accessKey: string
         secretKey: string
         */
-        constructor (apiOrigin, accessKey, secretKey) {
+        constructor(apiOrigin, accessKey, secretKey) {
           this.accessKey = accessKey
           this.secretKey = secretKey
         }
 
-        getRequest (path) {
+        getRequest(path) {
           if (path === '/forms/1') {
             return Promise.resolve({
               id: 1,
               name: 'Emptiness',
-              formsAppIds: [1, 2]
+              formsAppIds: [1, 2],
             })
           } else {
             return Promise.resolve({
               id: 1,
               name: 'appname',
-              hostname: 'orgname-appname.apps.oneblink.io'
+              hostname: 'orgname-appname.apps.oneblink.io',
             })
           }
         }
@@ -38,31 +38,31 @@ describe('Forms SDK Class', () => {
     const Forms = require('../../classes/Forms.js')
     const forms = new Forms({
       accessKey: '123',
-      secretKey: 'abc'
+      secretKey: 'abc',
     })
 
     test('should reject with correct validation errors for "formId"', () => {
       return expect(forms.generateFormUrl({ formId: 'asdf' })).rejects.toThrow(
-        'Must supply "formId" as a number'
+        'Must supply "formId" as a number',
       )
     })
 
     test('should reject with correct validation errors for "externalId"', () => {
       return expect(
-        forms.generateFormUrl({ formId: 1, externalId: 1 })
+        forms.generateFormUrl({ formId: 1, externalId: 1 }),
       ).rejects.toThrow('Must supply "externalId" as a string or not at all')
     })
 
     test('should reject with correct validation errors for "formsAppId"', () => {
       return expect(
-        forms.generateFormUrl({ formId: 1, formsAppId: 'abc' })
+        forms.generateFormUrl({ formId: 1, formsAppId: 'abc' }),
       ).rejects.toThrow('Must supply "formsAppId" as a number or not at all')
     })
 
     test('should generate url and expiry with external id', async () => {
       const result = await forms.generateFormUrl({
         formId: 1,
-        externalId: 'blah blah'
+        externalId: 'blah blah',
       })
 
       expect(new Date(result.expiry)).toBeInstanceOf(Date)
@@ -100,19 +100,19 @@ describe('Forms SDK Class', () => {
     const forms = new Forms({
       accessKey: '123',
       secretKey: 'abc',
-      oneBlinkAPIOrigin: 'https://domain.api.com'
+      oneBlinkAPIOrigin: 'https://domain.api.com',
     })
 
     describe('should reject with correct validation errors for', () => {
       test('"formId"', () => {
         return expect(forms.getSubmissionData()).rejects.toThrow(
-          'Must supply "formId" as a number'
+          'Must supply "formId" as a number',
         )
       })
 
       test('"submissionId"', () => {
         return expect(forms.getSubmissionData(1)).rejects.toThrow(
-          'Must supply "submissionId" as a string'
+          'Must supply "submissionId" as a string',
         )
       })
     })
@@ -123,33 +123,33 @@ describe('Forms SDK Class', () => {
     const forms = new Forms({
       accessKey: '123',
       secretKey: 'abc',
-      oneBlinkAPIOrigin: 'https://domain.api.com'
+      oneBlinkAPIOrigin: 'https://domain.api.com',
     })
 
     describe('should reject with correct validation errors for', () => {
       test('"formId"', () => {
         return expect(forms.generateSubmissionDataUrl()).rejects.toThrow(
-          'Must supply "formId" as a number'
+          'Must supply "formId" as a number',
         )
       })
 
       test('"submissionId"', () => {
         return expect(forms.generateSubmissionDataUrl(1)).rejects.toThrow(
-          'Must supply "submissionId" as a string'
+          'Must supply "submissionId" as a string',
         )
       })
 
       test('"expiryInSeconds"', () => {
         return expect(
-          forms.generateSubmissionDataUrl(1, '123')
+          forms.generateSubmissionDataUrl(1, '123'),
         ).rejects.toThrow('Must supply "expiryInSeconds" as a number')
       })
 
       test('minimum "expiryInSeconds"', () => {
         return expect(
-          forms.generateSubmissionDataUrl(1, '123', 600)
+          forms.generateSubmissionDataUrl(1, '123', 600),
         ).rejects.toThrow(
-          '"expiryInSeconds" must be greater than or equal to 900'
+          '"expiryInSeconds" must be greater than or equal to 900',
         )
       })
     })
@@ -160,13 +160,13 @@ describe('Forms SDK Class', () => {
     const forms = new Forms({
       accessKey: '123',
       secretKey: 'abc',
-      oneBlinkAPIOrigin: 'https://domain.api.com'
+      oneBlinkAPIOrigin: 'https://domain.api.com',
     })
 
     describe('should reject with correct validation errors for', () => {
       test('"formId"', () => {
         return expect(forms.getForm('123')).rejects.toThrow(
-          'Must supply "formId" as a number'
+          'Must supply "formId" as a number',
         )
       })
     })

@@ -20,7 +20,7 @@ const OneBlink = require('@oneblink/sdk')
 const options = {
   accessKey: '123455678901ABCDEFGHIJKL',
   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-  tenant: `ONEBLINK`
+  tenant: `ONEBLINK`,
 }
 const teamMembersSDK = new OneBlink.TeamMembers(options)
 ```
@@ -31,7 +31,7 @@ const teamMembersSDK = new OneBlink.TeamMembers(options)
 
 ```javascript
 const email = 'email@domain.io'
-teamMembersSDK.getTeamMemberRole(email).then(role => {
+teamMembersSDK.getTeamMemberRole(email).then((role) => {
   if (role !== null) {
     // Use role here...
   }

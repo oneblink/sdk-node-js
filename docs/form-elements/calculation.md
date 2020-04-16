@@ -17,7 +17,7 @@ Calculate a value to display to the user. See [Calculation Documentation](https:
 
 Calculation element also inherits the properties of the following:
 
--   [Base Element](./base-element.md)
+- [Base Element](./base-element.md)
 
 ### Example
 

@@ -9,10 +9,10 @@ describe('Region URL selecting', () => {
       const forms = new Forms({
         accessKey: '123',
         secretKey: 'abc',
-        tenant: 'civicplus'
+        tenant: 'civicplus',
       })
       return expect(forms.oneBlinkAPI.defaults.baseURL).toBe(
-        'https://auth-api.transform.civicplus.com'
+        'https://auth-api.transform.civicplus.com',
       )
     })
 
@@ -20,10 +20,10 @@ describe('Region URL selecting', () => {
       const forms = new Forms({
         accessKey: '123',
         secretKey: 'abc',
-        tenant: 'oneblink'
+        tenant: 'oneblink',
       })
       return expect(forms.oneBlinkAPI.defaults.baseURL).toBe(
-        'https://auth-api.blinkm.io'
+        'https://auth-api.blinkm.io',
       )
     })
 
@@ -33,18 +33,18 @@ describe('Region URL selecting', () => {
           new Forms({
             accessKey: '123',
             secretKey: 'abc',
-            tenant: 'SomeOtherCompany'
-          })
+            tenant: 'SomeOtherCompany',
+          }),
       ).toThrow()
     })
 
     test('should use the ONEBLINK apiOrigin for the api by default', () => {
       const forms = new Forms({
         accessKey: '123',
-        secretKey: 'abc'
+        secretKey: 'abc',
       })
       return expect(forms.oneBlinkAPI.defaults.baseURL).toBe(
-        'https://auth-api.blinkm.io'
+        'https://auth-api.blinkm.io',
       )
     })
 
@@ -52,10 +52,10 @@ describe('Region URL selecting', () => {
       const forms = new Forms({
         accessKey: '123',
         secretKey: 'abc',
-        oneBlinkAPIOrigin: 'https://my-custom-url.blinkm.io'
+        oneBlinkAPIOrigin: 'https://my-custom-url.blinkm.io',
       })
       return expect(forms.oneBlinkAPI.defaults.baseURL).toBe(
-        'https://my-custom-url.blinkm.io'
+        'https://my-custom-url.blinkm.io',
       )
     })
   })

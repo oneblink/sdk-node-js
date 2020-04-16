@@ -17,8 +17,8 @@ Allow the user to scan a barcode using native camera functionality if the device
 
 Barcode Scanner element also inherits the properties of the following:
 
--   [Base Element](./base-element.md)
--   [Lookup Element](./lookup-element.md)
+- [Base Element](./base-element.md)
+- [Lookup Element](./lookup-element.md)
 
 ### Example
 

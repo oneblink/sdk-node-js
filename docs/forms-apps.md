@@ -26,7 +26,7 @@ const OneBlink = require('@oneblink/sdk')
 
 const options = {
   accessKey: '123455678901ABCDEFGHIJKL',
-  secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL'
+  secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
 }
 const formsAppsSDK = new OneBlink.FormsApps(options)
 ```
@@ -43,13 +43,13 @@ const formsApp = {
   hostname: 'customer-my.app.oneblink.io',
   pwaSettings: {
     homeScreenName: 'App',
-    splashScreenName: 'Application'
+    splashScreenName: 'Application',
   },
   organisationId: 'ABCDEFGHIJKL123456789012',
   formsAppEnvironmentId: 1,
-  formIds: []
+  formIds: [],
 }
-formsAppsSDK.createFormsApp(formsApp).then(savedFormsApp => {
+formsAppsSDK.createFormsApp(formsApp).then((savedFormsApp) => {
   // Use Forms App here...
 })
 ```
@@ -105,10 +105,10 @@ const formsAppUser = {
   formsAppId: 1,
   generatePassword: true,
   welcomeEmailParameters: {
-    company: 'Company Name'
-  }
+    company: 'Company Name',
+  },
 }
-formsAppsSDK.createUser(formsAppUser).then(savedFormsAppUser => {
+formsAppsSDK.createUser(formsAppUser).then((savedFormsAppUser) => {
   // Use Forms App User here...
 })
 ```
@@ -206,7 +206,7 @@ Get a single Forms App by its identifier
 
 ```javascript
 const formsAppId = 1
-formsAppsSDK.getFormsApp(formsAppId).then(formsApp => {
+formsAppsSDK.getFormsApp(formsAppId).then((formsApp) => {
   // Use Forms App here...
 })
 ```
@@ -253,7 +253,7 @@ Get a single Forms App for the Bearer token of a Forms App User
 
 ```javascript
 const bearerToken = ''
-formsAppsSDK.getMyFormsApp(bearerToken).then(formsApp => {
+formsAppsSDK.getMyFormsApp(bearerToken).then((formsApp) => {
   // Use Forms App here...
 })
 ```
@@ -282,15 +282,15 @@ const formsApp = {
   oAuthClientId: '123456789012abcdefghijkl',
   pwaSettings: {
     homeScreenName: 'App',
-    splashScreenName: 'Application'
+    splashScreenName: 'Application',
   },
   createdAt: '2018-06-01T00:00:00.000Z',
   updatedAt: '2019-05-17T05:49:14.000Z',
   organisationId: 'ABCDEFGHIJKL123456789012',
   formsAppEnvironmentId: 1,
-  formIds: []
+  formIds: [],
 }
-formsAppsSDK.updateFormsApp(formsApp).then(savedFormsApp => {
+formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
   // Use Forms App here...
 })
 ```
@@ -349,7 +349,7 @@ const styles = {
   highlightColour: '#0000FF',
   contrastColour: '#FFFFFF',
   customCss: '.ob-button { border-radius: 10px; }',
-  logoUrl: 'http://logo.com/path/to/image.png'
+  logoUrl: 'http://logo.com/path/to/image.png',
 }
 formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
   // Styles have been updated...

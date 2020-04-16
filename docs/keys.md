@@ -16,7 +16,7 @@ const OneBlink = require('@oneblink/sdk')
 const options = {
   accessKey: '123455678901ABCDEFGHIJKL',
   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-  tenant: `ONEBLINK`
+  tenant: `ONEBLINK`,
 }
 const keys = new OneBlink.Keys(options)
 ```
@@ -27,7 +27,7 @@ const keys = new OneBlink.Keys(options)
 
 ```javascript
 const keyId = '123455678901ABCDEFGHIJKL'
-keys.getKey(keyId).then(key => {
+keys.getKey(keyId).then((key) => {
   // Use key here...
 })
 ```

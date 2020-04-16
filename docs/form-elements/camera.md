@@ -15,7 +15,7 @@ Allow the user to take a photo using native camera functionality (or select an e
 
 Camera element also inherits the properties of the following:
 
--   [Base Element](./base-element.md)
+- [Base Element](./base-element.md)
 
 ### Example
 

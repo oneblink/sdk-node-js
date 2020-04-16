@@ -9,7 +9,7 @@ module.exports = class Keys extends OneBlinkAPI {
     super(
       getTenantUrl(options.tenant, options.oneBlinkAPIOrigin),
       options.accessKey,
-      options.secretKey
+      options.secretKey,
     )
   }
 

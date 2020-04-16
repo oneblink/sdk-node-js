@@ -14,5 +14,5 @@ module.exports = {
   Jobs,
   Keys,
   Organisations,
-  TeamMembers
+  TeamMembers,
 }

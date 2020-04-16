@@ -15,7 +15,7 @@ Display information to the user formatted using [HTML](https://developer.mozilla
 
 HTML element also inherits the properties of the following:
 
--   [Base Element](./base-element.md)
+- [Base Element](./base-element.md)
 
 ### Example
 

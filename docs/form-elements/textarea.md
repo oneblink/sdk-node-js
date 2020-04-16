@@ -17,8 +17,8 @@ Allow the user to enter a value in a multi-line text input.
 
 Textarea element also inherits the properties of the following:
 
--   [Base Element](./base-element.md)
--   [Lookup Element](./lookup-element.md)
+- [Base Element](./base-element.md)
+- [Lookup Element](./lookup-element.md)
 
 ### Example
 

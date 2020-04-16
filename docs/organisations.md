@@ -16,7 +16,7 @@ const OneBlink = require('@oneblink/sdk')
 const options = {
   accessKey: '123455678901ABCDEFGHIJKL',
   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-  tenant: `ONEBLINK`
+  tenant: `ONEBLINK`,
 }
 const organisations = new OneBlink.Organisations(options)
 ```
@@ -27,7 +27,7 @@ const organisations = new OneBlink.Organisations(options)
 
 ```javascript
 const organisationId = 'ABCDEFGHIJKL123455678901'
-organisations.getOrganisations(organisationId).then(organisation => {
+organisations.getOrganisations(organisationId).then((organisation) => {
   // Use organisation here...
 })
 ```

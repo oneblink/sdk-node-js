@@ -14,7 +14,7 @@ A form level only element to group other elements.
 
 Page element also inherits the properties of the following:
 
--   [Base Element](./base-element.md)
+- [Base Element](./base-element.md)
 
 ### Example
 

@@ -18,9 +18,9 @@ Allow the user to select a single option from a list of options displayed as [ra
 
 Radio element also inherits the properties of the following:
 
--   [Base Element](./base-element.md)
--   [Options Element](./options-element.md)
--   [Lookup Element](./lookup-element.md)
+- [Base Element](./base-element.md)
+- [Options Element](./options-element.md)
+- [Lookup Element](./lookup-element.md)
 
 ### Example
 

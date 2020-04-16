@@ -1,4 +1,3 @@
-
 // @flow
 'use strict'
 
@@ -7,7 +6,7 @@ describe('Generate Form Element', () => {
 
   test('should return a default text element based off of only a name', () => {
     const elementData = {
-      name: 'F'
+      name: 'F',
     }
     const generatedElement = Forms.generateFormElement(elementData)
     expect(typeof generatedElement.id).toBe('string')
@@ -22,7 +21,7 @@ describe('Generate Form Element', () => {
 
   test('should default label to type ONLY if no label is given', () => {
     const elementData = {
-      type: 'number'
+      type: 'number',
     }
     const generatedElement = Forms.generateFormElement(elementData)
     expect(generatedElement.type).toBe('number')
@@ -30,9 +29,11 @@ describe('Generate Form Element', () => {
 
     const elementDataWithLabel = {
       type: 'number',
-      label: 'i am a label'
+      label: 'i am a label',
     }
-    const generatedElementWithLabel = Forms.generateFormElement(elementDataWithLabel)
+    const generatedElementWithLabel = Forms.generateFormElement(
+      elementDataWithLabel,
+    )
     expect(generatedElementWithLabel.type).toBe('number')
     expect(generatedElementWithLabel.label).toBe('i am a label')
   })
@@ -40,15 +41,19 @@ describe('Generate Form Element', () => {
   test('should always set an element name', () => {
     const elementDataWithName = {
       type: 'number',
-      name: 'i am a name'
+      name: 'i am a name',
     }
-    const generatedElementWithName = Forms.generateFormElement(elementDataWithName)
+    const generatedElementWithName = Forms.generateFormElement(
+      elementDataWithName,
+    )
     expect(generatedElementWithName.name).toBe('i am a name')
 
     const elementDataWithType = {
-      type: 'number'
+      type: 'number',
     }
-    const generatedElementWithType = Forms.generateFormElement(elementDataWithType)
+    const generatedElementWithType = Forms.generateFormElement(
+      elementDataWithType,
+    )
     expect(generatedElementWithType.name).toBe('number')
 
     const elementData = {}

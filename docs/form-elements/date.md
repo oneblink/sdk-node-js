@@ -19,8 +19,8 @@ Allow the user to select a date. Submission data will be in [ISO_8601 Timestamp]
 
 Date element also inherits the properties of the following:
 
--   [Base Element](./base-element.md)
--   [Lookup Element](./lookup-element.md)
+- [Base Element](./base-element.md)
+- [Lookup Element](./lookup-element.md)
 
 ### Example
 

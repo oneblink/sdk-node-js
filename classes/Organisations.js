@@ -9,14 +9,14 @@ module.exports = class Organisations extends OneBlinkAPI {
     super(
       getTenantUrl(options.tenant, options.oneBlinkAPIOrigin),
       options.accessKey,
-      options.secretKey
+      options.secretKey,
     )
   }
 
   getOrganisation(organisationId /* : ?mixed */) /* : Promise<Organisation> */ {
     if (typeof organisationId !== 'string') {
       return Promise.reject(
-        new TypeError('Must supply "organisationId" as a string')
+        new TypeError('Must supply "organisationId" as a string'),
       )
     }
 
