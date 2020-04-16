@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Removed
+
+- `url`, `username` and `password` from `TRIM` submission event
+
 # 0.4.5 (2020-04-03)
 
 ### Fixed
