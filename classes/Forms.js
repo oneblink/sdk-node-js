@@ -15,7 +15,7 @@ module.exports = class Forms extends OneBlinkAPI {
     super(
       getTenantUrl(options.tenant, options.oneBlinkAPIOrigin),
       options.accessKey,
-      options.secretKey
+      options.secretKey,
     )
   }
 
@@ -26,7 +26,7 @@ module.exports = class Forms extends OneBlinkAPI {
       externalId?: ?mixed,
       preFillData? : ?mixed,
       expiryInSeconds?: ?mixed
-    } */
+    } */,
   ) /* : Promise<{ expiry: string, formUrl: string }> */ {
     if (typeof parameters !== 'object') {
       throw new TypeError('Parameters not provided.')
@@ -35,7 +35,7 @@ module.exports = class Forms extends OneBlinkAPI {
     const expiryInSeconds = parameters.expiryInSeconds
     if (expiryInSeconds !== undefined && typeof expiryInSeconds !== 'number') {
       throw new TypeError(
-        'Must supply "expiryInSeconds" as a number or not at all'
+        'Must supply "expiryInSeconds" as a number or not at all',
       )
     }
 
@@ -72,7 +72,7 @@ module.exports = class Forms extends OneBlinkAPI {
     let preFillFormDataId
     if (parameters.preFillData) {
       const preFillMeta = await super.postRequest(
-        `/forms/${formId}/pre-fill-credentials`
+        `/forms/${formId}/pre-fill-credentials`,
       )
       await setPreFillData(preFillMeta, parameters.preFillData)
       preFillFormDataId = preFillMeta.preFillFormDataId
@@ -88,57 +88,57 @@ module.exports = class Forms extends OneBlinkAPI {
       formId,
       token,
       externalId,
-      preFillFormDataId
+      preFillFormDataId,
     )
 
     const expiry = new Date(Date.now() + jwtExpiry * 1000).toISOString()
 
     return {
       formUrl,
-      expiry
+      expiry,
     }
   }
 
   async generateSubmissionDataUrl(
     formId /* : ?mixed */,
     submissionId /* : ?mixed */,
-    expiryInSeconds /* : ?mixed */
+    expiryInSeconds /* : ?mixed */,
   ) /* : Promise<{ url: string }> */ {
     if (typeof formId !== 'number') {
       return Promise.reject(new TypeError('Must supply "formId" as a number'))
     }
     if (typeof submissionId !== 'string') {
       return Promise.reject(
-        new TypeError('Must supply "submissionId" as a string')
+        new TypeError('Must supply "submissionId" as a string'),
       )
     }
     if (typeof expiryInSeconds !== 'number') {
       return Promise.reject(
-        new TypeError('Must supply "expiryInSeconds" as a number')
+        new TypeError('Must supply "expiryInSeconds" as a number'),
       )
     }
     if (expiryInSeconds < 900) {
       return Promise.reject(
-        new TypeError('"expiryInSeconds" must be greater than or equal to 900')
+        new TypeError('"expiryInSeconds" must be greater than or equal to 900'),
       )
     }
 
     return super.postRequest(
-      `/forms/${formId}/retrieval-url/${submissionId}?expirySeconds=${expiryInSeconds}`
+      `/forms/${formId}/retrieval-url/${submissionId}?expirySeconds=${expiryInSeconds}`,
     )
   }
 
   getSubmissionData(
     formId /* : ?mixed */,
     submissionId /* : ?mixed */,
-    isDraft /* : ?boolean */
+    isDraft /* : ?boolean */,
   ) /* : Promise<S3SubmissionData> */ {
     if (typeof formId !== 'number') {
       return Promise.reject(new TypeError('Must supply "formId" as a number'))
     }
     if (typeof submissionId !== 'string') {
       return Promise.reject(
-        new TypeError('Must supply "submissionId" as a string')
+        new TypeError('Must supply "submissionId" as a string'),
       )
     }
 
@@ -149,11 +149,11 @@ module.exports = class Forms extends OneBlinkAPI {
 
     return super
       .postRequest(url)
-      .then(credentials => submissionData.getSubmissionData(credentials))
+      .then((credentials) => submissionData.getSubmissionData(credentials))
   }
 
   search(
-    options /* : ?FormsSearchOptions */
+    options /* : ?FormsSearchOptions */,
   ) /* : Promise<FormsSearchResult> */ {
     options = options || {}
 
@@ -161,19 +161,19 @@ module.exports = class Forms extends OneBlinkAPI {
 
     if (typeof options.isAuthenticated === 'boolean') {
       searchParams = Object.assign({}, searchParams, {
-        isAuthenticated: options.isAuthenticated
+        isAuthenticated: options.isAuthenticated,
       })
     }
 
     if (typeof options.isPublished === 'boolean') {
       searchParams = Object.assign({}, searchParams, {
-        isPublished: options.isPublished
+        isPublished: options.isPublished,
       })
     }
 
     if (typeof options.name === 'string') {
       searchParams = Object.assign({}, searchParams, {
-        name: options.name
+        name: options.name,
       })
     }
 
@@ -181,13 +181,13 @@ module.exports = class Forms extends OneBlinkAPI {
   }
 
   searchSubmissions(
-    options /* : FormSubmissionHistorySearchParameters */
+    options /* : FormSubmissionHistorySearchParameters */,
   ) /* : Promise<FormSubmissionHistorySearchResults> */ {
     let searchParams = {}
 
     if (typeof options.formId === 'number') {
       searchParams = Object.assign(searchParams, {
-        formId: options.formId
+        formId: options.formId,
       })
     } else {
       throw new Error('formId must be a number and is required')
@@ -195,13 +195,13 @@ module.exports = class Forms extends OneBlinkAPI {
 
     if (typeof options.submissionDateFrom === 'string') {
       searchParams = Object.assign(searchParams, {
-        submissionDateFrom: options.submissionDateFrom
+        submissionDateFrom: options.submissionDateFrom,
       })
     }
 
     if (typeof options.submissionDateTo === 'string') {
       searchParams = Object.assign(searchParams, {
-        submissionDateTo: options.submissionDateTo
+        submissionDateTo: options.submissionDateTo,
       })
     }
 
@@ -211,7 +211,7 @@ module.exports = class Forms extends OneBlinkAPI {
       limit:
         typeof options.limit === 'number'
           ? Math.max(1, options.limit)
-          : undefined
+          : undefined,
     })
 
     return super.searchRequest(`/form-submission-meta`, searchParams)
@@ -219,14 +219,14 @@ module.exports = class Forms extends OneBlinkAPI {
 
   getForm(
     formId /* : ?mixed */,
-    injectForms /* : ?boolean */
+    injectForms /* : ?boolean */,
   ) /* : Promise<Form> */ {
     if (typeof formId !== 'number') {
       return Promise.reject(new TypeError('Must supply "formId" as a number'))
     }
 
     return super.searchRequest(`/forms/${formId}`, {
-      injectForms: injectForms || false
+      injectForms: injectForms || false,
     })
   }
 
@@ -236,7 +236,7 @@ module.exports = class Forms extends OneBlinkAPI {
   }
 
   static generateFormElement(
-    formElementGenerationData /* : mixed */
+    formElementGenerationData /* : mixed */,
   ) /* : FormElement */ {
     const formElement = generateFormElement(formElementGenerationData)
     return formElement

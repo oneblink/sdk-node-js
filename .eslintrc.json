@@ -1,18 +1,16 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:node/recommended",
-    "standard"
-  ],
+  "extends": ["eslint:recommended", "prettier"],
   "env": {
+    "commonjs": true,
     "es6": true,
     "node": true
   },
-  "plugins": [
-    "node"
-  ],
-  "rules": {
-    "space-before-function-paren": "off",
-    "quote-props": [1, "as-needed"]
+  "plugins": ["prettier"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
   }
 }

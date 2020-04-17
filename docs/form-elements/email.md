@@ -17,8 +17,8 @@ Allow the user to enter an email address in a single-line text input. Values tha
 
 Email element also inherits the properties of the following:
 
--   [Base Element](./base-element.md)
--   [Lookup Element](./lookup-element.md)
+- [Base Element](./base-element.md)
+- [Lookup Element](./lookup-element.md)
 
 ### Example
 

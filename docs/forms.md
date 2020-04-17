@@ -30,7 +30,7 @@ const OneBlink = require('@oneblink/sdk')
 const options = {
   accessKey: '123455678901ABCDEFGHIJKL',
   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-  tenant: `ONEBLINK`
+  tenant: `ONEBLINK`,
 }
 const forms = new OneBlink.Forms(options)
 ```
@@ -46,12 +46,12 @@ const parameters = {
   externalId: 'My Custom Identifier',
   preFillData: {
     FieldName1: 'A Machine',
-    FieldName2: 'Room B'
+    FieldName2: 'Room B',
   },
-  expiryInSeconds: 36800
+  expiryInSeconds: 36800,
 }
 
-forms.generateFormUrl(parameters).then(result => {
+forms.generateFormUrl(parameters).then((result) => {
   const formUrl = result.formUrl
   // Use form URL here...
 })
@@ -87,7 +87,7 @@ const submissionId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
 const expiryInSeconds = 900
 forms
   .generateSubmissionDataUrl(formId, submissionId, expiryInSeconds)
-  .then(result => {
+  .then((result) => {
     const submissionDataUrl = result.url
     // Use URL here...
   })
@@ -119,11 +119,11 @@ const submissionId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
 const isDraft = false
 forms
   .getSubmissionData(formId, submissionId, isDraft)
-  .then(result => {
+  .then((result) => {
     const definition = result.definition
     const submission = result.submission
   })
-  .catch(error => {
+  .catch((error) => {
     // Handle error here
   })
 ```
@@ -195,11 +195,11 @@ const formId = 1
 const draftDataId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
 forms
   .getDraftData(formId, draftDataId)
-  .then(result => {
+  .then((result) => {
     const definition = result.definition
     const draftData = result.submission
   })
-  .catch(error => {
+  .catch((error) => {
     // Handle error here
   })
 ```
@@ -240,7 +240,7 @@ forms
 ```javascript
 const formId = 1
 const injectForms = false
-forms.getForm(formId, injectForms).then(form => {
+forms.getForm(formId, injectForms).then((form) => {
   // Use form here...
 })
 ```
@@ -276,14 +276,14 @@ forms.getForm(formId, injectForms).then(form => {
 const options = {
   isPublished: true,
   isAuthenticated: true,
-  name: 'Form Name'
+  name: 'Form Name',
 }
 forms
   .search(options)
-  .then(result => {
+  .then((result) => {
     const forms = result.forms
   })
-  .catch(error => {
+  .catch((error) => {
     // Handle error here
   })
 ```
@@ -336,22 +336,22 @@ Then use the information to fetch the actual submission data, if it is still ava
 const options = {
   formId: 1,
   submissionDateFrom: '2018-08-16T05:28:26.448Z',
-  submissionDateTo: '2019-08-16T05:28:26.448Z'
+  submissionDateTo: '2019-08-16T05:28:26.448Z',
 }
 forms
   .searchSubmissions(options)
-  .then(result => {
+  .then((result) => {
     const submissionDetails = result.formSubmissionMeta
     return Promise.all(
-      submissionDetails.map(metaData =>
-        forms.getSubmissionData(metaData.formId, metaData.submissionId)
-      )
+      submissionDetails.map((metaData) =>
+        forms.getSubmissionData(metaData.formId, metaData.submissionId),
+      ),
     )
   })
-  .then(submissions => {
+  .then((submissions) => {
     // something...
   })
-  .catch(error => {
+  .catch((error) => {
     // Handle error here
   })
 ```
@@ -409,7 +409,7 @@ const form = {
   isPublished: true,
   submissionEvents: [],
   postSubmissionAction: 'FORMS_LIBRARY',
-  formsAppIds: [1, 2, 3]
+  formsAppIds: [1, 2, 3],
 }
 
 const validatedForm = OneBlink.Forms.validateForm(form)
@@ -479,7 +479,7 @@ The method will set reasonable defaults for any values not passed to it, and val
 
 ```javascript
 const element = {
-  name: 'my test element'
+  name: 'my test element',
 }
 
 const generatedElement = OneBlink.Forms.generateFormElement(element)

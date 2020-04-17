@@ -12,14 +12,14 @@ module.exports = class FormsApps extends OneBlinkAPI {
     super(
       getTenantUrl(options.tenant, options.oneBlinkAPIOrigin),
       options.accessKey,
-      options.secretKey
+      options.secretKey,
     )
   }
 
   async getFormsApp(formsAppId /* : ?mixed */) /* : Promise<FormsApp> */ {
     if (typeof formsAppId !== 'number') {
       return Promise.reject(
-        new TypeError('Must supply "formsAppId" as a number')
+        new TypeError('Must supply "formsAppId" as a number'),
       )
     }
 
@@ -27,21 +27,21 @@ module.exports = class FormsApps extends OneBlinkAPI {
   }
 
   async getMyFormsApp(
-    formsAppUserToken /* : ?mixed */
+    formsAppUserToken /* : ?mixed */,
   ) /* : Promise<FormsApp | null> */ {
     if (typeof formsAppUserToken !== 'string') {
       return Promise.reject(
-        new TypeError('Must supply "formsAppUserToken" as a string')
+        new TypeError('Must supply "formsAppUserToken" as a string'),
       )
     }
 
     return this.oneBlinkAPI
       .get('/my-forms-app', {
         headers: {
-          Authorization: `Bearer ${formsAppUserToken}`
-        }
+          Authorization: `Bearer ${formsAppUserToken}`,
+        },
       })
-      .then(response => response.data)
+      .then((response) => response.data)
       .catch(oneBlinkAPIErrorHandler)
   }
 
@@ -52,7 +52,7 @@ module.exports = class FormsApps extends OneBlinkAPI {
   async updateFormsApp(data /* : ?mixed */) /* : Promise<FormsApp> */ {
     if (!data || typeof data.id !== 'number') {
       return Promise.reject(
-        new TypeError('Must supply "formsApp.id" as a number')
+        new TypeError('Must supply "formsApp.id" as a number'),
       )
     }
 
@@ -62,7 +62,7 @@ module.exports = class FormsApps extends OneBlinkAPI {
   async deleteFormsApp(formsAppId /* : ?mixed */) /* : Promise<void> */ {
     if (typeof formsAppId !== 'number') {
       return Promise.reject(
-        new TypeError('Must supply "formsAppId" as a number')
+        new TypeError('Must supply "formsAppId" as a number'),
       )
     }
 
@@ -71,11 +71,11 @@ module.exports = class FormsApps extends OneBlinkAPI {
 
   async updateStyles(
     formsAppId /* : ?mixed */,
-    data /* : ?mixed */
+    data /* : ?mixed */,
   ) /* : Promise<FormsAppStyles> */ {
     if (typeof formsAppId !== 'number') {
       return Promise.reject(
-        new TypeError('Must supply "formsAppId" as a number')
+        new TypeError('Must supply "formsAppId" as a number'),
       )
     }
 
@@ -89,7 +89,7 @@ module.exports = class FormsApps extends OneBlinkAPI {
   async deleteUser(formsAppUserId /* : ?mixed */) /* : Promise<void> */ {
     if (typeof formsAppUserId !== 'number') {
       return Promise.reject(
-        new TypeError('Must supply "formsAppUserId" as a number')
+        new TypeError('Must supply "formsAppUserId" as a number'),
       )
     }
 

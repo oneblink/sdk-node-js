@@ -16,7 +16,7 @@ const OneBlink = require('@oneblink/sdk')
 const options = {
   accessKey: '123455678901ABCDEFGHIJKL',
   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-  tenant: `ONEBLINK`
+  tenant: `ONEBLINK`,
 }
 const jobs = new OneBlink.Jobs(options)
 ```
@@ -35,16 +35,16 @@ const newJob = {
     title: 'Job Title',
     description: 'Job description',
     type: 'Type',
-    priority: 3
-  }
+    priority: 3,
+  },
 }
 
 const preFillData = {
   text_element: 'abc',
-  number_element: 123
+  number_element: 123,
 }
 
-jobs.createJob(newJob, preFillData).then(job => {
+jobs.createJob(newJob, preFillData).then((job) => {
   // job.id can be used to delete the Job
 })
 ```
@@ -113,7 +113,7 @@ jobs.deleteJob(jobId).then(() => {
 ```javascript
 const results = await jobs.searchJobs({
   username: 'user@domain.io',
-  formId: 10
+  formId: 10,
 })
 
 // an array of jobs

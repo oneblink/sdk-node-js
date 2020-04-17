@@ -11,19 +11,15 @@ const newJobSchema = Joi.object()
   .required()
   .keys({
     username: Joi.string().required(),
-    formId: Joi.number()
-      .required()
-      .min(1),
+    formId: Joi.number().required().min(1),
     externalId: Joi.string(),
-    details: Joi.object()
-      .required()
-      .keys({
-        key: Joi.string(),
-        title: Joi.string().required(),
-        description: Joi.string(),
-        type: Joi.string(),
-        priority: Joi.number()
-      })
+    details: Joi.object().required().keys({
+      key: Joi.string(),
+      title: Joi.string().required(),
+      description: Joi.string(),
+      type: Joi.string(),
+      priority: Joi.number(),
+    }),
   })
 
 module.exports = class Jobs extends OneBlinkAPI {
@@ -32,13 +28,13 @@ module.exports = class Jobs extends OneBlinkAPI {
     super(
       getTenantUrl(options.tenant, options.oneBlinkAPIOrigin),
       options.accessKey,
-      options.secretKey
+      options.secretKey,
     )
   }
 
   async createJob(
     options /* : ?mixed */,
-    preFillData /* : ?mixed */
+    preFillData /* : ?mixed */,
   ) /* : Promise<Job> */ {
     await Promise.resolve()
 
@@ -51,13 +47,13 @@ module.exports = class Jobs extends OneBlinkAPI {
 
     if (preFillData) {
       const preFillMeta = await super.postRequest(
-        `/forms/${newJob.formId}/pre-fill-credentials`
+        `/forms/${newJob.formId}/pre-fill-credentials`,
       )
       await setPreFillData(preFillMeta, preFillData)
       newJob.preFillFormDataId = preFillMeta.preFillFormDataId
     }
 
-    const job = await super.postRequest/*:: <NewJob, Job> */('/jobs', newJob)
+    const job /* : Job */ = await super.postRequest('/jobs', newJob)
 
     return job
   }
@@ -70,63 +66,75 @@ module.exports = class Jobs extends OneBlinkAPI {
     return super.deleteRequest(`/jobs/${jobId}`)
   }
 
-  async searchJobs(
-    options /* : ?mixed */
-  ) /* : Promise<JobsSearchResult> */ {
+  async searchJobs(options /* : ?mixed */) /* : Promise<JobsSearchResult> */ {
     let searchOptions = {}
 
     if (options) {
       if (options.externalId) {
         if (typeof options.externalId !== 'string') {
           throw new TypeError(
-            `externalId must be provided as a string or not at all`
+            `externalId must be provided as a string or not at all`,
           )
         }
-        searchOptions = Object.assign(searchOptions, { externalId: options.externalId })
+        searchOptions = Object.assign(searchOptions, {
+          externalId: options.externalId,
+        })
       }
 
       if (options.username) {
         if (typeof options.username !== 'string') {
           throw new TypeError(
-            `username must be provided as a string or not at all`
+            `username must be provided as a string or not at all`,
           )
         }
-        searchOptions = Object.assign(searchOptions, { username: options.username })
+        searchOptions = Object.assign(searchOptions, {
+          username: options.username,
+        })
       }
 
       if (options.isSubmitted) {
         if (typeof options.isSubmitted !== 'boolean') {
           throw new TypeError(
-            `isSubmitted must be provided as a boolean or not at all`
+            `isSubmitted must be provided as a boolean or not at all`,
           )
         }
-        searchOptions = Object.assign(searchOptions, { isSubmitted: options.isSubmitted })
+        searchOptions = Object.assign(searchOptions, {
+          isSubmitted: options.isSubmitted,
+        })
       }
 
       if (options.formId) {
         if (typeof options.formId !== 'number') {
-          throw new TypeError(`formId must be provided as a number or not at all`)
+          throw new TypeError(
+            `formId must be provided as a number or not at all`,
+          )
         }
         searchOptions = Object.assign(searchOptions, { formId: options.formId })
       }
 
       if (options.limit) {
         if (typeof options.limit !== 'number') {
-          throw new TypeError(`limit must be provided as a number or not at all`)
+          throw new TypeError(
+            `limit must be provided as a number or not at all`,
+          )
         }
         searchOptions = Object.assign(searchOptions, { limit: options.limit })
       }
 
       if (options.offset) {
         if (typeof options.offset !== 'number') {
-          throw new TypeError(`offset must be provided as a number or not at all`)
+          throw new TypeError(
+            `offset must be provided as a number or not at all`,
+          )
         }
         searchOptions = Object.assign(searchOptions, { offset: options.offset })
       }
     }
 
-    const results =
-      await super.searchRequest/*:: <JobsSearchOptions, JobsSearchResult> */(`/jobs`, searchOptions)
+    const results /* : JobsSearchResult */ = await super.searchRequest(
+      `/jobs`,
+      searchOptions,
+    )
 
     return results
   }

@@ -18,9 +18,9 @@ Allow the user to select a single option or multiple options from a list of opti
 
 Select element also inherits the properties of the following:
 
--   [Base Element](./base-element.md)
--   [Options Element](./options-element.md)
--   [Lookup Element](./lookup-element.md)
+- [Base Element](./base-element.md)
+- [Options Element](./options-element.md)
+- [Lookup Element](./lookup-element.md)
 
 ### Example
 

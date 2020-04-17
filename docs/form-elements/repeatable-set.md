@@ -20,7 +20,7 @@ Allow the user add multiple entries of a set of elements.
 
 Repeatable Set element also inherits the properties of the following:
 
--   [Base Element](./base-element.md)
+- [Base Element](./base-element.md)
 
 ### Example
 

@@ -9,7 +9,7 @@ module.exports = class TeamMembers extends OneBlinkAPI {
     super(
       getTenantUrl(options.tenant, options.oneBlinkAPIOrigin),
       options.accessKey,
-      options.secretKey
+      options.secretKey,
     )
   }
 
@@ -19,7 +19,7 @@ module.exports = class TeamMembers extends OneBlinkAPI {
     }
 
     const { permissions } = await super.searchRequest('/permissions', {
-      email
+      email,
     })
     if (
       !permissions[0] ||

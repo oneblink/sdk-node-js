@@ -14,7 +14,7 @@ Force the user to prove they are not a robot.
 
 Captcha element also inherits the properties of the following:
 
--   [Base Element](./base-element.md)
+- [Base Element](./base-element.md)
 
 ### Example
 

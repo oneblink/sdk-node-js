@@ -14,8 +14,8 @@ Allow the user to select GPS coordinates on an interactive map.
 
 Location element also inherits the properties of the following:
 
--   [Base Element](./base-element.md)
--   [Lookup Element](./lookup-element.md)
+- [Base Element](./base-element.md)
+- [Lookup Element](./lookup-element.md)
 
 ### Example
 

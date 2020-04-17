@@ -3,7 +3,7 @@
 
 const constructorOptions = {
   accessKey: '123',
-  secretKey: 'abc'
+  secretKey: 'abc',
 }
 
 describe('Jobs SDK Class', () => {
@@ -19,14 +19,14 @@ describe('Jobs SDK Class', () => {
       describe('should reject with correct validation errors for "username"', () => {
         test('required', () => {
           return expect(jobs.createJob({})).rejects.toThrow(
-            '"username" is required'
+            '"username" is required',
           )
         })
         test('string', () => {
           return expect(
             jobs.createJob({
-              username: 123
-            })
+              username: 123,
+            }),
           ).rejects.toThrow('"username" must be a string')
         })
       })
@@ -35,16 +35,16 @@ describe('Jobs SDK Class', () => {
         test('required', () => {
           return expect(
             jobs.createJob({
-              username: 'username'
-            })
+              username: 'username',
+            }),
           ).rejects.toThrow('"formId" is required')
         })
         test('string', () => {
           return expect(
             jobs.createJob({
               username: 'username',
-              formId: 'abc'
-            })
+              formId: 'abc',
+            }),
           ).rejects.toThrow('"formId" must be a number')
         })
       })
@@ -55,8 +55,8 @@ describe('Jobs SDK Class', () => {
             jobs.createJob({
               username: 'username',
               formId: 1,
-              externalId: 123
-            })
+              externalId: 123,
+            }),
           ).rejects.toThrow('"externalId" must be a string')
         })
       })
@@ -69,9 +69,9 @@ describe('Jobs SDK Class', () => {
               formId: 1,
               details: {
                 title: 'job title',
-                priority: 'one'
-              }
-            })
+                priority: 'one',
+              },
+            }),
           ).rejects.toThrow('"priority" must be a number')
         })
       })
@@ -96,7 +96,7 @@ describe('Jobs SDK Class', () => {
               postRequest() {
                 return mockPostRequest()
               }
-            }
+            },
         )
 
         const Jobs = require('../../classes/Jobs.js')
@@ -105,8 +105,8 @@ describe('Jobs SDK Class', () => {
           username: 'username',
           formId: 1,
           details: {
-            title: 'A title'
-          }
+            title: 'A title',
+          },
         })
 
         expect(mockPostRequest).toBeCalledTimes(1)
@@ -123,7 +123,7 @@ describe('Jobs SDK Class', () => {
               postRequest() {
                 return mockPostRequest()
               }
-            }
+            },
         )
         const mockSetPreFillData = jest
           .fn()
@@ -136,12 +136,12 @@ describe('Jobs SDK Class', () => {
           username: 'username',
           formId: 1,
           details: {
-            title: 'A title'
-          }
+            title: 'A title',
+          },
         }
         const preFillData = {
           text_element: 'abc',
-          number_element: 123
+          number_element: 123,
         }
         await jobs.createJob(options, preFillData)
 
@@ -157,7 +157,7 @@ describe('Jobs SDK Class', () => {
 
     test('should reject with correct validation errors for "jobId"', () => {
       return expect(jobs.deleteJob()).rejects.toThrow(
-        'Must supply "jobId" as a string'
+        'Must supply "jobId" as a string',
       )
     })
   })
@@ -173,37 +173,37 @@ describe('Jobs SDK Class', () => {
     const jobs = new Jobs(constructorOptions)
     test('should reject form id', () => {
       return expect(jobs.searchJobs({ formId: 'ten' })).rejects.toThrow(
-        'formId must be provided as a number or not at all'
+        'formId must be provided as a number or not at all',
       )
     })
 
     test('should reject externalId', () => {
       return expect(jobs.searchJobs({ externalId: 12345 })).rejects.toThrow(
-        'externalId must be provided as a string or not at all'
+        'externalId must be provided as a string or not at all',
       )
     })
 
     test('should reject username', () => {
       return expect(jobs.searchJobs({ username: 12345 })).rejects.toThrow(
-        'username must be provided as a string or not at all'
+        'username must be provided as a string or not at all',
       )
     })
 
     test('should reject isSubmitted', () => {
       return expect(jobs.searchJobs({ isSubmitted: 'maybe?' })).rejects.toThrow(
-        'isSubmitted must be provided as a boolean or not at all'
+        'isSubmitted must be provided as a boolean or not at all',
       )
     })
 
     test('should reject limit', () => {
       return expect(jobs.searchJobs({ limit: 'infinite' })).rejects.toThrow(
-        'limit must be provided as a number or not at all'
+        'limit must be provided as a number or not at all',
       )
     })
 
     test('should reject offset', () => {
       return expect(
-        jobs.searchJobs({ offset: 'a little bit' })
+        jobs.searchJobs({ offset: 'a little bit' }),
       ).rejects.toThrow('offset must be provided as a number or not at all')
     })
 
@@ -218,7 +218,7 @@ describe('Jobs SDK Class', () => {
             searchRequest() {
               return mockSearchRequest()
             }
-          }
+          },
       )
 
       const Jobs = require('../../classes/Jobs.js')
@@ -230,7 +230,7 @@ describe('Jobs SDK Class', () => {
         username: 'user@domain.io',
         isSubmitted: false,
         offset: 1,
-        limit: 100
+        limit: 100,
       })
 
       return expect(mockSearchRequest).toHaveBeenCalledTimes(1)

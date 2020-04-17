@@ -21,9 +21,9 @@ describe('Valid Form Schema with Pages', () => {
           type: 'CALLBACK',
           configuration: {
             url: 'https://domain.io/path',
-            secret: 'abc123'
-          }
-        }
+            secret: 'abc123',
+          },
+        },
       ],
       elements: [
         {
@@ -37,21 +37,21 @@ describe('Valid Form Schema with Pages', () => {
               label: 'Large Heading',
               type: 'heading',
               required: false,
-              headingType: 1
+              headingType: 1,
             },
             {
               id: 'b1a24856-f3a9-4e2e-8ce4-70e92cfe99f0',
               name: 'Location',
               label: 'Where Was It?',
               type: 'location',
-              required: false
+              required: false,
             },
             {
               id: 'c3b61176-4332-4731-9643-191e5e204767',
               name: 'signature',
               label: 'Signature',
               type: 'draw',
-              required: false
+              required: false,
             },
             {
               id: '4527e000-e5b0-4f4f-9007-7fbfeba7042f',
@@ -59,7 +59,7 @@ describe('Valid Form Schema with Pages', () => {
               label: 'Medium Heading',
               type: 'heading',
               required: false,
-              headingType: 3
+              headingType: 3,
             },
             {
               id: '9014e80c-3c68-4adb-a333-1be04ebc95ee',
@@ -73,19 +73,19 @@ describe('Valid Form Schema with Pages', () => {
                 {
                   id: '8be1f1dd-ec3f-4537-bb70-f0f1c7c31b26',
                   value: 'ONEvalue',
-                  label: 'One'
+                  label: 'One',
                 },
                 {
                   id: '0729643a-5ffe-416d-8d4b-337e73e96714',
                   value: 'twovalue',
-                  label: 'Two'
+                  label: 'Two',
                 },
                 {
                   id: 'ada69988-a8b5-4a5e-84be-e998ea27287a',
                   value: 'threevalue',
-                  label: 'Three'
-                }
-              ]
+                  label: 'Three',
+                },
+              ],
             },
             {
               id: '01c69734-2543-4cc5-a3ef-d12de468475a',
@@ -93,7 +93,7 @@ describe('Valid Form Schema with Pages', () => {
               label: 'Text Areass',
               type: 'textarea',
               required: false,
-              defaultValue: 'Multi line text'
+              defaultValue: 'Multi line text',
             },
             {
               id: '24de3c4f-3f7a-4296-8d9a-35cfbac7300d',
@@ -101,14 +101,14 @@ describe('Valid Form Schema with Pages', () => {
               label: 'Date',
               type: 'date',
               required: false,
-              defaultValue: '2018-08-16T00:00:00.000Z'
+              defaultValue: '2018-08-16T00:00:00.000Z',
             },
             {
               id: 'b30792a6-1074-45fe-b599-2dd76ad3addc',
               name: 'Camer',
               label: 'Camer',
               type: 'camera',
-              required: false
+              required: false,
             },
             {
               id: 'dc070d4b-2577-4c49-b682-dafa482b334a',
@@ -119,25 +119,25 @@ describe('Valid Form Schema with Pages', () => {
               buttons: false,
               defaultValue: [
                 '25ec5754-0d9a-4783-82d4-fd6ecce35d2f',
-                '14988191-a741-4a1f-984c-62ca86729808'
+                '14988191-a741-4a1f-984c-62ca86729808',
               ],
               options: [
                 {
                   id: '25ec5754-0d9a-4783-82d4-fd6ecce35d2f',
                   value: 'ONEvalue',
-                  label: 'One'
+                  label: 'One',
                 },
                 {
                   id: '14988191-a741-4a1f-984c-62ca86729808',
                   value: 'twovalue',
-                  label: 'Two'
+                  label: 'Two',
                 },
                 {
                   id: '869a3234-53c3-4dfe-95af-7b6d449fbc2d',
                   value: 'threevalue',
-                  label: 'Three'
-                }
-              ]
+                  label: 'Three',
+                },
+              ],
             },
             {
               id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
@@ -145,7 +145,7 @@ describe('Valid Form Schema with Pages', () => {
               label: 'Date and Time',
               type: 'datetime',
               required: false,
-              defaultValue: '2018-08-16T05:28:26.448Z'
+              defaultValue: '2018-08-16T05:28:26.448Z',
             },
             {
               id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18ba',
@@ -154,7 +154,7 @@ describe('Valid Form Schema with Pages', () => {
               type: 'number',
               required: false,
               isSlider: false,
-              defaultValue: 3
+              defaultValue: 3,
             },
             {
               id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
@@ -165,7 +165,7 @@ describe('Valid Form Schema with Pages', () => {
               minNumber: 1,
               maxNumber: 6,
               isSlider: true,
-              defaultValue: 3
+              defaultValue: 3,
             },
             {
               id: '811710b0-bc78-11e8-9131-a774f238a892',
@@ -177,13 +177,13 @@ describe('Valid Form Schema with Pages', () => {
               attributesMapping: [
                 {
                   attribute: 'State',
-                  elementId: 'fd9c80d5-d56d-4e8d-ab8e-e70c531c77c2'
+                  elementId: 'fd9c80d5-d56d-4e8d-ab8e-e70c531c77c2',
                 },
                 {
                   attribute: 'Country',
-                  elementId: 'cc6daf4c-fa10-44e4-8d51-4f56febc9ab0'
-                }
-              ]
+                  elementId: 'cc6daf4c-fa10-44e4-8d51-4f56febc9ab0',
+                },
+              ],
             },
             {
               id: '8e4d819b-97fa-438d-b613-a092d38c3b27',
@@ -197,19 +197,19 @@ describe('Valid Form Schema with Pages', () => {
                 {
                   id: '9e50b6e5-52b7-48ab-ab86-542ccba82205',
                   value: 'ONE',
-                  label: 'one'
+                  label: 'one',
                 },
                 {
                   id: '5c82ef40-779a-46fb-8860-c9b4969518ec',
                   value: 'TWO',
-                  label: 'two'
+                  label: 'two',
                 },
                 {
                   id: '55568d62-6ac5-4504-a88d-e2311a026776',
                   value: 'THREE',
-                  label: 'three'
-                }
-              ]
+                  label: 'three',
+                },
+              ],
             },
             {
               id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
@@ -220,30 +220,30 @@ describe('Valid Form Schema with Pages', () => {
               multi: true,
               defaultValue: [
                 '9e50b6e5-52b7-48ab-ab86-542ccba82205',
-                '5c82ef40-779a-46fb-8860-c9b4969518ec'
+                '5c82ef40-779a-46fb-8860-c9b4969518ec',
               ],
               optionsType: 'CUSTOM',
               conditionallyShowOptions: true,
               conditionallyShowOptionsElementIds: [
-                'dc070d4b-2577-4c49-b682-dafa482b334a'
+                'dc070d4b-2577-4c49-b682-dafa482b334a',
               ],
               options: [
                 {
                   attributes: [
                     {
                       elementId: 'dc070d4b-2577-4c49-b682-dafa482b334a',
-                      optionIds: ['33633fe8-10a8-478b-a24b-49c029c4292c']
+                      optionIds: ['33633fe8-10a8-478b-a24b-49c029c4292c'],
                     },
                     {
                       elementId: 'dc070d4b-2577-4c49-b682-dafa482b334a',
-                      optionIds: ['7e7dd403-baad-4a63-8482-8b0f9dc6c4e7']
-                    }
+                      optionIds: ['7e7dd403-baad-4a63-8482-8b0f9dc6c4e7'],
+                    },
                   ],
                   id: 'fa0f2864-d812-4610-a6e7-a48666ef5c2f',
                   label: '123 Fake Street',
-                  value: '123 Fake Street'
-                }
-              ]
+                  value: '123 Fake Street',
+                },
+              ],
             },
             {
               id: '59b723a9-00e2-493f-8d76-84ea71a178ee',
@@ -257,13 +257,13 @@ describe('Valid Form Schema with Pages', () => {
               conditionallyShowPredicates: [
                 {
                   elementId: '8e4d819b-97fa-438d-b613-a092d38c3b23',
-                  optionIds: ['9e50b6e5-52b7-48ab-ab86-542ccba82205']
+                  optionIds: ['9e50b6e5-52b7-48ab-ab86-542ccba82205'],
                 },
                 {
                   elementId: '8e4d819b-97fa-438d-b613-a092d38c3b27',
-                  optionIds: ['5c82ef40-779a-46fb-8860-c9b4969518ec']
-                }
-              ]
+                  optionIds: ['5c82ef40-779a-46fb-8860-c9b4969518ec'],
+                },
+              ],
             },
             {
               id: '67dd8946-89dd-43b6-9b04-aca333a12c29',
@@ -271,7 +271,7 @@ describe('Valid Form Schema with Pages', () => {
               label: 'Test on multi lines',
               type: 'textarea',
               required: false,
-              defaultValue: 'multi line text'
+              defaultValue: 'multi line text',
             },
             {
               id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
@@ -279,14 +279,14 @@ describe('Valid Form Schema with Pages', () => {
               label: 'What was the time',
               type: 'time',
               required: false,
-              defaultValue: '1970-01-01T05:28:26.448Z'
+              defaultValue: '1970-01-01T05:28:26.448Z',
             },
             {
               id: '2424f4ea-35a0-47ee-9c22-ef8e16cb5103',
               name: 'More_Information',
               label: 'More Information',
               type: 'html',
-              defaultValue: '<p><b>bold text here<b></p>'
+              defaultValue: '<p><b>bold text here<b></p>',
             },
             {
               id: '2424f4ea-35a0-47ee-9c22-ef8e16cb9999',
@@ -294,7 +294,7 @@ describe('Valid Form Schema with Pages', () => {
               label: 'calculations',
               type: 'calculation',
               calculation: '(69*69)+58008',
-              defaultValue: '<p><b>{result}<b></p>'
+              defaultValue: '<p><b>{result}<b></p>',
             },
             {
               id: '2424f4ea-35a0-47ee-9c22-ef8e16cb7103',
@@ -302,7 +302,7 @@ describe('Valid Form Schema with Pages', () => {
               label: 'Please Scan Barcode of Box',
               type: 'barcodeScanner',
               required: false,
-              defaultValue: '123ABC098ZYX'
+              defaultValue: '123ABC098ZYX',
             },
             {
               id: 'bb1b3d16-f3e1-4833-a273-19ea18e00582',
@@ -320,16 +320,16 @@ describe('Valid Form Schema with Pages', () => {
                   label: 'What was the time',
                   type: 'time',
                   required: false,
-                  defaultValue: '1970-01-01T05:28:26.448Z'
-                }
-              ]
+                  defaultValue: '1970-01-01T05:28:26.448Z',
+                },
+              ],
             },
             {
               id: 'a5289278-5cb4-4103-90b6-f67dde84dee7',
               name: 'email',
               label: 'email',
               type: 'email',
-              defaultValue: 'developers@oneblink.io'
+              defaultValue: 'developers@oneblink.io',
             },
             {
               id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
@@ -337,13 +337,13 @@ describe('Valid Form Schema with Pages', () => {
               label: 'My Cat',
               type: 'image',
               defaultValue:
-                'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg'
+                'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg',
             },
             {
               id: '8788a2ea-a108-4362-bc37-4bf1f9d64b97',
               name: 'file',
               label: 'file',
-              type: 'file'
+              type: 'file',
             },
             {
               id: 'b527bcea-dc84-477f-a5ee-d34abfec92fa',
@@ -351,13 +351,13 @@ describe('Valid Form Schema with Pages', () => {
               label: 'files',
               type: 'files',
               minEntries: 1,
-              maxEntries: 2
+              maxEntries: 2,
             },
             {
               id: 'b527bcea-dc84-477f-a5ee-d34abfec92fb',
               name: 'telephone',
               label: 'telephone',
-              type: 'telephone'
+              type: 'telephone',
             },
             {
               id: '042508a4-4a8d-4684-9fd3-640a5018697d',
@@ -368,31 +368,31 @@ describe('Valid Form Schema with Pages', () => {
                 {
                   id: '9e50b6e5-52b7-48ab-ab86-542ccba82205',
                   value: 'ONE',
-                  label: 'one'
+                  label: 'one',
                 },
                 {
                   id: '5c82ef40-779a-46fb-8860-c9b4969518ec',
                   value: 'TWO',
-                  label: 'two'
+                  label: 'two',
                 },
                 {
                   id: '55568d62-6ac5-4504-a88d-e2311a026776',
                   value: 'THREE',
-                  label: 'three'
-                }
-              ]
+                  label: 'three',
+                },
+              ],
             },
             {
               id: 'b8a635eb-d28c-4f18-b400-5e2b458e76e9',
               type: 'form',
               name: 'form',
-              formId: 1
+              formId: 1,
             },
             {
               id: '1495d816-e2b5-4b99-b378-fa7cd46e034c',
               type: 'infoPage',
               name: 'infoPage',
-              formId: 2
+              formId: 2,
             },
             {
               id: '042508a4-4a8d-4684-9fd3-640a5018697e',
@@ -400,7 +400,7 @@ describe('Valid Form Schema with Pages', () => {
               label: 'Data Lookup text',
               type: 'text',
               isDataLookup: true,
-              dataLookupId: 1
+              dataLookupId: 1,
             },
             {
               id: '93624277-22cb-46f2-88f0-035b9837e09d',
@@ -408,7 +408,7 @@ describe('Valid Form Schema with Pages', () => {
               label: 'Element Lookup text',
               type: 'text',
               isElementLookup: true,
-              elementLookupId: 2
+              elementLookupId: 2,
             },
             {
               id: 'f138d54f-c30f-49d8-9d2c-a8191643a887',
@@ -418,13 +418,13 @@ describe('Valid Form Schema with Pages', () => {
               isElementLookup: true,
               elementLookupId: 2,
               isDataLookup: true,
-              dataLookupId: 1
-            }
-          ]
-        }
-      ]
+              dataLookupId: 1,
+            },
+          ],
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   test('should not return an error', () => {
@@ -432,7 +432,7 @@ describe('Valid Form Schema with Pages', () => {
   })
 
   test('should default "readOnly" to "false" for all elements', () => {
-    result.value.elements[0].elements.forEach(element => {
+    result.value.elements[0].elements.forEach((element) => {
       if (element.type === 'form' || element.type === 'infoPage') {
         expect(element.readOnly).toBeUndefined()
       } else {
@@ -457,9 +457,9 @@ describe('Valid Form Schema', () => {
           type: 'CALLBACK',
           configuration: {
             url: 'https://domain.io/path',
-            secret: 'abc123'
-          }
-        }
+            secret: 'abc123',
+          },
+        },
       ],
       elements: [
         {
@@ -468,21 +468,21 @@ describe('Valid Form Schema', () => {
           label: 'Large Heading',
           type: 'heading',
           required: false,
-          headingType: 1
+          headingType: 1,
         },
         {
           id: 'b1a24856-f3a9-4e2e-8ce4-70e92cfe99f0',
           name: 'Location',
           label: 'Where Was It?',
           type: 'location',
-          required: false
+          required: false,
         },
         {
           id: 'c3b61176-4332-4731-9643-191e5e204767',
           name: 'signature',
           label: 'Signature',
           type: 'draw',
-          required: false
+          required: false,
         },
         {
           id: '4527e000-e5b0-4f4f-9007-7fbfeba7042f',
@@ -490,7 +490,7 @@ describe('Valid Form Schema', () => {
           label: 'Medium Heading',
           type: 'heading',
           required: false,
-          headingType: 3
+          headingType: 3,
         },
         {
           id: '9014e80c-3c68-4adb-a333-1be04ebc95ee',
@@ -504,19 +504,19 @@ describe('Valid Form Schema', () => {
             {
               id: '8be1f1dd-ec3f-4537-bb70-f0f1c7c31b26',
               value: 'ONEvalue',
-              label: 'One'
+              label: 'One',
             },
             {
               id: '0729643a-5ffe-416d-8d4b-337e73e96714',
               value: 'twovalue',
-              label: 'Two'
+              label: 'Two',
             },
             {
               id: 'ada69988-a8b5-4a5e-84be-e998ea27287a',
               value: 'threevalue',
-              label: 'Three'
-            }
-          ]
+              label: 'Three',
+            },
+          ],
         },
         {
           id: '01c69734-2543-4cc5-a3ef-d12de468475a',
@@ -524,7 +524,7 @@ describe('Valid Form Schema', () => {
           label: 'Text Areass',
           type: 'textarea',
           required: false,
-          defaultValue: 'Multi line text'
+          defaultValue: 'Multi line text',
         },
         {
           id: '24de3c4f-3f7a-4296-8d9a-35cfbac7300d',
@@ -532,14 +532,14 @@ describe('Valid Form Schema', () => {
           label: 'Date',
           type: 'date',
           required: false,
-          defaultValue: '2018-08-16T00:00:00.000Z'
+          defaultValue: '2018-08-16T00:00:00.000Z',
         },
         {
           id: 'b30792a6-1074-45fe-b599-2dd76ad3addc',
           name: 'Camer',
           label: 'Camer',
           type: 'camera',
-          required: false
+          required: false,
         },
         {
           id: 'dc070d4b-2577-4c49-b682-dafa482b334a',
@@ -550,25 +550,25 @@ describe('Valid Form Schema', () => {
           buttons: false,
           defaultValue: [
             '25ec5754-0d9a-4783-82d4-fd6ecce35d2f',
-            '14988191-a741-4a1f-984c-62ca86729808'
+            '14988191-a741-4a1f-984c-62ca86729808',
           ],
           options: [
             {
               id: '25ec5754-0d9a-4783-82d4-fd6ecce35d2f',
               value: 'ONEvalue',
-              label: 'One'
+              label: 'One',
             },
             {
               id: '14988191-a741-4a1f-984c-62ca86729808',
               value: 'twovalue',
-              label: 'Two'
+              label: 'Two',
             },
             {
               id: '869a3234-53c3-4dfe-95af-7b6d449fbc2d',
               value: 'threevalue',
-              label: 'Three'
-            }
-          ]
+              label: 'Three',
+            },
+          ],
         },
         {
           id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
@@ -576,7 +576,7 @@ describe('Valid Form Schema', () => {
           label: 'Date and Time',
           type: 'datetime',
           required: false,
-          defaultValue: '2018-08-16T05:28:26.448Z'
+          defaultValue: '2018-08-16T05:28:26.448Z',
         },
         {
           id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18ba',
@@ -586,7 +586,7 @@ describe('Valid Form Schema', () => {
           required: false,
           minNumber: 1,
           maxNumber: 6,
-          defaultValue: 3
+          defaultValue: 3,
         },
         {
           id: '8e4d819b-97fa-438d-b613-a092d38c3b27',
@@ -600,19 +600,19 @@ describe('Valid Form Schema', () => {
             {
               id: '9e50b6e5-52b7-48ab-ab86-542ccba82205',
               value: 'ONE',
-              label: 'one'
+              label: 'one',
             },
             {
               id: '5c82ef40-779a-46fb-8860-c9b4969518ec',
               value: 'TWO',
-              label: 'two'
+              label: 'two',
             },
             {
               id: '55568d62-6ac5-4504-a88d-e2311a026776',
               value: 'THREE',
-              label: 'three'
-            }
-          ]
+              label: 'three',
+            },
+          ],
         },
         {
           id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
@@ -623,25 +623,25 @@ describe('Valid Form Schema', () => {
           multi: true,
           defaultValue: [
             '9e50b6e5-52b7-48ab-ab86-542ccba82205',
-            '5c82ef40-779a-46fb-8860-c9b4969518ec'
+            '5c82ef40-779a-46fb-8860-c9b4969518ec',
           ],
           options: [
             {
               id: '9e50b6e5-52b7-48ab-ab86-542ccba82205',
               value: 'ONE',
-              label: 'one'
+              label: 'one',
             },
             {
               id: '5c82ef40-779a-46fb-8860-c9b4969518ec',
               value: 'TWO',
-              label: 'two'
+              label: 'two',
             },
             {
               id: '55568d62-6ac5-4504-a88d-e2311a026776',
               value: 'THREE',
-              label: 'three'
-            }
-          ]
+              label: 'three',
+            },
+          ],
         },
         {
           id: '59b723a9-00e2-493f-8d76-84ea71a178ee',
@@ -649,7 +649,7 @@ describe('Valid Form Schema', () => {
           label: 'Just Text',
           type: 'text',
           required: false,
-          defaultValue: 'single line text'
+          defaultValue: 'single line text',
         },
         {
           id: '67dd8946-89dd-43b6-9b04-aca333a12c29',
@@ -657,7 +657,7 @@ describe('Valid Form Schema', () => {
           label: 'Test on multi lines',
           type: 'textarea',
           required: false,
-          defaultValue: 'multi line text'
+          defaultValue: 'multi line text',
         },
         {
           id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
@@ -665,7 +665,7 @@ describe('Valid Form Schema', () => {
           label: 'What was the time',
           type: 'time',
           required: false,
-          defaultValue: '1970-01-01T05:28:26.448Z'
+          defaultValue: '1970-01-01T05:28:26.448Z',
         },
         {
           id: 'bb1b3d16-f3e1-4833-a273-19ea18e00582',
@@ -681,15 +681,15 @@ describe('Valid Form Schema', () => {
               label: 'What was the time',
               type: 'time',
               required: false,
-              defaultValue: '1970-01-01T05:28:26.448Z'
-            }
-          ]
+              defaultValue: '1970-01-01T05:28:26.448Z',
+            },
+          ],
         },
         {
           id: 'f9efc411-72ff-47ac-874f-8209c0e20f83',
           name: 'A_Captcha',
           label: 'A Captcha',
-          type: 'captcha'
+          type: 'captcha',
         },
         {
           id: '9014e80c-3c68-4adb-a334-1be04ebc95ee',
@@ -700,7 +700,7 @@ describe('Valid Form Schema', () => {
           buttons: false,
           defaultValue: 'defaultOptionValue',
           optionsType: 'DYNAMIC',
-          dynamicOptionSetId: 1
+          dynamicOptionSetId: 1,
         },
         {
           id: '9014e80c-3c68-4adb-a335-1be04ebc95ee',
@@ -711,7 +711,7 @@ describe('Valid Form Schema', () => {
           buttons: false,
           defaultValue: ['defaultOptionValue'],
           optionsType: 'DYNAMIC',
-          dynamicOptionSetId: 1
+          dynamicOptionSetId: 1,
         },
         {
           id: '9014e80c-3c68-4adb-a336-1be04ebc95ee',
@@ -721,7 +721,7 @@ describe('Valid Form Schema', () => {
           required: false,
           defaultValue: 'defaultOptionValue',
           optionsType: 'DYNAMIC',
-          dynamicOptionSetId: 1
+          dynamicOptionSetId: 1,
         },
         {
           id: '9014e80c-3c68-4adb-a337-1be04ebc95ee',
@@ -732,11 +732,11 @@ describe('Valid Form Schema', () => {
           multi: true,
           defaultValue: ['defaultOptionValue'],
           optionsType: 'DYNAMIC',
-          dynamicOptionSetId: 1
-        }
-      ]
+          dynamicOptionSetId: 1,
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   test('should not return an error', () => {
@@ -744,7 +744,7 @@ describe('Valid Form Schema', () => {
   })
 
   test('should default "readOnly" to "false" for all elements', () => {
-    result.value.elements.forEach(element => {
+    result.value.elements.forEach((element) => {
       expect(element.readOnly).toBe(false)
     })
   })
@@ -771,23 +771,23 @@ test('should set default for radio "buttons" property', () => {
             {
               id: '21ded718-710d-4dca-9f76-ccfc2f855b06',
               value: 'ONEvalue',
-              label: 'One'
+              label: 'One',
             },
             {
               id: '3ad5e5a3-52c6-40ed-a0bd-d7a9125f8439',
               value: 'twovalue',
-              label: 'Two'
+              label: 'Two',
             },
             {
               id: '81ec04d4-367d-44db-8eb0-9f9175fe791c',
               value: 'threevalue',
-              label: 'Three'
-            }
-          ]
-        }
-      ]
+              label: 'Three',
+            },
+          ],
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error).toBe(null)
@@ -815,27 +815,27 @@ test('should error if "buttons" is not a boolean', () => {
             {
               id: '35049223-dde2-405c-970a-5c2961a85504',
               value: 'ONEvalue',
-              label: 'One'
+              label: 'One',
             },
             {
               id: 'bc918f6b-0258-4472-b12d-e5ae05d232b4',
               value: 'twovalue',
-              label: 'Two'
+              label: 'Two',
             },
             {
               id: '18713e3c-e541-4bcf-8b73-f724fdb501c0',
               value: 'threevalue',
-              label: 'Three'
-            }
-          ]
-        }
-      ]
+              label: 'Three',
+            },
+          ],
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error.message).toContain(
-    '"Form Element - Radio Buttons as Buttons" must be a boolean'
+    '"Form Element - Radio Buttons as Buttons" must be a boolean',
   )
 })
 
@@ -853,11 +853,11 @@ test('should error if element "id" is not supplied', () => {
         {
           name: 'text',
           label: 'Text',
-          type: 'text'
-        }
-      ]
+          type: 'text',
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error.message).toContain('"Form Element - Id" is required')
@@ -878,11 +878,11 @@ test('should error if element "id" is not a guid', () => {
           id: '123',
           name: 'text',
           label: 'Text',
-          type: 'text'
-        }
-      ]
+          type: 'text',
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error.message).toContain('"Form Element - Id" must be a valid GUID')
@@ -903,21 +903,21 @@ test('should error if element "id" is not unique', () => {
           id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
           name: 'text',
           label: 'Text',
-          type: 'text'
+          type: 'text',
         },
         {
           id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
           name: 'Numbers_and_more',
           label: 'Numbers and more',
-          type: 'number'
-        }
-      ]
+          type: 'number',
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error.message).toContain(
-    '"Form Elements" position 1 contains a duplicate value'
+    '"Form Elements" position 1 contains a duplicate value',
   )
 })
 
@@ -940,11 +940,11 @@ test('should not error if number min is the same as max', () => {
           required: false,
           minNumber: 33.4,
           conditionallyShow: false,
-          maxNumber: 33.4
-        }
-      ]
+          maxNumber: 33.4,
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error).toBeNull()
@@ -969,15 +969,15 @@ test('should error if number min is greater than max', () => {
           required: false,
           minNumber: 33.5,
           conditionallyShow: false,
-          maxNumber: 33.4
-        }
-      ]
+          maxNumber: 33.4,
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error.message).toContain(
-    '"Form Element - Maximum Number" must be larger than or equal to 33.5'
+    '"Form Element - Maximum Number" must be larger than or equal to 33.5',
   )
 })
 
@@ -1000,11 +1000,11 @@ test('should throw error if minNumber is not provided for number element with is
           required: false,
           conditionallyShow: false,
           isSlider: true,
-          maxNumber: 33.4
-        }
-      ]
+          maxNumber: 33.4,
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error.message).toContain('"Form Element - Minimum Number" is required')
@@ -1031,11 +1031,11 @@ test.skip('should throw error if maxNumber is not provided for number element wi
           required: false,
           conditionallyShow: false,
           isSlider: true,
-          minNumber: 33.4
-        }
-      ]
+          minNumber: 33.4,
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error.message).toContain('"Form Element - Maximum Number" is required')
@@ -1058,15 +1058,15 @@ test('should error if "toDate" is greater than "fromDate"', () => {
           type: 'date',
           label: 'test',
           fromDate: '2018-08-16T05:28:26.448Z',
-          toDate: '2018-08-16T05:27:59.691Z'
-        }
-      ]
+          toDate: '2018-08-16T05:27:59.691Z',
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error.message).toContain(
-    '"Form Element - To Date" must be larger than or equal to'
+    '"Form Element - To Date" must be larger than or equal to',
   )
 })
 
@@ -1086,42 +1086,42 @@ test('should error if "defaultValue" does not match what is valid for each type'
           name: 'text',
           type: 'text',
           label: 'test',
-          defaultValue: 123
+          defaultValue: 123,
         },
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
           name: 'test',
           type: 'textarea',
           label: 'test',
-          defaultValue: 123
+          defaultValue: 123,
         },
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
           name: 'number',
           type: 'number',
           label: 'test',
-          defaultValue: 'abc'
+          defaultValue: 'abc',
         },
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
           name: 'date',
           type: 'date',
           label: 'test',
-          defaultValue: '123'
+          defaultValue: '123',
         },
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
           name: 'datetime',
           type: 'datetime',
           label: 'test',
-          defaultValue: '123'
+          defaultValue: '123',
         },
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
           name: 'time',
           type: 'time',
           label: 'test',
-          defaultValue: '123'
+          defaultValue: '123',
         },
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1133,14 +1133,14 @@ test('should error if "defaultValue" does not match what is valid for each type'
             {
               id: '35049223-dde2-405c-970a-5c2961a85504',
               value: '1',
-              label: 'One'
+              label: 'One',
             },
             {
               id: 'bc918f6b-0258-4472-b12d-e5ae05d232b4',
               value: '2',
-              label: 'Two'
-            }
-          ]
+              label: 'Two',
+            },
+          ],
         },
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1152,14 +1152,14 @@ test('should error if "defaultValue" does not match what is valid for each type'
             {
               id: '35049223-dde2-405c-970a-5c2961a85504',
               value: '1',
-              label: 'One'
+              label: 'One',
             },
             {
               id: 'bc918f6b-0258-4472-b12d-e5ae05d232b4',
               value: '2',
-              label: 'Two'
-            }
-          ]
+              label: 'Two',
+            },
+          ],
         },
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1171,14 +1171,14 @@ test('should error if "defaultValue" does not match what is valid for each type'
             {
               id: '35049223-dde2-405c-970a-5c2961a85504',
               value: '1',
-              label: 'One'
+              label: 'One',
             },
             {
               id: 'bc918f6b-0258-4472-b12d-e5ae05d232b4',
               value: '2',
-              label: 'Two'
-            }
-          ]
+              label: 'Two',
+            },
+          ],
         },
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1190,14 +1190,14 @@ test('should error if "defaultValue" does not match what is valid for each type'
             {
               id: '35049223-dde2-405c-970a-5c2961a85504',
               value: '1',
-              label: 'One'
+              label: 'One',
             },
             {
               id: 'bc918f6b-0258-4472-b12d-e5ae05d232b4',
               value: '2',
-              label: 'Two'
-            }
-          ]
+              label: 'Two',
+            },
+          ],
         },
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1210,14 +1210,14 @@ test('should error if "defaultValue" does not match what is valid for each type'
             {
               id: '35049223-dde2-405c-970a-5c2961a85504',
               value: '1',
-              label: 'One'
+              label: 'One',
             },
             {
               id: 'bc918f6b-0258-4472-b12d-e5ae05d232b4',
               value: '2',
-              label: 'Two'
-            }
-          ]
+              label: 'Two',
+            },
+          ],
         },
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1230,21 +1230,21 @@ test('should error if "defaultValue" does not match what is valid for each type'
             {
               id: '35049223-dde2-405c-970a-5c2961a85504',
               value: '1',
-              label: 'One'
+              label: 'One',
             },
             {
               id: 'bc918f6b-0258-4472-b12d-e5ae05d232b4',
               value: '2',
-              label: 'Two'
-            }
-          ]
+              label: 'Two',
+            },
+          ],
         },
         {
           id: '2424f4ea-35a0-47ee-9c22-ef8e16cb5103',
           name: 'More_Information',
           label: 'More Information',
           type: 'html',
-          defaultValue: 123
+          defaultValue: 123,
         },
         {
           id: '2424f4ea-35a0-47ee-9c22-ef8e16cb7103',
@@ -1252,56 +1252,56 @@ test('should error if "defaultValue" does not match what is valid for each type'
           label: 'Please Scan Barcode of Box',
           type: 'barcodeScanner',
           required: false,
-          defaultValue: 123
-        }
-      ]
+          defaultValue: 123,
+        },
+      ],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toBe(
-    '"Form Element - Default Value" must be a string'
+    '"Form Element - Default Value" must be a string',
   )
   expect(error.details[1].message).toBe(
-    '"Form Element - Default Value" must be a string'
+    '"Form Element - Default Value" must be a string',
   )
   expect(error.details[2].message).toBe(
-    '"Form Element - Default Value" must be a number'
+    '"Form Element - Default Value" must be a number',
   )
   expect(error.details[3].message).toBe(
-    '"Form Element - Default Date Value" must be a valid ISO 8601 date'
+    '"Form Element - Default Date Value" must be a valid ISO 8601 date',
   )
   expect(error.details[3].message).toBe(
-    '"Form Element - Default Date Value" must be a valid ISO 8601 date'
+    '"Form Element - Default Date Value" must be a valid ISO 8601 date',
   )
   expect(error.details[4].message).toBe(
-    '"Form Element - Default Date Value" must be a valid ISO 8601 date'
+    '"Form Element - Default Date Value" must be a valid ISO 8601 date',
   )
   expect(error.details[5].message).toBe(
-    '"Form Element - Default Date Value" must be a valid ISO 8601 date'
+    '"Form Element - Default Date Value" must be a valid ISO 8601 date',
   )
   expect(error.details[6].message).toBe(
-    '"Form Element - Default Value" must be a valid GUID'
+    '"Form Element - Default Value" must be a valid GUID',
   )
   expect(error.details[7].message).toBe(
-    '"Form Element - Default Value" must be an array'
+    '"Form Element - Default Value" must be an array',
   )
   expect(error.details[8].message).toBe('"0" must be a valid GUID')
   expect(error.details[9].message).toBe(
-    '"Form Element - Default Value" must be a valid GUID'
+    '"Form Element - Default Value" must be a valid GUID',
   )
   expect(error.details[10].message).toBe(
-    '"Form Element - Default Value" must be an array'
+    '"Form Element - Default Value" must be an array',
   )
   expect(error.details[11].message).toBe('"0" must be a valid GUID')
   expect(error.details[12].message).toBe(
-    '"Form Element - Default Value" must be a string'
+    '"Form Element - Default Value" must be a string',
   )
   expect(error.details[13].message).toBe(
-    '"Form Element - Default Value" must be a string'
+    '"Form Element - Default Value" must be a string',
   )
 })
 
@@ -1321,11 +1321,11 @@ test('should not error if number type element has a "defaultValue" but does not 
           name: 'number',
           type: 'number',
           label: 'number',
-          defaultValue: 3
-        }
-      ]
+          defaultValue: 3,
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error).toBe(null)
@@ -1348,15 +1348,15 @@ test('should error if number type element has a "defaultValue" less than "minNum
           type: 'number',
           label: 'number',
           defaultValue: 3,
-          minNumber: 5
-        }
-      ]
+          minNumber: 5,
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error.details[0].message).toBe(
-    '"Form Element - Default Value" must be larger than or equal to 5'
+    '"Form Element - Default Value" must be larger than or equal to 5',
   )
 })
 
@@ -1377,15 +1377,15 @@ test('should error if number type element has a "defaultValue" more than "maxNum
           type: 'number',
           label: 'number',
           defaultValue: 3,
-          maxNumber: 2
-        }
-      ]
+          maxNumber: 2,
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error.details[0].message).toBe(
-    '"Form Element - Default Value" must be less than or equal to 2'
+    '"Form Element - Default Value" must be less than or equal to 2',
   )
 })
 
@@ -1405,11 +1405,11 @@ test('should not error if date type element has a "defaultValue" but does not ha
           name: 'date',
           type: 'date',
           label: 'date',
-          defaultValue: '2018-08-16T00:00:00.000Z'
-        }
-      ]
+          defaultValue: '2018-08-16T00:00:00.000Z',
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error).toBe(null)
@@ -1432,15 +1432,15 @@ test('should error if date type element has a "defaultValue" less than "fromDate
           type: 'date',
           label: 'date',
           defaultValue: '2018-08-16T00:00:00.000Z',
-          fromDate: '2018-08-17T00:00:00.000Z'
-        }
-      ]
+          fromDate: '2018-08-17T00:00:00.000Z',
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Default Date Value" must be larger than or equal to'
+    '"Form Element - Default Date Value" must be larger than or equal to',
   )
 })
 
@@ -1461,15 +1461,15 @@ test('should error if date type element has a "defaultValue" more than "toDate"'
           type: 'date',
           label: 'date',
           defaultValue: '2018-08-16T00:00:00.000Z',
-          toDate: '2018-08-15T00:00:00.000Z'
-        }
-      ]
+          toDate: '2018-08-15T00:00:00.000Z',
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Default Date Value" must be less than or equal to'
+    '"Form Element - Default Date Value" must be less than or equal to',
   )
 })
 
@@ -1488,15 +1488,15 @@ test('should error if repeatableSet type element has no elements', () => {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
           name: 'repeatableSet',
           type: 'repeatableSet',
-          label: 'repeatableSet'
-        }
-      ]
+          label: 'repeatableSet',
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Repeatable Set - Elements" is required'
+    '"Form Element - Repeatable Set - Elements" is required',
   )
 })
 
@@ -1525,17 +1525,17 @@ test('should error if repeatableSet type element min entries is more than max en
               label: 'What was the time',
               type: 'time',
               required: false,
-              defaultValue: '1970-01-01T05:28:26.448Z'
-            }
-          ]
-        }
-      ]
+              defaultValue: '1970-01-01T05:28:26.448Z',
+            },
+          ],
+        },
+      ],
     },
-    formSchema
+    formSchema,
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Maximum number of repeatable set entries" must be larger than or equal to 2'
+    '"Form Element - Maximum number of repeatable set entries" must be larger than or equal to 2',
   )
 })
 
@@ -1564,23 +1564,23 @@ test('should error if repeatableSet type element min or max entries is less then
               label: 'What was the time',
               type: 'time',
               required: false,
-              defaultValue: '1970-01-01T05:28:26.448Z'
-            }
-          ]
-        }
-      ]
+              defaultValue: '1970-01-01T05:28:26.448Z',
+            },
+          ],
+        },
+      ],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Minimum number of repeatable set entries" must be larger than or equal to 0'
+    '"Form Element - Minimum number of repeatable set entries" must be larger than or equal to 0',
   )
   expect(error.details[1].message).toContain(
-    '"Form Element - Maximum number of repeatable set entries" must be larger than or equal to 0'
+    '"Form Element - Maximum number of repeatable set entries" must be larger than or equal to 0',
   )
 })
 
@@ -1611,25 +1611,25 @@ test('should error if page element has child page element', () => {
                   type: 'text',
                   label: 'Input Label',
                   name: 'Input_Label',
-                  required: false
-                }
-              ]
-            }
-          ]
-        }
+                  required: false,
+                },
+              ],
+            },
+          ],
+        },
       ],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage, files]'
+    '"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage, files]',
   )
 })
 
@@ -1649,21 +1649,21 @@ test('should error if page element has no elements', () => {
           id: '119b04c3-f2ad-4994-a525-e7189eb67a79',
           type: 'page',
           label: 'page1',
-          elements: []
-        }
+          elements: [],
+        },
       ],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Page - Elements" must contain at least 1 items'
+    '"Form Element - Page - Elements" must contain at least 1 items',
   )
 })
 
@@ -1694,25 +1694,25 @@ test('should error if isMultiPage is set to false', () => {
                   type: 'text',
                   label: 'Input Label',
                   name: 'Input_Label',
-                  required: false
-                }
-              ]
-            }
-          ]
-        }
+                  required: false,
+                },
+              ],
+            },
+          ],
+        },
       ],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage, files]'
+    '"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage, files]',
   )
 })
 
@@ -1738,9 +1738,9 @@ test('should allow multiple pages', () => {
               type: 'text',
               label: 'Input Label',
               name: 'Input_Label1',
-              required: false
-            }
-          ]
+              required: false,
+            },
+          ],
         },
         {
           id: '559b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -1752,19 +1752,19 @@ test('should allow multiple pages', () => {
               type: 'text',
               label: 'Input Label1',
               name: 'Input_Label2',
-              required: false
-            }
-          ]
-        }
+              required: false,
+            },
+          ],
+        },
       ],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error).toBe(null)
@@ -1792,26 +1792,26 @@ test('should error if root elements arent all page elements', () => {
               type: 'text',
               label: 'Input Label',
               name: 'Input_Label1',
-              required: false
-            }
-          ]
+              required: false,
+            },
+          ],
         },
         {
           id: '569b04c3-f2ad-4994-a525-e7189eb67a79',
           type: 'text',
           label: 'Input Label1',
           name: 'Input_Label2',
-          required: false
-        }
+          required: false,
+        },
       ],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toBe('"type" must be one of [page]')
@@ -1839,9 +1839,9 @@ test('should error if isMultiPage is false even if all root elements are pages',
               type: 'text',
               label: 'Input Label',
               name: 'Input_Label1',
-              required: false
-            }
-          ]
+              required: false,
+            },
+          ],
         },
         {
           id: '559b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -1853,23 +1853,23 @@ test('should error if isMultiPage is false even if all root elements are pages',
               type: 'text',
               label: 'Input Label1',
               name: 'Input_Label2',
-              required: false
-            }
-          ]
-        }
+              required: false,
+            },
+          ],
+        },
       ],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toBe(
-    '"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage, files]'
+    '"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage, files]',
   )
 })
 
@@ -1892,21 +1892,21 @@ test('should error if image element does not have a default value', () => {
           label: 'Picture',
           readOnly: false,
           required: true,
-          conditionallyShow: false
-        }
+          conditionallyShow: false,
+        },
       ],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toBe(
-    '"Form Element - Default Value" is required'
+    '"Form Element - Default Value" is required',
   )
 })
 
@@ -1928,22 +1928,22 @@ test('should error if HTML element does not have a default value', () => {
           label: 'html Input',
           readOnly: false,
           required: true,
-          conditionallyShow: false
-        }
+          conditionallyShow: false,
+        },
       ],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toBe('"Form Element - Name" is required')
   expect(error.details[1].message).toBe(
-    '"Form Element - Default Value" is required'
+    '"Form Element - Default Value" is required',
   )
 })
 
@@ -1966,24 +1966,24 @@ test('should error if calculation element does not have a default value', () => 
           name: 'calculation',
           readOnly: false,
           required: true,
-          conditionallyShow: false
-        }
+          conditionallyShow: false,
+        },
       ],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toBe(
-    '"Form Element - Default Value" is required'
+    '"Form Element - Default Value" is required',
   )
   expect(error.details[1].message).toBe(
-    '"Form Element - Calculation - calculation" is required'
+    '"Form Element - Calculation - calculation" is required',
   )
 })
 
@@ -2009,17 +2009,17 @@ test('should allow array of restricted barcode types', () => {
           required: true,
           conditionallyShow: false,
           restrictBarcodeTypes: true,
-          restrictedBarcodeTypes: ['123abc', 'acb123']
-        }
+          restrictedBarcodeTypes: ['123abc', 'acb123'],
+        },
       ],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error).toBe(null)
@@ -2046,21 +2046,21 @@ test('should require restricted barcode types if restrictBarcodeTypes boolean is
           readOnly: false,
           required: true,
           conditionallyShow: false,
-          restrictBarcodeTypes: true
-        }
+          restrictBarcodeTypes: true,
+        },
       ],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toBe(
-    '"Form Element - Barcode Scanner - restrictedBarcodeTypes" is required'
+    '"Form Element - Barcode Scanner - restrictedBarcodeTypes" is required',
   )
 })
 
@@ -2078,16 +2078,16 @@ test('should throw error if postSubmissionAction is an invalid type', () => {
       elements: [],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toBe(
-    '"Post Submission Action" must be one of [URL, CLOSE, FORMS_LIBRARY]'
+    '"Post Submission Action" must be one of [URL, CLOSE, FORMS_LIBRARY]',
   )
 })
 
@@ -2104,12 +2104,12 @@ test('should throw error if postSubmissionAction is missing', () => {
       elements: [],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toBe('"Post Submission Action" is required')
@@ -2129,16 +2129,16 @@ test('should throw error if postSubmissionAction is URL but no URL is present', 
       elements: [],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toBe(
-    '"Post Submission Redirect URL" is required'
+    '"Post Submission Redirect URL" is required',
   )
 })
 
@@ -2159,21 +2159,21 @@ test('should throw error if defaultValue for email is not valid', () => {
           name: 'email',
           label: 'email',
           type: 'email',
-          defaultValue: 'developers'
-        }
+          defaultValue: 'developers',
+        },
       ],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toBe(
-    '"Form Element - Default Email Value" must be a valid email'
+    '"Form Element - Default Email Value" must be a valid email',
   )
 })
 
@@ -2196,21 +2196,21 @@ test('should throw error if defaultValue contains src="data:', () => {
           name: 'html',
           label: 'html',
           type: 'html',
-          defaultValue: defaultValue
-        }
+          defaultValue: defaultValue,
+        },
       ],
       isAuthenticated: true,
       isPublished: true,
-      submissionEvents: []
+      submissionEvents: [],
     },
     formSchema,
     {
-      abortEarly: false
-    }
+      abortEarly: false,
+    },
   )
 
   expect(error.details[0].message).toBe(
-    `"Form Element - Default Value" with value "${defaultValue}" matches the inverted No Binary Data pattern`
+    `"Form Element - Default Value" with value "${defaultValue}" matches the inverted No Binary Data pattern`,
   )
 })
 
@@ -2234,11 +2234,11 @@ describe('optionTypes', () => {
               type: 'checkboxes',
               required: false,
               optionsType: 'DYNAMIC',
-              dynamicOptionSetId: 1
-            }
-          ]
+              dynamicOptionSetId: 1,
+            },
+          ],
         },
-        formSchema
+        formSchema,
       )
 
       expect(result.error).toBe(null)
@@ -2260,15 +2260,15 @@ describe('optionTypes', () => {
               label: 'Czechboxes',
               type: 'checkboxes',
               required: false,
-              optionsType: 'DYNAMIC'
-            }
-          ]
+              optionsType: 'DYNAMIC',
+            },
+          ],
         },
-        formSchema
+        formSchema,
       )
 
       expect(error.message).toContain(
-        '"Form Element - Dynamic Option Set Id" is required'
+        '"Form Element - Dynamic Option Set Id" is required',
       )
     })
   })
@@ -2295,13 +2295,13 @@ describe('optionTypes', () => {
                 {
                   id: '25ec5754-0d9a-4783-82d4-fd6ecce35d2f',
                   value: 'ONEvalue',
-                  label: 'One'
-                }
-              ]
-            }
-          ]
+                  label: 'One',
+                },
+              ],
+            },
+          ],
         },
-        formSchema
+        formSchema,
       )
 
       expect(result.error).toBe(null)
@@ -2323,11 +2323,11 @@ describe('optionTypes', () => {
               label: 'Czechboxes',
               type: 'checkboxes',
               required: false,
-              optionsType: 'CUSTOM'
-            }
-          ]
+              optionsType: 'CUSTOM',
+            },
+          ],
         },
-        formSchema
+        formSchema,
       )
 
       expect(error.message).toContain('"Form Element - Options" is required')
@@ -2355,13 +2355,13 @@ describe('optionTypes', () => {
                 {
                   id: '25ec5754-0d9a-4783-82d4-fd6ecce35d2f',
                   value: 'ONEvalue',
-                  label: 'One'
-                }
-              ]
-            }
-          ]
+                  label: 'One',
+                },
+              ],
+            },
+          ],
         },
-        formSchema
+        formSchema,
       )
 
       expect(error).toBe(null)
@@ -2388,13 +2388,13 @@ describe('optionTypes', () => {
                 {
                   id: '25ec5754-0d9a-4783-82d4-fd6ecce35d2f',
                   value: 'ONEvalue',
-                  label: 'One'
-                }
-              ]
-            }
-          ]
+                  label: 'One',
+                },
+              ],
+            },
+          ],
         },
-        formSchema
+        formSchema,
       )
 
       expect(result.error).toBe(null)
@@ -2415,11 +2415,11 @@ describe('optionTypes', () => {
               name: 'Czech boxes',
               label: 'Czechboxes',
               type: 'checkboxes',
-              required: false
-            }
-          ]
+              required: false,
+            },
+          ],
         },
-        formSchema
+        formSchema,
       )
 
       expect(error.message).toContain('"Form Element - Options" is required')
@@ -2446,15 +2446,15 @@ describe('PDF submission event', () => {
           {
             type: 'PDF',
             configuration: {
-              email: 'developers@oneblink.io'
-            }
-          }
-        ]
+              email: 'developers@oneblink.io',
+            },
+          },
+        ],
       },
       formSchema,
       {
-        abortEarly: false
-      }
+        abortEarly: false,
+      },
     )
     expect(error).toBeNull()
   })
@@ -2476,15 +2476,15 @@ describe('PDF submission event', () => {
           {
             type: 'PDF',
             configuration: {
-              email: '{ELEMENT:abc}'
-            }
-          }
-        ]
+              email: '{ELEMENT:abc}',
+            },
+          },
+        ],
       },
       formSchema,
       {
-        abortEarly: false
-      }
+        abortEarly: false,
+      },
     )
     expect(result.error).toBeNull()
   })
@@ -2506,18 +2506,18 @@ describe('PDF submission event', () => {
           {
             type: 'PDF',
             configuration: {
-              email: 'sdfsdfsd'
-            }
-          }
-        ]
+              email: 'sdfsdfsd',
+            },
+          },
+        ],
       },
       formSchema,
       {
-        abortEarly: false
-      }
+        abortEarly: false,
+      },
     )
     expect(error.details[0].message).toBe(
-      `"Form Submission Event - Email Address" must be a valid email`
+      `"Form Submission Event - Email Address" must be a valid email`,
     )
   })
 })
@@ -2542,15 +2542,15 @@ describe('CALLBACK submission event', () => {
             type: 'CALLBACK',
             configuration: {
               url: 'https://google.com',
-              secret: 'abc123'
-            }
-          }
-        ]
+              secret: 'abc123',
+            },
+          },
+        ],
       },
       formSchema,
       {
-        abortEarly: false
-      }
+        abortEarly: false,
+      },
     )
     expect(error).toBeNull()
   })
@@ -2571,17 +2571,17 @@ describe('CALLBACK submission event', () => {
         submissionEvents: [
           {
             type: 'CALLBACK',
-            configuration: {}
-          }
-        ]
+            configuration: {},
+          },
+        ],
       },
       formSchema,
       {
-        abortEarly: false
-      }
+        abortEarly: false,
+      },
     )
     expect(error.details[0].message).toBe(
-      `"Form Submission Event - Callback Url" is required`
+      `"Form Submission Event - Callback Url" is required`,
     )
   })
 })
@@ -2603,14 +2603,14 @@ describe('SPOTTO submission event', () => {
         isPublished: true,
         submissionEvents: [
           {
-            type: 'SPOTTO'
-          }
-        ]
+            type: 'SPOTTO',
+          },
+        ],
       },
       formSchema,
       {
-        abortEarly: false
-      }
+        abortEarly: false,
+      },
     )
     expect(error).toBeNull()
   })
@@ -2637,28 +2637,28 @@ describe('TRIM submission event', () => {
             configuration: {
               container: {
                 uri: 4,
-                label: 'URI Label'
+                label: 'URI Label',
               },
               recordType: {
                 uri: 1,
-                label: 'Record Type Label'
+                label: 'Record Type Label',
               },
               actionDefinition: {
                 uri: 2,
-                label: 'Action Definition Label'
+                label: 'Action Definition Label',
               },
               location: {
                 uri: 3,
-                label: 'Location Label'
-              }
-            }
-          }
-        ]
+                label: 'Location Label',
+              },
+            },
+          },
+        ],
       },
       formSchema,
       {
-        abortEarly: false
-      }
+        abortEarly: false,
+      },
     )
     expect(error).toBeNull()
   })
@@ -2685,7 +2685,7 @@ describe('Conditional Predicates', () => {
             required: false,
             minNumber: 1,
             maxNumber: 6,
-            defaultValue: 3
+            defaultValue: 3,
           },
           {
             id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
@@ -2697,19 +2697,19 @@ describe('Conditional Predicates', () => {
               {
                 id: '9e50b6e5-52b7-48ab-ab86-542ccba82205',
                 value: 'ONE',
-                label: 'one'
+                label: 'one',
               },
               {
                 id: '5c82ef40-779a-46fb-8860-c9b4969518ec',
                 value: 'TWO',
-                label: 'two'
+                label: 'two',
               },
               {
                 id: '55568d62-6ac5-4504-a88d-e2311a026776',
                 value: 'THREE',
-                label: 'three'
-              }
-            ]
+                label: 'three',
+              },
+            ],
           },
           {
             id: '59b723a9-00e2-493f-8d76-84ea71a178ee',
@@ -2725,28 +2725,28 @@ describe('Conditional Predicates', () => {
                 elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
                 type: 'NUMERIC',
                 operator: '<',
-                value: 5
+                value: 5,
               },
               {
                 elementId: '8e4d819b-97fa-438d-b613-a092d38c3b23',
                 type: 'OPTIONS',
-                optionIds: ['5c82ef40-779a-46fb-8860-c9b4969518ec']
-              }
-            ]
-          }
+                optionIds: ['5c82ef40-779a-46fb-8860-c9b4969518ec'],
+              },
+            ],
+          },
         ],
         isAuthenticated: true,
         isPublished: true,
         submissionEvents: [
           {
-            type: 'SPOTTO'
-          }
-        ]
+            type: 'SPOTTO',
+          },
+        ],
       },
       formSchema,
       {
-        abortEarly: false
-      }
+        abortEarly: false,
+      },
     )
     expect(error).toBeNull()
   })
@@ -2771,7 +2771,7 @@ describe('Conditional Predicates', () => {
             required: false,
             minNumber: 1,
             maxNumber: 6,
-            defaultValue: 3
+            defaultValue: 3,
           },
           {
             id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
@@ -2783,19 +2783,19 @@ describe('Conditional Predicates', () => {
               {
                 id: '9e50b6e5-52b7-48ab-ab86-542ccba82205',
                 value: 'ONE',
-                label: 'one'
+                label: 'one',
               },
               {
                 id: '5c82ef40-779a-46fb-8860-c9b4969518ec',
                 value: 'TWO',
-                label: 'two'
+                label: 'two',
               },
               {
                 id: '55568d62-6ac5-4504-a88d-e2311a026776',
                 value: 'THREE',
-                label: 'three'
-              }
-            ]
+                label: 'three',
+              },
+            ],
           },
           {
             id: '59b723a9-00e2-493f-8d76-84ea71a178ee',
@@ -2811,37 +2811,37 @@ describe('Conditional Predicates', () => {
                 elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
                 type: 'OPTIONS',
                 operator: '<',
-                value: 5
+                value: 5,
               },
               {
                 elementId: '8e4d819b-97fa-438d-b613-a092d38c3b23',
                 type: 'NUMERIC',
-                optionIds: ['5c82ef40-779a-46fb-8860-c9b4969518ec']
-              }
-            ]
-          }
+                optionIds: ['5c82ef40-779a-46fb-8860-c9b4969518ec'],
+              },
+            ],
+          },
         ],
         isAuthenticated: true,
         isPublished: true,
         submissionEvents: [
           {
-            type: 'SPOTTO'
-          }
-        ]
+            type: 'SPOTTO',
+          },
+        ],
       },
       formSchema,
       {
-        abortEarly: false
-      }
+        abortEarly: false,
+      },
     )
     expect(error.details[0].message).toBe(
-      '"Form Element - Conditionally Show Predicate - Option Ids" is required'
+      '"Form Element - Conditionally Show Predicate - Option Ids" is required',
     )
     expect(error.details[1].message).toBe(
-      '"Form Element - Conditionally Show Predicate - Operator" is required'
+      '"Form Element - Conditionally Show Predicate - Operator" is required',
     )
     expect(error.details[2].message).toBe(
-      '"Form Element - Conditionally Show Predicate - Value" is required'
+      '"Form Element - Conditionally Show Predicate - Value" is required',
     )
   })
 })
@@ -2869,17 +2869,17 @@ describe('Data Lookup enabled', () => {
             required: true,
             conditionallyShow: false,
             isDataLookup: true,
-            dataLookupId: 1
-          }
+            dataLookupId: 1,
+          },
         ],
         isAuthenticated: true,
         isPublished: true,
-        submissionEvents: []
+        submissionEvents: [],
       },
       formSchema,
       {
-        abortEarly: false
-      }
+        abortEarly: false,
+      },
     )
 
     expect(error).toBe(null)
@@ -2906,17 +2906,17 @@ describe('Data Lookup enabled', () => {
             readOnly: false,
             required: true,
             conditionallyShow: false,
-            isDataLookup: true
-          }
+            isDataLookup: true,
+          },
         ],
         isAuthenticated: true,
         isPublished: true,
-        submissionEvents: []
+        submissionEvents: [],
       },
       formSchema,
       {
-        abortEarly: false
-      }
+        abortEarly: false,
+      },
     )
 
     expect(error.details[0].message).toBe('"Data Lookup Id" is required')
@@ -2943,17 +2943,17 @@ describe('Data Lookup enabled', () => {
             readOnly: false,
             required: true,
             conditionallyShow: false,
-            isElementLookup: true
-          }
+            isElementLookup: true,
+          },
         ],
         isAuthenticated: true,
         isPublished: true,
-        submissionEvents: []
+        submissionEvents: [],
       },
       formSchema,
       {
-        abortEarly: false
-      }
+        abortEarly: false,
+      },
     )
 
     expect(error.details[0].message).toBe('"Element Lookup Id" is required')
@@ -2961,7 +2961,7 @@ describe('Data Lookup enabled', () => {
 })
 
 describe('invalid property removal', () => {
-  const createForm = props => {
+  const createForm = (props) => {
     return {
       id: 1,
       name: 'Inspection',
@@ -2975,9 +2975,9 @@ describe('invalid property removal', () => {
           type: 'CALLBACK',
           configuration: {
             url: 'https://domain.io/path',
-            secret: 'abc123'
-          }
-        }
+            secret: 'abc123',
+          },
+        },
       ],
       elements: [
         {
@@ -2993,9 +2993,9 @@ describe('invalid property removal', () => {
                 label: 'Large Heading',
                 type: 'heading',
                 required: false,
-                headingType: 1
+                headingType: 1,
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3004,9 +3004,9 @@ describe('invalid property removal', () => {
                 name: 'Location',
                 label: 'Where Was It?',
                 type: 'location',
-                required: false
+                required: false,
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3015,9 +3015,9 @@ describe('invalid property removal', () => {
                 name: 'signature',
                 label: 'Signature',
                 type: 'draw',
-                required: false
+                required: false,
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3027,9 +3027,9 @@ describe('invalid property removal', () => {
                 label: 'Medium Heading',
                 type: 'heading',
                 required: false,
-                headingType: 3
+                headingType: 3,
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3045,21 +3045,21 @@ describe('invalid property removal', () => {
                   {
                     id: '8be1f1dd-ec3f-4537-bb70-f0f1c7c31b26',
                     value: 'ONEvalue',
-                    label: 'One'
+                    label: 'One',
                   },
                   {
                     id: '0729643a-5ffe-416d-8d4b-337e73e96714',
                     value: 'twovalue',
-                    label: 'Two'
+                    label: 'Two',
                   },
                   {
                     id: 'ada69988-a8b5-4a5e-84be-e998ea27287a',
                     value: 'threevalue',
-                    label: 'Three'
-                  }
-                ]
+                    label: 'Three',
+                  },
+                ],
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3069,9 +3069,9 @@ describe('invalid property removal', () => {
                 label: 'Text Areass',
                 type: 'textarea',
                 required: false,
-                defaultValue: 'Multi line text'
+                defaultValue: 'Multi line text',
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3081,9 +3081,9 @@ describe('invalid property removal', () => {
                 label: 'Date',
                 type: 'date',
                 required: false,
-                defaultValue: '2018-08-16T00:00:00.000Z'
+                defaultValue: '2018-08-16T00:00:00.000Z',
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3092,9 +3092,9 @@ describe('invalid property removal', () => {
                 name: 'Camer',
                 label: 'Camer',
                 type: 'camera',
-                required: false
+                required: false,
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3107,27 +3107,27 @@ describe('invalid property removal', () => {
                 buttons: false,
                 defaultValue: [
                   '25ec5754-0d9a-4783-82d4-fd6ecce35d2f',
-                  '14988191-a741-4a1f-984c-62ca86729808'
+                  '14988191-a741-4a1f-984c-62ca86729808',
                 ],
                 options: [
                   {
                     id: '25ec5754-0d9a-4783-82d4-fd6ecce35d2f',
                     value: 'ONEvalue',
-                    label: 'One'
+                    label: 'One',
                   },
                   {
                     id: '14988191-a741-4a1f-984c-62ca86729808',
                     value: 'twovalue',
-                    label: 'Two'
+                    label: 'Two',
                   },
                   {
                     id: '869a3234-53c3-4dfe-95af-7b6d449fbc2d',
                     value: 'threevalue',
-                    label: 'Three'
-                  }
-                ]
+                    label: 'Three',
+                  },
+                ],
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3137,9 +3137,9 @@ describe('invalid property removal', () => {
                 label: 'Date and Time',
                 type: 'datetime',
                 required: false,
-                defaultValue: '2018-08-16T05:28:26.448Z'
+                defaultValue: '2018-08-16T05:28:26.448Z',
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3150,9 +3150,9 @@ describe('invalid property removal', () => {
                 type: 'number',
                 required: false,
                 isSlider: false,
-                defaultValue: 3
+                defaultValue: 3,
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3165,9 +3165,9 @@ describe('invalid property removal', () => {
                 minNumber: 1,
                 maxNumber: 6,
                 isSlider: true,
-                defaultValue: 3
+                defaultValue: 3,
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3181,15 +3181,15 @@ describe('invalid property removal', () => {
                 attributesMapping: [
                   {
                     attribute: 'State',
-                    elementId: 'fd9c80d5-d56d-4e8d-ab8e-e70c531c77c2'
+                    elementId: 'fd9c80d5-d56d-4e8d-ab8e-e70c531c77c2',
                   },
                   {
                     attribute: 'Country',
-                    elementId: 'cc6daf4c-fa10-44e4-8d51-4f56febc9ab0'
-                  }
-                ]
+                    elementId: 'cc6daf4c-fa10-44e4-8d51-4f56febc9ab0',
+                  },
+                ],
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3205,21 +3205,21 @@ describe('invalid property removal', () => {
                   {
                     id: '9e50b6e5-52b7-48ab-ab86-542ccba82205',
                     value: 'ONE',
-                    label: 'one'
+                    label: 'one',
                   },
                   {
                     id: '5c82ef40-779a-46fb-8860-c9b4969518ec',
                     value: 'TWO',
-                    label: 'two'
+                    label: 'two',
                   },
                   {
                     id: '55568d62-6ac5-4504-a88d-e2311a026776',
                     value: 'THREE',
-                    label: 'three'
-                  }
-                ]
+                    label: 'three',
+                  },
+                ],
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3232,32 +3232,32 @@ describe('invalid property removal', () => {
                 multi: true,
                 defaultValue: [
                   '9e50b6e5-52b7-48ab-ab86-542ccba82205',
-                  '5c82ef40-779a-46fb-8860-c9b4969518ec'
+                  '5c82ef40-779a-46fb-8860-c9b4969518ec',
                 ],
                 optionsType: 'CUSTOM',
                 conditionallyShowOptions: true,
                 conditionallyShowOptionsElementIds: [
-                  'dc070d4b-2577-4c49-b682-dafa482b334a'
+                  'dc070d4b-2577-4c49-b682-dafa482b334a',
                 ],
                 options: [
                   {
                     attributes: [
                       {
                         elementId: 'dc070d4b-2577-4c49-b682-dafa482b334a',
-                        optionIds: ['33633fe8-10a8-478b-a24b-49c029c4292c']
+                        optionIds: ['33633fe8-10a8-478b-a24b-49c029c4292c'],
                       },
                       {
                         elementId: 'dc070d4b-2577-4c49-b682-dafa482b334a',
-                        optionIds: ['7e7dd403-baad-4a63-8482-8b0f9dc6c4e7']
-                      }
+                        optionIds: ['7e7dd403-baad-4a63-8482-8b0f9dc6c4e7'],
+                      },
                     ],
                     id: 'fa0f2864-d812-4610-a6e7-a48666ef5c2f',
                     label: '123 Fake Street',
-                    value: '123 Fake Street'
-                  }
-                ]
+                    value: '123 Fake Street',
+                  },
+                ],
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3273,15 +3273,15 @@ describe('invalid property removal', () => {
                 conditionallyShowPredicates: [
                   {
                     elementId: '8e4d819b-97fa-438d-b613-a092d38c3b23',
-                    optionIds: ['9e50b6e5-52b7-48ab-ab86-542ccba82205']
+                    optionIds: ['9e50b6e5-52b7-48ab-ab86-542ccba82205'],
                   },
                   {
                     elementId: '8e4d819b-97fa-438d-b613-a092d38c3b27',
-                    optionIds: ['5c82ef40-779a-46fb-8860-c9b4969518ec']
-                  }
-                ]
+                    optionIds: ['5c82ef40-779a-46fb-8860-c9b4969518ec'],
+                  },
+                ],
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3291,9 +3291,9 @@ describe('invalid property removal', () => {
                 label: 'Test on multi lines',
                 type: 'textarea',
                 required: false,
-                defaultValue: 'multi line text'
+                defaultValue: 'multi line text',
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3303,9 +3303,9 @@ describe('invalid property removal', () => {
                 label: 'What was the time',
                 type: 'time',
                 required: false,
-                defaultValue: '1970-01-01T05:28:26.448Z'
+                defaultValue: '1970-01-01T05:28:26.448Z',
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3314,9 +3314,9 @@ describe('invalid property removal', () => {
                 name: 'More_Information',
                 label: 'More Information',
                 type: 'html',
-                defaultValue: '<p><b>bold text here<b></p>'
+                defaultValue: '<p><b>bold text here<b></p>',
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3326,9 +3326,9 @@ describe('invalid property removal', () => {
                 label: 'calculations',
                 type: 'calculation',
                 calculation: '(69*69)+58008',
-                defaultValue: '<p><b>{result}<b></p>'
+                defaultValue: '<p><b>{result}<b></p>',
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3338,9 +3338,9 @@ describe('invalid property removal', () => {
                 label: 'Please Scan Barcode of Box',
                 type: 'barcodeScanner',
                 required: false,
-                defaultValue: '123ABC098ZYX'
+                defaultValue: '123ABC098ZYX',
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3360,11 +3360,11 @@ describe('invalid property removal', () => {
                     label: 'What was the time',
                     type: 'time',
                     required: false,
-                    defaultValue: '1970-01-01T05:28:26.448Z'
-                  }
-                ]
+                    defaultValue: '1970-01-01T05:28:26.448Z',
+                  },
+                ],
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3373,9 +3373,9 @@ describe('invalid property removal', () => {
                 name: 'email',
                 label: 'email',
                 type: 'email',
-                defaultValue: 'developers@oneblink.io'
+                defaultValue: 'developers@oneblink.io',
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3385,9 +3385,9 @@ describe('invalid property removal', () => {
                 label: 'My Cat',
                 type: 'image',
                 defaultValue:
-                  'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg'
+                  'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg',
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3395,9 +3395,9 @@ describe('invalid property removal', () => {
                 id: 'b527bcea-dc84-477f-a5ee-d34abfec92fa',
                 name: 'file',
                 label: 'file',
-                type: 'file'
+                type: 'file',
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3405,9 +3405,9 @@ describe('invalid property removal', () => {
                 id: 'b527bcea-dc84-477f-a5ee-d34abfec92fb',
                 name: 'telephone',
                 label: 'telephone',
-                type: 'telephone'
+                type: 'telephone',
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3420,21 +3420,21 @@ describe('invalid property removal', () => {
                   {
                     id: '9e50b6e5-52b7-48ab-ab86-542ccba82205',
                     value: 'ONE',
-                    label: 'one'
+                    label: 'one',
                   },
                   {
                     id: '5c82ef40-779a-46fb-8860-c9b4969518ec',
                     value: 'TWO',
-                    label: 'two'
+                    label: 'two',
                   },
                   {
                     id: '55568d62-6ac5-4504-a88d-e2311a026776',
                     value: 'THREE',
-                    label: 'three'
-                  }
-                ]
+                    label: 'three',
+                  },
+                ],
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3442,9 +3442,9 @@ describe('invalid property removal', () => {
                 id: 'b8a635eb-d28c-4f18-b400-5e2b458e76e9',
                 type: 'form',
                 name: 'form',
-                formId: 1
+                formId: 1,
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3452,9 +3452,9 @@ describe('invalid property removal', () => {
                 id: '1495d816-e2b5-4b99-b378-fa7cd46e034c',
                 type: 'infoPage',
                 name: 'infoPage',
-                formId: 2
+                formId: 2,
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3464,9 +3464,9 @@ describe('invalid property removal', () => {
                 label: 'Data Lookup text',
                 type: 'text',
                 isDataLookup: true,
-                dataLookupId: 1
+                dataLookupId: 1,
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3476,9 +3476,9 @@ describe('invalid property removal', () => {
                 label: 'Element Lookup text',
                 type: 'text',
                 isElementLookup: true,
-                elementLookupId: 2
+                elementLookupId: 2,
               },
-              props
+              props,
             ),
             Object.assign(
               {},
@@ -3490,13 +3490,13 @@ describe('invalid property removal', () => {
                 isElementLookup: true,
                 elementLookupId: 2,
                 isDataLookup: true,
-                dataLookupId: 1
+                dataLookupId: 1,
               },
-              props
-            )
-          ]
-        }
-      ]
+              props,
+            ),
+          ],
+        },
+      ],
     }
   }
 
@@ -3507,15 +3507,15 @@ describe('invalid property removal', () => {
       especially: ['really', 'wrong', 1337, { boo: 'yah' }],
       things: {
         whee: 'doh!',
-        elements: ['muhahahahaha']
-      }
+        elements: ['muhahahahaha'],
+      },
     }
     const form = createForm(extraProps)
     const { value: result } = Joi.validate(form, formSchema, {
-      stripUnknown: true
+      stripUnknown: true,
     })
 
-    result.elements[0].elements.forEach(element => {
+    result.elements[0].elements.forEach((element) => {
       expect(element).toEqual(expect.not.objectContaining(extraProps))
     })
   })
@@ -3529,7 +3529,7 @@ describe('invalid property removal', () => {
       maxNumber: -32,
       attributesMapping: [{}],
       preCalculationDisplay: 'asfdsafsaf',
-      calculation: '1 + 1 = window'
+      calculation: '1 + 1 = window',
     }
 
     const { error, value } = Joi.validate(
@@ -3550,17 +3550,17 @@ describe('invalid property removal', () => {
               label: 'My Cat',
               type: 'image',
               defaultValue:
-                'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg'
+                'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg',
             },
-            shouldBeRemoved
-          )
-        ]
+            shouldBeRemoved,
+          ),
+        ],
       },
-      formSchema
+      formSchema,
     )
     expect(error).toBeFalsy()
     expect(value.elements[0]).toEqual(
-      expect.not.objectContaining(shouldBeRemoved)
+      expect.not.objectContaining(shouldBeRemoved),
     )
   })
 
@@ -3575,9 +3575,9 @@ describe('invalid property removal', () => {
         postSubmissionAction: 'FORMS_LIBRARY',
         redirectUrl: 123,
         submissionEvents: [],
-        elements: []
+        elements: [],
       },
-      formSchema
+      formSchema,
     )
     expect(error).toBeFalsy()
     expect(value).toEqual({
@@ -3592,7 +3592,7 @@ describe('invalid property removal', () => {
       isAuthenticated: false,
       isInfoPage: false,
       isMultiPage: false,
-      isPublished: false
+      isPublished: false,
     })
   })
 
@@ -3603,9 +3603,9 @@ describe('invalid property removal', () => {
         type: 'form',
         name: 'name',
         label: 'label',
-        formId: 1
+        formId: 1,
       },
-      elementSchema
+      elementSchema,
     )
     expect(error).toBeFalsy()
     expect(value).toEqual({
@@ -3613,7 +3613,7 @@ describe('invalid property removal', () => {
       type: 'form',
       name: 'name',
       formId: 1,
-      conditionallyShow: false
+      conditionallyShow: false,
     })
   })
 
@@ -3624,12 +3624,12 @@ describe('invalid property removal', () => {
         type: 'select',
         name: 'select',
         label: 'select',
-        optionsType: 'SEARCH'
+        optionsType: 'SEARCH',
       },
-      elementSchema
+      elementSchema,
     )
     expect(error.message).toContain(
-      '"Form Element - Options type" must be one of [CUSTOM, DYNAMIC]'
+      '"Form Element - Options type" must be one of [CUSTOM, DYNAMIC]',
     )
   })
 
@@ -3640,12 +3640,12 @@ describe('invalid property removal', () => {
         type: 'checkboxes',
         name: 'checkboxes',
         label: 'checkboxes',
-        optionsType: 'SEARCH'
+        optionsType: 'SEARCH',
       },
-      elementSchema
+      elementSchema,
     )
     expect(error.message).toContain(
-      '"Form Element - Options type" must be one of [CUSTOM, DYNAMIC]'
+      '"Form Element - Options type" must be one of [CUSTOM, DYNAMIC]',
     )
   })
 
@@ -3656,12 +3656,12 @@ describe('invalid property removal', () => {
         type: 'radio',
         name: 'radio',
         label: 'radio',
-        optionsType: 'SEARCH'
+        optionsType: 'SEARCH',
       },
-      elementSchema
+      elementSchema,
     )
     expect(error.message).toContain(
-      '"Form Element - Options type" must be one of [CUSTOM, DYNAMIC]'
+      '"Form Element - Options type" must be one of [CUSTOM, DYNAMIC]',
     )
   })
 
@@ -3673,9 +3673,9 @@ describe('invalid property removal', () => {
         name: 'autocomplete',
         label: 'autocomplete',
         optionsType: 'SEARCH',
-        searchUrl: 'http://search.com'
+        searchUrl: 'http://search.com',
       },
-      elementSchema
+      elementSchema,
     )
     expect(error).toBeFalsy()
     expect(value).toEqual({
@@ -3690,7 +3690,7 @@ describe('invalid property removal', () => {
       readOnly: false,
       required: false,
       type: 'autocomplete',
-      searchUrl: 'http://search.com'
+      searchUrl: 'http://search.com',
     })
   })
 
@@ -3702,9 +3702,9 @@ describe('invalid property removal', () => {
         name: 'autocomplete',
         label: 'autocomplete',
         optionsType: 'SEARCH',
-        searchUrl: 'http://search.com'
+        searchUrl: 'http://search.com',
       },
-      elementSchema
+      elementSchema,
     )
     expect(error).toBeFalsy()
     expect(value).toEqual({
@@ -3719,7 +3719,7 @@ describe('invalid property removal', () => {
       readOnly: false,
       required: false,
       type: 'autocomplete',
-      searchUrl: 'http://search.com'
+      searchUrl: 'http://search.com',
     })
   })
 
@@ -3730,12 +3730,12 @@ describe('invalid property removal', () => {
         type: 'autocomplete',
         name: 'autocomplete',
         label: 'autocomplete',
-        optionsType: 'SEARCH'
+        optionsType: 'SEARCH',
       },
-      elementSchema
+      elementSchema,
     )
     expect(error.message).toBe(
-      'child "searchUrl" fails because ["Search URL" is required]'
+      'child "searchUrl" fails because ["Search URL" is required]',
     )
   })
 })
@@ -3747,9 +3747,9 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
       name: 'files',
       label: 'Files',
       type: 'files',
-      restrictFileTypes: false
+      restrictFileTypes: false,
     },
-    elementSchema
+    elementSchema,
   )
   expect(result.error).toBe(null)
 
@@ -3760,9 +3760,9 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
       label: 'Files',
       type: 'files',
       restrictFileTypes: true,
-      restrictedFileTypes: ['png', 'jpg', 'gif']
+      restrictedFileTypes: ['png', 'jpg', 'gif'],
     },
-    elementSchema
+    elementSchema,
   )
   expect(error).toBeFalsy()
   expect(value).toEqual({
@@ -3773,7 +3773,7 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
     readOnly: false,
     conditionallyShow: false,
     restrictFileTypes: true,
-    restrictedFileTypes: ['png', 'jpg', 'gif']
+    restrictedFileTypes: ['png', 'jpg', 'gif'],
   })
 })
 
@@ -3785,9 +3785,9 @@ test('should strip restrictedFileTypes if restrictFileTypes is false', () => {
       label: 'Files',
       type: 'files',
       restrictFileTypes: false,
-      restrictedFileTypes: ['png']
+      restrictedFileTypes: ['png'],
     },
-    elementSchema
+    elementSchema,
   )
   expect(error).toBeFalsy()
   expect(value).toEqual({
@@ -3797,7 +3797,7 @@ test('should strip restrictedFileTypes if restrictFileTypes is false', () => {
     type: 'files',
     readOnly: false,
     conditionallyShow: false,
-    restrictFileTypes: false
+    restrictFileTypes: false,
   })
 })
 
@@ -3809,12 +3809,12 @@ test('should only allow strings in restrictedFileTypes', () => {
       label: 'Files',
       type: 'files',
       restrictFileTypes: true,
-      restrictedFileTypes: [{ fileType: 'png' }]
+      restrictedFileTypes: [{ fileType: 'png' }],
     },
-    elementSchema
+    elementSchema,
   )
   expect(error.message).toBe(
-    'child "restrictedFileTypes" fails because ["Restricted File Types" at position 0 fails because ["restricted file type" must be a string]]'
+    'child "restrictedFileTypes" fails because ["Restricted File Types" at position 0 fails because ["restricted file type" must be a string]]',
   )
 })
 
@@ -3826,12 +3826,12 @@ test('should throw error if restrictFileTypes is true and restrictedFileTypes is
       label: 'Files',
       type: 'files',
       restrictFileTypes: true,
-      restrictedFileTypes: null
+      restrictedFileTypes: null,
     },
-    elementSchema
+    elementSchema,
   )
   expect(error.message).toBe(
-    'child "restrictedFileTypes" fails because ["Restricted File Types" must be an array]'
+    'child "restrictedFileTypes" fails because ["Restricted File Types" must be an array]',
   )
 })
 
@@ -3842,12 +3842,12 @@ test('should throw error if restrictFileTypes is true and restrictedFileTypes is
       name: 'files',
       label: 'Files',
       type: 'files',
-      restrictFileTypes: true
+      restrictFileTypes: true,
     },
-    elementSchema
+    elementSchema,
   )
   expect(error.message).toBe(
-    'child "restrictedFileTypes" fails because ["Restricted File Types" is required]'
+    'child "restrictedFileTypes" fails because ["Restricted File Types" is required]',
   )
 })
 
@@ -3859,11 +3859,11 @@ test('should throw error if minEntries is greater than maxEntries', () => {
       label: 'Files',
       type: 'files',
       minEntries: 3,
-      maxEntries: 2
+      maxEntries: 2,
     },
-    elementSchema
+    elementSchema,
   )
   expect(error.message).toContain(
-    'child "maxEntries" fails because ["Form Element - Maximum number of files" must be larger than or equal to 3]'
+    'child "maxEntries" fails because ["Form Element - Maximum number of files" must be larger than or equal to 3]',
   )
 })
