@@ -3,7 +3,7 @@
   "description": "OneBlink SDK to serve as an entry point for all OneBlink Services in NodeJS",
   "version": "0.4.5",
   "bugs": {
-    "url": "https://github.com/blinkmobile/oneblink-sdk-js/issues"
+    "url": "https://github.com/oneblink/sdk-js/issues"
   },
   "dependencies": {
     "aws-sdk": "2.656.0",
@@ -36,7 +36,7 @@
     "classes",
     "index.js"
   ],
-  "homepage": "https://github.com/blinkmobile/oneblink-sdk-js",
+  "homepage": "https://github.com/oneblink/sdk-js",
   "keywords": [],
   "license": "MIT",
   "main": "index.js",
@@ -52,7 +52,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blinkmobile/oneblink-sdk-js.git"
+    "url": "git+https://github.com/oneblink/sdk-js.git"
   },
   "scripts": {
     "eslint": "eslint --fix --cache .",
