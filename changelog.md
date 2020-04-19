@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- `CP_PAY` submission event to form schema
+
 ### Removed
 
 - `url`, `username` and `password` from `TRIM` submission event
