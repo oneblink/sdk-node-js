@@ -2664,6 +2664,47 @@ describe('TRIM submission event', () => {
   })
 })
 
+describe('CP_PAY submission event', () => {
+  test('should allow CP_PAY submission event', () => {
+    const { error } = Joi.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+            required: false,
+          },
+        ],
+        isAuthenticated: true,
+        isPublished: true,
+        submissionEvents: [
+          {
+            type: 'CP_PAY',
+            configuration: {
+              elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            },
+          },
+        ],
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBeNull()
+  })
+})
+
 describe('Conditional Predicates', () => {
   test('should allow both OPTIONS and NUMERIC conditional types', () => {
     const { error } = Joi.validate(
