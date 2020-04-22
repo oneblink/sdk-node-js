@@ -1,18 +1,17 @@
 // @flow
 'use strict'
 
-/* ::
 declare type ConstructorOptions = {
   accessKey: mixed,
   secretKey: mixed,
   oneBlinkAPIOrigin?: mixed,
-  tenant?: string
+  tenant?: string,
 }
 
 declare type AWSCredentials = {
   AccessKeyId: string,
   SecretAccessKey: string,
-  SessionToken: string
+  SessionToken: string,
 }
 
 declare type FormRetrievalData = {
@@ -20,8 +19,8 @@ declare type FormRetrievalData = {
   s3: {
     bucket: string,
     key: string,
-    region: string
-  }
+    region: string,
+  },
 }
 
 declare type PreFillMeta = {
@@ -29,123 +28,34 @@ declare type PreFillMeta = {
   s3: {
     bucket: string,
     key: string,
-    region: string
-  }
+    region: string,
+  },
 }
 
 declare type BaseSearchResult = {
   meta: {
-    "limit": null,
-    "offset": null,
-    "nextOffset": null
-  }
-}
-
-declare type FormElement = {
-  id: string,
-  type: 'camera' |
-    'checkboxes' |
-    'date' |
-    'datetime' |
-    'heading' |
-    'location' |
-    'number' |
-    'radio' |
-    'select' |
-    'draw' |
-    'text' |
-    'textarea' |
-    'time' |
-    'repeatableSet' |
-    'html' |
-    'barcodeScanner' |
-    'captcha' |
-    'page' |
-    'email' |
-    'file' |
-    'form' |
-    'infoPage' |
-    'files',
-  name?: string,
-  label?: string,
-  required: boolean,
-  readOnly: boolean,
-  conditionallyShow: boolean,
-  conditionallyShowPredicates?: Array<{
-    elementId: string,
-    type: 'OPTIONS' | 'NUMERIC',
-    optionIds?: string[],
-    operator?: string,
-    value?: number
-  }>,
-  requiresAllConditionallyShowPredicates?: boolean,
-  multi?: boolean,
-  minNumber?: number,
-  maxNumber?: number,
-  headingType?: number,
-  fromDate?: string,
-  toDate?: string,
-  optionsType? : 'custom' | 'dynamic' | 'search',
-  dynamicOptionSetId?: number,
-  options?: Array<{
-    optionId: string,
-    id: string,
-    value: string
-  }>,
-  elements?: Array<FormElement>,
-  minSets?: number,
-  maxSets?: number,
-  defaultValue?: any,
-  isDataLookup?: boolean,
-  isElementLookup?: boolean,
-  formId?: number,
-  searchUrl?: string,
-  restrictFileTypes?: boolean,
-  restrictedFileTypes?: string[],
-  minEntries?: number,
-  maxEntries?: number
-}
-
-declare type Form = {
-  id: number,
-  name: string,
-  description?: string,
-  organisationId: string,
-  formsAppIds: number[],
-  elements: FormElement[],
-  isAuthenticated: boolean,
-  isMultiPage: boolean,
-  isPublished: boolean,
-  submissionEvents?: Array<FormSubmissionEvent>,
-  createdAt?: Date,
-  updatedAt?: Date,
-  postSubmissionAction: string,
-  redirectUrl? : string,
-  organisation? : Organisation,
-  isInfoPage: boolean
-}
-
-declare type FormSubmissionEvent = {
-  type: 'CALLBACK' | 'PDF' | 'SPOTTO' | 'ONEBLINK_API',
-  configuration: Object
+    limit: null,
+    offset: null,
+    nextOffset: null,
+  },
 }
 
 declare type FormsSearchResult = {
-  forms: Form[]
+  forms: Form[],
 } & BaseSearchResult
 
 declare type FormsSearchOptions = {
   isAuthenticated?: mixed,
   isPublished?: mixed,
-  name?: mixed
+  name?: mixed,
 }
 
 declare type S3SubmissionData = {
   submission: {
-    [name: string]: any
+    [name: string]: any,
   },
   definition: Form,
-  submissionTimestamp: string
+  submissionTimestamp: string,
 }
 
 declare type Key = {
@@ -154,13 +64,13 @@ declare type Key = {
   name: string,
   privilege: {
     'API HOSTING'?: 'DEPLOYMENT',
-    'PDF'?: 'BUILDER',
+    PDF?: 'BUILDER',
     'WEB APP HOSTING'?: 'DEPLOYMENT',
-    'FORMS'?: 'FaaS'
+    FORMS?: 'FaaS',
   },
   links: {
-    organisations: string
-  }
+    organisations: string,
+  },
 }
 
 declare type Organisation = {
@@ -172,8 +82,8 @@ declare type Organisation = {
   createdAt: string,
   tags: string[],
   links: {
-    awsAccounts: string[]
-  }
+    awsAccounts: string[],
+  },
 }
 
 declare type NewJob = {
@@ -186,14 +96,14 @@ declare type NewJob = {
     key?: string,
     description?: string,
     type?: string,
-    priority?: number
-  }
+    priority?: number,
+  },
 }
 
 declare type Job = NewJob & {
   id: string,
   isSubmitted: false,
-  createdAt: string
+  createdAt: string,
 }
 
 declare type FormsAppStyles = {
@@ -201,7 +111,7 @@ declare type FormsAppStyles = {
   highlightColour?: string,
   contrastColour?: string,
   logoUrl?: string,
-  customCss?: string
+  customCss?: string,
 }
 
 declare type FormsApp = {
@@ -217,19 +127,19 @@ declare type FormsApp = {
   pwaSettings: {
     homeScreenIconUrl?: string,
     homeScreenName?: string,
-    splashScreenName?: string
+    splashScreenName?: string,
   },
   welcomeEmail?: {
     body?: string,
-    subject?: string
-  }
+    subject?: string,
+  },
 }
 
 declare type FormsAppUser = {
   id: number,
   email: string,
   formsAppId: number,
-  createdAt: string
+  createdAt: string,
 }
 
 type RolePrivileges = {
@@ -244,7 +154,7 @@ type RolePrivileges = {
   FORMS_APP_STYLES?: 'MANAGER' | 'READONLY',
   FORMS_APP_USERS?: 'MANAGER' | 'READONLY',
   KEYS?: 'MANAGER' | 'READONLY',
-  WEB_APP_HOSTING?: 'MANAGER' | 'DEVELOPER' | 'READONLY'
+  WEB_APP_HOSTING?: 'MANAGER' | 'DEVELOPER' | 'READONLY',
 }
 
 type Role = {
@@ -254,7 +164,7 @@ type Role = {
   privilege: RolePrivileges,
   organisationId: string,
   createdAt: string,
-  updatedAt: string
+  updatedAt: string,
 }
 
 declare type JobsSearchOptions = {
@@ -263,15 +173,15 @@ declare type JobsSearchOptions = {
   formId?: number,
   isSubmitted?: boolean,
   limit?: number,
-  offset?: number
+  offset?: number,
 }
 
 declare type JobsSearchResult = {
   meta: {
     limit: number,
-    offset: number
+    offset: number,
   },
-  jobs: Job[]
+  jobs: Job[],
 }
 
 declare type FormSubmissionMetadata = {
@@ -282,12 +192,12 @@ declare type FormSubmissionMetadata = {
   user?: FormSubmissionMetaUserDetails,
   key?: {
     id: string,
-    name: string
-  }
+    name: string,
+  },
 }
 
 declare type FormSubmissionHistorySearchResults = BaseSearchResult & {
-  formSubmissionMeta: FormSubmissionMetadata[]
+  formSubmissionMeta: FormSubmissionMetadata[],
 }
 
 declare type FormSubmissionHistorySearchParameters = {
@@ -295,7 +205,5 @@ declare type FormSubmissionHistorySearchParameters = {
   submissionDateFrom?: string,
   submissionDateTo?: string,
   limit?: number,
-  offset?: number
+  offset?: number,
 }
-*/
-
