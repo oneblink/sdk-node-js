@@ -235,9 +235,9 @@ module.exports = class Forms extends OneBlinkAPI {
     return validatedForm
   }
 
-  static generateFormElement(
+  static generateFormElement /* :: <T: _FormElementBase> */(
     formElementGenerationData /* : mixed */,
-  ) /* : FormElement */ {
+  ) /* : T */ {
     const formElement = generateFormElement(formElementGenerationData)
     return formElement
   }
