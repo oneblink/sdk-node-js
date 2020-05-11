@@ -7,7 +7,10 @@
 - [`getForm()`](#getform)
 - [`getSubmissionData()`](#getsubmissiondata)
 - [`search()`](#search)
-- [`searchSubmissions()`](#searchSubmissions)
+- [`searchSubmissions()`](#searchsubmissions)
+- [`createForm()`](#createform)
+- [`updateForm()`](#updateform)
+- [`deleteForm()`](#deleteform)
 
 ## Static Functions
 
@@ -390,46 +393,46 @@ forms
 }
 ```
 
-## `validateForm()`
-
-`validateForm()` is a static method available on the forms class, used for validating a OneBlink compatible Forms Definition.
+## `createForm()`
 
 ### Example
 
 ```javascript
-const form = {
-  id: 1,
-  name: 'testsform',
-  formsAppEnvironmentId: 1,
-  description: 'a form',
-  organisationId: '0101010101010',
-  formsAppEnvironmentId: 1,
-  elements: [],
-  isAuthenticated: false,
-  isPublished: true,
-  submissionEvents: [],
-  postSubmissionAction: 'FORMS_LIBRARY',
-  formsAppIds: [1, 2, 3],
-}
-
-const validatedForm = OneBlink.Forms.validateForm(form)
-
-return validatedForm
+forms
+  .createForm({
+    name: 'testsform',
+    formsAppEnvironmentId: 1,
+    description: 'a form',
+    organisationId: '0101010101010',
+    formsAppEnvironmentId: 1,
+    elements: [],
+    isAuthenticated: false,
+    isPublished: true,
+    submissionEvents: [],
+    postSubmissionAction: 'FORMS_LIBRARY',
+    formsAppIds: [1, 2, 3],
+  })
+  .then((form) => {
+    // use form here
+  })
+  .catch((error) => {
+    // Handle error here
+  })
 ```
 
 ### Parameters
 
 | Parameter                                              | Required                                  | Type                                             | Description                                                                                     |
 | ------------------------------------------------------ | ----------------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| `name`                                                 | yes                                       | `string`                                         | Name of the form.                                                                               |
+| `name`                                                 | Yes                                       | `string`                                         | Name of the form.                                                                               |
 | `description`                                          | No                                        | `string`                                         | A description of the form.                                                                      |
-| `organisationId`                                       | yes                                       | `string`                                         | The organisation ID the form belong to.                                                         |
-| `formsAppEnvironmentId`                                | yes                                       | `number`                                         | The forms app environment ID the form belong to.                                                |
-| `formsAppIds`                                          | yes                                       | `number[]`                                       | ID's of any Forms Apps that the form is included in.                                            |
-| `elements`                                             | yes                                       | [`FormElement`](./form-elements/README.md)`[]`   | All elements contained within the form itself.                                                  |
-| `isAuthenticated`                                      | yes                                       | `boolean`                                        | Whether or not the form can only be viewed by an Authenticated user.                            |
-| `isMultiPage`                                          | yes                                       | `boolean`                                        | Whether or not the form contains multiple pages.                                                |
-| `isPublished`                                          | yes                                       | `boolean`                                        | Whether or not the form is visible within the Forms Apps it's included in.                      |
+| `organisationId`                                       | Yes                                       | `string`                                         | The organisation ID the form belong to.                                                         |
+| `formsAppEnvironmentId`                                | Yes                                       | `number`                                         | The forms app environment ID the form belong to.                                                |
+| `formsAppIds`                                          | Yes                                       | `number[]`                                       | ID's of any Forms Apps that the form is included in.                                            |
+| `elements`                                             | Yes                                       | [`FormElement`](./form-elements/README.md)`[]`   | All elements contained within the form itself.                                                  |
+| `isAuthenticated`                                      | Yes                                       | `boolean`                                        | Whether or not the form can only be viewed by an Authenticated user.                            |
+| `isMultiPage`                                          | Yes                                       | `boolean`                                        | Whether or not the form contains multiple pages.                                                |
+| `isPublished`                                          | Yes                                       | `boolean`                                        | Whether or not the form is visible within the Forms Apps it's included in.                      |
 | `submissionEvents`                                     | No                                        | `SubmissionEvent[]`                              | Events that occur/trigger on a valid successful submission.                                     |
 | `submissionEvents[].type`                              | Yes                                       | `'CALLBACK' | 'PDF' | 'SPOTTO' | 'ONEBLINK_API'` | The type of submission event.                                                                   |
 | `submissionEvents[].configuration`                     | Yes                                       | `mixed`                                          | Configuration specific to the type of submission event.                                         |
@@ -441,12 +444,9 @@ return validatedForm
 | `submissionEvents[].configuration.apiId`               | If `type` is `ONEBLINK_API`               | `string`                                         | The ID of the OneBlink hosted API that a callback is made to on submission.                     |
 | `submissionEvents[].configuration.apiEnvironment`      | If `type` is `ONEBLINK_API`               | `string`                                         | The environment of the specified OneBlink hosted API to recieve the callback.                   |
 | `submissionEvents[].configuration.apiEnvironmentRoute` | If `type` is `ONEBLINK_API`               | `string`                                         | The route of the specified API and Environment to recieve the callback payload.                 |
-| `createdAt`                                            | No                                        | `Date`                                           | Date that the form was created.                                                                 |
-| `updatedAt`                                            | No                                        | `Date`                                           | Date that the form was last updated.                                                            |
 | `postSubmissionAction`                                 | Yes                                       | `string`                                         | The action for the Form to take on a successful submission.                                     |
 | `redirectUrl`                                          | No                                        | `string`                                         | The URL the form will redirect to if configured to do so by the `postSubmissionActions`.        |
 | `isInfoPage`                                           | Yes                                       | `boolean`                                        | Whether or not the Form is an Info Page.                                                        |
-| `formsAppEnvironmentId`                                | Yes                                       | `number`                                         | the environment the form has been placed in                                                     |
 
 ### Result
 
@@ -464,8 +464,180 @@ return validatedForm
   "postSubmissionAction": "FORMS_LIBRARY",
   "formsAppIds": [1, 2, 3],
   "isMultiPage": false,
-  "isInfoPage": false,
-  "formsAppEnvironmentId": 1
+  "isInfoPage": false
+}
+```
+
+## `updateForm()`
+
+### Example
+
+```javascript
+forms
+  .updateForm({
+    id: 1,
+    name: 'testsform',
+    formsAppEnvironmentId: 1,
+    description: 'a form',
+    organisationId: '0101010101010',
+    formsAppEnvironmentId: 1,
+    elements: [],
+    isAuthenticated: false,
+    isPublished: true,
+    submissionEvents: [],
+    postSubmissionAction: 'FORMS_LIBRARY',
+    formsAppIds: [1, 2, 3],
+  })
+  .then((form) => {
+    // use form here
+  })
+  .catch((error) => {
+    // Handle error here
+  })
+```
+
+### Parameters
+
+| Parameter                                              | Required                                  | Type                                             | Description                                                                                     |
+| ------------------------------------------------------ | ----------------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| `id`                                                   | Yes                                       | `number`                                         | Id of the form.                                                                                 |
+| `name`                                                 | Yes                                       | `string`                                         | Name of the form.                                                                               |
+| `description`                                          | No                                        | `string`                                         | A description of the form.                                                                      |
+| `organisationId`                                       | Yes                                       | `string`                                         | The organisation ID the form belong to.                                                         |
+| `formsAppEnvironmentId`                                | Yes                                       | `number`                                         | The forms app environment ID the form belong to.                                                |
+| `formsAppIds`                                          | Yes                                       | `number[]`                                       | ID's of any Forms Apps that the form is included in.                                            |
+| `elements`                                             | Yes                                       | [`FormElement`](./form-elements/README.md)`[]`   | All elements contained within the form itself.                                                  |
+| `isAuthenticated`                                      | Yes                                       | `boolean`                                        | Whether or not the form can only be viewed by an Authenticated user.                            |
+| `isMultiPage`                                          | Yes                                       | `boolean`                                        | Whether or not the form contains multiple pages.                                                |
+| `isPublished`                                          | Yes                                       | `boolean`                                        | Whether or not the form is visible within the Forms Apps it's included in.                      |
+| `submissionEvents`                                     | No                                        | `SubmissionEvent[]`                              | Events that occur/trigger on a valid successful submission.                                     |
+| `submissionEvents[].type`                              | Yes                                       | `'CALLBACK' | 'PDF' | 'SPOTTO' | 'ONEBLINK_API'` | The type of submission event.                                                                   |
+| `submissionEvents[].configuration`                     | Yes                                       | `mixed`                                          | Configuration specific to the type of submission event.                                         |
+| `submissionEvents[].configuration.url`                 | If `type` is `CALLBACK`                   | `string`                                         | URL that the callback is made to.                                                               |
+| `submissionEvents[].configuration.secret`              | If `type` is `CALLBACK` or `ONEBLINK_API` | `string`                                         | Secret string used for verifying the authenticity of the request made from the OneBlink system. |
+| `submissionEvents[].configuration.email`               | If `type` is `PDF`                        | `string`                                         | The email in which a PDF copy of the form submission will be sent.                              |
+| `submissionEvents[].configuration.pdfFileName`         | If `type` is `PDF`                        | `string`                                         | The name of the PDF file sent to the configured email address.                                  |
+| `submissionEvents[].configuration.emailSubjectLine`    | If `type` is `PDF`                        | `string`                                         | The subject line of the email sent to the configured email address.                             |
+| `submissionEvents[].configuration.apiId`               | If `type` is `ONEBLINK_API`               | `string`                                         | The ID of the OneBlink hosted API that a callback is made to on submission.                     |
+| `submissionEvents[].configuration.apiEnvironment`      | If `type` is `ONEBLINK_API`               | `string`                                         | The environment of the specified OneBlink hosted API to recieve the callback.                   |
+| `submissionEvents[].configuration.apiEnvironmentRoute` | If `type` is `ONEBLINK_API`               | `string`                                         | The route of the specified API and Environment to recieve the callback payload.                 |
+| `postSubmissionAction`                                 | Yes                                       | `string`                                         | The action for the Form to take on a successful submission.                                     |
+| `redirectUrl`                                          | No                                        | `string`                                         | The URL the form will redirect to if configured to do so by the `postSubmissionActions`.        |
+| `isInfoPage`                                           | Yes                                       | `boolean`                                        | Whether or not the Form is an Info Page.                                                        |
+
+### Result
+
+```json
+{
+  "id": 1,
+  "name": "testsform",
+  "description": "a form",
+  "organisationId": "0101010101010",
+  "formsAppEnvironmentId": 1,
+  "elements": [],
+  "isAuthenticated": false,
+  "isPublished": true,
+  "submissionEvents": [],
+  "postSubmissionAction": "FORMS_LIBRARY",
+  "formsAppIds": [1, 2, 3],
+  "isMultiPage": false,
+  "isInfoPage": false
+}
+```
+
+## `deleteForm()`
+
+### Example
+
+```javascript
+const formId = 1
+forms
+  .deleteForm(formId)
+  .then(() => {
+    // Form is not deleted
+  })
+  .catch((error) => {
+    // Handle error here
+  })
+```
+
+### Parameters
+
+| Parameter | Required | Type     | Description     |
+| --------- | -------- | -------- | --------------- |
+| `formId`  | Yes      | `number` | Id of the form. |
+
+## `validateForm()`
+
+`validateForm()` is a static method available on the forms class, used for validating a OneBlink compatible Forms Definition.
+
+### Example
+
+```javascript
+const form = {
+  id: 1,
+  name: 'testsform',
+  formsAppEnvironmentId: 1,
+  description: 'a form',
+  organisationId: '0101010101010',
+  elements: [],
+  isAuthenticated: false,
+  isPublished: true,
+  submissionEvents: [],
+  postSubmissionAction: 'FORMS_LIBRARY',
+  formsAppIds: [1, 2, 3],
+}
+
+const validatedForm = OneBlink.Forms.validateForm(form)
+
+return validatedForm
+```
+
+### Parameters
+
+| Parameter                                              | Required                                  | Type                                             | Description                                                                                     |
+| ------------------------------------------------------ | ----------------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| `name`                                                 | Yes                                       | `string`                                         | Name of the form.                                                                               |
+| `description`                                          | No                                        | `string`                                         | A description of the form.                                                                      |
+| `organisationId`                                       | Yes                                       | `string`                                         | The organisation ID the form belong to.                                                         |
+| `formsAppEnvironmentId`                                | Yes                                       | `number`                                         | The forms app environment ID the form belong to.                                                |
+| `formsAppIds`                                          | Yes                                       | `number[]`                                       | ID's of any Forms Apps that the form is included in.                                            |
+| `elements`                                             | Yes                                       | [`FormElement`](./form-elements/README.md)`[]`   | All elements contained within the form itself.                                                  |
+| `isAuthenticated`                                      | Yes                                       | `boolean`                                        | Whether or not the form can only be viewed by an Authenticated user.                            |
+| `isMultiPage`                                          | Yes                                       | `boolean`                                        | Whether or not the form contains multiple pages.                                                |
+| `isPublished`                                          | Yes                                       | `boolean`                                        | Whether or not the form is visible within the Forms Apps it's included in.                      |
+| `submissionEvents`                                     | No                                        | `SubmissionEvent[]`                              | Events that occur/trigger on a valid successful submission.                                     |
+| `submissionEvents[].type`                              | Yes                                       | `'CALLBACK' | 'PDF' | 'SPOTTO' | 'ONEBLINK_API'` | The type of submission event.                                                                   |
+| `submissionEvents[].configuration`                     | Yes                                       | `mixed`                                          | Configuration specific to the type of submission event.                                         |
+| `submissionEvents[].configuration.url`                 | If `type` is `CALLBACK`                   | `string`                                         | URL that the callback is made to.                                                               |
+| `submissionEvents[].configuration.secret`              | If `type` is `CALLBACK` or `ONEBLINK_API` | `string`                                         | Secret string used for verifying the authenticity of the request made from the OneBlink system. |
+| `submissionEvents[].configuration.email`               | If `type` is `PDF`                        | `string`                                         | The email in which a PDF copy of the form submission will be sent.                              |
+| `submissionEvents[].configuration.pdfFileName`         | If `type` is `PDF`                        | `string`                                         | The name of the PDF file sent to the configured email address.                                  |
+| `submissionEvents[].configuration.emailSubjectLine`    | If `type` is `PDF`                        | `string`                                         | The subject line of the email sent to the configured email address.                             |
+| `submissionEvents[].configuration.apiId`               | If `type` is `ONEBLINK_API`               | `string`                                         | The ID of the OneBlink hosted API that a callback is made to on submission.                     |
+| `submissionEvents[].configuration.apiEnvironment`      | If `type` is `ONEBLINK_API`               | `string`                                         | The environment of the specified OneBlink hosted API to recieve the callback.                   |
+| `submissionEvents[].configuration.apiEnvironmentRoute` | If `type` is `ONEBLINK_API`               | `string`                                         | The route of the specified API and Environment to recieve the callback payload.                 |
+| `postSubmissionAction`                                 | Yes                                       | `string`                                         | The action for the Form to take on a successful submission.                                     |
+| `redirectUrl`                                          | No                                        | `string`                                         | The URL the form will redirect to if configured to do so by the `postSubmissionActions`.        |
+| `isInfoPage`                                           | Yes                                       | `boolean`                                        | Whether or not the Form is an Info Page.                                                        |
+
+### Result
+
+```json
+{
+  "id": 1,
+  "name": "testsform",
+  "description": "a form",
+  "organisationId": "0101010101010",
+  "formsAppEnvironmentId": 1,
+  "elements": [],
+  "isAuthenticated": false,
+  "isPublished": true,
+  "submissionEvents": [],
+  "postSubmissionAction": "FORMS_LIBRARY",
+  "formsAppIds": [1, 2, 3],
+  "isMultiPage": false,
+  "isInfoPage": false
 }
 ```
 

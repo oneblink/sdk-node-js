@@ -230,6 +230,26 @@ module.exports = class Forms extends OneBlinkAPI {
     })
   }
 
+  async createForm(data /* : ?mixed */) /* : Promise<Form> */ {
+    const form = validateWithFormSchema(data)
+    const savedForm = await super.postRequest('/forms', form)
+    return savedForm
+  }
+
+  async updateForm(data /* : ?mixed */) /* : Promise<Form> */ {
+    const form = validateWithFormSchema(data)
+    const savedForm = await super.putRequest(`/forms/${form.id}`, form)
+    return savedForm
+  }
+
+  async deleteForm(formId /* : ?mixed */) /* : Promise<void> */ {
+    if (typeof formId !== 'number') {
+      throw new TypeError('Must supply "formId" as a number')
+    }
+
+    await super.deleteRequest(`/forms/${formId}`)
+  }
+
   static validateForm(form /* : mixed */) /* : Form */ {
     const validatedForm = validateWithFormSchema(form)
     return validatedForm

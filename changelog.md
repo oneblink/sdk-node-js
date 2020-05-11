@@ -5,6 +5,9 @@
 ### Added
 
 - `CP_PAY` submission event to form schema
+- [`createForm()`](./docs/forms.md#createform) function
+- [`updateForm()`](./docs/forms.md#updateform) function
+- [`deleteForm()`](./docs/forms.md#deleteform) function
 
 ### Removed
 
