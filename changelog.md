@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Breaking Changes
+
+- Drop support for Node 8
+
 ### Added
 
 - `CP_PAY` submission event to form schema
