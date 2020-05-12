@@ -247,7 +247,7 @@ declare type HeadingElement = FormElementBase & {
   headingType: number,
 }
 
-declare type LocationElement = FormElementBase & {
+declare type LocationElement = FormElementRequired & {
   type: 'location',
   readOnly: boolean,
 } & LookupFormElement
