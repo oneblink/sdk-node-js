@@ -12,6 +12,7 @@
 - [`createForm()`](./docs/forms.md#createform) function
 - [`updateForm()`](./docs/forms.md#updateform) function
 - [`deleteForm()`](./docs/forms.md#deleteform) function
+- `required` to `location` form element type
 
 ### Removed
 
