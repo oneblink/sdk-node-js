@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+# 0.5.0 (2020-05-14)
+
 ### Breaking Changes
 
 - Drop support for Node 8
