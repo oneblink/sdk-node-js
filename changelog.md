@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- Summary Element to Element types
+
 # 0.5.0 (2020-05-14)
 
 ### Breaking Changes
