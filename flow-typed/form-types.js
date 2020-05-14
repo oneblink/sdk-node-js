@@ -40,6 +40,7 @@ declare type FormElementType =
   | 'autocomplete'
   | 'form'
   | 'infoPage'
+  | 'summary'
 
 declare type ElementType = {
   id: FormElementType,
@@ -318,6 +319,11 @@ declare type TelephoneElement = FormElementRequired & {
   defaultValue: ?string,
 } & LookupFormElement
 
+declare type SummaryElement = FormElementBase & {
+  type: 'summary',
+  elementId: string,
+}
+
 declare type FormElementWithoutForm =
   | TextElement
   | EmailElement
@@ -344,6 +350,7 @@ declare type FormElementWithoutForm =
   | CalculationElement
   | TelephoneElement
   | AutoCompleteElement
+  | SummaryElement
 
 declare type FormElementWithForm = FormFormElement | InfoPageElement
 
