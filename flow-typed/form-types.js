@@ -321,7 +321,7 @@ declare type TelephoneElement = FormElementRequired & {
 
 declare type SummaryElement = FormElementBase & {
   type: 'summary',
-  elementId: string,
+  elementIds: string[],
 }
 
 declare type FormElementWithoutForm =
