@@ -734,6 +734,27 @@ describe('Valid Form Schema', () => {
           optionsType: 'DYNAMIC',
           dynamicOptionSetId: 1,
         },
+        {
+          id: '9014e80c-3c68-4adb-a337-1be04ebc95ef',
+          name: 'summary',
+          label: 'Summary',
+          type: 'summary',
+          elementIds: ['9014e80c-3c68-4adb-a337-1be04ebc95ee'],
+        },
+        {
+          id: '69b723a9-00e2-493f-8d76-84ea71a178f1',
+          name: 'Just_Text_2',
+          label: 'Just Text',
+          type: 'text',
+          required: false,
+          defaultValue: 'single line text',
+          conditionallyShowPredicates: [
+            {
+              elementId: '9014e80c-3c68-4adb-a337-1be04ebc95ef',
+              type: 'SUMMARY',
+            },
+          ],
+        },
       ],
     },
     formSchema,
