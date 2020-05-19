@@ -751,7 +751,8 @@ describe('Valid Form Schema', () => {
           conditionallyShowPredicates: [
             {
               elementId: '9014e80c-3c68-4adb-a337-1be04ebc95ef',
-              type: 'SUMMARY',
+              type: 'VALUE',
+              hasValue: true,
             },
           ],
         },
