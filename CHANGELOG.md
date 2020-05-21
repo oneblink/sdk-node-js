@@ -5,6 +5,7 @@
 ### Added
 
 - Summary Element to Element types
+- `CP_HCMS` submission event to form schema
 
 # 0.5.0 (2020-05-14)
 
