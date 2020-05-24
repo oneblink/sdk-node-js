@@ -76,7 +76,8 @@ declare type Key = {
 declare type Organisation = {
   id: string,
   name: string,
-  formsHostname: string,
+  assetsS3Bucket: string,
+  slug: string,
   formsCloudFrontDistributionOrigin?: string,
   beeFormsCustomer: boolean,
   createdAt: string,
@@ -117,6 +118,7 @@ declare type FormsAppStyles = {
 declare type FormsApp = {
   id: number,
   name: string,
+  slug: string,
   hostname: string,
   oAuthClientId: ?string,
   createdAt: string,

@@ -40,7 +40,7 @@ Create a Forms App
 ```javascript
 const formsApp = {
   name: 'My Application',
-  hostname: 'customer-my.app.oneblink.io',
+  slug: 'my',
   pwaSettings: {
     homeScreenName: 'App',
     splashScreenName: 'Application',
@@ -60,7 +60,7 @@ formsAppsSDK.createFormsApp(formsApp).then((savedFormsApp) => {
 | ---------------------------------------- | -------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `formsApp`                               | Yes      | `Object`   | Forms App properties                                                                                                                                                                                 |
 | `formsApp.name`                          | Yes      | `string`   | Name of the forms app                                                                                                                                                                                |
-| `formsApp.hostname`                      | Yes      | `string`   | Hostname (domain) for the forms app                                                                                                                                                                  |
+| `formsApp.slug`                          | Yes      | `string`   | Unique domain safe text to identify the app                                                                                                                                                          |
 | `formsApp.organisationId`                | Yes      | `string`   | The exact organisation identifier the forms app is associated with                                                                                                                                   |
 | `formsApp.formsAppEnvironmentId`         | Yes      | `number`   | The exact forms app environment identifier the forms app is associated with                                                                                                                          |
 | `formsApp.formIds`                       | Yes      | `number[]` | The identifiers of the forms that are in the forms app. The order of the forms is respected when rendering the list of forms                                                                         |
@@ -79,6 +79,7 @@ formsAppsSDK.createFormsApp(formsApp).then((savedFormsApp) => {
   "id": 1,
   "name": "My Application",
   "hostname": "customer-my.app.oneblink.io",
+  "slug": "my",
   "oAuthClientId": "123456789012abcdefghijkl",
   "styles": {},
   "pwaSettings": {

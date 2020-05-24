@@ -29,6 +29,7 @@ describe('Forms SDK Class', () => {
               id: 1,
               name: 'appname',
               hostname: 'orgname-appname.apps.oneblink.io',
+              slug: 'appname',
             })
           }
         }
