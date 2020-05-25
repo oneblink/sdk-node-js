@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- `CP_HCMS` submission event to form schema
+
 # 0.6.0 (2020-05-25)
 
 ### Added

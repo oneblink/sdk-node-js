@@ -393,6 +393,7 @@ declare type FormSubmissionEventConfiguration = {
   apiId?: string,
   apiEnvironment?: string,
   apiEnvironmentRoute?: string,
+  contentTypeName?: string,
 }
 
 declare type FormSubmissionEventType =
@@ -402,6 +403,7 @@ declare type FormSubmissionEventType =
   | 'ONEBLINK_API'
   | 'TRIM'
   | 'CP_PAY'
+  | 'CP_HCMS'
 
 declare type FormSubmissionEvent = {
   id?: number,
