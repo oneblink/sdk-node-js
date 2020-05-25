@@ -50,7 +50,7 @@ The following options are available as well the as the documented ones in each [
    git checkout master && git pull
    ```
 
-1. Run CLI `package-diff-summary {last-tag}`
+1. Run CLI `npx package-diff-summary {last-tag}`
 
 1. Copy result (if there is one) under a _Dependencies_ heading in [Changelog](./CHANGELOG.md)
 
