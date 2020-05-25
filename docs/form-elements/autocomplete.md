@@ -14,6 +14,7 @@ Allows the user to select a single option from a list of options which can be fi
 | `defaultValue` | Yes      | `string`  |                  | The identifier of an option to be selected when the form is opened.                      |
 | `required`     | Yes      | `boolean` | `false`          | Determine if this element requires an option to be selected (`true`) or not (`false`).   |
 | `readOnly`     | Yes      | `boolean` | `false`          | Determine if this selected option be changed by the user (`false`) or not (`true`).      |
+| `searchUrl`    | No       | `string`  |                  | In addition to the option types inherited from the options element, Autocomplete elements allow for an additional option type, `SEARCH`. The `searchUrl` property should be used in conjunction with the `SEARCH` option type to set the URL that will be hit periodically when the input of the Autocomplete element changes, with the current input passed to this URL via the query string property of `value`. |
 
 Autocomplete element also inherits the properties of the following:
 
