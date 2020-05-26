@@ -2686,6 +2686,72 @@ describe('TRIM submission event', () => {
   })
 })
 
+describe('BPOINT submission event', () => {
+  test('should error for BPOINT submission event not passing "elementId"', () => {
+    const { error } = Joi.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [],
+        isAuthenticated: true,
+        isPublished: true,
+        submissionEvents: [
+          {
+            type: 'BPOINT',
+            configuration: {},
+          },
+        ],
+      },
+      formSchema,
+    )
+    expect(error.message).toContain('"elementId" is required')
+  })
+  test('should allow BPOINT submission event', () => {
+    const { error } = Joi.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+            required: false,
+          },
+        ],
+        isAuthenticated: true,
+        isPublished: true,
+        submissionEvents: [
+          {
+            type: 'BPOINT',
+            configuration: {
+              elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            },
+          },
+        ],
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBeNull()
+  })
+})
+
 describe('CP_PAY submission event', () => {
   test('should allow CP_PAY submission event', () => {
     const { error } = Joi.validate(
