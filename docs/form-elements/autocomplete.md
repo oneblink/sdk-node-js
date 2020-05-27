@@ -14,6 +14,7 @@ Allows the user to select a single option from a list of options which can be fi
 | `defaultValue` | Yes      | `string`  |                  | The identifier of an option to be selected when the form is opened.                      |
 | `required`     | Yes      | `boolean` | `false`          | Determine if this element requires an option to be selected (`true`) or not (`false`).   |
 | `readOnly`     | Yes      | `boolean` | `false`          | Determine if this selected option be changed by the user (`false`) or not (`true`).      |
+| `searchUrl`    | No       | `string`  |                  | The URL that will recieve the value of the autocomplete element. The value will be sent on user input (debounced by 750 ms) as the query string property `value`. This URL should return the relevant options in our standard options format (see [Options Element](./options-element.md)) |
 
 Autocomplete element also inherits the properties of the following:
 

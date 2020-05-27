@@ -6,6 +6,7 @@
 
 - `BPOINT` submission event to form schema
 - `CP_HCMS` submission event to form schema
+- `SEARCH` and `searchUrl` documentation for Autocomplete elements
 
 # 0.6.0 (2020-05-25)
 
