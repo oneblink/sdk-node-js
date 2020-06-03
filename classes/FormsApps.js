@@ -3,17 +3,24 @@
 
 const OneBlinkAPI = require('../lib/one-blink-api.js')
 const oneBlinkAPIErrorHandler = require('../lib/one-blink-api-error-handler.js')
-const getTenantUrl = require('../lib/tenant')
 const basePath = `/forms-apps`
-
+const verifyJWT = require('../lib/verify-jwt')
 module.exports = class FormsApps extends OneBlinkAPI {
   constructor(options /* : ConstructorOptions */) {
     options = options || {}
     super(
-      getTenantUrl(options.tenant, options.oneBlinkAPIOrigin),
+      options.oneBlinkAPIOrigin,
       options.accessKey,
       options.secretKey,
+      options.tenant,
     )
+  }
+
+  async verifyJWT(
+    token /* : string */,
+    iss /* : string | void*/,
+  ) /* : Promise<mixed> */ {
+    return verifyJWT(token, iss || this.jwtIssuer)
   }
 
   async getFormsApp(formsAppId /* : ?mixed */) /* : Promise<FormsApp> */ {

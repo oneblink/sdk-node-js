@@ -5,7 +5,6 @@ const Joi = require('joi')
 
 const OneBlinkAPI = require('../lib/one-blink-api.js')
 const setPreFillData = require('../lib/pre-fill-data.js')
-const getTenantUrl = require('../lib/tenant')
 const newJobSchema = Joi.object()
   .label('options')
   .required()
@@ -26,9 +25,10 @@ module.exports = class Jobs extends OneBlinkAPI {
   constructor(options /* : ConstructorOptions */) {
     options = options || {}
     super(
-      getTenantUrl(options.tenant, options.oneBlinkAPIOrigin),
+      options.oneBlinkAPIOrigin,
       options.accessKey,
       options.secretKey,
+      options.tenant,
     )
   }
 
