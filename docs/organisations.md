@@ -49,7 +49,8 @@ organisations.getOrganisations(organisationId).then((organisation) => {
     "awsAccounts": ["ABCDEFG55678901HIJKL1234"]
   },
   "tags": ["Organisation Tag"],
-  "formsHostname": "example.forms.oneblink.io",
+  "assetsS3Bucket": "example.forms.oneblink.io",
+  "slug": "example",
   "beeFormsCustomer": false
 }
 ```

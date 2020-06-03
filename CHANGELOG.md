@@ -2,9 +2,27 @@
 
 ## Unreleased
 
+# 0.6.1 (2020-06-03)
+
+### Added
+
+- `BPOINT` submission event to form schema
+- `CP_HCMS` submission event to form schema
+- `SEARCH` and `searchUrl` documentation for Autocomplete elements
+
+### Dependencies
+
+- update [aws-sdk](https://www.npmjs.com/package/aws-sdk) to [2.683.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.683.0) (from [2.673.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.673.0))
+
+- update [uuid](https://www.npmjs.com/package/uuid) to [8.1.0](https://github.com/uuidjs/uuid/blob/master/CHANGELOG.md) (from [8.0.0](https://github.com/uuidjs/uuid/blob/master/CHANGELOG.md))
+
+# 0.6.0 (2020-05-25)
+
 ### Added
 
 - Summary Element to Element types
+- `slug` property to Forms Apps
+- `slug` property to Organisations
 
 # 0.5.0 (2020-05-14)
 
