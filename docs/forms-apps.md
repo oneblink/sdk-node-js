@@ -2,6 +2,7 @@
 
 ## Functions
 
+- [`verifyJWT()`](#verifyjwt)
 - [`createFormsApp()`](#createformsapp)
 - [`createUser()`](#createuser)
 - [`deleteFormsApp()`](#deleteformsapp)
@@ -27,8 +28,53 @@ const OneBlink = require('@oneblink/sdk')
 const options = {
   accessKey: '123455678901ABCDEFGHIJKL',
   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+  tenant: 'ONEBLINK',
 }
 const formsAppsSDK = new OneBlink.FormsApps(options)
+```
+
+## `verifyJWT()`
+
+Verify a JWT and return its result
+
+### Example
+
+```javascript
+formsAppsSDK
+  .verifyJWT(token)
+  .then((result) => {
+    // Result is Decoded Token
+  })
+  .catch((e) => {
+    // Token was invalid
+  })
+```
+
+### Parameters
+
+| Parameter | Required | Type     | Description                                                                                     |
+| --------- | -------- | -------- | ----------------------------------------------------------------------------------------------- |
+| `token`   | Yes      | `string` | The JWT you wish to verify                                                                      |
+| `iss`     | No       | `string` | The JWT token issuer. This will already be set for you in conjunction with your selected tenant |
+
+### Result (Resolved Promise)
+
+```js
+{
+  sub: '88724de3-d728-448a-b0a9-7c1b585f1f0f',
+  'cognito:groups': ['ap-southeast-2_o1t3ntGWx_Google'],
+  token_use: 'access',
+  scope: 'aws.cognito.signin.user.admin openid profile email',
+  auth_time: 1591078251,
+  iss:
+    'https://token-issuer-url.com/',
+  exp: 1591141557,
+  iat: 1591137957,
+  version: 2,
+  jti: 'e36f68e7-a0ff-4f93-b2b0-c3b8c63c02f0',
+  client_id: 'clientId',
+  username: 'username',
+}
 ```
 
 ## `createFormsApp()`
