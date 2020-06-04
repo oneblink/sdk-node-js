@@ -11,12 +11,7 @@ const generateFormElement = require('../lib/generate-form-element.js')
 module.exports = class Forms extends OneBlinkAPI {
   constructor(options /* : ConstructorOptions */) {
     options = options || {}
-    super(
-      options.oneBlinkAPIOrigin,
-      options.accessKey,
-      options.secretKey,
-      options.tenant,
-    )
+    super(options.accessKey, options.secretKey, options.tenant)
   }
 
   async generateFormUrl(

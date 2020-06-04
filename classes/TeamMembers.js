@@ -5,12 +5,7 @@ const OneBlinkAPI = require('../lib/one-blink-api.js')
 module.exports = class TeamMembers extends OneBlinkAPI {
   constructor(options /* : ConstructorOptions */) {
     options = options || {}
-    super(
-      options.oneBlinkAPIOrigin,
-      options.accessKey,
-      options.secretKey,
-      options.tenant,
-    )
+    super(options.accessKey, options.secretKey, options.tenant)
   }
 
   async getTeamMemberRole(email /* : ?mixed */) /* : Promise<Role | null> */ {

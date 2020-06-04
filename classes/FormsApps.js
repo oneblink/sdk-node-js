@@ -8,19 +8,11 @@ const verifyJWT = require('../lib/verify-jwt')
 module.exports = class FormsApps extends OneBlinkAPI {
   constructor(options /* : ConstructorOptions */) {
     options = options || {}
-    super(
-      options.oneBlinkAPIOrigin,
-      options.accessKey,
-      options.secretKey,
-      options.tenant,
-    )
+    super(options.accessKey, options.secretKey, options.tenant)
   }
 
-  async verifyJWT(
-    token /* : string */,
-    iss /* : string | void*/,
-  ) /* : Promise<mixed> */ {
-    return verifyJWT(token, iss || this.jwtIssuer)
+  async verifyJWT(token /* : string */) /* : Promise<mixed> */ {
+    return verifyJWT(token, this.jwksInstance)
   }
 
   async getFormsApp(formsAppId /* : ?mixed */) /* : Promise<FormsApp> */ {

@@ -24,12 +24,7 @@ const newJobSchema = Joi.object()
 module.exports = class Jobs extends OneBlinkAPI {
   constructor(options /* : ConstructorOptions */) {
     options = options || {}
-    super(
-      options.oneBlinkAPIOrigin,
-      options.accessKey,
-      options.secretKey,
-      options.tenant,
-    )
+    super(options.accessKey, options.secretKey, options.tenant)
   }
 
   async createJob(
