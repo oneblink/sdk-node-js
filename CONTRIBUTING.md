@@ -16,9 +16,7 @@ process.env.ONEBLINK_SDK_ENVIRONMENT = 'test'
 
 before you import the SDK
 
-## Publishing Releases
-
-## Beta Process
+## Beta Release Process
 
 1. Checkout `master` and get the latest code
 
@@ -44,7 +42,7 @@ before you import the SDK
    npm publish --tag beta
    ```
 
-## Production Process
+## Production Release Process
 
 1. Checkout `master` and get the latest code
 
@@ -57,6 +55,12 @@ before you import the SDK
 1. Copy result (if there is one) under a _Dependencies_ heading in [Changelog](./CHANGELOG.md)
 
 1. Update the [Changelog](./CHANGELOG.md) by replacing `Unreleased` with `x.x.x (YYYY-MM-DD)`
+
+1. Commit changes to the `master` branch
+
+   ```
+   git add -A && git commit -m "[CHANGELOG] x.x.x"
+   ```
 
 1. Bump the version and create a release commit
 
