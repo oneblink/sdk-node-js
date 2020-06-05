@@ -2,11 +2,11 @@
 
 ## Constructor
 
-| Parameter           | Required | Type                          | Description                                                                        |
-| ------------------- | -------- | ----------------------------- | ---------------------------------------------------------------------------------- |
-| `options.accessKey` | Yes      | `string`                      | Access key provided by OneBlink.                                                   |
-| `options.secretKey` | Yes      | `string`                      | Secret key provided by OneBlink.                                                   |
-| `options.tenant`    | No       | `'ONEBLINK'` or `'CIVICPLUS'` | Sets the default apiOrigin to the tenant appropriate value. Defaults to `ONEBLINK` |
+| Parameter           | Required | Type                          | Description                                                                 |
+| ------------------- | -------- | ----------------------------- | --------------------------------------------------------------------------- |
+| `options.accessKey` | Yes      | `string`                      | Access key provided by OneBlink.                                            |
+| `options.secretKey` | Yes      | `string`                      | Secret key provided by OneBlink.                                            |
+| `options.tenant`    | No       | `'ONEBLINK'` or `'CIVICPLUS'` | Sets configuration to the tenant appropriate values. Defaults to `ONEBLINK` |
 
 ### Example
 

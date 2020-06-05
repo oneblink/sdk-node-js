@@ -12,7 +12,7 @@ describe('Forms SDK Class', () => {
         accessKey: string
         secretKey: string
         */
-        constructor(apiOrigin, accessKey, secretKey) {
+        constructor(accessKey, secretKey) {
           this.accessKey = accessKey
           this.secretKey = secretKey
         }

@@ -8,15 +8,10 @@ const OneBlinkAPI = require('../lib/one-blink-api.js')
 const setPreFillData = require('../lib/pre-fill-data')
 const { validateWithFormSchema } = require('../lib/forms-validation.js')
 const generateFormElement = require('../lib/generate-form-element.js')
-const getTenantUrl = require('../lib/tenant')
 module.exports = class Forms extends OneBlinkAPI {
   constructor(options /* : ConstructorOptions */) {
     options = options || {}
-    super(
-      getTenantUrl(options.tenant, options.oneBlinkAPIOrigin),
-      options.accessKey,
-      options.secretKey,
-    )
+    super(options.accessKey, options.secretKey, options.tenant)
   }
 
   async generateFormUrl(

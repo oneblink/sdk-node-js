@@ -2,6 +2,7 @@
 
 ## Functions
 
+- [`verifyJWT()`](#verifyjwt)
 - [`createFormsApp()`](#createformsapp)
 - [`createUser()`](#createuser)
 - [`deleteFormsApp()`](#deleteformsapp)
@@ -13,11 +14,11 @@
 
 ## Constructor
 
-| Parameter           | Required | Type                          | Description                                                                        |
-| ------------------- | -------- | ----------------------------- | ---------------------------------------------------------------------------------- |
-| `options.accessKey` | Yes      | `string`                      | Access key provided by OneBlink.                                                   |
-| `options.secretKey` | Yes      | `string`                      | Secret key provided by OneBlink.                                                   |
-| `options.tenant`    | No       | `'ONEBLINK'` or `'CIVICPLUS'` | Sets the default apiOrigin to the tenant appropriate value. Defaults to `ONEBLINK` |
+| Parameter           | Required | Type                          | Description                                                                 |
+| ------------------- | -------- | ----------------------------- | --------------------------------------------------------------------------- |
+| `options.accessKey` | Yes      | `string`                      | Access key provided by OneBlink.                                            |
+| `options.secretKey` | Yes      | `string`                      | Secret key provided by OneBlink.                                            |
+| `options.tenant`    | No       | `'ONEBLINK'` or `'CIVICPLUS'` | Sets configuration to the tenant appropriate values. Defaults to `ONEBLINK` |
 
 ### Example
 
@@ -27,8 +28,57 @@ const OneBlink = require('@oneblink/sdk')
 const options = {
   accessKey: '123455678901ABCDEFGHIJKL',
   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+  tenant: 'ONEBLINK',
 }
 const formsAppsSDK = new OneBlink.FormsApps(options)
+```
+
+## `verifyJWT()`
+
+Verify a JWT and return its result
+
+### Example
+
+```javascript
+const token =
+  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+// or
+const token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+formsAppsSDK
+  .verifyJWT(token)
+  .then((result) => {
+    // Result is Decoded Token
+  })
+  .catch((e) => {
+    // Token was invalid
+  })
+```
+
+### Parameters
+
+| Parameter | Required | Type     | Description                |
+| --------- | -------- | -------- | -------------------------- |
+| `token`   | Yes      | `string` | The JWT you wish to verify |
+
+### Result (Resolved Promise)
+
+```js
+{
+  sub: '88724de3-d728-448a-b0a9-7c1b585f1f0f',
+  'cognito:groups': ['ap-southeast-2_o1t3ntGWx_Google'],
+  token_use: 'access',
+  scope: 'aws.cognito.signin.user.admin openid profile email',
+  auth_time: 1591078251,
+  iss:
+    'https://token-issuer-url.com/',
+  exp: 1591141557,
+  iat: 1591137957,
+  version: 2,
+  jti: 'e36f68e7-a0ff-4f93-b2b0-c3b8c63c02f0',
+  client_id: 'clientId',
+  username: 'username',
+}
 ```
 
 ## `createFormsApp()`

@@ -4,7 +4,6 @@
 declare type ConstructorOptions = {
   accessKey: mixed,
   secretKey: mixed,
-  oneBlinkAPIOrigin?: mixed,
   tenant?: string,
 }
 

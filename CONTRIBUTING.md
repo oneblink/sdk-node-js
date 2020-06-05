@@ -6,13 +6,15 @@ This project adheres to [GitHub Flow](https://guides.github.com/introduction/flo
 
 ## Development
 
-### Public Class Constructors
+### Using Test Host (Not for customers)
 
-The following options are available as well the as the documented ones in each [Class Constructor ](./docs/README.md) to allow you to use test endpoints for local development or end to end testing
+To set configuration values (apiOrigin, JWT Issuer) to those matching the test environment, set
 
-| Parameter                   | Required | Type     | Description                                                                               |
-| --------------------------- | -------- | -------- | ----------------------------------------------------------------------------------------- |
-| `options.oneBlinkAPIOrigin` | No       | `string` | The Origin of the OneBlink API. Should only be used for development and testing purposes. |
+```js
+process.env.ONEBLINK_SDK_ENVIRONMENT = 'test'
+```
+
+before you import the SDK
 
 ## Publishing Releases
 
