@@ -4,7 +4,6 @@
 declare type ConstructorOptions = {
   accessKey: mixed,
   secretKey: mixed,
-  tenant?: string,
 }
 
 declare type AWSCredentials = {
@@ -207,4 +206,22 @@ declare type FormSubmissionHistorySearchParameters = {
   submissionDateTo?: string,
   limit?: number,
   offset?: number,
+}
+
+declare type TenantConfiguration = {
+  test: {
+    apiOrigin: string,
+    jwtIssuer: string,
+  },
+  prod: {
+    apiOrigin: string,
+    jwtIssuer: string,
+  },
+}
+
+declare type JwksClient = Object
+
+declare type Tenant = {
+  apiOrigin: string,
+  jwksInstance: JwksClient,
 }

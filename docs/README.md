@@ -1,5 +1,29 @@
 # OneBlink SDK | Usage
 
+## Tenants
+
+This SDK is the entry point for all OneBlink Productivity instances. The default instance is the [OneBlink Console](https://console.oneblink.io). To use a different tenant to the default, change the require path t include the desired tenant. The currently available tenants include:
+
+- [OneBlink Console](https://console.oneblink.io)
+
+  ```js
+  const OneBlink = require('@oneblink/sdk/tenants/oneblink')
+  ```
+
+- [CivicOptimize Productivity](https://)
+
+  ```js
+  const CivicPlus = require('@oneblink/sdk/tenants/civicplus')
+  ```
+
+Once the SDK has been `require`d, all class documentation below applies to all tenants. However, all of the examples use the default tenant. If you copy and paste from the examples, please don't forget to change (replacing `my-tenant` with a valid tenant path):
+
+```js
+const OneBlink = require('@oneblink/sdk')
+// to
+const MyTenant = require('@oneblink/sdk/tenants/my-tenant')
+```
+
 ## Classes
 
 - [Forms](./forms.md)

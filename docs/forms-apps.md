@@ -2,7 +2,6 @@
 
 ## Functions
 
-- [`verifyJWT()`](#verifyjwt)
 - [`createFormsApp()`](#createformsapp)
 - [`createUser()`](#createuser)
 - [`deleteFormsApp()`](#deleteformsapp)
@@ -12,13 +11,16 @@
 - [`updateFormsApp()`](#updateformsapp)
 - [`updateStyles()`](#updatestyles)
 
+## Static Functions
+
+- [`verifyJWT()`](#verifyjwt)
+
 ## Constructor
 
-| Parameter           | Required | Type                          | Description                                                                 |
-| ------------------- | -------- | ----------------------------- | --------------------------------------------------------------------------- |
-| `options.accessKey` | Yes      | `string`                      | Access key provided by OneBlink.                                            |
-| `options.secretKey` | Yes      | `string`                      | Secret key provided by OneBlink.                                            |
-| `options.tenant`    | No       | `'ONEBLINK'` or `'CIVICPLUS'` | Sets configuration to the tenant appropriate values. Defaults to `ONEBLINK` |
+| Parameter           | Required | Type     | Description                      |
+| ------------------- | -------- | -------- | -------------------------------- |
+| `options.accessKey` | Yes      | `string` | Access key provided by OneBlink. |
+| `options.secretKey` | Yes      | `string` | Secret key provided by OneBlink. |
 
 ### Example
 
@@ -28,14 +30,13 @@ const OneBlink = require('@oneblink/sdk')
 const options = {
   accessKey: '123455678901ABCDEFGHIJKL',
   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-  tenant: 'ONEBLINK',
 }
 const formsAppsSDK = new OneBlink.FormsApps(options)
 ```
 
 ## `verifyJWT()`
 
-Verify a JWT and return its result
+A static function to verify a JWT and return its result
 
 ### Example
 
@@ -45,8 +46,7 @@ const token =
 // or
 const token =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
-formsAppsSDK
-  .verifyJWT(token)
+OneBlink.FormsApps.verifyJWT(token)
   .then((result) => {
     // Result is Decoded Token
   })

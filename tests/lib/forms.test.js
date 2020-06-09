@@ -36,7 +36,7 @@ describe('Forms SDK Class', () => {
       }
     })
 
-    const Forms = require('../../classes/Forms.js')
+    const { Forms } = require('../..')
     const forms = new Forms({
       accessKey: '123',
       secretKey: 'abc',
@@ -97,11 +97,10 @@ describe('Forms SDK Class', () => {
   })
 
   describe('getSubmissionData()', () => {
-    const Forms = require('../../classes/Forms.js')
+    const { Forms } = require('../..')
     const forms = new Forms({
       accessKey: '123',
       secretKey: 'abc',
-      oneBlinkAPIOrigin: 'https://domain.api.com',
     })
 
     describe('should reject with correct validation errors for', () => {
@@ -120,11 +119,10 @@ describe('Forms SDK Class', () => {
   })
 
   describe('generateSubmissionDataUrl()', () => {
-    const Forms = require('../../classes/Forms.js')
+    const { Forms } = require('../..')
     const forms = new Forms({
       accessKey: '123',
       secretKey: 'abc',
-      oneBlinkAPIOrigin: 'https://domain.api.com',
     })
 
     describe('should reject with correct validation errors for', () => {
@@ -157,11 +155,10 @@ describe('Forms SDK Class', () => {
   })
 
   describe('getForm()', () => {
-    const Forms = require('../../classes/Forms.js')
+    const { Forms } = require('../..')
     const forms = new Forms({
       accessKey: '123',
       secretKey: 'abc',
-      oneBlinkAPIOrigin: 'https://domain.api.com',
     })
 
     describe('should reject with correct validation errors for', () => {

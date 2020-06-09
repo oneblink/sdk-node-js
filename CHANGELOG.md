@@ -2,9 +2,13 @@
 
 ## Unreleased
 
+### Breaking Changes
+
+- removed `tenant` argument from all classes. This has been replaced by specifying the tenant in the `require()` path. See the [Tenants](./docs/README.md#tenants) documentation for more details.
+
 ### Added
 
-- verifyJWT function in FormsApps Class
+- static verifyJWT function in FormsApps Class
 
 # 0.6.1 (2020-06-03)
 
