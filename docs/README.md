@@ -7,6 +7,8 @@ This SDK is the entry point for all OneBlink Productivity instances. The default
 - [OneBlink Console](https://console.oneblink.io)
 
   ```js
+  const OneBlink = require('@oneblink/sdk')
+  // or
   const OneBlink = require('@oneblink/sdk/tenants/oneblink')
   ```
 
