@@ -8,252 +8,263 @@ const OneBlinkAPI = require('../lib/one-blink-api.js')
 const setPreFillData = require('../lib/pre-fill-data')
 const { validateWithFormSchema } = require('../lib/forms-validation.js')
 const generateFormElement = require('../lib/generate-form-element.js')
-module.exports = class Forms extends OneBlinkAPI {
-  constructor(options /* : ConstructorOptions */) {
-    options = options || {}
-    super(options.accessKey, options.secretKey, options.tenant)
-  }
 
-  async generateFormUrl(
-    parameters /* : {
+module.exports = (tenant /* : Tenant */) =>
+  class Forms extends OneBlinkAPI {
+    constructor(options /* : ConstructorOptions */) {
+      options = options || {}
+      super(options.accessKey, options.secretKey, tenant)
+    }
+
+    async generateFormUrl(
+      parameters /* : {
       formId: ?mixed,
       formsAppId?: ?mixed,
       externalId?: ?mixed,
       preFillData? : ?mixed,
       expiryInSeconds?: ?mixed
     } */,
-  ) /* : Promise<{ expiry: string, formUrl: string }> */ {
-    if (typeof parameters !== 'object') {
-      throw new TypeError('Parameters not provided.')
+    ) /* : Promise<{ expiry: string, formUrl: string }> */ {
+      if (typeof parameters !== 'object') {
+        throw new TypeError('Parameters not provided.')
+      }
+
+      const expiryInSeconds = parameters.expiryInSeconds
+      if (
+        expiryInSeconds !== undefined &&
+        typeof expiryInSeconds !== 'number'
+      ) {
+        throw new TypeError(
+          'Must supply "expiryInSeconds" as a number or not at all',
+        )
+      }
+
+      const externalId = parameters.externalId
+      if (externalId && typeof externalId !== 'string') {
+        throw new TypeError(
+          'Must supply "externalId" as a string or not at all',
+        )
+      }
+
+      const formId = parameters.formId
+      if (typeof formId !== 'number') {
+        throw new TypeError('Must supply "formId" as a number')
+      }
+
+      let formsAppId = parameters.formsAppId
+      if (
+        typeof formsAppId !== 'number' &&
+        formsAppId !== undefined &&
+        formsAppId !== null
+      ) {
+        throw new TypeError(
+          'Must supply "formsAppId" as a number or not at all',
+        )
+      }
+
+      if (typeof formsAppId !== 'number') {
+        const form = await super.getRequest(`/forms/${formId}`)
+        formsAppId = form.formsAppIds[0]
+      }
+
+      if (typeof formsAppId !== 'number') {
+        throw new Error('This form has not been added to a forms app yet.')
+      }
+
+      const formsApp = await super.getRequest(`/forms-apps/${formsAppId}`)
+
+      let preFillFormDataId
+      if (parameters.preFillData) {
+        const preFillMeta = await super.postRequest(
+          `/forms/${formId}/pre-fill-credentials`,
+        )
+        await setPreFillData(preFillMeta, parameters.preFillData)
+        preFillFormDataId = preFillMeta.preFillFormDataId
+      }
+
+      // Default expiry for token is 8 hours
+      const jwtExpiry = expiryInSeconds || 28800
+
+      const token = generateJWT(this.accessKey, this.secretKey, jwtExpiry)
+
+      const formUrl = generateFormUrl(
+        `https://${formsApp.hostname}/forms`,
+        formId,
+        token,
+        externalId,
+        preFillFormDataId,
+      )
+
+      const expiry = new Date(Date.now() + jwtExpiry * 1000).toISOString()
+
+      return {
+        formUrl,
+        expiry,
+      }
     }
 
-    const expiryInSeconds = parameters.expiryInSeconds
-    if (expiryInSeconds !== undefined && typeof expiryInSeconds !== 'number') {
-      throw new TypeError(
-        'Must supply "expiryInSeconds" as a number or not at all',
+    async generateSubmissionDataUrl(
+      formId /* : ?mixed */,
+      submissionId /* : ?mixed */,
+      expiryInSeconds /* : ?mixed */,
+    ) /* : Promise<{ url: string }> */ {
+      if (typeof formId !== 'number') {
+        return Promise.reject(new TypeError('Must supply "formId" as a number'))
+      }
+      if (typeof submissionId !== 'string') {
+        return Promise.reject(
+          new TypeError('Must supply "submissionId" as a string'),
+        )
+      }
+      if (typeof expiryInSeconds !== 'number') {
+        return Promise.reject(
+          new TypeError('Must supply "expiryInSeconds" as a number'),
+        )
+      }
+      if (expiryInSeconds < 900) {
+        return Promise.reject(
+          new TypeError(
+            '"expiryInSeconds" must be greater than or equal to 900',
+          ),
+        )
+      }
+
+      return super.postRequest(
+        `/forms/${formId}/retrieval-url/${submissionId}?expirySeconds=${expiryInSeconds}`,
       )
     }
 
-    const externalId = parameters.externalId
-    if (externalId && typeof externalId !== 'string') {
-      throw new TypeError('Must supply "externalId" as a string or not at all')
+    getSubmissionData(
+      formId /* : ?mixed */,
+      submissionId /* : ?mixed */,
+      isDraft /* : ?boolean */,
+    ) /* : Promise<S3SubmissionData> */ {
+      if (typeof formId !== 'number') {
+        return Promise.reject(new TypeError('Must supply "formId" as a number'))
+      }
+      if (typeof submissionId !== 'string') {
+        return Promise.reject(
+          new TypeError('Must supply "submissionId" as a string'),
+        )
+      }
+
+      let url = `/forms/${formId}/retrieval-credentials/${submissionId}`
+      if (isDraft) {
+        url = `/forms/${formId}/download-draft-data-credentials/${submissionId}`
+      }
+
+      return super
+        .postRequest(url)
+        .then((credentials) => submissionData.getSubmissionData(credentials))
     }
 
-    const formId = parameters.formId
-    if (typeof formId !== 'number') {
-      throw new TypeError('Must supply "formId" as a number')
+    search(
+      options /* : ?FormsSearchOptions */,
+    ) /* : Promise<FormsSearchResult> */ {
+      options = options || {}
+
+      let searchParams = {}
+
+      if (typeof options.isAuthenticated === 'boolean') {
+        searchParams = Object.assign({}, searchParams, {
+          isAuthenticated: options.isAuthenticated,
+        })
+      }
+
+      if (typeof options.isPublished === 'boolean') {
+        searchParams = Object.assign({}, searchParams, {
+          isPublished: options.isPublished,
+        })
+      }
+
+      if (typeof options.name === 'string') {
+        searchParams = Object.assign({}, searchParams, {
+          name: options.name,
+        })
+      }
+
+      return super.searchRequest(`/forms`, searchParams)
     }
 
-    let formsAppId = parameters.formsAppId
-    if (
-      typeof formsAppId !== 'number' &&
-      formsAppId !== undefined &&
-      formsAppId !== null
-    ) {
-      throw new TypeError('Must supply "formsAppId" as a number or not at all')
-    }
+    searchSubmissions(
+      options /* : FormSubmissionHistorySearchParameters */,
+    ) /* : Promise<FormSubmissionHistorySearchResults> */ {
+      let searchParams = {}
 
-    if (typeof formsAppId !== 'number') {
-      const form = await super.getRequest(`/forms/${formId}`)
-      formsAppId = form.formsAppIds[0]
-    }
+      if (typeof options.formId === 'number') {
+        searchParams = Object.assign(searchParams, {
+          formId: options.formId,
+        })
+      } else {
+        throw new Error('formId must be a number and is required')
+      }
 
-    if (typeof formsAppId !== 'number') {
-      throw new Error('This form has not been added to a forms app yet.')
-    }
+      if (typeof options.submissionDateFrom === 'string') {
+        searchParams = Object.assign(searchParams, {
+          submissionDateFrom: options.submissionDateFrom,
+        })
+      }
 
-    const formsApp = await super.getRequest(`/forms-apps/${formsAppId}`)
+      if (typeof options.submissionDateTo === 'string') {
+        searchParams = Object.assign(searchParams, {
+          submissionDateTo: options.submissionDateTo,
+        })
+      }
 
-    let preFillFormDataId
-    if (parameters.preFillData) {
-      const preFillMeta = await super.postRequest(
-        `/forms/${formId}/pre-fill-credentials`,
-      )
-      await setPreFillData(preFillMeta, parameters.preFillData)
-      preFillFormDataId = preFillMeta.preFillFormDataId
-    }
-
-    // Default expiry for token is 8 hours
-    const jwtExpiry = expiryInSeconds || 28800
-
-    const token = generateJWT(this.accessKey, this.secretKey, jwtExpiry)
-
-    const formUrl = generateFormUrl(
-      `https://${formsApp.hostname}/forms`,
-      formId,
-      token,
-      externalId,
-      preFillFormDataId,
-    )
-
-    const expiry = new Date(Date.now() + jwtExpiry * 1000).toISOString()
-
-    return {
-      formUrl,
-      expiry,
-    }
-  }
-
-  async generateSubmissionDataUrl(
-    formId /* : ?mixed */,
-    submissionId /* : ?mixed */,
-    expiryInSeconds /* : ?mixed */,
-  ) /* : Promise<{ url: string }> */ {
-    if (typeof formId !== 'number') {
-      return Promise.reject(new TypeError('Must supply "formId" as a number'))
-    }
-    if (typeof submissionId !== 'string') {
-      return Promise.reject(
-        new TypeError('Must supply "submissionId" as a string'),
-      )
-    }
-    if (typeof expiryInSeconds !== 'number') {
-      return Promise.reject(
-        new TypeError('Must supply "expiryInSeconds" as a number'),
-      )
-    }
-    if (expiryInSeconds < 900) {
-      return Promise.reject(
-        new TypeError('"expiryInSeconds" must be greater than or equal to 900'),
-      )
-    }
-
-    return super.postRequest(
-      `/forms/${formId}/retrieval-url/${submissionId}?expirySeconds=${expiryInSeconds}`,
-    )
-  }
-
-  getSubmissionData(
-    formId /* : ?mixed */,
-    submissionId /* : ?mixed */,
-    isDraft /* : ?boolean */,
-  ) /* : Promise<S3SubmissionData> */ {
-    if (typeof formId !== 'number') {
-      return Promise.reject(new TypeError('Must supply "formId" as a number'))
-    }
-    if (typeof submissionId !== 'string') {
-      return Promise.reject(
-        new TypeError('Must supply "submissionId" as a string'),
-      )
-    }
-
-    let url = `/forms/${formId}/retrieval-credentials/${submissionId}`
-    if (isDraft) {
-      url = `/forms/${formId}/download-draft-data-credentials/${submissionId}`
-    }
-
-    return super
-      .postRequest(url)
-      .then((credentials) => submissionData.getSubmissionData(credentials))
-  }
-
-  search(
-    options /* : ?FormsSearchOptions */,
-  ) /* : Promise<FormsSearchResult> */ {
-    options = options || {}
-
-    let searchParams = {}
-
-    if (typeof options.isAuthenticated === 'boolean') {
-      searchParams = Object.assign({}, searchParams, {
-        isAuthenticated: options.isAuthenticated,
-      })
-    }
-
-    if (typeof options.isPublished === 'boolean') {
-      searchParams = Object.assign({}, searchParams, {
-        isPublished: options.isPublished,
-      })
-    }
-
-    if (typeof options.name === 'string') {
-      searchParams = Object.assign({}, searchParams, {
-        name: options.name,
-      })
-    }
-
-    return super.searchRequest(`/forms`, searchParams)
-  }
-
-  searchSubmissions(
-    options /* : FormSubmissionHistorySearchParameters */,
-  ) /* : Promise<FormSubmissionHistorySearchResults> */ {
-    let searchParams = {}
-
-    if (typeof options.formId === 'number') {
       searchParams = Object.assign(searchParams, {
-        formId: options.formId,
+        offset:
+          typeof options.offset === 'number' ? Math.max(0, options.offset) : 0,
+        limit:
+          typeof options.limit === 'number'
+            ? Math.max(1, options.limit)
+            : undefined,
       })
-    } else {
-      throw new Error('formId must be a number and is required')
+
+      return super.searchRequest(`/form-submission-meta`, searchParams)
     }
 
-    if (typeof options.submissionDateFrom === 'string') {
-      searchParams = Object.assign(searchParams, {
-        submissionDateFrom: options.submissionDateFrom,
+    getForm(
+      formId /* : ?mixed */,
+      injectForms /* : ?boolean */,
+    ) /* : Promise<Form> */ {
+      if (typeof formId !== 'number') {
+        return Promise.reject(new TypeError('Must supply "formId" as a number'))
+      }
+
+      return super.searchRequest(`/forms/${formId}`, {
+        injectForms: injectForms || false,
       })
     }
 
-    if (typeof options.submissionDateTo === 'string') {
-      searchParams = Object.assign(searchParams, {
-        submissionDateTo: options.submissionDateTo,
-      })
+    async createForm(data /* : ?mixed */) /* : Promise<Form> */ {
+      const form = validateWithFormSchema(data)
+      const savedForm = await super.postRequest('/forms', form)
+      return savedForm
     }
 
-    searchParams = Object.assign(searchParams, {
-      offset:
-        typeof options.offset === 'number' ? Math.max(0, options.offset) : 0,
-      limit:
-        typeof options.limit === 'number'
-          ? Math.max(1, options.limit)
-          : undefined,
-    })
-
-    return super.searchRequest(`/form-submission-meta`, searchParams)
-  }
-
-  getForm(
-    formId /* : ?mixed */,
-    injectForms /* : ?boolean */,
-  ) /* : Promise<Form> */ {
-    if (typeof formId !== 'number') {
-      return Promise.reject(new TypeError('Must supply "formId" as a number'))
+    async updateForm(data /* : ?mixed */) /* : Promise<Form> */ {
+      const form = validateWithFormSchema(data)
+      const savedForm = await super.putRequest(`/forms/${form.id}`, form)
+      return savedForm
     }
 
-    return super.searchRequest(`/forms/${formId}`, {
-      injectForms: injectForms || false,
-    })
-  }
+    async deleteForm(formId /* : ?mixed */) /* : Promise<void> */ {
+      if (typeof formId !== 'number') {
+        throw new TypeError('Must supply "formId" as a number')
+      }
 
-  async createForm(data /* : ?mixed */) /* : Promise<Form> */ {
-    const form = validateWithFormSchema(data)
-    const savedForm = await super.postRequest('/forms', form)
-    return savedForm
-  }
-
-  async updateForm(data /* : ?mixed */) /* : Promise<Form> */ {
-    const form = validateWithFormSchema(data)
-    const savedForm = await super.putRequest(`/forms/${form.id}`, form)
-    return savedForm
-  }
-
-  async deleteForm(formId /* : ?mixed */) /* : Promise<void> */ {
-    if (typeof formId !== 'number') {
-      throw new TypeError('Must supply "formId" as a number')
+      await super.deleteRequest(`/forms/${formId}`)
     }
 
-    await super.deleteRequest(`/forms/${formId}`)
-  }
+    static validateForm(form /* : mixed */) /* : Form */ {
+      const validatedForm = validateWithFormSchema(form)
+      return validatedForm
+    }
 
-  static validateForm(form /* : mixed */) /* : Form */ {
-    const validatedForm = validateWithFormSchema(form)
-    return validatedForm
+    static generateFormElement /* :: <T: _FormElementBase> */(
+      formElementGenerationData /* : mixed */,
+    ) /* : T */ {
+      const formElement = generateFormElement(formElementGenerationData)
+      return formElement
+    }
   }
-
-  static generateFormElement /* :: <T: _FormElementBase> */(
-    formElementGenerationData /* : mixed */,
-  ) /* : T */ {
-    const formElement = generateFormElement(formElementGenerationData)
-    return formElement
-  }
-}

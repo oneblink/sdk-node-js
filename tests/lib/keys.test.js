@@ -2,7 +2,7 @@
 'use strict'
 
 describe('Keys SDK Class', () => {
-  const Keys = require('../../classes/Keys.js')
+  const { Keys } = require('../..')
   const keys = new Keys({
     accessKey: '123',
     secretKey: 'abc',

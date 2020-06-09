@@ -9,7 +9,7 @@ const constructorOptions = {
 describe('Jobs SDK Class', () => {
   describe('createJob()', () => {
     describe('validation', () => {
-      const Jobs = require('../../classes/Jobs.js')
+      const { Jobs } = require('../..')
       const jobs = new Jobs(constructorOptions)
 
       test('should reject with correct validation errors for "options"', () => {
@@ -99,7 +99,7 @@ describe('Jobs SDK Class', () => {
             },
         )
 
-        const Jobs = require('../../classes/Jobs.js')
+        const { Jobs } = require('../..')
         const jobs = new Jobs(constructorOptions)
         await jobs.createJob({
           username: 'username',
@@ -130,7 +130,7 @@ describe('Jobs SDK Class', () => {
           .mockImplementation(() => Promise.resolve())
         jest.mock('../../lib/pre-fill-data.js', () => mockSetPreFillData)
 
-        const Jobs = require('../../classes/Jobs.js')
+        const { Jobs } = require('../..')
         const jobs = new Jobs(constructorOptions)
         const options = {
           username: 'username',
@@ -152,7 +152,7 @@ describe('Jobs SDK Class', () => {
   })
 
   describe('deleteJob()', () => {
-    const Jobs = require('../../classes/Jobs.js')
+    const { Jobs } = require('../..')
     const jobs = new Jobs(constructorOptions)
 
     test('should reject with correct validation errors for "jobId"', () => {
@@ -169,7 +169,7 @@ describe('Jobs SDK Class', () => {
     }
     beforeEach(reset)
     afterAll(reset)
-    const Jobs = require('../../classes/Jobs.js')
+    const { Jobs } = require('../..')
     const jobs = new Jobs(constructorOptions)
     test('should reject form id', () => {
       return expect(jobs.searchJobs({ formId: 'ten' })).rejects.toThrow(
@@ -221,7 +221,7 @@ describe('Jobs SDK Class', () => {
           },
       )
 
-      const Jobs = require('../../classes/Jobs.js')
+      const { Jobs } = require('../..')
       const jobs = new Jobs(constructorOptions)
 
       await jobs.searchJobs({

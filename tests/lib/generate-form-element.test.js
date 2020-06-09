@@ -1,8 +1,13 @@
 // @flow
 'use strict'
 
+const { ONEBLINK } = require('../../lib/tenant-configuration')
+const generateTenant = require('../../lib/generate-tenant')
+
+const tenant = generateTenant(ONEBLINK)
+
 describe('Generate Form Element', () => {
-  const Forms = require('../../classes/Forms.js')
+  const Forms = require('../../classes/Forms.js')(tenant)
 
   test('should return a default text element based off of only a name', () => {
     const elementData = {

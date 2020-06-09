@@ -2,7 +2,7 @@
 'use strict'
 
 describe('TeamMembers SDK Class', () => {
-  const OneBlinkSDK = require('../../index.js')
+  const OneBlinkSDK = require('../..')
   const teamMembersSDK = new OneBlinkSDK.TeamMembers({
     accessKey: '123',
     secretKey: 'abc',
