@@ -2,7 +2,7 @@
 
 ## Tenants
 
-This SDK is the entry point for all OneBlink Productivity instances. The default instance is the [OneBlink Console](https://console.oneblink.io). To use a different tenant to the default, change the require path t include the desired tenant. The currently available tenants include:
+This SDK is the entry point for all OneBlink Productivity instances. The default instance is the [OneBlink Console](https://console.oneblink.io). To use a different tenant to the default, change the require path to include the desired tenant. The available tenants are:
 
 - [OneBlink Console](https://console.oneblink.io)
 
