@@ -8,7 +8,7 @@
 
 ### Added
 
-- verifyJWT function in FormsApps Class
+- static verifyJWT function in FormsApps Class
 
 # 0.6.1 (2020-06-03)
 

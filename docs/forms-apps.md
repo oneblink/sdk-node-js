@@ -2,7 +2,6 @@
 
 ## Functions
 
-- [`verifyJWT()`](#verifyjwt)
 - [`createFormsApp()`](#createformsapp)
 - [`createUser()`](#createuser)
 - [`deleteFormsApp()`](#deleteformsapp)
@@ -11,6 +10,10 @@
 - [`getMyFormsApp()`](#getmyformsapp)
 - [`updateFormsApp()`](#updateformsapp)
 - [`updateStyles()`](#updatestyles)
+
+## Static Functions
+
+- [`verifyJWT()`](#verifyjwt)
 
 ## Constructor
 
@@ -33,7 +36,7 @@ const formsAppsSDK = new OneBlink.FormsApps(options)
 
 ## `verifyJWT()`
 
-Verify a JWT and return its result
+A static function to verify a JWT and return its result
 
 ### Example
 
@@ -43,8 +46,7 @@ const token =
 // or
 const token =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
-formsAppsSDK
-  .verifyJWT(token)
+OneBlink.FormsApps.verifyJWT(token)
   .then((result) => {
     // Result is Decoded Token
   })
