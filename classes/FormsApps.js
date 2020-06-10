@@ -14,7 +14,7 @@ module.exports = (tenant /* : Tenant */) =>
     }
 
     static async verifyJWT(token /* : string */) /* : Promise<mixed> */ {
-      return verifyJWT(token, tenant.jwksInstance)
+      return verifyJWT(token, tenant)
     }
 
     async getFormsApp(formsAppId /* : ?mixed */) /* : Promise<FormsApp> */ {
