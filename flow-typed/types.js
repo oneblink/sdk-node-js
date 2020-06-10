@@ -223,5 +223,6 @@ declare type JwksClient = Object
 
 declare type Tenant = {
   apiOrigin: string,
+  jwtIssuer: string,
   jwksInstance: JwksClient,
 }
