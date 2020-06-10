@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- docs for all available search parameters when searching for forms
+
 # 0.7.0 (2020-06-10)
 
 ### Breaking Changes

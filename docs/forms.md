@@ -248,10 +248,10 @@ forms.getForm(formId, injectForms).then((form) => {
 
 ### Parameters
 
-| Parameter | Required | Type     | Description                              |
-| --------- | -------- | -------- | ---------------------------------------- |
-| `formId`  | Yes      | `number` | The exact id of the form you wish to get |
-| `injectForms`  | No      | `boolean` | Set to `true` to inject form elements from nested [Form](./form-elements/form.md) elements and [Info Page](./form-elements/info-page.md) elements.  |
+| Parameter     | Required | Type      | Description                                                                                                                                        |
+| ------------- | -------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `formId`      | Yes      | `number`  | The exact id of the form you wish to get                                                                                                           |
+| `injectForms` | No       | `boolean` | Set to `true` to inject form elements from nested [Form](./form-elements/form.md) elements and [Info Page](./form-elements/info-page.md) elements. |
 
 ### Result (Resolved Promise)
 
@@ -276,7 +276,6 @@ forms.getForm(formId, injectForms).then((form) => {
 
 ```javascript
 const options = {
-  isPublished: true,
   isAuthenticated: true,
   name: 'Form Name',
 }
@@ -292,12 +291,16 @@ forms
 
 ### Parameters
 
-| Parameter                 | Required | Type      | Description                                                                                       |
-| ------------------------- | -------- | --------- | ------------------------------------------------------------------------------------------------- |
-| `options`                 | No       | `Object`  | Search options.                                                                                   |
-| `options.isAuthenticated` | No       | `boolean` | Return authenticated forms or unauthenticated forms. If not supplied, all forms will be returned. |
-| `options.isPublished`     | No       | `boolean` | Return published forms or unpublished forms. If not supplied, all forms will be returned.         |
-| `options.name`            | No       | `string`  | Search on the name property of a form. Can be a prefix, suffix or partial match.                  |
+| Parameter                       | Required | Type      | Description                                                                                                     |
+| ------------------------------- | -------- | --------- | --------------------------------------------------------------------------------------------------------------- |
+| `options`                       | No       | `Object`  | Search options.                                                                                                 |
+| `options.isAuthenticated`       | No       | `boolean` | Search on the `isAuthenticated` property of a form. Must be either `true` or `false` or not specified.          |
+| `options.isInfoPage`            | No       | `boolean` | Search on the `isInfoPage` property of a form. Must be either `true` or `false` or not specified.               |
+| `options.name`                  | No       | `string`  | Search on the `name` property of a form. Can be a prefix, suffix or partial match                               |
+| `options.formsAppId`            | No       | `number`  | Search on the `formsAppIds` property of a form. Must be the exact match of one the ids in `formsAppIds`.        |
+| `options.formsAppEnvironmentId` | No       | `number`  | Search on the `formsAppEnvironmentId` property of a form. Must be the exact match of a `formsAppEnvironmentId`. |
+| `options.limit`                 | No       | `number`  | Limit the number of results returned                                                                            |
+| `options.offset`                | No       | `number`  | Skip a specific number of results, used in conjunction with `limit` to enforce paging                           |
 
 ### Result (Resolved Promise)
 
