@@ -159,30 +159,8 @@ module.exports = (tenant /* : Tenant */) =>
     }
 
     search(
-      options /* : ?FormsSearchOptions */,
+      searchParams /* : ?FormsSearchOptions */,
     ) /* : Promise<FormsSearchResult> */ {
-      options = options || {}
-
-      let searchParams = {}
-
-      if (typeof options.isAuthenticated === 'boolean') {
-        searchParams = Object.assign({}, searchParams, {
-          isAuthenticated: options.isAuthenticated,
-        })
-      }
-
-      if (typeof options.isPublished === 'boolean') {
-        searchParams = Object.assign({}, searchParams, {
-          isPublished: options.isPublished,
-        })
-      }
-
-      if (typeof options.name === 'string') {
-        searchParams = Object.assign({}, searchParams, {
-          name: options.name,
-        })
-      }
-
       return super.searchRequest(`/forms`, searchParams)
     }
 
