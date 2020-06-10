@@ -251,6 +251,7 @@ forms.getForm(formId, injectForms).then((form) => {
 | Parameter | Required | Type     | Description                              |
 | --------- | -------- | -------- | ---------------------------------------- |
 | `formId`  | Yes      | `number` | The exact id of the form you wish to get |
+| `injectForms`  | No      | `boolean` | Set to `true` to inject form elements from nested [Form](./form-elements/form.md) elements and [Info Page](./form-elements/info-page.md) elements.  |
 
 ### Result (Resolved Promise)
 
