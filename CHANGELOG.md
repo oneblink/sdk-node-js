@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+# 0.7.0 (2020-06-10)
+
 ### Breaking Changes
 
 - removed `tenant` argument from all classes. This has been replaced by specifying the tenant in the `require()` path. See the [Tenants](./docs/README.md#tenants) documentation for more details.
