@@ -5,6 +5,7 @@
 ### Added
 
 - docs for all available search parameters when searching for forms
+- `gatewayId` to `FormSubmissionEventConfiguration`
 
 # 0.7.0 (2020-06-10)
 

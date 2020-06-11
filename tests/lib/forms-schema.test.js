@@ -2780,6 +2780,7 @@ describe('CP_PAY submission event', () => {
             type: 'CP_PAY',
             configuration: {
               elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              gatewayId: '056f58b6-95bd-4df3-b6b4-f5bcc5e5ae8e',
             },
           },
         ],

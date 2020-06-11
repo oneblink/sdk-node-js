@@ -394,6 +394,7 @@ declare type FormSubmissionEventConfiguration = {
   apiEnvironment?: string,
   apiEnvironmentRoute?: string,
   contentTypeName?: string,
+  gatewayId?: string,
 }
 
 declare type FormSubmissionEventType =
