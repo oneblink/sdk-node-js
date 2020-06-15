@@ -220,18 +220,18 @@ module.exports = (tenant /* : Tenant */) =>
       return savedForm
     }
 
-    async updateForm(data /* : ?mixed */) /* : Promise<Form> */ {
+    async updateForm(data /* : ?mixed */, overrideLock/* : boolean */ = false ) /* : Promise<Form> */ {
       const form = validateWithFormSchema(data)
-      const savedForm = await super.putRequest(`/forms/${form.id}`, form)
+      const savedForm = await super.putRequest(`/forms/${form.id}${overrideLock === true ? '?overrideLock=true': '' }`, form)
       return savedForm
     }
 
-    async deleteForm(formId /* : ?mixed */) /* : Promise<void> */ {
+    async deleteForm(formId /* : ?mixed */, overrideLock/* : boolean */ = false ) /* : Promise<void> */ {
       if (typeof formId !== 'number') {
         throw new TypeError('Must supply "formId" as a number')
       }
 
-      await super.deleteRequest(`/forms/${formId}`)
+      await super.deleteRequest(`/forms/${formId}${overrideLock === true ? '?overrideLock=true': '' }`)
     }
 
     static validateForm(form /* : mixed */) /* : Form */ {
