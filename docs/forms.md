@@ -470,26 +470,29 @@ forms
 }
 ```
 
-## `updateForm()`
+## `updateForm(definition, overrideLock)`
 
 ### Example
 
 ```javascript
 forms
-  .updateForm({
-    id: 1,
-    name: 'testsform',
-    formsAppEnvironmentId: 1,
-    description: 'a form',
-    organisationId: '0101010101010',
-    formsAppEnvironmentId: 1,
-    elements: [],
-    isAuthenticated: false,
-    isPublished: true,
-    submissionEvents: [],
-    postSubmissionAction: 'FORMS_LIBRARY',
-    formsAppIds: [1, 2, 3],
-  })
+  .updateForm(
+    {
+      id: 1,
+      name: 'testsform',
+      formsAppEnvironmentId: 1,
+      description: 'a form',
+      organisationId: '0101010101010',
+      formsAppEnvironmentId: 1,
+      elements: [],
+      isAuthenticated: false,
+      isPublished: true,
+      submissionEvents: [],
+      postSubmissionAction: 'FORMS_LIBRARY',
+      formsAppIds: [1, 2, 3],
+    },
+    true,
+  )
   .then((form) => {
     // use form here
   })
@@ -499,6 +502,13 @@ forms
 ```
 
 ### Parameters
+
+| Parameter    | Required | Type                | Description                                                                                             |
+| ------------ | -------- | ------------------- | ------------------------------------------------------------------------------------------------------- |
+| definition   | Yes      | `Definition Object` | See definition properties for a list of valid propertys and their types                                 |
+| overrideLock | no       | `boolean`           | Defaults to false. Set to true to force updating of the form if the form is locked via the form builder |
+
+#### Definition properties
 
 | Parameter                                              | Required                                  | Type                                             | Description                                                                                     |
 | ------------------------------------------------------ | ----------------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
@@ -547,14 +557,14 @@ forms
 }
 ```
 
-## `deleteForm()`
+## `deleteForm(formId, overrideLock)`
 
 ### Example
 
 ```javascript
 const formId = 1
 forms
-  .deleteForm(formId)
+  .deleteForm(formId, true)
   .then(() => {
     // Form is not deleted
   })
@@ -565,9 +575,10 @@ forms
 
 ### Parameters
 
-| Parameter | Required | Type     | Description     |
-| --------- | -------- | -------- | --------------- |
-| `formId`  | Yes      | `number` | Id of the form. |
+| Parameter    | Required | Type      | Description                                                                                             |
+| ------------ | -------- | --------- | ------------------------------------------------------------------------------------------------------- |
+| `formId`     | Yes      | `number`  | Id of the form.                                                                                         |
+| overrideLock | no       | `boolean` | Defaults to false. Set to true to force deleting of the form if the form is locked via the form builder |
 
 ## `validateForm()`
 
