@@ -503,10 +503,10 @@ forms
 
 ### Parameters
 
-| Parameter    | Required | Type                | Description                                                                                                |
-| ------------ | -------- | ------------------- | ---------------------------------------------------------------------------------------------------------- |
-| definition   | Yes      | `Definition Object` | See definition properties for a list of valid propertys and their types                                    |
-| overrideLock | no       | `boolean`           | Defaults to false. Set to true to force an updating of the form if the form is locked via the form builder |
+| Parameter    | Required | Type                | Description                                                                                             |
+| ------------ | -------- | ------------------- | ------------------------------------------------------------------------------------------------------- |
+| definition   | Yes      | `Definition Object` | See definition properties for a list of valid propertys and their types                                 |
+| overrideLock | no       | `boolean`           | Defaults to false. Set to true to force updating of the form if the form is locked via the form builder |
 
 #### Definition properties
 
@@ -575,10 +575,10 @@ forms
 
 ### Parameters
 
-| Parameter    | Required | Type      | Description                                                                                                |
-| ------------ | -------- | --------- | ---------------------------------------------------------------------------------------------------------- |
-| `formId`     | Yes      | `number`  | Id of the form.                                                                                            |
-| overrideLock | no       | `boolean` | Defaults to false. Set to true to force an updating of the form if the form is locked via the form builder |
+| Parameter    | Required | Type      | Description                                                                                             |
+| ------------ | -------- | --------- | ------------------------------------------------------------------------------------------------------- |
+| `formId`     | Yes      | `number`  | Id of the form.                                                                                         |
+| overrideLock | no       | `boolean` | Defaults to false. Set to true to force deleting of the form if the form is locked via the form builder |
 
 ## `validateForm()`
 
