@@ -6,14 +6,15 @@
 
 Allow the user to enter an email address in a single-line text input. Values that are not valid email addresses will prevent submission.
 
-| Property       | Required | Type      | Default   | Description                                                                              |
-| -------------- | -------- | --------- | --------- | ---------------------------------------------------------------------------------------- |
-| `type`         | Yes      | `string`  | `'email'` | The type of Form Element.                                                                |
-| `name`         | Yes      | `string`  |           | The key that will be assigned a value in the submission data when the form is submitted. |
-| `label`        | Yes      | `string`  |           | Display text presented to the user above the input by default.                           |
-| `defaultValue` | No       | `string`  |           | A default email address when the form is opened.                                         |
-| `required`     | Yes      | `boolean` | `false`   | Determine if this input requires a value entered by the user (`true`) or not (`false`).  |
-| `readOnly`     | Yes      | `boolean` | `false`   | Determine if this input can be edited by the user (`false`) or not (`true`).             |
+| Property           | Required | Type      | Default   | Description                                                                              |
+| ------------------ | -------- | --------- | --------- | ---------------------------------------------------------------------------------------- |
+| `type`             | Yes      | `string`  | `'email'` | The type of Form Element.                                                                |
+| `name`             | Yes      | `string`  |           | The key that will be assigned a value in the submission data when the form is submitted. |
+| `label`            | Yes      | `string`  |           | Display text presented to the user above the input by default.                           |
+| `defaultValue`     | No       | `string`  |           | A default email address when the form is opened.                                         |
+| `placeholderValue` | No       | `string`  |           | The content to appear in the form control when the form control is empty.                |
+| `required`         | Yes      | `boolean` | `false`   | Determine if this input requires a value entered by the user (`true`) or not (`false`).  |
+| `readOnly`         | Yes      | `boolean` | `false`   | Determine if this input can be edited by the user (`false`) or not (`true`).             |
 
 Email element also inherits the properties of the following:
 
