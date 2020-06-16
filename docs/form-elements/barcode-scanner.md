@@ -6,14 +6,15 @@
 
 Allow the user to scan a barcode using native camera functionality if the device is supported.
 
-| Property       | Required | Type      | Default            | Description                                                                              |
-| -------------- | -------- | --------- | ------------------ | ---------------------------------------------------------------------------------------- |
-| `type`         | Yes      | `string`  | `'barcodeScanner'` | The type of Form Element.                                                                |
-| `name`         | Yes      | `string`  |                    | The key that will be assigned a value in the submission data when the form is submitted. |
-| `label`        | Yes      | `string`  |                    | Display text presented to the user above the input by default.                           |
-| `defaultValue` | No       | `string`  |                    | A default value when the form is opened.                                                 |
-| `required`     | Yes      | `boolean` | `false`            | Determine if this input requires a value entered by the user (`true`) or not (`false`).  |
-| `readOnly`     | Yes      | `boolean` | `false`            | Determine if this input can be edited by the user (`false`) or not (`true`).             |
+| Property           | Required | Type      | Default            | Description                                                                              |
+| ------------------ | -------- | --------- | ------------------ | ---------------------------------------------------------------------------------------- |
+| `type`             | Yes      | `string`  | `'barcodeScanner'` | The type of Form Element.                                                                |
+| `name`             | Yes      | `string`  |                    | The key that will be assigned a value in the submission data when the form is submitted. |
+| `label`            | Yes      | `string`  |                    | Display text presented to the user above the input by default.                           |
+| `defaultValue`     | No       | `string`  |                    | A default value when the form is opened.                                                 |
+| `placeholderValue` | No       | `string`  |                    | The content to appear in the form control when the form control is empty.                |
+| `required`         | Yes      | `boolean` | `false`            | Determine if this input requires a value entered by the user (`true`) or not (`false`).  |
+| `readOnly`         | Yes      | `boolean` | `false`            | Determine if this input can be edited by the user (`false`) or not (`true`).             |
 
 Barcode Scanner element also inherits the properties of the following:
 
