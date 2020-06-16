@@ -4117,3 +4117,87 @@ test('should throw error if minEntries is greater than maxEntries', () => {
     'child "maxEntries" fails because ["Form Element - Maximum number of files" must be larger than or equal to 3]',
   )
 })
+
+test('should allow placeholderValue property for these elements', () => {
+  const result = Joi.validate(
+    {
+      id: 1,
+      name: 'Placeholders Form',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      submissionEvents: [],
+      elements: [
+        {
+          id: '01c69734-2543-4cc5-a3ef-d12de468475a',
+          name: 'Text_Area',
+          label: 'Text Areass',
+          type: 'textarea',
+          required: false,
+          defaultValue: 'Multi line text',
+          placeholderValue: 'text placeholder',
+        },
+        {
+          id: '59b723a9-00e2-493f-8d76-84ea71a178ee',
+          name: 'Just_Text',
+          label: 'Just Text',
+          type: 'text',
+          required: false,
+          defaultValue: 'single line text',
+          placeholderValue: 'textarea placeholder',
+        },
+        {
+          id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18ba',
+          name: 'Numbers_and_more',
+          label: 'Numbers and more',
+          type: 'number',
+          required: false,
+          isSlider: false,
+          defaultValue: 3,
+          placeholderValue: 'number placeholder',
+        },
+        {
+          id: 'a5289278-5cb4-4103-90b6-f67dde84dee7',
+          name: 'email',
+          label: 'email',
+          type: 'email',
+          defaultValue: 'developers@oneblink.io',
+          placeholderValue: 'email placeholder',
+        },
+        {
+          id: 'b527bcea-dc84-477f-a5ee-d34abfec92fb',
+          name: 'telephone',
+          label: 'telephone',
+          type: 'telephone',
+          placeholderValue: 'phone placeholder',
+        },
+        {
+          id: '042508a4-4a8d-4684-9fd3-640a5018697d',
+          name: 'autocomplete',
+          label: 'autocomplete',
+          type: 'autocomplete',
+          options: [
+            {
+              id: '9e50b6e5-52b7-48ab-ab86-542ccba82205',
+              value: 'ONE',
+              label: 'one',
+            },
+          ],
+        },
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb7103',
+          name: 'Barcode_Scanner',
+          label: 'Please Scan Barcode of Box',
+          type: 'barcodeScanner',
+          required: false,
+          defaultValue: '123ABC098ZYX',
+          placeholderValue: 'barcode placeholder',
+        },
+      ],
+    },
+    formSchema,
+  )
+  expect(result.error).toBe(null)
+})

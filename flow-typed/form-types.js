@@ -170,6 +170,7 @@ declare type AutoCompleteElement = FormElementWithOptionsBase & {
   readOnly: boolean,
   defaultValue: ?string,
   searchUrl?: string,
+  placeholderValue?: string,
 } & LookupFormElement
 
 declare type FormElementWithOptions =
@@ -208,24 +209,28 @@ declare type NumberElement = FormElementRequired & {
   defaultValue: ?number,
   isSlider: boolean,
   sliderIncrement?: ?number,
+  placeholderValue?: string,
 } & LookupFormElement
 
 declare type TextElement = FormElementRequired & {
   type: 'text',
   readOnly: boolean,
   defaultValue: ?string,
+  placeholderValue?: string,
 } & LookupFormElement
 
 declare type TextareaElement = FormElementRequired & {
   type: 'textarea',
   readOnly: boolean,
   defaultValue: ?string,
+  placeholderValue?: string,
 } & LookupFormElement
 
 declare type EmailElement = FormElementRequired & {
   type: 'email',
   readOnly: boolean,
   defaultValue: ?string,
+  placeholderValue?: string,
 } & LookupFormElement
 
 declare type ImageElement = FormElementBase & {
@@ -284,6 +289,7 @@ declare type BarcodeScannerElement = FormElementRequired & {
   defaultValue: ?string,
   restrictBarcodeTypes: boolean,
   restrictedBarcodeTypes?: string[],
+  placeholderValue?: string,
 } & LookupFormElement
 
 declare type CaptchaElement = FormElementRequired & {
@@ -317,6 +323,7 @@ declare type TelephoneElement = FormElementRequired & {
   type: 'telephone',
   readOnly: boolean,
   defaultValue: ?string,
+  placeholderValue?: string,
 } & LookupFormElement
 
 declare type SummaryElement = FormElementBase & {

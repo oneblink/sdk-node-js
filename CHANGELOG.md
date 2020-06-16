@@ -4,6 +4,7 @@
 
 ### Added
 
+- Types and validation for placeholderValue on form elements
 - added `overrideLock` parameter to update and delete form functions
 - docs for all available search parameters when searching for forms
 - `gatewayId` to `FormSubmissionEventConfiguration`
