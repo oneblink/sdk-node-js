@@ -4201,3 +4201,42 @@ test('should allow placeholderValue property for these elements', () => {
   )
   expect(result.error).toBe(null)
 })
+
+test('should not allow forms without tags', () => {
+  const result = Joi.validate(
+    {
+      id: 1,
+      name: 'Tags Form',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      submissionEvents: [],
+      elements: [],
+    },
+    formSchema,
+  )
+  expect(result.error.message).toBe(
+    'child "Form Tags" fails because ["Form Tags" is required]',
+  )
+})
+
+test('should allow tags on forms', () => {
+  const result = Joi.validate(
+    {
+      id: 1,
+      name: 'Tags Form',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      submissionEvents: [],
+      elements: [],
+      tags: [],
+    },
+    formSchema,
+  )
+  expect(result.error).toBe(null)
+})
