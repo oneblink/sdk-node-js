@@ -6,16 +6,17 @@
 
 Allow the user to select a date. Submission data will be in [ISO_8601 Timestamp](https://en.wikipedia.org/wiki/ISO_8601) format.
 
-| Property       | Required | Type      | Default  | Description                                                                                                                                 |
-| -------------- | -------- | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`         | Yes      | `string`  | `'date'` | The type of Form Element.                                                                                                                   |
-| `name`         | Yes      | `string`  |          | The key that will be assigned a value in the submission data when the form is submitted.                                                    |
-| `label`        | Yes      | `string`  |          | Display text presented to the user above the input by default.                                                                              |
-| `defaultValue` | No       | `string`  |          | A default value when the form is opened.                                                                                                    |
-| `required`     | Yes      | `boolean` | `false`  | Determine if this input requires a date selected by the user (`true`) or not (`false`).                                                     |
-| `readOnly`     | Yes      | `boolean` | `false`  | Determine if this input can be edited by the user (`false`) or not (`true`).                                                                |
-| `fromDate`     | No       | `string`  |          | The earliest possible date that can be selected by the user. Must be in [ISO_8601 Timestamp](https://en.wikipedia.org/wiki/ISO_8601) format |
-| `toDate`       | No       | `string`  |          | The latest possible date that can be selected by the user. Must be in [ISO_8601 Timestamp](https://en.wikipedia.org/wiki/ISO_8601) format   |
+| Property           | Required | Type      | Default  | Description                                                                                                                                 |
+| ------------------ | -------- | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`             | Yes      | `string`  | `'date'` | The type of Form Element.                                                                                                                   |
+| `name`             | Yes      | `string`  |          | The key that will be assigned a value in the submission data when the form is submitted.                                                    |
+| `label`            | Yes      | `string`  |          | Display text presented to the user above the input by default.                                                                              |
+| `defaultValue`     | No       | `string`  |          | A default value when the form is opened.                                                                                                    |
+| `placeholderValue` | No       | `string`  |          | The content to appear in the form control when the form control is empty.                                                                   |
+| `required`         | Yes      | `boolean` | `false`  | Determine if this input requires a date selected by the user (`true`) or not (`false`).                                                     |
+| `readOnly`         | Yes      | `boolean` | `false`  | Determine if this input can be edited by the user (`false`) or not (`true`).                                                                |
+| `fromDate`         | No       | `string`  |          | The earliest possible date that can be selected by the user. Must be in [ISO_8601 Timestamp](https://en.wikipedia.org/wiki/ISO_8601) format |
+| `toDate`           | No       | `string`  |          | The latest possible date that can be selected by the user. Must be in [ISO_8601 Timestamp](https://en.wikipedia.org/wiki/ISO_8601) format   |
 
 Date element also inherits the properties of the following:
 

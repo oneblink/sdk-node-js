@@ -4137,7 +4137,7 @@ test('should allow placeholderValue property for these elements', () => {
           type: 'textarea',
           required: false,
           defaultValue: 'Multi line text',
-          placeholderValue: 'text placeholder',
+          placeholderValue: 'placeholder',
         },
         {
           id: '59b723a9-00e2-493f-8d76-84ea71a178ee',
@@ -4146,7 +4146,7 @@ test('should allow placeholderValue property for these elements', () => {
           type: 'text',
           required: false,
           defaultValue: 'single line text',
-          placeholderValue: 'textarea placeholder',
+          placeholderValue: 'placeholder',
         },
         {
           id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18ba',
@@ -4156,7 +4156,7 @@ test('should allow placeholderValue property for these elements', () => {
           required: false,
           isSlider: false,
           defaultValue: 3,
-          placeholderValue: 'number placeholder',
+          placeholderValue: 'placeholder',
         },
         {
           id: 'a5289278-5cb4-4103-90b6-f67dde84dee7',
@@ -4164,20 +4164,21 @@ test('should allow placeholderValue property for these elements', () => {
           label: 'email',
           type: 'email',
           defaultValue: 'developers@oneblink.io',
-          placeholderValue: 'email placeholder',
+          placeholderValue: 'placeholder',
         },
         {
           id: 'b527bcea-dc84-477f-a5ee-d34abfec92fb',
           name: 'telephone',
           label: 'telephone',
           type: 'telephone',
-          placeholderValue: 'phone placeholder',
+          placeholderValue: 'placeholder',
         },
         {
           id: '042508a4-4a8d-4684-9fd3-640a5018697d',
           name: 'autocomplete',
           label: 'autocomplete',
           type: 'autocomplete',
+          placeholderValue: 'placeholder',
           options: [
             {
               id: '9e50b6e5-52b7-48ab-ab86-542ccba82205',
@@ -4193,11 +4194,38 @@ test('should allow placeholderValue property for these elements', () => {
           type: 'barcodeScanner',
           required: false,
           defaultValue: '123ABC098ZYX',
-          placeholderValue: 'barcode placeholder',
+          placeholderValue: 'placeholder',
+        },
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb7104',
+          name: 'Date',
+          label: 'Date',
+          type: 'date',
+          required: false,
+          placeholderValue: 'placeholder',
+        },
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb7105',
+          name: 'Date_Time',
+          label: 'Date Time',
+          type: 'datetime',
+          required: false,
+          placeholderValue: 'placeholder',
+        },
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb7106',
+          name: 'Time',
+          label: 'Time',
+          type: 'time',
+          required: false,
+          placeholderValue: 'placeholder',
         },
       ],
     },
     formSchema,
   )
   expect(result.error).toBe(null)
+  for (const element of result.value.elements) {
+    expect(element.placeholderValue).toBe('placeholder')
+  }
 })

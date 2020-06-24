@@ -189,16 +189,19 @@ type DateElementBase = FormElementRequired & {
 
 declare type DateElement = DateElementBase & {
   type: 'date',
+  placeholderValue?: string,
 } & LookupFormElement
 
 declare type DateTimeElement = DateElementBase & {
   type: 'datetime',
+  placeholderValue?: string,
 } & LookupFormElement
 
 declare type TimeElement = FormElementRequired & {
   type: 'time',
   readOnly: boolean,
   defaultValue: ?Date,
+  placeholderValue?: string,
 } & LookupFormElement
 
 declare type NumberElement = FormElementRequired & {
