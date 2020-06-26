@@ -25,6 +25,7 @@ describe('Valid Form Schema with Pages', () => {
           },
         },
       ],
+      tags: [],
       elements: [
         {
           id: '119b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -461,6 +462,7 @@ describe('Valid Form Schema', () => {
           },
         },
       ],
+      tags: [],
       elements: [
         {
           id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -782,6 +784,7 @@ test('should set default for radio "buttons" property', () => {
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -825,6 +828,7 @@ test('should error if "buttons" is not a boolean', () => {
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -871,6 +875,7 @@ test('should error if element "id" is not supplied', () => {
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           name: 'text',
@@ -895,6 +900,7 @@ test('should error if element "id" is not a guid', () => {
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '123',
@@ -920,6 +926,7 @@ test('should error if element "id" is not unique', () => {
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -953,6 +960,7 @@ test('should not error if number min is the same as max', () => {
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -982,6 +990,7 @@ test('should error if number min is greater than max', () => {
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1013,6 +1022,7 @@ test('should throw error if minNumber is not provided for number element with is
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1044,6 +1054,7 @@ test.skip('should throw error if maxNumber is not provided for number element wi
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1073,6 +1084,7 @@ test('should error if "toDate" is greater than "fromDate"', () => {
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1102,6 +1114,7 @@ test('should error if "defaultValue" does not match what is valid for each type'
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1337,6 +1350,7 @@ test('should not error if number type element has a "defaultValue" but does not 
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1363,6 +1377,7 @@ test('should error if number type element has a "defaultValue" less than "minNum
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1392,6 +1407,7 @@ test('should error if number type element has a "defaultValue" more than "maxNum
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1421,6 +1437,7 @@ test('should not error if date type element has a "defaultValue" but does not ha
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1447,6 +1464,7 @@ test('should error if date type element has a "defaultValue" less than "fromDate
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1476,6 +1494,7 @@ test('should error if date type element has a "defaultValue" more than "toDate"'
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1505,6 +1524,7 @@ test('should error if repeatableSet type element has no elements', () => {
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1532,6 +1552,7 @@ test('should error if repeatableSet type element min entries is more than max en
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1571,6 +1592,7 @@ test('should error if repeatableSet type element min or max entries is less then
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
@@ -1643,6 +1665,7 @@ test('should error if page element has child page element', () => {
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -1677,6 +1700,7 @@ test('should error if page element has no elements', () => {
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -1726,6 +1750,7 @@ test('should error if isMultiPage is set to false', () => {
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -1782,6 +1807,7 @@ test('should allow multiple pages', () => {
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -1829,6 +1855,7 @@ test('should error if root elements arent all page elements', () => {
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -1883,6 +1910,7 @@ test('should error if isMultiPage is false even if all root elements are pages',
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -1920,6 +1948,7 @@ test('should error if image element does not have a default value', () => {
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -1956,6 +1985,7 @@ test('should error if HTML element does not have a default value', () => {
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -1994,6 +2024,7 @@ test('should error if calculation element does not have a default value', () => 
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -2037,6 +2068,7 @@ test('should allow array of restricted barcode types', () => {
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -2074,6 +2106,7 @@ test('should require restricted barcode types if restrictBarcodeTypes boolean is
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -2101,6 +2134,7 @@ test('should throw error if postSubmissionAction is an invalid type', () => {
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -2127,6 +2161,7 @@ test('should throw error if postSubmissionAction is missing', () => {
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -2152,6 +2187,7 @@ test('should throw error if postSubmissionAction is URL but no URL is present', 
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -2187,6 +2223,7 @@ test('should throw error if defaultValue for email is not valid', () => {
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -2224,6 +2261,7 @@ test('should throw error if defaultValue contains src="data:', () => {
       isAuthenticated: true,
       isPublished: true,
       submissionEvents: [],
+      tags: [],
     },
     formSchema,
     {
@@ -2248,6 +2286,7 @@ describe('optionTypes', () => {
           organisationId: '59cc888b8969af000fb50ddb',
           isMultiPage: false,
           postSubmissionAction: 'FORMS_LIBRARY',
+          tags: [],
           elements: [
             {
               id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -2275,6 +2314,7 @@ describe('optionTypes', () => {
           organisationId: '59cc888b8969af000fb50ddb',
           isMultiPage: false,
           postSubmissionAction: 'FORMS_LIBRARY',
+          tags: [],
           elements: [
             {
               id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -2305,6 +2345,7 @@ describe('optionTypes', () => {
           organisationId: '59cc888b8969af000fb50ddb',
           isMultiPage: false,
           postSubmissionAction: 'FORMS_LIBRARY',
+          tags: [],
           elements: [
             {
               id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -2338,6 +2379,7 @@ describe('optionTypes', () => {
           organisationId: '59cc888b8969af000fb50ddb',
           isMultiPage: false,
           postSubmissionAction: 'FORMS_LIBRARY',
+          tags: [],
           elements: [
             {
               id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -2366,6 +2408,7 @@ describe('optionTypes', () => {
           organisationId: '59cc888b8969af000fb50ddb',
           isMultiPage: false,
           postSubmissionAction: 'FORMS_LIBRARY',
+          tags: [],
           elements: [
             {
               id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -2399,6 +2442,7 @@ describe('optionTypes', () => {
           organisationId: '59cc888b8969af000fb50ddb',
           isMultiPage: false,
           postSubmissionAction: 'FORMS_LIBRARY',
+          tags: [],
           elements: [
             {
               id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -2431,6 +2475,7 @@ describe('optionTypes', () => {
           organisationId: '59cc888b8969af000fb50ddb',
           isMultiPage: false,
           postSubmissionAction: 'FORMS_LIBRARY',
+          tags: [],
           elements: [
             {
               id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
@@ -2464,6 +2509,7 @@ describe('PDF submission event', () => {
         elements: [],
         isAuthenticated: true,
         isPublished: true,
+        tags: [],
         submissionEvents: [
           {
             type: 'PDF',
@@ -2494,6 +2540,7 @@ describe('PDF submission event', () => {
         elements: [],
         isAuthenticated: true,
         isPublished: true,
+        tags: [],
         submissionEvents: [
           {
             type: 'PDF',
@@ -2524,6 +2571,7 @@ describe('PDF submission event', () => {
         elements: [],
         isAuthenticated: true,
         isPublished: true,
+        tags: [],
         submissionEvents: [
           {
             type: 'PDF',
@@ -2559,6 +2607,7 @@ describe('CALLBACK submission event', () => {
         elements: [],
         isAuthenticated: true,
         isPublished: true,
+        tags: [],
         submissionEvents: [
           {
             type: 'CALLBACK',
@@ -2590,6 +2639,7 @@ describe('CALLBACK submission event', () => {
         elements: [],
         isAuthenticated: true,
         isPublished: true,
+        tags: [],
         submissionEvents: [
           {
             type: 'CALLBACK',
@@ -2623,6 +2673,7 @@ describe('SPOTTO submission event', () => {
         elements: [],
         isAuthenticated: true,
         isPublished: true,
+        tags: [],
         submissionEvents: [
           {
             type: 'SPOTTO',
@@ -2653,6 +2704,7 @@ describe('TRIM submission event', () => {
         elements: [],
         isAuthenticated: true,
         isPublished: true,
+        tags: [],
         submissionEvents: [
           {
             type: 'TRIM',
@@ -2701,6 +2753,7 @@ describe('BPOINT submission event', () => {
         elements: [],
         isAuthenticated: true,
         isPublished: true,
+        tags: [],
         submissionEvents: [
           {
             type: 'BPOINT',
@@ -2723,6 +2776,7 @@ describe('BPOINT submission event', () => {
         organisationId: 'ORGANISATION_00000000001',
         postSubmissionAction: 'FORMS_LIBRARY',
         isMultiPage: false,
+        tags: [],
         elements: [
           {
             id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
@@ -2764,6 +2818,7 @@ describe('CP_PAY submission event', () => {
         organisationId: 'ORGANISATION_00000000001',
         postSubmissionAction: 'FORMS_LIBRARY',
         isMultiPage: false,
+        tags: [],
         elements: [
           {
             id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
@@ -2806,6 +2861,7 @@ describe('CP_HCMS submission event', () => {
         organisationId: 'ORGANISATION_00000000001',
         postSubmissionAction: 'FORMS_LIBRARY',
         isMultiPage: false,
+        tags: [],
         elements: [
           {
             id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
@@ -2844,6 +2900,7 @@ describe('CP_HCMS submission event', () => {
         organisationId: 'ORGANISATION_00000000001',
         postSubmissionAction: 'FORMS_LIBRARY',
         isMultiPage: false,
+        tags: [],
         elements: [
           {
             id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
@@ -2885,6 +2942,7 @@ describe('CP_HCMS submission event', () => {
         organisationId: 'ORGANISATION_00000000001',
         postSubmissionAction: 'FORMS_LIBRARY',
         isMultiPage: false,
+        tags: [],
         elements: [
           {
             id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
@@ -2926,6 +2984,7 @@ describe('Conditional Predicates', () => {
         organisationId: 'ORGANISATION_00000000001',
         postSubmissionAction: 'FORMS_LIBRARY',
         isMultiPage: false,
+        tags: [],
         elements: [
           {
             id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
@@ -3125,6 +3184,7 @@ describe('Data Lookup enabled', () => {
         isAuthenticated: true,
         isPublished: true,
         submissionEvents: [],
+        tags: [],
       },
       formSchema,
       {
@@ -3162,6 +3222,7 @@ describe('Data Lookup enabled', () => {
         isAuthenticated: true,
         isPublished: true,
         submissionEvents: [],
+        tags: [],
       },
       formSchema,
       {
@@ -3199,6 +3260,7 @@ describe('Data Lookup enabled', () => {
         isAuthenticated: true,
         isPublished: true,
         submissionEvents: [],
+        tags: [],
       },
       formSchema,
       {
@@ -3791,6 +3853,7 @@ describe('invalid property removal', () => {
         organisationId: '59cc888b8969af000fb50ddb',
         postSubmissionAction: 'FORMS_LIBRARY',
         submissionEvents: [],
+        tags: [],
         elements: [
           Object.assign(
             {},
@@ -3825,6 +3888,7 @@ describe('invalid property removal', () => {
         postSubmissionAction: 'FORMS_LIBRARY',
         redirectUrl: 123,
         submissionEvents: [],
+        tags: [],
         elements: [],
       },
       formSchema,
@@ -3838,6 +3902,7 @@ describe('invalid property removal', () => {
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
       submissionEvents: [],
+      tags: [],
       elements: [],
       isAuthenticated: false,
       isInfoPage: false,
@@ -4129,6 +4194,7 @@ test('should allow placeholderValue property for these elements', () => {
       postSubmissionAction: 'FORMS_LIBRARY',
       isMultiPage: false,
       submissionEvents: [],
+      tags: [],
       elements: [
         {
           id: '01c69734-2543-4cc5-a3ef-d12de468475a',
@@ -4228,4 +4294,23 @@ test('should allow placeholderValue property for these elements', () => {
   for (const element of result.value.elements) {
     expect(element.placeholderValue).toBe('placeholder')
   }
+})
+
+test('should allow forms without tags', () => {
+  const result = Joi.validate(
+    {
+      id: 1,
+      name: 'Tags Form',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      submissionEvents: [],
+      elements: [],
+    },
+    formSchema,
+  )
+  expect(result.value.tags).toEqual([])
+  expect(result.error).toBe(null)
 })

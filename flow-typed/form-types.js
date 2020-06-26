@@ -440,6 +440,7 @@ declare type Form = {
   postSubmissionAction: FormPostSubmissionAction,
   redirectUrl?: ?string,
   submissionEvents: FormSubmissionEvent[],
+  tags: Array<string>,
 }
 
 declare type ApiForm = Form
