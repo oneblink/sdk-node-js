@@ -4268,7 +4268,7 @@ test('should allow placeholderValue property for these elements', () => {
   expect(result.error).toBe(null)
 })
 
-test.only('should allow forms without tags', () => {
+test('should allow forms without tags', () => {
   const result = Joi.validate(
     {
       id: 1,
@@ -4283,6 +4283,6 @@ test.only('should allow forms without tags', () => {
     },
     formSchema,
   )
-  expect(result.value.tags.toEqual([]))
+  expect(result.value.tags).toEqual([])
   expect(result.error).toBe(null)
 })
