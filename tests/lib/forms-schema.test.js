@@ -4283,6 +4283,6 @@ test.only('should allow forms without tags', () => {
     },
     formSchema,
   )
-  expect(result.value.tags === [])
+  expect(result.value.tags.toEqual([]))
   expect(result.error).toBe(null)
 })
