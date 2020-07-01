@@ -4,6 +4,7 @@
 
 ### Added
 
+- Publish start and end date
 - Added tags for form def
 - Types and validation for placeholderValue on form elements
 - added `overrideLock` parameter to update and delete form functions
