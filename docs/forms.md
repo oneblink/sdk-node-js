@@ -16,6 +16,7 @@
 
 - [`validateForm()`](#validateform)
 - [`generateFormElement()`](#generateformelement)
+- [`generatePageElement()`](#generatepageelement)
 
 ## Constructor
 
@@ -682,3 +683,32 @@ Please refer to our Form Element Definitions found [here](./form-elements/README
 ### Result
 
 [A valid Form Element](./form-elements/README.md)
+
+## `generatePageElement()`
+
+`generatePageElement()` is a static method available on the forms class, used for both creating and validating a OneBlink Page Element.
+
+The method will set reasonable defaults for any values not passed to it, and validate ones that are against our Element Schema.
+
+### Example
+
+```javascript
+const childElement = Forms.generateFormElement({ label: 'my first element' })
+
+const element = {
+  name: 'my test element',
+  elements: [childElement],
+}
+
+const generatedElement = OneBlink.Forms.generatePageElement(element)
+
+return generatedElement
+```
+
+### Parameters
+
+Please refer to our Page Element Definition found [here](./form-elements/page.md)
+
+### Result
+
+[A valid Page Element](./form-elements/page.md)
