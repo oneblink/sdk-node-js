@@ -8,6 +8,7 @@ const OneBlinkAPI = require('../lib/one-blink-api.js')
 const setPreFillData = require('../lib/pre-fill-data')
 const { validateWithFormSchema } = require('../lib/forms-validation.js')
 const generateFormElement = require('../lib/generate-form-element.js')
+const generatePageElement = require('../lib/generate-page-element.js')
 
 module.exports = (tenant /* : Tenant */) =>
   class Forms extends OneBlinkAPI {
@@ -244,5 +245,11 @@ module.exports = (tenant /* : Tenant */) =>
     ) /* : T */ {
       const formElement = generateFormElement(formElementGenerationData)
       return formElement
+    }
+    static generatePageElement(
+      formElementGenerationData /*: mixed */,
+    ) /* :PageElement */ {
+      const pageElement = generatePageElement(formElementGenerationData)
+      return pageElement
     }
   }
