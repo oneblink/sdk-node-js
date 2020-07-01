@@ -446,8 +446,8 @@ forms
 | `redirectUrl`                                          | No                                        | `string`                                         | The URL the form will redirect to if configured to do so by the `postSubmissionActions`.        |
 | `isInfoPage`                                           | Yes                                       | `boolean`                                        | Whether or not the Form is an Info Page.                                                        |
 | `tags`                                                 | No                                        | `string[]`                                       | A list of tags used to categorise or describe the form.                                         |
-| `publishStartDate`                                     | No                                        | `string`                                         | The date a form becomes available.                                                              |
-| `publishEndDate`                                       | No                                        | `string`                                         | The date a form becomes unavailable.                                                            |
+| `publishStartDate`                                     | No                                        | `string`                                         | The date and time (in ISO format) a form becomes available.                                     |
+| `publishEndDate`                                       | No                                        | `string`                                         | The date and time (in ISO format) a form becomes unavailable.                                   |
 
 ### Result
 
@@ -533,8 +533,8 @@ forms
 | `redirectUrl`                                          | No                                        | `string`                                         | The URL the form will redirect to if configured to do so by the `postSubmissionActions`.        |
 | `isInfoPage`                                           | Yes                                       | `boolean`                                        | Whether or not the Form is an Info Page.                                                        |
 | `tags`                                                 | No                                        | `string[]`                                       | A list of tags used to categorise or describe the form.                                         |
-| `publishStartDate`                                     | No                                        | `string`                                         | The date a form becomes available.                                                              |
-| `publishEndDate`                                       | No                                        | `string`                                         | The date a form becomes unavailable.                                                            |
+| `publishStartDate`                                     | No                                        | `string`                                         | The date and time (in ISO format) a form becomes available.                                     |
+| `publishEndDate`                                       | No                                        | `string`                                         | The date and time (in ISO format) a form becomes unavailable.                                   |
 
 ### Result
 
@@ -630,8 +630,8 @@ return validatedForm
 | `redirectUrl`                                          | No                                        | `string`                                         | The URL the form will redirect to if configured to do so by the `postSubmissionActions`.        |
 | `isInfoPage`                                           | Yes                                       | `boolean`                                        | Whether or not the Form is an Info Page.                                                        |
 | `tags`                                                 | No                                        | `string[]`                                       | A list of tags used to categorise or describe the form.                                         |
-| `publishStartDate`                                     | No                                        | `string`                                         | The date a form becomes available.                                                              |
-| `publishEndDate`                                       | No                                        | `string`                                         | The date a form becomes unavailable.                                                            |
+| `publishStartDate`                                     | No                                        | `string`                                         | The date and time (in ISO format) a form becomes available.                                     |
+| `publishEndDate`                                       | No                                        | `string`                                         | The date and time (in ISO format) a form becomes unavailable.                                   |
 
 ### Result
 
