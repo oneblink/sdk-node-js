@@ -266,7 +266,6 @@ forms.getForm(formId, injectForms).then((form) => {
   "formsAppEnvironmentId": 1,
   "elements": [],
   "isAuthenticated": false,
-  "isPublished": true,
   "submissionEvents": []
 }
 ```
@@ -322,7 +321,6 @@ forms
       "formsAppEnvironmentId": 1,
       "elements": [],
       "isAuthenticated": false,
-      "isPublished": true,
       "submissionEvents": [],
       "postSubmissionAction": "FORMS_LIBRARY",
       "isInfoPage": false
@@ -410,7 +408,6 @@ forms
     formsAppEnvironmentId: 1,
     elements: [],
     isAuthenticated: false,
-    isPublished: true,
     submissionEvents: [],
     postSubmissionAction: 'FORMS_LIBRARY',
     formsAppIds: [1, 2, 3],
@@ -435,7 +432,6 @@ forms
 | `elements`                                             | Yes                                       | [`FormElement`](./form-elements/README.md)`[]`   | All elements contained within the form itself.                                                  |
 | `isAuthenticated`                                      | Yes                                       | `boolean`                                        | Whether or not the form can only be viewed by an Authenticated user.                            |
 | `isMultiPage`                                          | Yes                                       | `boolean`                                        | Whether or not the form contains multiple pages.                                                |
-| `isPublished`                                          | Yes                                       | `boolean`                                        | Whether or not the form is visible within the Forms Apps it's included in.                      |
 | `submissionEvents`                                     | No                                        | `SubmissionEvent[]`                              | Events that occur/trigger on a valid successful submission.                                     |
 | `submissionEvents[].type`                              | Yes                                       | `'CALLBACK' | 'PDF' | 'SPOTTO' | 'ONEBLINK_API'` | The type of submission event.                                                                   |
 | `submissionEvents[].configuration`                     | Yes                                       | `mixed`                                          | Configuration specific to the type of submission event.                                         |
@@ -451,6 +447,8 @@ forms
 | `redirectUrl`                                          | No                                        | `string`                                         | The URL the form will redirect to if configured to do so by the `postSubmissionActions`.        |
 | `isInfoPage`                                           | Yes                                       | `boolean`                                        | Whether or not the Form is an Info Page.                                                        |
 | `tags`                                                 | No                                        | `string[]`                                       | A list of tags used to categorise or describe the form.                                         |
+| `publishStartDate`                                     | No                                        | `string`                                         | The date and time (in ISO format) a form becomes available.                                     |
+| `publishEndDate`                                       | No                                        | `string`                                         | The date and time (in ISO format) a form becomes unavailable.                                   |
 
 ### Result
 
@@ -463,7 +461,6 @@ forms
   "formsAppEnvironmentId": 1,
   "elements": [],
   "isAuthenticated": false,
-  "isPublished": true,
   "submissionEvents": [],
   "postSubmissionAction": "FORMS_LIBRARY",
   "formsAppIds": [1, 2, 3],
@@ -488,7 +485,6 @@ forms
       formsAppEnvironmentId: 1,
       elements: [],
       isAuthenticated: false,
-      isPublished: true,
       submissionEvents: [],
       postSubmissionAction: 'FORMS_LIBRARY',
       formsAppIds: [1, 2, 3],
@@ -523,7 +519,6 @@ forms
 | `elements`                                             | Yes                                       | [`FormElement`](./form-elements/README.md)`[]`   | All elements contained within the form itself.                                                  |
 | `isAuthenticated`                                      | Yes                                       | `boolean`                                        | Whether or not the form can only be viewed by an Authenticated user.                            |
 | `isMultiPage`                                          | Yes                                       | `boolean`                                        | Whether or not the form contains multiple pages.                                                |
-| `isPublished`                                          | Yes                                       | `boolean`                                        | Whether or not the form is visible within the Forms Apps it's included in.                      |
 | `submissionEvents`                                     | No                                        | `SubmissionEvent[]`                              | Events that occur/trigger on a valid successful submission.                                     |
 | `submissionEvents[].type`                              | Yes                                       | `'CALLBACK' | 'PDF' | 'SPOTTO' | 'ONEBLINK_API'` | The type of submission event.                                                                   |
 | `submissionEvents[].configuration`                     | Yes                                       | `mixed`                                          | Configuration specific to the type of submission event.                                         |
@@ -539,6 +534,8 @@ forms
 | `redirectUrl`                                          | No                                        | `string`                                         | The URL the form will redirect to if configured to do so by the `postSubmissionActions`.        |
 | `isInfoPage`                                           | Yes                                       | `boolean`                                        | Whether or not the Form is an Info Page.                                                        |
 | `tags`                                                 | No                                        | `string[]`                                       | A list of tags used to categorise or describe the form.                                         |
+| `publishStartDate`                                     | No                                        | `string`                                         | The date and time (in ISO format) a form becomes available.                                     |
+| `publishEndDate`                                       | No                                        | `string`                                         | The date and time (in ISO format) a form becomes unavailable.                                   |
 
 ### Result
 
@@ -551,7 +548,6 @@ forms
   "formsAppEnvironmentId": 1,
   "elements": [],
   "isAuthenticated": false,
-  "isPublished": true,
   "submissionEvents": [],
   "postSubmissionAction": "FORMS_LIBRARY",
   "formsAppIds": [1, 2, 3],
@@ -598,7 +594,6 @@ const form = {
   organisationId: '0101010101010',
   elements: [],
   isAuthenticated: false,
-  isPublished: true,
   submissionEvents: [],
   postSubmissionAction: 'FORMS_LIBRARY',
   formsAppIds: [1, 2, 3],
@@ -621,7 +616,6 @@ return validatedForm
 | `elements`                                             | Yes                                       | [`FormElement`](./form-elements/README.md)`[]`   | All elements contained within the form itself.                                                  |
 | `isAuthenticated`                                      | Yes                                       | `boolean`                                        | Whether or not the form can only be viewed by an Authenticated user.                            |
 | `isMultiPage`                                          | Yes                                       | `boolean`                                        | Whether or not the form contains multiple pages.                                                |
-| `isPublished`                                          | Yes                                       | `boolean`                                        | Whether or not the form is visible within the Forms Apps it's included in.                      |
 | `submissionEvents`                                     | No                                        | `SubmissionEvent[]`                              | Events that occur/trigger on a valid successful submission.                                     |
 | `submissionEvents[].type`                              | Yes                                       | `'CALLBACK' | 'PDF' | 'SPOTTO' | 'ONEBLINK_API'` | The type of submission event.                                                                   |
 | `submissionEvents[].configuration`                     | Yes                                       | `mixed`                                          | Configuration specific to the type of submission event.                                         |
@@ -637,6 +631,8 @@ return validatedForm
 | `redirectUrl`                                          | No                                        | `string`                                         | The URL the form will redirect to if configured to do so by the `postSubmissionActions`.        |
 | `isInfoPage`                                           | Yes                                       | `boolean`                                        | Whether or not the Form is an Info Page.                                                        |
 | `tags`                                                 | No                                        | `string[]`                                       | A list of tags used to categorise or describe the form.                                         |
+| `publishStartDate`                                     | No                                        | `string`                                         | The date and time (in ISO format) a form becomes available.                                     |
+| `publishEndDate`                                       | No                                        | `string`                                         | The date and time (in ISO format) a form becomes unavailable.                                   |
 
 ### Result
 
@@ -649,7 +645,6 @@ return validatedForm
   "formsAppEnvironmentId": 1,
   "elements": [],
   "isAuthenticated": false,
-  "isPublished": true,
   "submissionEvents": [],
   "postSubmissionAction": "FORMS_LIBRARY",
   "formsAppIds": [1, 2, 3],

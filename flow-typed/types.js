@@ -44,7 +44,6 @@ declare type FormsSearchResult = {
 
 declare type FormsSearchOptions = {
   isAuthenticated?: mixed,
-  isPublished?: mixed,
   name?: mixed,
 }
 

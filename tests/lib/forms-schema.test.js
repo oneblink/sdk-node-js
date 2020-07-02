@@ -5,7 +5,7 @@
 const Joi = require('joi')
 
 const { formSchema, elementSchema } = require('../../lib/forms-schema.js')
-
+const { validateWithFormSchema } = require('../../lib/forms-validation')
 describe('Valid Form Schema with Pages', () => {
   const result = Joi.validate(
     {
@@ -1663,7 +1663,6 @@ test('should error if page element has child page element', () => {
         },
       ],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -1698,7 +1697,6 @@ test('should error if page element has no elements', () => {
         },
       ],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -1748,7 +1746,6 @@ test('should error if isMultiPage is set to false', () => {
         },
       ],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -1805,7 +1802,6 @@ test('should allow multiple pages', () => {
         },
       ],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -1853,7 +1849,6 @@ test('should error if root elements arent all page elements', () => {
         },
       ],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -1908,7 +1903,6 @@ test('should error if isMultiPage is false even if all root elements are pages',
         },
       ],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -1946,7 +1940,6 @@ test('should error if image element does not have a default value', () => {
         },
       ],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -1983,7 +1976,6 @@ test('should error if HTML element does not have a default value', () => {
         },
       ],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -2022,7 +2014,6 @@ test('should error if calculation element does not have a default value', () => 
         },
       ],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -2066,7 +2057,6 @@ test('should allow array of restricted barcode types', () => {
         },
       ],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -2104,7 +2094,6 @@ test('should require restricted barcode types if restrictBarcodeTypes boolean is
         },
       ],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -2132,7 +2121,6 @@ test('should throw error if postSubmissionAction is an invalid type', () => {
       isMultiPage: false,
       elements: [],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -2159,7 +2147,6 @@ test('should throw error if postSubmissionAction is missing', () => {
       isMultiPage: false,
       elements: [],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -2185,7 +2172,6 @@ test('should throw error if postSubmissionAction is URL but no URL is present', 
       isMultiPage: false,
       elements: [],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -2221,7 +2207,6 @@ test('should throw error if defaultValue for email is not valid', () => {
         },
       ],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -2259,7 +2244,6 @@ test('should throw error if defaultValue contains src="data:', () => {
         },
       ],
       isAuthenticated: true,
-      isPublished: true,
       submissionEvents: [],
       tags: [],
     },
@@ -2508,7 +2492,6 @@ describe('PDF submission event', () => {
         isMultiPage: false,
         elements: [],
         isAuthenticated: true,
-        isPublished: true,
         tags: [],
         submissionEvents: [
           {
@@ -2539,7 +2522,7 @@ describe('PDF submission event', () => {
         isMultiPage: false,
         elements: [],
         isAuthenticated: true,
-        isPublished: true,
+
         tags: [],
         submissionEvents: [
           {
@@ -2570,7 +2553,7 @@ describe('PDF submission event', () => {
         isMultiPage: false,
         elements: [],
         isAuthenticated: true,
-        isPublished: true,
+
         tags: [],
         submissionEvents: [
           {
@@ -2606,7 +2589,7 @@ describe('CALLBACK submission event', () => {
         isMultiPage: false,
         elements: [],
         isAuthenticated: true,
-        isPublished: true,
+
         tags: [],
         submissionEvents: [
           {
@@ -2638,7 +2621,7 @@ describe('CALLBACK submission event', () => {
         isMultiPage: false,
         elements: [],
         isAuthenticated: true,
-        isPublished: true,
+
         tags: [],
         submissionEvents: [
           {
@@ -2672,7 +2655,7 @@ describe('SPOTTO submission event', () => {
         isMultiPage: false,
         elements: [],
         isAuthenticated: true,
-        isPublished: true,
+
         tags: [],
         submissionEvents: [
           {
@@ -2703,7 +2686,7 @@ describe('TRIM submission event', () => {
         isMultiPage: false,
         elements: [],
         isAuthenticated: true,
-        isPublished: true,
+
         tags: [],
         submissionEvents: [
           {
@@ -2752,7 +2735,7 @@ describe('BPOINT submission event', () => {
         isMultiPage: false,
         elements: [],
         isAuthenticated: true,
-        isPublished: true,
+
         tags: [],
         submissionEvents: [
           {
@@ -2787,7 +2770,7 @@ describe('BPOINT submission event', () => {
           },
         ],
         isAuthenticated: true,
-        isPublished: true,
+
         submissionEvents: [
           {
             type: 'BPOINT',
@@ -2829,7 +2812,7 @@ describe('CP_PAY submission event', () => {
           },
         ],
         isAuthenticated: true,
-        isPublished: true,
+
         submissionEvents: [
           {
             type: 'CP_PAY',
@@ -2872,7 +2855,7 @@ describe('CP_HCMS submission event', () => {
           },
         ],
         isAuthenticated: true,
-        isPublished: true,
+
         submissionEvents: [
           {
             type: 'CP_HCMS',
@@ -2911,7 +2894,7 @@ describe('CP_HCMS submission event', () => {
           },
         ],
         isAuthenticated: true,
-        isPublished: true,
+
         submissionEvents: [
           {
             type: 'CP_HCMS',
@@ -2953,7 +2936,7 @@ describe('CP_HCMS submission event', () => {
           },
         ],
         isAuthenticated: true,
-        isPublished: true,
+
         submissionEvents: [
           {
             type: 'CP_HCMS',
@@ -3045,7 +3028,7 @@ describe('Conditional Predicates', () => {
           },
         ],
         isAuthenticated: true,
-        isPublished: true,
+
         submissionEvents: [
           {
             type: 'SPOTTO',
@@ -3131,7 +3114,7 @@ describe('Conditional Predicates', () => {
           },
         ],
         isAuthenticated: true,
-        isPublished: true,
+
         submissionEvents: [
           {
             type: 'SPOTTO',
@@ -3182,7 +3165,7 @@ describe('Data Lookup enabled', () => {
           },
         ],
         isAuthenticated: true,
-        isPublished: true,
+
         submissionEvents: [],
         tags: [],
       },
@@ -3220,7 +3203,7 @@ describe('Data Lookup enabled', () => {
           },
         ],
         isAuthenticated: true,
-        isPublished: true,
+
         submissionEvents: [],
         tags: [],
       },
@@ -3258,7 +3241,7 @@ describe('Data Lookup enabled', () => {
           },
         ],
         isAuthenticated: true,
-        isPublished: true,
+
         submissionEvents: [],
         tags: [],
       },
@@ -3907,7 +3890,6 @@ describe('invalid property removal', () => {
       isAuthenticated: false,
       isInfoPage: false,
       isMultiPage: false,
-      isPublished: false,
     })
   })
 
@@ -4313,4 +4295,22 @@ test('should allow forms without tags', () => {
   )
   expect(result.value.tags).toEqual([])
   expect(result.error).toBe(null)
+})
+
+test('should not allow publish start date after publish end date', () => {
+  expect(() =>
+    validateWithFormSchema({
+      id: 1,
+      name: 'Tags Form',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      submissionEvents: [],
+      elements: [],
+      publishStartDate: '2020-06-21 12:00:00',
+      publishEndDate: '2020-06-20 12:00:00',
+    }),
+  ).toThrow('Publish Start Date must be before Publish End Date')
 })
