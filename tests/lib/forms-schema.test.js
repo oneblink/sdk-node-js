@@ -2748,6 +2748,34 @@ describe('BPOINT submission event', () => {
     )
     expect(error.message).toContain('"elementId" is required')
   })
+  test('should error for BPOINT submission event not passing "environmentId"', () => {
+    const { error } = Joi.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [],
+        isAuthenticated: true,
+
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'BPOINT',
+            configuration: {
+              elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            },
+          },
+        ],
+      },
+      formSchema,
+    )
+    expect(error.message).toContain('"environmentId" is required')
+  })
   test('should allow BPOINT submission event', () => {
     const { error } = Joi.validate(
       {
@@ -2776,6 +2804,7 @@ describe('BPOINT submission event', () => {
             type: 'BPOINT',
             configuration: {
               elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
             },
           },
         ],

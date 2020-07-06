@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- Added environmentId to BPOINT configuration
+
 # 0.7.1 (2020-07-06)
 
 ### Added

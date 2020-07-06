@@ -405,6 +405,7 @@ declare type FormSubmissionEventConfiguration = {
   apiEnvironmentRoute?: string,
   contentTypeName?: string,
   gatewayId?: string,
+  environmentId?: string,
 }
 
 declare type FormSubmissionEventType =
@@ -415,6 +416,7 @@ declare type FormSubmissionEventType =
   | 'TRIM'
   | 'CP_PAY'
   | 'CP_HCMS'
+  | 'BPOINT'
 
 declare type FormSubmissionEvent = {
   id?: number,
