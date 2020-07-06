@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added environmentId to BPOINT configuration
 - Publish start and end date
 - Added tags for form def
 - Types and validation for placeholderValue on form elements
