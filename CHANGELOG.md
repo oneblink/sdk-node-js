@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+# 0.7.1 (2020-07-06)
+
 ### Added
 
 - Publish start and end date
