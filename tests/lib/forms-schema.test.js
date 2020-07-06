@@ -2686,7 +2686,52 @@ describe('TRIM submission event', () => {
         isMultiPage: false,
         elements: [],
         isAuthenticated: true,
-
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'TRIM',
+            configuration: {
+              environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              container: {
+                uri: 4,
+                label: 'URI Label',
+              },
+              recordType: {
+                uri: 1,
+                label: 'Record Type Label',
+              },
+              actionDefinition: {
+                uri: 2,
+                label: 'Action Definition Label',
+              },
+              location: {
+                uri: 3,
+                label: 'Location Label',
+              },
+            },
+          },
+        ],
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBeNull()
+  })
+  test('should error TRIM submission event not passing environmentId', () => {
+    const { error } = Joi.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [],
+        isAuthenticated: true,
         tags: [],
         submissionEvents: [
           {
@@ -2717,7 +2762,7 @@ describe('TRIM submission event', () => {
         abortEarly: false,
       },
     )
-    expect(error).toBeNull()
+    expect(error.message).toContain('"environmentId" is required')
   })
 })
 

@@ -4,7 +4,7 @@
 
 ### Added
 
-- Added environmentId to BPOINT configuration
+- `environmentId` to BPOINT and TRIM submission event configuration
 
 # 0.7.1 (2020-07-06)
 
