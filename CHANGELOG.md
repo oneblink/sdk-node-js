@@ -2,11 +2,14 @@
 
 ## Unreleased
 
+### Added
+
+- Added environmentId to BPOINT configuration
+
 # 0.7.1 (2020-07-06)
 
 ### Added
 
-- Added environmentId to BPOINT configuration
 - Publish start and end date
 - Added tags for form def
 - Types and validation for placeholderValue on form elements
