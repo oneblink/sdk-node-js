@@ -2,11 +2,14 @@
 
 ## Unreleased
 
+### Added
+
+- Allowed 'NOW' for date, time and DateTime defaultValues
+
 # 0.7.2 (2020-07-09)
 
 ### Added
 
-- Allowed 'NOW' for date, time and DateTime defaultValues
 - `environmentId` to BPOINT and TRIM submission event configuration
 
 # 0.7.1 (2020-07-06)
