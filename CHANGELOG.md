@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- Allowed 'NOW' for date, time and DateTime defaultValues
+
 # 0.7.2 (2020-07-09)
 
 ### Added

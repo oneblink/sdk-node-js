@@ -184,7 +184,7 @@ type DateElementBase = FormElementRequired & {
   readOnly: boolean,
   fromDate?: ?Date,
   toDate?: ?Date,
-  defaultValue: ?Date,
+  defaultValue: ?(Date | 'NOW'),
 } & LookupFormElement
 
 declare type DateElement = DateElementBase & {
@@ -200,7 +200,7 @@ declare type DateTimeElement = DateElementBase & {
 declare type TimeElement = FormElementRequired & {
   type: 'time',
   readOnly: boolean,
-  defaultValue: ?Date,
+  defaultValue: ?(Date | 'NOW'),
   placeholderValue?: string,
 } & LookupFormElement
 

@@ -1307,16 +1307,16 @@ test('should error if "defaultValue" does not match what is valid for each type'
     '"Form Element - Default Value" must be a number',
   )
   expect(error.details[3].message).toBe(
-    '"Form Element - Default Date Value" must be a valid ISO 8601 date',
+    '"Form Element - Default Date Value" must be a valid ISO 8601 date or the string "NOW"',
   )
   expect(error.details[3].message).toBe(
-    '"Form Element - Default Date Value" must be a valid ISO 8601 date',
+    '"Form Element - Default Date Value" must be a valid ISO 8601 date or the string "NOW"',
   )
   expect(error.details[4].message).toBe(
-    '"Form Element - Default Date Value" must be a valid ISO 8601 date',
+    '"Form Element - Default Date Value" must be a valid ISO 8601 date or the string "NOW"',
   )
   expect(error.details[5].message).toBe(
-    '"Form Element - Default Date Value" must be a valid ISO 8601 date',
+    '"Form Element - Default Date Value" must be a valid ISO 8601 date or the string "NOW"',
   )
   expect(error.details[6].message).toBe(
     '"Form Element - Default Value" must be a valid GUID',
@@ -4387,4 +4387,101 @@ test('should not allow publish start date after publish end date', () => {
       publishEndDate: '2020-06-20 12:00:00',
     }),
   ).toThrow('Publish Start Date must be before Publish End Date')
+})
+
+test('should allow datetime, date and time elements with NOW defaults', () => {
+  const result = Joi.validate(
+    {
+      id: 1,
+      name: 'NOW Defaults Form',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      submissionEvents: [],
+      elements: [
+        {
+          id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
+          name: 'Date_and_Time',
+          label: 'Date and Time',
+          type: 'datetime',
+          required: false,
+          defaultValue: 'NOW',
+        },
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
+          name: 'Just_Time',
+          label: 'Just Time',
+          type: 'time',
+          required: false,
+          defaultValue: 'NOW',
+        },
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+        },
+      ],
+    },
+    formSchema,
+  )
+  expect(result.error).toBe(null)
+})
+
+test('should not allow datetime, date and time elements with any other strings as default', () => {
+  const result = Joi.validate(
+    {
+      id: 1,
+      name: 'NOW Defaults Form',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      submissionEvents: [],
+      elements: [
+        {
+          id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
+          name: 'Date_and_Time',
+          label: 'Date and Time',
+          type: 'datetime',
+          required: false,
+          defaultValue: 'OTHER_STRINGS',
+        },
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
+          name: 'Just_Time',
+          label: 'Just Time',
+          type: 'time',
+          required: false,
+          defaultValue: 'OTHER_STRINGS',
+        },
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'OTHER_STRINGS',
+        },
+      ],
+    },
+    formSchema,
+    {
+      abortEarly: false,
+    },
+  )
+  expect(result.error.details[0].message).toBe(
+    '"Form Element - Default Date Value" must be a valid ISO 8601 date or the string "NOW"',
+  )
+  expect(result.error.details[1].message).toBe(
+    '"Form Element - Default Date Value" must be a valid ISO 8601 date or the string "NOW"',
+  )
+  expect(result.error.details[2].message).toBe(
+    '"Form Element - Default Date Value" must be a valid ISO 8601 date or the string "NOW"',
+  )
 })
