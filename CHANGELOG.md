@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+# 0.7.2 (2020-07-09)
+
 ### Added
 
 - `environmentId` to BPOINT and TRIM submission event configuration
