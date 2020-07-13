@@ -4485,3 +4485,122 @@ test('should not allow datetime, date and time elements with any other strings a
     '"Form Element - Default Date Value" must be a valid ISO 8601 date or the string "NOW"',
   )
 })
+
+describe('submission event conditional logic', () => {
+  test('should allow both OPTIONS and NUMERIC conditional types', () => {
+    const { error } = Joi.validate(
+      {
+        id: 1,
+        name: 'conditionally execute event via number input',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        tags: [],
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+            required: false,
+            minNumber: 1,
+            maxNumber: 6,
+            defaultValue: 3,
+          },
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Select',
+            label: 'Select',
+            type: 'select',
+            required: false,
+            options: [
+              {
+                id: '9e50b6e5-52b7-48ab-ab86-542ccba82205',
+                value: 'ONE',
+                label: 'one',
+              },
+              {
+                id: '5c82ef40-779a-46fb-8860-c9b4969518ec',
+                value: 'TWO',
+                label: 'two',
+              },
+            ],
+          },
+        ],
+        isAuthenticated: true,
+        submissionEvents: [
+          {
+            type: 'SPOTTO',
+            conditionallyExecute: true,
+            requiresAllConditionallyExecutePredicates: true,
+            conditionallyExecutePredicates: [
+              {
+                elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+                type: 'NUMERIC',
+                operator: '<',
+                value: 5,
+              },
+              {
+                elementId: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+                type: 'OPTIONS',
+                optionIds: ['5c82ef40-779a-46fb-8860-c9b4969518ec'],
+              },
+            ],
+          },
+        ],
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBeNull()
+  })
+
+  test('should set correct defaults for submission event conditional properties', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'conditionally show via number input',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+            required: false,
+            minNumber: 1,
+            maxNumber: 6,
+            defaultValue: 3,
+          },
+        ],
+        isAuthenticated: true,
+        submissionEvents: [
+          {
+            type: 'SPOTTO',
+          },
+        ],
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+    expect(result.value.submissionEvents[0]).toEqual({
+      type: 'SPOTTO',
+      conditionallyExecute: false,
+      requiresAllConditionallyExecutePredicates: false,
+      isDraft: false,
+    })
+    expect(result.error).toBe(null)
+  })
+})
