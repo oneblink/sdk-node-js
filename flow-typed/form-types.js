@@ -423,6 +423,9 @@ declare type FormSubmissionEvent = {
   type: FormSubmissionEventType,
   configuration: FormSubmissionEventConfiguration,
   isDraft: boolean,
+  conditionallyExecute: boolean,
+  requiresAllConditionallyExecutePredicates: boolean,
+  conditionallyExecutePredicates?: ConditionallyShowPredicate[],
 }
 
 declare type FormPostSubmissionAction = 'URL' | 'CLOSE' | 'FORMS_LIBRARY'
