@@ -423,8 +423,8 @@ declare type FormSubmissionEvent = {
   type: FormSubmissionEventType,
   configuration: FormSubmissionEventConfiguration,
   isDraft: boolean,
-  conditionallyExecute: boolean,
-  requiresAllConditionallyExecutePredicates: boolean,
+  conditionallyExecute?: boolean,
+  requiresAllConditionallyExecutePredicates?: boolean,
   conditionallyExecutePredicates?: ConditionallyShowPredicate[],
 }
 
