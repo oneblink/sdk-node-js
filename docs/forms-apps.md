@@ -144,7 +144,8 @@ formsAppsSDK.createFormsApp(formsApp).then((savedFormsApp) => {
   "updatedAt": "2019-05-17T05:49:14.000Z",
   "organisationId": "ABCDEFGHIJKL123456789012",
   "formsAppEnvironmentId": 1,
-  "formIds": []
+  "formIds": [],
+  "notificationEmailAddresses": ["support@organisation.com"]
 }
 ```
 
@@ -297,7 +298,8 @@ formsAppsSDK.getFormsApp(formsAppId).then((formsApp) => {
   "updatedAt": "2019-05-17T05:49:14.000Z",
   "organisationId": "ABCDEFGHIJKL123456789012",
   "formsAppEnvironmentId": 1,
-  "formIds": []
+  "formIds": [],
+  "notificationEmailAddresses": ["support@organisation.com"]
 }
 ```
 
@@ -345,6 +347,7 @@ const formsApp = {
   organisationId: 'ABCDEFGHIJKL123456789012',
   formsAppEnvironmentId: 1,
   formIds: [],
+  notificationEmailAddresses: ['support@organisation.com'],
 }
 formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
   // Use Forms App here...
@@ -370,6 +373,9 @@ formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
 | `formsApp.welcomeEmail`                  | No       | `Object`   | Forms App custom welcome email properties                                                                                                                                                            |
 | `formsApp.welcomeEmail.subject`          | No       | `string`   | The subject to use when sending welcome emails to new app users                                                                                                                                      |
 | `formsApp.welcomeEmail.body`             | No       | `string`   | A [mustache](http://mustache.github.io/#demo) template to use when sending welcome emails to new app users. See [`createUser()`](#createuser) for passing additional parameters for a specific user. |
+| `formsApp.notificationEmailAddresses`    | No       | `string[]` | Array of emails addresses to be notified when an error occurs in processing submission events                                                                                                        |
+| `formsApp.oAuthClientId`                 | No       | `string`   | OAuth Client id                                                                                                                                                                                      |
+| `formsApp.hasSamlIdentityProvider`       | No       | `boolean`  | True when using a SAML identity provider                                                                                                                                                             |
 
 ### Result (Resolved Promise)
 
@@ -388,7 +394,8 @@ formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
   "updatedAt": "2019-05-17T05:49:14.000Z",
   "organisationId": "ABCDEFGHIJKL123456789012",
   "formsAppEnvironmentId": 1,
-  "formIds": []
+  "formIds": [],
+  "notificationEmailAddresses": ["support@organisation.com"]
 }
 ```
 
@@ -415,15 +422,21 @@ formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
 
 ### Parameters
 
-| Parameter                   | Required | Type       | Description                                          |
-| --------------------------- | -------- | ---------- | ---------------------------------------------------- |
-| `styles`                    | Yes      | `Object`   | Forms App styles properties                          |
-| `formsApp.foregroundColour` | No       | `string`   | Foreground colour of banner in Forms App             |
-| `formsApp.highlightColour`  | No       | `string`   | Highlight colour for elements that should stand out  |
-| `formsApp.contrastColour`   | No       | `string`   | Contrast colour applied against the highlight colour |
-| `formsApp.customCss`        | No       | `string`   | Custom CSS applied to the Forms App                  |
-| `formsApp.logoUrl`          | No       | `string`   | The absolute URL to the logo image in the Forms App  |
-| `formsApp.menuItems`        | No       | `Object[]` | The absolute URL to the logo image in the Forms App  |
+| Parameter                   | Required | Type       | Description                                                                                            |
+| --------------------------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------ |
+| `styles`                    | Yes      | `Object`   | Forms App styles properties                                                                            |
+| `formsApp.foregroundColour` | No       | `string`   | Foreground colour of banner in Forms App                                                               |
+| `formsApp.highlightColour`  | No       | `string`   | Highlight colour for elements that should stand out                                                    |
+| `formsApp.contrastColour`   | No       | `string`   | Contrast colour applied against the highlight colour                                                   |
+| `formsApp.customCss`        | No       | `string`   | Custom CSS applied to the Forms App                                                                    |
+| `formsApp.logoUrl`          | No       | `string`   | The absolute URL to the logo image in the Forms App                                                    |
+| `formsApp.menuItems`        | No       | `Object[]` | Array of menu item objects                                                                             |
+| `label`                     | Yes      | `string`   | Label for the menu item                                                                                |
+| `icon`                      | Yes      | `string`   | Icon to be used for the menu item                                                                      |
+| `type`                      | Yes      | `string`   | Type of menu item, valid values "FORMS_LIST", "JOBS", "DRAFTS","PENDING_SUBMISSIONS","PROFILE", "HREF" |
+| `isHidden`                  | Yes      | `boolean`  | If true, menu item will be hidden (valid for types except "HREF")                                      |
+| `isDefault`                 | Yes      | `boolean`  | If true, menu item will be the default item shown (valid for types except "HREF")                      |
+| `href`                      | Yes      | `string`   | Url to be opened for menu item (valid for type "HREF" only)                                            |
 
 ### Result (Resolved Promise)
 
@@ -433,6 +446,7 @@ formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
   "highlightColour": "#0000FF",
   "contrastColour": "#FFFFFF",
   "customCss": ".ob-button { border-radius: 10px; }",
-  "logoUrl": "http://logo.com/path/to/image.png"
+  "logoUrl": "http://logo.com/path/to/image.png",
+  "menuItems": []
 }
 ```
