@@ -4,6 +4,7 @@
 
 ### Added
 
+- Solution prop to RolePrivilege type
 - Conditional execute properties to submission events
 - Allowed 'NOW' for date, time and DateTime defaultValues
 
