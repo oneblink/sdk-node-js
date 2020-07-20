@@ -98,6 +98,7 @@ const formsApp = {
   organisationId: 'ABCDEFGHIJKL123456789012',
   formsAppEnvironmentId: 1,
   formIds: [],
+  notificationEmailAddresses: ['support@organisation.com'],
 }
 formsAppsSDK.createFormsApp(formsApp).then((savedFormsApp) => {
   // Use Forms App here...
@@ -121,6 +122,9 @@ formsAppsSDK.createFormsApp(formsApp).then((savedFormsApp) => {
 | `formsApp.welcomeEmail`                  | No       | `Object`   | Forms App custom welcome email properties                                                                                                                                                            |
 | `formsApp.welcomeEmail.subject`          | No       | `string`   | The subject to use when sending welcome emails to new app users                                                                                                                                      |
 | `formsApp.welcomeEmail.body`             | No       | `string`   | A [mustache](http://mustache.github.io/#demo) template to use when sending welcome emails to new app users. See [`createUser()`](#createuser) for passing additional parameters for a specific user. |
+| `formsApp.notificationEmailAddresses`    | No       | `string[]` | Array of emails addresses to be notified when an error occurs in processing submission events                                                                                                        |
+| `formsApp.oAuthClientId`                 | No       | `string`   | OAuth Client id                                                                                                                                                                                      |
+| `formsApp.hasSamlIdentityProvider`       | No       | `boolean`  | True when using a SAML identity provider                                                                                                                                                             |
 
 ### Result (Resolved Promise)
 
@@ -281,7 +285,8 @@ formsAppsSDK.getFormsApp(formsAppId).then((formsApp) => {
     "customCss": "",
     "contrastColour": "#fff",
     "highlightColour": "#0693e3",
-    "foregroundColour": "#abb8c3"
+    "foregroundColour": "#abb8c3",
+    "menuItems": []
   },
   "pwaSettings": {
     "homeScreenName": "App",
@@ -401,6 +406,7 @@ const styles = {
   contrastColour: '#FFFFFF',
   customCss: '.ob-button { border-radius: 10px; }',
   logoUrl: 'http://logo.com/path/to/image.png',
+  menuItems: [],
 }
 formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
   // Styles have been updated...
@@ -409,14 +415,15 @@ formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
 
 ### Parameters
 
-| Parameter                   | Required | Type     | Description                                          |
-| --------------------------- | -------- | -------- | ---------------------------------------------------- |
-| `styles`                    | Yes      | `Object` | Forms App styles properties                          |
-| `formsApp.foregroundColour` | No       | `string` | Foreground colour of banner in Forms App             |
-| `formsApp.highlightColour`  | No       | `string` | Highlight colour for elements that should stand out  |
-| `formsApp.contrastColour`   | No       | `string` | Contrast colour applied against the highlight colour |
-| `formsApp.customCss`        | No       | `string` | Custom CSS applied to the Forms App                  |
-| `formsApp.logoUrl`          | No       | `string` | The absolute URL to the logo image in the Forms App  |
+| Parameter                   | Required | Type       | Description                                          |
+| --------------------------- | -------- | ---------- | ---------------------------------------------------- |
+| `styles`                    | Yes      | `Object`   | Forms App styles properties                          |
+| `formsApp.foregroundColour` | No       | `string`   | Foreground colour of banner in Forms App             |
+| `formsApp.highlightColour`  | No       | `string`   | Highlight colour for elements that should stand out  |
+| `formsApp.contrastColour`   | No       | `string`   | Contrast colour applied against the highlight colour |
+| `formsApp.customCss`        | No       | `string`   | Custom CSS applied to the Forms App                  |
+| `formsApp.logoUrl`          | No       | `string`   | The absolute URL to the logo image in the Forms App  |
+| `formsApp.menuItems`        | No       | `Object[]` | The absolute URL to the logo image in the Forms App  |
 
 ### Result (Resolved Promise)
 
