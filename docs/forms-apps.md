@@ -374,7 +374,6 @@ formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
 | `formsApp.welcomeEmail.subject`          | No       | `string`   | The subject to use when sending welcome emails to new app users                                                                                                                                      |
 | `formsApp.welcomeEmail.body`             | No       | `string`   | A [mustache](http://mustache.github.io/#demo) template to use when sending welcome emails to new app users. See [`createUser()`](#createuser) for passing additional parameters for a specific user. |
 | `formsApp.notificationEmailAddresses`    | No       | `string[]` | Array of emails addresses to be notified when an error occurs in processing submission events                                                                                                        |
-| `formsApp.oAuthClientId`                 | No       | `string`   | OAuth Client id                                                                                                                                                                                      |
 | `formsApp.hasSamlIdentityProvider`       | No       | `boolean`  | True when using a SAML identity provider                                                                                                                                                             |
 
 ### Result (Resolved Promise)
