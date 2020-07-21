@@ -280,6 +280,7 @@ formsAppsSDK.getFormsApp(formsAppId).then((formsApp) => {
   "id": 1,
   "name": "My Application",
   "hostname": "customer-my.app.oneblink.io",
+  "slug": "my",
   "oAuthClientId": "ABCDEFGHIJKL123456789012",
   "styles": {
     "logoUrl": "",
