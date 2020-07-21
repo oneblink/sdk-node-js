@@ -6,6 +6,7 @@
 
 - Conditional execute properties to submission events
 - Allowed 'NOW' for date, time and DateTime defaultValues
+- Update `Forms-App` docs
 
 # 0.7.2 (2020-07-09)
 
