@@ -336,7 +336,7 @@ Update a Forms App
 const formsApp = {
   id: 1,
   name: 'My Application',
-  hostname: 'customer-my.app.oneblink.io',
+  slug: 'my',
   oAuthClientId: '123456789012abcdefghijkl',
   pwaSettings: {
     homeScreenName: 'App',
@@ -361,7 +361,7 @@ formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
 | `formsApp`                               | Yes      | `Object`   | Forms App properties                                                                                                                                                                                 |
 | `formsApp.id`                            | Yes      | `number`   | Identifier of the forms app                                                                                                                                                                          |
 | `formsApp.name`                          | Yes      | `string`   | Name of the forms app                                                                                                                                                                                |
-| `formsApp.hostname`                      | Yes      | `string`   | Hostname (domain) for the forms app                                                                                                                                                                  |
+| `formsApp.slug`                          | Yes      | `string`   | Unique domain safe text to identify the app                                                                                                                                                          |
 | `formsApp.organisationId`                | Yes      | `string`   | The exact organisation identifier the forms app is associated with                                                                                                                                   |
 | `formsApp.formsAppEnvironmentId`         | Yes      | `number`   | The exact forms app environment identifier the forms app is associated with                                                                                                                          |
 | `formsApp.oAuthClientId`                 | Yes      | `string`   | The identifier of the OAuth Client for the forms app **(Do not change this)**.                                                                                                                       |
@@ -384,6 +384,7 @@ formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
   "id": 1,
   "name": "My Application",
   "hostname": "customer-my.app.oneblink.io",
+  "slug": "my",
   "oAuthClientId": "123456789012abcdefghijkl",
   "styles": {},
   "pwaSettings": {
@@ -422,21 +423,21 @@ formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
 
 ### Parameters
 
-| Parameter                   | Required | Type       | Description                                                                                            |
-| --------------------------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------ |
-| `styles`                    | Yes      | `Object`   | Forms App styles properties                                                                            |
-| `formsApp.foregroundColour` | No       | `string`   | Foreground colour of banner in Forms App                                                               |
-| `formsApp.highlightColour`  | No       | `string`   | Highlight colour for elements that should stand out                                                    |
-| `formsApp.contrastColour`   | No       | `string`   | Contrast colour applied against the highlight colour                                                   |
-| `formsApp.customCss`        | No       | `string`   | Custom CSS applied to the Forms App                                                                    |
-| `formsApp.logoUrl`          | No       | `string`   | The absolute URL to the logo image in the Forms App                                                    |
-| `formsApp.menuItems`        | No       | `Object[]` | Array of menu item objects                                                                             |
-| `label`                     | Yes      | `string`   | Label for the menu item                                                                                |
-| `icon`                      | Yes      | `string`   | Icon to be used for the menu item                                                                      |
-| `type`                      | Yes      | `string`   | Type of menu item, valid values "FORMS_LIST", "JOBS", "DRAFTS","PENDING_SUBMISSIONS","PROFILE", "HREF" |
-| `isHidden`                  | Yes      | `boolean`  | If true, menu item will be hidden (valid for types except "HREF")                                      |
-| `isDefault`                 | Yes      | `boolean`  | If true, menu item will be the default item shown (valid for types except "HREF")                      |
-| `href`                      | Yes      | `string`   | Url to be opened for menu item (valid for type "HREF" only)                                            |
+| Parameter                      | Required | Type       | Description                                                                                            |
+| ------------------------------ | -------- | ---------- | ------------------------------------------------------------------------------------------------------ |
+| `styles`                       | Yes      | `Object`   | Forms App styles properties                                                                            |
+| `styles.foregroundColour`      | No       | `string`   | Foreground colour of banner in Forms App                                                               |
+| `styles.highlightColour`       | No       | `string`   | Highlight colour for elements that should stand out                                                    |
+| `styles.contrastColour`        | No       | `string`   | Contrast colour applied against the highlight colour                                                   |
+| `styles.customCss`             | No       | `string`   | Custom CSS applied to the Forms App                                                                    |
+| `styles.logoUrl`               | No       | `string`   | The absolute URL to the logo image in the Forms App                                                    |
+| `styles.menuItems`             | No       | `Object[]` | Array of menu item objects                                                                             |
+| `styles.menuItems[].label`     | Yes      | `string`   | Label for the menu item                                                                                |
+| `styles.menuItems[].icon`      | Yes      | `string`   | Icon to be used for the menu item                                                                      |
+| `styles.menuItems[].type`      | Yes      | `string`   | Type of menu item, valid values "FORMS_LIST", "JOBS", "DRAFTS","PENDING_SUBMISSIONS","PROFILE", "HREF" |
+| `styles.menuItems[].isHidden`  | Yes      | `boolean`  | If true, menu item will be hidden (valid for types except "HREF")                                      |
+| `styles.menuItems[].isDefault` | Yes      | `boolean`  | If true, menu item will be the default item shown (valid for types except "HREF")                      |
+| `styles.menuItems[].href`      | Yes      | `string`   | Url to be opened for menu item (valid for type "HREF" only)                                            |
 
 ### Result (Resolved Promise)
 
