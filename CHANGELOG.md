@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+# 0.7.3 (2020-07-23)
+
 ### Added
 
 - Conditional execute properties to submission events
