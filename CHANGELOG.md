@@ -2,11 +2,14 @@
 
 ## Unreleased
 
+### Added
+
+- Solution prop to RolePrivilege type
+
 # 0.7.3 (2020-07-23)
 
 ### Added
 
-- Solution prop to RolePrivilege type
 - Conditional execute properties to submission events
 - Allowed 'NOW' for date, time and DateTime defaultValues
 - Update `Forms-App` docs
