@@ -25,7 +25,7 @@ const organisations = new OneBlink.Organisations(options)
 
 ```javascript
 const organisationId = 'ABCDEFGHIJKL123455678901'
-organisations.getOrganisations(organisationId).then((organisation) => {
+organisations.getOrganisation(organisationId).then((organisation) => {
   // Use organisation here...
 })
 ```

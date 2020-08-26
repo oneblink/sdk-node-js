@@ -98,6 +98,7 @@ const formsApp = {
   organisationId: 'ABCDEFGHIJKL123456789012',
   formsAppEnvironmentId: 1,
   formIds: [],
+  notificationEmailAddresses: ['support@organisation.com'],
 }
 formsAppsSDK.createFormsApp(formsApp).then((savedFormsApp) => {
   // Use Forms App here...
@@ -121,6 +122,9 @@ formsAppsSDK.createFormsApp(formsApp).then((savedFormsApp) => {
 | `formsApp.welcomeEmail`                  | No       | `Object`   | Forms App custom welcome email properties                                                                                                                                                            |
 | `formsApp.welcomeEmail.subject`          | No       | `string`   | The subject to use when sending welcome emails to new app users                                                                                                                                      |
 | `formsApp.welcomeEmail.body`             | No       | `string`   | A [mustache](http://mustache.github.io/#demo) template to use when sending welcome emails to new app users. See [`createUser()`](#createuser) for passing additional parameters for a specific user. |
+| `formsApp.notificationEmailAddresses`    | No       | `string[]` | Array of emails addresses to be notified when an error occurs in processing submission events                                                                                                        |
+| `formsApp.oAuthClientId`                 | No       | `string`   | OAuth Client id                                                                                                                                                                                      |
+| `formsApp.hasSamlIdentityProvider`       | No       | `boolean`  | True when using a SAML identity provider                                                                                                                                                             |
 
 ### Result (Resolved Promise)
 
@@ -140,7 +144,8 @@ formsAppsSDK.createFormsApp(formsApp).then((savedFormsApp) => {
   "updatedAt": "2019-05-17T05:49:14.000Z",
   "organisationId": "ABCDEFGHIJKL123456789012",
   "formsAppEnvironmentId": 1,
-  "formIds": []
+  "formIds": [],
+  "notificationEmailAddresses": ["support@organisation.com"]
 }
 ```
 
@@ -275,13 +280,15 @@ formsAppsSDK.getFormsApp(formsAppId).then((formsApp) => {
   "id": 1,
   "name": "My Application",
   "hostname": "customer-my.app.oneblink.io",
+  "slug": "my",
   "oAuthClientId": "ABCDEFGHIJKL123456789012",
   "styles": {
     "logoUrl": "",
     "customCss": "",
     "contrastColour": "#fff",
     "highlightColour": "#0693e3",
-    "foregroundColour": "#abb8c3"
+    "foregroundColour": "#abb8c3",
+    "menuItems": []
   },
   "pwaSettings": {
     "homeScreenName": "App",
@@ -292,7 +299,8 @@ formsAppsSDK.getFormsApp(formsAppId).then((formsApp) => {
   "updatedAt": "2019-05-17T05:49:14.000Z",
   "organisationId": "ABCDEFGHIJKL123456789012",
   "formsAppEnvironmentId": 1,
-  "formIds": []
+  "formIds": [],
+  "notificationEmailAddresses": ["support@organisation.com"]
 }
 ```
 
@@ -329,7 +337,7 @@ Update a Forms App
 const formsApp = {
   id: 1,
   name: 'My Application',
-  hostname: 'customer-my.app.oneblink.io',
+  slug: 'my',
   oAuthClientId: '123456789012abcdefghijkl',
   pwaSettings: {
     homeScreenName: 'App',
@@ -340,6 +348,7 @@ const formsApp = {
   organisationId: 'ABCDEFGHIJKL123456789012',
   formsAppEnvironmentId: 1,
   formIds: [],
+  notificationEmailAddresses: ['support@organisation.com'],
 }
 formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
   // Use Forms App here...
@@ -353,7 +362,7 @@ formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
 | `formsApp`                               | Yes      | `Object`   | Forms App properties                                                                                                                                                                                 |
 | `formsApp.id`                            | Yes      | `number`   | Identifier of the forms app                                                                                                                                                                          |
 | `formsApp.name`                          | Yes      | `string`   | Name of the forms app                                                                                                                                                                                |
-| `formsApp.hostname`                      | Yes      | `string`   | Hostname (domain) for the forms app                                                                                                                                                                  |
+| `formsApp.slug`                          | Yes      | `string`   | Unique domain safe text to identify the app                                                                                                                                                          |
 | `formsApp.organisationId`                | Yes      | `string`   | The exact organisation identifier the forms app is associated with                                                                                                                                   |
 | `formsApp.formsAppEnvironmentId`         | Yes      | `number`   | The exact forms app environment identifier the forms app is associated with                                                                                                                          |
 | `formsApp.oAuthClientId`                 | Yes      | `string`   | The identifier of the OAuth Client for the forms app **(Do not change this)**.                                                                                                                       |
@@ -365,6 +374,8 @@ formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
 | `formsApp.welcomeEmail`                  | No       | `Object`   | Forms App custom welcome email properties                                                                                                                                                            |
 | `formsApp.welcomeEmail.subject`          | No       | `string`   | The subject to use when sending welcome emails to new app users                                                                                                                                      |
 | `formsApp.welcomeEmail.body`             | No       | `string`   | A [mustache](http://mustache.github.io/#demo) template to use when sending welcome emails to new app users. See [`createUser()`](#createuser) for passing additional parameters for a specific user. |
+| `formsApp.notificationEmailAddresses`    | No       | `string[]` | Array of emails addresses to be notified when an error occurs in processing submission events                                                                                                        |
+| `formsApp.hasSamlIdentityProvider`       | No       | `boolean`  | True when using a SAML identity provider                                                                                                                                                             |
 
 ### Result (Resolved Promise)
 
@@ -373,6 +384,7 @@ formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
   "id": 1,
   "name": "My Application",
   "hostname": "customer-my.app.oneblink.io",
+  "slug": "my",
   "oAuthClientId": "123456789012abcdefghijkl",
   "styles": {},
   "pwaSettings": {
@@ -383,7 +395,8 @@ formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
   "updatedAt": "2019-05-17T05:49:14.000Z",
   "organisationId": "ABCDEFGHIJKL123456789012",
   "formsAppEnvironmentId": 1,
-  "formIds": []
+  "formIds": [],
+  "notificationEmailAddresses": ["support@organisation.com"]
 }
 ```
 
@@ -401,6 +414,7 @@ const styles = {
   contrastColour: '#FFFFFF',
   customCss: '.ob-button { border-radius: 10px; }',
   logoUrl: 'http://logo.com/path/to/image.png',
+  menuItems: [],
 }
 formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
   // Styles have been updated...
@@ -409,14 +423,21 @@ formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
 
 ### Parameters
 
-| Parameter                   | Required | Type     | Description                                          |
-| --------------------------- | -------- | -------- | ---------------------------------------------------- |
-| `styles`                    | Yes      | `Object` | Forms App styles properties                          |
-| `formsApp.foregroundColour` | No       | `string` | Foreground colour of banner in Forms App             |
-| `formsApp.highlightColour`  | No       | `string` | Highlight colour for elements that should stand out  |
-| `formsApp.contrastColour`   | No       | `string` | Contrast colour applied against the highlight colour |
-| `formsApp.customCss`        | No       | `string` | Custom CSS applied to the Forms App                  |
-| `formsApp.logoUrl`          | No       | `string` | The absolute URL to the logo image in the Forms App  |
+| Parameter                      | Required | Type       | Description                                                                                            |
+| ------------------------------ | -------- | ---------- | ------------------------------------------------------------------------------------------------------ |
+| `styles`                       | Yes      | `Object`   | Forms App styles properties                                                                            |
+| `styles.foregroundColour`      | No       | `string`   | Foreground colour of banner in Forms App                                                               |
+| `styles.highlightColour`       | No       | `string`   | Highlight colour for elements that should stand out                                                    |
+| `styles.contrastColour`        | No       | `string`   | Contrast colour applied against the highlight colour                                                   |
+| `styles.customCss`             | No       | `string`   | Custom CSS applied to the Forms App                                                                    |
+| `styles.logoUrl`               | No       | `string`   | The absolute URL to the logo image in the Forms App                                                    |
+| `styles.menuItems`             | No       | `Object[]` | Array of menu item objects                                                                             |
+| `styles.menuItems[].label`     | Yes      | `string`   | Label for the menu item                                                                                |
+| `styles.menuItems[].icon`      | Yes      | `string`   | Icon to be used for the menu item                                                                      |
+| `styles.menuItems[].type`      | Yes      | `string`   | Type of menu item, valid values "FORMS_LIST", "JOBS", "DRAFTS","PENDING_SUBMISSIONS","PROFILE", "HREF" |
+| `styles.menuItems[].isHidden`  | Yes      | `boolean`  | If true, menu item will be hidden (valid for types except "HREF")                                      |
+| `styles.menuItems[].isDefault` | Yes      | `boolean`  | If true, menu item will be the default item shown (valid for types except "HREF")                      |
+| `styles.menuItems[].href`      | Yes      | `string`   | Url to be opened for menu item (valid for type "HREF" only)                                            |
 
 ### Result (Resolved Promise)
 
@@ -426,6 +447,7 @@ formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
   "highlightColour": "#0000FF",
   "contrastColour": "#FFFFFF",
   "customCss": ".ob-button { border-radius: 10px; }",
-  "logoUrl": "http://logo.com/path/to/image.png"
+  "logoUrl": "http://logo.com/path/to/image.png",
+  "menuItems": []
 }
 ```

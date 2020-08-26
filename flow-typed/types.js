@@ -104,36 +104,6 @@ declare type Job = NewJob & {
   createdAt: string,
 }
 
-declare type FormsAppStyles = {
-  foregroundColour?: string,
-  highlightColour?: string,
-  contrastColour?: string,
-  logoUrl?: string,
-  customCss?: string,
-}
-
-declare type FormsApp = {
-  id: number,
-  name: string,
-  slug: string,
-  hostname: string,
-  oAuthClientId: ?string,
-  createdAt: string,
-  updatedAt: string,
-  organisationId: string,
-  formIds: number[],
-  styles: FormsAppStyles,
-  pwaSettings: {
-    homeScreenIconUrl?: string,
-    homeScreenName?: string,
-    splashScreenName?: string,
-  },
-  welcomeEmail?: {
-    body?: string,
-    subject?: string,
-  },
-}
-
 declare type FormsAppUser = {
   id: number,
   email: string,
