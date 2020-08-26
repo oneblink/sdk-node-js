@@ -124,6 +124,7 @@ type RolePrivileges = {
   FORMS_APP_USERS?: 'MANAGER' | 'READONLY',
   KEYS?: 'MANAGER' | 'READONLY',
   WEB_APP_HOSTING?: 'MANAGER' | 'DEVELOPER' | 'READONLY',
+  SOLUTIONS?: 'MANAGER' | 'READONLY',
 }
 
 type Role = {
