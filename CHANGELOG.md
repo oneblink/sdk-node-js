@@ -5,6 +5,7 @@
 ### Added
 
 - Solution prop to RolePrivilege type
+- `uploadAsset` to `Organisations` class
 
 # 0.7.3 (2020-07-23)
 

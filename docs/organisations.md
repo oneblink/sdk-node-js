@@ -52,3 +52,32 @@ organisations.getOrganisation(organisationId).then((organisation) => {
   "beeFormsCustomer": false
 }
 ```
+
+## Upload Asset
+
+### Example
+
+```javascript
+const assetData = 'binary data'
+const assetFileName = 'file.jpg'
+organisations
+  .uploadAsset(assetData, assetFileName)
+  .then((uploadResult) => {
+    // Use uploadResult  here...
+  })
+```
+
+### Parameters
+
+| Parameter       | Required | Type     | Description                        |
+| --------------- | -------- | -------- | ---------------------------------- |
+| `assetData`     | Yes      | `string` | Binary data of the asset to upload |
+| `assetFileName` | Yes      | `string` | Filename to use for the asset      |
+
+### Result (Resolved Promise)
+
+```json
+{
+  "location": "https://assets.com/assets/file.jpg"
+}
+```
