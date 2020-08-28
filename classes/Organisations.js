@@ -41,7 +41,7 @@ module.exports = (tenant /* : Tenant */) =>
       return super
         .getRequest('/organisations')
         .then((searchResponse) => {
-          if (!searchResponse.organisations) {
+          if (!searchResponse.organisations || !searchResponse.organisations[0]) {
             return Promise.reject(
               new TypeError('You do not have access to any organisations'),
             )
