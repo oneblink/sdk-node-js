@@ -61,7 +61,7 @@ organisations.getOrganisation(organisationId).then((organisation) => {
 const assetData = 'binary data'
 const assetFileName = 'file.jpg'
 organisations
-  .uploadAsset(assetData, assetFileName, organisationId)
+  .uploadAsset(assetData, assetFileName)
   .then((uploadResult) => {
     // Use uploadResult  here...
   })
