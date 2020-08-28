@@ -28,10 +28,5 @@ describe('Organisations SDK Class', () => {
         'Must supply "assetFileName" as a string',
       )
     })
-    test('should reject when organisationId is not valid', () => {
-      return expect(organisations.uploadAsset('', '')).rejects.toThrow(
-        'Must supply "organisationId" as a string',
-      )
-    })
   })
 })

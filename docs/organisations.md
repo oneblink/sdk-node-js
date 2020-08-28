@@ -58,7 +58,6 @@ organisations.getOrganisation(organisationId).then((organisation) => {
 ### Example
 
 ```javascript
-const organisationId = 'ABCDEFGHIJKL123455678901'
 const assetData = 'binary data'
 const assetFileName = 'file.jpg'
 organisations
@@ -70,11 +69,10 @@ organisations
 
 ### Parameters
 
-| Parameter        | Required | Type     | Description                                                       |
-| ---------------- | -------- | -------- | ----------------------------------------------------------------- |
-| `assetData`      | Yes      | `string` | Binary data of the asset to upload                                |
-| `assetFileName`  | Yes      | `string` | Filename to use for the asset                                     |
-| `organisationId` | Yes      | `string` | The exact id of the organisation you wish to upload the asset for |
+| Parameter       | Required | Type     | Description                        |
+| --------------- | -------- | -------- | ---------------------------------- |
+| `assetData`     | Yes      | `string` | Binary data of the asset to upload |
+| `assetFileName` | Yes      | `string` | Filename to use for the asset      |
 
 ### Result (Resolved Promise)
 

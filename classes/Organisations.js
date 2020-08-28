@@ -26,7 +26,6 @@ module.exports = (tenant /* : Tenant */) =>
     uploadAsset(
       assetData /* :string */,
       assetFileName /*:string */,
-      organisationId /* : ?mixed */,
     ) /* :Promise<{location :string}> */ {
       if (typeof assetData !== 'string') {
         return Promise.reject(
@@ -38,17 +37,24 @@ module.exports = (tenant /* : Tenant */) =>
           new TypeError('Must supply "assetFileName" as a string'),
         )
       }
-      if (typeof organisationId !== 'string') {
-        return Promise.reject(
-          new TypeError('Must supply "organisationId" as a string'),
-        )
-      }
 
       return super
-        .postRequest('/asset-upload-credentials', {
-          assetPath: `assets/${assetFileName}`,
-          organisationId,
+        .getRequest('/organisations')
+        .then((searchResponse) => {
+          if (!searchResponse.organisations) {
+            return Promise.reject(
+              new TypeError('You do not have access to any organisations'),
+            )
+          }
+          return searchResponse.organisations[0].id
         })
+        .then((organisationId) => {
+          return super.postRequest('/asset-upload-credentials', {
+            assetPath: `assets/${assetFileName}`,
+            organisationId,
+          })
+        })
+
         .then((credentials) => uploadAsset(credentials, assetData))
         .then((uploadDetails) => {
           return { location: uploadDetails.Location }
