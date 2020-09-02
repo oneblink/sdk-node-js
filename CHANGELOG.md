@@ -7,6 +7,10 @@
 - Solution prop to RolePrivilege type
 - `uploadAsset` to `Organisations` class
 
+## Fixed
+
+- `form.submissionEvents` allowing `null` and `undefined`
+
 # 0.7.3 (2020-07-23)
 
 ### Added
