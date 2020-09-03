@@ -17,8 +17,11 @@ describe('Organisations SDK Class', () => {
   })
   describe('uploadAsset', () => {
     test('should reject when assetFileName is not valid', () => {
+      const asset = {
+        assetData: '',
+      }
       // $FlowFixMe
-      return expect(organisations.uploadAsset('', 1, '')).rejects.toThrow(
+      return expect(organisations.uploadAsset(asset)).rejects.toThrow(
         'Must supply "assetFileName" as a string',
       )
     })

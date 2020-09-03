@@ -24,16 +24,21 @@ module.exports = (tenant /* : Tenant */) =>
     }
 
     uploadAsset(
-      assetData /* :mixed */,
-      assetFileName /*:string */,
-      assetContentType /* :?string */,
+      asset /* : {
+      assetData :mixed,
+      assetFileName :string,
+      assetContentType :?string
+      } */,
     ) /* :Promise<{location :string}> */ {
-      if (typeof assetFileName !== 'string') {
+      if (typeof asset.assetFileName !== 'string') {
         return Promise.reject(
           new TypeError('Must supply "assetFileName" as a string'),
         )
       }
-      if (assetContentType && typeof assetContentType !== 'string') {
+      if (
+        asset.assetContentType &&
+        typeof asset.assetContentType !== 'string'
+      ) {
         return Promise.reject(
           new TypeError('If supplied, "assetContentType" must be a string'),
         )
@@ -53,13 +58,13 @@ module.exports = (tenant /* : Tenant */) =>
         })
         .then((organisationId) => {
           return super.postRequest('/asset-upload-credentials', {
-            assetPath: `assets/${assetFileName}`,
+            assetPath: `assets/${asset.assetFileName}`,
             organisationId,
           })
         })
 
         .then((credentials) =>
-          uploadAsset(credentials, assetData, assetContentType),
+          uploadAsset(credentials, asset.assetData, asset.assetContentType),
         )
         .then((uploadDetails) => {
           return { location: uploadDetails.Location }
