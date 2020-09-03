@@ -60,6 +60,7 @@ organisations.getOrganisation(organisationId).then((organisation) => {
 ```javascript
 const assetData = 'binary data'
 const assetFileName = 'file.jpg'
+const assetContentType = 'text/plain'
 organisations.uploadAsset(assetData, assetFileName).then((uploadResult) => {
   // Use uploadResult  here...
 })
@@ -67,10 +68,11 @@ organisations.uploadAsset(assetData, assetFileName).then((uploadResult) => {
 
 ### Parameters
 
-| Parameter       | Required | Type     | Description                        |
-| --------------- | -------- | -------- | ---------------------------------- |
-| `assetData`     | Yes      | `any`    | Binary data of the asset to upload |
-| `assetFileName` | Yes      | `string` | Filename to use for the asset      |
+| Parameter          | Required | Type     | Description                                                                                                                                           |
+| ------------------ | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `assetData`        | Yes      | `any`    | Binary data of the asset to upload                                                                                                                    |
+| `assetFileName`    | Yes      | `string` | Filename to use for the asset                                                                                                                         |
+| `assetContentType` | No       | `string` | A standard MIME type describing the format of the contents. For more information, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17 |
 
 ### Result (Resolved Promise)
 
