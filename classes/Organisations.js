@@ -24,14 +24,9 @@ module.exports = (tenant /* : Tenant */) =>
     }
 
     uploadAsset(
-      assetData /* :string */,
+      assetData /* :mixed */,
       assetFileName /*:string */,
     ) /* :Promise<{location :string}> */ {
-      if (typeof assetData !== 'string') {
-        return Promise.reject(
-          new TypeError('Must supply "assetData" as a string'),
-        )
-      }
       if (typeof assetFileName !== 'string') {
         return Promise.reject(
           new TypeError('Must supply "assetFileName" as a string'),
@@ -41,7 +36,10 @@ module.exports = (tenant /* : Tenant */) =>
       return super
         .getRequest('/organisations')
         .then((searchResponse) => {
-          if (!searchResponse.organisations || !searchResponse.organisations[0]) {
+          if (
+            !searchResponse.organisations ||
+            !searchResponse.organisations[0]
+          ) {
             return Promise.reject(
               new TypeError('You do not have access to any organisations'),
             )
