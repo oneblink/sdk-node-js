@@ -16,12 +16,6 @@ describe('Organisations SDK Class', () => {
     })
   })
   describe('uploadAsset', () => {
-    test('should reject when assetData is not valid', () => {
-      // $FlowFixMe
-      return expect(organisations.uploadAsset(1, '', '')).rejects.toThrow(
-        'Must supply "assetData" as a string',
-      )
-    })
     test('should reject when assetFileName is not valid', () => {
       // $FlowFixMe
       return expect(organisations.uploadAsset('', 1, '')).rejects.toThrow(
