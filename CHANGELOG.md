@@ -2,16 +2,18 @@
 
 ## Unreleased
 
+## 0.7.4 (2020-10-15)
+
 ### Added
 
 - Solution prop to RolePrivilege type
 - `uploadAsset` to `Organisations` class
 
-## Fixed
+### Fixed
 
 - `form.submissionEvents` allowing `null` and `undefined`
 
-# 0.7.3 (2020-07-23)
+## 0.7.3 (2020-07-23)
 
 ### Added
 
@@ -19,13 +21,13 @@
 - Allowed 'NOW' for date, time and DateTime defaultValues
 - Update `Forms-App` docs
 
-# 0.7.2 (2020-07-09)
+## 0.7.2 (2020-07-09)
 
 ### Added
 
 - `environmentId` to BPOINT and TRIM submission event configuration
 
-# 0.7.1 (2020-07-06)
+## 0.7.1 (2020-07-06)
 
 ### Added
 
@@ -37,7 +39,7 @@
 - `gatewayId` to `FormSubmissionEventConfiguration`
 - `generatePageElement` to `Forms` class
 
-# 0.7.0 (2020-06-10)
+## 0.7.0 (2020-06-10)
 
 ### Breaking Changes
 
@@ -47,7 +49,7 @@
 
 - static verifyJWT function in FormsApps Class
 
-# 0.6.1 (2020-06-03)
+## 0.6.1 (2020-06-03)
 
 ### Added
 
@@ -61,7 +63,7 @@
 
 - update [uuid](https://www.npmjs.com/package/uuid) to [8.1.0](https://github.com/uuidjs/uuid/blob/master/CHANGELOG.md) (from [8.0.0](https://github.com/uuidjs/uuid/blob/master/CHANGELOG.md))
 
-# 0.6.0 (2020-05-25)
+## 0.6.0 (2020-05-25)
 
 ### Added
 
@@ -69,7 +71,7 @@
 - `slug` property to Forms Apps
 - `slug` property to Organisations
 
-# 0.5.0 (2020-05-14)
+## 0.5.0 (2020-05-14)
 
 ### Breaking Changes
 
@@ -87,13 +89,13 @@
 
 - `url`, `username` and `password` from `TRIM` submission event
 
-# 0.4.5 (2020-04-03)
+## 0.4.5 (2020-04-03)
 
 ### Fixed
 
 - `0.4.4` being published with `--tag beta`
 
-# 0.4.4 (2020-04-02)
+## 0.4.4 (2020-04-02)
 
 ### Removed
 
@@ -103,13 +105,13 @@
 
 - `TRIM` submission event to forms schema
 
-# 0.4.3 (2020-02-26)
+## 0.4.3 (2020-02-26)
 
 ### Added
 
 - Added [`searchSubmissions()`](./docs/forms#searchSubmissions) function to Form class
 
-# 0.4.2 (2020-02-13)
+## 0.4.2 (2020-02-13)
 
 ### Added
 
@@ -117,13 +119,13 @@
 - `priority` as optional parameter to `createJob` function
 - `device` property to example of form submission data
 
-# 0.4.1 (2020-01-30)
+## 0.4.1 (2020-01-30)
 
 ### Added
 
 - Added [`search()`](./docs/jobs#search) function to Jobs class
 
-# 0.4.0 (2019-12-18)
+## 0.4.0 (2019-12-18)
 
 ### Added
 
@@ -133,19 +135,19 @@
 
 - element and data lookup configuration
 
-# 0.3.4 (2019-11-04)
+## 0.3.4 (2019-11-04)
 
 ### Added
 
 - Added `restrictFileTypes` and `restrictedFileTypes` properties for file element
 
-# 0.3.3 (2019-09-16)
+## 0.3.3 (2019-09-16)
 
 ### Added
 
 - Added `SEARCH` options type and `searchUrl` property for autocomplete element
 
-# 0.3.2 (2019-06-20)
+## 0.3.2 (2019-06-20)
 
 ### Added
 
@@ -153,13 +155,13 @@
 - `isDraft` parameter to [`Forms.getSubmissionData()`](./docs/forms.md#getsubmissiondata)
 - [`TeamMembers`](./docs/team-members.md) class
 
-# 0.3.1 (2019-06-18)
+## 0.3.1 (2019-06-18)
 
 ### Added
 
 - `formsAppId` options to [`Forms.generateFormUrl()`](./docs/forms.md#generateformurl)
 
-# 0.3.0 (2019-06-07)
+## 0.3.0 (2019-06-07)
 
 ### Breaking Changes
 
