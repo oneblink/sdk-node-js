@@ -5,7 +5,7 @@
 
 [libs]
 flow-typed
-
+node_modules/@oneblink/types/flow-typed/
 [lints]
 
 [options]

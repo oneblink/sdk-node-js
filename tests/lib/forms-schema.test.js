@@ -4603,4 +4603,113 @@ describe('submission event conditional logic', () => {
     })
     expect(result.error).toBe(null)
   })
+
+  test('should allow element with valid between conditional logic', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'conditionally show element via number input',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+            required: false,
+            minNumber: 1,
+            maxNumber: 6,
+            defaultValue: 3,
+          },
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: true,
+            requiresAllConditionallyShowPredicates: false,
+            conditionallyShowPredicates: [
+              {
+                elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+                type: 'BETWEEN',
+                min: 2,
+                max: 5,
+              },
+            ],
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+    expect(result.error).toBe(null)
+  })
+  test('should reject element with missing property in between conditional logic', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'conditionally show element via number input',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+            required: false,
+            minNumber: 1,
+            maxNumber: 6,
+            defaultValue: 3,
+          },
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: true,
+            requiresAllConditionallyShowPredicates: false,
+            conditionallyShowPredicates: [
+              {
+                elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+                type: 'BETWEEN',
+                min: 2,
+              },
+            ],
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error.message).toContain(
+      '"Form Element - Conditionally Show Predicate - Between-Max" is required',
+    )
+  })
 })

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- BETWEEN type to conditional logic predicates
+
 ## 0.7.4 (2020-10-15)
 
 ### Added

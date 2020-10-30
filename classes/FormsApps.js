@@ -73,7 +73,7 @@ module.exports = (tenant /* : Tenant */) =>
     async updateStyles(
       formsAppId /* : ?mixed */,
       data /* : ?mixed */,
-    ) /* : Promise<FormsAppStyles> */ {
+    ) /* : Promise<FormsListStyles> */ {
       if (typeof formsAppId !== 'number') {
         return Promise.reject(
           new TypeError('Must supply "formsAppId" as a number'),

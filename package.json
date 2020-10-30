@@ -6,6 +6,7 @@
     "url": "https://github.com/oneblink/sdk-js/issues"
   },
   "dependencies": {
+    "@oneblink/types": "github:oneblink/types",
     "aws-sdk": "^2.692.0",
     "axios": "^0.19.2",
     "joi": "^14.3.1",
