@@ -4712,4 +4712,166 @@ describe('submission event conditional logic', () => {
       '"Form Element - Conditionally Show Predicate - Between-Max" is required',
     )
   })
+
+  test('should reject element if maxLength is less than minLength', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'min & max text element length',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: false,
+            requiresAllConditionallyShowPredicates: false,
+            minLength: 4,
+            maxLength: 3,
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error.message).toContain(
+      '"Form Element - Maximum Length" must be larger than or equal to 4',
+    )
+  })
+
+  test('should not reject element if maxLength is greater than minLength', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'min & max text element length',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: false,
+            requiresAllConditionallyShowPredicates: false,
+            minLength: 3,
+            maxLength: 4,
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error).toBeNull()
+  })
+
+  test('should reject element if defaultValue is less than minLength', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'min & max text element length',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: false,
+            requiresAllConditionallyShowPredicates: false,
+            minLength: 5,
+            maxLength: 6,
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error.message).toBe(
+      'child "elements" fails because ["Form Elements" at position 0 fails because [child "defaultValue" fails because ["Form Element - Default Value" length must be at least 5 characters long]]]',
+    )
+  })
+
+  test('should reject element if defaultValue is greater than maxLength', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'min & max text element length',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: false,
+            requiresAllConditionallyShowPredicates: false,
+            minLength: 2,
+            maxLength: 3,
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error.message).toBe(
+      'child "elements" fails because ["Form Elements" at position 0 fails because [child "defaultValue" fails because ["Form Element - Default Value" length must be at least 5 characters long]]]',
+    )
+  })
 })
