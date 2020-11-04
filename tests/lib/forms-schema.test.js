@@ -4871,7 +4871,7 @@ describe('submission event conditional logic', () => {
     )
 
     expect(result.error.message).toBe(
-      'child "elements" fails because ["Form Elements" at position 0 fails because [child "defaultValue" fails because ["Form Element - Default Value" length must be at least 5 characters long]]]',
+      'child "elements" fails because ["Form Elements" at position 0 fails because [child "defaultValue" fails because ["Form Element - Default Value" length must be less than or equal to 3 characters long]]]',
     )
   })
 })

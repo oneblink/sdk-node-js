@@ -5,6 +5,7 @@
 ### Added
 
 - BETWEEN type to conditional logic predicates
+- minLength/maxLength props for text & textarea elements
 
 ## 0.7.4 (2020-10-15)
 
