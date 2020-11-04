@@ -4874,4 +4874,43 @@ describe('submission event conditional logic', () => {
       'child "elements" fails because ["Form Elements" at position 0 fails because [child "defaultValue" fails because ["Form Element - Default Value" length must be less than or equal to 3 characters long]]]',
     )
   })
+
+  test('should not reject element if defaultValue is between minLength and maxLength', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'min & max text element length',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: false,
+            requiresAllConditionallyShowPredicates: false,
+            minLength: 4,
+            maxLength: 5,
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error).toBeNull()
+  })
 })
