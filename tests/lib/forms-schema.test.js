@@ -4657,7 +4657,7 @@ describe('submission event conditional logic', () => {
     )
     expect(result.error).toBe(null)
   })
-  test('should reject element with missing property in between conditional logic', () => {
+  test.only('should reject element with missing property in between conditional logic', () => {
     const result = Joi.validate(
       {
         id: 1,
