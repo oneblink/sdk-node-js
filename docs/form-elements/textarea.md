@@ -13,8 +13,8 @@ Allow the user to enter a value in a multi-line text input.
 | `label`            | Yes      | `string`  |              | Display text presented to the user above the input by default.                           |
 | `defaultValue`     | No       | `string`  |              | A default value when the form is opened.                                                 |
 | `placeholderValue` | No       | `string`  |              | The content to appear in the form control when the form control is empty.                |
-| `minLength`        | No       | `string`  |              | The minimum length required for the entered text value.                                  |
-| `maxLength`        | No       | `string`  |              | The maximum length allowed for the entered text value.                                   |
+| `minLength`        | No       | `number`  |              | The minimum length required for the entered text value.                                  |
+| `maxLength`        | No       | `number`  |              | The maximum length allowed for the entered text value.                                   |
 | `required`         | Yes      | `boolean` | `false`      | Determine if this input requires a value entered by the user (`true`) or not (`false`).  |
 | `readOnly`         | Yes      | `boolean` | `false`      | Determine if this input can be edited by the user (`false`) or not (`true`).             |
 
