@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.7.5 (2020-11-05)
+
 ### Added
 
 - BETWEEN type to conditional logic predicates
