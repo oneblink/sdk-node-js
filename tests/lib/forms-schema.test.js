@@ -4768,4 +4768,39 @@ describe('submission event conditional logic', () => {
       '"Form Element - Conditionally Show Predicate - Between-Max" must be larger than or equal to 8',
     )
   })
+
+  test('should reject number element with decimal default value when isInteger set to true', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'conditionally show element via number input',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+            required: false,
+            defaultValue: 3.2,
+            isInteger: true
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error.message).toContain(
+      '"Form Element - Default Value" must be an integer',
+    )
+  })
 })
