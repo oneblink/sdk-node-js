@@ -4,6 +4,13 @@
 
 ### Added
 
+- minLength/maxLength props for text & textarea elements
+- `isInteger` to `number` element type
+
+## 0.7.5 (2020-11-05)
+
+### Added
+
 - BETWEEN type to conditional logic predicates
 
 ## 0.7.4 (2020-10-15)

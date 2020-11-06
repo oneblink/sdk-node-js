@@ -1042,6 +1042,70 @@ test('should throw error if minNumber is not provided for number element with is
   expect(error.message).toContain('"Form Element - Minimum Number" is required')
 })
 
+test('should error if number min is not an integer when number isInteger', () => {
+  const { error } = Joi.validate(
+    {
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      submissionEvents: [],
+      tags: [],
+      elements: [
+        {
+          id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+          name: 'test',
+          type: 'number',
+          label: 'test',
+          required: false,
+          minNumber: 33.5,
+          conditionallyShow: false,
+          isInteger: true,
+        },
+      ],
+    },
+    formSchema,
+  )
+
+  expect(error.message).toContain(
+    '"Form Element - Minimum Number" must be an integer',
+  )
+})
+
+test('should error if number max is not an integer when number isInteger', () => {
+  const { error } = Joi.validate(
+    {
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      submissionEvents: [],
+      tags: [],
+      elements: [
+        {
+          id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+          name: 'test',
+          type: 'number',
+          label: 'test',
+          required: false,
+          maxNumber: 33.5,
+          conditionallyShow: false,
+          isInteger: true,
+        },
+      ],
+    },
+    formSchema,
+  )
+
+  expect(error.message).toContain(
+    '"Form Element - Maximum Number" must be an integer',
+  )
+})
+
 // Looks like this is impossible with the current Joi version
 // https://github.com/hapijs/joi/issues/1685
 test.skip('should throw error if maxNumber is not provided for number element with isSlider as true', () => {
@@ -4768,6 +4832,206 @@ describe('submission event conditional logic', () => {
       '"Form Element - Conditionally Show Predicate - Between-Max" must be larger than or equal to 8',
     )
   })
+  test('should reject element if maxLength is less than minLength', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'min & max text element length',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: false,
+            requiresAllConditionallyShowPredicates: false,
+            minLength: 4,
+            maxLength: 3,
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error.message).toContain(
+      '"Form Element - Maximum Length" must be larger than or equal to 4',
+    )
+  })
+
+  test('should not reject element if maxLength is greater than minLength', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'min & max text element length',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: false,
+            requiresAllConditionallyShowPredicates: false,
+            minLength: 3,
+            maxLength: 4,
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error).toBeNull()
+  })
+
+  test('should reject element if defaultValue is less than minLength', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'min & max text element length',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: false,
+            requiresAllConditionallyShowPredicates: false,
+            minLength: 5,
+            maxLength: 6,
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error.message).toBe(
+      'child "elements" fails because ["Form Elements" at position 0 fails because [child "defaultValue" fails because ["Form Element - Default Value" length must be at least 5 characters long]]]',
+    )
+  })
+
+  test('should reject element if defaultValue is greater than maxLength', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'min & max text element length',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: false,
+            requiresAllConditionallyShowPredicates: false,
+            minLength: 2,
+            maxLength: 3,
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error.message).toBe(
+      'child "elements" fails because ["Form Elements" at position 0 fails because [child "defaultValue" fails because ["Form Element - Default Value" length must be less than or equal to 3 characters long]]]',
+    )
+  })
+
+  test('should not reject element if defaultValue is between minLength and maxLength', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'min & max text element length',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: false,
+            requiresAllConditionallyShowPredicates: false,
+            minLength: 4,
+            maxLength: 5,
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error).toBeNull()
+  })
 
   test('should reject number element with decimal default value when isInteger set to true', () => {
     const result = Joi.validate(
@@ -4788,7 +5052,7 @@ describe('submission event conditional logic', () => {
             type: 'number',
             required: false,
             defaultValue: 3.2,
-            isInteger: true
+            isInteger: true,
           },
         ],
         isAuthenticated: true,

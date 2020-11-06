@@ -19,6 +19,7 @@ Allow the user to enter a numeric value (not to be confused with a [Phone Number
 | `minNumber`        | If `isSlider` is `true` | `number`  |            | The smallest possible number that can be entered by the user.                            |
 | `maxNumber`        | If `isSlider` is `true` | `number`  |            | The largest possible number that can be entered by the user.                             |
 | `sliderIncrement`  | No                      | `number`  | `1`        | The increment between the each move of the slider.                                       |
+| `isInteger`        | No                      | `boolean` | `false`    | Determine if this input only accepts integers.                                           |
 
 Number element also inherits the properties of the following:
 
