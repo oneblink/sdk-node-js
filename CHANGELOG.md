@@ -6,6 +6,7 @@
 
 - minLength/maxLength props for text & textarea elements
 - `isInteger` to `number` element type
+- `includeTimestampWatermark ` to `camera` element type
 
 ## 0.7.5 (2020-11-05)
 
