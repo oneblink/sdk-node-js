@@ -5146,4 +5146,99 @@ describe('submission event conditional logic', () => {
       '"Form Element - Default Value" must be an integer',
     )
   })
+
+  test('should allow property: "includeTimestampWatermark" to be set for camera elements', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'conditionally show element via number input',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'camera',
+            label: 'camera',
+            type: 'camera',
+            includeTimestampWatermark: true,
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+
+    expect(result.value.elements[0].includeTimestampWatermark).toBe(true)
+  })
+
+  test('should strip property: "includeTimestampWatermark" if element is not of type "camera"', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'conditionally show element via number input',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'text',
+            label: 'text',
+            type: 'text',
+            includeTimestampWatermark: true,
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+
+    expect(result.value.elements[0].includeTimestampWatermark).toBe(undefined)
+  })
+
+  test('should reject property: "includeTimestampWatermark" if it is not a boolean', () => {
+    const result = Joi.validate(
+      {
+        id: 1,
+        name: 'conditionally show element via number input',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'camera',
+            label: 'camera',
+            type: 'camera',
+            includeTimestampWatermark: 'true1',
+          },
+        ],
+        isAuthenticated: true,
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error.message).toContain(
+      '"Camera element - Include timestamp watermark" must be a boolean',
+    )
+  })
 })
