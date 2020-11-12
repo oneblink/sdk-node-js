@@ -10,6 +10,10 @@
 - `isInteger` to `number` element type
 - `includeTimestampWatermark ` to `camera` element type
 
+### Removed
+
+- SPOTTO submission event
+
 ## 0.7.5 (2020-11-05)
 
 ### Added

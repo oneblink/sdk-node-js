@@ -2704,38 +2704,6 @@ describe('CALLBACK submission event', () => {
     )
   })
 })
-
-describe('SPOTTO submission event', () => {
-  test('should allow SPOTTO submission event without configuration', () => {
-    const { error } = Joi.validate(
-      {
-        id: 1,
-        name: 'string',
-        description: 'string',
-        formsAppEnvironmentId: 1,
-        formsAppIds: [1],
-        organisationId: 'ORGANISATION_00000000001',
-        postSubmissionAction: 'FORMS_LIBRARY',
-        isMultiPage: false,
-        elements: [],
-        isAuthenticated: true,
-
-        tags: [],
-        submissionEvents: [
-          {
-            type: 'SPOTTO',
-          },
-        ],
-      },
-      formSchema,
-      {
-        abortEarly: false,
-      },
-    )
-    expect(error).toBeNull()
-  })
-})
-
 describe('TRIM submission event', () => {
   test('should allow TRIM submission event', () => {
     const { error } = Joi.validate(
@@ -3167,11 +3135,7 @@ describe('Conditional Predicates', () => {
         ],
         isAuthenticated: true,
 
-        submissionEvents: [
-          {
-            type: 'SPOTTO',
-          },
-        ],
+        submissionEvents: [],
       },
       formSchema,
       {
@@ -3253,11 +3217,7 @@ describe('Conditional Predicates', () => {
         ],
         isAuthenticated: true,
 
-        submissionEvents: [
-          {
-            type: 'SPOTTO',
-          },
-        ],
+        submissionEvents: [],
       },
       formSchema,
       {
@@ -4597,7 +4557,10 @@ describe('submission event conditional logic', () => {
         isAuthenticated: true,
         submissionEvents: [
           {
-            type: 'SPOTTO',
+            type: 'PDF',
+            configuration: {
+              email: 'developers@oneblink.io',
+            },
             conditionallyExecute: true,
             requiresAllConditionallyExecutePredicates: true,
             conditionallyExecutePredicates: [
@@ -4650,7 +4613,10 @@ describe('submission event conditional logic', () => {
         isAuthenticated: true,
         submissionEvents: [
           {
-            type: 'SPOTTO',
+            type: 'PDF',
+            configuration: {
+              email: 'developers@oneblink.io',
+            },
           },
         ],
       },
@@ -4659,8 +4625,12 @@ describe('submission event conditional logic', () => {
         abortEarly: false,
       },
     )
+
     expect(result.value.submissionEvents[0]).toEqual({
-      type: 'SPOTTO',
+      type: 'PDF',
+      configuration: {
+        email: 'developers@oneblink.io',
+      },
       conditionallyExecute: false,
       requiresAllConditionallyExecutePredicates: false,
       isDraft: false,
