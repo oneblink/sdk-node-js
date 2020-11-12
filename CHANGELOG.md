@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Removed
+
+- SPOTTO submission event
+
 ## 0.7.6 (2020-11-12)
 
 ### Added
@@ -9,10 +13,6 @@
 - minLength/maxLength props for text & textarea elements
 - `isInteger` to `number` element type
 - `includeTimestampWatermark ` to `camera` element type
-
-### Removed
-
-- SPOTTO submission event
 
 ## 0.7.5 (2020-11-05)
 
