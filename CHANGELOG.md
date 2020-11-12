@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.7.6 (2020-11-12)
+
 ### Added
 
 - minLength/maxLength props for text & textarea elements
