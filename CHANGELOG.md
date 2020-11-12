@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Removed
+
+- SPOTTO submission event
+
 ## 0.7.6 (2020-11-12)
 
 ### Added
