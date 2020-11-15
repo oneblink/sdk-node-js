@@ -196,3 +196,12 @@ declare type Tenant = {
   jwtIssuer: string,
   jwksInstance: JwksClient,
 }
+
+declare type SetSendingAddressResponse = {
+  emailAddress: string,
+  emailName: string,
+  formsAppId: number,
+  createdAt: string,
+  updatedAt: string,
+  sesVerificationAttributes: { VerificationStatus: string },
+}
