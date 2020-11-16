@@ -121,9 +121,12 @@ module.exports = (tenant /* : Tenant */) =>
         )
       }
 
-      if (typeof sendingAddressConfig.emailName !== 'string') {
+      if (
+        sendingAddressConfig.emailName &&
+        typeof sendingAddressConfig.emailName !== 'string'
+      ) {
         return Promise.reject(
-          new TypeError('Must supply "emailName" as a string'),
+          new TypeError('Must supply "emailName" as a string or not at all'),
         )
       }
 

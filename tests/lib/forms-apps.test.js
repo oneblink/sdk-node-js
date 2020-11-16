@@ -31,8 +31,9 @@ describe('FormsApps SDK Class', () => {
       return expect(
         formsAppsSDK.setSendingAddress(1, {
           emailAddress: 'developers@oneblink.io',
+          emailName: 123
         }),
-      ).rejects.toThrow('Must supply "emailName" as a string')
+      ).rejects.toThrow('Must supply "emailName" as a string or not at all')
     })
   })
 

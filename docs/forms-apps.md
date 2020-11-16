@@ -480,7 +480,7 @@ const res = await formsAppsSDK.setSendingAddress(
 | `formsAppId`                        | Yes      | `string` | The ID of the forms app you wish to set the sending address for.                 |
 | `sendingAddressConfig`              | Yes      | `Object` | The object containing the `emailAddress` & `emailName` properties                |
 | `sendingAddressConfig.emailAddress` | Yes      | `string` | The email address to be used as the sending address.                             |
-| `sendingAddressConfig.emailName`    | Yes      | `string` | The name that will appear as the sender on emails sent from the sending address. |
+| `sendingAddressConfig.emailName`    | No       | `string` | The name that will appear as the sender on emails sent from the sending address. |
 
 ### Result (Resolved Promise)
 
