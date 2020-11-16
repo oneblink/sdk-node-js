@@ -27,4 +27,12 @@ describe('FormsApps SDK Class', () => {
       ).rejects.toThrow('Must supply "emailName" as a string')
     })
   })
+
+  describe('deleteSendingAddress()', () => {
+    test('should reject with correct validation errors for "formsAppId"', () => {
+      return expect(formsAppsSDK.deleteSendingAddress()).rejects.toThrow(
+        'Must supply "formsAppId" as a number',
+      )
+    })
+  })
 })

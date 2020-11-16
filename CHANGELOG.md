@@ -5,6 +5,7 @@
 ### Added
 
 - [`setSendingAddress()`](./docs/forms-apps.md#setSendingAddress) function
+- [`deleteSendingAddress()`](./docs/forms-apps.md#deleteSendingAddress) function
 
 ### Removed
 

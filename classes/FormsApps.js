@@ -125,4 +125,16 @@ module.exports = (tenant /* : Tenant */) =>
         emailName,
       })
     }
+
+    async deleteSendingAddress(
+      formsAppId /* : ?mixed */,
+    ) /* : Promise<void> */ {
+      if (typeof formsAppId !== 'number') {
+        return Promise.reject(
+          new TypeError('Must supply "formsAppId" as a number'),
+        )
+      }
+
+      return super.deleteRequest(`/forms-apps/${formsAppId}/sending-address`)
+    }
   }
