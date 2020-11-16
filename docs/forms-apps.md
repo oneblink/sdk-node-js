@@ -11,7 +11,7 @@
 - [`updateFormsApp()`](#updateformsapp)
 - [`updateStyles()`](#updatestyles)
 - [`setSendingAddress()`](#setSendingAddress)
-= [`deleteSendingAddress()`](#deleteSendingAddress)
+- [`deleteSendingAddress()`](#deleteSendingAddress)
 
 ## Static Functions
 
@@ -462,23 +462,25 @@ Set the email address forms app emails will be sent from
 
 ```javascript
 const formsAppId = 1
-const emailAddress = 'developers@oneblink.io'
-const emailName = 'developers'
+const sendingAddressConfig = {
+  emailAddress: 'developers@oneblink.io',
+  emailName: 'developers',
+}
 
 const res = await formsAppsSDK.setSendingAddress(
   formsAppId,
-  emailAddress,
-  emailName,
+  sendingAddressConfig,
 )
 ```
 
 ### Parameters
 
-| Parameter      | Required | Type     | Description                                                                      |
-| -------------- | -------- | -------- | -------------------------------------------------------------------------------- |
-| `formsAppId`   | Yes      | `string` | The ID of the forms app you wish to set the sending address for.                 |
-| `emailAddress` | Yes      | `string` | The email address to be used as the sending address.                             |
-| `emailName`    | Yes      | `string` | The name that will appear as the sender on emails sent from the sending address. |
+| Parameter                           | Required | Type     | Description                                                                      |
+| ----------------------------------- | -------- | -------- | -------------------------------------------------------------------------------- |
+| `formsAppId`                        | Yes      | `string` | The ID of the forms app you wish to set the sending address for.                 |
+| `sendingAddressConfig`              | Yes      | `Object` | The object containing the `emailAddress` & `emailName` properties                |
+| `sendingAddressConfig.emailAddress` | Yes      | `string` | The email address to be used as the sending address.                             |
+| `sendingAddressConfig.emailName`    | Yes      | `string` | The name that will appear as the sender on emails sent from the sending address. |
 
 ### Result (Resolved Promise)
 
@@ -510,4 +512,3 @@ await formsAppsSDK.deleteSendingAddress(formsAppId)
 | Parameter    | Required | Type     | Description                                                          |
 | ------------ | -------- | -------- | -------------------------------------------------------------------- |
 | `formsAppId` | Yes      | `string` | The ID of the forms app you wish to remove the sending address from. |
-
