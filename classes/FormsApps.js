@@ -99,8 +99,7 @@ module.exports = (tenant /* : Tenant */) =>
 
     async setSendingAddress(
       formsAppId /* : ?mixed */,
-      emailAddress /* : ?mixed */,
-      emailName /* : ?mixed */,
+      sendingAddressConfig /*: mixed */,
     ) /* : Promise<FormsAppSendingAddress> */ {
       if (typeof formsAppId !== 'number') {
         return Promise.reject(
@@ -108,21 +107,32 @@ module.exports = (tenant /* : Tenant */) =>
         )
       }
 
-      if (typeof emailAddress !== 'string') {
+      if (!sendingAddressConfig) {
+        return Promise.reject(
+          new TypeError(
+            'Must supply an object containing "emailAddress" & "emailName" properties',
+          ),
+        )
+      }
+
+      if (typeof sendingAddressConfig.emailAddress !== 'string') {
         return Promise.reject(
           new TypeError('Must supply "emailAddress" as a string'),
         )
       }
 
-      if (typeof emailName !== 'string') {
+      if (
+        sendingAddressConfig.emailName &&
+        typeof sendingAddressConfig.emailName !== 'string'
+      ) {
         return Promise.reject(
-          new TypeError('Must supply "emailName" as a string'),
+          new TypeError('Must supply "emailName" as a string or not at all'),
         )
       }
 
       return super.postRequest(`/forms-apps/${formsAppId}/sending-address`, {
-        emailAddress,
-        emailName,
+        emailAddress: sendingAddressConfig.emailAddress,
+        emailName: sendingAddressConfig.emailName,
       })
     }
 

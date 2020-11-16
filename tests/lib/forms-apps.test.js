@@ -15,16 +15,25 @@ describe('FormsApps SDK Class', () => {
       )
     })
 
-    test('should reject with correct validation errors for "emailAddress"', () => {
+    test('should reject with correct validation errors for "sendingAddressConfig"', () => {
       return expect(formsAppsSDK.setSendingAddress(1)).rejects.toThrow(
+        'Must supply an object containing "emailAddress" & "emailName" properties',
+      )
+    })
+
+    test('should reject with correct validation errors for "emailAddress"', () => {
+      return expect(formsAppsSDK.setSendingAddress(1, {})).rejects.toThrow(
         'Must supply "emailAddress" as a string',
       )
     })
 
     test('should reject with correct validation errors for "emailName"', () => {
       return expect(
-        formsAppsSDK.setSendingAddress(1, 'developers@oneblink.io'),
-      ).rejects.toThrow('Must supply "emailName" as a string')
+        formsAppsSDK.setSendingAddress(1, {
+          emailAddress: 'developers@oneblink.io',
+          emailName: 123
+        }),
+      ).rejects.toThrow('Must supply "emailName" as a string or not at all')
     })
   })
 
