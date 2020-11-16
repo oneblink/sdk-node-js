@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- [`setSendingAddress()`](./docs/forms-apps.md#setSendingAddress) function
+
 ### Removed
 
 - SPOTTO submission event

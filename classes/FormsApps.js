@@ -96,4 +96,33 @@ module.exports = (tenant /* : Tenant */) =>
 
       return super.deleteRequest(`/appUsers/${formsAppUserId}`)
     }
+
+    async setSendingAddress(
+      formsAppId /* : ?mixed */,
+      emailAddress /* : ?mixed */,
+      emailName /* : ?mixed */,
+    ) /* : Promise<FormsAppSendingAddress> */ {
+      if (typeof formsAppId !== 'number') {
+        return Promise.reject(
+          new TypeError('Must supply "formsAppId" as a number'),
+        )
+      }
+
+      if (typeof emailAddress !== 'string') {
+        return Promise.reject(
+          new TypeError('Must supply "emailAddress" as a string'),
+        )
+      }
+
+      if (typeof emailName !== 'string') {
+        return Promise.reject(
+          new TypeError('Must supply "emailName" as a string'),
+        )
+      }
+
+      return super.postRequest(`/forms-apps/${formsAppId}/sending-address`, {
+        emailAddress,
+        emailName,
+      })
+    }
   }

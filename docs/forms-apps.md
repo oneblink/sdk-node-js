@@ -10,6 +10,7 @@
 - [`getMyFormsApp()`](#getmyformsapp)
 - [`updateFormsApp()`](#updateformsapp)
 - [`updateStyles()`](#updatestyles)
+- [`setSendingAddress()`](#setSendingAddress)
 
 ## Static Functions
 
@@ -449,5 +450,40 @@ formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
   "customCss": ".ob-button { border-radius: 10px; }",
   "logoUrl": "http://logo.com/path/to/image.png",
   "menuItems": []
+}
+```
+
+## `setSendingAddress()`
+
+Set the email address forms app emails will be sent from
+
+### Example
+
+```javascript
+const formsAppId = 1
+const emailAddress = 'developers@oneblink.io'
+const emailName = 'developers'
+
+const res = await formsAppsSDK.setSendingAddress(formsAppId, emailAddress, emailName)
+```
+
+### Parameters
+
+| Parameter      | Required | Type     | Description                                                                      |
+| -------------- | -------- | -------- | -------------------------------------------------------------------------------- |
+| `formsAppId`   | Yes      | `string` | The ID of the forms app you wish to set the sending address for.                 |
+| `emailAddress` | Yes      | `string` | The email address to be used as the sending address.                             |
+| `emailName`    | Yes      | `string` | The name that will appear as the sender on emails sent from the sending address. |
+
+### Result (Resolved Promise)
+
+```json
+{
+  "emailAddress": "developers@oneblink.io",
+  "emailName": "developers",
+  "formsAppId": 760,
+  "createdAt": "2020-11-13T03:40:14.000Z",
+  "updatedAt": "2020-11-15T23:19:34.250Z",
+  "sesVerificationAttributes": { "VerificationStatus": "Pending" }
 }
 ```
