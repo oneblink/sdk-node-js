@@ -11,6 +11,7 @@
 - [`updateFormsApp()`](#updateformsapp)
 - [`updateStyles()`](#updatestyles)
 - [`setSendingAddress()`](#setSendingAddress)
+= [`deleteSendingAddress()`](#deleteSendingAddress)
 
 ## Static Functions
 
@@ -464,7 +465,11 @@ const formsAppId = 1
 const emailAddress = 'developers@oneblink.io'
 const emailName = 'developers'
 
-const res = await formsAppsSDK.setSendingAddress(formsAppId, emailAddress, emailName)
+const res = await formsAppsSDK.setSendingAddress(
+  formsAppId,
+  emailAddress,
+  emailName,
+)
 ```
 
 ### Parameters
@@ -487,3 +492,22 @@ const res = await formsAppsSDK.setSendingAddress(formsAppId, emailAddress, email
   "sesVerificationAttributes": { "VerificationStatus": "Pending" }
 }
 ```
+
+## `deleteSendingAddress()`
+
+Remove a custom sending address for a forms app
+
+### Example
+
+```javascript
+const formsAppId = 1
+
+await formsAppsSDK.deleteSendingAddress(formsAppId)
+```
+
+### Parameters
+
+| Parameter    | Required | Type     | Description                                                          |
+| ------------ | -------- | -------- | -------------------------------------------------------------------- |
+| `formsAppId` | Yes      | `string` | The ID of the forms app you wish to remove the sending address from. |
+
