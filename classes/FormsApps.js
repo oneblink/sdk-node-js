@@ -101,7 +101,7 @@ module.exports = (tenant /* : Tenant */) =>
       formsAppId /* : ?mixed */,
       emailAddress /* : ?mixed */,
       emailName /* : ?mixed */,
-    ) /* : Promise<SetSendingAddressResponse> */ {
+    ) /* : Promise<FormsAppSendingAddress> */ {
       if (typeof formsAppId !== 'number') {
         return Promise.reject(
           new TypeError('Must supply "formsAppId" as a number'),
