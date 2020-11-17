@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.8.0 (2020-11-17)
+
 ### Added
 
 - [`setSendingAddress()`](./docs/forms-apps.md#setSendingAddress) function
@@ -17,7 +19,7 @@
 
 - minLength/maxLength props for text & textarea elements
 - `isInteger` to `number` element type
-- `includeTimestampWatermark ` to `camera` element type
+- `includeTimestampWatermark` to `camera` element type
 
 ## 0.7.5 (2020-11-05)
 
