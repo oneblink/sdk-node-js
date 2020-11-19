@@ -9,6 +9,7 @@ const setPreFillData = require('../lib/pre-fill-data')
 const { validateWithFormSchema } = require('../lib/forms-validation.js')
 const generateFormElement = require('../lib/generate-form-element.js')
 const generatePageElement = require('../lib/generate-page-element.js')
+const { encryptUserToken } = require('../lib/user-token-helpers')
 
 module.exports = (tenant /* : Tenant */) =>
   class Forms extends OneBlinkAPI {
@@ -18,15 +19,9 @@ module.exports = (tenant /* : Tenant */) =>
     }
 
     async generateFormUrl(
-      parameters /* : {
-      formId: ?mixed,
-      formsAppId?: ?mixed,
-      externalId?: ?mixed,
-      preFillData? : ?mixed,
-      expiryInSeconds?: ?mixed
-    } */,
+      parameters /* : ?mixed */,
     ) /* : Promise<{ expiry: string, formUrl: string }> */ {
-      if (typeof parameters !== 'object') {
+      if (!parameters || typeof parameters !== 'object') {
         throw new TypeError('Parameters not provided.')
       }
 
@@ -88,13 +83,35 @@ module.exports = (tenant /* : Tenant */) =>
 
       const token = generateJWT(this.accessKey, this.secretKey, jwtExpiry)
 
-      const formUrl = generateFormUrl(
-        `https://${formsApp.hostname}/forms`,
+      let userToken = undefined
+      const username = parameters.username
+      if (
+        username !== undefined &&
+        username !== null &&
+        typeof username !== 'string'
+      ) {
+        throw new TypeError('Must supply "username" as a string or not at all')
+      }
+
+      if (username) {
+        const secret = parameters.secret
+        if (typeof secret !== 'string') {
+          throw new TypeError(
+            'Must supply "secret" as a string if "username" is used',
+          )
+        }
+
+        userToken = encryptUserToken({ secret, username })
+      }
+
+      const formUrl = generateFormUrl({
         formId,
         token,
         externalId,
         preFillFormDataId,
-      )
+        endpoint: `https://${formsApp.hostname}/forms`,
+        userToken,
+      })
 
       const expiry = new Date(Date.now() + jwtExpiry * 1000).toISOString()
 
@@ -221,18 +238,29 @@ module.exports = (tenant /* : Tenant */) =>
       return savedForm
     }
 
-    async updateForm(data /* : ?mixed */, overrideLock/* : boolean */ = false ) /* : Promise<Form> */ {
+    async updateForm(
+      data /* : ?mixed */,
+      overrideLock /* : boolean */ = false,
+    ) /* : Promise<Form> */ {
       const form = validateWithFormSchema(data)
-      const savedForm = await super.putRequest(`/forms/${form.id}${overrideLock === true ? '?overrideLock=true': '' }`, form)
+      const savedForm = await super.putRequest(
+        `/forms/${form.id}${overrideLock === true ? '?overrideLock=true' : ''}`,
+        form,
+      )
       return savedForm
     }
 
-    async deleteForm(formId /* : ?mixed */, overrideLock/* : boolean */ = false ) /* : Promise<void> */ {
+    async deleteForm(
+      formId /* : ?mixed */,
+      overrideLock /* : boolean */ = false,
+    ) /* : Promise<void> */ {
       if (typeof formId !== 'number') {
         throw new TypeError('Must supply "formId" as a number')
       }
 
-      await super.deleteRequest(`/forms/${formId}${overrideLock === true ? '?overrideLock=true': '' }`)
+      await super.deleteRequest(
+        `/forms/${formId}${overrideLock === true ? '?overrideLock=true' : ''}`,
+      )
     }
 
     static validateForm(form /* : mixed */) /* : Form */ {

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- `userToken` to form URLs
+
 ## 0.8.0 (2020-11-17)
 
 ### Added
