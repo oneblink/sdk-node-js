@@ -9,7 +9,7 @@ const setPreFillData = require('../lib/pre-fill-data')
 const { validateWithFormSchema } = require('../lib/forms-validation.js')
 const generateFormElement = require('../lib/generate-form-element.js')
 const generatePageElement = require('../lib/generate-page-element.js')
-const generateUserToken = require('../lib/generate-user-token.js')
+const { encryptUserToken } = require('../lib/user-token-helpers')
 
 module.exports = (tenant /* : Tenant */) =>
   class Forms extends OneBlinkAPI {
@@ -101,7 +101,7 @@ module.exports = (tenant /* : Tenant */) =>
           )
         }
 
-        userToken = generateUserToken({ secret, username })
+        userToken = encryptUserToken({ secret, username })
       }
 
       const formUrl = generateFormUrl({
