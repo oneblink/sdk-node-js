@@ -8,7 +8,7 @@ describe('User Token Helpers', () => {
   } = require('../../lib/user-token-helpers')
 
   test('should encrypt a secret with less then 32 characters', () => {
-    const secret = 'abc123'
+    const secret = 'secret'
     const username = 'username'
 
     const userToken = encryptUserToken({
@@ -41,7 +41,7 @@ describe('User Token Helpers', () => {
     expect(decrypted).toBe(username)
   })
 
-  test('should encrypt a secret with exactly 32 characters', () => {
+  test('should encrypt a secret with more than 32 characters', () => {
     const secret =
       'abcdefghijklmnopqrstuvqxyz123456abcdefghijklmnopqrstuvqxyz123456'
     const username = 'username'
