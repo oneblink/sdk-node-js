@@ -11,12 +11,15 @@
 - [`createForm()`](#createform)
 - [`updateForm()`](#updateform)
 - [`deleteForm()`](#deleteform)
+- [`decryptUserToken()`](#decryptUserToken)
 
 ## Static Functions
 
 - [`validateForm()`](#validateform)
 - [`generateFormElement()`](#generateformelement)
 - [`generatePageElement()`](#generatepageelement)
+- [`encryptUserToken()`](#encryptUserToken)
+- [`decryptFaaSUserToken()`](#decryptFaaSUserToken)
 
 ## Constructor
 
@@ -581,6 +584,20 @@ forms
 | `formId`     | Yes      | `number`  | Id of the form.                                                                                         |
 | overrideLock | no       | `boolean` | Defaults to false. Set to true to force deleting of the form if the form is locked via the form builder |
 
+## `decryptUserToken()`
+
+`decryptUserToken()` Asynchronously decrypts a user token for forms that were submitted by a logged in user (not via a FaaS key - see [`decryptFaaSUserToken()`](#decryptFaaSUserToken) for that use case). User tokens verify that the submission was made by the user and provide a user id which can then be used to authorise the user to perform subsequent actions
+
+### Parameters
+
+| Parameter | Required | Type   | Description                        |
+| --------- | -------- | ------ | ---------------------------------- |
+| userToken | yes      | string | The non-FaaS user token to decrypt |
+
+### Result
+
+A Promise which resolves to the user id of the submitting user.
+
 ## `validateForm()`
 
 `validateForm()` is a static method available on the forms class, used for validating a OneBlink compatible Forms Definition.
@@ -709,3 +726,35 @@ Please refer to our Page Element Definition found [here](./form-elements/page.md
 ### Result
 
 [A valid Page Element](./form-elements/page.md)
+
+## `encryptUserToken()`
+
+`encryptUserToken()` is a static method available on the forms class for securley encrypting the user id (email address) when the OneBlink API is being called with a FaaS key and not a user JWT. This is automatically done for the user in `generateSubmissionDataUrl()`
+
+### Parameters
+
+| Parameter        | Required | Type   | Description                                                                |
+| ---------------- | -------- | ------ | -------------------------------------------------------------------------- |
+| details          | yes      | Object | An object containing the user name and secret used to encrypt the username |
+| details.username | yes      | string | the username to encrypt                                                    |
+| details.secret   | yes      | string | a string used to encrypt the username                                      |
+
+### Result
+
+A string which is the encrypted representation of the username
+
+## `decryptFaaSUserToken()`
+
+`decryptFaaSUserToken()` is a static method available on the forms class for decrypting a user token. This token is passed to OneBlink webhooks in the `userToken` prop.
+
+### Parameters
+
+| Parameter         | Required | Type   | Description                                                              |
+| ----------------- | -------- | ------ | ------------------------------------------------------------------------ |
+| details           | yes      | Object | An object containing the user token and secret used to decrypt the token |
+| details.userToken | yes      | string | the user token to decrypt                                                |
+| details.secret    | yes      | string | the secret used to encrypt the username                                  |
+
+### Result
+
+The decrypted username
