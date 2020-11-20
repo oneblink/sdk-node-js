@@ -290,7 +290,7 @@ module.exports = (tenant /* : Tenant */) =>
       return pageElement
     }
 
-    static encryptFaaSUserToken(
+    static encryptUserToken(
       details /* : { username: string, secret: string } */,
     ) {
       return encryptUserToken(details)
