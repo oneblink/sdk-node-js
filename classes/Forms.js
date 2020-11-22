@@ -266,10 +266,12 @@ module.exports = (tenant /* : Tenant */) =>
       )
     }
 
-    async decryptUserToken(userToken /* : string */) {
-      return super.postRequest('/decrypt-user-token', {
+    async decryptUserToken(userToken /* : string */)/* : Promise<string> */ {
+      const response = await super.postRequest('/decrypt-user-token', {
         userToken
       })
+
+      return response.username
     }
 
     static validateForm(form /* : mixed */) /* : Form */ {
