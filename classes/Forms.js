@@ -9,7 +9,10 @@ const setPreFillData = require('../lib/pre-fill-data')
 const { validateWithFormSchema } = require('../lib/forms-validation.js')
 const generateFormElement = require('../lib/generate-form-element.js')
 const generatePageElement = require('../lib/generate-page-element.js')
-const { encryptUserToken } = require('../lib/user-token-helpers')
+const {
+  encryptUserToken,
+  decryptUserToken,
+} = require('../lib/user-token-helpers')
 
 module.exports = (tenant /* : Tenant */) =>
   class Forms extends OneBlinkAPI {
@@ -263,6 +266,14 @@ module.exports = (tenant /* : Tenant */) =>
       )
     }
 
+    async decryptUserToken(userToken /* : string */)/* : Promise<string> */ {
+      const response = await super.postRequest('/decrypt-user-token', {
+        userToken
+      })
+
+      return response.username
+    }
+
     static validateForm(form /* : mixed */) /* : Form */ {
       const validatedForm = validateWithFormSchema(form)
       return validatedForm
@@ -279,5 +290,17 @@ module.exports = (tenant /* : Tenant */) =>
     ) /* :PageElement */ {
       const pageElement = generatePageElement(formElementGenerationData)
       return pageElement
+    }
+
+    static encryptUserToken(
+      details /* : { username: string, secret: string } */,
+    ) {
+      return encryptUserToken(details)
+    }
+
+    static decryptFaaSUserToken(
+      details /* : { userToken: string, secret: string } */,
+    ) {
+      return decryptUserToken(details)
     }
   }
