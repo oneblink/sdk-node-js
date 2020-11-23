@@ -53,6 +53,8 @@ const parameters = {
     FieldName2: 'Room B',
   },
   expiryInSeconds: 36800,
+  username: 'username',
+  secret: 'sshh',
 }
 
 forms.generateFormUrl(parameters).then((result) => {
@@ -71,8 +73,8 @@ forms.generateFormUrl(parameters).then((result) => {
 | `parameters.externalId`      | No       | `string` | The external identifier of the form submission you wish to use, this identifier will be returned to you with the submissionId after a successful submission to allow you to retrieve the data later |
 | `parameters.preFillData`     | No       | `Object` | An object with the form field names as keys and the prefill data as the values                                                                                                                      |
 | `parameters.expiryInSeconds` | No       | `number` | The time in seconds until the generated form URL is no longer valid. This is set to `28800` seconds (8 hours) by default.                                                                           |
-| `parameters.username`        | No       | `string` | An identifier for the user completing the form. Use this if you would like securely know the user that submitted the form in a webhook.                                                             |
-| `parameters.secret`          | No       | `string` | A secret used to hash the `username` property which can be validated in a webhook.                                                                                                                  |
+| `parameters.username`        | No       | `string` | An identifier for the user completing the form. Use this if you would like to securely know the user that submitted the form in a webhook.                                                          |
+| `parameters.secret`          | No       | `string` | A secret used to encrypt the `username` property which can be validated in a webhook.                                                                                                               |
 
 ### Result (Resolved Promise)
 
