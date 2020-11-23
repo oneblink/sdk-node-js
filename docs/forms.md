@@ -716,15 +716,15 @@ Please refer to our Page Element Definition found [here](./form-elements/page.md
 
 ## `encryptUserToken()`
 
-`encryptUserToken()` is a static method available on the forms class for securley encrypting the user id (email address) when the OneBlink API is being called with a FaaS key and not a user JWT. This is automatically done for the user in `generateSubmissionDataUrl()`
+`encryptUserToken()` is a static method available on the forms class for securely encrypting a user identifier (e.g. email address) when the OneBlink API is being called with a FaaS key and not a user JWT. This is automatically done for the user in [`generateFormUrl()`](#generateformurl) by passing the `username` and `secret` options.
 
 ### Parameters
 
-| Parameter        | Required | Type   | Description                                                                |
-| ---------------- | -------- | ------ | -------------------------------------------------------------------------- |
-| details          | yes      | Object | An object containing the user name and secret used to encrypt the username |
-| details.username | yes      | string | the username to encrypt                                                    |
-| details.secret   | yes      | string | a string used to encrypt the username                                      |
+| Parameter        | Required | Type   | Description                                                               |
+| ---------------- | -------- | ------ | ------------------------------------------------------------------------- |
+| details          | yes      | Object | An object containing the username and secret used to encrypt the username |
+| details.username | yes      | string | the username to encrypt                                                   |
+| details.secret   | yes      | string | a string used to encrypt the username                                     |
 
 ### Result
 
@@ -732,7 +732,7 @@ A string which is the encrypted representation of the username
 
 ## `decryptUserToken()`
 
-`decryptUserToken()` is a static method available on the forms class for decrypting a user token. This token is passed to OneBlink webhooks in the `userToken` prop.
+`decryptUserToken()` is a static method available on the forms class for decrypting a user token. This token is passed to OneBlink webhooks in the `userToken` property.
 
 ### Parameters
 
