@@ -11,7 +11,6 @@
 - [`createForm()`](#createform)
 - [`updateForm()`](#updateform)
 - [`deleteForm()`](#deleteform)
-- [`decryptUserToken()`](#decryptUserToken)
 
 ## Static Functions
 
@@ -19,7 +18,7 @@
 - [`generateFormElement()`](#generateformelement)
 - [`generatePageElement()`](#generatepageelement)
 - [`encryptUserToken()`](#encryptUserToken)
-- [`decryptFaaSUserToken()`](#decryptFaaSUserToken)
+- [`decryptUserToken()`](#decryptUserToken)
 
 ## Constructor
 
@@ -584,20 +583,6 @@ forms
 | `formId`     | Yes      | `number`  | Id of the form.                                                                                         |
 | overrideLock | no       | `boolean` | Defaults to false. Set to true to force deleting of the form if the form is locked via the form builder |
 
-## `decryptUserToken()`
-
-`decryptUserToken()` Asynchronously decrypts a user token for forms that were submitted by a logged in user (not via a FaaS key - see [`decryptFaaSUserToken()`](#decryptFaaSUserToken) for that use case). User tokens verify that the submission was made by the user and provide a user id which can then be used to authorise the user to perform subsequent actions
-
-### Parameters
-
-| Parameter | Required | Type   | Description                        |
-| --------- | -------- | ------ | ---------------------------------- |
-| userToken | yes      | string | The non-FaaS user token to decrypt |
-
-### Result
-
-A Promise which resolves to the user id of the submitting user.
-
 ## `validateForm()`
 
 `validateForm()` is a static method available on the forms class, used for validating a OneBlink compatible Forms Definition.
@@ -743,9 +728,9 @@ Please refer to our Page Element Definition found [here](./form-elements/page.md
 
 A string which is the encrypted representation of the username
 
-## `decryptFaaSUserToken()`
+## `decryptUserToken()`
 
-`decryptFaaSUserToken()` is a static method available on the forms class for decrypting a user token. This token is passed to OneBlink webhooks in the `userToken` prop.
+`decryptUserToken()` is a static method available on the forms class for decrypting a user token. This token is passed to OneBlink webhooks in the `userToken` prop.
 
 ### Parameters
 

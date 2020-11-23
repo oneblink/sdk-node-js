@@ -5,6 +5,7 @@
 ### Added
 
 - `userToken` to form URLs
+- `Forms.decryptUserToken()` and `Forms.encryptUserToken()` functions
 
 ## 0.8.0 (2020-11-17)
 

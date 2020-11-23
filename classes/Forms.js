@@ -266,14 +266,6 @@ module.exports = (tenant /* : Tenant */) =>
       )
     }
 
-    async decryptUserToken(userToken /* : string */)/* : Promise<string> */ {
-      const response = await super.postRequest('/decrypt-user-token', {
-        userToken
-      })
-
-      return response.username
-    }
-
     static validateForm(form /* : mixed */) /* : Form */ {
       const validatedForm = validateWithFormSchema(form)
       return validatedForm
@@ -298,7 +290,7 @@ module.exports = (tenant /* : Tenant */) =>
       return encryptUserToken(details)
     }
 
-    static decryptFaaSUserToken(
+    static decryptUserToken(
       details /* : { userToken: string, secret: string } */,
     ) {
       return decryptUserToken(details)
