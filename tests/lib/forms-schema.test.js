@@ -2967,6 +2967,7 @@ describe('CP_HCMS submission event', () => {
             type: 'CP_HCMS',
             configuration: {
               contentTypeName: 'contenttypename-1',
+              encryptedElementIds: ['b941ea2d-965c-4d40-8c1d-e5a231fc18b1'],
             },
           },
         ],
@@ -3058,6 +3059,51 @@ describe('CP_HCMS submission event', () => {
       },
     )
     expect(error.message).toContain('fails to match the required pattern')
+  })
+  test('should reject CP_HCMS submission event with duplicate encryptedElementIds', () => {
+    const { error } = Joi.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        tags: [],
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+            required: false,
+          },
+        ],
+        isAuthenticated: true,
+
+        submissionEvents: [
+          {
+            type: 'CP_HCMS',
+            configuration: {
+              contentTypeName: 'contenttypename-1',
+              encryptedElementIds: [
+                'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+                'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              ],
+            },
+          },
+        ],
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error.message).toContain(
+      'child "encryptedElementIds" fails because ["encryptedElementIds" position 1 contains a duplicate value]',
+    )
   })
 })
 
