@@ -2,11 +2,13 @@
 
 ## Unreleased
 
+## 0.9.1 (2020-12-15)
+
 ### Added
 
 - `encryptedElementIds` to `CP_HCMS` submission event type
 
-## 0.9.0 (2020-11-24) 46
+## 0.9.0 (2020-11-24)
 
 ### Added
 
