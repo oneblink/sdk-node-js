@@ -3,7 +3,10 @@
 ## Unreleased
 
 ### Added
+
+- Added `includeSubmissionIdInPdf` to PDF Submission event properties
 - Added `crn2` and `crn3` as BPoint Submission event properties
+
 ## 0.9.1 (2020-12-15)
 
 ### Added
