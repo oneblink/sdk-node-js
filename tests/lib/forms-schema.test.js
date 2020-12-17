@@ -4662,6 +4662,7 @@ describe('submission event conditional logic', () => {
             type: 'PDF',
             configuration: {
               email: 'developers@oneblink.io',
+              includeSubmissionIdInPdf: true,
             },
           },
         ],
@@ -4676,6 +4677,7 @@ describe('submission event conditional logic', () => {
       type: 'PDF',
       configuration: {
         email: 'developers@oneblink.io',
+        includeSubmissionIdInPdf: true,
       },
       conditionallyExecute: false,
       requiresAllConditionallyExecutePredicates: false,
