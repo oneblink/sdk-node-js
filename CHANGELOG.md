@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added `excludedElementIds` to PDF Submission event configuration
 - Added `includeSubmissionIdInPdf` to PDF and Trim Submission event properties
 - Added `crn2` and `crn3` as BPoint Submission event properties
 
