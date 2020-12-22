@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.9.2 (2020-12-22)
+
 ### Added
 
 - Added `includeSubmissionIdInPdf` to PDF and Trim Submission event properties
