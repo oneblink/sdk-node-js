@@ -31,7 +31,7 @@ module.exports = (tenant /* : Tenant */) =>
     async createJob(
       options /* : ?mixed */,
       preFillData /* : ?mixed */,
-    ) /* : Promise<Job> */ {
+    ) /* : Promise<FormsAppJob> */ {
       await Promise.resolve()
 
       const result = Joi.validate(options, newJobSchema, { stripUnknown: true })
@@ -39,7 +39,7 @@ module.exports = (tenant /* : Tenant */) =>
         throw result.error
       }
 
-      const newJob /* : NewJob */ = result.value
+      const newJob /* : NewFormsAppJob */ = result.value
 
       if (preFillData) {
         const preFillMeta = await super.postRequest(
@@ -49,7 +49,7 @@ module.exports = (tenant /* : Tenant */) =>
         newJob.preFillFormDataId = preFillMeta.preFillFormDataId
       }
 
-      const job /* : Job */ = await super.postRequest('/jobs', newJob)
+      const job /* : FormsAppJob */ = await super.postRequest('/jobs', newJob)
 
       return job
     }
