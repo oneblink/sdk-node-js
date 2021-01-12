@@ -5,7 +5,7 @@
 ### Added
 
 - `excludedElementIds` to PDF Submission event configuration
-- `geoscopeAddress` form element to form element schema
+- `geoscapeAddress` form element to form element schema
 
 ## 0.9.2 (2020-12-22)
 
