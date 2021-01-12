@@ -1737,7 +1737,7 @@ test('should error if page element has child page element', () => {
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage, files, summary]',
+    '"Form Element - Type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, date, datetime, draw, email, file, files, form, geoscopeAddress, heading, html, image, infoPage, location, number, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -1820,7 +1820,7 @@ test('should error if isMultiPage is set to false', () => {
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage, files, summary]',
+    '"Form Element - Type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, date, datetime, draw, email, file, files, form, geoscopeAddress, heading, html, image, infoPage, location, number, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -1977,7 +1977,7 @@ test('should error if isMultiPage is false even if all root elements are pages',
   )
 
   expect(error.details[0].message).toBe(
-    '"Form Element - Type" must be one of [camera, checkboxes, date, datetime, heading, location, number, radio, select, draw, text, textarea, time, repeatableSet, barcodeScanner, html, captcha, email, image, file, calculation, telephone, autocomplete, form, infoPage, files, summary]',
+    '"Form Element - Type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, date, datetime, draw, email, file, files, form, geoscopeAddress, heading, html, image, infoPage, location, number, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
   )
 })
 
