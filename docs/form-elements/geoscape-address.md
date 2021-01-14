@@ -15,7 +15,7 @@ Allows the user to search for Geoscape addresses and select a single address.
 | `readOnly`             | Yes      | `boolean`  | `false`             | Determine if this selected option be changed by the user (`false`) or not (`true`).                                         |
 | `defaultValue`         | No       | `object`   |                     | The result of the [Geoscape Address Details service](https://psma.docs.stoplight.io/apiReference/addresses/address/address) |
 | `placeholderValue`     | No       | `string`   |                     | The content to appear in the form control when the form control is empty.                                                   |
-| `stateTerritoryFilter` | No       | `string[]` |                     | The an array of Australian State and/or Territory abbreviations that the search should be limited to.                       |
+| `stateTerritoryFilter` | No       | `string[]` |                     | An array of Australian State and/or Territory abbreviations that the search should be limited to.                       |
 
 This element also inherits the properties of the following:
 
