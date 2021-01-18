@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.9.3 (2020-01-18)
+
 ### Added
 
 - `excludedElementIds` to PDF Submission event configuration
