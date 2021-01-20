@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fixed
+
+- Allow `excludedElementIds` to be an empty array
+
 ## 0.9.3 (2020-01-18)
 
 ### Added
