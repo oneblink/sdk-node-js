@@ -39,3 +39,7 @@ const MyTenant = require('@oneblink/sdk/tenants/my-tenant')
 - [Organisations](./organisations.md)
 
 - [Team Members](./team-members.md)
+
+## Types
+
+- [Forms App](./types/forms-app.md)
