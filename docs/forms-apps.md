@@ -109,47 +109,13 @@ formsAppsSDK.createFormsApp(formsApp).then((savedFormsApp) => {
 
 ### Parameters
 
-| Parameter                                | Required | Type       | Description                                                                                                                                                                                          |
-| ---------------------------------------- | -------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `formsApp`                               | Yes      | `Object`   | Forms App properties                                                                                                                                                                                 |
-| `formsApp.name`                          | Yes      | `string`   | Name of the forms app                                                                                                                                                                                |
-| `formsApp.slug`                          | Yes      | `string`   | Unique domain safe text to identify the app                                                                                                                                                          |
-| `formsApp.organisationId`                | Yes      | `string`   | The exact organisation identifier the forms app is associated with                                                                                                                                   |
-| `formsApp.formsAppEnvironmentId`         | Yes      | `number`   | The exact forms app environment identifier the forms app is associated with                                                                                                                          |
-| `formsApp.formIds`                       | Yes      | `number[]` | The identifiers of the forms that are in the forms app. The order of the forms is respected when rendering the list of forms                                                                         |
-| `formsApp.pwaSettings`                   | Yes      | `Object`   | Forms App progressive web app setting properties                                                                                                                                                     |
-| `formsApp.pwaSettings.homeScreenName`    | No       | `string`   | The text beneath the app icon when installed as a progressive web app on mobile devices                                                                                                              |
-| `formsApp.pwaSettings.splashScreenName`  | No       | `string`   | The text on the splash screen when installed as a progressive web app on mobile devices                                                                                                              |
-| `formsApp.pwaSettings.homeScreenIconUrl` | No       | `string`   | The absolute URL to the app icon that is displayed when installed as a progressive web app on mobile devices                                                                                         |
-| `formsApp.welcomeEmail`                  | No       | `Object`   | Forms App custom welcome email properties                                                                                                                                                            |
-| `formsApp.welcomeEmail.subject`          | No       | `string`   | The subject to use when sending welcome emails to new app users                                                                                                                                      |
-| `formsApp.welcomeEmail.body`             | No       | `string`   | A [mustache](http://mustache.github.io/#demo) template to use when sending welcome emails to new app users. See [`createUser()`](#createuser) for passing additional parameters for a specific user. |
-| `formsApp.notificationEmailAddresses`    | No       | `string[]` | Array of emails addresses to be notified when an error occurs in processing submission events                                                                                                        |
-| `formsApp.oAuthClientId`                 | No       | `string`   | OAuth Client id                                                                                                                                                                                      |
-| `formsApp.hasSamlIdentityProvider`       | No       | `boolean`  | True when using a SAML identity provider                                                                                                                                                             |
+| Parameter  | Required | Type                                                     | Description          |
+| ---------- | -------- | -------------------------------------------------------- | -------------------- |
+| `formsApp` | Yes      | [`NewFormsApp`](./types/forms-app/README.md#newformsapp) | Forms App properties |
 
 ### Result (Resolved Promise)
 
-```json
-{
-  "id": 1,
-  "name": "My Application",
-  "hostname": "customer-my.app.oneblink.io",
-  "slug": "my",
-  "oAuthClientId": "123456789012abcdefghijkl",
-  "styles": {},
-  "pwaSettings": {
-    "homeScreenName": "App",
-    "splashScreenName": "Application"
-  },
-  "createdAt": "2018-06-01T00:00:00.000Z",
-  "updatedAt": "2019-05-17T05:49:14.000Z",
-  "organisationId": "ABCDEFGHIJKL123456789012",
-  "formsAppEnvironmentId": 1,
-  "formIds": [],
-  "notificationEmailAddresses": ["support@organisation.com"]
-}
-```
+[Retreived FormsApp](./types/forms-app/README.md#retreived-formsapp)
 
 ## `createUser()`
 
@@ -336,22 +302,6 @@ Update a Forms App
 ### Example
 
 ```javascript
-const formsApp = {
-  id: 1,
-  name: 'My Application',
-  slug: 'my',
-  oAuthClientId: '123456789012abcdefghijkl',
-  pwaSettings: {
-    homeScreenName: 'App',
-    splashScreenName: 'Application',
-  },
-  createdAt: '2018-06-01T00:00:00.000Z',
-  updatedAt: '2019-05-17T05:49:14.000Z',
-  organisationId: 'ABCDEFGHIJKL123456789012',
-  formsAppEnvironmentId: 1,
-  formIds: [],
-  notificationEmailAddresses: ['support@organisation.com'],
-}
 formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
   // Use Forms App here...
 })
@@ -359,48 +309,13 @@ formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
 
 ### Parameters
 
-| Parameter                                | Required | Type       | Description                                                                                                                                                                                          |
-| ---------------------------------------- | -------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `formsApp`                               | Yes      | `Object`   | Forms App properties                                                                                                                                                                                 |
-| `formsApp.id`                            | Yes      | `number`   | Identifier of the forms app                                                                                                                                                                          |
-| `formsApp.name`                          | Yes      | `string`   | Name of the forms app                                                                                                                                                                                |
-| `formsApp.slug`                          | Yes      | `string`   | Unique domain safe text to identify the app                                                                                                                                                          |
-| `formsApp.organisationId`                | Yes      | `string`   | The exact organisation identifier the forms app is associated with                                                                                                                                   |
-| `formsApp.formsAppEnvironmentId`         | Yes      | `number`   | The exact forms app environment identifier the forms app is associated with                                                                                                                          |
-| `formsApp.oAuthClientId`                 | Yes      | `string`   | The identifier of the OAuth Client for the forms app **(Do not change this)**.                                                                                                                       |
-| `formsApp.formIds`                       | Yes      | `number[]` | The identifiers of the forms that are in the forms app. The order of the forms is respected when rendering the list of forms                                                                         |
-| `formsApp.pwaSettings`                   | Yes      | `Object`   | Forms App progressive web app setting properties                                                                                                                                                     |
-| `formsApp.pwaSettings.homeScreenName`    | No       | `string`   | The text beneath the app icon when installed as a progressive web app on mobile devices                                                                                                              |
-| `formsApp.pwaSettings.splashScreenName`  | No       | `string`   | The text on the splash screen when installed as a progressive web app on mobile devices                                                                                                              |
-| `formsApp.pwaSettings.homeScreenIconUrl` | No       | `string`   | The absolute URL to the app icon that is displayed when installed as a progressive web app on mobile devices                                                                                         |
-| `formsApp.welcomeEmail`                  | No       | `Object`   | Forms App custom welcome email properties                                                                                                                                                            |
-| `formsApp.welcomeEmail.subject`          | No       | `string`   | The subject to use when sending welcome emails to new app users                                                                                                                                      |
-| `formsApp.welcomeEmail.body`             | No       | `string`   | A [mustache](http://mustache.github.io/#demo) template to use when sending welcome emails to new app users. See [`createUser()`](#createuser) for passing additional parameters for a specific user. |
-| `formsApp.notificationEmailAddresses`    | No       | `string[]` | Array of emails addresses to be notified when an error occurs in processing submission events                                                                                                        |
-| `formsApp.hasSamlIdentityProvider`       | No       | `boolean`  | True when using a SAML identity provider                                                                                                                                                             |
+| Parameter  | Required | Type                                               | Description          |
+| ---------- | -------- | -------------------------------------------------- | -------------------- |
+| `formsApp` | Yes      | [`FormsApp`](./types/forms-app/README.md#formsapp) | Forms App properties |
 
 ### Result (Resolved Promise)
 
-```json
-{
-  "id": 1,
-  "name": "My Application",
-  "hostname": "customer-my.app.oneblink.io",
-  "slug": "my",
-  "oAuthClientId": "123456789012abcdefghijkl",
-  "styles": {},
-  "pwaSettings": {
-    "homeScreenName": "App",
-    "splashScreenName": "Application"
-  },
-  "createdAt": "2018-06-01T00:00:00.000Z",
-  "updatedAt": "2019-05-17T05:49:14.000Z",
-  "organisationId": "ABCDEFGHIJKL123456789012",
-  "formsAppEnvironmentId": 1,
-  "formIds": [],
-  "notificationEmailAddresses": ["support@organisation.com"]
-}
-```
+[Retreived FormsApp](./types/forms-app/README.md#retreived-formsapp)
 
 ## `updateStyles()`
 
@@ -409,15 +324,6 @@ Update a Forms App
 ### Example
 
 ```javascript
-const formsAppId = 1
-const styles = {
-  foregroundColour: '#E8E8E8',
-  highlightColour: '#0000FF',
-  contrastColour: '#FFFFFF',
-  customCss: '.ob-button { border-radius: 10px; }',
-  logoUrl: 'http://logo.com/path/to/image.png',
-  menuItems: [],
-}
 formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
   // Styles have been updated...
 })
@@ -425,34 +331,13 @@ formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
 
 ### Parameters
 
-| Parameter                      | Required | Type       | Description                                                                                            |
-| ------------------------------ | -------- | ---------- | ------------------------------------------------------------------------------------------------------ |
-| `styles`                       | Yes      | `Object`   | Forms App styles properties                                                                            |
-| `styles.foregroundColour`      | No       | `string`   | Foreground colour of banner in Forms App                                                               |
-| `styles.highlightColour`       | No       | `string`   | Highlight colour for elements that should stand out                                                    |
-| `styles.contrastColour`        | No       | `string`   | Contrast colour applied against the highlight colour                                                   |
-| `styles.customCss`             | No       | `string`   | Custom CSS applied to the Forms App                                                                    |
-| `styles.logoUrl`               | No       | `string`   | The absolute URL to the logo image in the Forms App                                                    |
-| `styles.menuItems`             | No       | `Object[]` | Array of menu item objects                                                                             |
-| `styles.menuItems[].label`     | Yes      | `string`   | Label for the menu item                                                                                |
-| `styles.menuItems[].icon`      | Yes      | `string`   | Icon to be used for the menu item                                                                      |
-| `styles.menuItems[].type`      | Yes      | `string`   | Type of menu item, valid values "FORMS_LIST", "JOBS", "DRAFTS","PENDING_SUBMISSIONS","PROFILE", "HREF" |
-| `styles.menuItems[].isHidden`  | Yes      | `boolean`  | If true, menu item will be hidden (valid for types except "HREF")                                      |
-| `styles.menuItems[].isDefault` | Yes      | `boolean`  | If true, menu item will be the default item shown (valid for types except "HREF")                      |
-| `styles.menuItems[].href`      | Yes      | `string`   | Url to be opened for menu item (valid for type "HREF" only)                                            |
+| Parameter | Required | Type                                                    | Description                 |
+| --------- | -------- | ------------------------------------------------------- | --------------------------- |
+| `styles`  | Yes      | [`FormsAppStyles`](./types/forms-app/FormsAppStyles.md) | Forms App styles properties |
 
 ### Result (Resolved Promise)
 
-```json
-{
-  "foregroundColour": "#E8E8E8",
-  "highlightColour": "#0000FF",
-  "contrastColour": "#FFFFFF",
-  "customCss": ".ob-button { border-radius: 10px; }",
-  "logoUrl": "http://logo.com/path/to/image.png",
-  "menuItems": []
-}
-```
+[`FormsAppStyles`](./types/forms-app/FormsAppStyles.md)
 
 ## `setSendingAddress()`
 

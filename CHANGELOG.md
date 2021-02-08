@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Updated
+
+- Forms Apps docs to reflect separate app types
+
 ### Fixed
 
 - Allow `excludedElementIds` to be an empty array
