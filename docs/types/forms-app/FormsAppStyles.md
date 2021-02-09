@@ -4,9 +4,9 @@
 
 ## FormsAppStyles
 
-For Forms Apps of type `CONTAINER` [ContainerMenuItem](./FormsAppStylesMenuItems.md#containermenuitem), [FormMenuItem](./FormsAppStylesMenuItems.md#formmenuitem) and [HrefMenuItem](./FormsAppStylesMenuItems.md#hrefmenuitem) can be used in the `menuItems` array, as well as [ScreenMenuItem](./FormsAppStylesMenuItems.md#screenmenuitem) exluding the `FORMS_LIST` type.
+For Forms Apps of type `TILES` [ContainerMenuItem](./FormsAppStylesMenuItems.md#containermenuitem), [FormMenuItem](./FormsAppStylesMenuItems.md#formmenuitem) and [HrefMenuItem](./FormsAppStylesMenuItems.md#hrefmenuitem) can be used in the `menuItems` array, as well as [ScreenMenuItem](./FormsAppStylesMenuItems.md#screenmenuitem) exluding the `FORMS_LIST` type.
 
-Form Forms Apps of type 'FORMS_LIST' only [ScreenMenuItem](./FormsAppStylesMenuItems.md#screenmenuitem) and [HrefMenuItem](./FormsAppStylesMenuItems.md#hrefmenuitem) can be used in the `menuItems` array.
+Form Forms Apps of type `FORMS_LIST` only [ScreenMenuItem](./FormsAppStylesMenuItems.md#screenmenuitem) and [HrefMenuItem](./FormsAppStylesMenuItems.md#hrefmenuitem) can be used in the `menuItems` array.
 
 | Parameter          | Required | Type                                                       | Description                                                                                     |
 | ------------------ | -------- | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
