@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.9.4 (2021-02-09)
+
 ### Updated
 
 - Forms Apps docs to reflect separate app types
