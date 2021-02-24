@@ -55,6 +55,7 @@ const parameters = {
   expiryInSeconds: 36800,
   username: 'username',
   secret: 'sshh',
+  previousFormSubmissionApprovalId: 1,
 }
 
 forms.generateFormUrl(parameters).then((result) => {
@@ -65,16 +66,17 @@ forms.generateFormUrl(parameters).then((result) => {
 
 ### Parameters
 
-| Parameter                    | Required | Type     | Description                                                                                                                                                                                         |
-| ---------------------------- | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `parameters`                 | Yes      | `Object` | An object containing all parameters to be passed to the function                                                                                                                                    |
-| `parameters.formId`          | Yes      | `number` | The exact id of the form you wish to generate a URL for                                                                                                                                             |
-| `parameters.formsAppId`      | No       | `number` | The exact id of the forms app you wish to generate a URL for. This is set to the first forms app the form was added to by default.                                                                  |
-| `parameters.externalId`      | No       | `string` | The external identifier of the form submission you wish to use, this identifier will be returned to you with the submissionId after a successful submission to allow you to retrieve the data later |
-| `parameters.preFillData`     | No       | `Object` | An object with the form field names as keys and the prefill data as the values                                                                                                                      |
-| `parameters.expiryInSeconds` | No       | `number` | The time in seconds until the generated form URL is no longer valid. This is set to `28800` seconds (8 hours) by default.                                                                           |
-| `parameters.username`        | No       | `string` | An identifier for the user completing the form. Use this if you would like to securely know the user that submitted the form in a webhook.                                                          |
-| `parameters.secret`          | No       | `string` | A secret used to encrypt the `username` property which can be validated in a webhook.                                                                                                               |
+| Parameter                                     | Required | Type     | Description                                                                                                                                                                                         |
+| --------------------------------------------- | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `parameters`                                  | Yes      | `Object` | An object containing all parameters to be passed to the function                                                                                                                                    |
+| `parameters.formId`                           | Yes      | `number` | The exact id of the form you wish to generate a URL for                                                                                                                                             |
+| `parameters.formsAppId`                       | No       | `number` | The exact id of the forms app you wish to generate a URL for. This is set to the first forms app the form was added to by default.                                                                  |
+| `parameters.externalId`                       | No       | `string` | The external identifier of the form submission you wish to use, this identifier will be returned to you with the submissionId after a successful submission to allow you to retrieve the data later |
+| `parameters.preFillData`                      | No       | `Object` | An object with the form field names as keys and the prefill data as the values                                                                                                                      |
+| `parameters.expiryInSeconds`                  | No       | `number` | The time in seconds until the generated form URL is no longer valid. This is set to `28800` seconds (8 hours) by default.                                                                           |
+| `parameters.username`                         | No       | `string` | An identifier for the user completing the form. Use this if you would like to securely know the user that submitted the form in a webhook.                                                          |
+| `parameters.secret`                           | No       | `string` | A secret used to encrypt the `username` property which can be validated in a webhook.                                                                                                               |
+| `parameters.previousFormSubmissionApprovalId` | No       | `number` | The exact id of the previous form submission approval this submission will be associated to                                                                                                         |
 
 ### Result (Resolved Promise)
 
@@ -429,7 +431,7 @@ forms
 ### Parameters
 
 | Parameter                                              | Required                                  | Type                                           | Description                                                                                     |
-| ------------------------------------------------------ | ----------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| ------------------------------------------------------ | ----------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------- | --------------- | ----------------------------- |
 | `name`                                                 | Yes                                       | `string`                                       | Name of the form.                                                                               |
 | `description`                                          | No                                        | `string`                                       | A description of the form.                                                                      |
 | `organisationId`                                       | Yes                                       | `string`                                       | The organisation ID the form belong to.                                                         |
@@ -439,7 +441,7 @@ forms
 | `isAuthenticated`                                      | Yes                                       | `boolean`                                      | Whether or not the form can only be viewed by an Authenticated user.                            |
 | `isMultiPage`                                          | Yes                                       | `boolean`                                      | Whether or not the form contains multiple pages.                                                |
 | `submissionEvents`                                     | No                                        | `SubmissionEvent[]`                            | Events that occur/trigger on a valid successful submission.                                     |
-| `submissionEvents[].type`                              | Yes                                       | `'CALLBACK' | 'PDF' | 'ONEBLINK_API'`          | The type of submission event.                                                                   |
+| `submissionEvents[].type`                              | Yes                                       | `'CALLBACK'                                    | 'PDF'                                                                                           | 'ONEBLINK_API'` | The type of submission event. |
 | `submissionEvents[].configuration`                     | Yes                                       | `mixed`                                        | Configuration specific to the type of submission event.                                         |
 | `submissionEvents[].configuration.url`                 | If `type` is `CALLBACK`                   | `string`                                       | URL that the callback is made to.                                                               |
 | `submissionEvents[].configuration.secret`              | If `type` is `CALLBACK` or `ONEBLINK_API` | `string`                                       | Secret string used for verifying the authenticity of the request made from the OneBlink system. |
@@ -515,7 +517,7 @@ forms
 #### Definition properties
 
 | Parameter                                              | Required                                  | Type                                           | Description                                                                                     |
-| ------------------------------------------------------ | ----------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| ------------------------------------------------------ | ----------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------- | --------------- | ----------------------------- |
 | `id`                                                   | Yes                                       | `number`                                       | Id of the form.                                                                                 |
 | `name`                                                 | Yes                                       | `string`                                       | Name of the form.                                                                               |
 | `description`                                          | No                                        | `string`                                       | A description of the form.                                                                      |
@@ -526,7 +528,7 @@ forms
 | `isAuthenticated`                                      | Yes                                       | `boolean`                                      | Whether or not the form can only be viewed by an Authenticated user.                            |
 | `isMultiPage`                                          | Yes                                       | `boolean`                                      | Whether or not the form contains multiple pages.                                                |
 | `submissionEvents`                                     | No                                        | `SubmissionEvent[]`                            | Events that occur/trigger on a valid successful submission.                                     |
-| `submissionEvents[].type`                              | Yes                                       | `'CALLBACK' | 'PDF' | 'ONEBLINK_API'`          | The type of submission event.                                                                   |
+| `submissionEvents[].type`                              | Yes                                       | `'CALLBACK'                                    | 'PDF'                                                                                           | 'ONEBLINK_API'` | The type of submission event. |
 | `submissionEvents[].configuration`                     | Yes                                       | `mixed`                                        | Configuration specific to the type of submission event.                                         |
 | `submissionEvents[].configuration.url`                 | If `type` is `CALLBACK`                   | `string`                                       | URL that the callback is made to.                                                               |
 | `submissionEvents[].configuration.secret`              | If `type` is `CALLBACK` or `ONEBLINK_API` | `string`                                       | Secret string used for verifying the authenticity of the request made from the OneBlink system. |
@@ -613,7 +615,7 @@ return validatedForm
 ### Parameters
 
 | Parameter                                              | Required                                  | Type                                           | Description                                                                                     |
-| ------------------------------------------------------ | ----------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| ------------------------------------------------------ | ----------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------- | --------------- | ----------------------------- |
 | `name`                                                 | Yes                                       | `string`                                       | Name of the form.                                                                               |
 | `description`                                          | No                                        | `string`                                       | A description of the form.                                                                      |
 | `organisationId`                                       | Yes                                       | `string`                                       | The organisation ID the form belong to.                                                         |
@@ -623,7 +625,7 @@ return validatedForm
 | `isAuthenticated`                                      | Yes                                       | `boolean`                                      | Whether or not the form can only be viewed by an Authenticated user.                            |
 | `isMultiPage`                                          | Yes                                       | `boolean`                                      | Whether or not the form contains multiple pages.                                                |
 | `submissionEvents`                                     | No                                        | `SubmissionEvent[]`                            | Events that occur/trigger on a valid successful submission.                                     |
-| `submissionEvents[].type`                              | Yes                                       | `'CALLBACK' | 'PDF' | 'ONEBLINK_API'`          | The type of submission event.                                                                   |
+| `submissionEvents[].type`                              | Yes                                       | `'CALLBACK'                                    | 'PDF'                                                                                           | 'ONEBLINK_API'` | The type of submission event. |
 | `submissionEvents[].configuration`                     | Yes                                       | `mixed`                                        | Configuration specific to the type of submission event.                                         |
 | `submissionEvents[].configuration.url`                 | If `type` is `CALLBACK`                   | `string`                                       | URL that the callback is made to.                                                               |
 | `submissionEvents[].configuration.secret`              | If `type` is `CALLBACK` or `ONEBLINK_API` | `string`                                       | Secret string used for verifying the authenticity of the request made from the OneBlink system. |
