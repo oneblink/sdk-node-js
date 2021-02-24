@@ -50,6 +50,18 @@ module.exports = (tenant /* : Tenant */) =>
         throw new TypeError('Must supply "formId" as a number')
       }
 
+      let previousFormSubmissionApprovalId =
+        parameters.previousFormSubmissionApprovalId
+      if (
+        typeof previousFormSubmissionApprovalId !== 'number' &&
+        previousFormSubmissionApprovalId !== undefined &&
+        previousFormSubmissionApprovalId !== null
+      ) {
+        throw new TypeError(
+          'Must supply "previousFormSubmissionApprovalId" as a number or not at all',
+        )
+      }
+
       let formsAppId = parameters.formsAppId
       if (
         typeof formsAppId !== 'number' &&
@@ -114,6 +126,7 @@ module.exports = (tenant /* : Tenant */) =>
         preFillFormDataId,
         endpoint: `https://${formsApp.hostname}/forms`,
         userToken,
+        previousFormSubmissionApprovalId,
       })
 
       const expiry = new Date(Date.now() + jwtExpiry * 1000).toISOString()

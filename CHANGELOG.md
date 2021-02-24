@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- Allow `previousFormSubmissionApprovalId` to be included in `generateFormUrl()`
+
 ## 0.9.4 (2021-02-09)
 
 ### Updated
