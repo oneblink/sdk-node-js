@@ -1,2 +1,7 @@
 node_modules
-flow-typed
+examples
+docs
+dist
+my-serverless
+tenants
+local-tests
