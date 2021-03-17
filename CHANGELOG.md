@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- Compliance form element
+
 ## 0.9.5 (2021-03-03)
 
 ### Added
