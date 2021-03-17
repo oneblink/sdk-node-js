@@ -2,7 +2,6 @@
 'use strict'
 
 const OneBlinkAPI = require('../lib/one-blink-api.js')
-const oneBlinkAPIErrorHandler = require('../lib/one-blink-api-error-handler.js')
 const basePath = `/forms-apps`
 const verifyJWT = require('../lib/verify-jwt')
 
@@ -29,21 +28,21 @@ module.exports = (tenant /* : Tenant */) =>
 
     async getMyFormsApp(
       formsAppUserToken /* : ?mixed */,
-    ) /* : Promise<FormsApp | null> */ {
+    ) /* : Promise<FormsApp> */ {
       if (typeof formsAppUserToken !== 'string') {
         return Promise.reject(
           new TypeError('Must supply "formsAppUserToken" as a string'),
         )
       }
 
-      return this.oneBlinkAPI
-        .get('/my-forms-app', {
-          headers: {
-            Authorization: `Bearer ${formsAppUserToken}`,
-          },
-        })
-        .then((response) => response.data)
-        .catch(oneBlinkAPIErrorHandler)
+      const response = await this.request({
+        method: 'GET',
+        path: '/my-forms-app',
+        headers: {
+          Authorization: `Bearer ${formsAppUserToken}`,
+        },
+      })
+      return await response.json()
     }
 
     async createFormsApp(data /* : ?mixed */) /* : Promise<FormsApp> */ {

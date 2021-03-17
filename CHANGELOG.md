@@ -5,6 +5,11 @@
 ### Added
 
 - Compliance form element
+- `hint` property to Form schema
+
+### Fixed
+
+- `form.submissionEvent[].configuration` allowing `null`
 
 ## 0.9.5 (2021-03-03)
 

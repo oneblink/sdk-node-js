@@ -4581,6 +4581,38 @@ test('should not allow datetime, date and time elements with any other strings a
   )
 })
 
+describe('submission event configuration', () => {
+  test('should reject if configuration is not supplied', () => {
+    const { error } = Joi.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        tags: [],
+        elements: [],
+        isAuthenticated: true,
+        submissionEvents: [
+          {
+            type: 'PDF',
+          },
+        ],
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error.message).toBe(
+      'child "Submission Events" fails because ["Submission Events" at position 0 fails because [child "configuration" fails because ["Form Submission Event - Configuration" is required]]]',
+    )
+  })
+})
+
 describe('submission event conditional logic', () => {
   test('should allow both OPTIONS and NUMERIC conditional types', () => {
     const { error } = Joi.validate(
