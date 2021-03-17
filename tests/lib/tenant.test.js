@@ -14,7 +14,7 @@ describe('Region URL selecting', () => {
       accessKey: '123',
       secretKey: 'abc',
     })
-    return expect(forms.oneBlinkAPI.defaults.baseURL).toBe(
+    return expect(forms.tenant.apiOrigin).toBe(
       'https://auth-api.transform.civicplus.com',
     )
   })
@@ -25,9 +25,7 @@ describe('Region URL selecting', () => {
       accessKey: '123',
       secretKey: 'abc',
     })
-    return expect(forms.oneBlinkAPI.defaults.baseURL).toBe(
-      'https://auth-api.blinkm.io',
-    )
+    return expect(forms.tenant.apiOrigin).toBe('https://auth-api.blinkm.io')
   })
 
   test('should use the ONEBLINK apiOrigin for the api by default', () => {
@@ -36,9 +34,7 @@ describe('Region URL selecting', () => {
       accessKey: '123',
       secretKey: 'abc',
     })
-    return expect(forms.oneBlinkAPI.defaults.baseURL).toBe(
-      'https://auth-api.blinkm.io',
-    )
+    return expect(forms.tenant.apiOrigin).toBe('https://auth-api.blinkm.io')
   })
 
   test('should use the ONEBLINK test apiOrigin for the api', () => {
@@ -48,7 +44,7 @@ describe('Region URL selecting', () => {
       accessKey: '123',
       secretKey: 'abc',
     })
-    return expect(forms.oneBlinkAPI.defaults.baseURL).toBe(
+    return expect(forms.tenant.apiOrigin).toBe(
       'https://auth-api-test.blinkm.io',
     )
   })
@@ -60,7 +56,7 @@ describe('Region URL selecting', () => {
       accessKey: '123',
       secretKey: 'abc',
     })
-    return expect(forms.oneBlinkAPI.defaults.baseURL).toBe(
+    return expect(forms.tenant.apiOrigin).toBe(
       'https://auth-api-test.transform.civicplus.com',
     )
   })
