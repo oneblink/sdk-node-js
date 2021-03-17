@@ -758,6 +758,31 @@ describe('Valid Form Schema', () => {
             },
           ],
         },
+        {
+          id: '9014e80c-3c68-4adb-a338-1be04ebc95ee',
+          name: 'compliance',
+          label: 'Compliance Checkbox',
+          type: 'compliance',
+          required: false,
+          defaultValue: '8be1f1dd-ec3f-4537-bb70-f0f1c7c31b26',
+          options: [
+            {
+              id: '8be1f1dd-ec3f-4537-bb70-f0f1c7c31b26',
+              value: 'ONEvalue',
+              label: 'One',
+            },
+            {
+              id: '0729643a-5ffe-416d-8d4b-337e73e96714',
+              value: 'twovalue',
+              label: 'Two',
+            },
+            {
+              id: 'ada69988-a8b5-4a5e-84be-e998ea27287a',
+              value: 'threevalue',
+              label: 'Three',
+            },
+          ],
+        },
       ],
     },
     formSchema,
@@ -1737,7 +1762,7 @@ test('should error if page element has child page element', () => {
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
+    '"Form Element - Type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -1820,7 +1845,7 @@ test('should error if isMultiPage is set to false', () => {
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
+    '"Form Element - Type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -1977,7 +2002,7 @@ test('should error if isMultiPage is false even if all root elements are pages',
   )
 
   expect(error.details[0].message).toBe(
-    '"Form Element - Type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
+    '"Form Element - Type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
   )
 })
 
