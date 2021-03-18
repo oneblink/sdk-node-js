@@ -2,7 +2,7 @@
 
 [Back to all Elements](./README.md)
 
-## Radio Element
+## Compliance (Checklist) Element
 
 Allow the user to select a single option from a list of options displayed as buttons and also optionally enter notes and add attachments.
 
