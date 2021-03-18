@@ -22,7 +22,7 @@ Radio element also inherits the properties of the following:
 - [Options Element](./options-element.md)
 - [Lookup Element](./lookup-element.md)
 
-### Example
+### Example Form Element
 
 ```JSON
 {
@@ -55,5 +55,13 @@ Radio element also inherits the properties of the following:
 
     }
   ]
+}
+```
+
+### Example Submission Data
+
+```JSON
+{
+  "[element.name]": "pass"
 }
 ```
