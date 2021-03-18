@@ -8,7 +8,7 @@ Allow the user to select a single option from a list of options displayed as but
 
 | Property       | Required | Type      | Default   | Description                                                                              |
 | -------------- | -------- | --------- | --------- | ---------------------------------------------------------------------------------------- |
-| `type`         | Yes      | `string`  | `'radio'` | The type of Form Element.                                                                |
+| `type`         | Yes      | `string`  | `'compliance'` | The type of Form Element.                                                                |
 | `name`         | Yes      | `string`  |           | The key that will be assigned a value in the submission data when the form is submitted. |
 | `label`        | Yes      | `string`  |           | Display text presented to the user above the input by default.                           |
 | `defaultValue` | Yes      | `string`  |           | The identifier of an option to be selected when the form is opened.                      |
