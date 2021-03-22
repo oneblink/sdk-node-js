@@ -1,6 +1,6 @@
 # OneBlink SDK | FormsApp Definition
 
-[Back to README](../../README.md)
+[Back to Documentation](../../README.md)
 
 ## NewFormsApp
 
@@ -35,7 +35,7 @@
 | `oAuthClientId`              | Yes      | `string`                                          | The identifier of the OAuth Client for the forms app **(Do not change this)**                                                |
 | `hasSamlIdentityProvider`    | No       | `boolean`                                         | True when using a SAML identity provider                                                                                     |
 
-## RetreivedFormsApp
+## RetrievedFormsApp
 
 This is the schema that will be returned when creating, updating or getting a forms app.
 
@@ -108,7 +108,7 @@ This is the schema that will be returned when creating, updating or getting a fo
 }
 ```
 
-### RetreivedFormsApp
+### RetrievedFormsApp
 
 ```JSON
 {

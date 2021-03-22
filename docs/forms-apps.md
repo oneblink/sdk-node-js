@@ -85,7 +85,7 @@ OneBlink.FormsApps.verifyJWT(token)
 
 ## `createFormsApp()`
 
-Create a Forms App
+Create a [Forms App](./types/forms-app/README.md)
 
 ### Example
 
@@ -115,7 +115,7 @@ formsAppsSDK.createFormsApp(formsApp).then((savedFormsApp) => {
 
 ### Result (Resolved Promise)
 
-[Retreived FormsApp](./types/forms-app/README.md#retreived-formsapp)
+[Retrieved Forms App](./types/forms-app/README.md#retrievedformsapp)
 
 ## `createUser()`
 
@@ -224,7 +224,7 @@ undefined
 
 ## `getFormsApp()`
 
-Get a single Forms App by its identifier
+Get a single [Forms App](./types/forms-app/README.md) by its identifier
 
 ### Example
 
@@ -274,7 +274,7 @@ formsAppsSDK.getFormsApp(formsAppId).then((formsApp) => {
 
 ## `getMyFormsApp()`
 
-Get a single Forms App for the Bearer token of a Forms App User
+Get a single [Forms App](./types/forms-app/README.md) for the Bearer token of a Forms App User
 
 ### Example
 
@@ -297,7 +297,7 @@ Same as [`getFormsApp()`](#getformsapp)
 
 ## `updateFormsApp()`
 
-Update a Forms App
+Update a [Forms App](./types/forms-app/README.md)
 
 ### Example
 
@@ -319,7 +319,7 @@ formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
 
 ## `updateStyles()`
 
-Update a Forms App
+Update styles for [Forms App](./types/forms-app/README.md)
 
 ### Example
 
