@@ -59,6 +59,8 @@ import * as OneBlink from '@oneblink/sdk'
 
 - [Team Members](./team-members.md)
 
+- [PDF](./pdf.md)
+
 ## Miscellaneous
 
 - [Form Element Definitions](./form-elements/README.md)

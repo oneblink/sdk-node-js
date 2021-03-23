@@ -38,6 +38,7 @@ export default (tenant: Tenant) =>
       }
 
       const response = await super.request({
+        origin: this.tenant.apiOrigin,
         method: 'GET',
         path: '/my-forms-app',
         headers: {

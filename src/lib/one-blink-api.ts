@@ -1,6 +1,6 @@
 import querystring from 'querystring'
 
-import fetch, { Response } from 'node-fetch'
+import fetch, { Response, BodyInit } from 'node-fetch'
 
 import pkg from './package'
 import generateJWT from './generate-jwt'
@@ -40,25 +40,20 @@ export default class OneBlinkAPI {
     }
   }
 
-  async request<T>({
+  async request({
+    origin,
     method,
     path,
-    payload,
+    body,
     headers,
   }: {
+    origin: string
     method: 'GET' | 'POST' | 'PUT' | 'DELETE'
     path: string
-    payload?: T
+    body?: BodyInit
     headers?: Record<string, string>
   }): Promise<Response> {
-    let body = undefined
-    if (typeof payload === 'string') {
-      body = payload
-    } else if (payload !== undefined) {
-      body = JSON.stringify(payload)
-    }
-
-    const response = await fetch(`${this.tenant.apiOrigin}${path}`, {
+    const response = await fetch(`${origin}${path}`, {
       method,
       headers: {
         ...this.defaultRequestHeaders,
@@ -69,7 +64,6 @@ export default class OneBlinkAPI {
 
     if (!response.ok) {
       const body = await response.json()
-      console.log('body', body)
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
       const error = new Error(
@@ -86,6 +80,7 @@ export default class OneBlinkAPI {
 
   async getRequest<TOut>(path: string): Promise<TOut> {
     const response = await this.request({
+      origin: this.tenant.apiOrigin,
       method: 'GET',
       path,
     })
@@ -98,26 +93,38 @@ export default class OneBlinkAPI {
     return await this.getRequest(`${path}?${search}`)
   }
 
-  async putRequest<T, TOut>(path: string, payload?: T): Promise<TOut> {
+  async putRequest<T, TOut>(path: string, payload: T): Promise<TOut> {
     const response = await this.request({
+      origin: this.tenant.apiOrigin,
       method: 'PUT',
       path,
-      payload,
+      body: JSON.stringify(payload),
     })
     return await response.json()
   }
 
-  async postRequest<T, TOut>(path: string, payload?: T): Promise<TOut> {
+  async postRequest<T, TOut>(path: string, payload: T): Promise<TOut> {
     const response = await this.request({
+      origin: this.tenant.apiOrigin,
       method: 'POST',
       path,
-      payload,
+      body: JSON.stringify(payload),
+    })
+    return await response.json()
+  }
+
+  async postEmptyRequest<T>(path: string): Promise<T> {
+    const response = await this.request({
+      origin: this.tenant.apiOrigin,
+      method: 'POST',
+      path,
     })
     return await response.json()
   }
 
   async deleteRequest(path: string): Promise<void> {
     await this.request({
+      origin: this.tenant.apiOrigin,
       method: 'DELETE',
       path,
     })

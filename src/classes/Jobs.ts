@@ -48,7 +48,7 @@ export default (tenant: Tenant) =>
       const newJob = result.value as SubmissionTypes.NewFormsAppJob
 
       if (preFillData) {
-        const preFillMeta = await super.postRequest<undefined, PreFillMeta>(
+        const preFillMeta = await super.postEmptyRequest<PreFillMeta>(
           `/forms/${newJob.formId}/pre-fill-credentials`,
         )
         await setPreFillData(preFillMeta, preFillData)

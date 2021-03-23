@@ -11,6 +11,9 @@ export default function generateTenant(
     : tenantConfiguration.prod.jwtIssuer
 
   return {
+    pdfOrigin: isTest
+      ? tenantConfiguration.test.pdfOrigin
+      : tenantConfiguration.prod.pdfOrigin,
     apiOrigin: isTest
       ? tenantConfiguration.test.apiOrigin
       : tenantConfiguration.prod.apiOrigin,
