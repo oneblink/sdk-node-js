@@ -8,6 +8,7 @@ import generateFormElement from '../lib/generate-form-element'
 import generatePageElement from '../lib/generate-page-element'
 import { encryptUserToken, decryptUserToken } from '../lib/user-token-helpers'
 import { FormsAppsTypes, FormTypes, SubmissionTypes } from '@oneblink/types'
+import { ConditionalPredicatesItemSchema } from '../lib/forms-schema'
 import {
   BaseSearchResult,
   Tenant,
@@ -324,4 +325,6 @@ export default (tenant: Tenant) =>
     static decryptUserToken(details: { userToken: string; secret: string }) {
       return decryptUserToken(details)
     }
+
+    static getConditionalPredicatesItemSchema = ConditionalPredicatesItemSchema
   }

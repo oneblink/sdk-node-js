@@ -44,7 +44,10 @@ const SEARCH_OPTION_TYPE = 'SEARCH'
 
 const optionTypes = [CUSTOM_OPTION_TYPE, DYNAMIC_OPTION_TYPE]
 
-const ConditionalPredicatesItemsSchema = (subject: string, action: string) => {
+export const ConditionalPredicatesItemSchema = (
+  subject: string,
+  action: string,
+) => {
   return Joi.object().keys({
     elementId: Joi.string()
       .guid()
@@ -104,7 +107,7 @@ const ConditionallyShowPredicatesSchema = Joi.when('conditionallyShow', {
     .label('Form Element - Conditionally Show Predicates')
     .unique('elementId')
     .min(1)
-    .items(ConditionalPredicatesItemsSchema('Form Element', 'Show'))
+    .items(ConditionalPredicatesItemSchema('Form Element', 'Show'))
     .required(),
   otherwise: Joi.any().strip(),
 })
@@ -897,7 +900,7 @@ const SubmissionEventsSchema = Joi.object().keys({
       .unique('elementId')
       .min(1)
       .items(
-        ConditionalPredicatesItemsSchema('Form Submission Event', 'Execute'),
+        ConditionalPredicatesItemSchema('Form Submission Event', 'Execute'),
       )
       .required(),
     otherwise: Joi.any().strip(),
