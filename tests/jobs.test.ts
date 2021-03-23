@@ -101,6 +101,9 @@ describe('Jobs SDK Class', () => {
               postRequest() {
                 return mockPostRequest()
               }
+              postEmptyRequest() {
+                return mockPostRequest()
+              }
             },
         )
 
@@ -125,6 +128,9 @@ describe('Jobs SDK Class', () => {
           () =>
             class {
               postRequest() {
+                return mockPostRequest()
+              }
+              postEmptyRequest() {
                 return mockPostRequest()
               }
             },

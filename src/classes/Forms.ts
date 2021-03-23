@@ -37,6 +37,7 @@ type FormSubmissionHistorySearchResults = BaseSearchResult & {
   formSubmissionMeta: SubmissionTypes.FormSubmissionMeta[]
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default (tenant: Tenant) =>
   class Forms extends OneBlinkAPI {
     constructor(options: ConstructorOptions) {
@@ -110,7 +111,7 @@ export default (tenant: Tenant) =>
 
       let preFillFormDataId
       if (parameters.preFillData) {
-        const preFillMeta = await super.postRequest<undefined, PreFillMeta>(
+        const preFillMeta = await super.postEmptyRequest<PreFillMeta>(
           `/forms/${formId}/pre-fill-credentials`,
         )
         await setPreFillData(preFillMeta, parameters.preFillData)
@@ -187,7 +188,7 @@ export default (tenant: Tenant) =>
         )
       }
 
-      return super.postRequest(
+      return super.postEmptyRequest(
         `/forms/${formId}/retrieval-url/${submissionId}?expirySeconds=${expiryInSeconds}`,
       )
     }
@@ -211,9 +212,7 @@ export default (tenant: Tenant) =>
         url = `/forms/${formId}/download-draft-data-credentials/${submissionId}`
       }
 
-      const credentials = await super.postRequest<undefined, FormRetrievalData>(
-        url,
-      )
+      const credentials = await super.postEmptyRequest<FormRetrievalData>(url)
       return await getSubmissionData(credentials)
     }
 

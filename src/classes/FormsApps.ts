@@ -5,6 +5,7 @@ import verifyJWT from '../lib/verify-jwt'
 
 const basePath = `/forms-apps`
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default (tenant: Tenant) =>
   class FormsApps extends OneBlinkAPI {
     constructor(options: ConstructorOptions) {
@@ -38,6 +39,7 @@ export default (tenant: Tenant) =>
       }
 
       const response = await super.request({
+        origin: this.tenant.apiOrigin,
         method: 'GET',
         path: '/my-forms-app',
         headers: {

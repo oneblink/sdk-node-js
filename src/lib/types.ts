@@ -1,8 +1,8 @@
 import jwksClient from 'jwks-rsa'
 
 export type ConstructorOptions = {
-  accessKey: unknown
-  secretKey: unknown
+  accessKey: string
+  secretKey: string
 }
 
 export type AWSCredentials = {
@@ -20,14 +20,8 @@ export type FormRetrievalData = {
   }
 }
 
-export type PreFillMeta = {
+export type PreFillMeta = FormRetrievalData & {
   preFillFormDataId: string
-  credentials: AWSCredentials
-  s3: {
-    bucket: string
-    key: string
-    region: string
-  }
 }
 
 export type BaseSearchResult = {
@@ -38,19 +32,17 @@ export type BaseSearchResult = {
   }
 }
 
-export type TenantConfiguration = {
-  test: {
-    apiOrigin: string
-    jwtIssuer: string
-  }
-  prod: {
-    apiOrigin: string
-    jwtIssuer: string
-  }
+type TenantBase = {
+  apiOrigin: string
+  pdfOrigin: string
+  jwtIssuer: string
 }
 
-export type Tenant = {
-  apiOrigin: string
-  jwtIssuer: string
+export type TenantConfiguration = {
+  test: TenantBase
+  prod: TenantBase
+}
+
+export type Tenant = TenantBase & {
   jwksInstance: jwksClient.JwksClient
 }

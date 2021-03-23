@@ -12,6 +12,7 @@ type OrganisationsSearchResult = {
   organisations: OrganisationTypes.Organisation[]
 } & BaseSearchResult
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default (tenant: Tenant) =>
   class Organisations extends OneBlinkAPI {
     constructor(options: ConstructorOptions) {

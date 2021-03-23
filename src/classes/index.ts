@@ -6,7 +6,9 @@ import generateJobs from './Jobs'
 import generateKeys from './Keys'
 import generateOrganisations from './Organisations'
 import generateTeamMembers from './TeamMembers'
+import generatePDF from './PDF'
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default (tenantConfiguration: TenantConfiguration) => {
   const tenant = generateTenant(tenantConfiguration)
 
@@ -17,5 +19,6 @@ export default (tenantConfiguration: TenantConfiguration) => {
     Keys: generateKeys(tenant),
     Organisations: generateOrganisations(tenant),
     TeamMembers: generateTeamMembers(tenant),
+    PDF: generatePDF(tenant),
   }
 }
