@@ -3298,15 +3298,9 @@ describe('Conditional Predicates', () => {
         abortEarly: false,
       },
     )
-    expect(error.details[0].message).toBe(
-      '"Form Element - Conditionally Show Predicate - Option Ids" is required',
-    )
-    expect(error.details[1].message).toBe(
-      '"Form Element - Conditionally Show Predicate - Operator" is required',
-    )
-    expect(error.details[2].message).toBe(
-      '"Form Element - Conditionally Show Predicate - Value" is required',
-    )
+    expect(error.details[0].message).toBe('"optionIds" is required')
+    expect(error.details[1].message).toBe('"operator" is required')
+    expect(error.details[2].message).toBe('"value" is required')
   })
 })
 
@@ -4853,7 +4847,7 @@ describe('submission event conditional logic', () => {
     )
 
     expect(result.error.message).toContain(
-      '"Form Element - Conditionally Show Predicate - Between-Max" is required',
+      'child "elements" fails because ["Form Elements" at position 1 fails because [child "conditionallyShowPredicates" fails because ["conditionallyShowPredicates" at position 0 fails because [child "max" fails because ["max" is required]]]]]',
     )
   })
   test('should reject element with conditional between predicate where max is lower than min', () => {
@@ -4909,7 +4903,7 @@ describe('submission event conditional logic', () => {
     )
 
     expect(result.error.message).toContain(
-      '"Form Element - Conditionally Show Predicate - Between-Max" must be larger than or equal to 8',
+      'child "elements" fails because ["Form Elements" at position 1 fails because [child "conditionallyShowPredicates" fails because ["conditionallyShowPredicates" at position 0 fails because [child "max" fails because ["max" must be larger than or equal to 8]]]]]',
     )
   })
   test('should reject element if maxLength is less than minLength', () => {

@@ -63,20 +63,13 @@ function validateWithPageElementSchema(
   return validatedElement
 }
 
-function validateConditionalPredicates({
-  predicates,
-  subjectLabel,
-  actionLabel,
-}: {
-  predicates: Array<unknown>
-  subjectLabel: string
-  actionLabel: string
-}): Array<ConditionTypes.ConditionalPredicate> {
+function validateConditionalPredicates(
+  predicates: Array<unknown>,
+): Array<ConditionTypes.ConditionalPredicate> {
   const schema = Joi.array()
-    .label(`${subjectLabel} - Conditionally ${actionLabel} Predicates`)
     .unique('elementId')
     .min(1)
-    .items(ConditionalPredicatesItemSchema(subjectLabel, actionLabel))
+    .items(ConditionalPredicatesItemSchema)
     .required()
 
   const validatedPredicates = validateJoiSchema<

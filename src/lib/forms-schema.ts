@@ -44,70 +44,49 @@ const SEARCH_OPTION_TYPE = 'SEARCH'
 
 const optionTypes = [CUSTOM_OPTION_TYPE, DYNAMIC_OPTION_TYPE]
 
-export const ConditionalPredicatesItemSchema = (
-  subject: string,
-  action: string,
-) => {
-  return Joi.object().keys({
-    elementId: Joi.string()
-      .guid()
-      .required()
-      .label(`${subject} - Conditionally ${action} Predicate - Element Id`),
-    type: Joi.string()
-      .default('OPTIONS')
-      .label(`${subject} - Conditionally ${action} Predicate - Type`)
-      .valid(['OPTIONS', 'NUMERIC', 'VALUE', 'BETWEEN']),
-    optionIds: Joi.label(
-      `${subject} - Conditionally ${action} Predicate - Option Ids`,
-    ).when('type', {
-      is: Joi.only('OPTIONS'),
-      then: Joi.array().min(1).items(Joi.string()).required(),
-      otherwise: Joi.allow(null),
-    }),
-    operator: Joi.label(
-      `${subject} - Conditionally ${action} Predicate - Operator`,
-    ).when('type', {
-      is: Joi.only('NUMERIC'),
-      then: Joi.string().valid(['>', '>=', '===', '!==', '<=', '<']).required(),
-      otherwise: Joi.allow(null),
-    }),
-    value: Joi.label(
-      `${subject} - Conditionally ${action} Predicate - Value`,
-    ).when('type', {
-      is: Joi.only('NUMERIC'),
-      then: Joi.number().required(),
-      otherwise: Joi.allow(null),
-    }),
-    hasValue: Joi.label(
-      `${subject} - Conditionally ${action} Predicate - Has Value`,
-    ).when('type', {
-      is: Joi.only('VALUE'),
-      then: Joi.boolean().required(),
-      otherwise: Joi.allow(null),
-    }),
-    min: Joi.label(
-      `${subject} - Conditionally ${action} Predicate - Between-Min`,
-    ).when('type', {
-      is: Joi.only('BETWEEN'),
-      then: Joi.number().required(),
-      otherwise: Joi.any().strip(),
-    }),
-    max: Joi.label(
-      `${subject} - Conditionally ${action} Predicate - Between-Max`,
-    ).when('type', {
-      is: Joi.only('BETWEEN'),
-      then: Joi.number().min(Joi.ref('min')).required(),
-      otherwise: Joi.any().strip(),
-    }),
-  })
-}
+export const ConditionalPredicatesItemSchema = Joi.object().keys({
+  elementId: Joi.string().guid().required(),
+  type: Joi.string()
+    .default('OPTIONS')
+    .valid(['OPTIONS', 'NUMERIC', 'VALUE', 'BETWEEN']),
+  optionIds: Joi.when('type', {
+    is: Joi.only('OPTIONS'),
+    then: Joi.array().min(1).items(Joi.string()).required(),
+    otherwise: Joi.allow(null),
+  }),
+  operator: Joi.when('type', {
+    is: Joi.only('NUMERIC'),
+    then: Joi.string().valid(['>', '>=', '===', '!==', '<=', '<']).required(),
+    otherwise: Joi.allow(null),
+  }),
+  value: Joi.when('type', {
+    is: Joi.only('NUMERIC'),
+    then: Joi.number().required(),
+    otherwise: Joi.allow(null),
+  }),
+  hasValue: Joi.when('type', {
+    is: Joi.only('VALUE'),
+    then: Joi.boolean().required(),
+    otherwise: Joi.allow(null),
+  }),
+  min: Joi.when('type', {
+    is: Joi.only('BETWEEN'),
+    then: Joi.number().required(),
+    otherwise: Joi.any().strip(),
+  }),
+  max: Joi.when('type', {
+    is: Joi.only('BETWEEN'),
+    then: Joi.number().min(Joi.ref('min')).required(),
+    otherwise: Joi.any().strip(),
+  }),
+})
+
 const ConditionallyShowPredicatesSchema = Joi.when('conditionallyShow', {
   is: true,
   then: Joi.array()
-    .label('Form Element - Conditionally Show Predicates')
     .unique('elementId')
     .min(1)
-    .items(ConditionalPredicatesItemSchema('Form Element', 'Show'))
+    .items(ConditionalPredicatesItemSchema)
     .required(),
   otherwise: Joi.any().strip(),
 })
@@ -896,12 +875,9 @@ const SubmissionEventsSchema = Joi.object().keys({
   conditionallyExecutePredicates: Joi.when('conditionallyExecute', {
     is: true,
     then: Joi.array()
-      .label('Form Submission Event - Conditionally Execute Predicates')
       .unique('elementId')
       .min(1)
-      .items(
-        ConditionalPredicatesItemSchema('Form Submission Event', 'Execute'),
-      )
+      .items(ConditionalPredicatesItemSchema)
       .required(),
     otherwise: Joi.any().strip(),
   }),

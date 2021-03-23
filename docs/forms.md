@@ -769,22 +769,18 @@ const predicates = [
   },
 ]
 
-const validatedPredicates = OneBlink.Forms.validateConditionalPredicates({
-  predicates: predicates,
-  subjectLabel: 'Form Element',
-  actionLabel: 'Show',
-})
+const validatedPredicates = OneBlink.Forms.validateConditionalPredicates(
+  predicates,
+)
 
 return validatedPredicates
 ```
 
 ### Parameters
 
-| Parameter      | Required | Type                    | Description                                                                                                                                                          |
-| -------------- | -------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `predicates`   | Yes      | `ConditionaPredicate[]` | The array of conditiona predicates to be validated.                                                                                                                  |
-| `subjectLabel` | Yes      | `string`                | A string that will be used in error messages when validation fails. eg. `"<subjectLabel> - Conditionally <actionLabel> Predicate - Element Id" must be a valid GUID` |
-| `actionLabel`  | Yes      | `string`                | A string that will be used in error messages when validation fails. eg. `"<subjectLabel> - Conditionally <actionLabel> Predicate - Element Id" must be a valid GUID` |
+| Parameter    | Required | Type                    | Description                                         |
+| ------------ | -------- | ----------------------- | --------------------------------------------------- |
+| `predicates` | Yes      | `ConditionaPredicate[]` | The array of conditiona predicates to be validated. |
 
 ### Result
 
