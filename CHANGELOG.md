@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.9.6 (2021-03-23)
+
 ### Added
 
 - Compliance form element
@@ -14,6 +16,16 @@
 ### Changed
 
 - source to typescript
+
+### Dependencies
+
+- update [aws-sdk](https://www.npmjs.com/package/aws-sdk) to [2.865.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.865.0) (from [2.812.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.812.0))
+
+- no longer depend upon [axios](https://www.npmjs.com/package/axios)
+
+- update [jwks-rsa](https://www.npmjs.com/package/jwks-rsa) to [2.0.1](https://github.com/auth0/node-jwks-rsa/blob/master/CHANGELOG.md) (from [1.12.0](https://github.com/auth0/node-jwks-rsa/releases/tag/v1.12.0))
+
+- depend upon [node-fetch](https://www.npmjs.com/package/node-fetch) [2.6.1](https://github.com/node-fetch/node-fetch/releases/tag/v2.6.1)
 
 ## 0.9.5 (2021-03-03)
 
