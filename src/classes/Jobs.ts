@@ -29,6 +29,7 @@ type JobsSearchResult = {
   jobs: SubmissionTypes.FormsAppJob[]
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default (tenant: Tenant) =>
   class Jobs extends OneBlinkAPI {
     constructor(options: ConstructorOptions) {

@@ -37,6 +37,7 @@ type FormSubmissionHistorySearchResults = BaseSearchResult & {
   formSubmissionMeta: SubmissionTypes.FormSubmissionMeta[]
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default (tenant: Tenant) =>
   class Forms extends OneBlinkAPI {
     constructor(options: ConstructorOptions) {

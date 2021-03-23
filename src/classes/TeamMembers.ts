@@ -2,6 +2,7 @@ import { TeamMemberTypes } from '@oneblink/types'
 import OneBlinkAPI from '../lib/one-blink-api'
 import { ConstructorOptions, Tenant } from '../lib/types'
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default (tenant: Tenant) =>
   class TeamMembers extends OneBlinkAPI {
     constructor(options: ConstructorOptions) {

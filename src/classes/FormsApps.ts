@@ -5,6 +5,7 @@ import verifyJWT from '../lib/verify-jwt'
 
 const basePath = `/forms-apps`
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default (tenant: Tenant) =>
   class FormsApps extends OneBlinkAPI {
     constructor(options: ConstructorOptions) {
