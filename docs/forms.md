@@ -747,3 +747,62 @@ A string which is the encrypted representation of the username
 ### Result
 
 The decrypted username
+
+## `validateFormConditionalPredicates()`
+
+`validateFormConditionalPredicates()` is a static method available on the forms class, used for validating an array of Conditional Predicates found on form elements or submission events.
+
+### Example
+
+```javascript
+const predicates = [
+  {
+    elementId: 'f1eadc2b-79c8-4f97-8d92-cde64b34911f',
+    type: 'NUMERIC',
+    operator: '===',
+    value: 5,
+  },
+  {
+    elementId: '32g6dc5j-79c8-gf4z-8d92-cde64b34911f',
+    type: 'VALUE',
+    hasValue: true,
+  },
+]
+
+const validatedPredicates = OneBlink.Forms.validateConditionalPredicates({
+  predicates: predicates,
+  subjectLabel: 'Form Element',
+  actionLabel: 'Show',
+})
+
+return validatedPredicates
+```
+
+### Parameters
+
+| Parameter      | Required | Type                    | Description                                                                                                                                                          |
+| -------------- | -------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `predicates`   | Yes      | `ConditionaPredicate[]` | The array of conditiona predicates to be validated.                                                                                                                  |
+| `subjectLabel` | Yes      | `string`                | A string that will be used in error messages when validation fails. eg. `"<subjectLabel> - Conditionally <actionLabel> Predicate - Element Id" must be a valid GUID` |
+| `actionLabel`  | Yes      | `string`                | A string that will be used in error messages when validation fails. eg. `"<subjectLabel> - Conditionally <actionLabel> Predicate - Element Id" must be a valid GUID` |
+
+### Result
+
+```json
+[
+  {
+    "elementId": "f1eadc2b-79c8-4f97-8d92-cde64b34911f",
+    "type": "NUMERIC",
+    "operator": "===",
+    "value": 5
+  },
+  {
+    "elementId": "32g6dc5j-79c8-gf4z-8d92-cde64b34911f",
+    "type": "VALUE",
+    "hasValue": true
+  },
+  {}
+]
+```
+
+Throws an error if validation fails

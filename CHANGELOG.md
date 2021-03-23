@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- [`validateConditionalPredicates()`](./docs/forms.md#validateconditionalpredicates) function
+
 ## Added
 
 - [PDF class](./docs/pdf.md)
