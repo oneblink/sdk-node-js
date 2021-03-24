@@ -36,6 +36,7 @@ type TenantBase = {
   apiOrigin: string
   pdfOrigin: string
   jwtIssuer: string
+  awsRegion: string
 }
 
 export type TenantConfiguration = {

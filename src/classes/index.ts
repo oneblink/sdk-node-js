@@ -7,6 +7,7 @@ import generateKeys from './Keys'
 import generateOrganisations from './Organisations'
 import generateTeamMembers from './TeamMembers'
 import generatePDF from './PDF'
+import sendEmail from './sendEmail'
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default (tenantConfiguration: TenantConfiguration) => {
@@ -20,5 +21,6 @@ export default (tenantConfiguration: TenantConfiguration) => {
     Organisations: generateOrganisations(tenant),
     TeamMembers: generateTeamMembers(tenant),
     PDF: generatePDF(tenant),
+    sendEmail,
   }
 }

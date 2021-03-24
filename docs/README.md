@@ -45,7 +45,7 @@ This SDK also supports [Typescript Modules](https://www.typescriptlang.org/docs/
 import * as OneBlink from '@oneblink/sdk'
 ```
 
-## Classes
+## Usage
 
 - [Forms](./forms.md)
 
@@ -61,7 +61,10 @@ import * as OneBlink from '@oneblink/sdk'
 
 - [PDF](./pdf.md)
 
+- [Sending Emails](./sendEmail.md)
+
 ## Miscellaneous
 
 - [Form Element Definitions](./form-elements/README.md)
+
 - [Form Submissions](./form-submissions.md)

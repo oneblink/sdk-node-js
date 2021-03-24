@@ -4,6 +4,7 @@
 
 ## Added
 
+- [Sending Emails](./docs/sendEmail.md)
 - [PDF class](./docs/pdf.md)
 - [`validateConditionalPredicates()`](./docs/forms.md#validateconditionalpredicates) function
 

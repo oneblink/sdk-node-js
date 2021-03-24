@@ -9,6 +9,16 @@ const {
   Organisations,
   TeamMembers,
   PDF,
+  sendEmail,
 } = generateClasses(ONEBLINK)
 
-export { Forms, FormsApps, Jobs, Keys, Organisations, TeamMembers, PDF }
+export {
+  Forms,
+  FormsApps,
+  Jobs,
+  Keys,
+  Organisations,
+  TeamMembers,
+  PDF,
+  sendEmail,
+}
