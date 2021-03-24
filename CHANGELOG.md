@@ -5,6 +5,7 @@
 ## Added
 
 - [PDF class](./docs/pdf.md)
+- [`validateConditionalPredicates()`](./docs/forms.md#validateconditionalpredicates) function
 
 ## 0.9.6 (2021-03-23)
 

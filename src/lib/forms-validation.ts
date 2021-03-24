@@ -1,6 +1,11 @@
 import Joi from 'joi'
-import { FormTypes } from '@oneblink/types'
-import { elementSchema, formSchema, pageElementSchema } from './forms-schema'
+import { FormTypes, ConditionTypes } from '@oneblink/types'
+import {
+  elementSchema,
+  formSchema,
+  pageElementSchema,
+  ConditionalPredicatesItemSchema,
+} from './forms-schema'
 
 function validateJoiSchema<T>(
   data: unknown,
@@ -58,8 +63,26 @@ function validateWithPageElementSchema(
   return validatedElement
 }
 
+function validateConditionalPredicates(
+  predicates: Array<unknown>,
+): Array<ConditionTypes.ConditionalPredicate> {
+  const schema = Joi.array()
+    .unique('elementId')
+    .min(1)
+    .items(ConditionalPredicatesItemSchema)
+    .required()
+
+  const validatedPredicates = validateJoiSchema<
+    Array<ConditionTypes.ConditionalPredicate>
+  >(predicates, schema, {
+    stripUnknown: true,
+  })
+  return validatedPredicates
+}
+
 export {
   validateWithFormSchema,
   validateWithElementSchema,
   validateWithPageElementSchema,
+  validateConditionalPredicates,
 }
