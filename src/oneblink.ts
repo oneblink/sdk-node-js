@@ -1,4 +1,4 @@
-import generateClasses from './classes'
+import generateClasses, { SendEmailOptions, SendEmailResult } from './classes'
 import { ONEBLINK } from './lib/tenant-configuration'
 
 const {
@@ -9,6 +9,18 @@ const {
   Organisations,
   TeamMembers,
   PDF,
+  sendEmail,
 } = generateClasses(ONEBLINK)
 
-export { Forms, FormsApps, Jobs, Keys, Organisations, TeamMembers, PDF }
+export {
+  Forms,
+  FormsApps,
+  Jobs,
+  Keys,
+  Organisations,
+  TeamMembers,
+  PDF,
+  sendEmail,
+  SendEmailOptions,
+  SendEmailResult,
+}

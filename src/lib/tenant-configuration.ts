@@ -1,4 +1,7 @@
-export const ONEBLINK = {
+import { TenantConfiguration } from './types'
+
+export const ONEBLINK: TenantConfiguration = {
+  awsRegion: 'ap-southeast-2',
   test: {
     jwtIssuer:
       'https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_E03xBaafT',
@@ -13,7 +16,8 @@ export const ONEBLINK = {
   },
 }
 
-export const CIVICPLUS = {
+export const CIVICPLUS: TenantConfiguration = {
+  awsRegion: 'us-east-2',
   test: {
     jwtIssuer:
       'https://cognito-idp.us-east-2.amazonaws.com/us-east-2_e2gd0LSVp',

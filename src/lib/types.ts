@@ -33,16 +33,21 @@ export type BaseSearchResult = {
 }
 
 type TenantBase = {
+  awsRegion: string
+}
+
+type TenantEnvironment = {
   apiOrigin: string
   pdfOrigin: string
   jwtIssuer: string
 }
 
-export type TenantConfiguration = {
-  test: TenantBase
-  prod: TenantBase
+export type TenantConfiguration = TenantBase & {
+  test: TenantEnvironment
+  prod: TenantEnvironment
 }
 
-export type Tenant = TenantBase & {
-  jwksInstance: jwksClient.JwksClient
-}
+export type Tenant = TenantBase &
+  TenantEnvironment & {
+    jwksInstance: jwksClient.JwksClient
+  }
