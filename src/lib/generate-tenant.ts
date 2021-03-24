@@ -11,6 +11,7 @@ export default function generateTenant(
     : tenantConfiguration.prod.jwtIssuer
 
   return {
+    awsRegion: tenantConfiguration.awsRegion,
     pdfOrigin: isTest
       ? tenantConfiguration.test.pdfOrigin
       : tenantConfiguration.prod.pdfOrigin,
