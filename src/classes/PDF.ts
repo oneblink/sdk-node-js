@@ -1,4 +1,5 @@
 import { URLSearchParams } from 'url'
+import { PDFTypes } from '@oneblink/types'
 import OneBlinkAPI from '../lib/one-blink-api'
 import { ConstructorOptions, Tenant } from '../lib/types'
 
@@ -47,7 +48,26 @@ export default (tenant: Tenant) =>
         method: 'POST',
         path: `/forms/${formId}/submissions/${submissionId}/pdf-document?${urlSearchParams.toString()}`,
         headers: {
-          'Content-Type': `application/pdf`,
+          Accept: `application/pdf`,
+        },
+      })
+
+      return response.buffer()
+    }
+
+    async generatePDF(options: PDFTypes.GeneratePDFOptions): Promise<Buffer> {
+      if (!options || !options.body || !options.body.html) {
+        throw new TypeError('Must supply "options.body.html" as a string')
+      }
+
+      const response = await super.request({
+        origin: this.tenant.pdfOrigin,
+        method: 'POST',
+        path: '/pdf-document',
+        body: JSON.stringify(options),
+        headers: {
+          Accept: `application/pdf`,
+          'Content-Type': `application/json`,
         },
       })
 
