@@ -37,7 +37,7 @@ await OneBlink.sendEmail({
 ```json
 {
   "envelope": {
-    "to": ["matt@oneblink.io"],
+    "to": ["email@example.com"],
     "from": {
       "address": "noreply@example.com",
       "name": "No Reply"
