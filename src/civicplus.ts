@@ -1,4 +1,4 @@
-import generateClasses from './classes'
+import generateClasses, { SendEmailOptions, SendEmailResult } from './classes'
 import { CIVICPLUS } from './lib/tenant-configuration'
 
 const {
@@ -21,4 +21,6 @@ export {
   TeamMembers,
   PDF,
   sendEmail,
+  SendEmailOptions,
+  SendEmailResult,
 }
