@@ -15,7 +15,7 @@ await OneBlink.sendEmail({
     name: 'No Reply',
   },
   to: ['email@example.com'],
-  cs: ['you@example.com'],
+  cc: ['you@example.com'],
   bcc: ['not-you@example.com'],
   attachments: [
     {
