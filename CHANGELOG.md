@@ -7,11 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.7] - 2021-03-31
+
 ### Added
 
 - [Sending Emails](./docs/sendEmail.md)
 - [PDF class](./docs/pdf.md)
 - [`validateConditionalPredicates()`](./docs/forms.md#validateconditionalpredicates) function
+
+### Dependencies
+
+- update [aws-sdk](https://www.npmjs.com/package/aws-sdk) to [2.876.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.876.0) (from [2.865.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.865.0))
+
+- update [jwks-rsa](https://www.npmjs.com/package/jwks-rsa) to [2.0.2](https://github.com/auth0/node-jwks-rsa/releases/tag/v2.0.2) (from [2.0.1](https://github.com/auth0/node-jwks-rsa/releases/tag/v2.0.1))
+
+- depend upon [nodemailer](https://www.npmjs.com/package/nodemailer) [6.5.0](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md)
 
 ## [0.9.6] - 2021-03-23
 
