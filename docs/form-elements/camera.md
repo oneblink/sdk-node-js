@@ -12,6 +12,7 @@ Allow the user to take a photo using native camera functionality (or select an e
 | `name`                      | Yes      | `string`  |            | The key that will be assigned a value in the submission data when the form is submitted.    |
 | `label`                     | Yes      | `string`  |            | Display text presented to the user above the input by default.                              |
 | `required`                  | Yes      | `boolean` | `false`    | Determine if this input requires a value entered by the user (`true`) or not (`false`).     |
+| `hint`                      | No       | `string`  |            | A hint triggered by an icon tooltip to be displayed when hovering beside the element label. |
 | `includeTimestampWatermark` | no       | `boolean` | `false`    | Whether a watermark with a timestamp should be placed on images captured with this element. |
 
 Camera element also inherits the properties of the following:

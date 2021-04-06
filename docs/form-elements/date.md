@@ -11,6 +11,7 @@ Allow the user to select a date. Submission data will be in [ISO_8601 Timestamp]
 | `type`             | Yes      | `string`  | `'date'` | The type of Form Element.                                                                                                                   |
 | `name`             | Yes      | `string`  |          | The key that will be assigned a value in the submission data when the form is submitted.                                                    |
 | `label`            | Yes      | `string`  |          | Display text presented to the user above the input by default.                                                                              |
+| `hint`             | No       | `string`  |          | A hint triggered by an icon tooltip to be displayed when hovering beside the element label.                                                 |
 | `defaultValue`     | No       | `string`  |          | A default value when the form is opened.                                                                                                    |
 | `placeholderValue` | No       | `string`  |          | The content to appear in the form control when the form control is empty.                                                                   |
 | `required`         | Yes      | `boolean` | `false`  | Determine if this input requires a date selected by the user (`true`) or not (`false`).                                                     |
