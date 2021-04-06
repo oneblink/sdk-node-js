@@ -2,6 +2,7 @@ import Joi from 'joi'
 
 const base64DataRegex = /<[^>]*src="data:([a-zA-Z]*)\/([a-zA-Z]*);base64,([^"]*)".*>/m
 
+const addressIntegrationTypes = ['geoscapeAddress', 'pointAddress']
 const userInputTypes = [
   'checkboxes',
   'date',
@@ -17,8 +18,8 @@ const userInputTypes = [
   'email',
   'telephone',
   'autocomplete',
-  'geoscapeAddress',
   'compliance',
+  ...addressIntegrationTypes,
 ]
 
 const elementTypes = [
@@ -709,8 +710,8 @@ const elementSchema = Joi.object().keys({
       'barcodeScanner',
       'date',
       'datetime',
-      'geoscapeAddress',
       'time',
+      ...addressIntegrationTypes,
     ]),
     then: Joi.string().label('Form Element placeholder value'),
     otherwise: Joi.any().strip(),
@@ -725,9 +726,15 @@ const elementSchema = Joi.object().keys({
     otherwise: Joi.any().strip(),
   }),
 
-  // Geoscape Address
+  // Address integration filters
   stateTerritoryFilter: Joi.when('type', {
-    is: 'geoscapeAddress',
+    is: Joi.only([addressIntegrationTypes]),
+    then: Joi.array().items(Joi.string()),
+    otherwise: Joi.any().strip(),
+  }),
+  // ONLY FOR `pointAddress`
+  addressTypeFilter: Joi.when('type', {
+    is: 'pointAddress',
     then: Joi.array().items(Joi.string()),
     otherwise: Joi.any().strip(),
   }),
