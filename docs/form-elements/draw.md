@@ -6,12 +6,13 @@
 
 Allow the user to draw a sketch (usually used to submit signatures).
 
-| Property   | Required | Type      | Default  | Description                                                                              |
-| ---------- | -------- | --------- | -------- | ---------------------------------------------------------------------------------------- |
-| `type`     | Yes      | `string`  | `'draw'` | The type of Form Element.                                                                |
-| `name`     | Yes      | `string`  |          | The key that will be assigned a value in the submission data when the form is submitted. |
-| `label`    | Yes      | `string`  |          | Display text presented to the user above the input by default.                           |
-| `required` | Yes      | `boolean` | `false`  | Determine if this input requires a value drawn by the user (`true`) or not (`false`).    |
+| Property   | Required | Type      | Default  | Description                                                                                 |
+| ---------- | -------- | --------- | -------- | ------------------------------------------------------------------------------------------- |
+| `type`     | Yes      | `string`  | `'draw'` | The type of Form Element.                                                                   |
+| `name`     | Yes      | `string`  |          | The key that will be assigned a value in the submission data when the form is submitted.    |
+| `label`    | Yes      | `string`  |          | Display text presented to the user above the input by default.                              |
+| `hint`     | No       | `string`  |          | A hint triggered by an icon tooltip to be displayed when hovering beside the element label. |
+| `required` | Yes      | `boolean` | `false`  | Determine if this input requires a value drawn by the user (`true`) or not (`false`).       |
 
 Draw element also inherits the properties of the following:
 

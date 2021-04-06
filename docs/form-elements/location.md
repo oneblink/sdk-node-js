@@ -11,6 +11,7 @@ Allow the user to select GPS coordinates on an interactive map.
 | `type`   | Yes      | `string` | `'location'` | The type of Form Element.                                                                                    |
 | `name`   | Yes      | `string` |              | The key that will be assigned a value in the format below in the submission data when the form is submitted. |
 | `label`  | Yes      | `string` |              | Display text presented to the user above the map by default.                                                 |
+| `hint`   | No       | `string` |              | A hint triggered by an icon tooltip to be displayed when hovering beside the element label.                  |
 
 Location element also inherits the properties of the following:
 
