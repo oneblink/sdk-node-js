@@ -28,6 +28,7 @@ The OneBlink Form Definition allows for multiple different types of Form Element
 - [Location](./location.md)
 - [Number](./number.md)
 - [Page](./page.md)
+- [Point Address](./point-address.md)
 - [Radio](./radio.md)
 - [Repeatable Set](./repeatable-set.md)
 - [Select](./select.md)
