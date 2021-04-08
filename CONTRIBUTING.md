@@ -21,7 +21,13 @@ before you import the SDK
 1. Checkout `master` and get the latest code
 
    ```
-   git checkout master && git pull
+   git checkout master
+   ```
+
+1. Get the latest code
+
+   ```
+   git pull
    ```
 
 1. Bump the version and create a release commit
@@ -33,7 +39,13 @@ before you import the SDK
 1. Push changes to the `master` branch
 
    ```
-   git push && git push --tags
+   git push
+   ```
+
+1. Push new tag
+
+   ```
+   git push --tags
    ```
 
 ## Production Release Process
@@ -41,7 +53,13 @@ before you import the SDK
 1. Checkout `master` and get the latest code
 
    ```
-   git checkout master && git pull
+   git checkout master
+   ```
+
+1. Get the latest code
+
+   ```
+   git pull
    ```
 
 1. Run CLI `npx package-diff-summary {last-tag}`
@@ -50,10 +68,16 @@ before you import the SDK
 
 1. Update the [Changelog](./CHANGELOG.md) by adding `## [x.x.x] - YYYY-MM-DD` under `## Unreleased`
 
+1. Stage changes
+
+   ```
+   git add -A
+   ```
+
 1. Commit changes to the `master` branch
 
    ```
-   git add -A && git commit -m "[CHANGELOG] x.x.x"
+   git commit -m "[CHANGELOG] x.x.x"
    ```
 
 1. Bump the version and create a release commit
@@ -65,5 +89,11 @@ before you import the SDK
 1. Push changes to the `master` branch
 
    ```
-   git push && git push --tags
+   git push
+   ```
+
+1. Push new tag
+
+   ```
+   git push --tags
    ```
