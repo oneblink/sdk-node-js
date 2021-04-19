@@ -34,6 +34,7 @@
 | `notificationEmailAddresses` | No       | `string[]`                                        | Array of emails addresses to be notified when an error occurs in processing submission events                                |
 | `oAuthClientId`              | Yes      | `string`                                          | The identifier of the OAuth Client for the forms app **(Do not change this)**                                                |
 | `hasSamlIdentityProvider`    | No       | `boolean`                                         | True when using a SAML identity provider                                                                                     |
+| `isClientLoggingEnabled`     | No       | `boolean`                                         | Whether the forms app has client logging enabled                                                                             |
 
 ## RetrievedFormsApp
 
@@ -55,6 +56,7 @@ This is the schema that will be returned when creating, updating or getting a fo
 | `hasSamlIdentityProvider`    | Yes      | `boolean`                                         | True when using a SAML identity provider                                                                                     |
 | `styles`                     | Yes      | `FormsAppStyles`                                  | Forms App custom styles and menu items                                                                                       |
 | `hostname`                   | Yes      | `string`                                          | The full hostname of the Forms App, including the `slug` property                                                            |
+| `isClientLoggingEnabled`     | No       | `boolean`                                         | Whether the forms app has client logging enabled                                                                             |
 | `createdAt`                  | Yes      | `string`                                          | The time the forms app was created, represented by an ISO date                                                               |
 | `updatedAt`                  | Yes      | `string`                                          | The time the forms app was last updated, represented by an ISO date                                                          |
 
@@ -104,7 +106,8 @@ This is the schema that will be returned when creating, updating or getting a fo
     "body": "My Splash Screen"
   },
   "notificationEmailAddresses": ["emailaddress1@gmail.com", "emailaddress2@gmail.com"],
-  "oAuthClientId": "123456789012abcdefghijkl"
+  "oAuthClientId": "123456789012abcdefghijkl",
+  "isClientLoggingEnabled": false
 }
 ```
 
@@ -154,6 +157,7 @@ This is the schema that will be returned when creating, updating or getting a fo
       }
     ]
   },
+  "isClientLoggingEnabled": false,
   "createdAt": "2021-02-08 12:02:23",
   "updatedAt": "2021-02-08 12:46:54"
 }

@@ -268,7 +268,8 @@ formsAppsSDK.getFormsApp(formsAppId).then((formsApp) => {
   "organisationId": "ABCDEFGHIJKL123456789012",
   "formsAppEnvironmentId": 1,
   "formIds": [],
-  "notificationEmailAddresses": ["support@organisation.com"]
+  "notificationEmailAddresses": ["support@organisation.com"],
+  "isClientLoggingEnabled": false
 }
 ```
 
