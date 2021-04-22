@@ -7,9 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Updated
+### Added
 
-- Updated forms app docs with `isClientLoggingEnabled` prop
+- `isClientLoggingEnabled` to forms app docs
+- `zoom` property to `location` form element submission data docs
 
 ## [0.9.8] - 2021-04-15
 
