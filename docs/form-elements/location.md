@@ -34,6 +34,7 @@ Location element also inherits the properties of the following:
 ```JSON
 {
   "latitude": -33.426765,
-  "longitude": 151.34375
+  "longitude": 151.34375,
+  "zoom": 15
 }
 ```
