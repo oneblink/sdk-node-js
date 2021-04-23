@@ -603,6 +603,13 @@ const elementSchema = Joi.object().keys({
       }),
     otherwise: Joi.any().strip(),
   }),
+  displayAsCurrency: Joi.when('type', {
+    is: Joi.only('calculation'),
+    then: Joi.boolean()
+      .label('Form Element - Display Calculation as Currency')
+      .allow(null),
+    otherwise: Joi.any().strip(),
+  }),
 
   // Data lookup configuration
   isDataLookup: Joi.when('type', {
