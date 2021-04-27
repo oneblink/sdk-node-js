@@ -293,6 +293,7 @@ describe('Valid Form Schema with Pages', () => {
               type: 'calculation',
               calculation: '(69*69)+58008',
               defaultValue: '<p><b>{result}<b></p>',
+              displayAsCurrency: true,
             },
             {
               id: '2424f4ea-35a0-47ee-9c22-ef8e16cb7103',
