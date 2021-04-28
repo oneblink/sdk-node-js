@@ -9,10 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `isClientLoggingEnabled` to forms app docs
-- `zoom` property to `location` form element submission data docs
 - `displayAsCurrency` to form element schema
 - `storageType` to form element schema
+
+## [0.9.9] - 2021-04-27
+
+### Added
+
+- `isClientLoggingEnabled` to forms app docs
+- `zoom` property to `location` form element submission data docs
 
 ## [0.9.8] - 2021-04-15
 
