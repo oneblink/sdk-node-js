@@ -745,6 +745,16 @@ const elementSchema = Joi.object().keys({
     then: Joi.array().items(Joi.string()),
     otherwise: Joi.any().strip(),
   }),
+
+  // Binary storage option
+  storageType: Joi.when('type', {
+    is: Joi.only(['camera', 'draw', 'files']),
+    then: Joi.string()
+      .label('Storage type')
+      .allow(null)
+      .valid(['legacy', 'public', 'private']),
+    otherwise: Joi.any().strip(),
+  }),
 })
 
 const SubmissionEventsSchema = Joi.object().keys({

@@ -351,6 +351,7 @@ describe('Valid Form Schema with Pages', () => {
               type: 'files',
               minEntries: 1,
               maxEntries: 2,
+              storageType: 'public',
             },
             {
               id: 'b527bcea-dc84-477f-a5ee-d34abfec92fb',
