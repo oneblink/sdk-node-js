@@ -25,7 +25,7 @@ Radio element also inherits the properties of the following:
 
 ### Example Form Element
 
-```JSON
+```json
 {
   "id": "b1311ae0-6bb7-11e9-a923-1681be663d3e",
   "type": "radio",
@@ -53,7 +53,6 @@ Radio element also inherits the properties of the following:
       "value": "n/a",
       "label": "N/A",
       "colour": "#212121"
-
     }
   ]
 }
@@ -61,8 +60,10 @@ Radio element also inherits the properties of the following:
 
 ### Example Submission Data
 
-```JSON
+```json
 {
-  "[element.name]": "pass"
+  "submission": {
+    "[element.name]": "pass"
+  }
 }
 ```

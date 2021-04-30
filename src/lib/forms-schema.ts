@@ -748,10 +748,9 @@ const elementSchema = Joi.object().keys({
 
   // Binary storage option
   storageType: Joi.when('type', {
-    is: Joi.only(['camera', 'draw', 'files']),
+    is: Joi.only(['camera', 'draw', 'files', 'compliance']),
     then: Joi.string()
       .label('Storage type')
-      .allow(null)
       .valid(['legacy', 'public', 'private']),
     otherwise: Joi.any().strip(),
   }),

@@ -20,7 +20,7 @@ Location element also inherits the properties of the following:
 
 ### Example
 
-```JSON
+```json
 {
   "id": "b1311ae0-6bb7-11e9-a923-1681be663d3e",
   "type": "location",
@@ -29,12 +29,16 @@ Location element also inherits the properties of the following:
 }
 ```
 
-### Location Value Format
+### Example Submission Data
 
-```JSON
+```json
 {
-  "latitude": -33.426765,
-  "longitude": 151.34375,
-  "zoom": 15
+  "submission": {
+    "[element.name]": {
+      "latitude": -33.426765,
+      "longitude": 151.34375,
+      "zoom": 15
+    }
+  }
 }
 ```
