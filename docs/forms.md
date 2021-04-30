@@ -6,6 +6,8 @@
 - [`generateSubmissionDataUrl()`](#generatesubmissiondataurl)
 - [`getForm()`](#getform)
 - [`getSubmissionData()`](#getsubmissiondata)
+- [`getSubmissionAttachment()`](#getsubmissionattachment)
+- [`streamSubmissionAttachment()`](#streamsubmissionattachment)
 - [`search()`](#search)
 - [`searchSubmissions()`](#searchsubmissions)
 - [`createForm()`](#createform)
@@ -194,6 +196,77 @@ forms
     "webdriver": false
   }
 }
+```
+
+## `getSubmissionAttachment()`
+
+### Example
+
+```javascript
+const fs = require('fs')
+const util = require('util')
+
+const writeFileAsync = util.promisify(fs.writeFile)
+
+async function run() {
+  const formId = 1
+  const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+  const buffer = await forms.getSubmissionAttachment(formId, attachmentId)
+
+  await writeFileAsync('file.png', buffer)
+}
+```
+
+#### Parameters
+
+| Parameter      | Required | Type     | Description                                             |
+| -------------- | -------- | -------- | ------------------------------------------------------- |
+| `formId`       | Yes      | `number` | The exact id of the form the attachment was uploaded on |
+| `attachmentId` | Yes      | `string` | The attachment identifier from the form submission data |
+
+### Result (Resolved Promise)
+
+```javascript
+Buffer
+```
+
+## `streamSubmissionAttachment()`
+
+### Example
+
+```javascript
+const fs = require('fs')
+const util = require('util')
+const stream = require('stream')
+
+const finishedAsync = util.promisify(stream.finished)
+
+async function run() {
+  const formId = 1
+  const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+  const readableStream = await forms.streamSubmissionAttachment(
+    3096,
+    '19496b8c-2c65-4dba-abc6-2968e599fc4f',
+  )
+
+  const writableStream = fs.createWriteStream('file.png')
+  readableStream.pipe(writableStream)
+  await finishedAsync(readableStream)
+  writableStream.end()
+}
+```
+
+#### Parameters
+
+| Parameter      | Required | Type     | Description                                             |
+| -------------- | -------- | -------- | ------------------------------------------------------- |
+| `formId`       | Yes      | `number` | The exact id of the form the attachment was uploaded on |
+| `attachmentId` | Yes      | `string` | The attachment identifier from the form submission data |
+
+### Result (Resolved Promise)
+
+```javascript
+Stream
 ```
 
 ## `getDraftData()`

@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `displayAsCurrency` to form element schema
 - `storageType` to form element schema
+- [`getSubmissionAttachment()`](./docs/forms.md#getsubmissionattachment)
+- [`streamSubmissionAttachment()`](./docs/forms.md#streamsubmissionattachment)
 
 ## [0.9.9] - 2021-04-27
 

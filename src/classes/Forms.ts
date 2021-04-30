@@ -1,3 +1,4 @@
+import { Stream } from 'stream'
 import generateFormUrl from '../lib/generate-form-url'
 import generateJWT from '../lib/generate-jwt'
 import getSubmissionData from '../lib/retrieve-submission-data'
@@ -215,6 +216,47 @@ export default (tenant: Tenant) =>
 
       const credentials = await super.postEmptyRequest<FormRetrievalData>(url)
       return await getSubmissionData(credentials)
+    }
+
+    async _getSubmissionAttachmentResponse(
+      formId?: unknown,
+      attachmentId?: unknown,
+    ) {
+      if (typeof formId !== 'number') {
+        throw new TypeError('Must supply "formId" as a number')
+      }
+      if (typeof attachmentId !== 'string') {
+        throw new TypeError('Must supply "attachmentId" as a string')
+      }
+
+      const response = await this.request({
+        origin: this.tenant.apiOrigin,
+        method: 'GET',
+        path: `/submissions/${formId}/attachments/${attachmentId}`,
+      })
+      return response
+    }
+
+    async streamSubmissionAttachment(
+      formId: number,
+      attachmentId: string,
+    ): Promise<Stream> {
+      const response = await this._getSubmissionAttachmentResponse(
+        formId,
+        attachmentId,
+      )
+      return response.body
+    }
+
+    async getSubmissionAttachment(
+      formId: number,
+      attachmentId: string,
+    ): Promise<Buffer> {
+      const response = await this._getSubmissionAttachmentResponse(
+        formId,
+        attachmentId,
+      )
+      return await response.buffer()
     }
 
     search(searchParams?: FormsSearchOptions): Promise<FormsSearchResult> {
