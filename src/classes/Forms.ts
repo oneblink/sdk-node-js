@@ -237,7 +237,7 @@ export default (tenant: Tenant) =>
       return response
     }
 
-    async streamSubmissionAttachment(
+    async getSubmissionAttachmentStream(
       formId: number,
       attachmentId: string,
     ): Promise<Stream> {
@@ -248,7 +248,7 @@ export default (tenant: Tenant) =>
       return response.body
     }
 
-    async getSubmissionAttachment(
+    async getSubmissionAttachmentBuffer(
       formId: number,
       attachmentId: string,
     ): Promise<Buffer> {

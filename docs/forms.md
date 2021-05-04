@@ -6,8 +6,8 @@
 - [`generateSubmissionDataUrl()`](#generatesubmissiondataurl)
 - [`getForm()`](#getform)
 - [`getSubmissionData()`](#getsubmissiondata)
-- [`getSubmissionAttachment()`](#getsubmissionattachment)
-- [`streamSubmissionAttachment()`](#streamsubmissionattachment)
+- [`getSubmissionAttachmentBuffer()`](#getsubmissionattachmentbuffer)
+- [`getSubmissionAttachmentStream()`](#getsubmissionattachmentstream)
 - [`search()`](#search)
 - [`searchSubmissions()`](#searchsubmissions)
 - [`createForm()`](#createform)
@@ -198,7 +198,7 @@ forms
 }
 ```
 
-## `getSubmissionAttachment()`
+## `getSubmissionAttachmentBuffer()`
 
 ### Example
 
@@ -211,7 +211,7 @@ const writeFileAsync = util.promisify(fs.writeFile)
 async function run() {
   const formId = 1
   const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
-  const buffer = await forms.getSubmissionAttachment(formId, attachmentId)
+  const buffer = await forms.getSubmissionAttachmentBuffer(formId, attachmentId)
 
   await writeFileAsync('file.png', buffer)
 }
@@ -230,7 +230,7 @@ async function run() {
 Buffer
 ```
 
-## `streamSubmissionAttachment()`
+## `getSubmissionAttachmentStream()`
 
 ### Example
 
@@ -244,7 +244,7 @@ const finishedAsync = util.promisify(stream.finished)
 async function run() {
   const formId = 1
   const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
-  const readableStream = await forms.streamSubmissionAttachment(
+  const readableStream = await forms.getSubmissionAttachmentStream(
     3096,
     '19496b8c-2c65-4dba-abc6-2968e599fc4f',
   )
