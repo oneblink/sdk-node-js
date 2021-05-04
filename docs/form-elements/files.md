@@ -13,7 +13,7 @@ Allow the user upload a array of files from their device.
 | `label`       | Yes      | `string`  |           | Display text presented to the user above the input by default.                              |
 | `hint`        | No       | `string`  |           | A hint triggered by an icon tooltip to be displayed when hovering beside the element label. |
 | `minEntries`  | No       | `string`  |           | Minimum number of files required                                                            |
-| `storageType` | no       | `boolean` | `false`   | How the files uploaded by a user will be stored: `private`, `public`, `legacy`              |
+| `storageType` | no       | `string` |    | How the files uploaded by a user will be stored: `private`, `public`, `legacy`              |
 
 Files element also inherits the properties of the following:
 

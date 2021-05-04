@@ -13,7 +13,7 @@ Allow the user to draw a sketch (usually used to submit signatures).
 | `label`       | Yes      | `string`  |          | Display text presented to the user above the input by default.                              |
 | `hint`        | No       | `string`  |          | A hint triggered by an icon tooltip to be displayed when hovering beside the element label. |
 | `required`    | Yes      | `boolean` | `false`  | Determine if this input requires a value drawn by the user (`true`) or not (`false`).       |
-| `storageType` | no       | `boolean` | `false`  | How the drawing will be stored: `private`, `public`, `legacy`                               |
+| `storageType` | no       | `string` |   | How the drawing will be stored: `private`, `public`, `legacy`                               |
 
 Draw element also inherits the properties of the following:
 
