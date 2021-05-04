@@ -1,3 +1,5 @@
+import AWS from 'aws-sdk'
+import { Stream } from 'stream'
 import generateFormUrl from '../lib/generate-form-url'
 import generateJWT from '../lib/generate-jwt'
 import getSubmissionData from '../lib/retrieve-submission-data'
@@ -7,7 +9,12 @@ import { validateWithFormSchema } from '../lib/forms-validation'
 import generateFormElement from '../lib/generate-form-element'
 import generatePageElement from '../lib/generate-page-element'
 import { encryptUserToken, decryptUserToken } from '../lib/user-token-helpers'
-import { FormsAppsTypes, FormTypes, SubmissionTypes } from '@oneblink/types'
+import {
+  AWSTypes,
+  FormsAppsTypes,
+  FormTypes,
+  SubmissionTypes,
+} from '@oneblink/types'
 import { validateConditionalPredicates } from '../lib/forms-validation'
 import {
   BaseSearchResult,
@@ -215,6 +222,108 @@ export default (tenant: Tenant) =>
 
       const credentials = await super.postEmptyRequest<FormRetrievalData>(url)
       return await getSubmissionData(credentials)
+    }
+
+    async _getSubmissionAttachmentResponse(
+      formId?: unknown,
+      attachmentId?: unknown,
+    ) {
+      if (typeof formId !== 'number') {
+        throw new TypeError('Must supply "formId" as a number')
+      }
+      if (typeof attachmentId !== 'string') {
+        throw new TypeError('Must supply "attachmentId" as a string')
+      }
+
+      const response = await this.request({
+        origin: this.tenant.apiOrigin,
+        method: 'GET',
+        path: `/submissions/${formId}/attachments/${attachmentId}`,
+      })
+      return response
+    }
+
+    async getSubmissionAttachmentStream(
+      formId: number,
+      attachmentId: string,
+    ): Promise<Stream> {
+      const response = await this._getSubmissionAttachmentResponse(
+        formId,
+        attachmentId,
+      )
+      return response.body
+    }
+
+    async getSubmissionAttachmentBuffer(
+      formId: number,
+      attachmentId: string,
+    ): Promise<Buffer> {
+      const response = await this._getSubmissionAttachmentResponse(
+        formId,
+        attachmentId,
+      )
+      return await response.buffer()
+    }
+
+    async createSubmissionAttachment({
+      formId,
+      body,
+      fileName,
+      contentType,
+      isPrivate,
+      username,
+    }: {
+      formId: number
+      body: Stream | Buffer | string
+      fileName: string
+      contentType: string
+      isPrivate: boolean
+      username?: string
+    }) {
+      const result = await super.postRequest<
+        { username?: string },
+        AWSTypes.FormAttachmentS3Credentials
+      >(`/forms/${formId}/upload-attachment-credentials`, {
+        username,
+      })
+
+      const s3 = new AWS.S3({
+        region: result.s3.region,
+        accessKeyId: result.credentials.AccessKeyId,
+        secretAccessKey: result.credentials.SecretAccessKey,
+        sessionToken: result.credentials.SessionToken,
+      })
+
+      await s3
+        .upload(
+          {
+            ServerSideEncryption: 'AES256',
+            Expires: new Date(
+              new Date().setFullYear(new Date().getFullYear() + 1),
+            ), // Max 1 year
+            CacheControl: 'max-age=31536000', // Max 1 year(365 days),
+            Bucket: result.s3.bucket,
+            Key: result.s3.key,
+            ContentDisposition: `attachment; filename="${fileName}"`,
+            ContentType: contentType,
+            ACL: isPrivate ? 'private' : 'public-read',
+            Body: body,
+          },
+          {
+            partSize: 5 * 1024 * 1024,
+            queueSize: 5,
+          },
+        )
+        .promise()
+
+      return {
+        id: result.attachmentDataId,
+        contentType,
+        fileName,
+        isPrivate,
+        url: `${this.tenant.apiOrigin}/${result.s3.key}`,
+        s3: result.s3,
+      }
     }
 
     search(searchParams?: FormsSearchOptions): Promise<FormsSearchResult> {

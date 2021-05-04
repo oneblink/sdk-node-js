@@ -15,6 +15,7 @@ Allow the user to select a single option from a list of options displayed as but
 | `defaultValue` | Yes      | `string`  |                | The identifier of an option to be selected when the form is opened.                         |
 | `required`     | Yes      | `boolean` | `false`        | Determine if this element requires an option to be selected (`true`) or not (`false`).      |
 | `readOnly`     | Yes      | `boolean` | `false`        | Determine if this selected option be changed by the user (`false`) or not (`true`).         |
+| `storageType`  | no       | `string` |        | How the media uploaded by a user will be stored: `private`, `public`, `legacy`              |
 
 Compliance element also inherits the properties of the following:
 
@@ -24,12 +25,13 @@ Compliance element also inherits the properties of the following:
 
 ### Example Element
 
-```JSON
+```json
 {
   "id": "b1311ae0-6bb7-11e9-a923-1681be663d3e",
   "type": "compliance",
   "name": "result",
   "label": "How did it go?",
+  "storageType": "private",
   "defaultValue": "954af543-f500-4476-9403-f2ebc6c2260e",
   "required": true,
   "readOnly": false,
@@ -58,17 +60,48 @@ Compliance element also inherits the properties of the following:
 
 ### Example Submission Data
 
-```JSON
+#### Private/Public Storage
+
+```json
 {
-  "[element.name]": {
-    "value": "pass",
-    "notes": "This is why it passed",
-    "files": [
-      {
-        "fileName": "dot.png",
-        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAIElEQVQYV2NkYGBoYGBgqGdgYGhkZGBg+M8ABSAOXAYATFcEA8STCz8AAAAASUVORK5CYII="
-      }
-    ]
+  "submission": {
+    "[element.name]": {
+      "value": "pass",
+      "notes": "This is why it passed",
+      "files": [
+        {
+          "s3": {
+            "region": "ap-southeast-2",
+            "bucket": "customer.forms.oneblink.io",
+            "key": "submissions/1/attachments/44cdee6f-edbd-4620-aaf5-df25ce976e43"
+          },
+          "url": "https://auth-api.blinkm.io/submissions/1/attachments/44cdee6f-edbd-4620-aaf5-df25ce976e43",
+          "contentType": "image/png",
+          "fileName": "dot.png",
+          "id": "44cdee6f-edbd-4620-aaf5-df25ce976e43",
+          "isPrivate": true
+        }
+      ]
+    }
+  }
+}
+```
+
+#### Legacy Storage (Deprecated)
+
+```json
+{
+  "submission": {
+    "[element.name]": {
+      "value": "pass",
+      "notes": "This is why it passed",
+      "files": [
+        {
+          "fileName": "dot.png",
+          "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAIElEQVQYV2NkYGBoYGBgqGdgYGhkZGBg+M8ABSAOXAYATFcEA8STCz8AAAAASUVORK5CYII="
+        }
+      ]
+    }
   }
 }
 ```

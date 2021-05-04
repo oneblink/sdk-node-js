@@ -6,6 +6,9 @@
 - [`generateSubmissionDataUrl()`](#generatesubmissiondataurl)
 - [`getForm()`](#getform)
 - [`getSubmissionData()`](#getsubmissiondata)
+- [`createSubmissionAttachment()`](#createsubmissionattachment)
+- [`getSubmissionAttachmentBuffer()`](#getsubmissionattachmentbuffer)
+- [`getSubmissionAttachmentStream()`](#getsubmissionattachmentstream)
 - [`search()`](#search)
 - [`searchSubmissions()`](#searchsubmissions)
 - [`createForm()`](#createform)
@@ -194,6 +197,141 @@ forms
     "webdriver": false
   }
 }
+```
+
+## `createSubmissionAttachment()`
+
+### Example
+
+```javascript
+const fs = require('fs')
+const util = require('util')
+
+const readFileAsync = util.promisify(fs.readFile)
+
+async function run() {
+  const formId = 1
+
+  const imageFileName = 'profile-picture.png'
+  const imageBuffer = await readFileAsync(imageFileName)
+  const imageResult = await forms.createSubmissionAttachment({
+    formId,
+    body: imageBuffer,
+    isPrivate: false,
+    contentType: 'image/png',
+    fileName: imageFileName,
+  })
+
+  const documentFileName = 'secrets.text'
+  const readableStream = fs.createReadStream(documentFileName)
+  const documentResult = await forms.createSubmissionAttachment({
+    formId,
+    isPrivate: true,
+    contentType: 'text/plain',
+    fileName: documentFileName,
+    body: readableStream,
+    username: 'user@example.com',
+  })
+}
+```
+
+#### Parameters
+
+| Parameter             | Required | Type                             | Description                                                                          |
+| --------------------- | -------- | -------------------------------- | ------------------------------------------------------------------------------------ |
+| `options.formId`      | Yes      | `number`                         | The exact id of the form the attachment will be uploaded for                         |
+| `options.isPrivate`   | Yes      | `boolean`                        | Determine if this attachment can be downloaded anonymously (`false`) or not (`true`) |
+| `options.contentType` | Yes      | `string`                         | The attachment's content type                                                        |
+| `options.fileName`    | Yes      | `string`                         | The attachment's file name                                                           |
+| `options.body`        | Yes      | `Buffer` \| `Stream` \| `string` | The attachment's file content to upload                                              |
+| `options.username`    | No       | `string`                         | An optional username to allow a single user to download he attachment file           |
+
+### Result (Resolved Promise)
+
+```json
+{
+  "id": "52c08190-8ddd-41ca-9c01-416de443f111",
+  "contentType": "image/png",
+  "fileName": "dot.png",
+  "isPrivate": false,
+  "url": "https://auth-api.blinkm.io/submissions/1/attachments/52c08190-8ddd-41ca-9c01-416de443f111",
+  "s3": {
+    "bucket": "customer.forms.oneblink.io",
+    "key": "submissions/1/attachments/52c08190-8ddd-41ca-9c01-416de443f111",
+    "region": "ap-southeast-2"
+  }
+}
+```
+
+## `getSubmissionAttachmentBuffer()`
+
+### Example
+
+```javascript
+const fs = require('fs')
+const util = require('util')
+
+const writeFileAsync = util.promisify(fs.writeFile)
+
+async function run() {
+  const formId = 1
+  const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+  const buffer = await forms.getSubmissionAttachmentBuffer(formId, attachmentId)
+
+  await writeFileAsync('file.png', buffer)
+}
+```
+
+#### Parameters
+
+| Parameter      | Required | Type     | Description                                             |
+| -------------- | -------- | -------- | ------------------------------------------------------- |
+| `formId`       | Yes      | `number` | The exact id of the form the attachment was uploaded on |
+| `attachmentId` | Yes      | `string` | The attachment identifier from the form submission data |
+
+### Result (Resolved Promise)
+
+```javascript
+Buffer
+```
+
+## `getSubmissionAttachmentStream()`
+
+### Example
+
+```javascript
+const fs = require('fs')
+const util = require('util')
+const stream = require('stream')
+
+const finishedAsync = util.promisify(stream.finished)
+
+async function run() {
+  const formId = 1
+  const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+  const readableStream = await forms.getSubmissionAttachmentStream(
+    3096,
+    '19496b8c-2c65-4dba-abc6-2968e599fc4f',
+  )
+
+  const writableStream = fs.createWriteStream('file.png')
+  readableStream.pipe(writableStream)
+  await finishedAsync(readableStream)
+  writableStream.end()
+}
+```
+
+#### Parameters
+
+| Parameter      | Required | Type     | Description                                             |
+| -------------- | -------- | -------- | ------------------------------------------------------- |
+| `formId`       | Yes      | `number` | The exact id of the form the attachment was uploaded on |
+| `attachmentId` | Yes      | `string` | The attachment identifier from the form submission data |
+
+### Result (Resolved Promise)
+
+```javascript
+Stream
 ```
 
 ## `getDraftData()`
