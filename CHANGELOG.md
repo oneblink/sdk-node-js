@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [`createSubmissionAttachment()`](./docs/forms.md#createsubmissionattachment)
 - [`getSubmissionAttachmentBuffer()`](./docs/forms.md#getSubmissionAttachmentBuffer)
 - [`getSubmissionAttachmentStream()`](./docs/forms.md#getsubmissionattachmentstream)
+- `author` to submission events schema
 
 ## [0.9.9] - 2021-04-27
 

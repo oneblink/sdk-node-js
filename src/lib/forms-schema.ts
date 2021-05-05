@@ -856,6 +856,12 @@ const SubmissionEventsSchema = Joi.object().keys({
         includeSubmissionIdInPdf: Joi.boolean().label(
           'Form Submission Event - Include Submission ID',
         ),
+        author: Joi.object()
+          .keys({
+            uri: Joi.number().required(),
+            label: Joi.string().required(),
+          })
+          .allow(null),
       }),
     })
     .when('type', {
