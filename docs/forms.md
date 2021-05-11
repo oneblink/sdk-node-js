@@ -310,8 +310,8 @@ async function run() {
   const formId = 1
   const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
   const readableStream = await forms.getSubmissionAttachmentStream(
-    3096,
-    '19496b8c-2c65-4dba-abc6-2968e599fc4f',
+    formId,
+    attachmentId,
   )
 
   const writableStream = fs.createWriteStream('file.png')
