@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.10] - 2021-05-13
+
 ### Added
 
 - `displayAsCurrency` to form element schema
@@ -15,6 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [`getSubmissionAttachmentBuffer()`](./docs/forms.md#getSubmissionAttachmentBuffer)
 - [`getSubmissionAttachmentStream()`](./docs/forms.md#getsubmissionattachmentstream)
 - `author` to submission events schema
+
+### Dependencies
+
+- update [aws-sdk](https://www.npmjs.com/package/aws-sdk) to [2.894.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.894.0) (from [2.876.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.876.0))
+
+- update [jwks-rsa](https://www.npmjs.com/package/jwks-rsa) to [2.0.3](https://github.com/auth0/node-jwks-rsa/releases/tag/v2.0.3) (from [2.0.2](https://github.com/auth0/node-jwks-rsa/releases/tag/v2.0.2))
 
 ## [0.9.9] - 2021-04-27
 
