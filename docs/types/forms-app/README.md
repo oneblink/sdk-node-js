@@ -4,19 +4,20 @@
 
 ## NewFormsApp
 
-| Parameter                    | Required | Type                                              | Description                                                                                                                  |
-| ---------------------------- | -------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `name`                       | Yes      | `string`                                          | Name of the forms app                                                                                                        |
-| `type`                       | Yes      | `string`                                          | Type of the forms app. Valid values are "FORMS_LIST", "TILES", "VOLUNTEER"                                                   |
-| `slug`                       | Yes      | `string`                                          | Unique domain safe text to identify the app                                                                                  |
-| `organisationId`             | Yes      | `string`                                          | The exact organisation identifier the forms app is associated with                                                           |
-| `formsAppEnvironmentId`      | Yes      | `number`                                          | The exact forms app environment identifier the forms app is associated with                                                  |
-| `formIds`                    | Yes      | `number[]`                                        | The identifiers of the forms that are in the forms app. The order of the forms is respected when rendering the list of forms |
-| `pwaSettings`                | Yes      | [FormsAppPwaSettings](./FormsAppPwaSettings.md)   | Forms App progressive web app setting properties                                                                             |
-| `welcomeEmail`               | No       | [FormsAppWelcomeEmail](./FormsAppWelcomeEmail.md) | Forms App custom welcome email properties                                                                                    |
-| `notificationEmailAddresses` | No       | `string[]`                                        | Array of emails addresses to be notified when an error occurs in processing submission events                                |
-| `oAuthClientId`              | No       | `string`                                          | The identifier of the OAuth Client for the forms app                                                                         |
-| `hasSamlIdentityProvider`    | No       | `boolean`                                         | True when using a SAML identity provider                                                                                     |
+| Parameter                      | Required | Type                                              | Description                                                                                                                  |
+| ------------------------------ | -------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `name`                         | Yes      | `string`                                          | Name of the forms app                                                                                                        |
+| `type`                         | Yes      | `string`                                          | Type of the forms app. Valid values are "FORMS_LIST", "TILES", "VOLUNTEER"                                                   |
+| `slug`                         | Yes      | `string`                                          | Unique domain safe text to identify the app                                                                                  |
+| `organisationId`               | Yes      | `string`                                          | The exact organisation identifier the forms app is associated with                                                           |
+| `formsAppEnvironmentId`        | Yes      | `number`                                          | The exact forms app environment identifier the forms app is associated with                                                  |
+| `formIds`                      | Yes      | `number[]`                                        | The identifiers of the forms that are in the forms app. The order of the forms is respected when rendering the list of forms |
+| `pwaSettings`                  | Yes      | [FormsAppPwaSettings](./FormsAppPwaSettings.md)   | Forms App progressive web app setting properties                                                                             |
+| `welcomeEmail`                 | No       | [FormsAppWelcomeEmail](./FormsAppWelcomeEmail.md) | Forms App custom welcome email properties                                                                                    |
+| `notificationEmailAddresses`   | No       | `string[]`                                        | Array of emails addresses to be notified when an error occurs in processing submission events                                |
+| `oAuthClientId`                | No       | `string`                                          | The identifier of the OAuth Client for the forms app                                                                         |
+| `hasSamlIdentityProvider`      | No       | `boolean`                                         | True when using a SAML identity provider                                                                                     |
+| `recaptchaIntegrationDomainId` | No       | `string`                                          | The id of the recaptcha integration to be used                                                                               |
 
 ## FormsApp
 
