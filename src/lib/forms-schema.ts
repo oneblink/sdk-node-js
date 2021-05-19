@@ -412,7 +412,7 @@ const elementSchema = Joi.object().keys({
   // Date and Date+Time
   fromDate: Joi.when('type', {
     is: Joi.only(['date', 'datetime']),
-    then: Joi.date().iso().label('Form Element - From Date').allow(null),
+    then: Joi.date().iso().raw().label('Form Element - From Date').allow(null),
     otherwise: Joi.any().strip(),
   }),
   toDate: Joi.when('type', {
@@ -422,6 +422,7 @@ const elementSchema = Joi.object().keys({
       then: Joi.date()
         .iso()
         .min(Joi.ref('fromDate'))
+        .raw()
         .label('Form Element - To Date'),
     }).allow(null),
     otherwise: Joi.any().strip(),
@@ -891,6 +892,7 @@ const SubmissionEventsSchema = Joi.object().keys({
           .items(Joi.string().guid())
           .unique()
           .allow(null),
+        encryptPdf: Joi.boolean().default(false),
       }),
     }),
   conditionallyExecute: Joi.bool()
