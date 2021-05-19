@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@oneblink/release-cli": "^1.0.0",
-    "@oneblink/types": "github:oneblink/types#ON-12178",
+    "@oneblink/types": "github:oneblink/types",
     "@types/jest": "^26.0.23",
     "@types/joi": "^14.3.4",
     "@types/jsonwebtoken": "^8.5.1",

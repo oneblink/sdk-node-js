@@ -783,10 +783,6 @@ return validatedForm
 | `publishStartDate`                                     | No                                                | `string`                                       | The date and time (in ISO format) a form becomes available.                                     |
 | `publishEndDate`                                       | No                                                | `string`                                       | The date and time (in ISO format) a form becomes unavailable.                                   |
 
-contentTypeName: string,
-encryptedElementIds: ?Array<string>,
-encryptPdf?: boolean,
-
 ### Result
 
 ```json
