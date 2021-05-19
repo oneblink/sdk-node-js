@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `encryptPdf` property to `CP_HCMS` submission event type
+
 ## [0.9.11] - 2021-05-19
 
 ## [0.9.10] - 2021-05-13

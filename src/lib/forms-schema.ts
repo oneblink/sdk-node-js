@@ -891,6 +891,7 @@ const SubmissionEventsSchema = Joi.object().keys({
           .items(Joi.string().guid())
           .unique()
           .allow(null),
+        encryptPdf: Joi.boolean().default(false),
       }),
     }),
   conditionallyExecute: Joi.bool()
