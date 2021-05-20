@@ -12,7 +12,7 @@ export default Joi.object({
   .when(
     Joi.object({
       type: 'text',
-    }),
+    }).unknown(),
     {
       then: TextElement,
     },
@@ -20,7 +20,7 @@ export default Joi.object({
   .when(
     Joi.object({
       type: 'textarea',
-    }),
+    }).unknown(),
     {
       then: TextElement,
     },
@@ -28,7 +28,7 @@ export default Joi.object({
   .when(
     Joi.object({
       type: 'number',
-    }),
+    }).unknown(),
     {
       then: NumberElement,
     },
@@ -36,7 +36,7 @@ export default Joi.object({
   .when(
     Joi.object({
       type: 'text',
-    }),
+    }).unknown(),
     {
       then: TextElement,
     },
@@ -44,7 +44,7 @@ export default Joi.object({
   .when(
     Joi.object({
       type: 'email',
-    }),
+    }).unknown(),
     {
       then: EmailElement,
     },
@@ -52,7 +52,7 @@ export default Joi.object({
   .when(
     Joi.object({
       type: 'telephone',
-    }),
+    }).unknown(),
     {
       then: PhoneElement,
     },
@@ -60,7 +60,7 @@ export default Joi.object({
   .when(
     Joi.object({
       type: 'barcodeScanner',
-    }),
+    }).unknown(),
     {
       then: BarcodeElement,
     },
