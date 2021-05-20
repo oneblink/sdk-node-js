@@ -247,10 +247,10 @@ const elementSchema = Joi.object().keys({
       then: Joi.when(Joi.date().iso(), {
         then: Joi.when('fromDate', {
           is: Joi.date().iso().required(),
-          then: Joi.date().iso().min(Joi.ref('fromDate')),
+          then: Joi.date().iso().raw().min(Joi.ref('fromDate')),
         }).when('toDate', {
           is: Joi.date().iso().required(),
-          then: Joi.date().iso().max(Joi.ref('toDate')),
+          then: Joi.date().iso().raw().max(Joi.ref('toDate')),
         }),
         // @ts-expect-error ???
         otherwise: Joi.only(['NOW']).error(() => {
