@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `toDate` and `fromDate` to return raw data in form schema
+
 ### Added
 
 - `encryptPdf` property to `CP_HCMS` submission event type

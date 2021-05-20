@@ -247,10 +247,10 @@ const elementSchema = Joi.object().keys({
       then: Joi.when(Joi.date().iso(), {
         then: Joi.when('fromDate', {
           is: Joi.date().iso().required(),
-          then: Joi.date().iso().min(Joi.ref('fromDate')),
+          then: Joi.date().iso().raw().min(Joi.ref('fromDate')),
         }).when('toDate', {
           is: Joi.date().iso().required(),
-          then: Joi.date().iso().max(Joi.ref('toDate')),
+          then: Joi.date().iso().raw().max(Joi.ref('toDate')),
         }),
         // @ts-expect-error ???
         otherwise: Joi.only(['NOW']).error(() => {
@@ -412,7 +412,7 @@ const elementSchema = Joi.object().keys({
   // Date and Date+Time
   fromDate: Joi.when('type', {
     is: Joi.only(['date', 'datetime']),
-    then: Joi.date().iso().label('Form Element - From Date').allow(null),
+    then: Joi.date().iso().raw().label('Form Element - From Date').allow(null),
     otherwise: Joi.any().strip(),
   }),
   toDate: Joi.when('type', {
@@ -422,6 +422,7 @@ const elementSchema = Joi.object().keys({
       then: Joi.date()
         .iso()
         .min(Joi.ref('fromDate'))
+        .raw()
         .label('Form Element - To Date'),
     }).allow(null),
     otherwise: Joi.any().strip(),
