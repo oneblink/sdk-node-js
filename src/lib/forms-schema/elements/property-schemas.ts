@@ -215,3 +215,7 @@ export const toDate = Joi.when('fromDate', {
     .raw()
     .label('Form Element - To Date'),
 }).allow(null)
+
+export const storageType = Joi.string()
+  .label('Storage type')
+  .valid(['legacy', 'public', 'private'])
