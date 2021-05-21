@@ -146,7 +146,6 @@ const elementSchema = Joi.object().keys({
       'form',
       'infoPage',
       'page',
-      'heading',
       'html',
       'image',
       'heading',
