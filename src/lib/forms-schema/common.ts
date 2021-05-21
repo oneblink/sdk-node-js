@@ -36,6 +36,12 @@ export const elementTypes = [
   'summary',
 ].sort()
 
+export const CUSTOM_OPTION_TYPE = 'CUSTOM'
+export const DYNAMIC_OPTION_TYPE = 'DYNAMIC'
+export const SEARCH_OPTION_TYPE = 'SEARCH'
+
+export const optionTypes = [CUSTOM_OPTION_TYPE, DYNAMIC_OPTION_TYPE]
+
 export const idSchema = Joi.string().guid().required()
 export const elementIdSchema = idSchema.label('Form Element - Id')
 export const elementNameSchema = Joi.string()
