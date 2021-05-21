@@ -11,6 +11,8 @@ import RadioElement from './RadioElement'
 import CheckboxElement from './CheckboxElement'
 import SelectElement from './SelectElement'
 import AutocompleteElement from './AutocompleteElement'
+import DateElement from './DateElement'
+import TimeElement from './TimeElement'
 
 const typeCase = (type: FormTypes.FormElementType) => {
   return Joi.object({
@@ -49,4 +51,13 @@ export default Joi.object({
   })
   .when(typeCase('autocomplete'), {
     then: AutocompleteElement,
+  })
+  .when(typeCase('date'), {
+    then: DateElement,
+  })
+  .when(typeCase('datetime'), {
+    then: DateElement,
+  })
+  .when(typeCase('time'), {
+    then: TimeElement,
   })
