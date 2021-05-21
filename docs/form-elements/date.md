@@ -20,7 +20,7 @@ Allow the user to select a date. Submission data will be in [ISO_8601 Timestamp]
 | `fromDate`               | No       | `string`  |          | The earliest possible date that can be selected by the user. Must be a string formatted as 'YYYY-MM-DD', or the string 'NOW' to denote that `fromDateDaysOffset` will also be used to dynamically offset the `fromDate` from the time the form is loaded. |
 | `toDate`                 | No       | `string`  |          | The latest possible date that can be selected by the user. Must be a string formatted as 'YYYY-MM-DD', or the string 'NOW' to denote that `toDateDaysOffset` will also be used to dynamically offset the `toDate` from the time the form is loaded.       |
 | `fromDateDaysOffset`     | No       | `number`  |          | This value can only be set if `fromDate` is `NOW`. It can be a negative or positive number, but must be less than `toDateDaysOffset` if passed.                                                                                                        |
-| `toDateDaysOffset`       | No       | `number`  |          | This value must be set if `toDate` is set to `NOW`. It can be a negative or positive number, but must be greater than `fromDateDaysOffset` if passed.                                                                                                     |
+| `toDateDaysOffset`       | No       | `number`  |          | This value can only be set if `toDate` is set to `NOW`. It can be a negative or positive number, but must be greater than `fromDateDaysOffset` if passed.                                                                                                     |
 
 Date element also inherits the properties of the following:
 
