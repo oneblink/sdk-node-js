@@ -21,6 +21,21 @@ import HeadingElement from './HeadingElement'
 import HTMLElement from './HTMLElement'
 import ImageElement from './ImageElement'
 import InfoPageElement from './InfoPageElement'
+// Advanced
+import CameraElement from './CameraElement'
+import RepeatableSetElement from './RepeatableSetElement'
+import DrawElement from './DrawElement'
+import CalculationElement from './CalculationElement'
+import LocationElement from './LocationElement'
+import FilesElement from './FilesElement'
+import CaptchaElement from './CaptchaElement'
+import FormElement from './FormElement'
+import SummaryElement from './SummaryElement'
+import ComplianceElement from './ComplianceElement'
+import FileElement from './FileElement'
+//Integration
+import GeoscapeElement from './GeoscapeElement'
+import PointElement from './PointElement'
 
 const typeCase = (type: FormTypes.FormElementType) => {
   return Joi.object({
@@ -80,4 +95,43 @@ export default Joi.object({
   })
   .when(typeCase('infoPage'), {
     then: InfoPageElement,
+  })
+  .when(typeCase('camera'), {
+    then: CameraElement,
+  })
+  .when(typeCase('repeatableSet'), {
+    then: RepeatableSetElement,
+  })
+  .when(typeCase('draw'), {
+    then: DrawElement,
+  })
+  .when(typeCase('calculation'), {
+    then: CalculationElement,
+  })
+  .when(typeCase('location'), {
+    then: LocationElement,
+  })
+  .when(typeCase('files'), {
+    then: FilesElement,
+  })
+  .when(typeCase('file'), {
+    then: FileElement,
+  })
+  .when(typeCase('captcha'), {
+    then: CaptchaElement,
+  })
+  .when(typeCase('form'), {
+    then: FormElement,
+  })
+  .when(typeCase('summary'), {
+    then: SummaryElement,
+  })
+  .when(typeCase('compliance'), {
+    then: ComplianceElement,
+  })
+  .when(typeCase('geoscapeAddress'), {
+    then: GeoscapeElement,
+  })
+  .when(typeCase('pointAddress'), {
+    then: PointElement,
   })
