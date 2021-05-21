@@ -1,5 +1,11 @@
 import Joi from 'joi'
-import { idSchema } from '../common'
+import {
+  idSchema,
+  CUSTOM_OPTION_TYPE,
+  SEARCH_OPTION_TYPE,
+  optionTypes,
+  DYNAMIC_OPTION_TYPE,
+} from '../common'
 export const id = idSchema.label('Form Element - Id')
 export const name = Joi.string().required().label('Form Element - Name')
 export const label = Joi.string().required().label('Form Element - Label')
@@ -15,6 +21,96 @@ export const readOnly = Joi.bool()
 export const placeholderValue = Joi.string().label(
   'Form Element placeholder value',
 )
+
+export const buttons = Joi.boolean()
+  .label('Form Element - Radio Buttons as Buttons')
+  .default(false)
+
+const optionsType = Joi.string()
+  .label('Form Element - Options type')
+  .default(CUSTOM_OPTION_TYPE)
+  .when('type', {
+    is: 'autocomplete',
+    then: Joi.valid([...optionTypes, SEARCH_OPTION_TYPE]),
+    otherwise: Joi.valid(optionTypes),
+  })
+
+const dynamicOptionSetId = Joi.when('optionsType', {
+  is: DYNAMIC_OPTION_TYPE,
+  then: Joi.number().label('Form Element - Dynamic Option Set Id').required(),
+  otherwise: Joi.any().strip(),
+})
+const options = Joi.when('optionsType', {
+  is: CUSTOM_OPTION_TYPE,
+  then: Joi.array()
+    .label('Form Element - Options')
+    .unique('id')
+    .items(
+      Joi.object().keys({
+        id: Joi.string().guid().required().label('Form Element - Option Id'),
+        value: Joi.string().required().label('Form Element - Option Value'),
+        label: Joi.string().required().label('Form Element - Option Label'),
+        colour: Joi.string()
+          .allow([null, ''])
+          .regex(/^#[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$/)
+          .label('Form Element - Option Colour'),
+        attributes: Joi.array().items(
+          Joi.object().keys({
+            optionIds: Joi.array()
+              .required()
+              .items(Joi.string())
+              .label('Form Element - Attributes Mapping - Element Id'),
+            elementId: Joi.string()
+              .guid()
+              .required()
+              .label('Form Element - Option Value - Attribute Option Id'),
+          }),
+        ),
+      }),
+    )
+    .required(),
+  otherwise: Joi.any().strip(),
+})
+const attributesMapping = Joi.when('optionsType', {
+  is: DYNAMIC_OPTION_TYPE,
+  then: Joi.array().items(
+    Joi.object().keys({
+      elementId: Joi.string()
+        .guid()
+        .required()
+        .label('Form Element - Option Value - Attribute Element Id'),
+      attribute: Joi.string()
+        .required()
+        .label('Form Element - Attributes Mapping - Attribute'),
+    }),
+  ),
+  otherwise: Joi.any().strip(),
+})
+const conditionallyShowOptions = Joi.when('type', {
+  is: Joi.only(['checkboxes', 'radio', 'select', 'autocomplete', 'compliance']),
+  then: Joi.boolean()
+    .label('Form Element - conditionallyShowOptionsElementIds')
+    .default(false),
+  otherwise: Joi.any().strip(),
+})
+const conditionallyShowOptionsElementIds = Joi.when('optionsType', {
+  is: CUSTOM_OPTION_TYPE,
+  then: Joi.array().items(
+    Joi.string()
+      .guid()
+      .required()
+      .label('Form Element - Attributes Mapping - Element Id'),
+  ),
+  otherwise: Joi.any().strip(),
+})
+export const optionsSchemas = {
+  optionsType,
+  dynamicOptionSetId,
+  options,
+  attributesMapping,
+  conditionallyShowOptions,
+  conditionallyShowOptionsElementIds,
+}
 
 const conditionallyShow = Joi.bool()
   .default(false)
