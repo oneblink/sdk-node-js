@@ -10,7 +10,8 @@ import {
 } from './property-schemas'
 import elementSchema from './index'
 
-export default Joi.object({
+// Think this needs to be a variable because of recursive dependency
+const schema = Joi.object({
   id,
   name,
   label,
@@ -42,3 +43,4 @@ export default Joi.object({
     .unique('id')
     .label('Form Element - Repeatable Set - Elements'),
 })
+export default schema
