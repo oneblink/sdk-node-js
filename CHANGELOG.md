@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `encryptPdf` property to `CP_HCMS` submission event type
 - `toDateDaysOffset`, `fromDateDaysOffset` and `defaultValueDaysOffset` properties to docs
 
+### Fixed
+
+- network request's that fail without a JSON response attempting to parse the text as JSON
+
 ## [0.9.11] - 2021-05-19
 
 ## [0.9.10] - 2021-05-13
