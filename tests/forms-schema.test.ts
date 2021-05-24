@@ -2224,7 +2224,35 @@ test('should throw error if postSubmissionAction is an invalid type', () => {
   )
 
   expect(error.details[0].message).toBe(
-    '"Post Submission Action" must be one of [URL, CLOSE, FORMS_LIBRARY]',
+    '"Post Submission Action" must be one of [BACK, URL, CLOSE, FORMS_LIBRARY]',
+  )
+})
+
+test('should throw error if cancelAction is an invalid type', () => {
+  const { error } = Joi.validate(
+    {
+      id: 1,
+      name: 'string',
+      description: 'string',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: 'ORGANISATION_00000000001',
+      postSubmissionAction: 'BACK',
+      cancelAction: 'NOT_A_VALID_TYPE',
+      isMultiPage: false,
+      elements: [],
+      isAuthenticated: true,
+      submissionEvents: [],
+      tags: [],
+    },
+    formSchema,
+    {
+      abortEarly: false,
+    },
+  )
+
+  expect(error.details[0].message).toBe(
+    '"cancelAction" must be one of [BACK, URL, CLOSE, FORMS_LIBRARY]',
   )
 })
 
@@ -4028,7 +4056,7 @@ describe('invalid property removal', () => {
     )
   })
 
-  test('should strip out `redirectUrl` if `postSubmissionAction` is not "URL"', () => {
+  test('should strip out `redirectUrl` if `postSubmissionAction` is not "URL" and set default cancelAction', () => {
     const { error, value } = Joi.validate(
       {
         id: 1,
@@ -4052,6 +4080,7 @@ describe('invalid property removal', () => {
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
+      cancelAction: 'BACK',
       submissionEvents: [],
       tags: [],
       elements: [],

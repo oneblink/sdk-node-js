@@ -1,5 +1,6 @@
 import Joi from 'joi'
 
+const postSubmissionActions = ['BACK', 'URL', 'CLOSE', 'FORMS_LIBRARY']
 const base64DataRegex = /<[^>]*src="data:([a-zA-Z]*)\/([a-zA-Z]*);base64,([^"]*)".*>/m
 
 const addressIntegrationTypes = ['geoscapeAddress', 'pointAddress']
@@ -963,10 +964,16 @@ const formSchema = Joi.object().keys({
   postSubmissionAction: Joi.string()
     .label('Post Submission Action')
     .required()
-    .valid(['URL', 'CLOSE', 'FORMS_LIBRARY']),
+    .valid(postSubmissionActions),
   redirectUrl: Joi.when('postSubmissionAction', {
     is: 'URL',
     then: Joi.string().required().label('Post Submission Redirect URL'),
+    otherwise: Joi.any().strip(),
+  }),
+  cancelAction: Joi.string().default('BACK').valid(postSubmissionActions),
+  cancelRedirectUrl: Joi.when('cancelAction', {
+    is: 'URL',
+    then: Joi.string().required(),
     otherwise: Joi.any().strip(),
   }),
   isInfoPage: Joi.bool().default(false).label('Form Information Page'),
