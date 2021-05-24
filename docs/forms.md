@@ -910,9 +910,8 @@ const predicates = [
   },
 ]
 
-const validatedPredicates = OneBlink.Forms.validateConditionalPredicates(
-  predicates,
-)
+const validatedPredicates =
+  OneBlink.Forms.validateConditionalPredicates(predicates)
 
 return validatedPredicates
 ```

@@ -6,12 +6,12 @@
 
 Display a heading to the user.
 
-| Property      | Required | Type                | Default     | Description                                                                                                                              |
-| ------------- | -------- | ------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`        | Yes      | `string`            | `'heading'` | The type of Form Element.                                                                                                                |
-| `name`        | Yes      | `string`            |             | The key that will be assigned a value `true` (if the element is shown) or `false` (if the element is hidden) when the form is submitted. |
-| `label`       | Yes      | `string`            |             | The text to display.                                                                                                                     |
-| `headingType` | Yes      | `1 | 2 | 3 | 4 | 5` |             | The size of the heading. `1` being the largest and `5` being the smallest.                                                               |
+| Property      | Required | Type                    | Default     | Description                                                                                                                              |
+| ------------- | -------- | ----------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`        | Yes      | `string`                | `'heading'` | The type of Form Element.                                                                                                                |
+| `name`        | Yes      | `string`                |             | The key that will be assigned a value `true` (if the element is shown) or `false` (if the element is hidden) when the form is submitted. |
+| `label`       | Yes      | `string`                |             | The text to display.                                                                                                                     |
+| `headingType` | Yes      | `1 \| 2 \| 3 \| 4 \| 5` |             | The size of the heading. `1` being the largest and `5` being the smallest.                                                               |
 
 Heading element also inherits the properties of the following:
 

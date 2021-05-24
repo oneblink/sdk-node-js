@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid'
 import { validateWithElementSchema } from './forms-validation'
 
 export default function generateFormElement<
-  T extends FormTypes._FormElementBase
+  T extends FormTypes._FormElementBase,
 >(formElementGenerationData?: Record<string, unknown>): T {
   if (!formElementGenerationData) {
     throw new Error(
