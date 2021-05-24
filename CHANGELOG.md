@@ -15,12 +15,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `encryptPdf` property to `CP_HCMS` submission event type
 - `toDateDaysOffset`, `fromDateDaysOffset` and `defaultValueDaysOffset` properties to docs
+- `cancelAction` property to Form
 
 ### Fixed
 
 - network request's that fail without a JSON response attempting to parse the text as JSON
 
 ## [0.9.11] - 2021-05-19
+
+### Added
+
+- documentation for `recaptchaIntegrationDomainId` property
 
 ## [0.9.10] - 2021-05-13
 

@@ -1,6 +1,7 @@
 import Joi from 'joi'
 
-const base64DataRegex = /<[^>]*src="data:([a-zA-Z]*)\/([a-zA-Z]*);base64,([^"]*)".*>/m
+const base64DataRegex =
+  /<[^>]*src="data:([a-zA-Z]*)\/([a-zA-Z]*);base64,([^"]*)".*>/m
 
 const addressIntegrationTypes = ['geoscapeAddress', 'pointAddress']
 const userInputTypes = [

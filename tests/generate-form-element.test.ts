@@ -6,9 +6,8 @@ describe('Generate Form Element', () => {
     const elementData = {
       name: 'F',
     }
-    const generatedElement = OneBlinkSDK.Forms.generateFormElement<FormTypes.TextElement>(
-      elementData,
-    )
+    const generatedElement =
+      OneBlinkSDK.Forms.generateFormElement<FormTypes.TextElement>(elementData)
     expect(typeof generatedElement.id).toBe('string')
     expect(generatedElement.name).toBe('F')
     expect(generatedElement.type).toBe('text')
@@ -23,9 +22,10 @@ describe('Generate Form Element', () => {
     const elementData = {
       type: 'number',
     }
-    const generatedElement = OneBlinkSDK.Forms.generateFormElement<FormTypes.NumberElement>(
-      elementData,
-    )
+    const generatedElement =
+      OneBlinkSDK.Forms.generateFormElement<FormTypes.NumberElement>(
+        elementData,
+      )
     expect(generatedElement.type).toBe('number')
     expect(generatedElement.label).toBe('number')
 
@@ -33,9 +33,10 @@ describe('Generate Form Element', () => {
       type: 'number',
       label: 'i am a label',
     }
-    const generatedElementWithLabel = OneBlinkSDK.Forms.generateFormElement<FormTypes.NumberElement>(
-      elementDataWithLabel,
-    )
+    const generatedElementWithLabel =
+      OneBlinkSDK.Forms.generateFormElement<FormTypes.NumberElement>(
+        elementDataWithLabel,
+      )
     expect(generatedElementWithLabel.type).toBe('number')
     expect(generatedElementWithLabel.label).toBe('i am a label')
   })
@@ -45,23 +46,24 @@ describe('Generate Form Element', () => {
       type: 'number',
       name: 'i am a name',
     }
-    const generatedElementWithName = OneBlinkSDK.Forms.generateFormElement<FormTypes.NumberElement>(
-      elementDataWithName,
-    )
+    const generatedElementWithName =
+      OneBlinkSDK.Forms.generateFormElement<FormTypes.NumberElement>(
+        elementDataWithName,
+      )
     expect(generatedElementWithName.name).toBe('i am a name')
 
     const elementDataWithType = {
       type: 'number',
     }
-    const generatedElementWithType = OneBlinkSDK.Forms.generateFormElement<FormTypes.NumberElement>(
-      elementDataWithType,
-    )
+    const generatedElementWithType =
+      OneBlinkSDK.Forms.generateFormElement<FormTypes.NumberElement>(
+        elementDataWithType,
+      )
     expect(generatedElementWithType.name).toBe('number')
 
     const elementData = {}
-    const generatedElement = OneBlinkSDK.Forms.generateFormElement<FormTypes.TextElement>(
-      elementData,
-    )
+    const generatedElement =
+      OneBlinkSDK.Forms.generateFormElement<FormTypes.TextElement>(elementData)
     expect(generatedElement.name).toBe('text')
   })
 })
