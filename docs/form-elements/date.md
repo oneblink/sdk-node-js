@@ -39,7 +39,7 @@ Date element also inherits the properties of the following:
   "defaultValue": "2000-01-01",
   "fromDate": "1990-01-01",
   "toDate": "NOW",
-  "toDateDaysOffset": 365,
+  "toDateDaysOffset": -365,
   "required": true,
   "readOnly": false
 }
