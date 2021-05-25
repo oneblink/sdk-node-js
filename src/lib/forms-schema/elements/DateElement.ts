@@ -24,7 +24,7 @@ const errorFn = (fieldName: string): Joi.ValidationErrorFunction => {
 
 const fromDate = Joi.alternatives([dateSchema, nowSchema])
   .allow(null)
-  .error(errorFn('toDate'))
+  .error(errorFn('fromDate'))
 
 const toDate = Joi.when('fromDate', {
   is: Joi.date().iso().raw().required().label('Form Element - To Date'),
