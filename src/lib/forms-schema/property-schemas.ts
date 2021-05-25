@@ -1,12 +1,12 @@
 import Joi from 'joi'
 import {
-  idSchema,
   CUSTOM_OPTION_TYPE,
   SEARCH_OPTION_TYPE,
   optionTypes,
   DYNAMIC_OPTION_TYPE,
 } from './common'
-export const id = idSchema.label('Form Element - Id')
+
+export const id = Joi.string().guid().required().label('Form Element - Id')
 export const name = Joi.string().required().label('Form Element - Name')
 export const label = Joi.string().required().label('Form Element - Label')
 

@@ -42,27 +42,6 @@ export const SEARCH_OPTION_TYPE = 'SEARCH'
 
 export const optionTypes = [CUSTOM_OPTION_TYPE, DYNAMIC_OPTION_TYPE]
 
-export const idSchema = Joi.string().guid().required()
-export const elementIdSchema = idSchema.label('Form Element - Id')
-export const elementNameSchema = Joi.string()
-  .required()
-  .label('Form Element - Name')
-export const elementLabelSchema = Joi.string()
-  .required()
-  .label('Form Element - Label')
-
-export const elementHintSchema = Joi.string().label('Form Element - Hint')
-export const elementRequired = Joi.bool()
-  .default(false)
-  .label('Form Element - Required')
-
-export const elementReadOnly = Joi.bool()
-  .default(false)
-  .label('Form Element - Read Only')
-export const elementConditionallyShow = Joi.bool()
-  .default(false)
-  .label('Form Element - Conditionally Show')
-
 export const JoiRange = Joi.extend((joi: typeof Joi) => ({
   base: joi.number(),
   name: 'range',
@@ -99,5 +78,4 @@ export const JoiRange = Joi.extend((joi: typeof Joi) => ({
   ],
 }))
 
-export const base64DataRegex =
-  /<[^>]*src="data:([a-zA-Z]*)\/([a-zA-Z]*);base64,([^"]*)".*>/m
+export const base64DataRegex = /<[^>]*src="data:([a-zA-Z]*)\/([a-zA-Z]*);base64,([^"]*)".*>/m
