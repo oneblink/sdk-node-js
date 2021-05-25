@@ -20,12 +20,8 @@ export default (tenant: Tenant) =>
       if (!options) {
         throw new TypeError('Must supply "options" as a string')
       }
-      const {
-        submissionId,
-        formId,
-        isDraft,
-        includeSubmissionIdInPdf,
-      } = options
+      const { submissionId, formId, isDraft, includeSubmissionIdInPdf } =
+        options
       if (!submissionId || typeof submissionId !== 'string') {
         throw new TypeError('Must supply "options.submissionId" as a string')
       }

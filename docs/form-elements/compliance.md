@@ -15,7 +15,7 @@ Allow the user to select a single option from a list of options displayed as but
 | `defaultValue` | Yes      | `string`  |                | The identifier of an option to be selected when the form is opened.                         |
 | `required`     | Yes      | `boolean` | `false`        | Determine if this element requires an option to be selected (`true`) or not (`false`).      |
 | `readOnly`     | Yes      | `boolean` | `false`        | Determine if this selected option be changed by the user (`false`) or not (`true`).         |
-| `storageType`  | no       | `string` |        | How the media uploaded by a user will be stored: `private`, `public`, `legacy`              |
+| `storageType`  | no       | `string`  |                | How the media uploaded by a user will be stored: `private`, `public`, `legacy`              |
 
 Compliance element also inherits the properties of the following:
 

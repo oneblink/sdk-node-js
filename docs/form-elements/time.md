@@ -34,3 +34,13 @@ Time element also inherits the properties of the following:
   "readOnly": false
 }
 ```
+
+### Example Submission Data
+
+```json
+{
+  "submission": {
+    "[element.name]": "2000-01-01T14:00:00.000Z"
+  }
+}
+```

@@ -6,6 +6,22 @@ import pkg from './package'
 import generateJWT from './generate-jwt'
 import { Tenant } from './types'
 
+async function getResponseErrorMessage(response: Response): Promise<string> {
+  // The request was made and the server responded with
+  // a status code that falls out of the range of 2xx
+  const contentType = response.headers.get('content-type')
+  if (!contentType || !contentType.toLowerCase().includes('application/json')) {
+    return await response.text()
+  }
+
+  const body = await response.json()
+  if (body && body.message) {
+    return body.message
+  }
+
+  return 'OneBlink API Internal Server Error'
+}
+
 export default class OneBlinkAPI {
   tenant: Tenant
   accessKey: string
@@ -63,14 +79,10 @@ export default class OneBlinkAPI {
     })
 
     if (!response.ok) {
-      const body = await response.json()
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      const error = new Error(
-        body && body.message
-          ? body.message
-          : 'OneBlink API Internal Server Error',
-      )
+      // The request was made and the server responded with
+      // a status code that falls out of the range of 2xx
+      const errorMessage = await getResponseErrorMessage(response)
+      const error = new Error(errorMessage)
       error.name = 'OneBlinkAPIError'
       throw error
     }
