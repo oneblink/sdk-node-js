@@ -1,11 +1,7 @@
 import Joi from 'joi'
 import { FormTypes, ConditionTypes } from '@oneblink/types'
-import {
-  elementSchema,
-  formSchema,
-  pageElementSchema,
-  ConditionalPredicatesItemSchema,
-} from './forms-schema'
+import { elementSchema, formSchema, pageElementSchema } from './forms-schema'
+import { ConditionalPredicatesItemSchema } from './forms-schema/property-schemas'
 
 function validateJoiSchema<T>(
   data: unknown,

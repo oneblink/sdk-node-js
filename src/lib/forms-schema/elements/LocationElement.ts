@@ -8,7 +8,7 @@ import {
   hint,
   conditionallyShowSchemas,
   lookupSchemas,
-} from './property-schemas'
+} from '../property-schemas'
 
 export default Joi.object({
   id,

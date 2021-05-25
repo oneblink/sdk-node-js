@@ -5,7 +5,7 @@ import {
   SEARCH_OPTION_TYPE,
   optionTypes,
   DYNAMIC_OPTION_TYPE,
-} from '../common'
+} from './common'
 export const id = idSchema.label('Form Element - Id')
 export const name = Joi.string().required().label('Form Element - Name')
 export const label = Joi.string().required().label('Form Element - Label')
@@ -123,7 +123,7 @@ const requiresAllConditionallyShowPredicates = Joi.when('conditionallyShow', {
   otherwise: Joi.any().strip(),
 })
 
-const ConditionalPredicatesItemSchema = Joi.object().keys({
+export const ConditionalPredicatesItemSchema = Joi.object().keys({
   elementId: Joi.string().guid().required(),
   type: Joi.string()
     .default('OPTIONS')
@@ -160,7 +160,7 @@ const ConditionalPredicatesItemSchema = Joi.object().keys({
   }),
 })
 
-const conditionallyShowPredicates = Joi.when('conditionallyShow', {
+export const conditionallyShowPredicates = Joi.when('conditionallyShow', {
   is: true,
   then: Joi.array()
     .unique('elementId')

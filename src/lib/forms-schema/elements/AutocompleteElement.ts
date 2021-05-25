@@ -8,10 +8,9 @@ import {
   readOnly,
   conditionallyShowSchemas,
   lookupSchemas,
-  buttons,
   optionsSchemas,
   placeholderValue,
-} from './property-schemas'
+} from '../property-schemas'
 import { DYNAMIC_OPTION_TYPE, SEARCH_OPTION_TYPE } from '../common'
 export default Joi.object({
   id,
@@ -33,6 +32,5 @@ export default Joi.object({
     then: Joi.string().required().label('Search URL'),
     otherwise: Joi.any().strip(),
   }),
-  buttons,
   ...optionsSchemas,
 })

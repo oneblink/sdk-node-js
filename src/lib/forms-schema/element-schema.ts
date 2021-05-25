@@ -1,41 +1,41 @@
 import Joi from 'joi'
-import { elementTypes } from '../common'
+import { elementTypes } from './common'
 import { FormTypes } from '@oneblink/types'
 
 // User Input
-import TextElement from './TextElement'
-import NumberElement from './NumberElement'
-import EmailElement from './EmailElement'
-import PhoneElement from './PhoneElement'
-import BarcodeElement from './BarcodeElement'
+import TextElement from './elements/TextElement'
+import NumberElement from './elements/NumberElement'
+import EmailElement from './elements/EmailElement'
+import PhoneElement from './elements/PhoneElement'
+import BarcodeElement from './elements/BarcodeElement'
 // User Selection
-import RadioElement from './RadioElement'
-import CheckboxElement from './CheckboxElement'
-import SelectElement from './SelectElement'
-import AutocompleteElement from './AutocompleteElement'
+import RadioElement from './elements/RadioElement'
+import CheckboxElement from './elements/CheckboxElement'
+import SelectElement from './elements/SelectElement'
+import AutocompleteElement from './elements/AutocompleteElement'
 // Date and Time
-import DateElement from './DateElement'
-import TimeElement from './TimeElement'
+import DateElement from './elements/DateElement'
+import TimeElement from './elements/TimeElement'
 // Informational
-import HeadingElement from './HeadingElement'
-import HTMLElement from './HTMLElement'
-import ImageElement from './ImageElement'
-import InfoPageElement from './InfoPageElement'
+import HeadingElement from './elements/HeadingElement'
+import HTMLElement from './elements/HTMLElement'
+import ImageElement from './elements/ImageElement'
+import InfoPageElement from './elements/InfoPageElement'
 // Advanced
-import CameraElement from './CameraElement'
-import RepeatableSetElement from './RepeatableSetElement'
-import DrawElement from './DrawElement'
-import CalculationElement from './CalculationElement'
-import LocationElement from './LocationElement'
-import FilesElement from './FilesElement'
-import CaptchaElement from './CaptchaElement'
-import FormElement from './FormElement'
-import SummaryElement from './SummaryElement'
-import ComplianceElement from './ComplianceElement'
-import FileElement from './FileElement'
+import CameraElement from './elements/CameraElement'
+import RepeatableSetElement from './elements/RepeatableSetElement'
+import DrawElement from './elements/DrawElement'
+import CalculationElement from './elements/CalculationElement'
+import LocationElement from './elements/LocationElement'
+import FilesElement from './elements/FilesElement'
+import CaptchaElement from './elements/CaptchaElement'
+import FormElement from './elements/FormElement'
+import SummaryElement from './elements/SummaryElement'
+import ComplianceElement from './elements/ComplianceElement'
+import FileElement from './elements/FileElement'
 //Integration
-import GeoscapeElement from './GeoscapeElement'
-import PointElement from './PointElement'
+import GeoscapeElement from './elements/GeoscapeElement'
+import PointElement from './elements/PointElement'
 
 const typeCase = (type: FormTypes.FormElementType) => {
   return Joi.object({
@@ -45,6 +45,7 @@ const typeCase = (type: FormTypes.FormElementType) => {
 export default Joi.object({
   type: Joi.string().required().valid(elementTypes),
 })
+  .options({ stripUnknown: true })
   .when(typeCase('text'), {
     then: TextElement,
   })
