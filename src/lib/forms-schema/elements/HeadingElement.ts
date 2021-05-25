@@ -10,4 +10,4 @@ export default Joi.object({
     .required()
     .label('Form Element - Heading Size')
     .valid([1, 2, 3, 4, 5]),
-}).options({ stripUnknown: true })
+})
