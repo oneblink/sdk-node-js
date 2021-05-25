@@ -9,7 +9,7 @@ import {
   conditionallyShowSchemas,
   lookupSchemas,
   placeholderValue,
-} from './property-schemas'
+} from '../property-schemas'
 
 export default Joi.object({
   id,

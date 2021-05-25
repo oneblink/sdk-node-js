@@ -6,7 +6,7 @@ import {
   required,
   readOnly,
   conditionallyShowSchemas,
-} from './property-schemas'
+} from '../property-schemas'
 import { base64DataRegex } from '../common'
 
 export default Joi.object({

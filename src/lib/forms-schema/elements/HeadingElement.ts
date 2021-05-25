@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { id, name, label, conditionallyShowSchemas } from './property-schemas'
+import { id, name, label, conditionallyShowSchemas } from '../property-schemas'
 
 export default Joi.object({
   id,

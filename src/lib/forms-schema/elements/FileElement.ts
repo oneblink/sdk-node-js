@@ -7,7 +7,7 @@ import {
   readOnly,
   hint,
   conditionallyShowSchemas,
-} from './property-schemas'
+} from '../property-schemas'
 
 export default Joi.object({
   id,

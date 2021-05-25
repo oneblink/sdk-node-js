@@ -11,7 +11,7 @@ import {
   placeholderValue,
   fromDate,
   toDate,
-} from './property-schemas'
+} from '../property-schemas'
 
 export default Joi.object({
   id,

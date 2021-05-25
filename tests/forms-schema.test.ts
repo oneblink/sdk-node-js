@@ -433,7 +433,13 @@ describe('Valid Form Schema with Pages', () => {
 
   test('should default "readOnly" to "false" for all elements', () => {
     result.value.elements[0].elements.forEach((element) => {
-      if (element.type === 'form' || element.type === 'infoPage') {
+      if (
+        element.type === 'form' ||
+        element.type === 'infoPage' ||
+        element.type === 'image' ||
+        element.type === 'html' ||
+        element.type === 'heading'
+      ) {
         // @ts-expect-error "readyOnly" should not be here, hence the check
         expect(element.readOnly).toBeUndefined()
       } else {
@@ -795,8 +801,19 @@ describe('Valid Form Schema', () => {
 
   test('should default "readOnly" to "false" for all elements', () => {
     result.value.elements.forEach((element) => {
-      // @ts-expect-error "readyOnly" should be here, hence the check
-      expect(element.readOnly).toBe(false)
+      if (
+        element.type === 'form' ||
+        element.type === 'infoPage' ||
+        element.type === 'image' ||
+        element.type === 'html' ||
+        element.type === 'heading'
+      ) {
+        // @ts-expect-error "readyOnly" should not be here, hence the check
+        expect(element.readOnly).toBeUndefined()
+      } else {
+        // @ts-expect-error "readyOnly" should be here, hence the check
+        expect(element.readOnly).toBe(false)
+      }
     })
   })
 })
@@ -840,6 +857,9 @@ test('should set default for radio "buttons" property', () => {
       ],
     },
     formSchema,
+    {
+      stripUnknown: true,
+    },
   )
 
   expect(error).toBe(null)
@@ -887,6 +907,9 @@ test('should error if "buttons" is not a boolean', () => {
       ],
     },
     formSchema,
+    {
+      stripUnknown: true,
+    },
   )
 
   expect(error.message).toContain(
@@ -914,6 +937,9 @@ test('should error if element "id" is not supplied', () => {
       ],
     },
     formSchema,
+    {
+      stripUnknown: true,
+    },
   )
 
   expect(error.message).toContain('"Form Element - Id" is required')
@@ -940,6 +966,9 @@ test('should error if element "id" is not a guid', () => {
       ],
     },
     formSchema,
+    {
+      stripUnknown: true,
+    },
   )
 
   expect(error.message).toContain('"Form Element - Id" must be a valid GUID')
@@ -972,6 +1001,9 @@ test('should error if element "id" is not unique', () => {
       ],
     },
     formSchema,
+    {
+      stripUnknown: true,
+    },
   )
 
   expect(error.message).toContain(
@@ -1004,6 +1036,9 @@ test('should not error if number min is the same as max', () => {
       ],
     },
     formSchema,
+    {
+      stripUnknown: true,
+    },
   )
 
   expect(error).toBeNull()
@@ -1034,6 +1069,9 @@ test('should error if number min is greater than max', () => {
       ],
     },
     formSchema,
+    {
+      stripUnknown: true,
+    },
   )
 
   expect(error.message).toContain(
@@ -1066,6 +1104,9 @@ test('should throw error if minNumber is not provided for number element with is
       ],
     },
     formSchema,
+    {
+      stripUnknown: true,
+    },
   )
 
   expect(error.message).toContain('"Form Element - Minimum Number" is required')
@@ -1425,12 +1466,8 @@ test('should error if "defaultValue" does not match what is valid for each type'
     '"Form Element - Default Value" must be an array',
   )
   expect(error.details[11].message).toBe('"0" must be a valid GUID')
-  expect(error.details[12].message).toBe(
-    '"Form Element - Default Value" must be a string',
-  )
-  expect(error.details[13].message).toBe(
-    '"Form Element - Default Value" must be a string',
-  )
+  expect(error.details[12].message).toBe('"defaultValue" must be a string')
+  expect(error.details[13].message).toBe('"defaultValue" must be a string')
 })
 
 test('should not error if number type element has a "defaultValue" but does not have a "minNumber" or "maxNumber"', () => {
@@ -1766,7 +1803,7 @@ test('should error if page element has child page element', () => {
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
+    '"type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -1849,7 +1886,7 @@ test('should error if isMultiPage is set to false', () => {
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
+    '"type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -2006,7 +2043,7 @@ test('should error if isMultiPage is false even if all root elements are pages',
   )
 
   expect(error.details[0].message).toBe(
-    '"Form Element - Type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
+    '"type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -2042,9 +2079,7 @@ test('should error if image element does not have a default value', () => {
     },
   )
 
-  expect(error.details[0].message).toBe(
-    '"Form Element - Default Value" is required',
-  )
+  expect(error.details[0].message).toBe('"defaultValue" is required')
 })
 
 test('should error if HTML element does not have a default value', () => {
@@ -2079,9 +2114,7 @@ test('should error if HTML element does not have a default value', () => {
   )
 
   expect(error.details[0].message).toBe('"Form Element - Name" is required')
-  expect(error.details[1].message).toBe(
-    '"Form Element - Default Value" is required',
-  )
+  expect(error.details[1].message).toBe('"defaultValue" is required')
 })
 
 test('should error if calculation element does not have a default value', () => {
@@ -2116,9 +2149,7 @@ test('should error if calculation element does not have a default value', () => 
     },
   )
 
-  expect(error.details[0].message).toBe(
-    '"Form Element - Default Value" is required',
-  )
+  expect(error.details[0].message).toBe('"defaultValue" is required')
   expect(error.details[1].message).toBe(
     '"Form Element - Calculation - calculation" is required',
   )
@@ -2375,7 +2406,7 @@ test('should throw error if defaultValue contains src="data:', () => {
   )
 
   expect(error.details[0].message).toBe(
-    `"Form Element - Default Value" with value "${defaultValue}" matches the inverted No Binary Data pattern`,
+    `"defaultValue" with value "${defaultValue}" matches the inverted No Binary Data pattern`,
   )
 })
 
@@ -5054,7 +5085,7 @@ describe('submission event conditional logic', () => {
     )
 
     expect(result.error.message).toBe(
-      'child "elements" fails because ["Form Elements" at position 0 fails because [child "defaultValue" fails because ["Form Element - Default Value" length must be at least 5 characters long]]]',
+      'child "elements" fails because ["Form Elements" at position 0 fails because [child "Form Element - Default Value" fails because ["Form Element - Default Value" length must be at least 5 characters long]]]',
     )
   })
 
@@ -5095,7 +5126,7 @@ describe('submission event conditional logic', () => {
     )
 
     expect(result.error.message).toBe(
-      'child "elements" fails because ["Form Elements" at position 0 fails because [child "defaultValue" fails because ["Form Element - Default Value" length must be less than or equal to 3 characters long]]]',
+      'child "elements" fails because ["Form Elements" at position 0 fails because [child "Form Element - Default Value" fails because ["Form Element - Default Value" length must be less than or equal to 3 characters long]]]',
     )
   })
 

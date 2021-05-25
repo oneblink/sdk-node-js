@@ -9,7 +9,7 @@ import {
   storageType,
   optionsSchemas,
   lookupSchemas,
-} from './property-schemas'
+} from '../property-schemas'
 import { DYNAMIC_OPTION_TYPE } from '../common'
 export default Joi.object({
   id,
