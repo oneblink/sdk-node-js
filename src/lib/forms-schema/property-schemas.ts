@@ -201,21 +201,6 @@ export const conditionallyShowSchemas = {
   conditionallyShowPredicates,
 }
 
-export const fromDate = Joi.date()
-  .iso()
-  .raw()
-  .label('Form Element - From Date')
-  .allow(null)
-
-export const toDate = Joi.when('fromDate', {
-  is: Joi.date().iso().raw().required().label('Form Element - To Date'),
-  then: Joi.date()
-    .iso()
-    .min(Joi.ref('fromDate'))
-    .raw()
-    .label('Form Element - To Date'),
-}).allow(null)
-
 export const storageType = Joi.string()
   .label('Storage type')
   .valid(['legacy', 'public', 'private'])

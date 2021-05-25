@@ -1233,9 +1233,7 @@ test('should error if "toDate" is greater than "fromDate"', () => {
     formSchema,
   )
 
-  expect(error.message).toContain(
-    '"Form Element - To Date" must be larger than or equal to',
-  )
+  expect(error.message).toContain('"toDate" must be larger than or equal to')
 })
 
 test('should error if "defaultValue" does not match what is valid for each type', () => {
@@ -1441,16 +1439,16 @@ test('should error if "defaultValue" does not match what is valid for each type'
     '"Form Element - Default Value" must be a number',
   )
   expect(error.details[3].message).toBe(
-    '"Form Element - Default Date Value" must be a valid ISO 8601 date or the string "NOW"',
+    '"defaultValue" must be a valid ISO 8601 date or the string "NOW"',
   )
   expect(error.details[3].message).toBe(
-    '"Form Element - Default Date Value" must be a valid ISO 8601 date or the string "NOW"',
+    '"defaultValue" must be a valid ISO 8601 date or the string "NOW"',
   )
   expect(error.details[4].message).toBe(
-    '"Form Element - Default Date Value" must be a valid ISO 8601 date or the string "NOW"',
+    '"defaultValue" must be a valid ISO 8601 date or the string "NOW"',
   )
   expect(error.details[5].message).toBe(
-    '"Form Element - Default Date Value" must be a valid ISO 8601 date or the string "NOW"',
+    '"defaultValue" must be a valid ISO 8601 date or the string "NOW"',
   )
   expect(error.details[6].message).toBe(
     '"Form Element - Default Value" must be a valid GUID',
@@ -1610,7 +1608,7 @@ test('should error if date type element has a "defaultValue" less than "fromDate
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Default Date Value" must be larger than or equal to',
+    '"defaultValue" must be larger than or equal to',
   )
 })
 
@@ -1640,7 +1638,7 @@ test('should error if date type element has a "defaultValue" more than "toDate"'
   )
 
   expect(error.details[0].message).toContain(
-    '"Form Element - Default Date Value" must be less than or equal to',
+    '"defaultValue" must be less than or equal to',
   )
 })
 
@@ -4544,103 +4542,6 @@ test('should not allow publish start date after publish end date', () => {
   ).toThrow('Publish Start Date must be before Publish End Date')
 })
 
-test('should allow datetime, date and time elements with NOW defaults', () => {
-  const result = Joi.validate(
-    {
-      id: 1,
-      name: 'NOW Defaults Form',
-      formsAppEnvironmentId: 1,
-      formsAppIds: [1],
-      organisationId: '59cc888b8969af000fb50ddb',
-      postSubmissionAction: 'FORMS_LIBRARY',
-      isMultiPage: false,
-      submissionEvents: [],
-      elements: [
-        {
-          id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
-          name: 'Date_and_Time',
-          label: 'Date and Time',
-          type: 'datetime',
-          required: false,
-          defaultValue: 'NOW',
-        },
-        {
-          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
-          name: 'Just_Time',
-          label: 'Just Time',
-          type: 'time',
-          required: false,
-          defaultValue: 'NOW',
-        },
-        {
-          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
-          name: 'Just_Date',
-          label: 'Just Date',
-          type: 'date',
-          required: false,
-          defaultValue: 'NOW',
-        },
-      ],
-    },
-    formSchema,
-  )
-  expect(result.error).toBe(null)
-})
-
-test('should not allow datetime, date and time elements with any other strings as default', () => {
-  const result = Joi.validate(
-    {
-      id: 1,
-      name: 'NOW Defaults Form',
-      formsAppEnvironmentId: 1,
-      formsAppIds: [1],
-      organisationId: '59cc888b8969af000fb50ddb',
-      postSubmissionAction: 'FORMS_LIBRARY',
-      isMultiPage: false,
-      submissionEvents: [],
-      elements: [
-        {
-          id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
-          name: 'Date_and_Time',
-          label: 'Date and Time',
-          type: 'datetime',
-          required: false,
-          defaultValue: 'OTHER_STRINGS',
-        },
-        {
-          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
-          name: 'Just_Time',
-          label: 'Just Time',
-          type: 'time',
-          required: false,
-          defaultValue: 'OTHER_STRINGS',
-        },
-        {
-          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
-          name: 'Just_Date',
-          label: 'Just Date',
-          type: 'date',
-          required: false,
-          defaultValue: 'OTHER_STRINGS',
-        },
-      ],
-    },
-    formSchema,
-    {
-      abortEarly: false,
-    },
-  )
-  expect(result.error.details[0].message).toBe(
-    '"Form Element - Default Date Value" must be a valid ISO 8601 date or the string "NOW"',
-  )
-  expect(result.error.details[1].message).toBe(
-    '"Form Element - Default Date Value" must be a valid ISO 8601 date or the string "NOW"',
-  )
-  expect(result.error.details[2].message).toBe(
-    '"Form Element - Default Date Value" must be a valid ISO 8601 date or the string "NOW"',
-  )
-})
-
 describe('submission event configuration', () => {
   test('should reject if configuration is not supplied', () => {
     const { error } = Joi.validate(
@@ -5375,6 +5276,241 @@ describe('submission event conditional logic', () => {
 
     expect(result.error.message).toContain(
       '"Camera element - Include timestamp watermark" must be a boolean',
+    )
+  })
+})
+
+describe('Date and Time `NOW` option', () => {
+  const form = {
+    id: 1,
+    name: 'Form',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: '59cc888b8969af000fb50ddb',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    isMultiPage: false,
+    submissionEvents: [],
+  }
+  test('should allow datetime, date and time elements with NOW defaults', () => {
+    const result = Joi.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
+            name: 'Date_and_Time',
+            label: 'Date and Time',
+            type: 'datetime',
+            required: false,
+            defaultValue: 'NOW',
+          },
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
+            name: 'Just_Time',
+            label: 'Just Time',
+            type: 'time',
+            required: false,
+            defaultValue: 'NOW',
+          },
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+          },
+        ],
+      },
+      formSchema,
+    )
+    expect(result.error).toBe(null)
+  })
+
+  test('should not allow datetime, date and time elements with any other strings as default', () => {
+    const result = Joi.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
+            name: 'Date_and_Time',
+            label: 'Date and Time',
+            type: 'datetime',
+            required: false,
+            defaultValue: 'OTHER_STRINGS',
+          },
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
+            name: 'Just_Time',
+            label: 'Just Time',
+            type: 'time',
+            required: false,
+            defaultValue: 'OTHER_STRINGS',
+          },
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'OTHER_STRINGS',
+          },
+        ],
+      },
+      formSchema,
+      {
+        abortEarly: false,
+      },
+    )
+    expect(result.error.details[0].message).toBe(
+      '"defaultValue" must be a valid ISO 8601 date or the string "NOW"',
+    )
+    expect(result.error.details[1].message).toBe(
+      '"defaultValue" must be a valid ISO 8601 date or the string "NOW"',
+    )
+    expect(result.error.details[2].message).toBe(
+      '"defaultValue" must be a valid ISO 8601 date or the string "NOW"',
+    )
+  })
+
+  test('should allow date and date/time elements to have daysOffset values', () => {
+    const result = Joi.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
+            name: 'Date_and_Time',
+            label: 'Date and Time',
+            type: 'datetime',
+            required: false,
+            defaultValue: 'NOW',
+            defaultValueDaysOffset: 5,
+            fromDate: 'NOW',
+            fromDateDaysOffset: 4,
+            toDate: 'NOW',
+            toDateDaysOffset: 6,
+          },
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+            defaultValueDaysOffset: -4,
+            fromDate: 'NOW',
+            fromDateDaysOffset: -6,
+            toDate: 'NOW',
+            toDateDaysOffset: -3,
+          },
+        ],
+      },
+      formSchema,
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error).toBe(null)
+    // DATETIME
+    expect(result.value.elements[0].defaultValue).toBe('NOW')
+    expect(result.value.elements[0].defaultValueDaysOffset).toBe(5)
+    expect(result.value.elements[0].fromDate).toBe('NOW')
+    expect(result.value.elements[0].fromDateDaysOffset).toBe(4)
+    expect(result.value.elements[0].toDate).toBe('NOW')
+    expect(result.value.elements[0].toDateDaysOffset).toBe(6)
+    // DATE
+    expect(result.value.elements[1].defaultValue).toBe('NOW')
+    expect(result.value.elements[1].defaultValueDaysOffset).toBe(-4)
+    expect(result.value.elements[1].fromDate).toBe('NOW')
+    expect(result.value.elements[1].fromDateDaysOffset).toBe(-6)
+    expect(result.value.elements[1].toDate).toBe('NOW')
+    expect(result.value.elements[1].toDateDaysOffset).toBe(-3)
+  })
+  test('should allow combinations of `NOW` and static dates ', () => {
+    const result = Joi.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
+            name: 'Date_and_Time',
+            label: 'Date and Time',
+            type: 'datetime',
+            required: false,
+            defaultValue: 'NOW',
+            defaultValueDaysOffset: 5,
+            fromDate: '2021-05-25T00:00:00.000Z',
+            fromDateDaysOffset: 2,
+            toDate: 'NOW',
+            toDateDaysOffset: 6,
+          },
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+            fromDate: 'NOW',
+            fromDateDaysOffset: -6,
+            toDate: '2021-05-25',
+            toDateDaysOffset: 2,
+          },
+        ],
+      },
+      formSchema,
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error).toBe(null)
+    // DATETIME
+    expect(result.value.elements[0].defaultValue).toBe('NOW')
+    expect(result.value.elements[0].defaultValueDaysOffset).toBe(5)
+    expect(result.value.elements[0].fromDate).toBe('2021-05-25T00:00:00.000Z')
+    expect(result.value.elements[0].fromDateDaysOffset).toBe(undefined)
+    expect(result.value.elements[0].toDate).toBe('NOW')
+    expect(result.value.elements[0].toDateDaysOffset).toBe(6)
+    // DATE
+    expect(result.value.elements[1].defaultValue).toBe('NOW')
+    expect(result.value.elements[1].defaultValueDaysOffset).toBe(undefined)
+    expect(result.value.elements[1].fromDate).toBe('NOW')
+    expect(result.value.elements[1].fromDateDaysOffset).toBe(-6)
+    expect(result.value.elements[1].toDate).toBe('2021-05-25')
+    expect(result.value.elements[1].toDateDaysOffset).toBe(undefined)
+  })
+
+  test('should throw error when `toDate` is before `fromDate`', () => {
+    const result = Joi.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+            fromDate: 'NOW',
+            fromDateDaysOffset: -6,
+            toDate: 'NOW',
+            toDateDaysOffset: -8,
+          },
+        ],
+      },
+      formSchema,
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error.details[0].message).toBe(
+      '"toDateDaysOffset" must be larger than or equal to -6',
     )
   })
 })
