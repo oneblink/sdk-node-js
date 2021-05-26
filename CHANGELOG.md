@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.12] - 2021-05-26
+
 ### Changed
 
 - `toDate` and `fromDate` to return raw data in form schema
@@ -20,6 +22,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - network request's that fail without a JSON response attempting to parse the text as JSON
+
+### Dependencies
+
+- update [aws-sdk](https://www.npmjs.com/package/aws-sdk) to [2.912.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.912.0) (from [2.894.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.894.0))
+
+- update [nodemailer](https://www.npmjs.com/package/nodemailer) to [6.6.1](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md) (from [6.5.0](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md))
 
 ## [0.9.11] - 2021-05-19
 
