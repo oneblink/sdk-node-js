@@ -5514,3 +5514,103 @@ describe('Date and Time `NOW` option', () => {
     )
   })
 })
+
+describe('Regex Custom Validation Properties', () => {
+  const form = {
+    id: 1,
+    name: 'Form',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: '59cc888b8969af000fb50ddb',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    isMultiPage: false,
+    submissionEvents: [],
+  }
+
+  test('should allow saving of all regex fields', () => {
+    const result = Joi.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            regexPattern: '^[a-z]*$',
+            regexFlags: 'dgimsuy',
+            regexMessage: 'This is a regex error message',
+          },
+        ],
+      },
+      formSchema,
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error).toBe(null)
+    expect(result.value.elements[0].regexPattern).toBe('^[a-z]*$')
+    expect(result.value.elements[0].regexFlags).toBe('dgimsuy')
+    expect(result.value.elements[0].regexMessage).toBe(
+      'This is a regex error message',
+    )
+  })
+  test('should strip regex config fields if pattern is not present', () => {
+    const result = Joi.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            regexFlags: 'dgimsuy',
+            regexMessage: 'This is a regex error message',
+          },
+        ],
+      },
+      formSchema,
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error).toBe(null)
+    // @ts-expect-error Joi generic typings for validate function are stupid
+    expect(result.value.elements[0].regexPattern).toBe(undefined)
+    expect(result.value.elements[0].regexFlags).toBe(undefined)
+    expect(result.value.elements[0].regexMessage).toBe(undefined)
+  })
+  test('should throw an error if invalid `flag` characters are present, and should require `regexMessage` when `regexPattern` is set', () => {
+    const result = Joi.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            regexPattern: '^[a-z]*$',
+            regexFlags: 'dgimsuyabc',
+          },
+        ],
+      },
+      formSchema,
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error.details.length).toBe(2)
+    expect(result.error.details[0].message).toBe(
+      '"regexFlags" with value "dgimsuyabc" fails to match the required pattern: /^[dgimsuy]+$/',
+    )
+    expect(result.error.details[1].message).toBe('"regexMessage" is required')
+  })
+})

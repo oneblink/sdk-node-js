@@ -21,6 +21,7 @@ Telephone element also inherits the properties of the following:
 
 - [Base Element](./base-element.md)
 - [Lookup Element](./lookup-element.md)
+- [Custom Validation Element](./custom-validation-element.md)
 
 ### Example
 
@@ -33,5 +34,15 @@ Telephone element also inherits the properties of the following:
   "defaultValue": "0412 345 678",
   "required": true,
   "readOnly": false
+}
+```
+
+### Example Submission Data
+
+```json
+{
+  "submission": {
+    "[element.name]": "0402123456"
+  }
 }
 ```

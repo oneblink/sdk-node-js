@@ -10,6 +10,7 @@ import {
   conditionallyShowSchemas,
   placeholderValue,
   lookupSchemas,
+  regexSchemas,
 } from '../property-schemas'
 
 export default Joi.object({
@@ -101,4 +102,5 @@ export default Joi.object({
       otherwise: Joi.string(),
     })
     .label('Form Element - Default Value'),
+  ...regexSchemas,
 })

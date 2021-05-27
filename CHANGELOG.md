@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Updated
+
+- Form element schemas to support regex properties.
+
 ## [0.9.12] - 2021-05-26
 
 ### Changed
