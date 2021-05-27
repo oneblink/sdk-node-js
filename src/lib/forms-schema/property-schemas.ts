@@ -206,8 +206,16 @@ export const storageType = Joi.string()
   .valid(['legacy', 'public', 'private'])
 
 const regexPattern = Joi.string()
-const regexFlags = Joi.string().regex(/^[dgimsuy]*$/)
-const regexMessage = Joi.string()
+const regexFlags = Joi.when('regexPattern', {
+  is: Joi.string().required(),
+  then: Joi.string().regex(/^[dgimsuy]+$/),
+  otherwise: Joi.strip(),
+})
+const regexMessage = Joi.string().when('regexPattern', {
+  is: Joi.string().required(),
+  then: Joi.required(),
+  otherwise: Joi.strip(),
+})
 
 export const regexSchemas = {
   regexPattern,
