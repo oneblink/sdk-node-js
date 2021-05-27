@@ -26,6 +26,7 @@ Number element also inherits the properties of the following:
 
 - [Base Element](./base-element.md)
 - [Lookup Element](./lookup-element.md)
+- [Custom Validation Element](./custom-validation-element.md)
 
 ### Example
 
@@ -42,5 +43,15 @@ Number element also inherits the properties of the following:
   "minNumber": 0,
   "maxNumber": 100,
   "sliderIncrement": 5
+}
+```
+
+### Example Submission Data
+
+```json
+{
+  "submission": {
+    "[element.name]": 57
+  }
 }
 ```

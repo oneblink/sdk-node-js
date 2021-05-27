@@ -204,3 +204,13 @@ export const conditionallyShowSchemas = {
 export const storageType = Joi.string()
   .label('Storage type')
   .valid(['legacy', 'public', 'private'])
+
+const regexPattern = Joi.string()
+const regexFlags = Joi.string().regex(/^[dgimsuy]*$/)
+const regexMessage = Joi.string()
+
+export const regexSchemas = {
+  regexPattern,
+  regexFlags,
+  regexMessage,
+}

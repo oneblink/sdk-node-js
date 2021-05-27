@@ -23,6 +23,7 @@ Textarea element also inherits the properties of the following:
 
 - [Base Element](./base-element.md)
 - [Lookup Element](./lookup-element.md)
+- [Custom Validation Element](./custom-validation-element.md)
 
 ### Example
 
@@ -34,5 +35,15 @@ Textarea element also inherits the properties of the following:
   "label": "Please Enter a Description",
   "required": true,
   "readOnly": false
+}
+```
+
+### Example Submission Data
+
+```json
+{
+  "submission": {
+    "[element.name]": "Obi-Wan Kenobi was a Force-sensitive legendary human male Jedi Master who served on the Jedi High Council during the last years of the Republic Era. During the Imperial Era, he adopted the alias Ben Kenobi in order to hide from the regime that drove the Jedi to near extinction."
+  }
 }
 ```

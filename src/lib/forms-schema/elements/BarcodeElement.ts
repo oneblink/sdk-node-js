@@ -9,6 +9,7 @@ import {
   conditionallyShowSchemas,
   placeholderValue,
   lookupSchemas,
+  regexSchemas,
 } from '../property-schemas'
 
 export default Joi.object({
@@ -33,4 +34,5 @@ export default Joi.object({
       .required(),
     otherwise: Joi.any().strip(),
   }),
+  ...regexSchemas,
 })
