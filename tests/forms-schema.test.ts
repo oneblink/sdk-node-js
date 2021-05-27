@@ -5515,7 +5515,7 @@ describe('Date and Time `NOW` option', () => {
   })
 })
 
-describe.only('Regex Custom Validation Properties', () => {
+describe('Regex Custom Validation Properties', () => {
   const form = {
     id: 1,
     name: 'Form',
