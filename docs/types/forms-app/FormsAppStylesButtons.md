@@ -4,13 +4,13 @@
 
 ## FormsAppStylesButtons
 
-| Parameter         | Required | Type                                               | Description                                                  |
-| ----------------- | -------- | -------------------------------------------------- | ------------------------------------------------------------ |
-| `submit`          | No       | [`FormsAppStylesMenuItem[]`](#buttonconfiguration) | Button configuration for the Submit button                   |
-| `cancel`          | No       | [`FormsAppStylesMenuItem[]`](#buttonconfiguration) | Button configuration for the Cancel button                   |
-| `saveDraft`       | No       | [`FormsAppStylesMenuItem[]`](#buttonconfiguration) | Button configuration for the Save Draft button               |
-| `cancelPromptYes` | No       | [`FormsAppStylesMenuItem[]`](#buttonconfiguration) | Button configuration for the Cancel Prompt dialog Yes button |
-| `cancelPromptNo`  | No       | [`FormsAppStylesMenuItem[]`](#buttonconfiguration) | Button configuration for the Cancel Prompt dialog No button  |
+| Parameter         | Required | Type                                          | Description                                                  |
+| ----------------- | -------- | --------------------------------------------- | ------------------------------------------------------------ |
+| `submit`          | No       | [`ButtonConfiguration`](#buttonconfiguration) | Button configuration for the Submit button                   |
+| `cancel`          | No       | [`ButtonConfiguration`](#buttonconfiguration) | Button configuration for the Cancel button                   |
+| `saveDraft`       | No       | [`ButtonConfiguration`](#buttonconfiguration) | Button configuration for the Save Draft button               |
+| `cancelPromptYes` | No       | [`ButtonConfiguration`](#buttonconfiguration) | Button configuration for the Cancel Prompt dialog Yes button |
+| `cancelPromptNo`  | No       | [`ButtonConfiguration`](#buttonconfiguration) | Button configuration for the Cancel Prompt dialog No button  |
 
 ## ButtonConfiguration
 
