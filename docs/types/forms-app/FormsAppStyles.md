@@ -16,6 +16,7 @@ Form Forms Apps of type `FORMS_LIST` only [ScreenMenuItem](./FormsAppStylesMenuI
 | `customCss`        | No       | `string`                                                   | Custom CSS applied to the Forms App                                                             |
 | `logoUrl`          | No       | `string`                                                   | The absolute URL to the logo image in the Forms App                                             |
 | `menuItems`        | Yes      | [`FormsAppStylesMenuItem[]`](./FormsAppStylesMenuItems.md) | Array of menu item objects. See above for which menu items to use for different forms app types |
+| `buttons`          | No       | [`FormsAppStylesButtons`](./FormsAppStylesButtons.md)      | Configuration object for button customization                                                   |
 
 ## VolunteerFormsAppStyles
 
