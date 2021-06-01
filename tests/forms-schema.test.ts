@@ -1162,7 +1162,7 @@ test('should error if number max is not an integer when number isInteger', () =>
 
 // Looks like this is impossible with the current Joi version
 // https://github.com/hapijs/joi/issues/1685
-test.skip('should throw error if maxNumber is not provided for number element with isSlider as true', () => {
+test('should throw error if maxNumber is not provided for number element with isSlider as true', () => {
   const { error } = formSchema.validate({
     id: 1,
     name: 'Inspection',
