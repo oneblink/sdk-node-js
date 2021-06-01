@@ -437,10 +437,10 @@ describe('Valid Form Schema with Pages', () => {
           element.type === 'html' ||
           element.type === 'heading'
         ) {
-          // @ts-expect-error ???
+          // @ts-expect-error "readyOnly" should be here, hence the check
           expect(element.readOnly).toBeUndefined()
         } else {
-          // @ts-expect-error ???
+          // @ts-expect-error "readyOnly" should be here, hence the check
           expect(element.readOnly).toBe(false)
         }
       },
@@ -803,10 +803,10 @@ describe('Valid Form Schema', () => {
         element.type === 'html' ||
         element.type === 'heading'
       ) {
-        // @ts-expect-error ???
+        // @ts-expect-error "readyOnly" should be here, hence the check
         expect(element.readOnly).toBeUndefined()
       } else {
-        // @ts-expect-error ???
+        // @ts-expect-error "readyOnly" should be here, hence the check
         expect(element.readOnly).toBe(false)
       }
     })
