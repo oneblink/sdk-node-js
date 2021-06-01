@@ -23,12 +23,8 @@ export default Joi.object({
   ...lookupSchemas,
   defaultValue: Joi.when('optionsType', {
     is: Joi.invalid(DYNAMIC_OPTION_TYPE),
-    then: Joi.array()
-      .items(Joi.string().guid())
-      .label('Form Element - Default Value'),
-    otherwise: Joi.array()
-      .items(Joi.string())
-      .label('Form Element - Default Value'),
+    then: Joi.array().items(Joi.string().guid()),
+    otherwise: Joi.array().items(Joi.string()),
   }),
   buttons,
   ...optionsSchemas,

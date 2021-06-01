@@ -6,8 +6,5 @@ export default Joi.object({
   name,
   label,
   ...conditionallyShowSchemas,
-  headingType: Joi.number()
-    .required()
-    .label('Form Element - Heading Size')
-    .valid(1, 2, 3, 4, 5),
+  headingType: Joi.number().required().valid(1, 2, 3, 4, 5),
 })

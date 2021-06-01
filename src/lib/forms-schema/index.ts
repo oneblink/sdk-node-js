@@ -10,7 +10,6 @@ const SubmissionEventsSchema = Joi.object().keys({
   isDraft: Joi.boolean().default(false),
   type: Joi.string()
     .required()
-    .label('Form Submission Event - Type')
     .valid(
       'CALLBACK',
       'PDF',
@@ -22,64 +21,39 @@ const SubmissionEventsSchema = Joi.object().keys({
     ),
   configuration: Joi.object()
     .required()
-    .label('Form Submission Event - Configuration')
     .when('type', {
       is: 'CALLBACK',
       then: Joi.object().keys({
-        url: Joi.string()
-          .uri()
-          .required()
-          .label('Form Submission Event - Callback Url'),
-        secret: Joi.string()
-          .required()
-          .label('Form Submission Event - Callback Secret'),
+        url: Joi.string().uri().required(),
+        secret: Joi.string().required(),
       }),
     })
     .when('type', {
       is: 'PDF',
       then: Joi.object().keys({
         email: Joi.alternatives([
-          Joi.string()
-            .email()
-            .required()
-            .label('Form Submission Event - Email Address'),
+          Joi.string().email().required(),
           Joi.string()
             .regex(/^{ELEMENT:\S+}$/)
-            .required()
-            .label('Form Submission Event - Email Address'),
+            .required(),
         ]),
-        pdfFileName: Joi.string()
-          .allow(null, '')
-          .label('Form Submission Event - PDF File Name'),
-        emailSubjectLine: Joi.string()
-          .allow(null, '')
-          .label('Form Submission Event - Email Subject Line'),
-        includeSubmissionIdInPdf: Joi.boolean().label(
-          'Form Submission Event - Include Submission ID',
-        ),
+        pdfFileName: Joi.string().allow(null, ''),
+        emailSubjectLine: Joi.string().allow(null, ''),
+        includeSubmissionIdInPdf: Joi.boolean(),
         excludedElementIds: Joi.array()
           .items(Joi.string().guid())
           .unique()
           .allow(null)
-          .default([])
-          .label('Form Submission Event - Excludeded element ids'),
+          .default([]),
       }),
     })
     .when('type', {
       is: 'ONEBLINK_API',
       then: Joi.object().keys({
-        apiId: Joi.string()
-          .required()
-          .label('Form Submission Event - API Instance'),
-        apiEnvironment: Joi.string()
-          .required()
-          .label('Form Submission Event - API Environment'),
-        apiEnvironmentRoute: Joi.string()
-          .required()
-          .label('Form Submission Event - API Environment Route'),
-        secret: Joi.string()
-          .required()
-          .label('Form Submission Event - Callback Secret'),
+        apiId: Joi.string().required(),
+        apiEnvironment: Joi.string().required(),
+        apiEnvironmentRoute: Joi.string().required(),
+        secret: Joi.string().required(),
       }),
     })
     .when('type', {
@@ -103,9 +77,7 @@ const SubmissionEventsSchema = Joi.object().keys({
           uri: Joi.number().required(),
           label: Joi.string().required(),
         }),
-        includeSubmissionIdInPdf: Joi.boolean().label(
-          'Form Submission Event - Include Submission ID',
-        ),
+        includeSubmissionIdInPdf: Joi.boolean(),
         author: Joi.object()
           .keys({
             uri: Joi.number().required(),
@@ -144,14 +116,8 @@ const SubmissionEventsSchema = Joi.object().keys({
         encryptPdf: Joi.boolean().default(false),
       }),
     }),
-  conditionallyExecute: Joi.bool()
-    .default(false)
-    .label('Form Submission Event - Conditionally Execute'),
-  requiresAllConditionallyExecutePredicates: Joi.bool()
-    .default(false)
-    .label(
-      'Form Submission Event - Requires All Conditionally Execute Predicates are Met',
-    ),
+  conditionallyExecute: Joi.bool().default(false),
+  requiresAllConditionallyExecutePredicates: Joi.bool().default(false),
   conditionallyExecutePredicates: Joi.when('conditionallyExecute', {
     is: true,
     then: Joi.array()
@@ -164,18 +130,13 @@ const SubmissionEventsSchema = Joi.object().keys({
 })
 
 const pageElementSchema = Joi.object().keys({
-  id: Joi.string().guid().required().label('Form Element - Id'),
-  label: Joi.string().required().label('Form Element - Label'),
+  id: Joi.string().guid().required(),
+  label: Joi.string().required(),
   type: Joi.valid('page'),
-  conditionallyShow: Joi.bool()
-    .default(false)
-    .label('Form Element - Conditionally Show'),
+  conditionallyShow: Joi.bool().default(false),
   conditionallyShowPredicates: conditionallyShowPredicates,
-  requiresAllConditionallyShowPredicates: Joi.bool()
-    .default(false)
-    .label('Form Element - Requires All Conditionally Show Predicates are Met'),
+  requiresAllConditionallyShowPredicates: Joi.bool().default(false),
   elements: Joi.array()
-    .label('Form Element - Page - Elements')
     .required()
     .items(elementSchema)
     .min(1)
@@ -185,36 +146,30 @@ const pageElementSchema = Joi.object().keys({
 
 const formSchema = Joi.object().keys({
   id: Joi.number(),
-  formsAppEnvironmentId: Joi.number().label('Environment').required(),
-  name: Joi.string().label('Name').required(),
-  description: Joi.string().label('Description').allow('', null),
-  organisationId: Joi.string().label('Organisation').required(),
-  elements: Joi.array()
-    .label('Form Elements')
-    .when('isMultiPage', {
-      is: false,
-      then: Joi.array()
-        .required()
-        .items(elementSchema)
-        .unique('name', { ignoreUndefined: true })
-        .unique('id'),
-      otherwise: Joi.array().items(pageElementSchema),
-    }),
-  isMultiPage: Joi.bool().default(false).label('Form Is Multi Page'),
-  isAuthenticated: Joi.bool().default(false).label('Form Authentication'),
-  publishStartDate: Joi.string().isoDate().label('Publish Start Date'),
-  publishEndDate: Joi.string().isoDate().label('Publish End Date'),
-  submissionEvents: Joi.array()
-    .allow(null)
-    .label('Submission Events')
-    .items(SubmissionEventsSchema),
+  formsAppEnvironmentId: Joi.number().required(),
+  name: Joi.string().required(),
+  description: Joi.string().allow('', null),
+  organisationId: Joi.string().required(),
+  elements: Joi.array().when('isMultiPage', {
+    is: false,
+    then: Joi.array()
+      .required()
+      .items(elementSchema)
+      .unique('name', { ignoreUndefined: true })
+      .unique('id'),
+    otherwise: Joi.array().items(pageElementSchema),
+  }),
+  isMultiPage: Joi.bool().default(false),
+  isAuthenticated: Joi.bool().default(false),
+  publishStartDate: Joi.string().isoDate(),
+  publishEndDate: Joi.string().isoDate(),
+  submissionEvents: Joi.array().allow(null).items(SubmissionEventsSchema),
   postSubmissionAction: Joi.string()
-    .label('Post Submission Action')
     .required()
     .valid(...postSubmissionActions),
   redirectUrl: Joi.when('postSubmissionAction', {
     is: 'URL',
-    then: Joi.string().required().label('Post Submission Redirect URL'),
+    then: Joi.string().required(),
     otherwise: Joi.any().strip(),
   }),
   cancelAction: Joi.string()
@@ -225,15 +180,12 @@ const formSchema = Joi.object().keys({
     then: Joi.string().required(),
     otherwise: Joi.any().strip(),
   }),
-  isInfoPage: Joi.bool().default(false).label('Form Information Page'),
-  formsAppIds: Joi.array()
-    .items(Joi.number())
-    .required()
-    .label('Associated Forms Apps'),
-  createdAt: Joi.string().label('Date Created').allow('', null),
-  updatedAt: Joi.string().label('Date Updated').allow('', null),
+  isInfoPage: Joi.bool().default(false),
+  formsAppIds: Joi.array().items(Joi.number()).required(),
+  createdAt: Joi.string().allow('', null),
+  updatedAt: Joi.string().allow('', null),
   // TAGS
-  tags: Joi.array().default([]).label('Form Tags').items(Joi.string()),
+  tags: Joi.array().default([]).items(Joi.string()),
 })
 
 export { formSchema, elementSchema, pageElementSchema }

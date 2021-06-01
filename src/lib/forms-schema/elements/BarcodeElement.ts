@@ -23,15 +23,10 @@ export default Joi.object({
   ...lookupSchemas,
   placeholderValue,
   defaultValue: Joi.string(),
-  restrictBarcodeTypes: Joi.boolean()
-    .default(false)
-    .label('Form Element - Barcode Scanner - restrictBarcodeTypes'),
+  restrictBarcodeTypes: Joi.boolean().default(false),
   restrictedBarcodeTypes: Joi.when('restrictBarcodeTypes', {
     is: true,
-    then: Joi.array()
-      .items(Joi.string())
-      .label('Form Element - Barcode Scanner - restrictedBarcodeTypes')
-      .required(),
+    then: Joi.array().items(Joi.string()).required(),
     otherwise: Joi.any().strip(),
   }),
   ...regexSchemas,

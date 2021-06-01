@@ -4,5 +4,5 @@ export default Joi.object({
   id,
   name,
   ...conditionallyShowSchemas,
-  formId: Joi.number().label('Form Id').required(),
+  formId: Joi.number().required(),
 })

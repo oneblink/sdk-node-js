@@ -16,7 +16,7 @@ export default Joi.object({
   readOnly,
   elementIds: Joi.array()
     .required()
-    .label('Form Element - Summarised Element ID')
+
     .min(1)
     .items(Joi.string().uuid().required()),
   ...conditionallyShowSchemas,

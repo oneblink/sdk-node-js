@@ -25,24 +25,19 @@ export default Joi.object({
   ...lookupSchemas,
   isSlider: Joi.when('type', {
     is: 'number',
-    then: Joi.boolean()
-      .label('Form Element - Display Number as Slider')
-      .default(false),
+    then: Joi.boolean().default(false),
     otherwise: Joi.any().strip(),
   }),
   sliderIncrement: Joi.when('isSlider', {
     is: true,
-    then: JoiRange.range()
-      .within(
-        Joi.ref('minNumber', { render: true }),
-        Joi.ref('maxNumber', { render: true }),
-      )
-      .label('Form Element - Slider Increment'),
+    then: JoiRange.range().within(
+      Joi.ref('minNumber', { render: true }),
+      Joi.ref('maxNumber', { render: true }),
+    ),
     otherwise: Joi.any().strip(),
   }),
   minNumber: Joi.number()
     .allow(null)
-    .label('Form Element - Minimum Number')
     .when('type', {
       is: Joi.not('number'),
       then: Joi.any().strip(),
@@ -56,7 +51,6 @@ export default Joi.object({
       then: Joi.number().integer(),
     }),
   maxNumber: Joi.number()
-    .label('Form Element - Maximum Number')
     .when('type', {
       is: Joi.not('number'),
       then: Joi.any().strip(),
@@ -75,7 +69,7 @@ export default Joi.object({
     }),
   isInteger: Joi.when('type', {
     is: 'number',
-    then: Joi.boolean().label('Form Element - isInteger').default(false),
+    then: Joi.boolean().default(false),
     otherwise: Joi.any().strip(),
   }),
   defaultValue: Joi.when('minNumber', {
@@ -102,7 +96,6 @@ export default Joi.object({
       is: true,
       then: Joi.number().integer(),
       otherwise: Joi.number(),
-    })
-    .label('Form Element - Default Value'),
+    }),
   ...regexSchemas,
 })

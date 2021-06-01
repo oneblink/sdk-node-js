@@ -6,7 +6,6 @@ import setPreFillData from '../lib/pre-fill-data'
 import { ConstructorOptions, PreFillMeta, Tenant } from '../lib/types'
 
 const newJobSchema = Joi.object()
-  .label('options')
   .required()
   .keys({
     username: Joi.string().required(),

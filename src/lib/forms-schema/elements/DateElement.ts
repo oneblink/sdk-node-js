@@ -17,7 +17,7 @@ const daysOffsetSchema = Joi.number().integer()
 
 const fromDate = Joi.alternatives([dateSchema, nowSchema]).allow(null)
 const toDate = Joi.when('fromDate', {
-  is: Joi.date().iso().raw().required().label('Form Element - To Date'),
+  is: Joi.date().iso().raw().required(),
   // SET MIN IF FROMDATE IS A STATIC DATE
   then: Joi.alternatives([
     dateSchema.min(Joi.ref('fromDate', { render: true })),

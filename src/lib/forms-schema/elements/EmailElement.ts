@@ -22,8 +22,6 @@ export default Joi.object({
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   placeholderValue,
-  defaultValue: Joi.string()
-    .email()
-    .label('Form Element - Default Email Value'),
+  defaultValue: Joi.string().email(),
   ...regexSchemas,
 })

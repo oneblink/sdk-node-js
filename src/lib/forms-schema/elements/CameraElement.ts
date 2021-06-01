@@ -18,8 +18,6 @@ export default Joi.object({
   required,
   readOnly,
   ...conditionallyShowSchemas,
-  includeTimestampWatermark: Joi.boolean()
-    .default(false)
-    .label('Camera element - Include timestamp watermark'),
+  includeTimestampWatermark: Joi.boolean().default(false),
   storageType,
 })
