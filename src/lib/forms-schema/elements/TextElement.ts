@@ -28,19 +28,21 @@ export default Joi.object({
     .min(0)
     .when('minLength', {
       is: Joi.number().required(),
-      then: Joi.number().min(Joi.ref('minLength')),
+      then: Joi.number().min(Joi.ref('minLength', { render: true })),
     }),
   defaultValue: Joi.when('minLength', {
     is: Joi.number().required(),
     then: Joi.string().when('maxLength', {
       is: Joi.number().required(),
-      then: Joi.string().min(Joi.ref('minLength')).max(Joi.ref('maxLength')),
-      otherwise: Joi.string().min(Joi.ref('minLength')),
+      then: Joi.string()
+        .min(Joi.ref('minLength', { render: true }))
+        .max(Joi.ref('maxLength', { render: true })),
+      otherwise: Joi.string().min(Joi.ref('minLength', { render: true })),
     }),
   })
     .when('maxLength', {
       is: Joi.number().required(),
-      then: Joi.string().max(Joi.ref('maxLength')),
+      then: Joi.string().max(Joi.ref('maxLength', { render: true })),
       otherwise: Joi.string(),
     })
     .label('Form Element - Default Value'),

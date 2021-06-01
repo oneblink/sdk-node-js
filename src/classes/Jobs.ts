@@ -41,7 +41,7 @@ export default (tenant: Tenant) =>
       options?: unknown,
       preFillData?: unknown,
     ): Promise<SubmissionTypes.FormsAppJob> {
-      const result = Joi.validate(options, newJobSchema, { stripUnknown: true })
+      const result = newJobSchema.validate(options, { stripUnknown: true })
       if (result.error) {
         throw result.error
       }

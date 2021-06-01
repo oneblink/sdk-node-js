@@ -19,15 +19,7 @@ export default Joi.object({
   required,
   readOnly,
   placeholderValue,
-  defaultValue: Joi.alternatives([Joi.date().iso().raw(), Joi.only(['NOW'])])
-    // @ts-expect-error ???
-    .error(() => {
-      return {
-        message:
-          '"defaultValue" must be a valid ISO 8601 date or the string "NOW"',
-      }
-    })
-    .label('Form Element - Default Date Value'),
+  defaultValue: Joi.alternatives([Joi.date().iso().raw(), Joi.valid('NOW')]),
   ...conditionallyShowSchemas,
   ...lookupSchemas,
 })

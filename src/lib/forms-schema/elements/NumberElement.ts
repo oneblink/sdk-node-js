@@ -33,7 +33,10 @@ export default Joi.object({
   sliderIncrement: Joi.when('isSlider', {
     is: true,
     then: JoiRange.range()
-      .within({ min: Joi.ref('minNumber'), max: Joi.ref('maxNumber') })
+      .within(
+        Joi.ref('minNumber', { render: true }),
+        Joi.ref('maxNumber', { render: true }),
+      )
       .label('Form Element - Slider Increment'),
     otherwise: Joi.any().strip(),
   }),
@@ -60,7 +63,7 @@ export default Joi.object({
     })
     .when('minNumber', {
       is: Joi.number().required(),
-      then: Joi.number().min(Joi.ref('minNumber')),
+      then: Joi.number().min(Joi.ref('minNumber', { render: true })),
     })
     .when('isSlider', {
       is: true,
@@ -79,27 +82,26 @@ export default Joi.object({
     is: Joi.number().required(),
     then: Joi.when('isInteger', {
       is: true,
-      then: Joi.number().integer().min(Joi.ref('minNumber')),
-      otherwise: Joi.number().min(Joi.ref('minNumber')),
+      then: Joi.number()
+        .integer()
+        .min(Joi.ref('minNumber', { render: true })),
+      otherwise: Joi.number().min(Joi.ref('minNumber', { render: true })),
     }),
   })
     .when('maxNumber', {
       is: Joi.number().required(),
       then: Joi.when('isInteger', {
         is: true,
-        then: Joi.number().integer().max(Joi.ref('maxNumber')),
-        otherwise: Joi.number().max(Joi.ref('maxNumber')),
+        then: Joi.number()
+          .integer()
+          .max(Joi.ref('maxNumber', { render: true })),
+        otherwise: Joi.number().max(Joi.ref('maxNumber', { render: true })),
       }),
     })
     .when('isInteger', {
       is: true,
       then: Joi.number().integer(),
       otherwise: Joi.number(),
-    })
-    .when('maxLength', {
-      is: Joi.number().required(),
-      then: Joi.string().max(Joi.ref('maxLength')),
-      otherwise: Joi.string(),
     })
     .label('Form Element - Default Value'),
   ...regexSchemas,

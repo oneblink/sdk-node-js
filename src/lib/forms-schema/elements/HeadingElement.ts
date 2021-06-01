@@ -9,5 +9,5 @@ export default Joi.object({
   headingType: Joi.number()
     .required()
     .label('Form Element - Heading Size')
-    .valid([1, 2, 3, 4, 5]),
+    .valid(1, 2, 3, 4, 5),
 })

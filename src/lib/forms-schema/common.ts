@@ -43,39 +43,48 @@ export const SEARCH_OPTION_TYPE = 'SEARCH'
 export const optionTypes = [CUSTOM_OPTION_TYPE, DYNAMIC_OPTION_TYPE]
 
 export const JoiRange = Joi.extend((joi: typeof Joi) => ({
+  type: 'range',
   base: joi.number(),
-  name: 'range',
-  language: {
-    within: 'Must not exceed range of values {{min}} and {{max}}: ({{v}})',
+  //name: 'range',
+  messages: {
+    'range.within':
+      'Must not exceed range of values {{#min}} and {{#max}}: ({{#v}})',
   },
-  rules: [
-    {
-      name: 'within',
-      params: {
-        options: joi.object({
-          min: joi.func().ref(),
-          max: joi.func().ref(),
-        }),
+  rules: {
+    within: {
+      method(min, max) {
+        return this.$_addRule({ name: 'within', args: { min, max } })
       },
-      // @ts-expect-error sorry Joi, this is valid...at least it was in Flow
-      validate(params, value, state, options) {
-        const max = params.options.max.key
-        const min = params.options.min.key
-        const parent = state.parent
-        const range = parent[max] - parent[min]
+      args: [
+        {
+          name: 'min',
+          ref: true,
+          assert: joi.number(),
+        },
+        {
+          name: 'max',
+          ref: true,
+          assert: joi.number(),
+        },
+      ],
+      validate(value, helpers, args, options) {
+        console.log({
+          value,
+          helpers,
+          args,
+          options,
+        })
+        const max = args.max
+        const min = args.min
+        const range = max - min
         if (value > range) {
-          // @ts-expect-error sorry Joi, this is valid...at least it was in Flow
-          return this.createError(
-            'range.within',
-            { v: value, min: parent[min], max: parent[max] },
-            state,
-            options,
-          )
+          return helpers.error('range.within', { v: value, min, max })
         }
         return value
       },
     },
-  ],
+  },
 }))
 
-export const base64DataRegex = /<[^>]*src="data:([a-zA-Z]*)\/([a-zA-Z]*);base64,([^"]*)".*>/m
+export const base64DataRegex =
+  /<[^>]*src="data:([a-zA-Z]*)\/([a-zA-Z]*);base64,([^"]*)".*>/m
