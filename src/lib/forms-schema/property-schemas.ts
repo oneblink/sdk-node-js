@@ -207,7 +207,15 @@ export const storageType = Joi.string()
   .label('Storage type')
   .valid('legacy', 'public', 'private')
 
-const regexPattern = Joi.string()
+const regexPattern = Joi.string().custom((value) => {
+  if (!value) return
+  try {
+    new RegExp(value)
+    return value
+  } catch (err) {
+    throw new Error('it was an invalid regex pattern')
+  }
+})
 const regexFlags = Joi.when('regexPattern', {
   is: Joi.string().required(),
   then: Joi.string().regex(/^[dgimsuy]+$/),

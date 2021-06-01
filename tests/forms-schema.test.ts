@@ -5499,4 +5499,31 @@ describe('Regex Custom Validation Properties', () => {
       '"elements[0].regexMessage" is required',
     )
   })
+  test('should throw an error if regex pattern is invalid', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            regexPattern: '^[mM][a-Z]',
+            regexMessage: 'This is a regex error message',
+          },
+        ],
+      },
+
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error?.details.length).toBe(1)
+    expect(result.error?.details[0].message).toBe(
+      '"elements[0].regexPattern" failed custom validation because it was an invalid regex pattern',
+    )
+  })
 })
