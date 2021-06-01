@@ -5,10 +5,10 @@ import { ConditionalPredicatesItemSchema } from './forms-schema/property-schemas
 
 function validateJoiSchema<T>(
   data: unknown,
-  schema: Joi.SchemaLike,
+  schema: Joi.Schema,
   options?: Joi.ValidationOptions,
 ): T {
-  const result = Joi.validate(data, schema, options)
+  const result = schema.validate(data, options)
   if (result.error) {
     throw result.error
   }

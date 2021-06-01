@@ -11,29 +11,19 @@ import {
   placeholderValue,
 } from '../property-schemas'
 
-const nowSchema = Joi.only(['NOW'])
+const nowSchema = Joi.valid('NOW')
 const dateSchema = Joi.date().iso().raw()
 const daysOffsetSchema = Joi.number().integer()
 
-const errorFn = (fieldName: string): Joi.ValidationErrorFunction => {
-  // @ts-expect-error ???
-  return () => ({
-    message: `"${fieldName}" must be a valid ISO 8601 date or the string "NOW"`,
-  })
-}
-
-const fromDate = Joi.alternatives([dateSchema, nowSchema])
-  .allow(null)
-  .error(errorFn('fromDate'))
-
+const fromDate = Joi.alternatives([dateSchema, nowSchema]).allow(null)
 const toDate = Joi.when('fromDate', {
   is: Joi.date().iso().raw().required().label('Form Element - To Date'),
   // SET MIN IF FROMDATE IS A STATIC DATE
   then: Joi.alternatives([
-    dateSchema.min(Joi.ref('fromDate')),
-    nowSchema.error(errorFn('toDate')),
+    dateSchema.min(Joi.ref('fromDate', { render: true })),
+    nowSchema,
   ]),
-  otherwise: Joi.alternatives([dateSchema, nowSchema]).error(errorFn('toDate')),
+  otherwise: Joi.alternatives([dateSchema, nowSchema]),
 }).allow(null)
 
 const fromDateDaysOffset = Joi.when('fromDate', {
@@ -45,7 +35,7 @@ const toDateDaysOffset = Joi.when('toDate', {
   is: nowSchema.required(),
   then: Joi.when('fromDateDaysOffset', {
     is: daysOffsetSchema.required(),
-    then: daysOffsetSchema.min(Joi.ref('fromDateDaysOffset')),
+    then: daysOffsetSchema.min(Joi.ref('fromDateDaysOffset', { render: true })),
     otherwise: daysOffsetSchema,
   }),
   otherwise: Joi.any().strip(),
@@ -63,16 +53,18 @@ export default Joi.object({
   fromDateDaysOffset,
   toDate,
   toDateDaysOffset,
-  defaultValue: Joi.when(dateSchema, {
-    then: Joi.when('fromDate', {
-      is: dateSchema.required(),
-      then: dateSchema.min(Joi.ref('fromDate')),
-    }).when('toDate', {
-      is: dateSchema.required(),
-      then: dateSchema.max(Joi.ref('toDate')),
-    }),
-    otherwise: Joi.only(['NOW']).error(errorFn('defaultValue')),
-  }),
+  defaultValue: Joi.alternatives([
+    dateSchema
+      .when('fromDate', {
+        is: dateSchema.required(),
+        then: dateSchema.min(Joi.ref('fromDate', { render: true })),
+      })
+      .when('toDate', {
+        is: dateSchema.required(),
+        then: dateSchema.max(Joi.ref('toDate', { render: true })),
+      }),
+    nowSchema,
+  ]),
   defaultValueDaysOffset: Joi.when('defaultValue', {
     is: nowSchema.required(),
     then: Joi.number().integer(),

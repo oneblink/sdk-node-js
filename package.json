@@ -9,7 +9,7 @@
   "dependencies": {
     "aws-sdk": "^2.918.0",
     "content-disposition": "^0.5.3",
-    "joi": "^14.3.1",
+    "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^2.0.3",
     "node-fetch": "^2.6.1",
@@ -21,7 +21,7 @@
     "@oneblink/types": "github:oneblink/types",
     "@types/content-disposition": "^0.5.3",
     "@types/jest": "^26.0.23",
-    "@types/joi": "^14.3.4",
+    "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/node-fetch": "^2.5.10",
     "@types/nodemailer": "^6.4.1",

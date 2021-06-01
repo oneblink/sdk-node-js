@@ -18,9 +18,9 @@ export default Joi.object({
   hint,
   restrictFileTypes: Joi.boolean().label('Restrict File Types').default(false),
   restrictedFileTypes: Joi.when('restrictFileTypes', {
-    is: Joi.only(true),
+    is: Joi.valid(true),
     then: Joi.array()
-      .items(Joi.string().label('restricted file type'))
+      .items(Joi.string())
       .required()
       .label('Restricted File Types'),
     otherwise: Joi.any().strip(),

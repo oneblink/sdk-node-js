@@ -42,8 +42,11 @@ const typeCase = (type: FormTypes.FormElementType) => {
     type,
   }).unknown()
 }
-export default Joi.object({
-  type: Joi.string().required().valid(elementTypes),
+
+const schema = Joi.object({
+  type: Joi.string()
+    .required()
+    .valid(...elementTypes),
 })
   .options({ stripUnknown: true })
   .when(typeCase('text'), {
@@ -136,3 +139,6 @@ export default Joi.object({
   .when(typeCase('pointAddress'), {
     then: PointElement,
   })
+  .id('formElement')
+
+export default schema

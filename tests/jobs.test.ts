@@ -77,7 +77,7 @@ describe('Jobs SDK Class', () => {
                 priority: 'one',
               },
             }),
-          ).rejects.toThrow('"priority" must be a number')
+          ).rejects.toThrow('"details.priority" must be a number')
         })
       })
     })

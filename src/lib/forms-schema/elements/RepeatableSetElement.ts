@@ -8,10 +8,10 @@ import {
   readOnly,
   conditionallyShowSchemas,
 } from '../property-schemas'
-import elementSchema from '../element-schema'
 
 // Think this needs to be a variable because of recursive dependency
-const schema = Joi.object({
+
+const schema: Joi.ObjectSchema = Joi.object({
   id,
   name,
   label,
@@ -26,7 +26,7 @@ const schema = Joi.object({
     .label('Form Element - Maximum number of repeatable set entries')
     .when('minSetEntries', {
       is: Joi.number().required().min(0),
-      then: Joi.number().min(Joi.ref('minSetEntries')),
+      then: Joi.number().min(Joi.ref('minSetEntries', { render: true })),
       otherwise: Joi.number().min(0),
     }),
   addSetEntryLabel: Joi.string().label(
@@ -36,7 +36,7 @@ const schema = Joi.object({
     'Form Element - Remove repeatable set entry label',
   ),
   elements: Joi.array()
-    .items(Joi.lazy(() => elementSchema))
+    .items(Joi.link('#formElement'))
     .required()
     .min(1)
     .unique('name', { ignoreUndefined: true })

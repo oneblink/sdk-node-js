@@ -11,7 +11,7 @@ const SubmissionEventsSchema = Joi.object().keys({
   type: Joi.string()
     .required()
     .label('Form Submission Event - Type')
-    .valid([
+    .valid(
       'CALLBACK',
       'PDF',
       'ONEBLINK_API',
@@ -19,7 +19,7 @@ const SubmissionEventsSchema = Joi.object().keys({
       'CP_PAY',
       'CP_HCMS',
       'BPOINT',
-    ]),
+    ),
   configuration: Joi.object()
     .required()
     .label('Form Submission Event - Configuration')
@@ -49,10 +49,10 @@ const SubmissionEventsSchema = Joi.object().keys({
             .label('Form Submission Event - Email Address'),
         ]),
         pdfFileName: Joi.string()
-          .allow([null, ''])
+          .allow(null, '')
           .label('Form Submission Event - PDF File Name'),
         emailSubjectLine: Joi.string()
-          .allow([null, ''])
+          .allow(null, '')
           .label('Form Submission Event - Email Subject Line'),
         includeSubmissionIdInPdf: Joi.boolean().label(
           'Form Submission Event - Include Submission ID',
@@ -86,7 +86,7 @@ const SubmissionEventsSchema = Joi.object().keys({
       is: 'TRIM',
       then: Joi.object().keys({
         environmentId: Joi.string().uuid().required(),
-        recordTitle: Joi.string().allow([null, '']),
+        recordTitle: Joi.string().allow(null, ''),
         container: Joi.object().keys({
           uri: Joi.number().required(),
           label: Joi.string().required(),
@@ -166,7 +166,7 @@ const SubmissionEventsSchema = Joi.object().keys({
 const pageElementSchema = Joi.object().keys({
   id: Joi.string().guid().required().label('Form Element - Id'),
   label: Joi.string().required().label('Form Element - Label'),
-  type: Joi.only('page'),
+  type: Joi.valid('page'),
   conditionallyShow: Joi.bool()
     .default(false)
     .label('Form Element - Conditionally Show'),
@@ -187,7 +187,7 @@ const formSchema = Joi.object().keys({
   id: Joi.number(),
   formsAppEnvironmentId: Joi.number().label('Environment').required(),
   name: Joi.string().label('Name').required(),
-  description: Joi.string().label('Description').allow('').allow(null),
+  description: Joi.string().label('Description').allow('', null),
   organisationId: Joi.string().label('Organisation').required(),
   elements: Joi.array()
     .label('Form Elements')
@@ -211,13 +211,15 @@ const formSchema = Joi.object().keys({
   postSubmissionAction: Joi.string()
     .label('Post Submission Action')
     .required()
-    .valid(postSubmissionActions),
+    .valid(...postSubmissionActions),
   redirectUrl: Joi.when('postSubmissionAction', {
     is: 'URL',
     then: Joi.string().required().label('Post Submission Redirect URL'),
     otherwise: Joi.any().strip(),
   }),
-  cancelAction: Joi.string().default('BACK').valid(postSubmissionActions),
+  cancelAction: Joi.string()
+    .default('BACK')
+    .valid(...postSubmissionActions),
   cancelRedirectUrl: Joi.when('cancelAction', {
     is: 'URL',
     then: Joi.string().required(),
@@ -228,8 +230,8 @@ const formSchema = Joi.object().keys({
     .items(Joi.number())
     .required()
     .label('Associated Forms Apps'),
-  createdAt: Joi.string().label('Date Created').allow('').allow(null),
-  updatedAt: Joi.string().label('Date Updated').allow('').allow(null),
+  createdAt: Joi.string().label('Date Created').allow('', null),
+  updatedAt: Joi.string().label('Date Updated').allow('', null),
   // TAGS
   tags: Joi.array().default([]).label('Form Tags').items(Joi.string()),
 })

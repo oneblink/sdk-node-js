@@ -31,8 +31,8 @@ const optionsType = Joi.string()
   .default(CUSTOM_OPTION_TYPE)
   .when('type', {
     is: 'autocomplete',
-    then: Joi.valid([...optionTypes, SEARCH_OPTION_TYPE]),
-    otherwise: Joi.valid(optionTypes),
+    then: Joi.valid(...optionTypes, SEARCH_OPTION_TYPE),
+    otherwise: Joi.valid(...optionTypes),
   })
 
 const dynamicOptionSetId = Joi.when('optionsType', {
@@ -51,7 +51,7 @@ const options = Joi.when('optionsType', {
         value: Joi.string().required().label('Form Element - Option Value'),
         label: Joi.string().required().label('Form Element - Option Label'),
         colour: Joi.string()
-          .allow([null, ''])
+          .allow(null, '')
           .regex(/^#[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$/)
           .label('Form Element - Option Colour'),
         attributes: Joi.array().items(
@@ -87,7 +87,7 @@ const attributesMapping = Joi.when('optionsType', {
   otherwise: Joi.any().strip(),
 })
 const conditionallyShowOptions = Joi.when('type', {
-  is: Joi.only(['checkboxes', 'radio', 'select', 'autocomplete', 'compliance']),
+  is: Joi.valid('checkboxes', 'radio', 'select', 'autocomplete', 'compliance'),
   then: Joi.boolean()
     .label('Form Element - conditionallyShowOptionsElementIds')
     .default(false),
@@ -127,35 +127,37 @@ export const ConditionalPredicatesItemSchema = Joi.object().keys({
   elementId: Joi.string().guid().required(),
   type: Joi.string()
     .default('OPTIONS')
-    .valid(['OPTIONS', 'NUMERIC', 'VALUE', 'BETWEEN']),
+    .valid('OPTIONS', 'NUMERIC', 'VALUE', 'BETWEEN'),
   optionIds: Joi.when('type', {
-    is: Joi.only('OPTIONS'),
+    is: Joi.valid('OPTIONS'),
     then: Joi.array().min(1).items(Joi.string()).required(),
     otherwise: Joi.allow(null),
   }),
   operator: Joi.when('type', {
-    is: Joi.only('NUMERIC'),
-    then: Joi.string().valid(['>', '>=', '===', '!==', '<=', '<']).required(),
+    is: Joi.valid('NUMERIC'),
+    then: Joi.string().valid('>', '>=', '===', '!==', '<=', '<').required(),
     otherwise: Joi.allow(null),
   }),
   value: Joi.when('type', {
-    is: Joi.only('NUMERIC'),
+    is: Joi.valid('NUMERIC'),
     then: Joi.number().required(),
     otherwise: Joi.allow(null),
   }),
   hasValue: Joi.when('type', {
-    is: Joi.only('VALUE'),
+    is: Joi.valid('VALUE'),
     then: Joi.boolean().required(),
     otherwise: Joi.allow(null),
   }),
   min: Joi.when('type', {
-    is: Joi.only('BETWEEN'),
+    is: Joi.valid('BETWEEN'),
     then: Joi.number().required(),
     otherwise: Joi.any().strip(),
   }),
   max: Joi.when('type', {
-    is: Joi.only('BETWEEN'),
-    then: Joi.number().min(Joi.ref('min')).required(),
+    is: Joi.valid('BETWEEN'),
+    then: Joi.number()
+      .min(Joi.ref('min', { render: true }))
+      .required(),
     otherwise: Joi.any().strip(),
   }),
 })
@@ -203,18 +205,26 @@ export const conditionallyShowSchemas = {
 
 export const storageType = Joi.string()
   .label('Storage type')
-  .valid(['legacy', 'public', 'private'])
+  .valid('legacy', 'public', 'private')
 
-const regexPattern = Joi.string()
+const regexPattern = Joi.string().custom((value) => {
+  if (!value) return
+  try {
+    new RegExp(value)
+    return value
+  } catch (err) {
+    throw new Error('it was an invalid regex pattern')
+  }
+})
 const regexFlags = Joi.when('regexPattern', {
   is: Joi.string().required(),
   then: Joi.string().regex(/^[dgimsuy]+$/),
-  otherwise: Joi.strip(),
+  otherwise: Joi.any().strip(),
 })
 const regexMessage = Joi.string().when('regexPattern', {
   is: Joi.string().required(),
   then: Joi.required(),
-  otherwise: Joi.strip(),
+  otherwise: Joi.any().strip(),
 })
 
 export const regexSchemas = {
