@@ -1178,9 +1178,7 @@ test('should throw error if maxNumber is not provided for number element with is
     ],
   })
 
-  expect(error?.message).toContain(
-    '"Form Element - Maximum Number" is required',
-  )
+  expect(error?.message).toContain('"elements[0].maxNumber" is required')
 })
 
 test('should error if "toDate" is greater than "fromDate"', () => {
