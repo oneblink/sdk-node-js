@@ -45,7 +45,6 @@ export const optionTypes = [CUSTOM_OPTION_TYPE, DYNAMIC_OPTION_TYPE]
 export const JoiRange = Joi.extend((joi: typeof Joi) => ({
   type: 'range',
   base: joi.number(),
-  //name: 'range',
   messages: {
     'range.within':
       'Must not exceed range of values {{#min}} and {{#max}}: ({{#v}})',
@@ -67,13 +66,7 @@ export const JoiRange = Joi.extend((joi: typeof Joi) => ({
           assert: joi.number(),
         },
       ],
-      validate(value, helpers, args, options) {
-        console.log({
-          value,
-          helpers,
-          args,
-          options,
-        })
+      validate(value, helpers, args) {
         const max = args.max
         const min = args.min
         const range = max - min

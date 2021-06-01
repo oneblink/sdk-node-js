@@ -8,7 +8,6 @@ import {
   readOnly,
   conditionallyShowSchemas,
 } from '../property-schemas'
-// import elementSchema from '../element-schema'
 
 // Think this needs to be a variable because of recursive dependency
 
