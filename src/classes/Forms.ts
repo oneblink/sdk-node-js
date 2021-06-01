@@ -1,5 +1,6 @@
 import AWS from 'aws-sdk'
 import { Stream } from 'stream'
+import contentDisposition from 'content-disposition'
 import generateFormUrl from '../lib/generate-form-url'
 import generateJWT from '../lib/generate-jwt'
 import getSubmissionData from '../lib/retrieve-submission-data'
@@ -304,7 +305,7 @@ export default (tenant: Tenant) =>
             CacheControl: 'max-age=31536000', // Max 1 year(365 days),
             Bucket: result.s3.bucket,
             Key: result.s3.key,
-            ContentDisposition: `attachment; filename="${fileName}"`,
+            ContentDisposition: contentDisposition(fileName),
             ContentType: contentType,
             ACL: isPrivate ? 'private' : 'public-read',
             Body: body,

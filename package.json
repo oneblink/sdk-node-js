@@ -7,7 +7,8 @@
     "url": "https://github.com/oneblink/sdk-js/issues"
   },
   "dependencies": {
-    "aws-sdk": "^2.912.0",
+    "aws-sdk": "^2.918.0",
+    "content-disposition": "^0.5.3",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^2.0.3",
@@ -18,6 +19,7 @@
   "devDependencies": {
     "@oneblink/release-cli": "^1.0.0",
     "@oneblink/types": "github:oneblink/types",
+    "@types/content-disposition": "^0.5.3",
     "@types/jest": "^26.0.23",
     "@types/joi": "^14.3.4",
     "@types/jsonwebtoken": "^8.5.1",

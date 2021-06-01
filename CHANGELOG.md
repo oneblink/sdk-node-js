@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Form element schemas to support regex properties.
 
+### Fixed
+
+- `Content-Disposition` header for attachment uploads
+
 ## [0.9.12] - 2021-05-26
 
 ### Changed
