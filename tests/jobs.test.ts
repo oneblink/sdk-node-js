@@ -12,7 +12,7 @@ describe('Jobs SDK Class', () => {
     describe('validation', () => {
       test('should reject with correct validation errors for "options"', async () => {
         const jobs = await getJobsSdk()
-        return expect(jobs.createJob()).rejects.toThrow('"options" is required')
+        return expect(jobs.createJob()).rejects.toThrow('"value" is required')
       })
 
       describe('should reject with correct validation errors for "username"', () => {

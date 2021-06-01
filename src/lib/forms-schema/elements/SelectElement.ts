@@ -21,22 +21,18 @@ export default Joi.object({
   readOnly,
   ...conditionallyShowSchemas,
   ...lookupSchemas,
-  multi: Joi.boolean().label('Form Element - Multi Select').default(false),
+  multi: Joi.boolean(),
   defaultValue: Joi.when('multi', {
     is: true,
     then: Joi.when('optionsType', {
       is: Joi.invalid(DYNAMIC_OPTION_TYPE),
-      then: Joi.array()
-        .items(Joi.string().guid())
-        .label('Form Element - Default Value'),
-      otherwise: Joi.array()
-        .items(Joi.string())
-        .label('Form Element - Default Value'),
+      then: Joi.array().items(Joi.string().guid()),
+      otherwise: Joi.array().items(Joi.string()),
     }),
     otherwise: Joi.when('optionsType', {
       is: Joi.invalid(DYNAMIC_OPTION_TYPE),
-      then: Joi.string().guid().label('Form Element - Default Value'),
-      otherwise: Joi.string().label('Form Element - Default Value'),
+      then: Joi.string().guid(),
+      otherwise: Joi.string(),
     }),
   }),
   buttons,

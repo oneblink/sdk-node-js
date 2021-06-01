@@ -22,9 +22,8 @@ export default Joi.object({
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   placeholderValue,
-  minLength: Joi.number().label('Form Element - Minimum Length').min(0),
+  minLength: Joi.number().min(0),
   maxLength: Joi.number()
-    .label('Form Element - Maximum Length')
     .min(0)
     .when('minLength', {
       is: Joi.number().required(),
@@ -39,12 +38,10 @@ export default Joi.object({
         .max(Joi.ref('maxLength', { render: true })),
       otherwise: Joi.string().min(Joi.ref('minLength', { render: true })),
     }),
-  })
-    .when('maxLength', {
-      is: Joi.number().required(),
-      then: Joi.string().max(Joi.ref('maxLength', { render: true })),
-      otherwise: Joi.string(),
-    })
-    .label('Form Element - Default Value'),
+  }).when('maxLength', {
+    is: Joi.number().required(),
+    then: Joi.string().max(Joi.ref('maxLength', { render: true })),
+    otherwise: Joi.string(),
+  }),
   ...regexSchemas,
 })

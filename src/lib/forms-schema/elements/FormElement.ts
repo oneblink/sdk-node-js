@@ -4,6 +4,6 @@ import { id, name, conditionallyShowSchemas } from '../property-schemas'
 export default Joi.object({
   id,
   name,
-  formId: Joi.number().label('Form Id').required(),
+  formId: Joi.number().required(),
   ...conditionallyShowSchemas,
 })

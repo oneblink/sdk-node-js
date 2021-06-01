@@ -19,28 +19,19 @@ const schema: Joi.ObjectSchema = Joi.object({
   required,
   readOnly,
   ...conditionallyShowSchemas,
-  minSetEntries: Joi.number()
-    .min(0)
-    .label('Form Element - Minimum number of repeatable set entries'),
-  maxSetEntries: Joi.number()
-    .label('Form Element - Maximum number of repeatable set entries')
-    .when('minSetEntries', {
-      is: Joi.number().required().min(0),
-      then: Joi.number().min(Joi.ref('minSetEntries', { render: true })),
-      otherwise: Joi.number().min(0),
-    }),
-  addSetEntryLabel: Joi.string().label(
-    'Form Element - Add repeatable set entry label',
-  ),
-  removeSetEntryLabel: Joi.string().label(
-    'Form Element - Remove repeatable set entry label',
-  ),
+  minSetEntries: Joi.number().min(0),
+  maxSetEntries: Joi.number().when('minSetEntries', {
+    is: Joi.number().required().min(0),
+    then: Joi.number().min(Joi.ref('minSetEntries', { render: true })),
+    otherwise: Joi.number().min(0),
+  }),
+  addSetEntryLabel: Joi.string(),
+  removeSetEntryLabel: Joi.string(),
   elements: Joi.array()
     .items(Joi.link('#formElement'))
     .required()
     .min(1)
     .unique('name', { ignoreUndefined: true })
-    .unique('id')
-    .label('Form Element - Repeatable Set - Elements'),
+    .unique('id'),
 })
 export default schema

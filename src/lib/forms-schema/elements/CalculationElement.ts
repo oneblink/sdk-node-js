@@ -20,17 +20,15 @@ export default Joi.object({
     name: 'No Binary Data',
     invert: true,
   }),
-  calculation: Joi.string()
-    .label('Form Element - Calculation - calculation')
-    .required(),
+  calculation: Joi.string().required(),
   preCalculationDisplay: Joi.string()
-    .label('Form Element - Pre Calculation Display')
+
     .allow(null)
     .regex(base64DataRegex, {
       name: 'No Binary Data',
       invert: true,
     }),
-  displayAsCurrency: Joi.boolean()
-    .label('Form Element - Display Calculation as Currency')
+  displayAsCurrency:
+    Joi.boolean()
     .allow(null),
 })

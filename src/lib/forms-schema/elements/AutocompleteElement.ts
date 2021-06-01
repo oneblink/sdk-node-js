@@ -24,12 +24,12 @@ export default Joi.object({
   ...lookupSchemas,
   defaultValue: Joi.when('optionsType', {
     is: Joi.invalid(DYNAMIC_OPTION_TYPE),
-    then: Joi.string().guid().label('Form Element - Default Value'),
-    otherwise: Joi.string().label('Form Element - Default Value'),
+    then: Joi.string().guid(),
+    otherwise: Joi.string(),
   }),
   searchUrl: Joi.when('optionsType', {
     is: SEARCH_OPTION_TYPE,
-    then: Joi.string().required().label('Search URL'),
+    then: Joi.string().required(),
     otherwise: Joi.any().strip(),
   }),
   ...optionsSchemas,

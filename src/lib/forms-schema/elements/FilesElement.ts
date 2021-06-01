@@ -16,24 +16,18 @@ export default Joi.object({
   readOnly,
   hint,
   storageType,
-  restrictFileTypes: Joi.boolean().label('Restrict File Types').default(false),
+  restrictFileTypes: Joi.boolean().default(false),
   restrictedFileTypes: Joi.when('restrictFileTypes', {
     is: Joi.valid(true),
-    then: Joi.array()
-      .items(Joi.string())
-      .required()
-      .label('Restricted File Types'),
+    then: Joi.array().items(Joi.string()).required(),
     otherwise: Joi.any().strip(),
   }),
-  minEntries: Joi.number()
-    .min(0)
-    .label('Form Element - Minimum number of files'),
+  minEntries: Joi.number().min(0),
   maxEntries: Joi.number()
-    .label('Form Element - Maximum number of files')
-    .when('minEntries', {
-      is: Joi.number().required().min(0),
-      then: Joi.number().min(Joi.ref('minEntries', { render: true })),
-      otherwise: Joi.number().min(0),
-    }),
+  .when('minEntries', {
+    is: Joi.number().required().min(0),
+    then: Joi.number().min(Joi.ref('minEntries', { render: true })),
+    otherwise: Joi.number().min(0),
+  }),
   ...conditionallyShowSchemas,
 })

@@ -16,13 +16,10 @@ export default Joi.object({
   required,
   readOnly,
   hint,
-  restrictFileTypes: Joi.boolean().label('Restrict File Types').default(false),
+  restrictFileTypes: Joi.boolean().default(false),
   restrictedFileTypes: Joi.when('restrictFileTypes', {
     is: Joi.valid(true),
-    then: Joi.array()
-      .items(Joi.string())
-      .required()
-      .label('Restricted File Types'),
+    then: Joi.array().items(Joi.string()).required(),
     otherwise: Joi.any().strip(),
   }),
 

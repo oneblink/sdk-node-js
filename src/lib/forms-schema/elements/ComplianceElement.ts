@@ -21,8 +21,8 @@ export default Joi.object({
   ...optionsSchemas,
   defaultValue: Joi.when('optionsType', {
     is: Joi.invalid(DYNAMIC_OPTION_TYPE),
-    then: Joi.string().guid().label('Form Element - Default Value'),
-    otherwise: Joi.string().label('Form Element - Default Value'),
+    then: Joi.string().guid(),
+    otherwise: Joi.string(),
   }),
   ...conditionallyShowSchemas,
   lookupSchemas,

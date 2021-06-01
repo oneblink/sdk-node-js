@@ -904,9 +904,7 @@ test('should error if "buttons" is not a boolean', () => {
     },
   )
 
-  expect(error?.message).toContain(
-    '"Form Element - Radio Buttons as Buttons" must be a boolean',
-  )
+  expect(error?.message).toContain('"elements[0].buttons" must be a boolean')
 })
 
 test('should error if element "id" is not supplied', () => {
@@ -933,7 +931,7 @@ test('should error if element "id" is not supplied', () => {
     },
   )
 
-  expect(error?.message).toContain('"Form Element - Id" is required')
+  expect(error?.message).toContain('"elements[0].id" is required')
 })
 
 test('should error if element "id" is not a guid', () => {
@@ -961,7 +959,7 @@ test('should error if element "id" is not a guid', () => {
     },
   )
 
-  expect(error?.message).toContain('"Form Element - Id" must be a valid GUID')
+  expect(error?.message).toContain('"elements[0].id" must be a valid GUID')
 })
 
 test('should error if element "id" is not unique', () => {
@@ -996,7 +994,7 @@ test('should error if element "id" is not unique', () => {
     },
   )
 
-  expect(error?.message).toContain('"Form Elements" contains a duplicate value')
+  expect(error?.message).toContain('"elements[1]" contains a duplicate value')
 })
 
 test('should not error if number min is the same as max', () => {
@@ -1063,7 +1061,7 @@ test('should error if number min is greater than max', () => {
   )
 
   expect(error?.message).toContain(
-    '"Form Element - Maximum Number" must be greater than or equal to 33.5',
+    '"elements[0].maxNumber" must be greater than or equal to 33.5',
   )
 })
 
@@ -1097,9 +1095,7 @@ test('should throw error if minNumber is not provided for number element with is
     },
   )
 
-  expect(error?.message).toContain(
-    '"Form Element - Minimum Number" is required',
-  )
+  expect(error?.message).toContain('"elements[0].minNumber" is required')
 })
 
 test('should error if number min is not an integer when number isInteger', () => {
@@ -1126,9 +1122,7 @@ test('should error if number min is not an integer when number isInteger', () =>
     ],
   })
 
-  expect(error?.message).toContain(
-    '"Form Element - Minimum Number" must be an integer',
-  )
+  expect(error?.message).toContain('"elements[0].minNumber" must be an integer')
 })
 
 test('should error if number max is not an integer when number isInteger', () => {
@@ -1155,9 +1149,7 @@ test('should error if number max is not an integer when number isInteger', () =>
     ],
   })
 
-  expect(error?.message).toContain(
-    '"Form Element - Maximum Number" must be an integer',
-  )
+  expect(error?.message).toContain('"elements[0].maxNumber" must be an integer')
 })
 
 // Looks like this is impossible with the current Joi version
@@ -1412,13 +1404,13 @@ test('should error if "defaultValue" does not match what is valid for each type'
   )
 
   expect(error?.details[0].message).toBe(
-    '"Form Element - Default Value" must be a string',
+    '"elements[0].defaultValue" must be a string',
   )
   expect(error?.details[1].message).toBe(
-    '"Form Element - Default Value" must be a string',
+    '"elements[1].defaultValue" must be a string',
   )
   expect(error?.details[2].message).toBe(
-    '"Form Element - Default Value" must be a number',
+    '"elements[2].defaultValue" must be a number',
   )
   expect(error?.details[3].message).toBe(
     '"elements[3].defaultValue" must be in ISO 8601 date format',
@@ -1430,19 +1422,19 @@ test('should error if "defaultValue" does not match what is valid for each type'
     '"elements[5].defaultValue" must be in ISO 8601 date format',
   )
   expect(error?.details[6].message).toBe(
-    '"Form Element - Default Value" must be a valid GUID',
+    '"elements[6].defaultValue" must be a valid GUID',
   )
   expect(error?.details[7].message).toBe(
-    '"Form Element - Default Value" must be an array',
+    '"elements[7].defaultValue" must be an array',
   )
   expect(error?.details[8].message).toBe(
     '"elements[8].defaultValue[0]" must be a valid GUID',
   )
   expect(error?.details[9].message).toBe(
-    '"Form Element - Default Value" must be a valid GUID',
+    '"elements[9].defaultValue" must be a valid GUID',
   )
   expect(error?.details[10].message).toBe(
-    '"Form Element - Default Value" must be an array',
+    '"elements[10].defaultValue" must be an array',
   )
   expect(error?.details[11].message).toBe(
     '"elements[11].defaultValue[0]" must be a valid GUID',
@@ -1502,7 +1494,7 @@ test('should error if number type element has a "defaultValue" less than "minNum
   })
 
   expect(error?.details[0].message).toBe(
-    '"Form Element - Default Value" must be greater than or equal to 5',
+    '"elements[0].defaultValue" must be greater than or equal to 5',
   )
 })
 
@@ -1529,7 +1521,7 @@ test('should error if number type element has a "defaultValue" more than "maxNum
   })
 
   expect(error?.details[0].message).toBe(
-    '"Form Element - Default Value" must be less than or equal to 2',
+    '"elements[0].defaultValue" must be less than or equal to 2',
   )
 })
 
@@ -1632,7 +1624,7 @@ test('should error if repeatableSet type element has no elements', () => {
   })
 
   expect(error?.details[0].message).toContain(
-    '"Form Element - Repeatable Set - Elements" is required',
+    '"elements[0].elements" is required',
   )
 })
 
@@ -1669,7 +1661,7 @@ test('should error if repeatableSet type element min entries is more than max en
   })
 
   expect(error?.details[0].message).toContain(
-    '"Form Element - Maximum number of repeatable set entries" must be greater than or equal to 2',
+    '"elements[0].maxSetEntries" must be greater than or equal to 2',
   )
 })
 
@@ -1712,10 +1704,10 @@ test('should error if repeatableSet type element min or max entries is less then
   )
 
   expect(error?.details[0].message).toContain(
-    '"Form Element - Minimum number of repeatable set entries" must be greater than or equal to 0',
+    '"elements[0].minSetEntries" must be greater than or equal to 0',
   )
   expect(error?.details[1].message).toContain(
-    '"Form Element - Maximum number of repeatable set entries" must be greater than or equal to 0',
+    '"elements[0].maxSetEntries" must be greater than or equal to 0',
   )
 })
 
@@ -1798,7 +1790,7 @@ test('should error if page element has no elements', () => {
   )
 
   expect(error?.details[0].message).toContain(
-    '"Form Element - Page - Elements" must contain at least 1 items',
+    '"elements[0].elements" must contain at least 1 items',
   )
 })
 
@@ -2076,7 +2068,7 @@ test('should error if HTML element does not have a default value', () => {
     },
   )
 
-  expect(error?.details[0].message).toBe('"Form Element - Name" is required')
+  expect(error?.details[0].message).toBe('"elements[0].name" is required')
   expect(error?.details[1].message).toBe(
     '"elements[0].defaultValue" is required',
   )
@@ -2118,7 +2110,7 @@ test('should error if calculation element does not have a default value', () => 
     '"elements[0].defaultValue" is required',
   )
   expect(error?.details[1].message).toBe(
-    '"Form Element - Calculation - calculation" is required',
+    '"elements[0].calculation" is required',
   )
 })
 
@@ -2195,7 +2187,7 @@ test('should require restricted barcode types if restrictBarcodeTypes boolean is
   )
 
   expect(error?.details[0].message).toBe(
-    '"Form Element - Barcode Scanner - restrictedBarcodeTypes" is required',
+    '"elements[0].restrictedBarcodeTypes" is required',
   )
 })
 
@@ -2222,7 +2214,7 @@ test('should throw error if postSubmissionAction is an invalid type', () => {
   )
 
   expect(error?.details[0].message).toBe(
-    '"Post Submission Action" must be one of [BACK, URL, CLOSE, FORMS_LIBRARY]',
+    '"postSubmissionAction" must be one of [BACK, URL, CLOSE, FORMS_LIBRARY]',
   )
 })
 
@@ -2275,7 +2267,7 @@ test('should throw error if postSubmissionAction is missing', () => {
     },
   )
 
-  expect(error?.details[0].message).toBe('"Post Submission Action" is required')
+  expect(error?.details[0].message).toBe('"postSubmissionAction" is required')
 })
 
 test('should throw error if postSubmissionAction is URL but no URL is present', () => {
@@ -2300,9 +2292,7 @@ test('should throw error if postSubmissionAction is URL but no URL is present', 
     },
   )
 
-  expect(error?.details[0].message).toBe(
-    '"Post Submission Redirect URL" is required',
-  )
+  expect(error?.details[0].message).toBe('"redirectUrl" is required')
 })
 
 test('should throw error if defaultValue for email is not valid', () => {
@@ -2336,7 +2326,7 @@ test('should throw error if defaultValue for email is not valid', () => {
   )
 
   expect(error?.details[0].message).toBe(
-    '"Form Element - Default Email Value" must be a valid email',
+    '"elements[0].defaultValue" must be a valid email',
   )
 })
 
@@ -2427,7 +2417,7 @@ describe('optionTypes', () => {
       })
 
       expect(error?.message).toContain(
-        '"Form Element - Dynamic Option Set Id" is required',
+        '"elements[0].dynamicOptionSetId" is required',
       )
     })
   })
@@ -2485,7 +2475,7 @@ describe('optionTypes', () => {
         ],
       })
 
-      expect(error?.message).toContain('"Form Element - Options" is required')
+      expect(error?.message).toContain('"elements[0].options" is required')
     })
   })
   describe('when not provided', () => {
@@ -2571,7 +2561,7 @@ describe('optionTypes', () => {
         ],
       })
 
-      expect(error?.message).toContain('"Form Element - Options" is required')
+      expect(error?.message).toContain('"elements[0].options" is required')
     })
   })
 })
@@ -2734,7 +2724,7 @@ describe('CALLBACK submission event', () => {
       },
     )
     expect(error?.details[0].message).toBe(
-      `"Form Submission Event - Callback Url" is required`,
+      `"submissionEvents[0].configuration.url" is required`,
     )
   })
 })
@@ -3390,7 +3380,9 @@ describe('Data Lookup enabled', () => {
       },
     )
 
-    expect(error?.details[0].message).toBe('"Data Lookup Id" is required')
+    expect(error?.details[0].message).toBe(
+      '"elements[0].dataLookupId" is required',
+    )
   })
 
   test('should require id if element lookup boolean is true', () => {
@@ -3428,7 +3420,9 @@ describe('Data Lookup enabled', () => {
       },
     )
 
-    expect(error?.details[0].message).toBe('"Element Lookup Id" is required')
+    expect(error?.details[0].message).toBe(
+      '"elements[0].elementLookupId" is required',
+    )
   })
 })
 
@@ -4092,7 +4086,7 @@ describe('invalid property removal', () => {
       optionsType: 'SEARCH',
     })
     expect(error?.message).toContain(
-      '"Form Element - Options type" must be one of [CUSTOM, DYNAMIC]',
+      '"optionsType" must be one of [CUSTOM, DYNAMIC]',
     )
   })
 
@@ -4105,7 +4099,7 @@ describe('invalid property removal', () => {
       optionsType: 'SEARCH',
     })
     expect(error?.message).toContain(
-      '"Form Element - Options type" must be one of [CUSTOM, DYNAMIC]',
+      '"optionsType" must be one of [CUSTOM, DYNAMIC]',
     )
   })
 
@@ -4118,7 +4112,7 @@ describe('invalid property removal', () => {
       optionsType: 'SEARCH',
     })
     expect(error?.message).toContain(
-      '"Form Element - Options type" must be one of [CUSTOM, DYNAMIC]',
+      '"optionsType" must be one of [CUSTOM, DYNAMIC]',
     )
   })
 
@@ -4182,7 +4176,7 @@ describe('invalid property removal', () => {
       label: 'autocomplete',
       optionsType: 'SEARCH',
     })
-    expect(error?.message).toBe('"Search URL" is required')
+    expect(error?.message).toBe('"searchUrl" is required')
   })
 })
 
@@ -4259,7 +4253,7 @@ test('should throw error if restrictFileTypes is true and restrictedFileTypes is
     restrictFileTypes: true,
     restrictedFileTypes: null,
   })
-  expect(error?.message).toBe('"Restricted File Types" must be an array')
+  expect(error?.message).toBe('"restrictedFileTypes" must be an array')
 })
 
 test('should throw error if restrictFileTypes is true and restrictedFileTypes is undefined', () => {
@@ -4270,7 +4264,7 @@ test('should throw error if restrictFileTypes is true and restrictedFileTypes is
     type: 'files',
     restrictFileTypes: true,
   })
-  expect(error?.message).toBe('"Restricted File Types" is required')
+  expect(error?.message).toBe('"restrictedFileTypes" is required')
 })
 
 test('should throw error if minEntries is greater than maxEntries', () => {
@@ -4283,7 +4277,7 @@ test('should throw error if minEntries is greater than maxEntries', () => {
     maxEntries: 2,
   })
   expect(error?.message).toContain(
-    '"Form Element - Maximum number of files" must be greater than or equal to 3',
+    '"maxEntries" must be greater than or equal to 3',
   )
 })
 
@@ -4458,7 +4452,7 @@ describe('submission event configuration', () => {
       },
     )
     expect(error?.message).toBe(
-      '"Form Submission Event - Configuration" is required',
+      '"submissionEvents[0].configuration" is required',
     )
   })
 })
@@ -4794,7 +4788,7 @@ describe('submission event conditional logic', () => {
     )
 
     expect(result.error?.message).toContain(
-      '"Form Element - Maximum Length" must be greater than or equal to 4',
+      '"elements[0].maxLength" must be greater than or equal to 4',
     )
   })
 
@@ -4874,7 +4868,7 @@ describe('submission event conditional logic', () => {
     )
 
     expect(result.error?.message).toBe(
-      '"Form Element - Default Value" length must be at least 5 characters long',
+      '"elements[0].defaultValue" length must be at least 5 characters long',
     )
   })
 
@@ -4915,7 +4909,7 @@ describe('submission event conditional logic', () => {
     )
 
     expect(result.error?.message).toBe(
-      '"Form Element - Default Value" length must be less than or equal to 3 characters long',
+      '"elements[0].defaultValue" length must be less than or equal to 3 characters long',
     )
   })
 
@@ -4994,7 +4988,7 @@ describe('submission event conditional logic', () => {
     )
 
     expect(result.error?.message).toContain(
-      '"Form Element - Minimum Length" must be greater than or equal to 0',
+      '"elements[0].minLength" must be greater than or equal to 0',
     )
   })
 
@@ -5033,7 +5027,7 @@ describe('submission event conditional logic', () => {
     )
 
     expect(result.error?.message).toContain(
-      '"Form Element - Maximum Length" must be greater than or equal to 0',
+      '"elements[0].maxLength" must be greater than or equal to 0',
     )
   })
 
@@ -5068,7 +5062,7 @@ describe('submission event conditional logic', () => {
     )
 
     expect(result.error?.message).toContain(
-      '"Form Element - Default Value" must be an integer',
+      '"elements[0].defaultValue" must be an integer',
     )
   })
 
@@ -5163,7 +5157,7 @@ describe('submission event conditional logic', () => {
     )
 
     expect(result.error?.message).toContain(
-      '"Camera element - Include timestamp watermark" must be a boolean',
+      '"elements[0].includeTimestampWatermark" must be a boolean',
     )
   })
 })
