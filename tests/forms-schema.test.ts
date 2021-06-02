@@ -5519,3 +5519,70 @@ describe('Regex Custom Validation Properties', () => {
     )
   })
 })
+
+describe('canToggleAll property', () => {
+  const form = {
+    id: 1,
+    name: 'Form',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: '59cc888b8969af000fb50ddb',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    isMultiPage: false,
+    submissionEvents: [],
+  }
+
+  test('should allow canToggleAll property and strip out for non multi select', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '9014e80c-3c68-4adb-a335-1be04ebc95ee',
+            name: 'checkboxes_with_dynamic',
+            label: 'Checkboxes',
+            type: 'checkboxes',
+            required: false,
+            buttons: false,
+            defaultValue: ['defaultOptionValue'],
+            optionsType: 'DYNAMIC',
+            dynamicOptionSetId: 1,
+            canToggleAll: true,
+          },
+          {
+            id: '9014e80c-3c68-4adb-a336-1be04ebc95ee',
+            name: 'select_with_dynamic',
+            label: 'Select',
+            type: 'select',
+            required: false,
+            defaultValue: 'defaultOptionValue',
+            optionsType: 'DYNAMIC',
+            dynamicOptionSetId: 1,
+            canToggleAll: true,
+          },
+          {
+            id: '9014e80c-3c68-4adb-a337-1be04ebc95ee',
+            name: 'multi_select_with_dynamic',
+            label: 'Select',
+            type: 'select',
+            required: false,
+            multi: true,
+            defaultValue: ['defaultOptionValue'],
+            optionsType: 'DYNAMIC',
+            dynamicOptionSetId: 1,
+            canToggleAll: true,
+          },
+        ],
+      },
+
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error).toBe(undefined)
+    expect(result.value.elements[0].canToggleAll).toBe(true)
+    expect(result.value.elements[1].canToggleAll).toBeUndefined()
+    expect(result.value.elements[2].canToggleAll).toBe(true)
+  })
+})

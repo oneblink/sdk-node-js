@@ -198,3 +198,5 @@ export const regexSchemas = {
   regexFlags,
   regexMessage,
 }
+
+export const canToggleAll = Joi.boolean().default(false)
