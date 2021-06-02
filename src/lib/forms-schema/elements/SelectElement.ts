@@ -10,6 +10,7 @@ import {
   lookupSchemas,
   buttons,
   optionsSchemas,
+  canToggleAll,
 } from '../property-schemas'
 import { DYNAMIC_OPTION_TYPE } from '../common'
 export default Joi.object({
@@ -37,4 +38,9 @@ export default Joi.object({
   }),
   buttons,
   ...optionsSchemas,
+  canToggleAll: Joi.when('multi', {
+    is: true,
+    then: canToggleAll,
+    otherwise: Joi.any().strip(),
+  }),
 })
