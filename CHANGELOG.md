@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.13] - 2021-06-02
+
 ### Updated
 
 - Form element schemas to support regex properties.
@@ -14,6 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `Content-Disposition` header for attachment uploads
+
+### Dependencies
+
+- update [aws-sdk](https://www.npmjs.com/package/aws-sdk) to [2.918.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.918.0) (from [2.912.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.912.0))
+
+- update [joi](https://www.npmjs.com/package/joi) to 17.4.0 (from 14.3.1)
+
+- depend upon [content-disposition](https://www.npmjs.com/package/content-disposition) [0.5.3](https://github.com/jshttp/content-disposition/releases/tag/v0.5.3)
 
 ## [0.9.12] - 2021-05-26
 
