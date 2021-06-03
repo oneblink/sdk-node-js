@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `canToggleAll` property to checkbox and multi select elements
+- `WESTPAC_QUICK_WEB` submission event to form schema
 
 ## [0.9.13] - 2021-06-02
 

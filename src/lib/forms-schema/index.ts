@@ -18,6 +18,7 @@ const SubmissionEventsSchema = Joi.object().keys({
       'CP_PAY',
       'CP_HCMS',
       'BPOINT',
+      'WESTPAC_QUICK_WEB',
     ),
   configuration: Joi.object()
     .required()
@@ -93,6 +94,14 @@ const SubmissionEventsSchema = Joi.object().keys({
         environmentId: Joi.string().uuid().required(),
         crn2: Joi.string(),
         crn3: Joi.string(),
+      }),
+    })
+    .when('type', {
+      is: 'WESTPAC_QUICK_WEB',
+      then: Joi.object().keys({
+        elementId: Joi.string().uuid().required(),
+        environmentId: Joi.string().uuid().required(),
+        customerReferenceNumber: Joi.string(),
       }),
     })
     .when('type', {

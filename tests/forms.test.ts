@@ -157,7 +157,7 @@ describe('Forms SDK Class', () => {
     })
   })
 
-  describe('getForm()', async () => {
+  describe('getForm()', () => {
     describe('should reject with correct validation errors for', () => {
       test('"formId"', async () => {
         const forms = await getFormsSdk()
