@@ -2996,6 +2996,7 @@ describe('WESTPAC_QUICK_WEB submission event', () => {
             configuration: {
               elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
               environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              customerReferenceNumber: 'abc'
             },
           },
         ],

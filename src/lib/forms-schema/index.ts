@@ -101,7 +101,7 @@ const SubmissionEventsSchema = Joi.object().keys({
       then: Joi.object().keys({
         elementId: Joi.string().uuid().required(),
         environmentId: Joi.string().uuid().required(),
-        customerReferenceNumber: Joi.string(),
+        customerReferenceNumber: Joi.string().required(),
       }),
     })
     .when('type', {
