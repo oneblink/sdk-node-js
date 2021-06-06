@@ -7,10 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.14] - 2021-06-06
+
 ### Added
 
 - `canToggleAll` property to checkbox and multi select elements
 - `WESTPAC_QUICK_WEB` submission event to form schema
+
+### Dependencies
+
+- update [aws-sdk](https://www.npmjs.com/package/aws-sdk) to [2.920.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.920.0) (from [2.918.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.918.0))
 
 ## [0.9.13] - 2021-06-02
 
