@@ -6,6 +6,16 @@ import {
 } from './property-schemas'
 const postSubmissionActions = ['BACK', 'URL', 'CLOSE', 'FORMS_LIBRARY']
 
+const pdfSubmissionEventConfiguration = {
+  pdfFileName: Joi.string().allow(null, ''),
+  includeSubmissionIdInPdf: Joi.boolean(),
+  excludedElementIds: Joi.array()
+    .items(Joi.string().guid())
+    .unique()
+    .allow(null)
+    .default([]),
+}
+
 const SubmissionEventsSchema = Joi.object().keys({
   isDraft: Joi.boolean().default(false),
   type: Joi.string()
@@ -19,6 +29,7 @@ const SubmissionEventsSchema = Joi.object().keys({
       'CP_HCMS',
       'BPOINT',
       'WESTPAC_QUICK_WEB',
+      'CIVICA_CRM',
     ),
   configuration: Joi.object()
     .required()
@@ -38,14 +49,8 @@ const SubmissionEventsSchema = Joi.object().keys({
             .regex(/^{ELEMENT:\S+}$/)
             .required(),
         ]),
-        pdfFileName: Joi.string().allow(null, ''),
         emailSubjectLine: Joi.string().allow(null, ''),
-        includeSubmissionIdInPdf: Joi.boolean(),
-        excludedElementIds: Joi.array()
-          .items(Joi.string().guid())
-          .unique()
-          .allow(null)
-          .default([]),
+        ...pdfSubmissionEventConfiguration,
       }),
     })
     .when('type', {
@@ -78,7 +83,8 @@ const SubmissionEventsSchema = Joi.object().keys({
           uri: Joi.number().required(),
           label: Joi.string().required(),
         }),
-        includeSubmissionIdInPdf: Joi.boolean(),
+        includeSubmissionIdInPdf:
+          pdfSubmissionEventConfiguration.includeSubmissionIdInPdf,
         author: Joi.object()
           .keys({
             uri: Joi.number().required(),
@@ -109,6 +115,24 @@ const SubmissionEventsSchema = Joi.object().keys({
       then: Joi.object().keys({
         elementId: Joi.string().uuid().required(),
         gatewayId: Joi.string().uuid().required(),
+      }),
+    })
+    .when('type', {
+      is: 'CIVICA_CRM',
+      then: Joi.object().keys({
+        environmentId: Joi.string().uuid().required(),
+        civicaCategoryId: Joi.number().required(),
+        mapping: Joi.array()
+          .required()
+          .min(1)
+          .unique('civicaCategoryItemNumber')
+          .items(
+            Joi.object({
+              civicaCategoryItemNumber: Joi.number().required(),
+              formElementId: Joi.string().uuid().required(),
+            }),
+          ),
+        ...pdfSubmissionEventConfiguration,
       }),
     })
     .when('type', {
