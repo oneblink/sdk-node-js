@@ -1754,7 +1754,7 @@ test('should error if page element has child page element', () => {
   )
 
   expect(error?.details[0].message).toContain(
-    '"elements[0].elements[0].type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
+    '"elements[0].elements[0].type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, civicaStreetName, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -1837,7 +1837,7 @@ test('should error if isMultiPage is set to false', () => {
   )
 
   expect(error?.details[0].message).toContain(
-    '"elements[0].type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
+    '"elements[0].type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, civicaStreetName, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -1994,7 +1994,7 @@ test('should error if isMultiPage is false even if all root elements are pages',
   )
 
   expect(error?.details[0].message).toBe(
-    '"elements[0].type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
+    '"elements[0].type" must be one of [autocomplete, barcodeScanner, calculation, camera, captcha, checkboxes, civicaStreetName, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -2822,6 +2822,130 @@ describe('TRIM submission event', () => {
   })
 })
 
+describe('CIVICA_CRM submission event', () => {
+  test('should allow CIVICA_CRM submission event', () => {
+    const { error } = formSchema.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+            type: 'text',
+            name: 'text',
+            label: 'text',
+          },
+        ],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'CIVICA_CRM',
+            configuration: {
+              environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              civicaCategoryId: 1,
+              mapping: [
+                {
+                  civicaCategoryItemNumber: 1,
+                  formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBe(undefined)
+  })
+  test('should error CIVICA_CRM submission event not passing environmentId', () => {
+    const { error } = formSchema.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+            type: 'text',
+            name: 'text',
+            label: 'text',
+          },
+        ],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'CIVICA_CRM',
+            configuration: {},
+          },
+        ],
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error?.message).toContain(
+      '"submissionEvents[0].configuration.environmentId" is required',
+    )
+  })
+  test('should error CIVICA_CRM submission event if mapping contains a formElementId that does not exist', () => {
+    expect(() =>
+      validateWithFormSchema({
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+            type: 'text',
+            name: 'text',
+            label: 'text',
+          },
+        ],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'CIVICA_CRM',
+            configuration: {
+              environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              civicaCategoryId: 1,
+              mapping: [
+                {
+                  civicaCategoryItemNumber: 1,
+                  formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+                },
+              ],
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      '"submissionEvents[0].configuration.mapping[0].formElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) does not exist in "elements"',
+    )
+  })
+})
+
 describe('BPOINT submission event', () => {
   test('should error for BPOINT submission event not passing "elementId"', () => {
     const { error } = formSchema.validate({
@@ -2996,7 +3120,7 @@ describe('WESTPAC_QUICK_WEB submission event', () => {
             configuration: {
               elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
               environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
-              customerReferenceNumber: 'abc'
+              customerReferenceNumber: 'abc',
             },
           },
         ],

@@ -36,6 +36,7 @@ import FileElement from './elements/FileElement'
 //Integration
 import GeoscapeElement from './elements/GeoscapeElement'
 import PointElement from './elements/PointElement'
+import civicaStreetNameElement from './elements/CivicaStreetNameElement'
 
 const typeCase = (type: FormTypes.FormElementType) => {
   return Joi.object({
@@ -138,6 +139,9 @@ const schema = Joi.object({
   })
   .when(typeCase('pointAddress'), {
     then: PointElement,
+  })
+  .when(typeCase('civicaStreetName'), {
+    then: civicaStreetNameElement,
   })
   .id('formElement')
 

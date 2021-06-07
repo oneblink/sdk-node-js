@@ -17,6 +17,7 @@ export const userInputTypes = [
   'telephone',
   'autocomplete',
   'compliance',
+  'civicaStreetName',
   ...addressIntegrationTypes,
 ]
 export const elementTypes = [
