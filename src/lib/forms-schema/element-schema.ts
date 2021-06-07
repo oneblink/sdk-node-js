@@ -13,6 +13,7 @@ import RadioElement from './elements/RadioElement'
 import CheckboxElement from './elements/CheckboxElement'
 import SelectElement from './elements/SelectElement'
 import AutocompleteElement from './elements/AutocompleteElement'
+import BooleanElement from './elements/BooleanElement'
 // Date and Time
 import DateElement from './elements/DateElement'
 import TimeElement from './elements/TimeElement'
@@ -138,6 +139,9 @@ const schema = Joi.object({
   })
   .when(typeCase('pointAddress'), {
     then: PointElement,
+  })
+  .when(typeCase('boolean'), {
+    then: BooleanElement,
   })
   .id('formElement')
 
