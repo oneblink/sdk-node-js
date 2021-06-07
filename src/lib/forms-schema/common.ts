@@ -2,6 +2,7 @@ import Joi from 'joi'
 
 export const addressIntegrationTypes = ['geoscapeAddress', 'pointAddress']
 export const userInputTypes = [
+  'boolean',
   'checkboxes',
   'date',
   'datetime',
