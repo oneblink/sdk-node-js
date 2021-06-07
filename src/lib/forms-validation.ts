@@ -33,6 +33,39 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
     validatedForm.submissionEvents = []
   }
 
+  for (
+    let submissionEventIndex = 0;
+    submissionEventIndex < validatedForm.submissionEvents.length;
+    submissionEventIndex++
+  ) {
+    const submissionEvent = validatedForm.submissionEvents[submissionEventIndex]
+    switch (submissionEvent.type) {
+      case 'CIVICA_CRM': {
+        for (
+          let mappingIndex = 0;
+          mappingIndex < submissionEvent.configuration.mapping.length;
+          mappingIndex++
+        ) {
+          const { formElementId } =
+            submissionEvent.configuration.mapping[mappingIndex]
+          const formElement = findFormElement(
+            validatedForm.elements,
+            ({ id }) => id === formElementId,
+          )
+          if (!formElement) {
+            throw new Error(
+              `"submissionEvents[${submissionEventIndex}].configuration.mapping[${mappingIndex}].formElementId" (${formElementId}) does not exist in "elements"`,
+            )
+          }
+        }
+        break
+      }
+      default: {
+        break
+      }
+    }
+  }
+
   return validatedForm
 }
 
@@ -74,6 +107,38 @@ function validateConditionalPredicates(
     stripUnknown: true,
   })
   return validatedPredicates
+}
+
+function findFormElement(
+  elements: FormTypes.FormElement[],
+  predicate: (
+    element: FormTypes.FormElement,
+    elements: FormTypes.FormElement[],
+  ) => boolean,
+  parentElements: FormTypes.FormElement[] = [],
+): FormTypes.FormElement | void {
+  for (const element of elements) {
+    if (predicate(element, parentElements)) {
+      return element
+    }
+
+    if (
+      (element.type === 'repeatableSet' ||
+        element.type === 'page' ||
+        element.type === 'form' ||
+        element.type === 'infoPage') &&
+      Array.isArray(element.elements)
+    ) {
+      const nestedElement = findFormElement(element.elements, predicate, [
+        ...parentElements,
+        element,
+      ])
+
+      if (nestedElement) {
+        return nestedElement
+      }
+    }
+  }
 }
 
 export {

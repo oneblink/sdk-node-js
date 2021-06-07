@@ -12,6 +12,7 @@ The OneBlink Form Definition allows for multiple different types of Form Element
 - [Camera](./camera.md)
 - [Captcha (Not a Robot)](./captcha.md)
 - [Checkboxes](./checkboxes.md)
+- [Civic Street Name](./civica-street-name.md)
 - [Compliance (Checklist)](./compliance.md)
 - [Date](./date.md)
 - [Datetime](./datetime.md)

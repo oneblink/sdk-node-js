@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `CIVICA_CRM` form submission event
+- `civicaStreetName` form element
+
 ## [0.9.14] - 2021-06-06
 
 ### Added
