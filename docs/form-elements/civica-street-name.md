@@ -2,9 +2,9 @@
 
 [Back to all Elements](./README.md)
 
-## Civic Street Name Element
+## Civica Street Name Element
 
-Allows the user to search for and select a single Civic Street Name record.
+Allows the user to search for and select a single Civica Street Name record.
 
 | Property           | Required | Type      | Default              | Description                                                                                 |
 | ------------------ | -------- | --------- | -------------------- | ------------------------------------------------------------------------------------------- |
