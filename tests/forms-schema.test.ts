@@ -2849,7 +2849,15 @@ describe('CIVICA_CRM submission event', () => {
             type: 'CIVICA_CRM',
             configuration: {
               environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
-              civicaCategoryId: 1,
+              civicaDescription: 'description',
+              civicaCustomerContactMethod: {
+                code: 'code',
+                description: 'description',
+              },
+              civicaCategory: {
+                id: 1,
+                label: 'category',
+              },
               mapping: [
                 {
                   civicaCategoryItemNumber: 1,
@@ -2929,7 +2937,15 @@ describe('CIVICA_CRM submission event', () => {
             type: 'CIVICA_CRM',
             configuration: {
               environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
-              civicaCategoryId: 1,
+              civicaDescription: 'description',
+              civicaCustomerContactMethod: {
+                code: 'code',
+                description: 'description',
+              },
+              civicaCategory: {
+                id: 1,
+                label: 'category',
+              },
               mapping: [
                 {
                   civicaCategoryItemNumber: 1,

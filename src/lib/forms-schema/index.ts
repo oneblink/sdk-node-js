@@ -121,7 +121,15 @@ const SubmissionEventsSchema = Joi.object().keys({
       is: 'CIVICA_CRM',
       then: Joi.object().keys({
         environmentId: Joi.string().uuid().required(),
-        civicaCategoryId: Joi.number().required(),
+        civicaDescription: Joi.string().required(),
+        civicaCustomerContactMethod: Joi.object({
+          code: Joi.string().required(),
+          description: Joi.string().required(),
+        }).required(),
+        civicaCategory: Joi.object({
+          id: Joi.number().required(),
+          label: Joi.string().required(),
+        }).required(),
         mapping: Joi.array()
           .required()
           .min(1)
