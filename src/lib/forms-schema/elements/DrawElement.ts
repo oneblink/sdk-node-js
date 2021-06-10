@@ -10,6 +10,8 @@ import {
   storageType,
 } from '../property-schemas'
 
+export const type = 'draw'
+
 export default Joi.object({
   id,
   name,

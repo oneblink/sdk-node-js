@@ -12,6 +12,9 @@ import {
   optionsSchemas,
 } from '../property-schemas'
 import { DYNAMIC_OPTION_TYPE } from '../common'
+
+export const type = 'radio'
+
 export default Joi.object({
   id,
   name,

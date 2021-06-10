@@ -1,6 +1,8 @@
 import Joi from 'joi'
 import { id, name, label, conditionallyShowSchemas } from '../property-schemas'
 
+export const type = 'heading'
+
 export default Joi.object({
   id,
   name,

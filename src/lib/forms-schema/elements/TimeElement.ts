@@ -11,6 +11,8 @@ import {
   placeholderValue,
 } from '../property-schemas'
 
+export const type = 'time'
+
 export default Joi.object({
   id,
   name,

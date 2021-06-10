@@ -12,6 +12,8 @@ import {
   regexSchemas,
 } from '../property-schemas'
 
+export const type = 'barcodeScanner'
+
 export default Joi.object({
   id,
   name,

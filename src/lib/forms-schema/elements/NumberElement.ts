@@ -13,6 +13,8 @@ import {
   regexSchemas,
 } from '../property-schemas'
 
+export const type = 'number'
+
 export default Joi.object({
   id,
   name,
