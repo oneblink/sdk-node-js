@@ -12,6 +12,8 @@ import elementSchema from '../element-schema'
 
 // Think this needs to be a variable because of recursive dependency
 
+export const type = 'repeatableSet'
+
 const schema: Joi.ObjectSchema = Joi.object({
   id,
   name,

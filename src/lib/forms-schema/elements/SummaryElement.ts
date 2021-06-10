@@ -8,6 +8,8 @@ import {
   conditionallyShowSchemas,
 } from '../property-schemas'
 
+export const type = 'summary'
+
 export default Joi.object({
   id,
   name,

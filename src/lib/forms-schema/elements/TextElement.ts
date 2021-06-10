@@ -12,6 +12,9 @@ import {
   regexSchemas,
 } from '../property-schemas'
 
+export const textElementType = 'text'
+export const textareaElementType = 'textarea'
+
 export default Joi.object({
   id,
   name,

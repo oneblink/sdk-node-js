@@ -1,44 +1,5 @@
 import Joi from 'joi'
 
-export const addressIntegrationTypes = ['geoscapeAddress', 'pointAddress']
-export const userInputTypes = [
-  'boolean',
-  'checkboxes',
-  'date',
-  'datetime',
-  'location',
-  'number',
-  'radio',
-  'select',
-  'text',
-  'textarea',
-  'time',
-  'barcodeScanner',
-  'email',
-  'telephone',
-  'autocomplete',
-  'compliance',
-  'civicaStreetName',
-  ...addressIntegrationTypes,
-]
-export const elementTypes = [
-  ...userInputTypes,
-  'camera',
-  'heading',
-  'draw',
-  'repeatableSet',
-  'html',
-  'captcha',
-  'image',
-  'file',
-  'calculation',
-  'form',
-  'infoPage',
-  'files',
-  'summary',
-  'section',
-].sort()
-
 export const CUSTOM_OPTION_TYPE = 'CUSTOM'
 export const DYNAMIC_OPTION_TYPE = 'DYNAMIC'
 export const SEARCH_OPTION_TYPE = 'SEARCH'

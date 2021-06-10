@@ -9,6 +9,8 @@ import {
 } from '../property-schemas'
 import { base64DataRegex } from '../common'
 
+export const type = 'calculation'
+
 export default Joi.object({
   id,
   name,
@@ -28,7 +30,5 @@ export default Joi.object({
       name: 'No Binary Data',
       invert: true,
     }),
-  displayAsCurrency:
-    Joi.boolean()
-    .allow(null),
+  displayAsCurrency: Joi.boolean().allow(null),
 })

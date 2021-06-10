@@ -9,6 +9,8 @@ import {
   storageType,
 } from '../property-schemas'
 
+export const type = 'files'
+
 export default Joi.object({
   id,
   name,
@@ -23,8 +25,7 @@ export default Joi.object({
     otherwise: Joi.any().strip(),
   }),
   minEntries: Joi.number().min(0),
-  maxEntries: Joi.number()
-  .when('minEntries', {
+  maxEntries: Joi.number().when('minEntries', {
     is: Joi.number().required().min(0),
     then: Joi.number().min(Joi.ref('minEntries', { render: true })),
     otherwise: Joi.number().min(0),

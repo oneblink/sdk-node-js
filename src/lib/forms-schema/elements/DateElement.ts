@@ -41,6 +41,9 @@ const toDateDaysOffset = Joi.when('toDate', {
   otherwise: Joi.any().strip(),
 })
 
+export const dateElementType = 'date'
+export const datetimeElementType = 'datetime'
+
 export default Joi.object({
   id,
   name,

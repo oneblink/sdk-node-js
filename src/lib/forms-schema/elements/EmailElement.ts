@@ -12,6 +12,8 @@ import {
   regexSchemas,
 } from '../property-schemas'
 
+export const type = 'email'
+
 export default Joi.object({
   id,
   name,

@@ -12,6 +12,9 @@ import {
   placeholderValue,
 } from '../property-schemas'
 import { DYNAMIC_OPTION_TYPE, SEARCH_OPTION_TYPE } from '../common'
+
+export const type = 'autocomplete'
+
 export default Joi.object({
   id,
   name,
