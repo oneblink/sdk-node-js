@@ -83,8 +83,10 @@ import civicaNameRecordElement, {
 
 // Creating an object here so we get a Typescript error when adding a
 // new element type and forgetting to add to the array of allowed types
-const elementTypesMap: Record<FormTypes.FormElementType, null> = {
-  page: null,
+const elementTypesMap: Record<
+  Exclude<FormTypes.FormElementType, 'page'>,
+  null
+> = {
   [textElementType]: null,
   [textareaElementType]: null,
   [numberElementType]: null,
@@ -130,11 +132,7 @@ const typeCase = (type: FormTypes.FormElementType) => {
 const schema = Joi.object({
   type: Joi.string()
     .required()
-    .valid(
-      ...Object.keys(elementTypesMap)
-        .filter((type) => type !== 'page')
-        .sort(),
-    ),
+    .valid(...Object.keys(elementTypesMap).sort()),
 })
   .options({ stripUnknown: true })
   .when(typeCase('text'), {
