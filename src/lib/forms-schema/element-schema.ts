@@ -74,12 +74,15 @@ import GeoscapeElement, {
   type as geoscapeElementType,
 } from './elements/GeoscapeElement'
 import PointElement, { type as pointElementType } from './elements/PointElement'
-import civicaStreetNameElement, {
+import CivicaStreetNameElement, {
   type as civicaStreetNameElementType,
 } from './elements/CivicaStreetNameElement'
-import civicaNameRecordElement, {
+import CivicaNameRecordElement, {
   type as civicaNameRecordElementType,
 } from './elements/CivicaNameRecordElement'
+import SectionElement, {
+  type as sectionElementType,
+} from './elements/SectionElement'
 
 // Creating an object here so we get a Typescript error when adding a
 // new element type and forgetting to add to the array of allowed types
@@ -120,7 +123,7 @@ const elementTypesMap: Record<
   [pointElementType]: null,
   [civicaStreetNameElementType]: null,
   [civicaNameRecordElementType]: null,
-  section: null,
+  [sectionElementType]: null,
 }
 
 const typeCase = (type: FormTypes.FormElementType) => {
@@ -229,11 +232,13 @@ const schema = Joi.object({
     then: BooleanElement,
   })
   .when(typeCase('civicaStreetName'), {
-    then: civicaStreetNameElement,
+    then: CivicaStreetNameElement,
+  })
+  .when(typeCase('section'), {
+    then: SectionElement,
   })
   .when(typeCase('civicaNameRecord'), {
-    then: civicaNameRecordElement,
+    then: CivicaNameRecordElement,
   })
-  .id('formElement')
 
 export default schema

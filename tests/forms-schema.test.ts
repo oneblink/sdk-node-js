@@ -5825,3 +5825,166 @@ describe('canToggleAll property', () => {
     expect(result.value.elements[2].canToggleAll).toBe(true)
   })
 })
+
+describe('Section Element', () => {
+  const form = {
+    id: 1,
+    name: 'Form',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: '59cc888b8969af000fb50ddb',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    isMultiPage: false,
+    submissionEvents: [],
+  }
+
+  test('should allow section elements and set correct defaults', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '9014e80c-3c68-4adb-a335-1be04ebc95ee',
+            label: 'Section Heading',
+            isCollapsed: true,
+            type: 'section',
+            elements: [
+              {
+                id: '9014e80c-3c68-4adb-a335-1be04ebc95ee',
+                name: 'checkboxes_with_dynamic',
+                label: 'Checkboxes',
+                type: 'checkboxes',
+                required: false,
+                buttons: false,
+                defaultValue: ['defaultOptionValue'],
+                optionsType: 'DYNAMIC',
+                dynamicOptionSetId: 1,
+                canToggleAll: true,
+              },
+            ],
+          },
+          {
+            id: '9014e80c-3c68-4adb-a335-1be04ebc95e2',
+            label: 'Section Heading 2',
+            type: 'section',
+            elements: [
+              {
+                id: '9014e80c-3c68-4adb-a335-1be04ebc95ee',
+                name: 'checkboxes_with_dynamic',
+                label: 'Checkboxes',
+                type: 'checkboxes',
+                required: false,
+                buttons: false,
+                defaultValue: ['defaultOptionValue'],
+                optionsType: 'DYNAMIC',
+                dynamicOptionSetId: 1,
+                canToggleAll: true,
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error).toBe(undefined)
+    expect(result.value.elements[0].elements.length).toBe(1)
+    expect(result.value.elements[0].isCollapsed).toBe(true)
+    expect(result.value.elements[1].isCollapsed).toBe(false)
+  })
+
+  test('should allow nested section elements', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '9014e80c-3c68-4adb-a335-1be04ebc95ee',
+            label: 'A',
+            isCollapsed: true,
+            name: 'A',
+            type: 'section',
+            elements: [
+              {
+                id: '9014e80c-3c68-4adb-a335-1be04ebc95ee',
+                label: 'B',
+                type: 'section',
+                elements: [
+                  {
+                    id: 'bb1b3d16-f3e1-4833-a273-19ea18e00582',
+                    name: 'C',
+                    label: 'C',
+                    type: 'repeatableSet',
+                    addSetEntryLabel: 'Add an entry',
+                    removeSetEntryLabel: 'Remove this entry',
+                    elements: [
+                      {
+                        id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+                        label: 'D',
+                        type: 'section',
+                        elements: [
+                          {
+                            id: 'bb1b3d16-f3e1-4833-a273-19ea18e00582',
+                            name: 'Text',
+                            type: 'text',
+                            label: 'Text',
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error).toBe(undefined)
+
+    expect(result.value.elements[0].elements[0].type).toBe('section')
+    expect(
+      result.value.elements[0].elements[0].elements[0].elements[0].type,
+    ).toBe('section')
+  })
+
+  test('should reject section elements with invalid properties', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '9014e80c-3c68-4adb-a335-1be04ebc95ee',
+            label: 'A',
+            isCollapsed: true,
+            name: 'A',
+            type: 'section',
+            elements: [
+              {
+                id: '9014e80c-3c68-4adb-a335-1be04ebc95ee',
+                label: 'B',
+                type: 'section',
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error?.details[0].message).toBe(
+      '"elements[0].elements[0]" failed custom validation because "elements" is required',
+    )
+  })
+})

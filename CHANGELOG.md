@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `Section` form element
 - `Boolean` form element
 - `CIVICA_CRM` form submission event
 - `civicaStreetName` form element

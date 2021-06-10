@@ -8,6 +8,7 @@ import {
   readOnly,
   conditionallyShowSchemas,
 } from '../property-schemas'
+import elementSchema from '../element-schema'
 
 // Think this needs to be a variable because of recursive dependency
 
@@ -30,7 +31,16 @@ const schema: Joi.ObjectSchema = Joi.object({
   addSetEntryLabel: Joi.string(),
   removeSetEntryLabel: Joi.string(),
   elements: Joi.array()
-    .items(Joi.link('#formElement'))
+    .items(
+      Joi.custom((value) => {
+        if (!value) return
+        const result = elementSchema.validate(value)
+        if (result.error) {
+          throw result.error
+        }
+        return result.value
+      }),
+    )
     .required()
     .min(1)
     .unique('name', { ignoreUndefined: true })
