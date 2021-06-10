@@ -5846,6 +5846,7 @@ describe('Section Element', () => {
           {
             id: '9014e80c-3c68-4adb-a335-1be04ebc95ee',
             label: 'Section Heading',
+            name: 'Section Heading',
             isCollapsed: true,
             type: 'section',
             elements: [
@@ -5866,6 +5867,7 @@ describe('Section Element', () => {
           {
             id: '9014e80c-3c68-4adb-a335-1be04ebc95e2',
             label: 'Section Heading 2',
+            name: 'Section Heading 2',
             type: 'section',
             elements: [
               {
@@ -5912,6 +5914,7 @@ describe('Section Element', () => {
                 id: '9014e80c-3c68-4adb-a335-1be04ebc95ee',
                 label: 'B',
                 type: 'section',
+                name: 'B',
                 elements: [
                   {
                     id: 'bb1b3d16-f3e1-4833-a273-19ea18e00582',
@@ -5925,6 +5928,7 @@ describe('Section Element', () => {
                         id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
                         label: 'D',
                         type: 'section',
+                        name: 'D',
                         elements: [
                           {
                             id: 'bb1b3d16-f3e1-4833-a273-19ea18e00582',
@@ -5971,6 +5975,7 @@ describe('Section Element', () => {
               {
                 id: '9014e80c-3c68-4adb-a335-1be04ebc95ee',
                 label: 'B',
+                name: 'B',
                 type: 'section',
               },
             ],
