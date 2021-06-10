@@ -34,6 +34,7 @@ import FormElement from './elements/FormElement'
 import SummaryElement from './elements/SummaryElement'
 import ComplianceElement from './elements/ComplianceElement'
 import FileElement from './elements/FileElement'
+import SectionElement from './elements/SectionElement'
 //Integration
 import GeoscapeElement from './elements/GeoscapeElement'
 import PointElement from './elements/PointElement'
@@ -147,6 +148,8 @@ const schema = Joi.object({
   .when(typeCase('civicaStreetName'), {
     then: civicaStreetNameElement,
   })
-  .id('formElement')
+  .when(typeCase('section'), {
+    then: SectionElement,
+  })
 
 export default schema

@@ -36,6 +36,7 @@ export const elementTypes = [
   'infoPage',
   'files',
   'summary',
+  'section',
 ].sort()
 
 export const CUSTOM_OPTION_TYPE = 'CUSTOM'
