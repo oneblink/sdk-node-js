@@ -11,6 +11,9 @@ import {
   lookupSchemas,
 } from '../property-schemas'
 import { DYNAMIC_OPTION_TYPE } from '../common'
+
+export const type = 'compliance'
+
 export default Joi.object({
   id,
   name,

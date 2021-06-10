@@ -11,6 +11,8 @@ import {
   lookupSchemas,
 } from '../property-schemas'
 
+export const type = 'pointAddress'
+
 export default Joi.object({
   id,
   name,

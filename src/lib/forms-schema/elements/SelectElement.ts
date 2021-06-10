@@ -13,6 +13,9 @@ import {
   canToggleAll,
 } from '../property-schemas'
 import { DYNAMIC_OPTION_TYPE } from '../common'
+
+export const type = 'select'
+
 export default Joi.object({
   id,
   name,

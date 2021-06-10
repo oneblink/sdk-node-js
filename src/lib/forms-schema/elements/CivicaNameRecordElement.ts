@@ -3,22 +3,21 @@ import {
   id,
   name,
   label,
+  hint,
   required,
   readOnly,
-  hint,
   conditionallyShowSchemas,
-  lookupSchemas,
 } from '../property-schemas'
 
-export const type = 'location'
+export const type = 'civicaNameRecord'
 
 export default Joi.object({
   id,
   name,
   label,
+  hint,
   required,
   readOnly,
-  hint,
-  ...lookupSchemas,
   ...conditionallyShowSchemas,
+  useGeoscapeAddressing: Joi.boolean().default(false),
 })

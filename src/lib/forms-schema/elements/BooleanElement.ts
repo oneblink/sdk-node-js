@@ -9,6 +9,9 @@ import {
   conditionallyShowSchemas,
   lookupSchemas,
 } from '../property-schemas'
+
+export const type = 'boolean'
+
 export default Joi.object({
   id,
   name,

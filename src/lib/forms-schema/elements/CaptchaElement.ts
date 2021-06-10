@@ -9,6 +9,8 @@ import {
   conditionallyShowSchemas,
 } from '../property-schemas'
 
+export const type = 'captcha'
+
 export default Joi.object({
   id,
   name,
