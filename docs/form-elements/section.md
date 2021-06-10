@@ -4,7 +4,7 @@
 
 ## Section Element
 
-Allow the user add multiple entries of a set of elements.
+Allows the grouping of multiple elements into a collapsible section.
 
 | Property      | Required | Type                             | Default     | Description                                                    |
 | ------------- | -------- | -------------------------------- | ----------- | -------------------------------------------------------------- |
@@ -13,7 +13,7 @@ Allow the user add multiple entries of a set of elements.
 | `isCollapsed` | No       | `boolean`                        | `false`     | Whether or not the section is collapsed by default.            |
 | `elements`    | Yes      | [`FormElement`](./README.md)`[]` |             | The elements contained within the section .                    |
 
-Section element also inherits the properties of the following:
+The Section element also inherits the properties of the following:
 
 - [Base Element](./base-element.md)
 
@@ -41,7 +41,7 @@ Section element also inherits the properties of the following:
 
 ### Example Submission Data
 
-Section element has no effect on this submission structure. The elements within will be included as per usual.
+The Section element has no effect on this submission structure. The elements within will be included as per usual.
 eg. The example above would look like:
 
 ```json
