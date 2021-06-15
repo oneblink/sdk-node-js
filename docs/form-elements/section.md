@@ -6,12 +6,14 @@
 
 Allows the grouping of multiple elements into a collapsible section.
 
-| Property      | Required | Type                             | Default     | Description                                                    |
-| ------------- | -------- | -------------------------------- | ----------- | -------------------------------------------------------------- |
-| `type`        | Yes      | `string`                         | `'section'` | The type of Form Element.                                      |
-| `label`       | Yes      | `string`                         |             | Display text presented to the user above the input by default. |
-| `isCollapsed` | No       | `boolean`                        | `false`     | Whether or not the section is collapsed by default.            |
-| `elements`    | Yes      | [`FormElement`](./README.md)`[]` |             | The elements contained within the section .                    |
+| Property      | Required | Type                             | Default     | Description                                                                              |
+| ------------- | -------- | -------------------------------- | ----------- | ---------------------------------------------------------------------------------------- |
+| `type`        | Yes      | `string`                         | `'section'` | The type of Form Element.                                                                |
+| `label`       | Yes      | `string`                         |             | Display text presented to the user as a collapsible heading.                             |
+| `name`        | Yes      | `string`                         |             | The key that will be assigned a value in the submission data when the form is submitted. |
+| `hint`        | No       | `string`                         |             | A hint triggered by an icon tooltip to be displayed when hovering beside the heading.    |
+| `isCollapsed` | No       | `boolean`                        | `false`     | Whether or not the section is collapsed by default.                                      |
+| `elements`    | Yes      | [`FormElement`](./README.md)`[]` |             | The elements contained within the section .                                              |
 
 The Section element also inherits the properties of the following:
 
