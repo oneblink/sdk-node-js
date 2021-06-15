@@ -25,7 +25,8 @@ The Section element also inherits the properties of the following:
 {
   "id": "b1311ae0-6bb7-11e9-a923-1681be663d3e",
   "type": "section",
-  "label": "My Section",
+  "label": "Person Details",
+  "name": "person",
   "isCollapsed": true,
   "elements": [
     {
@@ -49,7 +50,9 @@ eg. The example above would look like:
 ```json
 {
   "submission": {
-    "fullName": "Obi-Wan Kenobi"
+    "person": {
+      "fullName": "Obi-Wan Kenobi"
+    }
   }
 }
 ```
