@@ -1,11 +1,5 @@
 import Joi from 'joi'
-import {
-  id,
-  label,
-  name,
-  hint,
-  conditionallyShowSchemas,
-} from '../property-schemas'
+import { id, label, hint, conditionallyShowSchemas } from '../property-schemas'
 import elementSchema from '../element-schema'
 
 export const type = 'section'
@@ -13,7 +7,6 @@ export const type = 'section'
 const schema: Joi.ObjectSchema = Joi.object({
   id,
   label,
-  name,
   hint,
   ...conditionallyShowSchemas,
   isCollapsed: Joi.boolean().default(false),
