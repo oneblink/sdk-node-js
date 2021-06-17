@@ -1158,8 +1158,6 @@ test('should error if number max is not an integer when number isInteger', () =>
   expect(error?.message).toContain('"elements[0].maxNumber" must be an integer')
 })
 
-// Looks like this is impossible with the current Joi version
-// https://github.com/hapijs/joi/issues/1685
 test('should throw error if maxNumber is not provided for number element with isSlider as true', () => {
   const { error } = formSchema.validate({
     id: 1,
@@ -5846,7 +5844,6 @@ describe('Section Element', () => {
           {
             id: '9014e80c-3c68-4adb-a335-1be04ebc95ee',
             label: 'Section Heading',
-            name: 'Section Heading',
             isCollapsed: true,
             type: 'section',
             elements: [
@@ -5867,7 +5864,6 @@ describe('Section Element', () => {
           {
             id: '9014e80c-3c68-4adb-a335-1be04ebc95e2',
             label: 'Section Heading 2',
-            name: 'Section Heading 2',
             type: 'section',
             elements: [
               {
