@@ -21,6 +21,9 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
     stripUnknown: true,
   })
 
+  // validate element names are unique (including elements without a name with children)
+  validateElementNamesAcrossNestedElements(validatedForm.elements)
+
   const { publishStartDate, publishEndDate } = validatedForm
   if (!!publishStartDate && !!publishEndDate) {
     const startDate = new Date(publishStartDate)
@@ -67,6 +70,35 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
   }
 
   return validatedForm
+}
+
+function validateElementNamesAcrossNestedElements(
+  elements: FormTypes.FormElement[],
+): string[] {
+  const elementNames = []
+  for (const element of elements) {
+    if (element.type === 'page' || element.type === 'section') {
+      const childNames = validateElementNamesAcrossNestedElements(
+        element.elements,
+      )
+      for (const name of childNames) {
+        checkElementNameUniqueness(elementNames, name)
+        elementNames.push(name)
+      }
+    } else {
+      checkElementNameUniqueness(elementNames, element.name)
+      elementNames.push(element.name)
+    }
+  }
+  return elementNames
+}
+
+function checkElementNameUniqueness(elementNames: string[], name: string) {
+  // check if name already exists
+  const existingName = elementNames.find((e) => e === name)
+  if (existingName) {
+    throw new Error(`Element name is not unique: ${name}`)
+  }
 }
 
 function validateWithElementSchema<T extends FormTypes._FormElementBase>(
