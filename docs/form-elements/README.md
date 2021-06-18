@@ -40,3 +40,4 @@ The OneBlink Form Definition allows for multiple different types of Form Element
 - [Textarea](./textarea.md)
 - [Time](./time.md)
 - [Switch](./switch.md)
+- [Section](./section.md)

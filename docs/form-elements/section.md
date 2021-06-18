@@ -6,14 +6,13 @@
 
 Allows the grouping of multiple elements into a collapsible section.
 
-| Property      | Required | Type                             | Default     | Description                                                                              |
-| ------------- | -------- | -------------------------------- | ----------- | ---------------------------------------------------------------------------------------- |
-| `type`        | Yes      | `string`                         | `'section'` | The type of Form Element.                                                                |
-| `label`       | Yes      | `string`                         |             | Display text presented to the user as a collapsible heading.                             |
-| `name`        | Yes      | `string`                         |             | The key that will be assigned a value in the submission data when the form is submitted. |
-| `hint`        | No       | `string`                         |             | A hint triggered by an icon tooltip to be displayed when hovering beside the heading.    |
-| `isCollapsed` | No       | `boolean`                        | `false`     | Whether or not the section is collapsed by default.                                      |
-| `elements`    | Yes      | [`FormElement`](./README.md)`[]` |             | The elements contained within the section .                                              |
+| Property      | Required | Type                             | Default     | Description                                                                           |
+| ------------- | -------- | -------------------------------- | ----------- | ------------------------------------------------------------------------------------- |
+| `type`        | Yes      | `string`                         | `'section'` | The type of Form Element.                                                             |
+| `label`       | Yes      | `string`                         |             | Display text presented to the user as a collapsible heading.                          |
+| `hint`        | No       | `string`                         |             | A hint triggered by an icon tooltip to be displayed when hovering beside the heading. |
+| `isCollapsed` | No       | `boolean`                        | `false`     | Whether or not the section is collapsed by default.                                   |
+| `elements`    | Yes      | [`FormElement`](./README.md)`[]` |             | The elements contained within the section .                                           |
 
 The Section element also inherits the properties of the following:
 
@@ -26,7 +25,6 @@ The Section element also inherits the properties of the following:
   "id": "b1311ae0-6bb7-11e9-a923-1681be663d3e",
   "type": "section",
   "label": "Person Details",
-  "name": "person",
   "isCollapsed": true,
   "elements": [
     {
@@ -50,9 +48,7 @@ eg. The example above would look like:
 ```json
 {
   "submission": {
-    "person": {
-      "fullName": "Obi-Wan Kenobi"
-    }
+    "fullName": "Obi-Wan Kenobi"
   }
 }
 ```
