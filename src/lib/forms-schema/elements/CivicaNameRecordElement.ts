@@ -48,6 +48,7 @@ export default Joi.object({
   faxPhoneIsRequired: boolSchema,
   faxPhoneIsHidden: boolSchema,
 
+  streetAddressesLabel: textSchema,
   address1Label: textSchema,
   address2Label: textSchema,
   postcodeLabel: textSchema,
