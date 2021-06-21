@@ -24,6 +24,9 @@ export default Joi.object({
   ...conditionallyShowSchemas,
   useGeoscapeAddressing: Joi.boolean().default(false),
 
+  titleLabel: textSchema,
+  familyNameLabel: textSchema,
+
   givenName1Label: textSchema,
   givenName1IsRequired: boolSchema,
   givenName1IsHidden: boolSchema,
