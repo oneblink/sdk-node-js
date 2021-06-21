@@ -32,6 +32,7 @@ Allows the user to enter the required data for Civica Name Record.
 | `faxPhoneLabel`           | No       | `string`  |                      | The label that will be set for this field when the element is rendered.                  |
 | `faxPhoneIsRequired`      | No       | `boolean` | `false`              | Whether this field is required to be filled in when the element is rendered.             |
 | `faxPhoneIsHidden`        | No       | `boolean` | `false`              | Whether this field is hidden when the element is rendered.                               |
+| `streetAddressesLabel`    | No       | `string`  |                      | The label that will be set for this field when the element is rendered.                  |
 | `address1Label`           | No       | `string`  |                      | The label that will be set for this field when the element is rendered.                  |
 | `address2Label`           | No       | `string`  |                      | The label that will be set for this field when the element is rendered.                  |
 | `postcodeLabel`           | No       | `string`  |                      | The label that will be set for this field when the element is rendered.                  |
