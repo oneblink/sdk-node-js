@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.15] - 2021-06-23
+
 ### Added
 
 - `Section` form element
@@ -14,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `CIVICA_CRM` form submission event
 - `civicaStreetName` form element
 - `civicaRecordName` form element
+
+### Dependencies
+
+- update [aws-sdk](https://www.npmjs.com/package/aws-sdk) to [2.925.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.925.0) (from [2.920.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.920.0))
 
 ## [0.9.14] - 2021-06-06
 
