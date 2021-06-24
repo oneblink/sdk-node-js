@@ -1,4 +1,5 @@
 import Joi from 'joi'
+import { attachment } from '../common'
 import {
   id,
   name,
@@ -26,22 +27,7 @@ export default Joi.object({
   }),
   defaultValue: Joi.when('storageType', {
     is: Joi.valid('public', 'private'),
-    then: Joi.array().items(
-      Joi.object().keys({
-        id: Joi.string().required(),
-        url: Joi.string().required().uri(),
-        contentType: Joi.string().required(),
-        fileName: Joi.string().required(),
-        isPrivate: Joi.boolean().required(),
-        s3: Joi.object()
-          .keys({
-            bucket: Joi.string().required(),
-            key: Joi.string().required(),
-            region: Joi.string().required(),
-          })
-          .required(),
-      }),
-    ),
+    then: Joi.array().items(attachment),
     otherwise: Joi.array().items(
       Joi.object().keys({
         data: Joi.string().required().dataUri(),

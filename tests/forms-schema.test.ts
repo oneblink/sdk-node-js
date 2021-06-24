@@ -4603,6 +4603,156 @@ test('should allow defaultValue in "legacy" format for files element with no sto
   expect(value?.defaultValue).toEqual(input.defaultValue)
 })
 
+test('should allow defaultValue for camera element with "private" storageType', () => {
+  const input = {
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'camera',
+    label: 'Camera',
+    type: 'camera',
+    storageType: 'private',
+    defaultValue: {
+      s3: {
+        region: 'ap-southeast-2',
+        bucket: 'customer.forms.oneblink.io',
+        key: 'submissions/1/attachments/44cdee6f-edbd-4620-aaf5-df25ce976e43',
+      },
+      url: 'https://auth-api.blinkm.io/submissions/1/attachments/44cdee6f-edbd-4620-aaf5-df25ce976e43',
+      contentType: 'image/png',
+      fileName: 'dot.png',
+      id: '44cdee6f-edbd-4620-aaf5-df25ce976e43',
+      isPrivate: true,
+    },
+  }
+  const { value } = elementSchema.validate(input)
+  expect(value?.defaultValue).toEqual(input.defaultValue)
+})
+
+test('should allow defaultValue for camera element with "public" storageType', () => {
+  const input = {
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'camera',
+    label: 'Camera',
+    type: 'camera',
+    storageType: 'public',
+    defaultValue: {
+      s3: {
+        region: 'ap-southeast-2',
+        bucket: 'customer.forms.oneblink.io',
+        key: 'submissions/1/attachments/44cdee6f-edbd-4620-aaf5-df25ce976e43',
+      },
+      url: 'https://auth-api.blinkm.io/submissions/1/attachments/44cdee6f-edbd-4620-aaf5-df25ce976e43',
+      contentType: 'image/png',
+      fileName: 'dot.png',
+      id: '44cdee6f-edbd-4620-aaf5-df25ce976e43',
+      isPrivate: true,
+    },
+  }
+  const { value } = elementSchema.validate(input)
+  expect(value?.defaultValue).toEqual(input.defaultValue)
+})
+
+test('should allow defaultValue for camera element with "legacy" storageType', () => {
+  const input = {
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'camera',
+    label: 'Camera',
+    type: 'camera',
+    storageType: 'legacy',
+    defaultValue:
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAIElEQVQYV2NkYGBoYGBgqGdgYGhkZGBg+M8ABSAOXAYATFcEA8STCz8AAAAASUVORK5CYII=',
+  }
+  const { value } = elementSchema.validate(input)
+  expect(value?.defaultValue).toEqual(input.defaultValue)
+})
+
+test('should allow defaultValue in "legacy" format for camera element with no storageType', () => {
+  const input = {
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'camera',
+    label: 'Camera',
+    type: 'camera',
+    defaultValue:
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAIElEQVQYV2NkYGBoYGBgqGdgYGhkZGBg+M8ABSAOXAYATFcEA8STCz8AAAAASUVORK5CYII=',
+  }
+  const { value } = elementSchema.validate(input)
+  expect(value?.defaultValue).toEqual(input.defaultValue)
+})
+
+test('should allow defaultValue for draw element with "private" storageType', () => {
+  const input = {
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'draw',
+    label: 'Draw',
+    type: 'draw',
+    storageType: 'private',
+    defaultValue: {
+      s3: {
+        region: 'ap-southeast-2',
+        bucket: 'customer.forms.oneblink.io',
+        key: 'submissions/1/attachments/44cdee6f-edbd-4620-aaf5-df25ce976e43',
+      },
+      url: 'https://auth-api.blinkm.io/submissions/1/attachments/44cdee6f-edbd-4620-aaf5-df25ce976e43',
+      contentType: 'image/png',
+      fileName: 'dot.png',
+      id: '44cdee6f-edbd-4620-aaf5-df25ce976e43',
+      isPrivate: true,
+    },
+  }
+  const { value } = elementSchema.validate(input)
+  expect(value?.defaultValue).toEqual(input.defaultValue)
+})
+
+test('should allow defaultValue for draw element with "public" storageType', () => {
+  const input = {
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'draw',
+    label: 'Draw',
+    type: 'draw',
+    storageType: 'public',
+    defaultValue: {
+      s3: {
+        region: 'ap-southeast-2',
+        bucket: 'customer.forms.oneblink.io',
+        key: 'submissions/1/attachments/44cdee6f-edbd-4620-aaf5-df25ce976e43',
+      },
+      url: 'https://auth-api.blinkm.io/submissions/1/attachments/44cdee6f-edbd-4620-aaf5-df25ce976e43',
+      contentType: 'image/png',
+      fileName: 'dot.png',
+      id: '44cdee6f-edbd-4620-aaf5-df25ce976e43',
+      isPrivate: true,
+    },
+  }
+  const { value } = elementSchema.validate(input)
+  expect(value?.defaultValue).toEqual(input.defaultValue)
+})
+
+test('should allow defaultValue for draw element with "legacy" storageType', () => {
+  const input = {
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'draw',
+    label: 'Draw',
+    type: 'draw',
+    storageType: 'legacy',
+    defaultValue:
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAIElEQVQYV2NkYGBoYGBgqGdgYGhkZGBg+M8ABSAOXAYATFcEA8STCz8AAAAASUVORK5CYII=',
+  }
+  const { value } = elementSchema.validate(input)
+  expect(value?.defaultValue).toEqual(input.defaultValue)
+})
+
+test('should allow defaultValue in "legacy" format for draw element with no storageType', () => {
+  const input = {
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'draw',
+    label: 'Draw',
+    type: 'draw',
+    defaultValue:
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAIElEQVQYV2NkYGBoYGBgqGdgYGhkZGBg+M8ABSAOXAYATFcEA8STCz8AAAAASUVORK5CYII=',
+  }
+  const { value } = elementSchema.validate(input)
+  expect(value?.defaultValue).toEqual(input.defaultValue)
+})
+
 test('should allow placeholderValue property for these elements', () => {
   const result = formSchema.validate({
     id: 1,
