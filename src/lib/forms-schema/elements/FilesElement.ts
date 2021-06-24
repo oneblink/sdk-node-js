@@ -1,4 +1,5 @@
 import Joi from 'joi'
+import { attachment } from '../common'
 import {
   id,
   name,
@@ -23,6 +24,16 @@ export default Joi.object({
     is: Joi.valid(true),
     then: Joi.array().items(Joi.string()).required(),
     otherwise: Joi.any().strip(),
+  }),
+  defaultValue: Joi.when('storageType', {
+    is: Joi.valid('public', 'private'),
+    then: Joi.array().items(attachment),
+    otherwise: Joi.array().items(
+      Joi.object().keys({
+        data: Joi.string().required().dataUri(),
+        fileName: Joi.string().required(),
+      }),
+    ),
   }),
   minEntries: Joi.number().min(0),
   maxEntries: Joi.number().when('minEntries', {

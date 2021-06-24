@@ -99,10 +99,13 @@ export default class OneBlinkAPI {
     return await response.json()
   }
 
-  async searchRequest<T, TOut>(path: string, searchParams?: T): Promise<TOut> {
+  async searchRequest<TOut>(
+    path: string,
+    searchParams?: querystring.ParsedUrlQueryInput,
+  ): Promise<TOut> {
     const search = querystring.stringify(searchParams || {})
 
-    return await this.getRequest(`${path}?${search}`)
+    return await this.getRequest<TOut>(`${path}?${search}`)
   }
 
   async putRequest<T, TOut>(path: string, payload: T): Promise<TOut> {

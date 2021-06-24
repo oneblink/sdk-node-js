@@ -1,4 +1,5 @@
 import Joi from 'joi'
+import { attachment } from '../common'
 import {
   id,
   name,
@@ -21,4 +22,9 @@ export default Joi.object({
   readOnly,
   ...conditionallyShowSchemas,
   storageType,
+  defaultValue: Joi.when('storageType', {
+    is: Joi.valid('public', 'private'),
+    then: attachment,
+    otherwise: Joi.string().dataUri(),
+  }),
 })

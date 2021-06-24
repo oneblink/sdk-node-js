@@ -30,8 +30,8 @@ type FormsSearchResult = {
 } & BaseSearchResult
 
 type FormsSearchOptions = {
-  isAuthenticated?: unknown
-  name?: unknown
+  isAuthenticated?: boolean
+  name?: string
 }
 
 type FormSubmissionHistorySearchParameters = {
@@ -280,7 +280,7 @@ export default (tenant: Tenant) =>
       contentType: string
       isPrivate: boolean
       username?: string
-    }) {
+    }): Promise<SubmissionTypes.FormSubmissionAttachment> {
       const result = await super.postRequest<
         { username?: string },
         AWSTypes.FormAttachmentS3Credentials
@@ -368,7 +368,7 @@ export default (tenant: Tenant) =>
       return super.searchRequest(`/form-submission-meta`, searchParams)
     }
 
-    getForm(formId?: unknown, injectForms?: unknown): Promise<FormTypes.Form> {
+    getForm(formId?: number, injectForms?: boolean): Promise<FormTypes.Form> {
       if (typeof formId !== 'number') {
         return Promise.reject(new TypeError('Must supply "formId" as a number'))
       }
