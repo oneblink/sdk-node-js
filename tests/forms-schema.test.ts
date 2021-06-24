@@ -4516,6 +4516,93 @@ test('should throw error if minEntries is greater than maxEntries', () => {
   )
 })
 
+test('should allow defaultValue for files element with "private" storageType', () => {
+  const input = {
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'files',
+    label: 'Files',
+    type: 'files',
+    storageType: 'private',
+    defaultValue: [
+      {
+        s3: {
+          region: 'ap-southeast-2',
+          bucket: 'customer.forms.oneblink.io',
+          key: 'submissions/1/attachments/44cdee6f-edbd-4620-aaf5-df25ce976e43',
+        },
+        url: 'https://auth-api.blinkm.io/submissions/1/attachments/44cdee6f-edbd-4620-aaf5-df25ce976e43',
+        contentType: 'image/png',
+        fileName: 'dot.png',
+        id: '44cdee6f-edbd-4620-aaf5-df25ce976e43',
+        isPrivate: true,
+      },
+    ],
+  }
+  const { value } = elementSchema.validate(input)
+  expect(value?.defaultValue).toEqual(input.defaultValue)
+})
+
+test('should allow defaultValue for files element with "public" storageType', () => {
+  const input = {
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'files',
+    label: 'Files',
+    type: 'files',
+    storageType: 'public',
+    defaultValue: [
+      {
+        s3: {
+          region: 'ap-southeast-2',
+          bucket: 'customer.forms.oneblink.io',
+          key: 'submissions/1/attachments/44cdee6f-edbd-4620-aaf5-df25ce976e43',
+        },
+        url: 'https://auth-api.blinkm.io/submissions/1/attachments/44cdee6f-edbd-4620-aaf5-df25ce976e43',
+        contentType: 'image/png',
+        fileName: 'dot.png',
+        id: '44cdee6f-edbd-4620-aaf5-df25ce976e43',
+        isPrivate: true,
+      },
+    ],
+  }
+  const { value } = elementSchema.validate(input)
+  expect(value?.defaultValue).toEqual(input.defaultValue)
+})
+
+test('should allow defaultValue for files element with "legacy" storageType', () => {
+  const input = {
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'files',
+    label: 'Files',
+    type: 'files',
+    storageType: 'legacy',
+    defaultValue: [
+      {
+        fileName: 'dot.png',
+        data: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAIElEQVQYV2NkYGBoYGBgqGdgYGhkZGBg+M8ABSAOXAYATFcEA8STCz8AAAAASUVORK5CYII=',
+      },
+    ],
+  }
+  const { value } = elementSchema.validate(input)
+  expect(value?.defaultValue).toEqual(input.defaultValue)
+})
+
+test('should allow defaultValue in "legacy" format for files element with no storageType', () => {
+  const input = {
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'files',
+    label: 'Files',
+    type: 'files',
+    defaultValue: [
+      {
+        fileName: 'dot.png',
+        data: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAIElEQVQYV2NkYGBoYGBgqGdgYGhkZGBg+M8ABSAOXAYATFcEA8STCz8AAAAASUVORK5CYII=',
+      },
+    ],
+  }
+  const { value } = elementSchema.validate(input)
+  expect(value?.defaultValue).toEqual(input.defaultValue)
+})
+
 test('should allow placeholderValue property for these elements', () => {
   const result = formSchema.validate({
     id: 1,

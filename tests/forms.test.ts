@@ -161,7 +161,11 @@ describe('Forms SDK Class', () => {
     describe('should reject with correct validation errors for', () => {
       test('"formId"', async () => {
         const forms = await getFormsSdk()
-        return expect(forms.getForm('123')).rejects.toThrow(
+        const promise = forms.getForm(
+          // @ts-expect-error Intentionally passing a string here instead of a number
+          '123',
+        )
+        return expect(promise).rejects.toThrow(
           'Must supply "formId" as a number',
         )
       })

@@ -6,14 +6,15 @@
 
 Allow the user upload a array of files from their device.
 
-| Property      | Required | Type     | Default   | Description                                                                                 |
-| ------------- | -------- | -------- | --------- | ------------------------------------------------------------------------------------------- |
-| `type`        | Yes      | `string` | `'files'` | The type of Form Element.                                                                   |
-| `name`        | Yes      | `string` |           | The key that will be assigned a value in the submission data when the form is submitted.    |
-| `label`       | Yes      | `string` |           | Display text presented to the user above the input by default.                              |
-| `hint`        | No       | `string` |           | A hint triggered by an icon tooltip to be displayed when hovering beside the element label. |
-| `minEntries`  | No       | `string` |           | Minimum number of files required                                                            |
-| `storageType` | no       | `string` |           | How the files uploaded by a user will be stored: `private`, `public`, `legacy`              |
+| Property       | Required | Type     | Default   | Description                                                                                                                                       |
+| -------------- | -------- | -------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`         | Yes      | `string` | `'files'` | The type of Form Element.                                                                                                                         |
+| `name`         | Yes      | `string` |           | The key that will be assigned a value in the submission data when the form is submitted.                                                          |
+| `label`        | Yes      | `string` |           | Display text presented to the user above the input by default.                                                                                    |
+| `hint`         | No       | `string` |           | A hint triggered by an icon tooltip to be displayed when hovering beside the element label.                                                       |
+| `minEntries`   | No       | `string` |           | Minimum number of files required                                                                                                                  |
+| `storageType`  | no       | `string` |           | How the files uploaded by a user will be stored: `private`, `public`, `legacy`                                                                    |
+| `defaultValue` | no       | `Array`  |           | An array of attachments, see [Example Submission Data](#example-submission-data) below for structure which is based on the `storageType` property |
 
 Files element also inherits the properties of the following:
 

@@ -1,5 +1,3 @@
 {
-  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
-  "javascript.format.insertSpaceAfterConstructor": true,
   "cSpell.words": ["BPOINT", "jwks"]
 }
