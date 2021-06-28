@@ -30,5 +30,5 @@ export default Joi.object({
     otherwise: Joi.string(),
   }),
   ...conditionallyShowSchemas,
-  lookupSchemas,
+  ...lookupSchemas,
 })
