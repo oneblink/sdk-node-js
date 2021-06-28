@@ -26,14 +26,14 @@ export default Joi.object({
     otherwise: Joi.any().strip(),
   }),
   defaultValue: Joi.when('storageType', {
-    is: Joi.valid('public', 'private'),
-    then: Joi.array().items(attachment),
-    otherwise: Joi.array().items(
+    is: Joi.valid('legacy', Joi.optional()),
+    then: Joi.array().items(
       Joi.object().keys({
         data: Joi.string().required().dataUri(),
         fileName: Joi.string().required(),
       }),
     ),
+    otherwise: Joi.array().items(attachment),
   }),
   minEntries: Joi.number().min(0),
   maxEntries: Joi.number().when('minEntries', {

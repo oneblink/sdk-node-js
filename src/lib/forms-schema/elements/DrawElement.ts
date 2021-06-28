@@ -23,8 +23,8 @@ export default Joi.object({
   ...conditionallyShowSchemas,
   storageType,
   defaultValue: Joi.when('storageType', {
-    is: Joi.valid('public', 'private'),
-    then: attachment,
-    otherwise: Joi.string().dataUri(),
+    is: Joi.valid('legacy', Joi.optional()),
+    then: Joi.string().dataUri(),
+    otherwise: attachment,
   }),
 })

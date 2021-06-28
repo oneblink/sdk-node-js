@@ -24,8 +24,8 @@ export default Joi.object({
   includeTimestampWatermark: Joi.boolean().default(false),
   storageType,
   defaultValue: Joi.when('storageType', {
-    is: Joi.valid('public', 'private'),
-    then: attachment,
-    otherwise: Joi.string().dataUri(),
+    is: Joi.valid('legacy', Joi.optional()),
+    then: Joi.string().dataUri(),
+    otherwise: attachment,
   }),
 })

@@ -4538,7 +4538,8 @@ test('should allow defaultValue for files element with "private" storageType', (
       },
     ],
   }
-  const { value } = elementSchema.validate(input)
+  const { value, error } = elementSchema.validate(input)
+  expect(error).toBeUndefined()
   expect(value?.defaultValue).toEqual(input.defaultValue)
 })
 
@@ -4564,7 +4565,8 @@ test('should allow defaultValue for files element with "public" storageType', ()
       },
     ],
   }
-  const { value } = elementSchema.validate(input)
+  const { value, error } = elementSchema.validate(input)
+  expect(error).toBeUndefined()
   expect(value?.defaultValue).toEqual(input.defaultValue)
 })
 
@@ -4582,7 +4584,8 @@ test('should allow defaultValue for files element with "legacy" storageType', ()
       },
     ],
   }
-  const { value } = elementSchema.validate(input)
+  const { value, error } = elementSchema.validate(input)
+  expect(error).toBeUndefined()
   expect(value?.defaultValue).toEqual(input.defaultValue)
 })
 
@@ -4599,7 +4602,8 @@ test('should allow defaultValue in "legacy" format for files element with no sto
       },
     ],
   }
-  const { value } = elementSchema.validate(input)
+  const { value, error } = elementSchema.validate(input)
+  expect(error).toBeUndefined()
   expect(value?.defaultValue).toEqual(input.defaultValue)
 })
 
@@ -4623,7 +4627,8 @@ test('should allow defaultValue for camera element with "private" storageType', 
       isPrivate: true,
     },
   }
-  const { value } = elementSchema.validate(input)
+  const { value, error } = elementSchema.validate(input)
+  expect(error).toBeUndefined()
   expect(value?.defaultValue).toEqual(input.defaultValue)
 })
 
@@ -4647,7 +4652,8 @@ test('should allow defaultValue for camera element with "public" storageType', (
       isPrivate: true,
     },
   }
-  const { value } = elementSchema.validate(input)
+  const { value, error } = elementSchema.validate(input)
+  expect(error).toBeUndefined()
   expect(value?.defaultValue).toEqual(input.defaultValue)
 })
 
@@ -4661,7 +4667,8 @@ test('should allow defaultValue for camera element with "legacy" storageType', (
     defaultValue:
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAIElEQVQYV2NkYGBoYGBgqGdgYGhkZGBg+M8ABSAOXAYATFcEA8STCz8AAAAASUVORK5CYII=',
   }
-  const { value } = elementSchema.validate(input)
+  const { value, error } = elementSchema.validate(input)
+  expect(error).toBeUndefined()
   expect(value?.defaultValue).toEqual(input.defaultValue)
 })
 
@@ -4674,7 +4681,8 @@ test('should allow defaultValue in "legacy" format for camera element with no st
     defaultValue:
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAIElEQVQYV2NkYGBoYGBgqGdgYGhkZGBg+M8ABSAOXAYATFcEA8STCz8AAAAASUVORK5CYII=',
   }
-  const { value } = elementSchema.validate(input)
+  const { value, error } = elementSchema.validate(input)
+  expect(error).toBeUndefined()
   expect(value?.defaultValue).toEqual(input.defaultValue)
 })
 
@@ -4698,7 +4706,8 @@ test('should allow defaultValue for draw element with "private" storageType', ()
       isPrivate: true,
     },
   }
-  const { value } = elementSchema.validate(input)
+  const { value, error } = elementSchema.validate(input)
+  expect(error).toBeUndefined()
   expect(value?.defaultValue).toEqual(input.defaultValue)
 })
 
@@ -4722,7 +4731,8 @@ test('should allow defaultValue for draw element with "public" storageType', () 
       isPrivate: true,
     },
   }
-  const { value } = elementSchema.validate(input)
+  const { value, error } = elementSchema.validate(input)
+  expect(error).toBeUndefined()
   expect(value?.defaultValue).toEqual(input.defaultValue)
 })
 
@@ -4736,7 +4746,8 @@ test('should allow defaultValue for draw element with "legacy" storageType', () 
     defaultValue:
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAIElEQVQYV2NkYGBoYGBgqGdgYGhkZGBg+M8ABSAOXAYATFcEA8STCz8AAAAASUVORK5CYII=',
   }
-  const { value } = elementSchema.validate(input)
+  const { value, error } = elementSchema.validate(input)
+  expect(error).toBeUndefined()
   expect(value?.defaultValue).toEqual(input.defaultValue)
 })
 
@@ -4749,7 +4760,8 @@ test('should allow defaultValue in "legacy" format for draw element with no stor
     defaultValue:
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAIElEQVQYV2NkYGBoYGBgqGdgYGhkZGBg+M8ABSAOXAYATFcEA8STCz8AAAAASUVORK5CYII=',
   }
-  const { value } = elementSchema.validate(input)
+  const { value, error } = elementSchema.validate(input)
+  expect(error).toBeUndefined()
   expect(value?.defaultValue).toEqual(input.defaultValue)
 })
 
