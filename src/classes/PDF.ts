@@ -16,12 +16,18 @@ export default (tenant: Tenant) =>
       submissionId: string
       isDraft?: boolean
       includeSubmissionIdInPdf?: boolean
+      excludedElementIds?: string[]
     }): Promise<Buffer> {
       if (!options) {
         throw new TypeError('Must supply "options" as a string')
       }
-      const { submissionId, formId, isDraft, includeSubmissionIdInPdf } =
-        options
+      const {
+        submissionId,
+        formId,
+        isDraft,
+        includeSubmissionIdInPdf,
+        excludedElementIds,
+      } = options
       if (!submissionId || typeof submissionId !== 'string') {
         throw new TypeError('Must supply "options.submissionId" as a string')
       }
@@ -46,6 +52,7 @@ export default (tenant: Tenant) =>
         headers: {
           Accept: `application/pdf`,
         },
+        body: JSON.stringify({ excludedElementIds }),
       })
 
       return response.buffer()

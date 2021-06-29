@@ -104,6 +104,7 @@ async function run() {
     submissionId: 'c63ec3ac-12ab-447c-951c-2815d0e6fc24',
     isDraft: false,
     includeSubmissionIdInPdf: false,
+    excludedElementIds: ['1ae6d5f5-eade-411c-b85a-45fe40fe469e'],
   })
   await writeFileAsync('./submission.pdf', buffer, 'binary')
 }
@@ -111,12 +112,13 @@ async function run() {
 
 ### Parameters
 
-| Parameter                          | Required | Type     | Description                                                               |
-| ---------------------------------- | -------- | -------- | ------------------------------------------------------------------------- |
-| `options.formId`                   | Yes      | `number` | The exact identifier of the form you wish to generate the PDF for         |
-| `options.submissionId`             | Yes      | `string` | The submission identifier generated after a successful form submission    |
-| `options.isDraft`                  | No       | `bool`   | `true` if the submission is a draft submission, otherwise `false`         |
-| `options.includeSubmissionIdInPdf` | No       | `bool`   | `true` to include the submission identifier in the PDF, otherwise `false` |
+| Parameter                          | Required | Type       | Description                                                               |
+| ---------------------------------- | -------- | ---------- | ------------------------------------------------------------------------- |
+| `options.formId`                   | Yes      | `number`   | The exact identifier of the form you wish to generate the PDF for         |
+| `options.submissionId`             | Yes      | `string`   | The submission identifier generated after a successful form submission    |
+| `options.isDraft`                  | No       | `bool`     | `true` if the submission is a draft submission, otherwise `false`         |
+| `options.includeSubmissionIdInPdf` | No       | `bool`     | `true` to include the submission identifier in the PDF, otherwise `false` |
+| `options.excludedElementIds`       | No       | `string[]` | Array of elements ids to be excluded from the PDF document                |
 
 ### Result (Resolved Promise)
 
