@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - extra validation for form (copied out of API)
 
+### Breaking Changes
+
+- drop support for NodeJS 10
+
 ## [0.9.16] - 2021-06-30
 
 ### Added
