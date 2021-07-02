@@ -4,7 +4,7 @@
   "version": "0.9.16",
   "author": "OneBlink <developers@oneblink.io> (https://oneblink.io)",
   "bugs": {
-    "url": "https://github.com/oneblink/sdk-js/issues"
+    "url": "https://github.com/oneblink/sdk-node-js/issues"
   },
   "dependencies": {
     "aws-sdk": "^2.925.0",
@@ -49,7 +49,7 @@
   "files": [
     "tenants"
   ],
-  "homepage": "https://github.com/oneblink/sdk-js",
+  "homepage": "https://github.com/oneblink/sdk-node-js",
   "keywords": [],
   "license": "MIT",
   "main": "./tenants/oneblink.js",
@@ -58,7 +58,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oneblink/sdk-js.git"
+    "url": "git+https://github.com/oneblink/sdk-node-js.git"
   },
   "scripts": {
     "build": "tsc --build",
