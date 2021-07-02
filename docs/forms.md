@@ -568,33 +568,9 @@ forms
 
 ### Parameters
 
-| Parameter                                              | Required                                  | Type                                           | Description                                                                                     |
-| ------------------------------------------------------ | ----------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `name`                                                 | Yes                                       | `string`                                       | Name of the form.                                                                               |
-| `description`                                          | No                                        | `string`                                       | A description of the form.                                                                      |
-| `organisationId`                                       | Yes                                       | `string`                                       | The organisation ID the form belong to.                                                         |
-| `formsAppEnvironmentId`                                | Yes                                       | `number`                                       | The forms app environment ID the form belong to.                                                |
-| `formsAppIds`                                          | Yes                                       | `number[]`                                     | ID's of any Forms Apps that the form is included in.                                            |
-| `elements`                                             | Yes                                       | [`FormElement`](./form-elements/README.md)`[]` | All elements contained within the form itself.                                                  |
-| `isAuthenticated`                                      | Yes                                       | `boolean`                                      | Whether or not the form can only be viewed by an Authenticated user.                            |
-| `isMultiPage`                                          | Yes                                       | `boolean`                                      | Whether or not the form contains multiple pages.                                                |
-| `submissionEvents`                                     | No                                        | `SubmissionEvent[]`                            | Events that occur/trigger on a valid successful submission.                                     |
-| `submissionEvents[].type`                              | Yes                                       | `'CALLBACK' \| 'PDF' \| 'ONEBLINK_API'`        | The type of submission event.                                                                   |
-| `submissionEvents[].configuration`                     | Yes                                       | `mixed`                                        | Configuration specific to the type of submission event.                                         |
-| `submissionEvents[].configuration.url`                 | If `type` is `CALLBACK`                   | `string`                                       | URL that the callback is made to.                                                               |
-| `submissionEvents[].configuration.secret`              | If `type` is `CALLBACK` or `ONEBLINK_API` | `string`                                       | Secret string used for verifying the authenticity of the request made from the OneBlink system. |
-| `submissionEvents[].configuration.email`               | If `type` is `PDF`                        | `string`                                       | The email in which a PDF copy of the form submission will be sent.                              |
-| `submissionEvents[].configuration.pdfFileName`         | If `type` is `PDF`                        | `string`                                       | The name of the PDF file sent to the configured email address.                                  |
-| `submissionEvents[].configuration.emailSubjectLine`    | If `type` is `PDF`                        | `string`                                       | The subject line of the email sent to the configured email address.                             |
-| `submissionEvents[].configuration.apiId`               | If `type` is `ONEBLINK_API`               | `string`                                       | The ID of the OneBlink hosted API that a callback is made to on submission.                     |
-| `submissionEvents[].configuration.apiEnvironment`      | If `type` is `ONEBLINK_API`               | `string`                                       | The environment of the specified OneBlink hosted API to recieve the callback.                   |
-| `submissionEvents[].configuration.apiEnvironmentRoute` | If `type` is `ONEBLINK_API`               | `string`                                       | The route of the specified API and Environment to recieve the callback payload.                 |
-| `postSubmissionAction`                                 | Yes                                       | `string`                                       | The action for the Form to take on a successful submission.                                     |
-| `redirectUrl`                                          | No                                        | `string`                                       | The URL the form will redirect to if configured to do so by the `postSubmissionActions`.        |
-| `isInfoPage`                                           | Yes                                       | `boolean`                                      | Whether or not the Form is an Info Page.                                                        |
-| `tags`                                                 | No                                        | `string[]`                                     | A list of tags used to categorise or describe the form.                                         |
-| `publishStartDate`                                     | No                                        | `string`                                       | The date and time (in ISO format) a form becomes available.                                     |
-| `publishEndDate`                                       | No                                        | `string`                                       | The date and time (in ISO format) a form becomes unavailable.                                   |
+| Parameter | Required | Type                                        | Description                |
+| --------- | -------- | ------------------------------------------- | -------------------------- |
+| `form`    | Yes      | [`NewForm`](./types/form/README.md#newform) | The form object to create. |
 
 ### Result
 
@@ -647,41 +623,10 @@ forms
 
 ### Parameters
 
-| Parameter    | Required | Type                | Description                                                                                             |
-| ------------ | -------- | ------------------- | ------------------------------------------------------------------------------------------------------- |
-| definition   | Yes      | `Definition Object` | See definition properties for a list of valid propertys and their types                                 |
-| overrideLock | no       | `boolean`           | Defaults to false. Set to true to force updating of the form if the form is locked via the form builder |
-
-#### Definition properties
-
-| Parameter                                              | Required                                  | Type                                           | Description                                                                                     |
-| ------------------------------------------------------ | ----------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `id`                                                   | Yes                                       | `number`                                       | Id of the form.                                                                                 |
-| `name`                                                 | Yes                                       | `string`                                       | Name of the form.                                                                               |
-| `description`                                          | No                                        | `string`                                       | A description of the form.                                                                      |
-| `organisationId`                                       | Yes                                       | `string`                                       | The organisation ID the form belong to.                                                         |
-| `formsAppEnvironmentId`                                | Yes                                       | `number`                                       | The forms app environment ID the form belong to.                                                |
-| `formsAppIds`                                          | Yes                                       | `number[]`                                     | ID's of any Forms Apps that the form is included in.                                            |
-| `elements`                                             | Yes                                       | [`FormElement`](./form-elements/README.md)`[]` | All elements contained within the form itself.                                                  |
-| `isAuthenticated`                                      | Yes                                       | `boolean`                                      | Whether or not the form can only be viewed by an Authenticated user.                            |
-| `isMultiPage`                                          | Yes                                       | `boolean`                                      | Whether or not the form contains multiple pages.                                                |
-| `submissionEvents`                                     | No                                        | `SubmissionEvent[]`                            | Events that occur/trigger on a valid successful submission.                                     |
-| `submissionEvents[].type`                              | Yes                                       | `'CALLBACK' \| 'PDF' \| 'ONEBLINK_API'`        | The type of submission event.                                                                   |
-| `submissionEvents[].configuration`                     | Yes                                       | `mixed`                                        | Configuration specific to the type of submission event.                                         |
-| `submissionEvents[].configuration.url`                 | If `type` is `CALLBACK`                   | `string`                                       | URL that the callback is made to.                                                               |
-| `submissionEvents[].configuration.secret`              | If `type` is `CALLBACK` or `ONEBLINK_API` | `string`                                       | Secret string used for verifying the authenticity of the request made from the OneBlink system. |
-| `submissionEvents[].configuration.email`               | If `type` is `PDF`                        | `string`                                       | The email in which a PDF copy of the form submission will be sent.                              |
-| `submissionEvents[].configuration.pdfFileName`         | If `type` is `PDF`                        | `string`                                       | The name of the PDF file sent to the configured email address.                                  |
-| `submissionEvents[].configuration.emailSubjectLine`    | If `type` is `PDF`                        | `string`                                       | The subject line of the email sent to the configured email address.                             |
-| `submissionEvents[].configuration.apiId`               | If `type` is `ONEBLINK_API`               | `string`                                       | The ID of the OneBlink hosted API that a callback is made to on submission.                     |
-| `submissionEvents[].configuration.apiEnvironment`      | If `type` is `ONEBLINK_API`               | `string`                                       | The environment of the specified OneBlink hosted API to recieve the callback.                   |
-| `submissionEvents[].configuration.apiEnvironmentRoute` | If `type` is `ONEBLINK_API`               | `string`                                       | The route of the specified API and Environment to recieve the callback payload.                 |
-| `postSubmissionAction`                                 | Yes                                       | `string`                                       | The action for the Form to take on a successful submission.                                     |
-| `redirectUrl`                                          | No                                        | `string`                                       | The URL the form will redirect to if configured to do so by the `postSubmissionActions`.        |
-| `isInfoPage`                                           | Yes                                       | `boolean`                                      | Whether or not the Form is an Info Page.                                                        |
-| `tags`                                                 | No                                        | `string[]`                                     | A list of tags used to categorise or describe the form.                                         |
-| `publishStartDate`                                     | No                                        | `string`                                       | The date and time (in ISO format) a form becomes available.                                     |
-| `publishEndDate`                                       | No                                        | `string`                                       | The date and time (in ISO format) a form becomes unavailable.                                   |
+| Parameter    | Required | Type                                  | Description                                                                                             |
+| ------------ | -------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| definition   | Yes      | [`Form`](./types/form/README.md#form) | The form object to update                                                                               |
+| overrideLock | no       | `boolean`                             | Defaults to false. Set to true to force updating of the form if the form is locked via the form builder |
 
 ### Result
 
@@ -752,36 +697,9 @@ return validatedForm
 
 ### Parameters
 
-| Parameter                                              | Required                                          | Type                                           | Description                                                                                     |
-| ------------------------------------------------------ | ------------------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `name`                                                 | Yes                                               | `string`                                       | Name of the form.                                                                               |
-| `description`                                          | No                                                | `string`                                       | A description of the form.                                                                      |
-| `organisationId`                                       | Yes                                               | `string`                                       | The organisation ID the form belong to.                                                         |
-| `formsAppEnvironmentId`                                | Yes                                               | `number`                                       | The forms app environment ID the form belong to.                                                |
-| `formsAppIds`                                          | Yes                                               | `number[]`                                     | ID's of any Forms Apps that the form is included in.                                            |
-| `elements`                                             | Yes                                               | [`FormElement`](./form-elements/README.md)`[]` | All elements contained within the form itself.                                                  |
-| `isAuthenticated`                                      | Yes                                               | `boolean`                                      | Whether or not the form can only be viewed by an Authenticated user.                            |
-| `isMultiPage`                                          | Yes                                               | `boolean`                                      | Whether or not the form contains multiple pages.                                                |
-| `submissionEvents`                                     | No                                                | `SubmissionEvent[]`                            | Events that occur/trigger on a valid successful submission.                                     |
-| `submissionEvents[].type`                              | Yes                                               | `'CALLBACK' \| 'PDF' \| 'ONEBLINK_API'`        | The type of submission event.                                                                   |
-| `submissionEvents[].configuration`                     | Yes                                               | `mixed`                                        | Configuration specific to the type of submission event.                                         |
-| `submissionEvents[].configuration.url`                 | If `type` is `CALLBACK`                           | `string`                                       | URL that the callback is made to.                                                               |
-| `submissionEvents[].configuration.secret`              | If `type` is `CALLBACK` or `ONEBLINK_API`         | `string`                                       | Secret string used for verifying the authenticity of the request made from the OneBlink system. |
-| `submissionEvents[].configuration.email`               | If `type` is `PDF`                                | `string`                                       | The email in which a PDF copy of the form submission will be sent.                              |
-| `submissionEvents[].configuration.pdfFileName`         | If `type` is `PDF`                                | `string`                                       | The name of the PDF file sent to the configured email address.                                  |
-| `submissionEvents[].configuration.emailSubjectLine`    | If `type` is `PDF`                                | `string`                                       | The subject line of the email sent to the configured email address.                             |
-| `submissionEvents[].configuration.apiId`               | If `type` is `ONEBLINK_API`                       | `string`                                       | The ID of the OneBlink hosted API that a callback is made to on submission.                     |
-| `submissionEvents[].configuration.apiEnvironment`      | If `type` is `ONEBLINK_API`                       | `string`                                       | The environment of the specified OneBlink hosted API to recieve the callback.                   |
-| `submissionEvents[].configuration.apiEnvironmentRoute` | If `type` is `ONEBLINK_API`                       | `string`                                       | The route of the specified API and Environment to recieve the callback payload.                 |
-| `submissionEvents[].configuration.contentTypeName`     | If `type` is `CP_HCMS`                            | `string`                                       | Then name of the content type in the CP HCMS.                                                   |
-| `submissionEvents[].configuration.encryptedElementIds` | If `type` is `CP_HCMS`                            | `string[]`                                     | An array of element ids that should be set to encrypted in the CP HCMS.                         |
-| `submissionEvents[].configuration.encryptPdf`          | No. This option is only valid `type` is `CP_HCMS` | `boolean`                                      | Whether or not the pdf generated and saved to the CP HCMS should be encrypted.                  |
-| `postSubmissionAction`                                 | Yes                                               | `string`                                       | The action for the Form to take on a successful submission.                                     |
-| `redirectUrl`                                          | No                                                | `string`                                       | The URL the form will redirect to if configured to do so by the `postSubmissionActions`.        |
-| `isInfoPage`                                           | Yes                                               | `boolean`                                      | Whether or not the Form is an Info Page.                                                        |
-| `tags`                                                 | No                                                | `string[]`                                     | A list of tags used to categorise or describe the form.                                         |
-| `publishStartDate`                                     | No                                                | `string`                                       | The date and time (in ISO format) a form becomes available.                                     |
-| `publishEndDate`                                       | No                                                | `string`                                       | The date and time (in ISO format) a form becomes unavailable.                                   |
+| Parameter | Required | Type                                        | Description                  |
+| --------- | -------- | ------------------------------------------- | ---------------------------- |
+| `form`    | Yes      | [`NewForm`](./types/form/README.md#newform) | The form object to validate. |
 
 ### Result
 

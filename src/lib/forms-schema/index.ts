@@ -30,6 +30,7 @@ const SubmissionEventsSchema = Joi.object().keys({
       'BPOINT',
       'WESTPAC_QUICK_WEB',
       'CIVICA_CRM',
+      'SCHEDULING',
     ),
   configuration: Joi.object()
     .required()
@@ -155,6 +156,13 @@ const SubmissionEventsSchema = Joi.object().keys({
           .unique()
           .allow(null),
         encryptPdf: Joi.boolean().default(false),
+      }),
+    })
+    .when('type', {
+      is: 'SCHEDULING',
+      then: Joi.object().keys({
+        nylasAccountId: Joi.string().required(),
+        nylasSchedulingPageId: Joi.number().required(),
       }),
     }),
   conditionallyExecute: Joi.bool().default(false),
