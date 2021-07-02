@@ -1,4 +1,5 @@
 import Joi from 'joi'
+import { formElementsService } from '@oneblink/sdk-core'
 import { FormTypes, ConditionTypes } from '@oneblink/types'
 import { elementSchema, formSchema, pageElementSchema } from './forms-schema'
 import { ConditionalPredicatesItemSchema } from './forms-schema/property-schemas'
@@ -14,6 +15,20 @@ function validateJoiSchema<T>(
   }
 
   return result.value as T
+}
+
+const getRootFormElements = (
+  elements: Array<FormTypes.FormElement>,
+): Array<FormTypes.FormElement> => {
+  const rootFormElements = []
+  for (const element of elements) {
+    if (element.type === 'page' || element.type === 'section') {
+      rootFormElements.push(...getRootFormElements(element.elements))
+    } else {
+      rootFormElements.push(element)
+    }
+  }
+  return rootFormElements
 }
 
 function validateWithFormSchema(form?: unknown): FormTypes.Form {
@@ -36,13 +51,107 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
     validatedForm.submissionEvents = []
   }
 
+  const rootFormElements = getRootFormElements(validatedForm.elements)
+
+  for (const rootFormElement of rootFormElements) {
+    switch (rootFormElement.type) {
+      case 'summary': {
+        rootFormElement.elementIds.forEach((elementId) => {
+          if (elementId === rootFormElement.id) {
+            throw new Error('Summary element cannot summarised self')
+          }
+          const summarizedElement = rootFormElements.find(
+            ({ id }) => id === elementId,
+          )
+          if (!summarizedElement) {
+            throw new Error('Summarised elementId not found')
+          }
+
+          const validSummaryElementTypes = [
+            'text',
+            'textarea',
+            'number',
+            'email',
+            'telephone',
+            'barcodeScanner',
+            'date',
+            'datetime',
+            'time',
+            'select',
+            'radio',
+            'checkboxes',
+            'autocomplete',
+            'calculation',
+          ]
+          if (
+            !validSummaryElementTypes.some(
+              (type) => type === summarizedElement.type,
+            )
+          ) {
+            throw new Error('Summarised element type not valid')
+          }
+        })
+        break
+      }
+    }
+  }
+
   for (
     let submissionEventIndex = 0;
     submissionEventIndex < validatedForm.submissionEvents.length;
     submissionEventIndex++
   ) {
     const submissionEvent = validatedForm.submissionEvents[submissionEventIndex]
+
+    // CHECK ANY CONDITIONAL ELEMENT IDS ARE IN THE FORM
+    if (
+      submissionEvent.conditionallyExecutePredicates &&
+      submissionEvent.conditionallyExecute
+    ) {
+      for (
+        let conditionallyExecutePredicateIndex = 0;
+        submissionEventIndex <
+        submissionEvent.conditionallyExecutePredicates.length;
+        conditionallyExecutePredicateIndex++
+      ) {
+        const conditionallyExecutePredicate =
+          submissionEvent.conditionallyExecutePredicates[
+            conditionallyExecutePredicateIndex
+          ]
+        if (
+          !rootFormElements.some(
+            ({ id }) => id === conditionallyExecutePredicate.elementId,
+          )
+        ) {
+          throw new Error(
+            `"submissionEvents[${submissionEventIndex}].conditionallyExecutePredicates[${conditionallyExecutePredicateIndex}].elementId" (${conditionallyExecutePredicate.elementId}) does not exist in "elements"`,
+          )
+        }
+      }
+    }
+
     switch (submissionEvent.type) {
+      case 'CP_PAY':
+      case 'WESTPAC_QUICK_WEB':
+      case 'BPOINT': {
+        const formElement = rootFormElements.find(
+          ({ id }) => id === submissionEvent.configuration.elementId,
+        )
+        if (!formElement) {
+          throw new Error(
+            `"submissionEvents[${submissionEventIndex}].configuration.elementId" (${submissionEvent.configuration.elementId}) does not exist in "elements"`,
+          )
+        }
+        if (
+          formElement.type !== 'number' &&
+          formElement.type !== 'calculation'
+        ) {
+          throw new Error(
+            `"submissionEvents[${submissionEventIndex}].configuration.elementId" (${submissionEvent.configuration.elementId}) references a form element is not a "number" or "calculation" element.`,
+          )
+        }
+        break
+      }
       case 'CIVICA_CRM': {
         for (
           let mappingIndex = 0;
@@ -51,14 +160,65 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
         ) {
           const { formElementId } =
             submissionEvent.configuration.mapping[mappingIndex]
-          const formElement = findFormElement(
-            validatedForm.elements,
-            ({ id }) => id === formElementId,
-          )
-          if (!formElement) {
+          if (!rootFormElements.some(({ id }) => id === formElementId)) {
             throw new Error(
               `"submissionEvents[${submissionEventIndex}].configuration.mapping[${mappingIndex}].formElementId" (${formElementId}) does not exist in "elements"`,
             )
+          }
+        }
+        break
+      }
+      case 'CP_HCMS': {
+        if (submissionEvent.configuration.encryptedElementIds) {
+          for (const elementId of submissionEvent.configuration
+            .encryptedElementIds) {
+            const element = formElementsService.findFormElement(
+              validatedForm.elements,
+              ({ id }) => id === elementId,
+            )
+            if (!element) {
+              throw new Error(
+                `You tried to reference an element ${elementId} that does not exist on the form, in a ${submissionEvent.type} submission event.`,
+              )
+            }
+            const allowedElementTypes = [
+              'text',
+              'email',
+              'telephone',
+              'barcodeScanner',
+              'radio',
+              'autocomplete',
+              'camera',
+              'draw',
+              'files',
+              'file',
+              'select',
+            ]
+            if (
+              !allowedElementTypes.some(
+                (elementType) => elementType === element.type,
+              ) ||
+              (element.type === 'select' && element.multi)
+            ) {
+              throw new Error('Encrypted element is not a allowed type')
+            }
+          }
+        }
+        break
+      }
+      case 'PDF': {
+        if (submissionEvent.configuration.excludedElementIds) {
+          for (const elementId of submissionEvent.configuration
+            .excludedElementIds) {
+            const element = formElementsService.findFormElement(
+              validatedForm.elements,
+              ({ id }) => id === elementId,
+            )
+            if (!element) {
+              throw new Error(
+                `You tried to reference an element ${elementId} that does not exist on the form, in a ${submissionEvent.type} submission event.`,
+              )
+            }
           }
         }
         break
@@ -139,39 +299,6 @@ function validateConditionalPredicates(
     stripUnknown: true,
   })
   return validatedPredicates
-}
-
-function findFormElement(
-  elements: FormTypes.FormElement[],
-  predicate: (
-    element: FormTypes.FormElement,
-    elements: FormTypes.FormElement[],
-  ) => boolean,
-  parentElements: FormTypes.FormElement[] = [],
-): FormTypes.FormElement | void {
-  for (const element of elements) {
-    if (predicate(element, parentElements)) {
-      return element
-    }
-
-    if (
-      (element.type === 'repeatableSet' ||
-        element.type === 'page' ||
-        element.type === 'form' ||
-        element.type === 'infoPage' ||
-        element.type === 'section') &&
-      Array.isArray(element.elements)
-    ) {
-      const nestedElement = findFormElement(element.elements, predicate, [
-        ...parentElements,
-        element,
-      ])
-
-      if (nestedElement) {
-        return nestedElement
-      }
-    }
-  }
 }
 
 export {
