@@ -17,15 +17,11 @@ export default function generatePageElement(
   }
 
   // element property: id
-  if (typeof formElementGenerationData.id === 'string') {
-    formElement.id = formElementGenerationData.id
-  } else {
+  if (typeof formElementGenerationData.id !== 'string') {
     formElement.id = uuid()
   }
   // element property: label || default to: {type}
-  if (typeof formElementGenerationData.label === 'string') {
-    formElement.label = formElementGenerationData.label
-  } else {
+  if (typeof formElementGenerationData.label !== 'string') {
     formElement.label = formElement.type
   }
   if (!Array.isArray(formElement.elements)) {

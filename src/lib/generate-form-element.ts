@@ -16,9 +16,7 @@ export default function generateFormElement<
   const formElement: Record<string, unknown> = { ...formElementGenerationData }
 
   // element property: id
-  if (typeof formElementGenerationData.id === 'string') {
-    formElement.id = formElementGenerationData.id
-  } else {
+  if (typeof formElement.id !== 'string') {
     formElement.id = uuid()
   }
 
@@ -37,17 +35,8 @@ export default function generateFormElement<
   }
 
   // element property: type || default to: 'text'
-  if (typeof formElementGenerationData.type === 'string') {
-    formElement.type = formElementGenerationData.type
-  } else {
+  if (typeof formElementGenerationData.type !== 'string') {
     formElement.type = 'text'
-  }
-
-  // element property: required || default to: false
-  if (typeof formElementGenerationData.required === 'boolean') {
-    formElement.required = formElementGenerationData.required
-  } else {
-    formElement.required = false
   }
 
   // element property: label || default to: {type}
@@ -63,16 +52,6 @@ export default function generateFormElement<
     formElement.name = label.replace(/\s+/g, '_')
   }
   formElement.label = label
-
-  // element property: conditionallyShow || default: false
-  if (typeof formElementGenerationData.conditionallyShow === 'boolean') {
-    formElement.conditionallyShow = formElementGenerationData.conditionallyShow
-  } else {
-    formElement.conditionallyShow = false
-  }
-
-  // element property: readOnly || default: false
-  formElement.readOnly = formElementGenerationData.readOnly || false
 
   const validatedFormElement = validateWithElementSchema<T>(formElement)
   return validatedFormElement
