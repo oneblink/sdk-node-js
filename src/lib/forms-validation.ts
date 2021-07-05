@@ -200,7 +200,7 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
               ) ||
               (element.type === 'select' && element.multi)
             ) {
-              throw new Error('Encrypted element is not a allowed type')
+              throw new Error('Encrypted element is not an allowed type')
             }
           }
         }
