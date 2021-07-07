@@ -2826,6 +2826,183 @@ describe('TRIM submission event', () => {
   })
 })
 
+describe('SCHEDULING submission event', () => {
+  test('should allow SCHEDULING submission event', () => {
+    const { error } = formSchema.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+            type: 'text',
+            name: 'text',
+            label: 'text',
+          },
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a10',
+            type: 'email',
+            name: 'email',
+            label: 'email',
+          },
+        ],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'SCHEDULING',
+            configuration: {
+              nylasAccountId: 'string',
+              nylasSchedulingPageId: 1,
+              nameElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+              emailElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a10',
+            },
+          },
+        ],
+      },
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBe(undefined)
+  })
+  test('should error SCHEDULING submission event if nameElementId does not exist', () => {
+    expect(() =>
+      validateWithFormSchema({
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'SCHEDULING',
+            configuration: {
+              nylasAccountId: 'string',
+              nylasSchedulingPageId: 1,
+              nameElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      '"submissionEvents[0].configuration.nameElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) does not exist in "elements"',
+    )
+  })
+  test('should error SCHEDULING submission event if "nameElementId" references an element that is a "text" element', () => {
+    expect(() =>
+      validateWithFormSchema({
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            type: 'number',
+            name: 'number',
+            label: 'number',
+          },
+        ],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'SCHEDULING',
+            configuration: {
+              nylasAccountId: 'string',
+              nylasSchedulingPageId: 1,
+              nameElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      '"submissionEvents[0].configuration.nameElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) references a form element that is not a "text" element.',
+    )
+  })
+  test('should error SCHEDULING submission event if emailElementId does not exist', () => {
+    expect(() =>
+      validateWithFormSchema({
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'SCHEDULING',
+            configuration: {
+              nylasAccountId: 'string',
+              nylasSchedulingPageId: 1,
+              emailElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      '"submissionEvents[0].configuration.emailElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) does not exist in "elements"',
+    )
+  })
+  test('should error SCHEDULING submission event if "emailElementId" references an element that is an "email" element', () => {
+    expect(() =>
+      validateWithFormSchema({
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            type: 'number',
+            name: 'number',
+            label: 'number',
+          },
+        ],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'SCHEDULING',
+            configuration: {
+              nylasAccountId: 'string',
+              nylasSchedulingPageId: 1,
+              emailElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      '"submissionEvents[0].configuration.emailElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) references a form element that is not an "email" element.',
+    )
+  })
+})
 describe('CIVICA_CRM submission event', () => {
   test('should allow CIVICA_CRM submission event', () => {
     const { error } = formSchema.validate(

@@ -147,8 +147,43 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
           formElement.type !== 'calculation'
         ) {
           throw new Error(
-            `"submissionEvents[${submissionEventIndex}].configuration.elementId" (${submissionEvent.configuration.elementId}) references a form element is not a "number" or "calculation" element.`,
+            `"submissionEvents[${submissionEventIndex}].configuration.elementId" (${submissionEvent.configuration.elementId}) references a form element that is not a "number" or "calculation" element.`,
           )
+        }
+        break
+      }
+      case 'SCHEDULING': {
+        const nameElementId = submissionEvent.configuration.nameElementId
+        if (nameElementId) {
+          const formElement = rootFormElements.find(
+            ({ id }) => id === nameElementId,
+          )
+          if (!formElement) {
+            throw new Error(
+              `"submissionEvents[${submissionEventIndex}].configuration.nameElementId" (${nameElementId}) does not exist in "elements"`,
+            )
+          }
+          if (formElement.type !== 'text') {
+            throw new Error(
+              `"submissionEvents[${submissionEventIndex}].configuration.nameElementId" (${nameElementId}) references a form element that is not a "text" element.`,
+            )
+          }
+        }
+        const emailElementId = submissionEvent.configuration.emailElementId
+        if (emailElementId) {
+          const formElement = rootFormElements.find(
+            ({ id }) => id === emailElementId,
+          )
+          if (!formElement) {
+            throw new Error(
+              `"submissionEvents[${submissionEventIndex}].configuration.emailElementId" (${emailElementId}) does not exist in "elements"`,
+            )
+          }
+          if (formElement.type !== 'email') {
+            throw new Error(
+              `"submissionEvents[${submissionEventIndex}].configuration.emailElementId" (${emailElementId}) references a form element that is not an "email" element.`,
+            )
+          }
         }
         break
       }
