@@ -2901,6 +2901,42 @@ describe('SCHEDULING submission event', () => {
       '"submissionEvents[0].configuration.nameElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) does not exist in "elements"',
     )
   })
+  test('should error SCHEDULING submission event if "nameElementId" references an element that is a "text" element', () => {
+    expect(() =>
+      validateWithFormSchema({
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            type: 'number',
+            name: 'number',
+            label: 'number',
+          },
+        ],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'SCHEDULING',
+            configuration: {
+              nylasAccountId: 'string',
+              nylasSchedulingPageId: 1,
+              nameElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      '"submissionEvents[0].configuration.nameElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) references a form element that is not a "text" element.',
+    )
+  })
   test('should error SCHEDULING submission event if emailElementId does not exist', () => {
     expect(() =>
       validateWithFormSchema({

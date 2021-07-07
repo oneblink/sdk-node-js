@@ -163,6 +163,11 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
               `"submissionEvents[${submissionEventIndex}].configuration.nameElementId" (${nameElementId}) does not exist in "elements"`,
             )
           }
+          if (formElement.type !== 'text') {
+            throw new Error(
+              `"submissionEvents[${submissionEventIndex}].configuration.nameElementId" (${nameElementId}) references a form element that is not a "text" element.`,
+            )
+          }
         }
         const emailElementId = submissionEvent.configuration.emailElementId
         if (emailElementId) {
