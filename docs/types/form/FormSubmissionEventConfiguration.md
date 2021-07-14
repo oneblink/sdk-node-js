@@ -134,10 +134,13 @@
 
 ## SchedulingSubmissionEventConfiguration
 
-| Parameter               | Required | Type     | Description                    |
-| ----------------------- | -------- | -------- | ------------------------------ |
-| `nylasAccountId`        | yes      | `string` | The id of scheduling provider. |
-| `nylasSchedulingPageId` | yes      | `number` | The id of the scheduling page. |
+| Parameter               | Required | Type     | Description                                                                                            |
+| ----------------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------ |
+| `nylasAccountId`        | yes      | `string` | The id of scheduling provider.                                                                         |
+| `nylasSchedulingPageId` | yes      | `number` | The id of the scheduling page.                                                                         |
+| `nameElementId`         | no       | `string` | The id of the form element to map to the name field on the scheduling page. Must be a text element.    |
+| `emailElementId`        | no       | `string` | The id of the form element to map to the email field on the scheduling page. Must be an email element. |
+| `emailDescription`      | no       | `string` | An optional extra description to be included in the email.                                             |
 
 ### Example
 
