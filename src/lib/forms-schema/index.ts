@@ -165,6 +165,7 @@ const SubmissionEventsSchema = Joi.object().keys({
         nylasSchedulingPageId: Joi.number().required(),
         nameElementId: Joi.string().guid(),
         emailElementId: Joi.string().guid(),
+        emailDescription: Joi.string(),
       }),
     }),
   conditionallyExecute: Joi.bool().default(false),
