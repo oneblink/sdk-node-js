@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - extra validation for form (copied out of API)
+- [`generateSubmissionAttachmentUrl()`](./docs/forms.md#generatesubmissionattachmenturl)
 
 ### Breaking Changes
 

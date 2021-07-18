@@ -9,6 +9,7 @@
 - [`createSubmissionAttachment()`](#createsubmissionattachment)
 - [`getSubmissionAttachmentBuffer()`](#getsubmissionattachmentbuffer)
 - [`getSubmissionAttachmentStream()`](#getsubmissionattachmentstream)
+- [`generateSubmissionAttachmentUrl()`](#generatesubmissionattachmenturl)
 - [`search()`](#search)
 - [`searchSubmissions()`](#searchsubmissions)
 - [`createForm()`](#createform)
@@ -332,6 +333,38 @@ async function run() {
 
 ```javascript
 Stream
+```
+
+## `generateSubmissionAttachmentUrl()`
+
+### Example
+
+```javascript
+const formId = 1
+const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+const expiryInSeconds = 900
+forms
+  .generateSubmissionAttachmentUrl(formId, submissionId, expiryInSeconds)
+  .then((result) => {
+    const attachmentUrl = result.url
+    // Use URL here...
+  })
+```
+
+### Parameters
+
+| Parameter         | Required | Type     | Description                                                                                      |
+| ----------------- | -------- | -------- | ------------------------------------------------------------------------------------------------ |
+| `formId`          | Yes      | `number` | The exact id of the form you wish to generate a URL for                                          |
+| `attachmentId`    | Yes      | `string` | The attachment identifier from the form submission data                                          |
+| `expiryInSeconds` | Yes      | `number` | The number of seconds the signed URL should be valid for, must be greater than or equal to `900` |
+
+### Result (Resolved Promise)
+
+```json
+{
+  "url": "https://domain.io/path?query=string"
+}
 ```
 
 ## `getDraftData()`
