@@ -327,6 +327,34 @@ export default (tenant: Tenant) =>
       }
     }
 
+    async generateSubmissionAttachmentUrl(
+      formId: number,
+      attachmentId: string,
+      expiryInSeconds: number,
+    ): Promise<{ url: string }> {
+      if (typeof formId !== 'number') {
+        throw new TypeError('Must supply "formId" as a number')
+      }
+      if (typeof attachmentId !== 'string') {
+        throw new TypeError('Must supply "attachmentId" as a string')
+      }
+      if (typeof expiryInSeconds !== 'number') {
+        throw new TypeError('Must supply "expiryInSeconds" as a number')
+      }
+      if (expiryInSeconds < 900) {
+        throw new TypeError(
+          '"expiryInSeconds" must be greater than or equal to 900',
+        )
+      }
+
+      return super.postRequest(
+        `/forms/${formId}/attachments/${attachmentId}/download-url`,
+        {
+          expiryInSeconds,
+        },
+      )
+    }
+
     search(searchParams?: FormsSearchOptions): Promise<FormsSearchResult> {
       return super.searchRequest(`/forms`, searchParams)
     }
