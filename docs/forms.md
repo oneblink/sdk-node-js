@@ -344,7 +344,7 @@ const formId = 1
 const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
 const expiryInSeconds = 900
 forms
-  .generateSubmissionAttachmentUrl(formId, submissionId, expiryInSeconds)
+  .generateSubmissionAttachmentUrl(formId, attachmentId, expiryInSeconds)
   .then((result) => {
     const attachmentUrl = result.url
     // Use URL here...
