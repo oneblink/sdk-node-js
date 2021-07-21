@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- conditional predicate submission event validation
+
 ## [0.10.0] - 2021-07-20
 
 ### Added
