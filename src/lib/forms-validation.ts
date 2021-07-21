@@ -110,7 +110,7 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
     ) {
       for (
         let conditionallyExecutePredicateIndex = 0;
-        submissionEventIndex <
+        conditionallyExecutePredicateIndex <
         submissionEvent.conditionallyExecutePredicates.length;
         conditionallyExecutePredicateIndex++
       ) {
