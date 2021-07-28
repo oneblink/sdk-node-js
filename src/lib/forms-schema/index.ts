@@ -238,7 +238,7 @@ const formSchema = Joi.object().keys({
   updatedAt: Joi.string().allow('', null),
   // TAGS
   tags: Joi.array().default([]).items(Joi.string()),
-  validationEndpoint: Joi.object({
+  serverValidation: Joi.object({
     type: Joi.string().required().valid('CALLBACK', 'ONEBLINK_API'),
     configuration: Joi.object()
       .required()
