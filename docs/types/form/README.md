@@ -21,6 +21,7 @@
 | `tags`                  | No       | `string[]`                                          | A list of tags used to categorise or describe the form.                                  |
 | `publishStartDate`      | No       | `string`                                            | The date and time (in ISO format) a form becomes available.                              |
 | `publishEndDate`        | No       | `string`                                            | The date and time (in ISO format) a form becomes unavailable.                            |
+| `serverValidation`      | No       | [`FormServerValidation`](./FormServerValidation.md) | The details of the form validation endpoint.                                             |
 
 ## Form
 
@@ -42,6 +43,7 @@
 | `tags`                  | No       | `string[]`                                          | A list of tags used to categorise or describe the form.                                  |
 | `publishStartDate`      | No       | `string`                                            | The date and time (in ISO format) a form becomes available.                              |
 | `publishEndDate`        | No       | `string`                                            | The date and time (in ISO format) a form becomes unavailable.                            |
+| `serverValidation`      | No       | [`FormServerValidation`](./FormServerValidation.md) | The details of the form validation endpoint.                                             |
 
 ## Examples
 

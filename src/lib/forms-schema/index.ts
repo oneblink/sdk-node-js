@@ -238,6 +238,25 @@ const formSchema = Joi.object().keys({
   updatedAt: Joi.string().allow('', null),
   // TAGS
   tags: Joi.array().default([]).items(Joi.string()),
+  validationEndpoint: Joi.object({
+    type: Joi.string().required().valid('CALLBACK', 'ONEBLINK_API'),
+    configuration: Joi.object()
+      .required()
+      .when('type', {
+        is: 'CALLBACK',
+        then: Joi.object({
+          url: Joi.string().uri().required(),
+        }),
+      })
+      .when('type', {
+        is: 'ONEBLINK_API',
+        then: Joi.object({
+          apiId: Joi.string().required(),
+          apiEnvironment: Joi.string().required(),
+          apiEnvironmentRoute: Joi.string().required(),
+        }),
+      }),
+  }),
 })
 
 export { formSchema, elementSchema, pageElementSchema }
