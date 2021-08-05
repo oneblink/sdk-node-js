@@ -40,7 +40,7 @@ export default (tenant: Tenant) =>
       if (typeof formsAppId !== 'number') {
         throw new Error('formsAppId must be a number and is required')
       }
-      return await super.searchRequest(`/forms`, {
+      return await super.searchRequest(`/forms-apps/${formsAppId}/approvals`, {
         ...rest,
       })
     }
