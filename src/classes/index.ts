@@ -11,6 +11,7 @@ import generateSendEmail, {
   SendEmailOptions,
   SendEmailResult,
 } from './sendEmail'
+import generateApprovals from './Approvals'
 
 export { SendEmailOptions, SendEmailResult }
 
@@ -27,5 +28,6 @@ export default (tenantConfiguration: TenantConfiguration) => {
     TeamMembers: generateTeamMembers(tenant),
     PDF: generatePDF(tenant),
     sendEmail: generateSendEmail(tenant),
+    Approvals: generateApprovals(tenant),
   }
 }
