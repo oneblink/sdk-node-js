@@ -10,6 +10,7 @@ const {
   TeamMembers,
   PDF,
   sendEmail,
+  Approvals,
 } = generateClasses(ONEBLINK)
 
 export {
@@ -23,4 +24,5 @@ export {
   sendEmail,
   SendEmailOptions,
   SendEmailResult,
+  Approvals,
 }
