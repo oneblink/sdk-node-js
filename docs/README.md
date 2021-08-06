@@ -63,6 +63,8 @@ import * as OneBlink from '@oneblink/sdk'
 
 - [Sending Emails](./sendEmail.md)
 
+- [Approvals](./approvals.md)
+
 ## Miscellaneous
 
 - [Form Element Definitions](./form-elements/README.md)
