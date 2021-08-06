@@ -13,6 +13,11 @@ export type FormSubmissionsAdministrationApprovalsResponse = {
       formSubmissionApprovals: ApprovalTypes.FormSubmissionApproval[]
     }>
   }>
+  meta: {
+    limit?: number
+    offset?: number
+    nextOffset?: number
+  }
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -25,6 +30,8 @@ export default (tenant: Tenant) =>
 
     async getFormSubmissionAdministrationApprovals({
       formsAppId,
+      limit,
+      offset,
       ...rest
     }: {
       formsAppId: number
@@ -33,14 +40,19 @@ export default (tenant: Tenant) =>
       submissionid?: string
       submittedAfterDateTime?: string
       submittedBeforeDateTime?: string
-      limit?: number
-      offset?: number
+      limit: number
+      offset: number
       statuses?: string[]
     }): Promise<FormSubmissionsAdministrationApprovalsResponse> {
       if (typeof formsAppId !== 'number') {
-        throw new Error('formsAppId must be a number and is required')
+        throw new Error('"formsAppId" must be a number and is required')
+      }
+      if (typeof limit !== 'number' || typeof offset !== 'number') {
+        throw new Error('"limit" and "offset" are required')
       }
       return await super.searchRequest(`/forms-apps/${formsAppId}/approvals`, {
+        limit,
+        offset,
         ...rest,
       })
     }
