@@ -22,6 +22,7 @@
 | `publishStartDate`      | No       | `string`                                            | The date and time (in ISO format) a form becomes available.                              |
 | `publishEndDate`        | No       | `string`                                            | The date and time (in ISO format) a form becomes unavailable.                            |
 | `serverValidation`      | No       | [`FormServerValidation`](./FormServerValidation.md) | The details of the form validation endpoint.                                             |
+| `externalIdGeneration`  | No       | [`FormServerValidation`](./FormServerValidation.md) | The details of the externalId generation endpoint.                                       |
 
 ## Form
 
@@ -44,6 +45,7 @@
 | `publishStartDate`      | No       | `string`                                            | The date and time (in ISO format) a form becomes available.                              |
 | `publishEndDate`        | No       | `string`                                            | The date and time (in ISO format) a form becomes unavailable.                            |
 | `serverValidation`      | No       | [`FormServerValidation`](./FormServerValidation.md) | The details of the form validation endpoint.                                             |
+| `externalIdGeneration`  | No       | [`FormServerValidation`](./FormServerValidation.md) | The details of the externalId generation endpoint.                                       |
 
 ## Examples
 
