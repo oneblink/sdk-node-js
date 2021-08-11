@@ -7,10 +7,10 @@
 
 ## Constructor
 
-| Parameter           | Required | Type     | Description                      |
-| ------------------- | -------- | -------- | -------------------------------- |
-| `options.accessKey` | Yes      | `string` | Access key provided by OneBlink. |
-| `options.secretKey` | Yes      | `string` | Secret key provided by OneBlink. |
+| Parameter           | Required | Type     | Description                                                                 |
+| ------------------- | -------- | -------- | --------------------------------------------------------------------------- |
+| `options.accessKey` | Yes      | `string` | Access key provided by OneBlink, requires the `PDF` and `FORMS` permission. |
+| `options.secretKey` | Yes      | `string` | Secret key provided by OneBlink, requires the `PDF` and `FORMS` permission. |
 
 ### Example
 

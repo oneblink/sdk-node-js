@@ -2,10 +2,10 @@
 
 ## Constructor
 
-| Parameter           | Required | Type     | Description                      |
-| ------------------- | -------- | -------- | -------------------------------- |
-| `options.accessKey` | Yes      | `string` | Access key provided by OneBlink. |
-| `options.secretKey` | Yes      | `string` | Secret key provided by OneBlink. |
+| Parameter           | Required | Type     | Description                                                       |
+| ------------------- | -------- | -------- | ----------------------------------------------------------------- |
+| `options.accessKey` | Yes      | `string` | Access key provided by OneBlink, requires the `FORMS` permission. |
+| `options.secretKey` | Yes      | `string` | Secret key provided by OneBlink, requires the `FORMS` permission. |
 
 ### Example
 
@@ -24,7 +24,6 @@ const approvals = new OneBlink.Approvals(options)
 ### Example
 
 ```javascript
-const keyId = '123455678901ABCDEFGHIJKL'
 const { approvals, meta } =
   await approvals.getFormSubmissionAdministrationApprovals({
     formsAppId: 1,
@@ -39,17 +38,17 @@ const { approvals, meta } =
 
 AN object containing the following keys:
 
-| Parameter                 | Required | Type       | Description                                                                              |
-| ------------------------- | -------- | ---------- | ---------------------------------------------------------------------------------------- |
-| `formsAppId`              | Yes      | `number`   | The formsAppId of the approvals app                                                      |
-| `limit`                   | Yes      | `number`   | The number of results to return. Maximum is 50                                           |
-| `offset`                  | Yes      | `number`   | The offset of the results to return. Use this in conjunction with `limit` for pagination |
-| `formId`                  | No       | `number`   | The formId of the approvals                                                              |
-| `externalId`              | No       | `string`   | An exact externalId to search by                                                         |
-| `submissionId`            | No       | `string`   | An exact submissionId to search by                                                       |
-| `submittedAfterDateTime`  | No       | `string`   | The date submitted after as an ISO string                                                |
-| `submittedBeforeDateTime` | No       | `string`   | The date submitted before as an ISO string                                               |
-| `statuses`                | No       | `string[]` | An array of statuses to filter by                                                        |
+| Parameter                 | Required | Type       | Description                                                                                                                       |
+| ------------------------- | -------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `formsAppId`              | Yes      | `number`   | The formsAppId of the approvals app                                                                                               |
+| `limit`                   | Yes      | `number`   | The number of results to return. Maximum is 50                                                                                    |
+| `offset`                  | Yes      | `number`   | The offset of the results to return. Use this in conjunction with `limit` for pagination                                          |
+| `formId`                  | No       | `number`   | The formId of the approvals                                                                                                       |
+| `externalId`              | No       | `string`   | An exact externalId to search by                                                                                                  |
+| `submissionId`            | No       | `string`   | An exact submissionId to search by                                                                                                |
+| `submittedAfterDateTime`  | No       | `string`   | The date submitted after as an ISO string                                                                                         |
+| `submittedBeforeDateTime` | No       | `string`   | The date submitted before as an ISO string                                                                                        |
+| `statuses`                | No       | `string[]` | An array of statuses to filter by (`'PENDING'`, `'CLARIFICATION_RECEIVED'`, `'CLARIFICATION_REQUIRED'`, `'APPROVED'`, `'CLOSED'`) |
 
 ### Result (Resolved Promise)
 
