@@ -3005,7 +3005,7 @@ describe('SCHEDULING submission event', () => {
 })
 describe('CIVICA_CRM submission event', () => {
   test('should allow CIVICA_CRM submission event', () => {
-    const { error } = formSchema.validate(
+    const { error, value } = formSchema.validate(
       {
         id: 1,
         name: 'string',
@@ -3030,7 +3030,6 @@ describe('CIVICA_CRM submission event', () => {
             type: 'CIVICA_CRM',
             configuration: {
               environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
-              civicaDescription: 'description',
               civicaCustomerContactMethod: {
                 code: 'code',
                 description: 'description',
@@ -3054,6 +3053,7 @@ describe('CIVICA_CRM submission event', () => {
       },
     )
     expect(error).toBe(undefined)
+    expect(value.submissionEvents[0].configuration.mapping[0].isDescription).toBe(false)
   })
   test('should error CIVICA_CRM submission event not passing environmentId', () => {
     const { error } = formSchema.validate(
@@ -3118,7 +3118,6 @@ describe('CIVICA_CRM submission event', () => {
             type: 'CIVICA_CRM',
             configuration: {
               environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
-              civicaDescription: 'description',
               civicaCustomerContactMethod: {
                 code: 'code',
                 description: 'description',
