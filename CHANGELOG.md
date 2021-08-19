@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `isDescription` property to `form.submissionEvents[].configuration.mapping[]`
+
 ## [0.10.3] - 2021-08-11
 
 ### Added
