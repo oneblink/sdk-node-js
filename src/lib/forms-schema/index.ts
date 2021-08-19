@@ -122,7 +122,6 @@ const SubmissionEventsSchema = Joi.object().keys({
       is: 'CIVICA_CRM',
       then: Joi.object().keys({
         environmentId: Joi.string().uuid().required(),
-        civicaDescription: Joi.string().required(),
         civicaCustomerContactMethod: Joi.object({
           code: Joi.string().required(),
           description: Joi.string().required(),
@@ -139,6 +138,7 @@ const SubmissionEventsSchema = Joi.object().keys({
             Joi.object({
               civicaCategoryItemNumber: Joi.number().required(),
               formElementId: Joi.string().uuid().required(),
+              isDescription: Joi.boolean().default(false),
             }),
           ),
         ...pdfSubmissionEventConfiguration,
