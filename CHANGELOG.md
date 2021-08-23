@@ -7,9 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.0] - 2021-08-23
+
 ### Added
 
 - `isDescription` property to `form.submissionEvents[].configuration.mapping[]`
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [0.1.0](https://github.com/oneblink/sdk-core-js/releases/tag/v0.1.0) (from [0.1.0-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update [aws-sdk](https://www.npmjs.com/package/aws-sdk) to [2.971.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.971.0) (from [2.925.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.925.0))
+
+- update [joi](https://www.npmjs.com/package/joi) to 17.4.2 (from 17.4.0)
+
+- update [jwks-rsa](https://www.npmjs.com/package/jwks-rsa) to [2.0.4](https://github.com/auth0/node-jwks-rsa/releases/tag/v2.0.4) (from [2.0.3](https://github.com/auth0/node-jwks-rsa/releases/tag/v2.0.3))
+
+- update [nodemailer](https://www.npmjs.com/package/nodemailer) to [6.6.3](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md) (from [6.6.1](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md))
 
 ## [0.10.3] - 2021-08-11
 
