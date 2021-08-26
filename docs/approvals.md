@@ -49,6 +49,8 @@ AN object containing the following keys:
 | `submittedAfterDateTime`  | No       | `string`   | The date submitted after as an ISO string                                                                                         |
 | `submittedBeforeDateTime` | No       | `string`   | The date submitted before as an ISO string                                                                                        |
 | `statuses`                | No       | `string[]` | An array of statuses to filter by (`'PENDING'`, `'CLARIFICATION_RECEIVED'`, `'CLARIFICATION_REQUIRED'`, `'APPROVED'`, `'CLOSED'`) |
+| `updatedAfterDateTime`    | No       | `string`   | The date updated after as an ISO string                                                                                           |
+| `updatedBeforeDateTime`   | No       | `string`   | The date updated before as an ISO string                                                                                          |
 
 ### Result (Resolved Promise)
 
