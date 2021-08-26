@@ -43,6 +43,8 @@ export default (tenant: Tenant) =>
       limit: number
       offset: number
       statuses?: string[]
+      updatedAfterDateTime?: string
+      updatedBeforeDateTime?: string
     }): Promise<FormSubmissionsAdministrationApprovalsResponse> {
       if (typeof formsAppId !== 'number') {
         throw new Error('"formsAppId" must be a number and is required')
