@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `updatedAfterDateTime` and `updatedBeforeDateTime` query parameters to `approvals.getFormSubmissionAdministrationApprovals`
+- `lastUpdatedBy` query parameter to `approvals.getFormSubmissionAdministrationApprovals`
 
 ## [0.11.0] - 2021-08-23
 

@@ -45,6 +45,7 @@ export default (tenant: Tenant) =>
       statuses?: string[]
       updatedAfterDateTime?: string
       updatedBeforeDateTime?: string
+      lastUpdatedBy?: string[]
     }): Promise<FormSubmissionsAdministrationApprovalsResponse> {
       if (typeof formsAppId !== 'number') {
         throw new Error('"formsAppId" must be a number and is required')
