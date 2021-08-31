@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.1] - 2021-08-31
+
 ### Added
 
 - `updatedAfterDateTime` and `updatedBeforeDateTime` query parameters to `approvals.getFormSubmissionAdministrationApprovals`
