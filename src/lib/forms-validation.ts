@@ -60,8 +60,9 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
           if (elementId === rootFormElement.id) {
             throw new Error('Summary element cannot summarised self')
           }
-          const summarizedElement = rootFormElements.find(
-            ({ id }) => id === elementId,
+          const summarizedElement = formElementsService.findFormElement(
+            validatedForm.elements,
+            (formElement) => formElement.id === elementId,
           )
           if (!summarizedElement) {
             throw new Error('Summarised elementId not found')
