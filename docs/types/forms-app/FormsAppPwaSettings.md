@@ -4,7 +4,7 @@
 
 ## FormsAppPwaSettings
 
-| Parameter           | Required | Type     | Description                                                                                                  |
+| Property            | Required | Type     | Description                                                                                                  |
 | ------------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------ |
 | `homeScreenName`    | No       | `string` | The text beneath the app icon when installed as a progressive web app on mobile devices                      |
 | `splashScreenName`  | No       | `string` | The text on the splash screen when installed as a progressive web app on mobile devices                      |

@@ -2,19 +2,18 @@ import OneBlinkAPI from '../lib/one-blink-api'
 import { SubmissionTypes, ApprovalTypes, FormTypes } from '@oneblink/types'
 import { Tenant, ConstructorOptions } from '../lib/types'
 
-export type FormSubmissionApprovalHistory = Array<{
+export type FormSubmissionApprovalHistoryRecord = {
   formSubmissionMeta: SubmissionTypes.FormSubmissionMeta
   formApprovalFlowInstance: ApprovalTypes.FormApprovalFlowInstance
   formSubmissionApprovals: ApprovalTypes.FormSubmissionApproval[]
-}>
+}
 
 export type FormSubmissionsAdministrationApprovalsResponse = {
-  approvals: Array<{
-    formSubmissionMeta: SubmissionTypes.FormSubmissionMeta
-    formApprovalFlowInstance: ApprovalTypes.FormApprovalFlowInstance
-    formSubmissionApprovals: ApprovalTypes.FormSubmissionApproval[]
-    history: FormSubmissionApprovalHistory
-  }>
+  approvals: Array<
+    FormSubmissionApprovalHistoryRecord & {
+      history: FormSubmissionApprovalHistoryRecord[]
+    }
+  >
   meta: {
     limit?: number
     offset?: number
@@ -27,13 +26,14 @@ export type FormSubmissionApprovalResponse = {
   formSubmissionApproval: ApprovalTypes.FormSubmissionApproval
   formApprovalFlowInstance: ApprovalTypes.FormApprovalFlowInstance
   form: FormTypes.Form
-  history: FormSubmissionApprovalHistory
+  history: FormSubmissionApprovalHistoryRecord[]
 }
 
 export type FormApprovalFlowInstanceResponse = {
   formSubmissionMeta: SubmissionTypes.FormSubmissionMeta
   formApprovalFlowInstance: ApprovalTypes.FormApprovalFlowInstance
   form: FormTypes.Form
+  formSubmissionApprovals: ApprovalTypes.FormSubmissionApproval[]
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -44,7 +44,7 @@ export default (tenant: Tenant) =>
       super(options.accessKey, options.secretKey, tenant)
     }
 
-    async getFormSubmissionAdministrationApprovals({
+    async searchFormSubmissionAdministrationApprovals({
       formsAppId,
       limit,
       offset,
@@ -76,7 +76,7 @@ export default (tenant: Tenant) =>
       })
     }
 
-    async getFormSubmissionApprovalById(
+    async getFormSubmissionApproval(
       id: string,
     ): Promise<FormSubmissionApprovalResponse> {
       if (!id) {
@@ -85,7 +85,7 @@ export default (tenant: Tenant) =>
       return await super.getRequest(`/form-submission-approvals/${id}`)
     }
 
-    async getFormApprovalFlowInstanceById(
+    async getFormApprovalFlowInstance(
       id: number,
     ): Promise<FormApprovalFlowInstanceResponse> {
       if (typeof id !== 'number') {

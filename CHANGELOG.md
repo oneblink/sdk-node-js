@@ -9,8 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- [`getFormSubmissionApprovalById()`](./docs/approvals.md#getformsubmissionapprovalbyid) function
-- [`getFormApprovalFlowInstanceById()`](./docs/approvals.md#getformapprovalflowinstancebyid) function
+- [`getFormSubmissionApproval()`](./docs/approvals.md#getformsubmissionapproval) function
+- [`getFormApprovalFlowInstance()`](./docs/approvals.md#getformapprovalflowinstance) function
+
+### Renamed
+
+- [`searchFormSubmissionAdministrationApprovals()`](./docs/approvals.md#searchformsubmissionadministrationapprovals) function
 
 ## [0.11.2] - 2021-09-09
 

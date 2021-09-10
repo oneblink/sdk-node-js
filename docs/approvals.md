@@ -1,5 +1,11 @@
 # OneBlink SDK | Approvals Class
 
+## Instance Functions
+
+- [`searchFormSubmissionAdministrationApprovals()`](#searchformsubmissionadministrationapprovals)
+- [`getFormSubmissionApproval()`](#getformsubmissionapproval)
+- [`getFormApprovalFlowInstance()`](#getformapprovalflowinstance)
+
 ## Constructor
 
 | Parameter           | Required | Type     | Description                                                       |
@@ -19,13 +25,13 @@ const options = {
 const approvals = new OneBlink.Approvals(options)
 ```
 
-## getFormSubmissionAdministrationApprovals
+## searchFormSubmissionAdministrationApprovals
 
 ### Example
 
 ```javascript
 const { approvals, meta } =
-  await approvals.getFormSubmissionAdministrationApprovals({
+  await approvals.searchFormSubmissionAdministrationApprovals({
     formsAppId: 1,
     formId: 2,
     limit: 50,
@@ -36,7 +42,7 @@ const { approvals, meta } =
 
 ### Parameters
 
-AN object containing the following keys:
+An object containing the following keys:
 
 | Parameter                 | Required | Type       | Description                                                                                                                       |
 | ------------------------- | -------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -55,60 +61,14 @@ AN object containing the following keys:
 
 ### Result (Resolved Promise)
 
-```json
-{
-  "approvals": [
-    {
-      "formSubmissionMeta": {
-        "submissionId": "f1eadc2b-79c8-4f97-8d92-cde64b34911f",
-        "formId": 2,
-        "formsAppId": 1,
-        "dateTimeSubmitted": "2021-08-06T12:00:00.00Z"
-      },
-      "formApprovalFlowInstance": {
-        "id": 1,
-        "createdAt": "2021-08-06T12:00:00.00Z",
-        "formId": 2,
-        "submissionId": "f1eadc2b-79c8-4f97-8d92-cde64b34911f",
-        "approvalsFormsAppId": 1,
-        "steps": [
-          {
-            "group": "group1",
-            "label": "Step 1",
-            "isSkipped": false
-          }
-        ],
-        "status": "APPROVED",
-        "isLatest": true
-      },
-      "formSubmissionApprovals": [
-        {
-          "group": "group1",
-          "formApprovalFlowInstanceId": 1,
-          "stepLabel": "Step 1",
-          "id": "a2fgdc5g-79c8-4f97-8d92-cde64b34956s",
-          "status": "APPROVED",
-          "createdAt": "2021-08-06T12:00:00.00Z",
-          "updatedAt": "2021-08-06T12:00:00.00Z"
-        }
-      ],
-      "history": []
-    }
-  ],
-  "meta": {
-    "offset": 0,
-    "limit": 50,
-    "nextOffset": 50
-  }
-}
-```
+[`FormSubmissionsAdministrationApprovalsResponse`](./types/approvals/FormSubmissionsAdministrationApprovalsResponse.md#formsubmissionsadministrationapprovalsresponse)
 
-## getFormSubmissionApprovalById
+## getFormSubmissionApproval
 
 ### Example
 
 ```javascript
-const formSubmissionApproval = await approvals.getFormSubmissionApprovalById(
+const formSubmissionApproval = await approvals.getFormSubmissionApproval(
   'aaaaaaaa-bbbb-4543-cccc-addddd543454',
 )
 // Use data here...
@@ -116,7 +76,7 @@ const formSubmissionApproval = await approvals.getFormSubmissionApprovalById(
 
 ### Parameters
 
-AN object containing the following keys:
+An object containing the following keys:
 
 | Parameter | Required | Type     | Description                            |
 | --------- | -------- | -------- | -------------------------------------- |
@@ -124,68 +84,20 @@ AN object containing the following keys:
 
 ### Result (Resolved Promise)
 
-```json
-{
-  "formSubmissionMeta": {
-    "submissionId": "f1eadc2b-79c8-4f97-8d92-cde64b34911f",
-    "formId": 2,
-    "formsAppId": 1,
-    "dateTimeSubmitted": "2021-08-06T12:00:00.00Z"
-  },
-  "formApprovalFlowInstance": {
-    "id": 1,
-    "createdAt": "2021-08-06T12:00:00.00Z",
-    "formId": 2,
-    "submissionId": "f1eadc2b-79c8-4f97-8d92-cde64b34911f",
-    "approvalsFormsAppId": 1,
-    "steps": [
-      {
-        "group": "group1",
-        "label": "Step 1",
-        "isSkipped": false
-      }
-    ],
-    "status": "APPROVED",
-    "isLatest": true
-  },
-  "formSubmissionApproval": {
-    "group": "group1",
-    "formApprovalFlowInstanceId": 1,
-    "stepLabel": "Step 1",
-    "id": "a2fgdc5g-79c8-4f97-8d92-cde64b34956s",
-    "status": "APPROVED",
-    "createdAt": "2021-08-06T12:00:00.00Z",
-    "updatedAt": "2021-08-06T12:00:00.00Z"
-  },
-  "form": {
-    "id": 1,
-    "name": "testsform",
-    "formsAppEnvironmentId": 1,
-    "description": "a form",
-    "organisationId": "0101010101010",
-    "formsAppEnvironmentId": 1,
-    "elements": [],
-    "isAuthenticated": false,
-    "submissionEvents": []
-  },
-  "history": []
-}
-```
+[`FormSubmissionApprovalResponse`](./types/approvals/FormSubmissionApprovalsResponse.md#formsubmissionapprovalresponse)
 
-## getFormApprovalFlowInstanceById
+## getFormApprovalFlowInstance
 
 ### Example
 
 ```javascript
-const formSubmissionApproval = await approvals.getFormApprovalFlowInstanceById(
-  1,
-)
+const formSubmissionApproval = await approvals.getFormApprovalFlowInstance(1)
 // Use data here...
 ```
 
 ### Parameters
 
-AN object containing the following keys:
+An object containing the following keys:
 
 | Parameter | Required | Type     | Description                               |
 | --------- | -------- | -------- | ----------------------------------------- |
@@ -193,40 +105,4 @@ AN object containing the following keys:
 
 ### Result (Resolved Promise)
 
-```json
-{
-  "formSubmissionMeta": {
-    "submissionId": "f1eadc2b-79c8-4f97-8d92-cde64b34911f",
-    "formId": 2,
-    "formsAppId": 1,
-    "dateTimeSubmitted": "2021-08-06T12:00:00.00Z"
-  },
-  "formApprovalFlowInstance": {
-    "id": 1,
-    "createdAt": "2021-08-06T12:00:00.00Z",
-    "formId": 2,
-    "submissionId": "f1eadc2b-79c8-4f97-8d92-cde64b34911f",
-    "approvalsFormsAppId": 1,
-    "steps": [
-      {
-        "group": "group1",
-        "label": "Step 1",
-        "isSkipped": false
-      }
-    ],
-    "status": "APPROVED",
-    "isLatest": true
-  },
-  "form": {
-    "id": 1,
-    "name": "testsform",
-    "formsAppEnvironmentId": 1,
-    "description": "a form",
-    "organisationId": "0101010101010",
-    "formsAppEnvironmentId": 1,
-    "elements": [],
-    "isAuthenticated": false,
-    "submissionEvents": []
-  }
-}
-```
+[`FormApprovalFlowInstanceResponse`](./types/approvals/FormApprovalFlowInstanceResponse.md#formapprovalflowinstanceresponse)
