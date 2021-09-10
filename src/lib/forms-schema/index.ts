@@ -262,4 +262,4 @@ const formSchema = Joi.object().keys({
   externalIdGeneration: apiRequestSchema,
 })
 
-export { formSchema, elementSchema, pageElementSchema }
+export { formSchema, elementSchema, pageElementSchema, apiRequestSchema }
