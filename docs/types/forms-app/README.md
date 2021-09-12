@@ -4,7 +4,7 @@
 
 ## NewFormsApp
 
-| Parameter                      | Required | Type                                              | Description                                                                                                                  |
+| Property                       | Required | Type                                              | Description                                                                                                                  |
 | ------------------------------ | -------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `name`                         | Yes      | `string`                                          | Name of the forms app                                                                                                        |
 | `type`                         | Yes      | `string`                                          | Type of the forms app. Valid values are "FORMS_LIST", "TILES", "VOLUNTEER"                                                   |
@@ -21,7 +21,7 @@
 
 ## FormsApp
 
-| Parameter                    | Required | Type                                              | Description                                                                                                                  |
+| Property                     | Required | Type                                              | Description                                                                                                                  |
 | ---------------------------- | -------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `id`                         | Yes      | `number`                                          | Identifier of the forms app                                                                                                  |
 | `name`                       | Yes      | `string`                                          | Name of the forms app                                                                                                        |
@@ -41,7 +41,7 @@
 
 This is the schema that will be returned when creating, updating or getting a forms app.
 
-| Parameter                    | Required | Type                                              | Description                                                                                                                  |
+| Property                     | Required | Type                                              | Description                                                                                                                  |
 | ---------------------------- | -------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `id`                         | Yes      | `number`                                          | Identifier of the forms app                                                                                                  |
 | `name`                       | Yes      | `string`                                          | Name of the forms app                                                                                                        |

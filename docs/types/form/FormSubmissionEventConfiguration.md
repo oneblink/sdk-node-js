@@ -4,10 +4,10 @@
 
 ## CallbackSubmissionEventConfiguration
 
-| Parameter | Required | Type     | Description                                                                                     |
-| --------- | -------- | -------- | ----------------------------------------------------------------------------------------------- |
-| `url`     | yes      | `string` | URL that the callback is made to.                                                               |
-| `secret`  | yes      | `string` | Secret string used for verifying the authenticity of the request made from the OneBlink system. |
+| Property | Required | Type     | Description                                                                                     |
+| -------- | -------- | -------- | ----------------------------------------------------------------------------------------------- |
+| `url`    | yes      | `string` | URL that the callback is made to.                                                               |
+| `secret` | yes      | `string` | Secret string used for verifying the authenticity of the request made from the OneBlink system. |
 
 ### Example
 
@@ -20,7 +20,7 @@
 
 ## PDFSubmissionEventConfiguration
 
-| Parameter                  | Required | Type       | Description                                                                              |
+| Property                   | Required | Type       | Description                                                                              |
 | -------------------------- | -------- | ---------- | ---------------------------------------------------------------------------------------- |
 | `email`                    | yes      | `string`   | The email in which a PDF copy of the form submission will be sent.                       |
 | `emailSubjectLine`         | yes      | `string`   | The subject line of the email sent to the configured email address.                      |
@@ -42,7 +42,7 @@
 
 ## OneBlinkAPISubmissionEventConfiguration
 
-| Parameter             | Required | Type     | Description                                                                                     |
+| Property              | Required | Type     | Description                                                                                     |
 | --------------------- | -------- | -------- | ----------------------------------------------------------------------------------------------- |
 | `apiId`               | yes      | `string` | The ID of the OneBlink hosted API that a callback is made to on submission.                     |
 | `apiEnvironment`      | yes      | `string` | The environment of the specified OneBlink hosted API to recieve the callback.                   |
@@ -62,7 +62,7 @@
 
 ## BPOINTSubmissionEventConfiguration
 
-| Parameter       | Required | Type     | Description                                                                                              |
+| Property        | Required | Type     | Description                                                                                              |
 | --------------- | -------- | -------- | -------------------------------------------------------------------------------------------------------- |
 | `elementId`     | yes      | `string` | The elementId that holds the value that will be paid. Must be the id of a number or calculation element. |
 | `environmentId` | yes      | `string` | The id of the OneBlink -> BPOINT integration environment to be used.                                     |
@@ -82,7 +82,7 @@
 
 ## WestpacQuickWebSubmissionEventConfiguration
 
-| Parameter                 | Required | Type     | Description                                                                                              |
+| Property                  | Required | Type     | Description                                                                                              |
 | ------------------------- | -------- | -------- | -------------------------------------------------------------------------------------------------------- |
 | `elementId`               | yes      | `string` | The elementId that holds the value that will be paid. Must be the id of a number or calculation element. |
 | `environmentId`           | yes      | `string` | The id of the OneBlink -> WestpacQuickWeb integration environment to be used.                            |
@@ -100,7 +100,7 @@
 
 ## CPPaySubmissionEventConfiguration
 
-| Parameter   | Required | Type     | Description                                                                                              |
+| Property    | Required | Type     | Description                                                                                              |
 | ----------- | -------- | -------- | -------------------------------------------------------------------------------------------------------- |
 | `elementId` | yes      | `string` | The elementId that holds the value that will be paid. Must be the id of a number or calculation element. |
 | `gatewayId` | yes      | `string` | The id of the OneBlink -> CP Pay integration gateway to be used.                                         |
@@ -116,7 +116,7 @@
 
 ## CPHCMSSubmissionEventConfiguration
 
-| Parameter             | Required | Type       | Description                                                               |
+| Property              | Required | Type       | Description                                                               |
 | --------------------- | -------- | ---------- | ------------------------------------------------------------------------- |
 | `contentTypeName`     | yes      | `string`   | The content type name for the submission in the CivicPlus HCMS.           |
 | `encryptedElementIds` | no       | `string[]` | An array of element ids to be set as encrypted in the CP HCMS.            |
@@ -134,7 +134,7 @@
 
 ## SchedulingSubmissionEventConfiguration
 
-| Parameter               | Required | Type     | Description                                                                                            |
+| Property                | Required | Type     | Description                                                                                            |
 | ----------------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------ |
 | `nylasAccountId`        | yes      | `string` | The id of scheduling provider.                                                                         |
 | `nylasSchedulingPageId` | yes      | `number` | The id of the scheduling page.                                                                         |
@@ -153,7 +153,7 @@
 
 ## TRIMSubmissionEventConfiguration
 
-| Parameter                  | Required | Type                                                                                      | Description                                                                                      |
+| Property                   | Required | Type                                                                                      | Description                                                                                      |
 | -------------------------- | -------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | `environmentId`            | yes      | `string`                                                                                  | The id of the OneBlink -> TRIM (Micro Focus Content Manager) integration environment to be used. |
 | `recordTitle`              | no       | `string`                                                                                  |                                                                                                  |
@@ -166,10 +166,10 @@
 
 ### TRIMSubmissionEventConfigurationAttribute
 
-| Parameter | Required | Type     | Description          |
-| --------- | -------- | -------- | -------------------- |
-| `uri`     | yes      | `string` | The attribute uri.   |
-| `label`   | yes      | `string` | The attribute label. |
+| Property | Required | Type     | Description          |
+| -------- | -------- | -------- | -------------------- |
+| `uri`    | yes      | `string` | The attribute uri.   |
+| `label`  | yes      | `string` | The attribute label. |
 
 ### Example
 
@@ -203,7 +203,7 @@
 
 ## CivicaCRMSubmissionEventConfiguration
 
-| Parameter                                 | Required | Type                                                                                              | Description                                                                              |
+| Property                                  | Required | Type                                                                                              | Description                                                                              |
 | ----------------------------------------- | -------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | `environmentId`                           | yes      | `string`                                                                                          | The id of the OneBlink -> Civica integration environment to be used.                     |
 | `civicaDescription`                       | yes      | `string`                                                                                          | The civica description.                                                                  |
@@ -220,7 +220,7 @@
 
 ### CivicaCRMSubmissionEventConfigurationMapping
 
-| Parameter                  | Required | Type     | Description                                                         |
+| Property                   | Required | Type     | Description                                                         |
 | -------------------------- | -------- | -------- | ------------------------------------------------------------------- |
 | `civicaCategoryItemNumber` | yes      | `number` | The item number of the civica category to map the OB form field to. |
 | `formElementId`            | yes      | `string` | The elementId of the field to map to the civica category.           |

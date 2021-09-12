@@ -4,20 +4,20 @@
 
 ## FormServerValidation
 
-| Parameter       | Required | Type                                                                                      | Description                                   |
+| Property        | Required | Type                                                                                      | Description                                   |
 | --------------- | -------- | ----------------------------------------------------------------------------------------- | --------------------------------------------- |
 | `type`          | yes      | `'CALLBACK' \| 'ONEBLINK_API'`                                                            | The type of the validation endpoint.          |
 | `configuration` | yes      | `CallbackValidationEndpointConfiguration` \| `OneBlinkAPIValidationEndpointConfiguration` | The configuration of the validation endpoint. |
 
 ## CallbackServerValidationConfiguration
 
-| Parameter | Required | Type     | Description                         |
-| --------- | -------- | -------- | ----------------------------------- |
-| `url`     | yes      | `string` | The url of the validation endpoint. |
+| Property | Required | Type     | Description                         |
+| -------- | -------- | -------- | ----------------------------------- |
+| `url`    | yes      | `string` | The url of the validation endpoint. |
 
 ## OneBlinkAPIServerValidationConfiguration
 
-| Parameter             | Required | Type     | Description                                                            |
+| Property              | Required | Type     | Description                                                            |
 | --------------------- | -------- | -------- | ---------------------------------------------------------------------- |
 | `apiId`               | yes      | `string` | The ID of the OneBlink hosted API that houses the validation endpoint. |
 | `apiEnvironment`      | yes      | `string` | The environment of the specified OneBlink hosted API.                  |

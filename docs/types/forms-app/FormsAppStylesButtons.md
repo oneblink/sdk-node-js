@@ -4,7 +4,7 @@
 
 ## FormsAppStylesButtons
 
-| Parameter         | Required | Type                                          | Description                                                  |
+| Property          | Required | Type                                          | Description                                                  |
 | ----------------- | -------- | --------------------------------------------- | ------------------------------------------------------------ |
 | `submit`          | No       | [`ButtonConfiguration`](#buttonconfiguration) | Button configuration for the Submit button                   |
 | `cancel`          | No       | [`ButtonConfiguration`](#buttonconfiguration) | Button configuration for the Cancel button                   |
@@ -14,10 +14,10 @@
 
 ## ButtonConfiguration
 
-| Parameter | Required | Type     | Description                                                                                                              |
-| --------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `label`   | No       | `string` | The text to display on the button.                                                                                       |
-| `icon`    | No       | `string` | The icon to display on the button. Must be a valid Material Icon code as it appears here: https://fonts.google.com/icons |
+| Property | Required | Type     | Description                                                                                                              |
+| -------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `label`  | No       | `string` | The text to display on the button.                                                                                       |
+| `icon`   | No       | `string` | The icon to display on the button. Must be a valid Material Icon code as it appears here: https://fonts.google.com/icons |
 
 ## Example
 
