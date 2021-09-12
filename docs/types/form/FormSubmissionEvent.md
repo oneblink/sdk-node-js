@@ -4,7 +4,7 @@
 
 ## FormSubmissionEvent
 
-| Parameter       | Required | Type                                                                                                                                          | Description                                             |
+| Property        | Required | Type                                                                                                                                          | Description                                             |
 | --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | `isDraft`       | No       | `boolean`                                                                                                                                     | Whether the submission event should run for drafts.     |
 | `type`          | Yes      | `'CALLBACK' \| 'PDF' \| 'ONEBLINK_API' \| 'TRIM' \| 'BPOINT' \| 'WESTPAC_QUICK_WEB' \| 'CP_PAY' \| 'CIVICA_CRM' \| 'CP_HCMS' \| 'SCHEDULING'` | The type of submission event.                           |

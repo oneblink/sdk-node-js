@@ -8,7 +8,7 @@ For Forms Apps of type `TILES` [ContainerMenuItem](./FormsAppStylesMenuItems.md#
 
 Form Forms Apps of type `FORMS_LIST` only [ScreenMenuItem](./FormsAppStylesMenuItems.md#screenmenuitem) and [HrefMenuItem](./FormsAppStylesMenuItems.md#hrefmenuitem) can be used in the `menuItems` array.
 
-| Parameter          | Required | Type                                                       | Description                                                                                     |
+| Property           | Required | Type                                                       | Description                                                                                     |
 | ------------------ | -------- | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | `foregroundColour` | No       | `string`                                                   | Foreground colour of banner in Forms App                                                        |
 | `highlightColour`  | No       | `string`                                                   | Highlight colour for elements that should stand out                                             |
@@ -20,7 +20,7 @@ Form Forms Apps of type `FORMS_LIST` only [ScreenMenuItem](./FormsAppStylesMenuI
 
 ## VolunteerFormsAppStyles
 
-| Parameter          | Required | Type     | Description                                          |
+| Property           | Required | Type     | Description                                          |
 | ------------------ | -------- | -------- | ---------------------------------------------------- |
 | `foregroundColour` | No       | `string` | Foreground colour of banner in Forms App             |
 | `highlightColour`  | No       | `string` | Highlight colour for elements that should stand out  |

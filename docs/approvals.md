@@ -1,5 +1,11 @@
 # OneBlink SDK | Approvals Class
 
+## Instance Functions
+
+- [`searchFormSubmissionAdministrationApprovals()`](#searchformsubmissionadministrationapprovals)
+- [`getFormSubmissionApproval()`](#getformsubmissionapproval)
+- [`getFormApprovalFlowInstance()`](#getformapprovalflowinstance)
+
 ## Constructor
 
 | Parameter           | Required | Type     | Description                                                       |
@@ -19,13 +25,13 @@ const options = {
 const approvals = new OneBlink.Approvals(options)
 ```
 
-## getFormSubmissionAdministrationApprovals
+## searchFormSubmissionAdministrationApprovals
 
 ### Example
 
 ```javascript
 const { approvals, meta } =
-  await approvals.getFormSubmissionAdministrationApprovals({
+  await approvals.searchFormSubmissionAdministrationApprovals({
     formsAppId: 1,
     formId: 2,
     limit: 50,
@@ -36,7 +42,7 @@ const { approvals, meta } =
 
 ### Parameters
 
-AN object containing the following keys:
+An object containing the following keys:
 
 | Parameter                 | Required | Type       | Description                                                                                                                       |
 | ------------------------- | -------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -55,50 +61,48 @@ AN object containing the following keys:
 
 ### Result (Resolved Promise)
 
-```json
-{
-  "approvals": [
-    {
-      "formSubmissionMeta": {
-        "submissionId": "f1eadc2b-79c8-4f97-8d92-cde64b34911f",
-        "formId": 2,
-        "formsAppId": 1,
-        "dateTimeSubmitted": "2021-08-06T12:00:00.00Z"
-      },
-      "formApprovalFlowInstance": {
-        "id": 1,
-        "createdAt": "2021-08-06T12:00:00.00Z",
-        "formId": 2,
-        "submissionId": "f1eadc2b-79c8-4f97-8d92-cde64b34911f",
-        "approvalsFormsAppId": 1,
-        "steps": [
-          {
-            "group": "group1",
-            "label": "Step 1",
-            "isSkipped": false
-          }
-        ],
-        "status": "APPROVED",
-        "isLatest": true
-      },
-      "formSubmissionApprovals": [
-        {
-          "group": "group1",
-          "formApprovalFlowInstanceId": 1,
-          "stepLabel": "Step 1",
-          "id": "a2fgdc5g-79c8-4f97-8d92-cde64b34956s",
-          "status": "APPROVED",
-          "createdAt": "2021-08-06T12:00:00.00Z",
-          "updatedAt": "2021-08-06T12:00:00.00Z"
-        }
-      ],
-      "history": []
-    }
-  ],
-  "meta": {
-    "offset": 0,
-    "limit": 50,
-    "nextOffset": 50
-  }
-}
+[`FormSubmissionsAdministrationApprovalsResponse`](./types/approvals/FormSubmissionsAdministrationApprovalsResponse.md#formsubmissionsadministrationapprovalsresponse)
+
+## getFormSubmissionApproval
+
+### Example
+
+```javascript
+const formSubmissionApproval = await approvals.getFormSubmissionApproval(
+  'aaaaaaaa-bbbb-4543-cccc-addddd543454',
+)
+// Use data here...
 ```
+
+### Parameters
+
+An object containing the following keys:
+
+| Parameter | Required | Type     | Description                            |
+| --------- | -------- | -------- | -------------------------------------- |
+| `id`      | Yes      | `string` | The id of the form submission approval |
+
+### Result (Resolved Promise)
+
+[`FormSubmissionApprovalResponse`](./types/approvals/FormSubmissionApprovalsResponse.md#formsubmissionapprovalresponse)
+
+## getFormApprovalFlowInstance
+
+### Example
+
+```javascript
+const formSubmissionApproval = await approvals.getFormApprovalFlowInstance(1)
+// Use data here...
+```
+
+### Parameters
+
+An object containing the following keys:
+
+| Parameter | Required | Type     | Description                               |
+| --------- | -------- | -------- | ----------------------------------------- |
+| `id`      | Yes      | `number` | The id of the form approval flow instance |
+
+### Result (Resolved Promise)
+
+[`FormApprovalFlowInstanceResponse`](./types/approvals/FormApprovalFlowInstanceResponse.md#formapprovalflowinstanceresponse)

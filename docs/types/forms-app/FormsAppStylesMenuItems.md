@@ -4,7 +4,7 @@
 
 ## ScreenMenuItem
 
-| Parameter   | Required | Type      | Description                                                                                    |
+| Property    | Required | Type      | Description                                                                                    |
 | ----------- | -------- | --------- | ---------------------------------------------------------------------------------------------- |
 | `label`     | Yes      | `string`  | Label for the menu item                                                                        |
 | `icon`      | Yes      | `string`  | Icon to be used for the menu item                                                              |
@@ -14,16 +14,16 @@
 
 ## HrefMenuItem
 
-| Parameter | Required | Type     | Description                       |
-| --------- | -------- | -------- | --------------------------------- |
-| `label`   | Yes      | `string` | Label for the menu item           |
-| `icon`    | Yes      | `string` | Icon to be used for the menu item |
-| `type`    | Yes      | `string` | value must be "HREF"              |
-| `href`    | Yes      | `string` | Url to be opened for menu item    |
+| Property | Required | Type     | Description                       |
+| -------- | -------- | -------- | --------------------------------- |
+| `label`  | Yes      | `string` | Label for the menu item           |
+| `icon`   | Yes      | `string` | Icon to be used for the menu item |
+| `type`   | Yes      | `string` | value must be "HREF"              |
+| `href`   | Yes      | `string` | Url to be opened for menu item    |
 
 ## ContainerMenuItem
 
-| Parameter | Required | Type       | Description                               |
+| Property  | Required | Type       | Description                               |
 | --------- | -------- | ---------- | ----------------------------------------- |
 | `label`   | Yes      | `string`   | Label for the menu item                   |
 | `icon`    | Yes      | `string`   | Icon to be used for the menu item         |
@@ -32,12 +32,12 @@
 
 ## FormMenuItem
 
-| Parameter | Required | Type     | Description                       |
-| --------- | -------- | -------- | --------------------------------- |
-| `label`   | Yes      | `string` | Label for the menu item           |
-| `icon`    | Yes      | `string` | Icon to be used for the menu item |
-| `type`    | Yes      | `string` | value must be "FORM"              |
-| `formId`  | Yes      | number   | The id of the form                |
+| Property | Required | Type     | Description                       |
+| -------- | -------- | -------- | --------------------------------- |
+| `label`  | Yes      | `string` | Label for the menu item           |
+| `icon`   | Yes      | `string` | Icon to be used for the menu item |
+| `type`   | Yes      | `string` | value must be "FORM"              |
+| `formId` | Yes      | number   | The id of the form                |
 
 ## Examples
 

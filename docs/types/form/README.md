@@ -4,7 +4,7 @@
 
 ## NewForm
 
-| Parameter               | Required | Type                                                | Description                                                                              |
+| Property                | Required | Type                                                | Description                                                                              |
 | ----------------------- | -------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | `name`                  | Yes      | `string`                                            | Name of the form.                                                                        |
 | `description`           | No       | `string`                                            | A description of the form.                                                               |
@@ -26,7 +26,7 @@
 
 ## Form
 
-| Parameter               | Required | Type                                                | Description                                                                              |
+| Property                | Required | Type                                                | Description                                                                              |
 | ----------------------- | -------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | `id`                    | Yes      | `number`                                            | Id of the form.                                                                          |
 | `name`                  | Yes      | `string`                                            | Name of the form.                                                                        |
