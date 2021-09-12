@@ -23,6 +23,8 @@
 - [`generatePageElement()`](#generatepageelement)
 - [`encryptUserToken()`](#encryptUserToken)
 - [`decryptUserToken()`](#decryptUserToken)
+- [`validateConditionalPredicates()`](#validateconditionalpredicates)
+- [`validateApiRequest()`](#validateapirequest)
 
 ## Constructor
 
@@ -890,6 +892,44 @@ return validatedPredicates
   },
   {}
 ]
+```
+
+Throws an error if validation fails
+
+## `validateApiRequest()`
+
+`validateApiRequest()` is a static method available on the forms class, used for validating a api request configuration.
+
+### Example
+
+```javascript
+const apiRequest = {
+  type: 'CALLBACK',
+  configuration: {
+    url: 'https://a-website.com/endpoint',
+  },
+}
+
+const validatedApiRequest = OneBlink.Forms.validateApiRequest(apiRequest)
+
+return validatedApiRequest
+```
+
+### Parameters
+
+| Parameter    | Required | Type                   | Description                                    |
+| ------------ | -------- | ---------------------- | ---------------------------------------------- |
+| `apiRequest` | Yes      | `FormServerValidation` | The api request configuration to be validated. |
+
+### Result
+
+```json
+{
+  "type": "CALLBACK",
+  "configuration": {
+    "url": "https://a-website.com/endpoint"
+  }
+}
 ```
 
 Throws an error if validation fails

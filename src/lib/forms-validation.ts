@@ -1,7 +1,12 @@
 import Joi from 'joi'
 import { formElementsService } from '@oneblink/sdk-core'
 import { FormTypes, ConditionTypes } from '@oneblink/types'
-import { elementSchema, formSchema, pageElementSchema } from './forms-schema'
+import {
+  elementSchema,
+  formSchema,
+  pageElementSchema,
+  apiRequestSchema,
+} from './forms-schema'
 import { ConditionalPredicatesItemSchema } from './forms-schema/property-schemas'
 
 function validateJoiSchema<T>(
@@ -337,9 +342,23 @@ function validateConditionalPredicates(
   return validatedPredicates
 }
 
+function validateApiRequest(
+  apiRequest: unknown,
+): FormTypes.FormServerValidation {
+  const validatedApiRequest = validateJoiSchema<FormTypes.FormServerValidation>(
+    apiRequest,
+    apiRequestSchema,
+    {
+      stripUnknown: true,
+    },
+  )
+  return validatedApiRequest
+}
+
 export {
   validateWithFormSchema,
   validateWithElementSchema,
   validateWithPageElementSchema,
   validateConditionalPredicates,
+  validateApiRequest,
 }

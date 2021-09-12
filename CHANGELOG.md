@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- [`validateApiRequest()`](./docs/forms.md#validateapirequest) function
 - [`getFormSubmissionApproval()`](./docs/approvals.md#getformsubmissionapproval) function
 - [`getFormApprovalFlowInstance()`](./docs/approvals.md#getformapprovalflowinstance) function
 
