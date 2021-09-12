@@ -16,7 +16,10 @@ import {
   FormTypes,
   SubmissionTypes,
 } from '@oneblink/types'
-import { validateConditionalPredicates } from '../lib/forms-validation'
+import {
+  validateConditionalPredicates,
+  validateApiRequest,
+} from '../lib/forms-validation'
 import {
   BaseSearchResult,
   Tenant,
@@ -465,4 +468,5 @@ export default (tenant: Tenant) =>
     }
 
     static validateConditionalPredicates = validateConditionalPredicates
+    static validateApiRequest = validateApiRequest
   }

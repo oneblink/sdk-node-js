@@ -23,6 +23,8 @@
 - [`generatePageElement()`](#generatepageelement)
 - [`encryptUserToken()`](#encryptUserToken)
 - [`decryptUserToken()`](#decryptUserToken)
+- [`validateConditionalPredicates()`](#validateconditionalpredicates)
+- [`validateApiRequest()`](#validateapirequest)
 
 ## Constructor
 
