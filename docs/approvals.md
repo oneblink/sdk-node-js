@@ -61,7 +61,7 @@ An object containing the following keys:
 
 ### Result (Resolved Promise)
 
-[`FormSubmissionsAdministrationApprovalsResponse`](./types/approvals/FormSubmissionsAdministrationApprovalsResponse.md#formsubmissionsadministrationapprovalsresponse)
+[`FormSubmissionsAdministrationApprovalsResponse`](./types/approvals/FormSubmissionsAdministrationApprovalsResponse.md)
 
 ## getFormSubmissionApproval
 
@@ -84,7 +84,7 @@ An object containing the following keys:
 
 ### Result (Resolved Promise)
 
-[`FormSubmissionApprovalResponse`](./types/approvals/FormSubmissionApprovalsResponse.md#formsubmissionapprovalresponse)
+[`FormSubmissionApprovalResponse`](./types/approvals/FormSubmissionApprovalResponse.md)
 
 ## getFormApprovalFlowInstance
 
@@ -105,4 +105,4 @@ An object containing the following keys:
 
 ### Result (Resolved Promise)
 
-[`FormApprovalFlowInstanceResponse`](./types/approvals/FormApprovalFlowInstanceResponse.md#formapprovalflowinstanceresponse)
+[`FormApprovalFlowInstanceResponse`](./types/approvals/FormApprovalFlowInstanceResponse.md)
