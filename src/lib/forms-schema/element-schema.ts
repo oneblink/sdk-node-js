@@ -83,6 +83,7 @@ import CivicaNameRecordElement, {
 import SectionElement, {
   type as sectionElementType,
 } from './elements/SectionElement'
+import BsbElement, { type as bsbElementType } from './elements/BsbElement'
 
 // Creating an object here so we get a Typescript error when adding a
 // new element type and forgetting to add to the array of allowed types
@@ -124,6 +125,7 @@ const elementTypesMap: Record<
   [civicaStreetNameElementType]: null,
   [civicaNameRecordElementType]: null,
   [sectionElementType]: null,
+  [bsbElementType]: null,
 }
 
 const typeCase = (type: FormTypes.FormElementType) => {
@@ -239,6 +241,9 @@ const schema = Joi.object({
   })
   .when(typeCase('civicaNameRecord'), {
     then: CivicaNameRecordElement,
+  })
+  .when(typeCase('bsb'), {
+    then: BsbElement,
   })
 
 export default schema

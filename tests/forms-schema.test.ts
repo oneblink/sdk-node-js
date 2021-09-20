@@ -793,6 +793,14 @@ describe('Valid Form Schema', () => {
           },
         ],
       },
+      {
+        id: '9014e80c-3c68-4adb-a338-1be04ebc95ef',
+        name: 'BSB',
+        label: 'BSB',
+        type: 'bsb',
+        required: false,
+        defaultValue: '923100',
+      },
     ],
   })
 
@@ -1758,7 +1766,7 @@ test('should error if page element has child page element', () => {
   )
 
   expect(error?.details[0].message).toContain(
-    '"elements[0].elements[0].type" must be one of [autocomplete, barcodeScanner, boolean, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
+    '"elements[0].elements[0].type" must be one of [autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -1841,7 +1849,7 @@ test('should error if isMultiPage is set to false', () => {
   )
 
   expect(error?.details[0].message).toContain(
-    '"elements[0].type" must be one of [autocomplete, barcodeScanner, boolean, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
+    '"elements[0].type" must be one of [autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -1998,7 +2006,7 @@ test('should error if isMultiPage is false even if all root elements are pages',
   )
 
   expect(error?.details[0].message).toBe(
-    '"elements[0].type" must be one of [autocomplete, barcodeScanner, boolean, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
+    '"elements[0].type" must be one of [autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -3053,7 +3061,9 @@ describe('CIVICA_CRM submission event', () => {
       },
     )
     expect(error).toBe(undefined)
-    expect(value.submissionEvents[0].configuration.mapping[0].isDescription).toBe(false)
+    expect(
+      value.submissionEvents[0].configuration.mapping[0].isDescription,
+    ).toBe(false)
   })
   test('should error CIVICA_CRM submission event not passing environmentId', () => {
     const { error } = formSchema.validate(
