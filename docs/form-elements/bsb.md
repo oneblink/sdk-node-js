@@ -40,7 +40,7 @@ BSB element also inherits the properties of the following:
 ```json
 {
   "submission": {
-    "[element.name]": "923100"
+    "[element.name]": "923-100"
   }
 }
 ```
