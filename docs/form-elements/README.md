@@ -8,6 +8,7 @@ The OneBlink Form Definition allows for multiple different types of Form Element
 
 - [Autocomplete](./autocomplete.md)
 - [BarcodeScanner](./barcode-scanner.md)
+- [BSB](./bsb.md)
 - [Calculation](./calculation.md)
 - [Camera](./camera.md)
 - [Captcha (Not a Robot)](./captcha.md)
