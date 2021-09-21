@@ -799,7 +799,7 @@ describe('Valid Form Schema', () => {
         label: 'BSB',
         type: 'bsb',
         required: false,
-        defaultValue: '923100',
+        defaultValue: '923-100',
       },
     ],
   })
