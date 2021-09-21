@@ -29,7 +29,7 @@ BSB element also inherits the properties of the following:
   "type": "bsb",
   "name": "BSB",
   "label": "Please Enter Your BSB number",
-  "defaultValue": "923100",
+  "defaultValue": "923-100",
   "required": true,
   "readOnly": false
 }
