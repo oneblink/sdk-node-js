@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `groupFiles` property to `'TRIM'` form submission event
+
 ## [0.13.0] - 2021-09-24
 
 ### Added

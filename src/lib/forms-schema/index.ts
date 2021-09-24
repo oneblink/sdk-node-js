@@ -92,6 +92,7 @@ const SubmissionEventsSchema = Joi.object().keys({
             label: Joi.string().required(),
           })
           .allow(null),
+        groupFiles: Joi.boolean().default(false),
       }),
     })
     .when('type', {

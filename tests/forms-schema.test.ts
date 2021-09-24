@@ -2740,7 +2740,7 @@ describe('CALLBACK submission event', () => {
 })
 describe('TRIM submission event', () => {
   test('should allow TRIM submission event', () => {
-    const { error } = formSchema.validate(
+    const { error, value } = formSchema.validate(
       {
         id: 1,
         name: 'string',
@@ -2774,6 +2774,7 @@ describe('TRIM submission event', () => {
                 uri: 3,
                 label: 'Location Label',
               },
+              groupFiles: true,
             },
           },
         ],
@@ -2784,6 +2785,7 @@ describe('TRIM submission event', () => {
       },
     )
     expect(error).toBe(undefined)
+    expect(value.submissionEvents[0].configuration.groupFiles).toBe(true)
   })
   test('should error TRIM submission event not passing environmentId', () => {
     const { error } = formSchema.validate(

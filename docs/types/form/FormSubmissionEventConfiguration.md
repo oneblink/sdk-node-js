@@ -153,16 +153,17 @@
 
 ## TRIMSubmissionEventConfiguration
 
-| Property                   | Required | Type                                                                                      | Description                                                                                      |
-| -------------------------- | -------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `environmentId`            | yes      | `string`                                                                                  | The id of the OneBlink -> TRIM (Micro Focus Content Manager) integration environment to be used. |
-| `recordTitle`              | no       | `string`                                                                                  |                                                                                                  |
-| `container`                | yes      | [`TRIMSubmissionEventConfigurationAttribute`](#trimsubmissioneventconfigurationattribute) | The container object. Contains the container properties.                                         |
-| `recordType`               | yes      | [`TRIMSubmissionEventConfigurationAttribute`](#trimsubmissioneventconfigurationattribute) | The recordType object. Contains the recordType properties.                                       |
-| `actionDefinition`         | yes      | [`TRIMSubmissionEventConfigurationAttribute`](#trimsubmissioneventconfigurationattribute) | The actionDefinition object. Contains the actionDefinition properties.                           |
-| `location`                 | yes      | [`TRIMSubmissionEventConfigurationAttribute`](#trimsubmissioneventconfigurationattribute) | The location object. Contains the location properties.                                           |
-| `includeSubmissionIdInPdf` | no       | `boolean`                                                                                 | Whether the submission id should be included in the generated pdf (defaults to `false`).         |
-| `author`                   | no       | [`TRIMSubmissionEventConfigurationAttribute`](#trimsubmissioneventconfigurationattribute) | The author object. Contains the author properties.                                               |
+| Property                   | Required | Type                                                                                      | Description                                                                                         |
+| -------------------------- | -------- | ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `environmentId`            | yes      | `string`                                                                                  | The id of the OneBlink -> TRIM (Micro Focus Content Manager) integration environment to be used.    |
+| `recordTitle`              | no       | `string`                                                                                  |                                                                                                     |
+| `container`                | yes      | [`TRIMSubmissionEventConfigurationAttribute`](#trimsubmissioneventconfigurationattribute) | The container object. Contains the container properties.                                            |
+| `recordType`               | yes      | [`TRIMSubmissionEventConfigurationAttribute`](#trimsubmissioneventconfigurationattribute) | The recordType object. Contains the recordType properties.                                          |
+| `actionDefinition`         | yes      | [`TRIMSubmissionEventConfigurationAttribute`](#trimsubmissioneventconfigurationattribute) | The actionDefinition object. Contains the actionDefinition properties.                              |
+| `location`                 | yes      | [`TRIMSubmissionEventConfigurationAttribute`](#trimsubmissioneventconfigurationattribute) | The location object. Contains the location properties.                                              |
+| `includeSubmissionIdInPdf` | no       | `boolean`                                                                                 | Whether the submission id should be included in the generated pdf (defaults to `false`).            |
+| `author`                   | no       | [`TRIMSubmissionEventConfigurationAttribute`](#trimsubmissioneventconfigurationattribute) | The author object. Contains the author properties.                                                  |
+| `groupFiles`               | no       | `boolean`                                                                                 | Whether the submission pdf and attachments should be zipped before uploading (defaults to `false`). |
 
 ### TRIMSubmissionEventConfigurationAttribute
 
