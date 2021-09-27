@@ -7,9 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.0] - 2021-09-27
+
 ### Added
 
 - `groupFiles` property to `'TRIM'` form submission event
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [0.1.3](https://github.com/oneblink/sdk-core-js/releases/tag/v0.1.3) (from [0.1.3-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update [aws-sdk](https://www.npmjs.com/package/aws-sdk) to [2.994.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.994.0) (from [2.971.0](https://github.com/aws/aws-sdk-js/releases/tag/v2.971.0))
+
+- update [node-fetch](https://www.npmjs.com/package/node-fetch) to 2.6.5 (from [2.6.1](https://github.com/node-fetch/node-fetch/releases/tag/v2.6.1))
+
+- update [nodemailer](https://www.npmjs.com/package/nodemailer) to [6.6.5](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md) (from [6.6.3](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md))
 
 ## [0.13.0] - 2021-09-24
 
