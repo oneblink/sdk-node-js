@@ -28,6 +28,7 @@ export default (tenant: Tenant) =>
         isDraft,
         includeSubmissionIdInPdf,
         excludedElementIds,
+        usePagesAsBreaks,
       } = options
       if (!submissionId || typeof submissionId !== 'string') {
         throw new TypeError('Must supply "options.submissionId" as a string')
@@ -53,7 +54,7 @@ export default (tenant: Tenant) =>
         headers: {
           Accept: `application/pdf`,
         },
-        body: JSON.stringify({ excludedElementIds }),
+        body: JSON.stringify({ excludedElementIds, usePagesAsBreaks }),
       })
 
       return response.buffer()
