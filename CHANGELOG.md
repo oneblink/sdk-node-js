@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `usePagesAsBreaks` property to submission events which can generate a PDF
+
 ## [0.14.0] - 2021-09-27
 
 ### Added
