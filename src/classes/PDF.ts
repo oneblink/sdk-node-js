@@ -17,6 +17,7 @@ export default (tenant: Tenant) =>
       isDraft?: boolean
       includeSubmissionIdInPdf?: boolean
       excludedElementIds?: string[]
+      usePagesAsBreaks?: boolean
     }): Promise<Buffer> {
       if (!options) {
         throw new TypeError('Must supply "options" as a string')

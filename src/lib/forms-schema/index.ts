@@ -6,14 +6,18 @@ import {
 } from './property-schemas'
 const postSubmissionActions = ['BACK', 'URL', 'CLOSE', 'FORMS_LIBRARY']
 
+const usePagesAsBreaks = Joi.boolean()
+const includeSubmissionIdInPdf = Joi.boolean()
+const excludedElementIds = Joi.array()
+  .items(Joi.string().guid())
+  .unique()
+  .allow(null)
+  .default([])
 const pdfSubmissionEventConfiguration = {
   pdfFileName: Joi.string().allow(null, ''),
-  includeSubmissionIdInPdf: Joi.boolean(),
-  excludedElementIds: Joi.array()
-    .items(Joi.string().guid())
-    .unique()
-    .allow(null)
-    .default([]),
+  includeSubmissionIdInPdf,
+  excludedElementIds,
+  usePagesAsBreaks,
 }
 
 const SubmissionEventsSchema = Joi.object().keys({
@@ -84,8 +88,9 @@ const SubmissionEventsSchema = Joi.object().keys({
           uri: Joi.number().required(),
           label: Joi.string().required(),
         }),
-        includeSubmissionIdInPdf:
-          pdfSubmissionEventConfiguration.includeSubmissionIdInPdf,
+        includeSubmissionIdInPdf,
+        excludedElementIds,
+        usePagesAsBreaks,
         author: Joi.object()
           .keys({
             uri: Joi.number().required(),

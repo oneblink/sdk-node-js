@@ -27,6 +27,7 @@
 | `pdfFileName`              | yes      | `string`   | The name of the PDF file sent to the configured email address.                           |
 | `includeSubmissionIdInPdf` | no       | `boolean`  | Whether the submission id should be included in the generated pdf (defaults to `false`). |
 | `excludedElementIds`       | no       | `string[]` | An array of element ids to exclude from the submission when generating pdf.              |
+| `usePagesAsBreaks`         | no       | `boolean`  | Whether pages in the form submission should translate to page breaks in the PDF.         |
 
 ### Example
 
@@ -164,6 +165,8 @@
 | `includeSubmissionIdInPdf` | no       | `boolean`                                                                                 | Whether the submission id should be included in the generated pdf (defaults to `false`).            |
 | `author`                   | no       | [`TRIMSubmissionEventConfigurationAttribute`](#trimsubmissioneventconfigurationattribute) | The author object. Contains the author properties.                                                  |
 | `groupFiles`               | no       | `boolean`                                                                                 | Whether the submission pdf and attachments should be zipped before uploading (defaults to `false`). |
+| `excludedElementIds`       | no       | `string[]`                                                                                | An array of element ids to exclude from the submission when generating pdf.                         |
+| `usePagesAsBreaks`         | no       | `boolean`                                                                                 | Whether pages in the form submission should translate to page breaks in the PDF.                    |
 
 ### TRIMSubmissionEventConfigurationAttribute
 
@@ -218,6 +221,7 @@
 | `pdfFileName`                             | yes      | `string`                                                                                          | The name of the PDF file that is generated.                                              |
 | `includeSubmissionIdInPdf`                | no       | `boolean`                                                                                         | Whether the submission id should be included in the generated pdf (defaults to `false`). |
 | `excludedElementIds`                      | no       | `string[]`                                                                                        | An array of element ids to exclude from the submission when generating pdf.              |
+| `usePagesAsBreaks`                        | no       | `boolean`                                                                                         | Whether pages in the form submission should translate to page breaks in the PDF.         |
 
 ### CivicaCRMSubmissionEventConfigurationMapping
 

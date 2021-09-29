@@ -112,13 +112,16 @@ async function run() {
 
 ### Parameters
 
-| Parameter                          | Required | Type       | Description                                                               |
-| ---------------------------------- | -------- | ---------- | ------------------------------------------------------------------------- |
-| `options.formId`                   | Yes      | `number`   | The exact identifier of the form you wish to generate the PDF for         |
-| `options.submissionId`             | Yes      | `string`   | The submission identifier generated after a successful form submission    |
-| `options.isDraft`                  | No       | `bool`     | `true` if the submission is a draft submission, otherwise `false`         |
-| `options.includeSubmissionIdInPdf` | No       | `bool`     | `true` to include the submission identifier in the PDF, otherwise `false` |
-| `options.excludedElementIds`       | No       | `string[]` | Array of elements ids to be excluded from the PDF document                |
+| Parameter                          | Required | Type       | Description                                                                     |
+| ---------------------------------- | -------- | ---------- | ------------------------------------------------------------------------------- |
+| `options.formId`                   | Yes      | `number`   | The exact identifier of the form you wish to generate the PDF for               |
+| `options.submissionId`             | Yes      | `string`   | The submission identifier generated after a successful form submission          |
+| `options.isDraft`                  | No       | `bool`     | `true` if the submission is a draft submission, otherwise `false`               |
+| `options.includeSubmissionIdInPdf` | No       | `bool`     | `true` to include the submission identifier in the PDF, otherwise `false`       |
+| `options.excludedElementIds`       | No       | `string[]` | Array of elements ids to be excluded from the PDF document                      |
+| `options.usePagesAsBreaks`         | No       | `boolean`  | Whether pages in the form submission should translate to page breaks in the PDF |
+
+usePagesAsBreaks
 
 ### Result (Resolved Promise)
 
