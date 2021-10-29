@@ -4631,6 +4631,8 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
     conditionallyShow: false,
     restrictFileTypes: true,
     restrictedFileTypes: ['png', 'jpg', 'gif'],
+    isDataLookup: false,
+    isElementLookup: false,
   })
 })
 
@@ -4652,6 +4654,8 @@ test('should strip restrictedFileTypes if restrictFileTypes is false', () => {
     readOnly: false,
     conditionallyShow: false,
     restrictFileTypes: false,
+    isDataLookup: false,
+    isElementLookup: false,
   })
 })
 

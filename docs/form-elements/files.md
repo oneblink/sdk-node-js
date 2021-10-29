@@ -19,6 +19,7 @@ Allow the user upload a array of files from their device.
 Files element also inherits the properties of the following:
 
 - [Base Element](./base-element.md)
+- [Lookup Element](./lookup-element.md)
 
 ### Example
 

@@ -8,6 +8,7 @@ import {
   hint,
   conditionallyShowSchemas,
   storageType,
+  lookupSchemas,
 } from '../property-schemas'
 
 export const type = 'files'
@@ -42,4 +43,5 @@ export default Joi.object({
     otherwise: Joi.number().min(0),
   }),
   ...conditionallyShowSchemas,
+  ...lookupSchemas,
 })
