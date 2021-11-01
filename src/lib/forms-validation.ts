@@ -248,6 +248,30 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
         break
       }
       case 'PDF': {
+        if (submissionEvent.configuration.emailTemplate) {
+          for (
+            let mappingIndex = 0;
+            mappingIndex <
+            submissionEvent.configuration.emailTemplate.mapping.length;
+            mappingIndex++
+          ) {
+            const mapping =
+              submissionEvent.configuration.emailTemplate.mapping[mappingIndex]
+
+            if (mapping.type === 'FORM_ELEMENT') {
+              const element = formElementsService.findFormElement(
+                validatedForm.elements,
+                ({ id }) => id === mapping.formElementId,
+              )
+              if (!element) {
+                throw new Error(
+                  `"submissionEvents[${submissionEventIndex}].configuration.mapping[${mappingIndex}].formElementId" (${mapping.formElementId}) does not exist in "elements".`,
+                )
+              }
+            }
+          }
+        }
+
         if (submissionEvent.configuration.excludedElementIds) {
           for (const elementId of submissionEvent.configuration
             .excludedElementIds) {
