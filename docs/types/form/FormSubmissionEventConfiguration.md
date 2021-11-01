@@ -20,14 +20,21 @@
 
 ## PDFSubmissionEventConfiguration
 
-| Property                   | Required | Type       | Description                                                                              |
-| -------------------------- | -------- | ---------- | ---------------------------------------------------------------------------------------- |
-| `email`                    | yes      | `string`   | The email in which a PDF copy of the form submission will be sent.                       |
-| `emailSubjectLine`         | yes      | `string`   | The subject line of the email sent to the configured email address.                      |
-| `pdfFileName`              | yes      | `string`   | The name of the PDF file sent to the configured email address.                           |
-| `includeSubmissionIdInPdf` | no       | `boolean`  | Whether the submission id should be included in the generated pdf (defaults to `false`). |
-| `excludedElementIds`       | no       | `string[]` | An array of element ids to exclude from the submission when generating pdf.              |
-| `usePagesAsBreaks`         | no       | `boolean`  | Whether pages in the form submission should translate to page breaks in the PDF.         |
+| Property                                | Required | Type       | Description                                                                                             |
+| --------------------------------------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------- |
+| `email`                                 | yes      | `string`   | The email in which a PDF copy of the form submission will be sent.                                      |
+| `emailSubjectLine`                      | yes      | `string`   | The subject line of the email sent to the configured email address.                                     |
+| `pdfFileName`                           | yes      | `string`   | The name of the PDF file sent to the configured email address.                                          |
+| `includeSubmissionIdInPdf`              | no       | `boolean`  | Whether the submission id should be included in the generated pdf (defaults to `false`).                |
+| `excludedElementIds`                    | no       | `string[]` | An array of element ids to exclude from the submission when generating pdf.                             |
+| `usePagesAsBreaks`                      | no       | `boolean`  | Whether pages in the form submission should translate to page breaks in the PDF.                        |
+| `emailTemplate`                         | no       | `Object`   | A reference to a custom template for the email body.                                                    |
+| `emailTemplate.id`                      | yes      | `number`   | The `id` of the `emailTemplate`.                                                                        |
+| `emailTemplate.mapping`                 | yes      | `Array`    | The mappings required from the email template.                                                          |
+| `emailTemplate.mapping[].mustacheTag`   | yes      | `string`   | The mustache tag to replace in the email template.                                                      |
+| `emailTemplate.mapping[].type`          | yes      | `string`   | `'FORM_ELEMENT' \| 'TEXT' \| 'EXTERNAL_ID' \| 'FORM_NAME' \| 'SUBMISSION_ID' \| 'TIMESTAMP' \| 'DATE'`. |
+| `emailTemplate.mapping[].text`          | no       | `string`   | The free text to insert if type is `'TEXT'`.                                                            |
+| `emailTemplate.mapping[].formElementId` | no       | `string`   | The value from the form submission for a form element if type is `'FORM_ELEMENT'`.                      |
 
 ### Example
 
