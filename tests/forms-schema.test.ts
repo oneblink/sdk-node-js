@@ -2578,7 +2578,38 @@ describe('optionTypes', () => {
 
 describe('PDF submission event', () => {
   test('should allow PDF submission event with email address', () => {
-    const { error } = formSchema.validate(
+    const submissionEvents = [
+      {
+        type: 'PDF',
+        isDraft: false,
+        conditionallyExecute: false,
+        requiresAllConditionallyExecutePredicates: false,
+        configuration: {
+          email: 'developers@oneblink.io',
+          excludedElementIds: [],
+          emailTemplate: {
+            id: 1,
+            mapping: [
+              {
+                mustacheTag: 'submissionId',
+                type: 'SUBMISSION_ID',
+              },
+              {
+                mustacheTag: 'firstName',
+                type: 'FORM_ELEMENT',
+                formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+              },
+              {
+                mustacheTag: 'submissionId',
+                type: 'TEXT',
+                text: 'This is the text',
+              },
+            ],
+          },
+        },
+      },
+    ]
+    const { error, value } = formSchema.validate(
       {
         id: 1,
         name: 'string',
@@ -2588,17 +2619,17 @@ describe('PDF submission event', () => {
         organisationId: 'ORGANISATION_00000000001',
         postSubmissionAction: 'FORMS_LIBRARY',
         isMultiPage: false,
-        elements: [],
-        isAuthenticated: true,
-        tags: [],
-        submissionEvents: [
+        elements: [
           {
-            type: 'PDF',
-            configuration: {
-              email: 'developers@oneblink.io',
-            },
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            type: 'text',
+            name: 'firstName',
+            label: 'First Name',
           },
         ],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents,
       },
 
       {
@@ -2606,6 +2637,7 @@ describe('PDF submission event', () => {
       },
     )
     expect(error).toBe(undefined)
+    expect(value.submissionEvents).toEqual(submissionEvents)
   })
   test('should allow PDF submission event with field value', () => {
     const result = formSchema.validate(
@@ -2669,6 +2701,50 @@ describe('PDF submission event', () => {
     )
     expect(error?.details[0].message).toBe(
       '"submissionEvents[0].configuration.email" does not match any of the allowed types',
+    )
+  })
+  test('should disallow PDF submission event with email template mapping referencing element that does not exist', () => {
+    const run = () =>
+      validateWithFormSchema({
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            type: 'text',
+            name: 'firstName',
+            label: 'First Name',
+          },
+        ],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'PDF',
+            configuration: {
+              email: 'developers@oneblink.io',
+              emailTemplate: {
+                id: 1,
+                mapping: [
+                  {
+                    mustacheTag: 'firstName',
+                    type: 'FORM_ELEMENT',
+                    formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+                  },
+                ],
+              },
+            },
+          },
+        ],
+      })
+    expect(run).toThrow(
+      '"submissionEvents[0].configuration.mapping[0].formElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a79) does not exist in "elements".',
     )
   })
 })
