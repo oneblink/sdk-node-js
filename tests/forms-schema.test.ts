@@ -2591,16 +2591,12 @@ describe('PDF submission event', () => {
             id: 1,
             mapping: [
               {
-                mustacheTag: 'submissionId',
-                type: 'SUBMISSION_ID',
-              },
-              {
-                mustacheTag: 'firstName',
+                mustacheTag: 'custom:firstName',
                 type: 'FORM_ELEMENT',
                 formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
               },
               {
-                mustacheTag: 'submissionId',
+                mustacheTag: 'custom:text',
                 type: 'TEXT',
                 text: 'This is the text',
               },
