@@ -60,7 +60,9 @@ const SubmissionEventsSchema = Joi.object().keys({
           mapping: Joi.array()
             .items(
               Joi.object().keys({
-                mustacheTag: Joi.string().required(),
+                mustacheTag: Joi.string()
+                  .regex(/^custom:\S+/)
+                  .required(),
                 type: Joi.string().valid('FORM_ELEMENT', 'TEXT').required(),
                 formElementId: Joi.when('type', {
                   is: 'FORM_ELEMENT',
