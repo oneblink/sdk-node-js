@@ -35,6 +35,11 @@ type FormsSearchResult = {
 type FormsSearchOptions = {
   isAuthenticated?: boolean
   name?: string
+  isInfoPage?: boolean
+  formsAppId?: number
+  formsAppEnvironmentId?: number
+  limit?: number
+  offset?: number
 }
 
 type FormSubmissionHistorySearchParameters = {
