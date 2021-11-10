@@ -67,7 +67,7 @@ const options = {
   limit: 1,
   offset: 1,
 }
-const { formsAppEnvironment } = await formsAppEnvironments.search(options)
+const { formsAppEnvironments } = await formsAppEnvironments.search(options)
 ```
 
 ### Parameters
