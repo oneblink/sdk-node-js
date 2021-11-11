@@ -352,7 +352,7 @@ export default class Forms extends OneBlinkAPI {
     )
   }
 
-  search(searchParams?: FormsSearchOptions): Promise<FormsSearchResult> {
+  searchForms(searchParams?: FormsSearchOptions): Promise<FormsSearchResult> {
     return super.searchRequest(`/forms`, searchParams)
   }
 

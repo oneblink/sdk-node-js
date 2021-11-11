@@ -11,11 +11,17 @@ type FormsAppEnvironmentsSearchOptions = {
   offset?: number
 }
 
-const basePath = `/forms-app-environment`
+const basePath = `/forms-app-environments`
 export default class FormsAppEnvironments extends OneBlinkAPI {
   constructor(options: ConstructorOptions) {
     options = options || {}
     super(options.accessKey, options.secretKey)
+  }
+
+  searchFormsAppEnvironments(
+    searchParams?: FormsAppEnvironmentsSearchOptions,
+  ): Promise<FormsAppEnvironmentsSearchResult> {
+    return super.searchRequest(basePath, searchParams)
   }
 
   search(

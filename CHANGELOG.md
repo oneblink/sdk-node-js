@@ -7,10 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.0] - 2021-11-11
+
 ### Added
 
 - `emailTemplate` to `"PDF"` submission event
 - `FormsAppEnvironments` class
+
+### Breaking Changes
+
+- Updated `Forms.search()` to `Forms.searchForms()`.
 
 ## [0.16.0] - 2021-11-01
 
