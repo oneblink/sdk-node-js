@@ -26,7 +26,7 @@ export default (tenant: Tenant) =>
       super(options.accessKey, options.secretKey, tenant)
     }
 
-    searchFormsAppEnvironment(searchParams?: FormsAppEnvironmentsSearchOptions): Promise<FormsAppEnvironmentsSearchResult> {
+    searchFormsAppEnvironments(searchParams?: FormsAppEnvironmentsSearchOptions): Promise<FormsAppEnvironmentsSearchResult> {
       return super.searchRequest(basePath, searchParams)
     }
 
