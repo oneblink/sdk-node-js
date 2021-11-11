@@ -51,6 +51,8 @@ import * as OneBlink from '@oneblink/sdk'
 
 - [Forms Apps](./forms-apps.md)
 
+- [Forms App Environments](./forms-app-environments.md)
+
 - [Jobs](./jobs.md)
 
 - [Keys](./keys.md)

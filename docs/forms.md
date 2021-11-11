@@ -10,7 +10,7 @@
 - [`getSubmissionAttachmentBuffer()`](#getsubmissionattachmentbuffer)
 - [`getSubmissionAttachmentStream()`](#getsubmissionattachmentstream)
 - [`generateSubmissionAttachmentUrl()`](#generatesubmissionattachmenturl)
-- [`search()`](#search)
+- [`searchForms()`](#searchforms)
 - [`searchSubmissions()`](#searchsubmissions)
 - [`createForm()`](#createform)
 - [`updateForm()`](#updateform)
@@ -451,7 +451,7 @@ forms.getForm(formId, injectForms).then((form) => {
 }
 ```
 
-## `search()`
+## `searchForms()`
 
 ### Example
 
@@ -461,7 +461,7 @@ const options = {
   name: 'Form Name',
 }
 forms
-  .search(options)
+  .searchForms(options)
   .then((result) => {
     const forms = result.forms
   })

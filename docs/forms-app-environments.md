@@ -3,7 +3,7 @@
 ## Instance Functions
 
 - [`getFormsAppEnvironment()`](#getformsappenvironment)
-- [`search()`](#search)
+- [`searchFormsAppEnvironment()`](#searchformsappenvironment)
 - [`createFormsAppEnvironment()`](#createformsappenvironment)
 - [`updateFormsAppEnvironment()`](#updateformsappenvironment)
 - [`deleteFormsAppEnvironment()`](#deleteformsappenvironment)
@@ -58,7 +58,7 @@ const formsAppEnvironment = await formsAppEnvironments.getFormsAppEnvironment(
 }
 ```
 
-## `search()`
+## `searchFormsAppEnvironment()`
 
 ### Example
 
@@ -67,7 +67,8 @@ const options = {
   limit: 1,
   offset: 1,
 }
-const { formsAppEnvironments } = await formsAppEnvironments.search(options)
+const { formsAppEnvironments } =
+  await formsAppEnvironments.searchFormsAppEnvironment(options)
 ```
 
 ### Parameters
