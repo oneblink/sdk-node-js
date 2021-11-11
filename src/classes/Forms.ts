@@ -363,7 +363,7 @@ export default (tenant: Tenant) =>
       )
     }
 
-    search(searchParams?: FormsSearchOptions): Promise<FormsSearchResult> {
+    searchForms(searchParams?: FormsSearchOptions): Promise<FormsSearchResult> {
       return super.searchRequest(`/forms`, searchParams)
     }
 

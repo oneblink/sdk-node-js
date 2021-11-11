@@ -17,7 +17,7 @@ type FormsAppEnvironmentsSearchOptions = {
   offset?: number
 }
 
-const basePath = `/forms-app-environment`
+const basePath = `/forms-app-environments`
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default (tenant: Tenant) =>
   class FormsAppEnvironments extends OneBlinkAPI {
@@ -26,7 +26,7 @@ export default (tenant: Tenant) =>
       super(options.accessKey, options.secretKey, tenant)
     }
 
-    search(searchParams?: FormsAppEnvironmentsSearchOptions): Promise<FormsAppEnvironmentsSearchResult> {
+    searchFormsAppEnvironment(searchParams?: FormsAppEnvironmentsSearchOptions): Promise<FormsAppEnvironmentsSearchResult> {
       return super.searchRequest(basePath, searchParams)
     }
 
