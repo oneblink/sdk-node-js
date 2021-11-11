@@ -11,6 +11,7 @@ const {
   PDF,
   sendEmail,
   Approvals,
+  FormsAppEnvironments,
 } = generateClasses(CIVICPLUS)
 
 export {
@@ -25,4 +26,5 @@ export {
   SendEmailOptions,
   SendEmailResult,
   Approvals,
+  FormsAppEnvironments,
 }
