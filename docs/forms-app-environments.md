@@ -126,9 +126,9 @@ const formsAppEnvironment =
 
 ### Parameters
 
-| Parameter             | Required | Type                     | Description                                 |
-| --------------------- | -------- | ------------------------ | ------------------------------------------- |
-| `formsAppEnvironment` | Yes      | `NewFormsAppEnvironment` | The forms app environment object to create. |
+| Parameter             | Required | Type                                                                                                                                        | Description                                 |
+| --------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| `formsAppEnvironment` | Yes      | [`NewFormsAppEnvironment`](https://github.com/oneblink/types/blob/0f1f21650f57c2432d5f27b759ed8642769d3317/typescript/environments.d.ts#L1) | The forms app environment object to create. |
 
 ### Result
 
@@ -161,9 +161,9 @@ const formsAppEnvironment =
 
 ### Parameters
 
-| Parameter  | Required | Type                  | Description                                |
-| ---------- | -------- | --------------------- | ------------------------------------------ |
-| definition | Yes      | `FormsAppEnvironment` | The forms app environment object to update |
+| Parameter  | Required | Type                                                                                                                                      | Description                                |
+| ---------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| definition | Yes      | [`FormsAppEnvironment`](https://github.com/oneblink/types/blob/0f1f21650f57c2432d5f27b759ed8642769d3317/typescript/environments.d.ts#L17) | The forms app environment object to update |
 
 ### Result
 

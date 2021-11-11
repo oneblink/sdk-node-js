@@ -11,6 +11,7 @@ const {
   PDF,
   sendEmail,
   Approvals,
+  FormsAppEnvironments,
 } = generateClasses(ONEBLINK)
 
 export {
@@ -25,4 +26,5 @@ export {
   SendEmailOptions,
   SendEmailResult,
   Approvals,
+  FormsAppEnvironments,
 }

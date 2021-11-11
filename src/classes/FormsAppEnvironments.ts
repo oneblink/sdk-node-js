@@ -30,9 +30,9 @@ export default (tenant: Tenant) =>
       return super.searchRequest(basePath, searchParams)
     }
 
-    getFormsAppEnvironment(formsAppEnvironmentId?: number): Promise<EnvironmentTypes.FormsAppEnvironment> {
+    async getFormsAppEnvironment(formsAppEnvironmentId?: number): Promise<EnvironmentTypes.FormsAppEnvironment> {
       if (typeof formsAppEnvironmentId !== 'number') {
-        return Promise.reject(new TypeError('Must supply "formsAppEnvironmentId" as a number'))
+        throw new TypeError('Must supply "formsAppEnvironmentId" as a number')
       }
 
       return super.searchRequest(`${basePath}/${formsAppEnvironmentId}`)
@@ -46,9 +46,7 @@ export default (tenant: Tenant) =>
       data?: Record<string, unknown>,
     ): Promise<EnvironmentTypes.FormsAppEnvironment> {
       if (!data || typeof data.id !== 'number') {
-        return Promise.reject(
-          new TypeError('Must supply "formsAppEnvironment.id" as a number'),
-        )
+        throw new TypeError('Must supply "formsAppEnvironment.id" as a number')
       }
 
       return super.putRequest(`${basePath}/${data.id}`, data)
@@ -56,9 +54,7 @@ export default (tenant: Tenant) =>
 
     async deleteFormsAppEnvironment(formsAppEnvironmentId?: unknown): Promise<void> {
       if (typeof formsAppEnvironmentId !== 'number') {
-        return Promise.reject(
-          new TypeError('Must supply "formsAppEnvironmentId" as a number'),
-        )
+        throw new TypeError('Must supply "formsAppEnvironmentId" as a number')
       }
 
       return super.deleteRequest(`${basePath}/${formsAppEnvironmentId}`)

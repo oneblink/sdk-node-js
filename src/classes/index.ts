@@ -12,7 +12,7 @@ import generateSendEmail, {
   SendEmailResult,
 } from './sendEmail'
 import generateApprovals from './Approvals'
-
+import generateFormsAppEnvironments from './FormsAppEnvironments'
 export { SendEmailOptions, SendEmailResult }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -29,5 +29,6 @@ export default (tenantConfiguration: TenantConfiguration) => {
     PDF: generatePDF(tenant),
     sendEmail: generateSendEmail(tenant),
     Approvals: generateApprovals(tenant),
+    FormsAppEnvironments: generateFormsAppEnvironments(tenant),
   }
 }
