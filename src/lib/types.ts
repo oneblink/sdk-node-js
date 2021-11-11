@@ -1,5 +1,6 @@
 import jwksClient from 'jwks-rsa'
-
+import * as OneBlinkTypes from '@oneblink/types'
+export { OneBlinkTypes }
 export type ConstructorOptions = {
   accessKey: string
   secretKey: string

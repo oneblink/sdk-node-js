@@ -70,5 +70,10 @@
     "skipLibCheck": true /* Skip type checking of declaration files. */,
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   },
-  "exclude": ["tests", "tenants"]
+  "exclude": ["tests", "tenants"],
+  "typedocOptions": {
+    "entryPoints": ["src/oneblink.ts"],
+    "out": "docs-dist",
+    "excludeInternal": true
+  }
 }
