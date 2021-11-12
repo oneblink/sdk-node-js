@@ -56,11 +56,11 @@ export default class EmailTemplates extends OneBlinkAPI {
    * // Use data here...
    * ```
    *
-   * @param id The id of the form submission approval
+   * @param id The id of the email template
    * @returns
    */
   async getEmailTemplate(
-    id?: number,
+    id: number,
   ): Promise<EmailTemplateTypes.EmailTemplate> {
     if (typeof id !== 'number') {
       throw new TypeError('Must supply "id" as a number')
@@ -89,7 +89,7 @@ export default class EmailTemplates extends OneBlinkAPI {
    * @returns
    */
   async createEmailTemplate(
-    data?: unknown,
+    data: EmailTemplateTypes.NewEmailTemplate,
   ): Promise<EmailTemplateTypes.EmailTemplate> {
     return super.postRequest(basePath, data)
   }
@@ -111,11 +111,11 @@ export default class EmailTemplates extends OneBlinkAPI {
    * // Use data here...
    * ```
    *
-   * @param data The data for the new email template
+   * @param data The data for the email template to update
    * @returns
    */
   async updateEmailTemplate(
-    data?: Record<string, unknown>,
+    data: EmailTemplateTypes.EmailTemplate,
   ): Promise<EmailTemplateTypes.EmailTemplate> {
     if (!data || typeof data.id !== 'number') {
       throw new TypeError('Must supply "EmailTemplate.id" as a number')
@@ -131,10 +131,10 @@ export default class EmailTemplates extends OneBlinkAPI {
    * await emailTemplates.deleteEmailTemplate(1)
    * ```
    *
-   * @param id The id of the form submission approval
+   * @param id The id of the email template to delete
    * @returns
    */
-  async deleteEmailTemplate(id?: unknown): Promise<void> {
+  async deleteEmailTemplate(id: unknown): Promise<void> {
     if (typeof id !== 'number') {
       throw new TypeError('Must supply "id" as a number')
     }
