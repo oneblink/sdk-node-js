@@ -17,5 +17,8 @@
   },
   "parserOptions": {
     "ecmaVersion": 2020
+  },
+  "rules": {
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   }
 }

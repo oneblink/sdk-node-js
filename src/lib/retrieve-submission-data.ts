@@ -1,6 +1,6 @@
 import { SubmissionTypes } from '@oneblink/types'
 import AWS from 'aws-sdk'
-import { FormRetrievalData } from './types'
+import { FormRetrievalData } from '../types'
 
 export default async function getSubmissionData(
   retrievalData: FormRetrievalData,
