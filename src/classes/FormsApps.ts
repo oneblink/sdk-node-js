@@ -7,7 +7,7 @@ const basePath = `/forms-apps`
 
 export default class FormsApps extends OneBlinkAPI {
   /**
-   * Example
+   * #### Example
    *
    * ```typescript
    * const OneBlink = require('@oneblink/sdk')
@@ -27,7 +27,7 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * A Static function to verify a JWT and return its result
    *
-   * - Example
+   * #### Example
    *
    * ```javascript
    * const token =
@@ -55,7 +55,7 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Get a single Forms App by its identifier
    *
-   * - Example
+   * #### Example
    *
    * ```javascript
    * const formsAppId = 1
@@ -79,7 +79,7 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Get a single Forms App for the Bearer token of a Forms App User
    *
-   * - Example
+   * #### Example
    *
    * ```javascript
    * const bearerToken = ''
@@ -114,7 +114,7 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Create a Forms App
    *
-   * - Example
+   * #### Example
    *
    * ```javascript
    * formsAppsSDK.createFormsApp(formsApp).then((savedFormsApp) => {
@@ -133,7 +133,7 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Update a Forms App
    *
-   * - Example
+   * #### Example
    *
    * ```javascript
    * formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
@@ -158,7 +158,7 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Delete a Forms App by its identifier
    *
-   * - Example
+   * #### Example
    *
    * ```javascript
    * const formsAppId = 1
@@ -182,7 +182,7 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Update styles for Forms App
    *
-   * - Example
+   * #### Example
    *
    * ```javascript
    * formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
@@ -209,7 +209,7 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Create a Forms App User
    *
-   * - Example
+   * #### Example
    *
    * ```javascript
    * formsAppsSDK.createUser(formsAppUser).then((savedFormsAppUser) => {
@@ -228,7 +228,7 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Delete a Forms App User by its identifier
    *
-   * - Example
+   * #### Example
    *
    * ```javascript
    * const formsAppUserId = 1
@@ -252,7 +252,7 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Set the email address forms app emails will be sent from
    *
-   * - Example
+   * #### Example
    *
    * ```javascript
    * const res = await formsAppsSDK.setSendingAddress(
@@ -310,7 +310,7 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Remove a custom sending address for a forms app
    *
-   * - Example
+   * #### Example
    *
    * ```javascript
    * const formsAppId = 1
