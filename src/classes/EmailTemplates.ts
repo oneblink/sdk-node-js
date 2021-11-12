@@ -43,7 +43,7 @@ export default class EmailTemplates extends OneBlinkAPI {
    * @returns
    */
   searchEmailTemplates(
-    searchParams?: EmailTemplatesSearchOptions,
+    searchParams: EmailTemplatesSearchOptions,
   ): Promise<EmailTemplatesSearchResult> {
     return super.searchRequest(basePath, searchParams)
   }
@@ -134,7 +134,7 @@ export default class EmailTemplates extends OneBlinkAPI {
    * @param id The id of the email template to delete
    * @returns
    */
-  async deleteEmailTemplate(id: unknown): Promise<void> {
+  async deleteEmailTemplate(id: number): Promise<void> {
     if (typeof id !== 'number') {
       throw new TypeError('Must supply "id" as a number')
     }
