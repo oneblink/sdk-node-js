@@ -10,6 +10,7 @@ import TeamMembers from './classes/TeamMembers'
 import PDF from './classes/PDF'
 import Approvals from './classes/Approvals'
 import FormsAppEnvironments from './classes/FormsAppEnvironments'
+import EmailTemplates from './classes/EmailTemplates'
 
 // Functions
 import generateSendEmail, {
@@ -28,6 +29,7 @@ TeamMembers.tenant
 PDF.tenant = tenant
 Approvals.tenant = tenant
 FormsAppEnvironments.tenant = tenant
+EmailTemplates.tenant = tenant
 
 const sendEmail = generateSendEmail(tenant)
 export {
@@ -40,6 +42,7 @@ export {
   PDF,
   Approvals,
   FormsAppEnvironments,
+  EmailTemplates,
   sendEmail,
   SendEmailOptions,
   SendEmailResult,
