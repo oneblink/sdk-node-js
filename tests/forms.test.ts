@@ -48,22 +48,33 @@ describe('Forms SDK Class', () => {
 
     test('should reject with correct validation errors for "formId"', async () => {
       const forms = await getFormsSdk()
-      return expect(forms.generateFormUrl({ formId: 'asdf' })).rejects.toThrow(
-        'Must supply "formId" as a number',
-      )
+      return expect(
+        forms.generateFormUrl({
+          // @ts-expect-error test invalid values
+          formId: 'asdf',
+        }),
+      ).rejects.toThrow('Must supply "formId" as a number')
     })
 
     test('should reject with correct validation errors for "externalId"', async () => {
       const forms = await getFormsSdk()
       return expect(
-        forms.generateFormUrl({ formId: 1, externalId: 1 }),
+        forms.generateFormUrl({
+          formId: 1,
+          // @ts-expect-error test invalid values
+          externalId: 1,
+        }),
       ).rejects.toThrow('Must supply "externalId" as a string or not at all')
     })
 
     test('should reject with correct validation errors for "formsAppId"', async () => {
       const forms = await getFormsSdk()
       return expect(
-        forms.generateFormUrl({ formId: 1, formsAppId: 'abc' }),
+        forms.generateFormUrl({
+          formId: 1,
+          // @ts-expect-error test invalid values
+          formsAppId: 'abc',
+        }),
       ).rejects.toThrow('Must supply "formsAppId" as a number or not at all')
     })
 
@@ -109,16 +120,18 @@ describe('Forms SDK Class', () => {
     describe('should reject with correct validation errors for', () => {
       test('"formId"', async () => {
         const forms = await getFormsSdk()
-        return expect(forms.getSubmissionData()).rejects.toThrow(
-          'Must supply "formId" as a number',
-        )
+        return expect(
+          // @ts-expect-error test invalid values
+          forms.getSubmissionData(),
+        ).rejects.toThrow('Must supply "formId" as a number')
       })
 
       test('"submissionId"', async () => {
         const forms = await getFormsSdk()
-        return expect(forms.getSubmissionData(1)).rejects.toThrow(
-          'Must supply "submissionId" as a string',
-        )
+        return expect(
+          // @ts-expect-error test invalid values
+          forms.getSubmissionData(1),
+        ).rejects.toThrow('Must supply "submissionId" as a string')
       })
     })
   })
@@ -127,21 +140,24 @@ describe('Forms SDK Class', () => {
     describe('should reject with correct validation errors for', () => {
       test('"formId"', async () => {
         const forms = await getFormsSdk()
-        return expect(forms.generateSubmissionDataUrl()).rejects.toThrow(
-          'Must supply "formId" as a number',
-        )
+        return expect(
+          // @ts-expect-error test invalid values
+          forms.generateSubmissionDataUrl(),
+        ).rejects.toThrow('Must supply "formId" as a number')
       })
 
       test('"submissionId"', async () => {
         const forms = await getFormsSdk()
-        return expect(forms.generateSubmissionDataUrl(1)).rejects.toThrow(
-          'Must supply "submissionId" as a string',
-        )
+        return expect(
+          // @ts-expect-error test invalid values
+          forms.generateSubmissionDataUrl(1),
+        ).rejects.toThrow('Must supply "submissionId" as a string')
       })
 
       test('"expiryInSeconds"', async () => {
         const forms = await getFormsSdk()
         return expect(
+          // @ts-expect-error test invalid values
           forms.generateSubmissionDataUrl(1, '123'),
         ).rejects.toThrow('Must supply "expiryInSeconds" as a number')
       })
@@ -228,9 +244,12 @@ describe('Forms SDK Class', () => {
           ],
         }
         const forms = await getFormsSdk()
-        return expect(forms.createForm(form)).rejects.toThrow(
-          'Element name is not unique: text',
-        )
+        return expect(
+          forms.createForm(
+            // @ts-expect-error test invalid values
+            form,
+          ),
+        ).rejects.toThrow('Element name is not unique: text')
       })
     })
   })

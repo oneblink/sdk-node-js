@@ -89,6 +89,56 @@ export type FormApprovalFlowInstanceResponse = {
   formSubmissionApprovals: ApprovalTypes.FormSubmissionApproval[]
 }
 
+export type FormsSearchResult = {
+  forms: FormTypes.Form[]
+} & BaseSearchResult
+
+export type FormsSearchOptions = {
+  /**
+   * Search on the `isAuthenticated` property of a form. Must be either `true`
+   * or `false` or not specified.
+   */
+  isAuthenticated?: boolean
+  /** Search on the `name` property of a form. Can be a prefix, suffix or partial match */
+  name?: string
+  /**
+   * Search on the `isInfoPage` property of a form. Must be either `true` or
+   * `false` or not specified.
+   */
+  isInfoPage?: boolean
+  /**
+   * Search on the `formsAppIds` property of a form. Must be the exact match of
+   * one the ids in `formsAppIds`.
+   */
+  formsAppId?: number
+  /**
+   * Search on the `formsAppEnvironmentId` property of a form. Must be the exact
+   * match of a `formsAppEnvironmentId`.
+   */
+  formsAppEnvironmentId?: number
+  /** Limit the number of results returned */
+  limit?: number
+  /** Skip a specific number of results, used in conjunction with `limit` to enforce paging */
+  offset?: number
+}
+
+export type FormSubmissionHistorySearchParameters = {
+  /** Search for Submissions for a particular form Id */
+  formId: number
+  /** Search for Submissions starting at this date */
+  submissionDateFrom?: string
+  /** Search for Submissions ending on this date */
+  submissionDateTo?: string
+  /** Limit the number of results returned */
+  limit?: number
+  /** Skip a specific number of results, used in conjunction with `limit` to enforce paging */
+  offset?: number
+}
+
+export type FormSubmissionHistorySearchResults = BaseSearchResult & {
+  formSubmissionMeta: SubmissionTypes.FormSubmissionMeta[]
+}
+
 export type EmailTemplatesSearchResult = {
   formsAppEnvironments: EmailTemplateTypes.EmailTemplate[]
 } & BaseSearchResult
@@ -98,3 +148,4 @@ export type EmailTemplatesSearchOptions = {
   limit?: number
   offset?: number
 }
+
