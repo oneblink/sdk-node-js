@@ -1,3 +1,4 @@
+import { ApprovalTypes, FormTypes, SubmissionTypes } from '@oneblink/types'
 import jwksClient from 'jwks-rsa'
 export * from '@oneblink/types'
 
@@ -52,3 +53,33 @@ export type Tenant = TenantBase &
   TenantEnvironment & {
     jwksInstance: jwksClient.JwksClient
   }
+
+export type FormSubmissionApprovalHistoryRecord = {
+  formSubmissionMeta: SubmissionTypes.FormSubmissionMeta
+  formApprovalFlowInstance: ApprovalTypes.FormApprovalFlowInstance
+  formSubmissionApprovals: ApprovalTypes.FormSubmissionApproval[]
+}
+
+export type FormSubmissionsAdministrationApprovalsResponse =
+  BaseSearchResult & {
+    approvals: Array<
+      FormSubmissionApprovalHistoryRecord & {
+        history: FormSubmissionApprovalHistoryRecord[]
+      }
+    >
+  }
+
+export type FormSubmissionApprovalResponse = {
+  formSubmissionMeta: SubmissionTypes.FormSubmissionMeta
+  formSubmissionApproval: ApprovalTypes.FormSubmissionApproval
+  formApprovalFlowInstance: ApprovalTypes.FormApprovalFlowInstance
+  form: FormTypes.Form
+  history: FormSubmissionApprovalHistoryRecord[]
+}
+
+export type FormApprovalFlowInstanceResponse = {
+  formSubmissionMeta: SubmissionTypes.FormSubmissionMeta
+  formApprovalFlowInstance: ApprovalTypes.FormApprovalFlowInstance
+  form: FormTypes.Form
+  formSubmissionApprovals: ApprovalTypes.FormSubmissionApproval[]
+}
