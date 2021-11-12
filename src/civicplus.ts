@@ -16,8 +16,6 @@ import generateSendEmail, {
   SendEmailOptions,
   SendEmailResult,
 } from './classes/sendEmail'
-// Types
-import * as Types from './lib/types'
 
 const tenant = generateTenant(CIVICPLUS)
 
@@ -45,5 +43,4 @@ export {
   sendEmail,
   SendEmailOptions,
   SendEmailResult,
-  Types,
 }

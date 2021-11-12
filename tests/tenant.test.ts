@@ -10,32 +10,20 @@ describe('Region URL selecting', () => {
   })
   test('should use the CIVICPLUS apiOrigin for the api', async () => {
     const { Forms } = await import('../src/civicplus')
-    const forms = new Forms({
-      accessKey: '123',
-      secretKey: 'abc',
-    })
-    return expect(forms.tenant.apiOrigin).toBe(
+    return expect(Forms.tenant.apiOrigin).toBe(
       'https://auth-api.transform.civicplus.com',
     )
   })
 
   test('should use the ONEBLINK apiOrigin for the api', async () => {
     const { Forms } = await import('../src/oneblink')
-    const forms = new Forms({
-      accessKey: '123',
-      secretKey: 'abc',
-    })
-    return expect(forms.tenant.apiOrigin).toBe('https://auth-api.blinkm.io')
+    return expect(Forms.tenant.apiOrigin).toBe('https://auth-api.blinkm.io')
   })
 
   test('should use the ONEBLINK test apiOrigin for the api', async () => {
     process.env.ONEBLINK_SDK_ENVIRONMENT = 'test'
     const { Forms } = await import('../src/oneblink')
-    const forms = new Forms({
-      accessKey: '123',
-      secretKey: 'abc',
-    })
-    return expect(forms.tenant.apiOrigin).toBe(
+    return expect(Forms.tenant.apiOrigin).toBe(
       'https://auth-api-test.blinkm.io',
     )
   })
@@ -43,11 +31,7 @@ describe('Region URL selecting', () => {
   test('should use the CIVICPLUS test apiOrigin for the api', async () => {
     process.env.ONEBLINK_SDK_ENVIRONMENT = 'test'
     const { Forms } = await import('../src/civicplus')
-    const forms = new Forms({
-      accessKey: '123',
-      secretKey: 'abc',
-    })
-    return expect(forms.tenant.apiOrigin).toBe(
+    return expect(Forms.tenant.apiOrigin).toBe(
       'https://auth-api-test.transform.civicplus.com',
     )
   })

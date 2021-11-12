@@ -1,6 +1,6 @@
 import OneBlinkAPI from '../lib/one-blink-api'
 import { EnvironmentTypes } from '@oneblink/types'
-import { BaseSearchResult, ConstructorOptions } from '../lib/types'
+import { BaseSearchResult, ConstructorOptions } from '../types'
 
 type FormsAppEnvironmentsSearchResult = {
   formsAppEnvironments: EnvironmentTypes.FormsAppEnvironment[]

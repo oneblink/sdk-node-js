@@ -1,6 +1,6 @@
 import { FormsAppsTypes } from '@oneblink/types'
 import OneBlinkAPI from '../lib/one-blink-api'
-import { ConstructorOptions } from '../lib/types'
+import { ConstructorOptions } from '../types'
 import verifyJWT from '../lib/verify-jwt'
 
 const basePath = `/forms-apps`

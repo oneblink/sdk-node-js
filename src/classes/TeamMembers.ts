@@ -1,6 +1,6 @@
 import { TeamMemberTypes } from '@oneblink/types'
 import OneBlinkAPI from '../lib/one-blink-api'
-import { ConstructorOptions } from '../lib/types'
+import { ConstructorOptions } from '../types'
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default class TeamMembers extends OneBlinkAPI {

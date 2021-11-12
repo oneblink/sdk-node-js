@@ -3,7 +3,7 @@ import Joi from 'joi'
 
 import OneBlinkAPI from '../lib/one-blink-api'
 import setPreFillData from '../lib/pre-fill-data'
-import { ConstructorOptions, PreFillMeta } from '../lib/types'
+import { ConstructorOptions, PreFillMeta } from '../types'
 
 const newJobSchema = Joi.object()
   .required()

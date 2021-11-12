@@ -1,7 +1,7 @@
 import { URLSearchParams } from 'url'
 import { PDFTypes } from '@oneblink/types'
 import OneBlinkAPI from '../lib/one-blink-api'
-import { ConstructorOptions } from '../lib/types'
+import { ConstructorOptions } from '../types'
 
 export default class PDF extends OneBlinkAPI {
   constructor(options: ConstructorOptions) {

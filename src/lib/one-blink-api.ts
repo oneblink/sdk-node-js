@@ -4,7 +4,7 @@ import fetch, { Response, BodyInit } from 'node-fetch'
 
 import pkg from './package'
 import generateJWT from './generate-jwt'
-import { Tenant } from './types'
+import { Tenant } from '../types'
 import generateTenant from './generate-tenant'
 import { ONEBLINK } from './tenant-configuration'
 

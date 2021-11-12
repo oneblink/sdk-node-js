@@ -1,6 +1,6 @@
 import { KeyTypes } from '@oneblink/types'
 import OneBlinkAPI from '../lib/one-blink-api'
-import { ConstructorOptions } from '../lib/types'
+import { ConstructorOptions } from '../types'
 
 export default class Keys extends OneBlinkAPI {
   /**

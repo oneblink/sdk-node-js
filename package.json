@@ -65,6 +65,7 @@
   },
   "scripts": {
     "build": "tsc --build",
+    "docs": "typedoc",
     "eslint": "eslint --fix --cache ./src ./tests",
     "fixpack": "fixpack",
     "jest": "jest --silent",

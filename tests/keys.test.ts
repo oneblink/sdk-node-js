@@ -7,6 +7,7 @@ describe('Keys SDK Class', () => {
   })
 
   test('should reject with correct validation errors for "keyId"', () => {
+    // @ts-expect-error Counting on error being thrown
     return expect(keys.getKey()).rejects.toThrow(
       'Must supply "keyId" as a string',
     )

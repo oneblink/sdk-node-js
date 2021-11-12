@@ -1,6 +1,6 @@
 import OneBlinkAPI from '../lib/one-blink-api'
 import { SubmissionTypes, ApprovalTypes, FormTypes } from '@oneblink/types'
-import { ConstructorOptions } from '../lib/types'
+import { ConstructorOptions } from '../types'
 
 export type FormSubmissionApprovalHistoryRecord = {
   formSubmissionMeta: SubmissionTypes.FormSubmissionMeta

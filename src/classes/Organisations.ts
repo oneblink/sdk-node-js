@@ -1,6 +1,6 @@
 import { OrganisationTypes } from '@oneblink/types'
 import OneBlinkAPI from '../lib/one-blink-api'
-import { BaseSearchResult, ConstructorOptions, PreFillMeta } from '../lib/types'
+import { BaseSearchResult, ConstructorOptions, PreFillMeta } from '../types'
 import uploadAsset from '../lib/upload-asset'
 
 type OrganisationsSearchResult = {

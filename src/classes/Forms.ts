@@ -25,7 +25,7 @@ import {
   ConstructorOptions,
   PreFillMeta,
   FormRetrievalData,
-} from '../lib/types'
+} from '../types'
 
 type FormsSearchResult = {
   forms: FormTypes.Form[]
