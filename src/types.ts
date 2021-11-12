@@ -1,4 +1,9 @@
-import { ApprovalTypes, FormTypes, SubmissionTypes } from '@oneblink/types'
+import {
+  ApprovalTypes,
+  EmailTemplateTypes,
+  FormTypes,
+  SubmissionTypes,
+} from '@oneblink/types'
 import jwksClient from 'jwks-rsa'
 export * from '@oneblink/types'
 
@@ -133,3 +138,14 @@ export type FormSubmissionHistorySearchParameters = {
 export type FormSubmissionHistorySearchResults = BaseSearchResult & {
   formSubmissionMeta: SubmissionTypes.FormSubmissionMeta[]
 }
+
+export type EmailTemplatesSearchResult = {
+  formsAppEnvironments: EmailTemplateTypes.EmailTemplate[]
+} & BaseSearchResult
+
+export type EmailTemplatesSearchOptions = {
+  formsAppEnvironmentId: number
+  limit?: number
+  offset?: number
+}
+

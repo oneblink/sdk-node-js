@@ -6,18 +6,67 @@ import verifyJWT from '../lib/verify-jwt'
 const basePath = `/forms-apps`
 
 export default class FormsApps extends OneBlinkAPI {
+  /**
+   * #### Example
+   *
+   * ```typescript
+   * const OneBlink = require('@oneblink/sdk')
+   *
+   * const options = {
+   *   accessKey: '123455678901ABCDEFGHIJKL',
+   *   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+   * }
+   * const formsAppsSDK = new OneBlink.FormsApps(options)
+   * ```
+   */
   constructor(options: ConstructorOptions) {
     options = options || {}
     super(options.accessKey, options.secretKey)
   }
 
+  /**
+   * A Static function to verify a JWT and return its result
+   *
+   * #### Example
+   *
+   * ```javascript
+   * const token =
+   *   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+   * // or
+   * const token =
+   *   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+   * OneBlink.FormsApps.verifyJWT(token)
+   *   .then((result) => {
+   *     // Result is Decoded Token
+   *   })
+   *   .catch((e) => {
+   *     // Token was invalid
+   *   })
+   * ```
+   *
+   * @param token The JWT you wish to verify
+   */
   static async verifyJWT<T extends Record<string, unknown>>(
     token: string,
   ): Promise<T> {
     return verifyJWT<T>(token, OneBlinkAPI.tenant)
   }
 
-  async getFormsApp(formsAppId?: unknown): Promise<FormsAppsTypes.FormsApp> {
+  /**
+   * Get a single Forms App by its identifier
+   *
+   * #### Example
+   *
+   * ```javascript
+   * const formsAppId = 1
+   * formsAppsSDK.getFormsApp(formsAppId).then((formsApp) => {
+   *   // Use Forms App here...
+   * })
+   * ```
+   *
+   * @param formsAppId The exact identifier of the Forms App you wish to get
+   */
+  async getFormsApp(formsAppId: number): Promise<FormsAppsTypes.FormsApp> {
     if (typeof formsAppId !== 'number') {
       return Promise.reject(
         new TypeError('Must supply "formsAppId" as a number'),
@@ -27,6 +76,21 @@ export default class FormsApps extends OneBlinkAPI {
     return super.getRequest(`${basePath}/${formsAppId}`)
   }
 
+  /**
+   * Get a single Forms App for the Bearer token of a Forms App User
+   *
+   * #### Example
+   *
+   * ```javascript
+   * const bearerToken = ''
+   * formsAppsSDK.getMyFormsApp(bearerToken).then((formsApp) => {
+   *   // Use Forms App here...
+   * })
+   * ```
+   *
+   * @param formsAppUserToken The Bearer token in the `Authorization` header
+   *   from a request from an App User
+   */
   async getMyFormsApp(
     formsAppUserToken?: unknown,
   ): Promise<FormsAppsTypes.FormsApp> {
@@ -47,23 +111,65 @@ export default class FormsApps extends OneBlinkAPI {
     return await response.json()
   }
 
-  async createFormsApp(data?: unknown): Promise<FormsAppsTypes.FormsApp> {
-    return super.postRequest(basePath, data)
+  /**
+   * Create a Forms App
+   *
+   * #### Example
+   *
+   * ```javascript
+   * formsAppsSDK.createFormsApp(formsApp).then((savedFormsApp) => {
+   *   // Use Forms App here...
+   * })
+   * ```
+   *
+   * @param formsApp Forms App properties
+   */
+  async createFormsApp(
+    formsApp: FormsAppsTypes.NewFormsApp,
+  ): Promise<FormsAppsTypes.FormsApp> {
+    return super.postRequest(basePath, formsApp)
   }
 
+  /**
+   * Update a Forms App
+   *
+   * #### Example
+   *
+   * ```javascript
+   * formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
+   *   // Use Forms App here...
+   * })
+   * ```
+   *
+   * @param formsApp Forms App properties
+   */
   async updateFormsApp(
-    data?: Record<string, unknown>,
+    formsApp: FormsAppsTypes.FormsApp,
   ): Promise<FormsAppsTypes.FormsApp> {
-    if (!data || typeof data.id !== 'number') {
+    if (!formsApp || typeof formsApp.id !== 'number') {
       return Promise.reject(
         new TypeError('Must supply "formsApp.id" as a number'),
       )
     }
 
-    return super.putRequest(`${basePath}/${data.id}`, data)
+    return super.putRequest(`${basePath}/${formsApp.id}`, formsApp)
   }
 
-  async deleteFormsApp(formsAppId?: unknown): Promise<void> {
+  /**
+   * Delete a Forms App by its identifier
+   *
+   * #### Example
+   *
+   * ```javascript
+   * const formsAppId = 1
+   * formsAppsSDK.deleteFormsApp(formsAppId).then(() => {
+   *   // Forms App has been deleted...
+   * })
+   * ```
+   *
+   * @param formsAppId The exact identifier of the Forms App you wish to delete
+   */
+  async deleteFormsApp(formsAppId: number): Promise<void> {
     if (typeof formsAppId !== 'number') {
       return Promise.reject(
         new TypeError('Must supply "formsAppId" as a number'),
@@ -73,9 +179,23 @@ export default class FormsApps extends OneBlinkAPI {
     return super.deleteRequest(`${basePath}/${formsAppId}`)
   }
 
+  /**
+   * Update styles for Forms App
+   *
+   * #### Example
+   *
+   * ```javascript
+   * formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
+   *   // Styles have been updated...
+   * })
+   * ```
+   *
+   * @param formsAppId The exact identifier of the Forms App you wish to update the styles
+   * @param styles Forms App styles properties
+   */
   async updateStyles(
-    formsAppId?: unknown,
-    data?: unknown,
+    formsAppId: number,
+    styles: FormsAppsTypes.BaseFormsAppStyles | FormsAppsTypes.FormsListStyles,
   ): Promise<FormsAppsTypes.FormsListStyles> {
     if (typeof formsAppId !== 'number') {
       return Promise.reject(
@@ -83,14 +203,43 @@ export default class FormsApps extends OneBlinkAPI {
       )
     }
 
-    return super.putRequest(`${basePath}/${formsAppId}/styles`, data)
+    return super.putRequest(`${basePath}/${formsAppId}/styles`, styles)
   }
 
-  async createUser(data?: unknown): Promise<FormsAppsTypes.FormsAppUser> {
-    return super.postRequest('/appUsers', data)
+  /**
+   * Create a Forms App User
+   *
+   * #### Example
+   *
+   * ```javascript
+   * formsAppsSDK.createUser(formsAppUser).then((savedFormsAppUser) => {
+   *   // Use Forms App User here...
+   * })
+   * ```
+   *
+   * @param formsAppUser Forms App User
+   */
+  async createUser(
+    formsAppUser: FormsAppsTypes.NewFormsAppUser,
+  ): Promise<FormsAppsTypes.FormsAppUser> {
+    return super.postRequest('/appUsers', formsAppUser)
   }
 
-  async deleteUser(formsAppUserId?: unknown): Promise<void> {
+  /**
+   * Delete a Forms App User by its identifier
+   *
+   * #### Example
+   *
+   * ```javascript
+   * const formsAppUserId = 1
+   * formsAppsSDK.deleteUser(formsAppUserId).then(() => {
+   *   // Forms App User has been deleted...
+   * })
+   * ```
+   *
+   * @param formsAppUserId The exact Forms App User identifier you wish to delete
+   */
+  async deleteUser(formsAppUserId: number): Promise<void> {
     if (typeof formsAppUserId !== 'number') {
       return Promise.reject(
         new TypeError('Must supply "formsAppUserId" as a number'),
@@ -100,9 +249,28 @@ export default class FormsApps extends OneBlinkAPI {
     return super.deleteRequest(`/appUsers/${formsAppUserId}`)
   }
 
+  /**
+   * Set the email address forms app emails will be sent from
+   *
+   * #### Example
+   *
+   * ```javascript
+   * const res = await formsAppsSDK.setSendingAddress(
+   *   formsAppId,
+   *   sendingAddressConfig,
+   * )
+   * ```
+   *
+   * @param formsAppId The ID of the forms app you wish to set the sending address for
+   * @param sendingAddressConfig The object containing the `emailAddress` &
+   *   `emailName` properties
+   */
   async setSendingAddress(
-    formsAppId?: unknown,
-    sendingAddressConfig?: Record<string, unknown>,
+    formsAppId: number,
+    sendingAddressConfig: {
+      emailAddress: string
+      emailName?: string
+    },
   ): Promise<FormsAppsTypes.FormsAppSendingAddress> {
     if (typeof formsAppId !== 'number') {
       return Promise.reject(
@@ -139,7 +307,19 @@ export default class FormsApps extends OneBlinkAPI {
     })
   }
 
-  async deleteSendingAddress(formsAppId?: unknown): Promise<void> {
+  /**
+   * Remove a custom sending address for a forms app
+   *
+   * #### Example
+   *
+   * ```javascript
+   * const formsAppId = 1
+   * await formsAppsSDK.deleteSendingAddress(formsAppId)
+   * ```
+   *
+   * @param formsAppId The ID of the forms app you wish to remove the sending address from
+   */
+  async deleteSendingAddress(formsAppId: number): Promise<void> {
     if (typeof formsAppId !== 'number') {
       return Promise.reject(
         new TypeError('Must supply "formsAppId" as a number'),
