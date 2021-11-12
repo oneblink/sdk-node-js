@@ -1,6 +1,7 @@
 import {
   ApprovalTypes,
   EmailTemplateTypes,
+  EnvironmentTypes,
   FormTypes,
   OrganisationTypes,
   SubmissionTypes,
@@ -153,3 +154,12 @@ export type EmailTemplatesSearchOptions = {
 export type OrganisationsSearchResult = {
   organisations: OrganisationTypes.Organisation[]
 } & BaseSearchResult
+
+export type FormsAppEnvironmentsSearchResult = {
+  formsAppEnvironments: EnvironmentTypes.FormsAppEnvironment[]
+} & BaseSearchResult
+
+export type FormsAppEnvironmentsSearchOptions = {
+  limit?: number
+  offset?: number
+}
