@@ -1,47 +1,47 @@
 import OneBlinkAPI from '../lib/one-blink-api'
-import { SubmissionTypes, ApprovalTypes, FormTypes } from '@oneblink/types'
-import { ConstructorOptions } from '../types'
-
-export type FormSubmissionApprovalHistoryRecord = {
-  formSubmissionMeta: SubmissionTypes.FormSubmissionMeta
-  formApprovalFlowInstance: ApprovalTypes.FormApprovalFlowInstance
-  formSubmissionApprovals: ApprovalTypes.FormSubmissionApproval[]
-}
-
-export type FormSubmissionsAdministrationApprovalsResponse = {
-  approvals: Array<
-    FormSubmissionApprovalHistoryRecord & {
-      history: FormSubmissionApprovalHistoryRecord[]
-    }
-  >
-  meta: {
-    limit?: number
-    offset?: number
-    nextOffset?: number
-  }
-}
-
-export type FormSubmissionApprovalResponse = {
-  formSubmissionMeta: SubmissionTypes.FormSubmissionMeta
-  formSubmissionApproval: ApprovalTypes.FormSubmissionApproval
-  formApprovalFlowInstance: ApprovalTypes.FormApprovalFlowInstance
-  form: FormTypes.Form
-  history: FormSubmissionApprovalHistoryRecord[]
-}
-
-export type FormApprovalFlowInstanceResponse = {
-  formSubmissionMeta: SubmissionTypes.FormSubmissionMeta
-  formApprovalFlowInstance: ApprovalTypes.FormApprovalFlowInstance
-  form: FormTypes.Form
-  formSubmissionApprovals: ApprovalTypes.FormSubmissionApproval[]
-}
+import {
+  ConstructorOptions,
+  FormApprovalFlowInstanceResponse,
+  FormSubmissionApprovalResponse,
+  FormSubmissionsAdministrationApprovalsResponse,
+} from '../types'
 
 export default class Approvals extends OneBlinkAPI {
+  /**
+   * Example
+   *
+   * ```typescript
+   * const OneBlink = require('@oneblink/sdk')
+   *
+   * const options = {
+   *   accessKey: '123455678901ABCDEFGHIJKL',
+   *   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+   * }
+   *
+   * const approvals = new OneBlink.Approvals(options)
+   * ```
+   */
   constructor(options: ConstructorOptions) {
     options = options || {}
     super(options.accessKey, options.secretKey)
   }
 
+  /**
+   * Example
+   *
+   * ```javascript
+   * const { approvals, meta } =
+   *   await approvals.searchFormSubmissionAdministrationApprovals({
+   *     formsAppId: 1,
+   *     formId: 2,
+   *     limit: 50,
+   *     offset: 0,
+   *   })
+   * ```
+   *
+   * @param options Search options
+   * @returns
+   */
   async searchFormSubmissionAdministrationApprovals({
     formsAppId,
     limit,
@@ -74,6 +74,18 @@ export default class Approvals extends OneBlinkAPI {
     })
   }
 
+  /**
+   * Example
+   *
+   * ```javascript
+   * const formSubmissionApproval =
+   *   await approvals.getFormApprovalFlowInstance(1)
+   * // Use data here...
+   * ```
+   *
+   * @param id The id of the form submission approval
+   * @returns
+   */
   async getFormSubmissionApproval(
     id: string,
   ): Promise<FormSubmissionApprovalResponse> {
@@ -83,6 +95,18 @@ export default class Approvals extends OneBlinkAPI {
     return await super.getRequest(`/form-submission-approvals/${id}`)
   }
 
+  /**
+   * Example
+   *
+   * ```javascript
+   * const formSubmissionApproval =
+   *   await approvals.getFormApprovalFlowInstance(1)
+   * // Use data here...
+   * ```
+   *
+   * @param id The id of the form approval flow instance
+   * @returns
+   */
   async getFormApprovalFlowInstance(
     id: number,
   ): Promise<FormApprovalFlowInstanceResponse> {
