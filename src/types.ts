@@ -2,6 +2,7 @@ import {
   ApprovalTypes,
   EmailTemplateTypes,
   FormTypes,
+  OrganisationTypes,
   SubmissionTypes,
 } from '@oneblink/types'
 import jwksClient from 'jwks-rsa'
@@ -149,3 +150,6 @@ export type EmailTemplatesSearchOptions = {
   offset?: number
 }
 
+export type OrganisationsSearchResult = {
+  organisations: OrganisationTypes.Organisation[]
+} & BaseSearchResult
