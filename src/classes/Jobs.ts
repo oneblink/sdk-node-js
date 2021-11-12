@@ -29,16 +29,62 @@ type JobsSearchResult = {
 }
 
 export default class Jobs extends OneBlinkAPI {
+  /**
+   * #### Example
+   *
+   * ```typescript
+   * const OneBlink = require('@oneblink/sdk')
+   *
+   * const options = {
+   *   accessKey: '123455678901ABCDEFGHIJKL',
+   *   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+   * }
+   * const jobs = new OneBlink.Jobs(options)
+   * ```
+   */
   constructor(options: ConstructorOptions) {
     options = options || {}
     super(options.accessKey, options.secretKey)
   }
 
+  /**
+   * Create a single Job
+   *
+   * #### Example
+   *
+   * ```javascript
+   * const newJob = {
+   *   username: 'user@domain.io',
+   *   formId: 1,
+   *   externalId: 'your-job-identifier',
+   *   details: {
+   *     key: 'JOB-123',
+   *     title: 'Job Title',
+   *     description: 'Job description',
+   *     type: 'Type',
+   *     priority: 3,
+   *   },
+   * }
+   *
+   * const preFillData = {
+   *   text_element: 'abc',
+   *   number_element: 123,
+   * }
+   *
+   * jobs.createJob(newJob, preFillData).then((job) => {
+   *   // job.id can be used to delete the Job
+   * })
+   * ```
+   *
+   * @param data The Job to create
+   * @param preFillData Key/value pairs with the form field names as keys and
+   *   the pre-fill data as the values
+   */
   async createJob(
-    options?: unknown,
-    preFillData?: unknown,
+    data: SubmissionTypes.NewFormsAppJob,
+    preFillData?: Record<string, unknown>,
   ): Promise<SubmissionTypes.FormsAppJob> {
-    const result = newJobSchema.validate(options, { stripUnknown: true })
+    const result = newJobSchema.validate(data, { stripUnknown: true })
     if (result.error) {
       throw result.error
     }
@@ -61,7 +107,21 @@ export default class Jobs extends OneBlinkAPI {
     return job
   }
 
-  deleteJob(jobId?: unknown): Promise<void> {
+  /**
+   * Delete a single Job
+   *
+   * #### Example
+   *
+   * ```javascript
+   * const jobId = 'f73985fd-2dba-4bf7-abbe-e204889f5216'
+   * jobs.deleteJob(jobId).then(() => {
+   *   // Job has been deleted
+   * })
+   * ```
+   *
+   * @param jobId The exact id of the job you wish to delete
+   */
+  deleteJob(jobId: string): Promise<void> {
     if (!jobId || typeof jobId !== 'string') {
       return Promise.reject(new TypeError('Must supply "jobId" as a string'))
     }
@@ -69,9 +129,40 @@ export default class Jobs extends OneBlinkAPI {
     return super.deleteRequest(`/jobs/${jobId}`)
   }
 
-  async searchJobs(
-    options?: Record<string, unknown>,
-  ): Promise<JobsSearchResult> {
+  /**
+   * Search Jobs
+   *
+   * #### Example
+   *
+   * ```javascript
+   * const results = await jobs.searchJobs({
+   *   username: 'user@domain.io',
+   *   formId: 10,
+   * })
+   *
+   * // an array of jobs
+   * const jobs = results.jobs
+   * ```
+   *
+   * @param options Search options
+   */
+  async searchJobs(options?: {
+    /** The `externalId` property of a job */
+    externalId?: string
+    /** The `formId` matching the form that a job was created for */
+    formId?: number
+    /** The `username` that the job was assigned to */
+    username?: string
+    /** Whether the job has been submitted or not */
+    isSubmitted?: boolean
+    /** Limit the number of jobs returned */
+    limit?: number
+    /**
+     * Skip a specific number of results, used in conjunction with `limit` to
+     * enforce paging
+     */
+    offset?: number
+  }): Promise<JobsSearchResult> {
     let searchOptions = {}
 
     if (options) {
