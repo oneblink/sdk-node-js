@@ -40,7 +40,6 @@ export default class EmailTemplates extends OneBlinkAPI {
    * ```
    *
    * @param searchParams Search options
-   * @returns
    */
   searchEmailTemplates(
     searchParams: EmailTemplatesSearchOptions,
@@ -57,7 +56,6 @@ export default class EmailTemplates extends OneBlinkAPI {
    * ```
    *
    * @param id The id of the email template
-   * @returns
    */
   async getEmailTemplate(
     id: number,
@@ -86,7 +84,6 @@ export default class EmailTemplates extends OneBlinkAPI {
    * ```
    *
    * @param data The data for the new email template
-   * @returns
    */
   async createEmailTemplate(
     data: EmailTemplateTypes.NewEmailTemplate,
@@ -112,7 +109,6 @@ export default class EmailTemplates extends OneBlinkAPI {
    * ```
    *
    * @param data The data for the email template to update
-   * @returns
    */
   async updateEmailTemplate(
     data: EmailTemplateTypes.EmailTemplate,
@@ -132,7 +128,6 @@ export default class EmailTemplates extends OneBlinkAPI {
    * ```
    *
    * @param id The id of the email template to delete
-   * @returns
    */
   async deleteEmailTemplate(id: number): Promise<void> {
     if (typeof id !== 'number') {
