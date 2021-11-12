@@ -9,7 +9,7 @@ import {
 const basePath = `/email-templates`
 export default class EmailTemplates extends OneBlinkAPI {
   /**
-   * Example
+   * #### Example
    *
    * ```typescript
    * const OneBlink = require('@oneblink/sdk')
@@ -27,7 +27,7 @@ export default class EmailTemplates extends OneBlinkAPI {
   }
 
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const searchParams = {
@@ -48,7 +48,7 @@ export default class EmailTemplates extends OneBlinkAPI {
   }
 
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const emailTemplate = await emailTemplates.getEmailTemplate(1)
@@ -68,7 +68,7 @@ export default class EmailTemplates extends OneBlinkAPI {
   }
 
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const data = {
@@ -92,7 +92,7 @@ export default class EmailTemplates extends OneBlinkAPI {
   }
 
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const data = {
@@ -121,7 +121,7 @@ export default class EmailTemplates extends OneBlinkAPI {
   }
 
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * await emailTemplates.deleteEmailTemplate(1)
