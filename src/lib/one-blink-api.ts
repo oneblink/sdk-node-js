@@ -4,7 +4,9 @@ import fetch, { Response, BodyInit } from 'node-fetch'
 
 import pkg from './package'
 import generateJWT from './generate-jwt'
-import { Tenant } from './types'
+import { Tenant } from '../types'
+import generateTenant from './generate-tenant'
+import { ONEBLINK } from './tenant-configuration'
 
 async function getResponseErrorMessage(response: Response): Promise<string> {
   // The request was made and the server responded with
@@ -23,12 +25,16 @@ async function getResponseErrorMessage(response: Response): Promise<string> {
 }
 
 export default class OneBlinkAPI {
-  tenant: Tenant
+  /** @internal */
+  static tenant: Tenant = generateTenant(ONEBLINK)
+  /** @internal */
   accessKey: string
+  /** @internal */
   secretKey: string
+  /** @internal */
   jwtExpiry: number
 
-  constructor(accessKey: unknown, secretKey: unknown, tenant: Tenant) {
+  constructor(accessKey: unknown, secretKey: unknown) {
     if (!accessKey || typeof accessKey !== 'string') {
       throw new TypeError('Must supply Access Key as a string')
     }
@@ -40,9 +46,9 @@ export default class OneBlinkAPI {
     this.jwtExpiry = 300
     this.accessKey = accessKey
     this.secretKey = secretKey
-    this.tenant = tenant
   }
 
+  /** @internal */
   get defaultRequestHeaders(): Record<string, string> {
     return {
       Accept: 'application/json',
@@ -56,6 +62,7 @@ export default class OneBlinkAPI {
     }
   }
 
+  /** @internal */
   async request({
     origin,
     method,
@@ -90,15 +97,17 @@ export default class OneBlinkAPI {
     return response
   }
 
+  /** @internal */
   async getRequest<TOut>(path: string): Promise<TOut> {
     const response = await this.request({
-      origin: this.tenant.apiOrigin,
+      origin: OneBlinkAPI.tenant.apiOrigin,
       method: 'GET',
       path,
     })
     return await response.json()
   }
 
+  /** @internal */
   async searchRequest<TOut>(
     path: string,
     searchParams?: querystring.ParsedUrlQueryInput,
@@ -108,9 +117,10 @@ export default class OneBlinkAPI {
     return await this.getRequest<TOut>(`${path}?${search}`)
   }
 
+  /** @internal */
   async putRequest<T, TOut>(path: string, payload: T): Promise<TOut> {
     const response = await this.request({
-      origin: this.tenant.apiOrigin,
+      origin: OneBlinkAPI.tenant.apiOrigin,
       method: 'PUT',
       path,
       body: JSON.stringify(payload),
@@ -118,9 +128,10 @@ export default class OneBlinkAPI {
     return await response.json()
   }
 
+  /** @internal */
   async postRequest<T, TOut>(path: string, payload: T): Promise<TOut> {
     const response = await this.request({
-      origin: this.tenant.apiOrigin,
+      origin: OneBlinkAPI.tenant.apiOrigin,
       method: 'POST',
       path,
       body: JSON.stringify(payload),
@@ -128,18 +139,20 @@ export default class OneBlinkAPI {
     return await response.json()
   }
 
+  /** @internal */
   async postEmptyRequest<T>(path: string): Promise<T> {
     const response = await this.request({
-      origin: this.tenant.apiOrigin,
+      origin: OneBlinkAPI.tenant.apiOrigin,
       method: 'POST',
       path,
     })
     return await response.json()
   }
 
+  /** @internal */
   async deleteRequest(path: string): Promise<void> {
     await this.request({
-      origin: this.tenant.apiOrigin,
+      origin: OneBlinkAPI.tenant.apiOrigin,
       method: 'DELETE',
       path,
     })

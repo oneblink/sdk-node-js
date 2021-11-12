@@ -2,7 +2,7 @@ import { SES } from 'aws-sdk'
 // Have to use nodemailer as aws-sdk can not send attachments
 import nodemailer, { SentMessageInfo, SendMailOptions } from 'nodemailer'
 
-import { Tenant } from '../lib/types'
+import { Tenant } from '../types'
 
 export {
   SendMailOptions as SendEmailOptions,

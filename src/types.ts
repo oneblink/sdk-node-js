@@ -1,4 +1,5 @@
 import jwksClient from 'jwks-rsa'
+export * from '@oneblink/types'
 
 export type ConstructorOptions = {
   accessKey: string
@@ -32,11 +33,11 @@ export type BaseSearchResult = {
   }
 }
 
-type TenantBase = {
+export type TenantBase = {
   awsRegion: string
 }
 
-type TenantEnvironment = {
+export type TenantEnvironment = {
   apiOrigin: string
   pdfOrigin: string
   jwtIssuer: string

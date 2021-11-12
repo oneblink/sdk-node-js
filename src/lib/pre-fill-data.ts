@@ -1,5 +1,5 @@
 import AWS from 'aws-sdk'
-import { PreFillMeta } from './types'
+import { PreFillMeta } from '../types'
 
 export default async function setPreFillData(
   preFillMeta: PreFillMeta,
