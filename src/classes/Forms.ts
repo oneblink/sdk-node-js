@@ -32,7 +32,7 @@ import {
 
 export default class Forms extends OneBlinkAPI {
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const OneBlink = require('@oneblink/sdk')
@@ -43,15 +43,13 @@ export default class Forms extends OneBlinkAPI {
    * }
    * const forms = new OneBlink.Forms(options)
    * ```
-   *
-   * @param options
    */
   constructor(options: ConstructorOptions) {
     options = options || {}
     super(options.accessKey, options.secretKey)
   }
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const parameters = {
@@ -75,7 +73,6 @@ export default class Forms extends OneBlinkAPI {
    * ```
    *
    * @param parameters An object containing all parameters to be passed to the function
-   * @returns
    */
   async generateFormUrl(parameters: {
     /** The exact id of the form you wish to generate a URL for */
@@ -221,7 +218,7 @@ export default class Forms extends OneBlinkAPI {
     }
   }
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const formId = 1
@@ -241,7 +238,6 @@ export default class Forms extends OneBlinkAPI {
    *   submission via a callback URL
    * @param expiryInSeconds The number of seconds the signed URL should be valid
    *   for, must be greater than or equal to `900`
-   * @returns
    */
   async generateSubmissionDataUrl(
     formId: number,
@@ -272,7 +268,7 @@ export default class Forms extends OneBlinkAPI {
     )
   }
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const formId = 1
@@ -294,7 +290,6 @@ export default class Forms extends OneBlinkAPI {
    *   form submission, this will be return to you after a successful forms
    *   submission via a callback URL
    * @param isDraft `true` if the submission is a draft submission, otherwise `false`
-   * @returns
    */
   async getSubmissionData(
     formId: number,
@@ -339,7 +334,7 @@ export default class Forms extends OneBlinkAPI {
     return response
   }
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const fs = require('fs')
@@ -365,7 +360,6 @@ export default class Forms extends OneBlinkAPI {
    *
    * @param formId The exact id of the form the attachment was uploaded on
    * @param attachmentId The attachment identifier from the form submission data
-   * @returns
    */
   async getSubmissionAttachmentStream(
     formId: number,
@@ -378,7 +372,7 @@ export default class Forms extends OneBlinkAPI {
     return response.body
   }
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const fs = require('fs')
@@ -400,7 +394,6 @@ export default class Forms extends OneBlinkAPI {
    *
    * @param formId The exact id of the form the attachment was uploaded on
    * @param attachmentId The attachment identifier from the form submission data
-   * @returns
    */
   async getSubmissionAttachmentBuffer(
     formId: number,
@@ -413,7 +406,7 @@ export default class Forms extends OneBlinkAPI {
     return await response.buffer()
   }
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const fs = require('fs')
@@ -446,32 +439,29 @@ export default class Forms extends OneBlinkAPI {
    *   })
    * }
    * ```
-   *
-   * @param options
-   * @returns
    */
   async createSubmissionAttachment({
-    /** The exact id of the form the attachment will be uploaded for */
     formId,
-    /** The attachment's file content to upload */
     body,
-    /** The attachment's file name */
     fileName,
-    /** The attachment's content type */
     contentType,
+    isPrivate,
+    username,
+  }: {
+    /** The exact id of the form the attachment will be uploaded for */
+    formId: number
+    /** The attachment's file content to upload */
+    body: Stream | Buffer | string
+    /** The attachment's file name */
+    fileName: string
+    /** The attachment's content type */
+    contentType: string
     /**
      * Determine if this attachment can be downloaded anonymously (`false`) or
      * not (`true`)
      */
-    isPrivate,
-    /** An optional username to allow a single user to download he attachment file */
-    username,
-  }: {
-    formId: number
-    body: Stream | Buffer | string
-    fileName: string
-    contentType: string
     isPrivate: boolean
+    /** An optional username to allow a single user to download he attachment file */
     username?: string
   }): Promise<SubmissionTypes.FormSubmissionAttachment> {
     const result = await super.postRequest<
@@ -520,7 +510,7 @@ export default class Forms extends OneBlinkAPI {
     }
   }
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const formId = 1
@@ -542,7 +532,6 @@ export default class Forms extends OneBlinkAPI {
    * @param attachmentId The attachment identifier from the form submission data
    * @param expiryInSeconds The number of seconds the signed URL should be valid
    *   for, must be greater than or equal to `900`
-   * @returns
    */
   async generateSubmissionAttachmentUrl(
     formId: number,
@@ -572,7 +561,7 @@ export default class Forms extends OneBlinkAPI {
     )
   }
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const options = {
@@ -590,7 +579,6 @@ export default class Forms extends OneBlinkAPI {
    * ```
    *
    * @param searchParams Search options.
-   * @returns
    */
   searchForms(searchParams?: FormsSearchOptions): Promise<FormsSearchResult> {
     return super.searchRequest(`/forms`, searchParams)
@@ -599,7 +587,7 @@ export default class Forms extends OneBlinkAPI {
    * Search for details on submissions that match the search parameters. Then
    * use the information to fetch the actual submission data, if it is still available
    *
-   * Example
+   * #### Example
    *
    * ```javascript
    * const options = {
@@ -629,7 +617,6 @@ export default class Forms extends OneBlinkAPI {
    * ```
    *
    * @param options Search options.
-   * @returns
    */
   searchSubmissions(
     options: FormSubmissionHistorySearchParameters,
@@ -668,7 +655,7 @@ export default class Forms extends OneBlinkAPI {
     return super.searchRequest(`/form-submission-meta`, searchParams)
   }
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const formId = 1
@@ -681,7 +668,6 @@ export default class Forms extends OneBlinkAPI {
    * @param formId The exact id of the form you wish to get
    * @param injectForms Set to `true` to inject form elements from nested Form
    *   elements and Info Page elements.
-   * @returns
    */
   getForm(formId: number, injectForms?: boolean): Promise<FormTypes.Form> {
     if (typeof formId !== 'number') {
@@ -693,7 +679,7 @@ export default class Forms extends OneBlinkAPI {
     })
   }
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * forms
@@ -718,7 +704,6 @@ export default class Forms extends OneBlinkAPI {
    * ```
    *
    * @param newForm The form object to create.
-   * @returns
    */
   async createForm(
     newForm: Omit<FormTypes.Form, 'id'>,
@@ -731,7 +716,7 @@ export default class Forms extends OneBlinkAPI {
     return savedForm
   }
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * forms
@@ -762,7 +747,6 @@ export default class Forms extends OneBlinkAPI {
    * @param form The form object to update
    * @param overrideLock Defaults to `false`. Set to true to force updating of
    *   the form if the form is locked via the form builder
-   * @returns
    */
   async updateForm(
     form: FormTypes.Form,
@@ -776,7 +760,7 @@ export default class Forms extends OneBlinkAPI {
     return savedForm
   }
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const formId = 1
@@ -793,7 +777,6 @@ export default class Forms extends OneBlinkAPI {
    * @param formId Id of the form.
    * @param overrideLock Defaults to `false`. Set to true to force deleting of
    *   the form if the form is locked via the form builder
-   * @returns
    */
   async deleteForm(formId: number, overrideLock?: boolean): Promise<void> {
     if (typeof formId !== 'number') {
@@ -808,7 +791,7 @@ export default class Forms extends OneBlinkAPI {
    * A static method available on the forms class, used for validating a
    * OneBlink compatible Forms Definition.
    *
-   * Example
+   * #### Example
    *
    * ```javascript
    * const form = {
@@ -830,7 +813,6 @@ export default class Forms extends OneBlinkAPI {
    * ```
    *
    * @param form The form object to validate.
-   * @returns
    */
   static validateForm(form: unknown): FormTypes.Form {
     const validatedForm = validateWithFormSchema(form)
@@ -843,7 +825,7 @@ export default class Forms extends OneBlinkAPI {
    * The method will set reasonable defaults for any values not passed to it,
    * and validate ones that are against our Element Schema.
    *
-   * Example
+   * #### Example
    *
    * ```javascript
    * const element = {
@@ -854,9 +836,6 @@ export default class Forms extends OneBlinkAPI {
    *
    * return generatedElement
    * ```
-   *
-   * @param formElementGenerationData
-   * @returns
    */
   static generateFormElement<T extends FormTypes._FormElementBase>(
     formElementGenerationData?: Record<string, unknown>,
@@ -871,7 +850,7 @@ export default class Forms extends OneBlinkAPI {
    * The method will set reasonable defaults for any values not passed to it,
    * and validate ones that are against our Element Schema.
    *
-   * ### Example
+   * #### Example
    *
    * ```javascript
    * const childElement = Forms.generateFormElement({
@@ -887,9 +866,6 @@ export default class Forms extends OneBlinkAPI {
    *
    * return generatedElement
    * ```
-   *
-   * @param formElementGenerationData
-   * @returns
    */
   static generatePageElement(
     formElementGenerationData?: Record<string, unknown>,
@@ -904,7 +880,6 @@ export default class Forms extends OneBlinkAPI {
    * [`generateFormUrl()`](#generateFormUrl) by passing the `username` and
    * `secret` options.
    *
-   * @param details
    * @returns The encrypted representation of the username
    */
   static encryptUserToken(details: {
@@ -920,7 +895,6 @@ export default class Forms extends OneBlinkAPI {
    * A static method available on the forms class for decrypting a user token.
    * This token is passed to OneBlink webhooks in the `userToken` property.
    *
-   * @param details
    * @returns The decrypted username
    */
   static decryptUserToken(details: {
@@ -936,7 +910,7 @@ export default class Forms extends OneBlinkAPI {
    * A static method available on the forms class, used for validating an array
    * of Conditional Predicates found on form elements or submission events.
    *
-   * ### Example
+   * #### Example
    *
    * ```javascript
    * const predicates = [
@@ -958,9 +932,6 @@ export default class Forms extends OneBlinkAPI {
    *
    * return validatedPredicates
    * ```
-   *
-   * @param predicates
-   * @returns
    */
   static validateConditionalPredicates = validateConditionalPredicates
 
@@ -968,7 +939,7 @@ export default class Forms extends OneBlinkAPI {
    * A static method available on the forms class, used for validating a api
    * request configuration.
    *
-   * ### Example
+   * #### Example
    *
    * ```javascript
    * const apiRequest = {
@@ -983,9 +954,6 @@ export default class Forms extends OneBlinkAPI {
    *
    * return validatedApiRequest
    * ```
-   *
-   * @param apiRequest
-   * @returns
    */
   static validateApiRequest = validateApiRequest
 }
