@@ -1,16 +1,10 @@
 import OneBlinkAPI from '../lib/one-blink-api'
 import { EmailTemplateTypes } from '@oneblink/types'
-import { BaseSearchResult, ConstructorOptions } from '../types'
-
-type EmailTemplatesSearchResult = {
-  formsAppEnvironments: EmailTemplateTypes.EmailTemplate[]
-} & BaseSearchResult
-
-type EmailTemplatesSearchOptions = {
-  formsAppEnvironmentId: number
-  limit?: number
-  offset?: number
-}
+import {
+  ConstructorOptions,
+  EmailTemplatesSearchOptions,
+  EmailTemplatesSearchResult,
+} from '../types'
 
 const basePath = `/email-templates`
 export default class EmailTemplates extends OneBlinkAPI {
