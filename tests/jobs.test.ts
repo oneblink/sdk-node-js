@@ -12,12 +12,14 @@ describe('Jobs SDK Class', () => {
     describe('validation', () => {
       test('should reject with correct validation errors for "options"', async () => {
         const jobs = await getJobsSdk()
+        // @ts-expect-error Expecting throw
         return expect(jobs.createJob()).rejects.toThrow('"value" is required')
       })
 
       describe('should reject with correct validation errors for "username"', () => {
         test('required', async () => {
           const jobs = await getJobsSdk()
+          // @ts-expect-error Expecting throw
           return expect(jobs.createJob({})).rejects.toThrow(
             '"username" is required',
           )
@@ -26,6 +28,7 @@ describe('Jobs SDK Class', () => {
           const jobs = await getJobsSdk()
           return expect(
             jobs.createJob({
+              // @ts-expect-error Expecting throw
               username: 123,
             }),
           ).rejects.toThrow('"username" must be a string')
@@ -36,6 +39,7 @@ describe('Jobs SDK Class', () => {
         test('required', async () => {
           const jobs = await getJobsSdk()
           return expect(
+            // @ts-expect-error Expecting throw
             jobs.createJob({
               username: 'username',
             }),
@@ -46,6 +50,7 @@ describe('Jobs SDK Class', () => {
           return expect(
             jobs.createJob({
               username: 'username',
+              // @ts-expect-error Expecting throw
               formId: 'abc',
             }),
           ).rejects.toThrow('"formId" must be a number')
@@ -59,6 +64,7 @@ describe('Jobs SDK Class', () => {
             jobs.createJob({
               username: 'username',
               formId: 1,
+              // @ts-expect-error Expecting throw
               externalId: 123,
             }),
           ).rejects.toThrow('"externalId" must be a string')
@@ -74,6 +80,7 @@ describe('Jobs SDK Class', () => {
               formId: 1,
               details: {
                 title: 'job title',
+                // @ts-expect-error Expecting throw
                 priority: 'one',
               },
             }),
@@ -163,6 +170,7 @@ describe('Jobs SDK Class', () => {
   describe('deleteJob()', () => {
     test('should reject with correct validation errors for "jobId"', async () => {
       const jobs = await getJobsSdk()
+      // @ts-expect-error Expecting throw
       return expect(jobs.deleteJob()).rejects.toThrow(
         'Must supply "jobId" as a string',
       )
@@ -179,6 +187,7 @@ describe('Jobs SDK Class', () => {
 
     test('should reject form id', async () => {
       const jobs = await getJobsSdk()
+      // @ts-expect-error Expecting throw
       return expect(jobs.searchJobs({ formId: 'ten' })).rejects.toThrow(
         'formId must be provided as a number or not at all',
       )
@@ -186,6 +195,7 @@ describe('Jobs SDK Class', () => {
 
     test('should reject externalId', async () => {
       const jobs = await getJobsSdk()
+      // @ts-expect-error Expecting throw
       return expect(jobs.searchJobs({ externalId: 12345 })).rejects.toThrow(
         'externalId must be provided as a string or not at all',
       )
@@ -193,6 +203,7 @@ describe('Jobs SDK Class', () => {
 
     test('should reject username', async () => {
       const jobs = await getJobsSdk()
+      // @ts-expect-error Expecting throw
       return expect(jobs.searchJobs({ username: 12345 })).rejects.toThrow(
         'username must be provided as a string or not at all',
       )
@@ -200,6 +211,7 @@ describe('Jobs SDK Class', () => {
 
     test('should reject isSubmitted', async () => {
       const jobs = await getJobsSdk()
+      // @ts-expect-error Expecting throw
       return expect(jobs.searchJobs({ isSubmitted: 'maybe?' })).rejects.toThrow(
         'isSubmitted must be provided as a boolean or not at all',
       )
@@ -207,6 +219,7 @@ describe('Jobs SDK Class', () => {
 
     test('should reject limit', async () => {
       const jobs = await getJobsSdk()
+      // @ts-expect-error Expecting throw
       return expect(jobs.searchJobs({ limit: 'infinite' })).rejects.toThrow(
         'limit must be provided as a number or not at all',
       )
@@ -215,6 +228,7 @@ describe('Jobs SDK Class', () => {
     test('should reject offset', async () => {
       const jobs = await getJobsSdk()
       return expect(
+        // @ts-expect-error Expecting throw
         jobs.searchJobs({ offset: 'a little bit' }),
       ).rejects.toThrow('offset must be provided as a number or not at all')
     })

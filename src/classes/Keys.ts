@@ -4,7 +4,7 @@ import { ConstructorOptions } from '../types'
 
 export default class Keys extends OneBlinkAPI {
   /**
-   * Example
+   * #### Example
    *
    * ```typescript
    * const OneBlink = require('@oneblink/sdk')
@@ -22,7 +22,7 @@ export default class Keys extends OneBlinkAPI {
   }
 
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const keyId = '123455678901ABCDEFGHIJKL'
