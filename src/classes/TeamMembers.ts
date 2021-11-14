@@ -33,8 +33,7 @@ export default class TeamMembers extends OneBlinkAPI {
    * })
    * ```
    *
-   * @param keyId The email address the team member uses to login
-   * @returns
+   * @param email The email address the team member uses to login
    */
   async getTeamMemberRole(email: string): Promise<TeamMemberTypes.Role | null> {
     if (typeof email !== 'string') {
