@@ -46,12 +46,6 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
     return super.searchRequest(basePath, searchParams)
   }
 
-  search(
-    searchParams?: FormsAppEnvironmentsSearchOptions,
-  ): Promise<FormsAppEnvironmentsSearchResult> {
-    return super.searchRequest(basePath, searchParams)
-  }
-
   /**
    * #### Example
    *
@@ -101,9 +95,9 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    * @param data The data for the new forms app environment
    */
   async createFormsAppEnvironment(
-    data: EnvironmentTypes.FormsAppEnvironment,
+    newFormsAppEnvironment: EnvironmentTypes.NewFormsAppEnvironment,
   ): Promise<EnvironmentTypes.FormsAppEnvironment> {
-    return super.postRequest(basePath, data)
+    return super.postRequest(basePath, newFormsAppEnvironment)
   }
 
   /**
@@ -125,13 +119,16 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    * @param data The data for the forms app environment template to update
    */
   async updateFormsAppEnvironment(
-    data?: Record<string, unknown>,
+    formsAppEnvironment?: EnvironmentTypes.FormsAppEnvironment,
   ): Promise<EnvironmentTypes.FormsAppEnvironment> {
-    if (!data || typeof data.id !== 'number') {
+    if (!formsAppEnvironment || typeof formsAppEnvironment.id !== 'number') {
       throw new TypeError('Must supply "formsAppEnvironment.id" as a number')
     }
 
-    return super.putRequest(`${basePath}/${data.id}`, data)
+    return super.putRequest(
+      `${basePath}/${formsAppEnvironment.id}`,
+      formsAppEnvironment,
+    )
   }
 
   /**
@@ -144,7 +141,7 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    * @param id The id of the forms app environment to delete
    */
   async deleteFormsAppEnvironment(
-    formsAppEnvironmentId?: unknown,
+    formsAppEnvironmentId: number,
   ): Promise<void> {
     if (typeof formsAppEnvironmentId !== 'number') {
       throw new TypeError('Must supply "formsAppEnvironmentId" as a number')
