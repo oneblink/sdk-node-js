@@ -23,7 +23,6 @@ import {
 import {
   ConstructorOptions,
   PreFillMeta,
-  FormRetrievalData,
   FormsSearchOptions,
   FormsSearchResult,
   FormSubmissionHistorySearchParameters,
@@ -310,7 +309,8 @@ export default class Forms extends OneBlinkAPI {
       url = `/forms/${formId}/download-draft-data-credentials/${submissionId}`
     }
 
-    const credentials = await super.postEmptyRequest<FormRetrievalData>(url)
+    const credentials =
+      await super.postEmptyRequest<AWSTypes.FormS3Credentials>(url)
     return await getSubmissionData(credentials)
   }
 

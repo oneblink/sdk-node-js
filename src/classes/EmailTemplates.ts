@@ -80,7 +80,7 @@ export default class EmailTemplates extends OneBlinkAPI {
    * const emailTemplate = await emailTemplates.createEmailTemplate(
    *   data,
    * )
-   * // Use data here...
+   * // Use emailTemplate here...
    * ```
    *
    * @param data The data for the new email template
@@ -105,7 +105,7 @@ export default class EmailTemplates extends OneBlinkAPI {
    * const emailTemplate = await emailTemplates.updateEmailTemplate(
    *   data,
    * )
-   * // Use data here...
+   * // Use emailTemplate here...
    * ```
    *
    * @param data The data for the email template to update
