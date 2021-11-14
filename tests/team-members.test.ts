@@ -7,6 +7,7 @@ describe('TeamMembers SDK Class', () => {
   })
 
   test('should reject with correct validation errors for "keyId"', () => {
+    // @ts-expect-error Expected to fail
     return expect(teamMembersSDK.getTeamMemberRole()).rejects.toThrow(
       'Must supply "email" as a string',
     )
