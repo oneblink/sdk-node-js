@@ -41,7 +41,11 @@ export default class PDF extends OneBlinkAPI {
    * }
    * ```
    * @param options.formId The exact identifer of the form you wish to generate a pdf for 
-   * 
+   * @param options.submissionId The submission identifier generated after a successful form submission.
+   * @param options.isDraft `true` if the submission is a draft submission, otherwise `false` 
+   * @param options.includeSubmissionIdInPdf `true` to include the submission identifier in the PDF, otherwise `false` 
+   * @param options.excludedElementIds Array of elements ids to be excluded from the PDF document  
+   * @param options.usePagesAsBreaks Whether pages in the form submission should translate to page breaks in the PDF
    */
   async generateFormSubmissionPDF(options: {
     formId: number
