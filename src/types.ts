@@ -131,11 +131,6 @@ export type EmailTemplatesSearchOptions = BaseSearchOptions & {
   formsAppEnvironmentId: number
 }
 
-
-export type OrganisationsSearchResult = {
-  organisations: OrganisationTypes.Organisation[]
-} & BaseSearchResult
-
 export {
   SendMailOptions,
   SentMessageInfo,
