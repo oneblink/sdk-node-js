@@ -13,10 +13,7 @@ import FormsAppEnvironments from './classes/FormsAppEnvironments'
 import EmailTemplates from './classes/EmailTemplates'
 
 // Functions
-import generateSendEmail, {
-  SendEmailOptions,
-  SendEmailResult,
-} from './classes/sendEmail'
+import generateSendEmail from './classes/sendEmail'
 
 const tenant = generateTenant(ONEBLINK)
 
@@ -44,6 +41,4 @@ export {
   FormsAppEnvironments,
   EmailTemplates,
   sendEmail,
-  SendEmailOptions,
-  SendEmailResult,
 }
