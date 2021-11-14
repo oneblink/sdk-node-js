@@ -92,7 +92,7 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    * // Use formsAppEnvironment here...
    * ```
    *
-   * @param data The data for the new forms app environment
+   * @param newFormsAppEnvironment The data for the new forms app environment
    */
   async createFormsAppEnvironment(
     newFormsAppEnvironment: EnvironmentTypes.NewFormsAppEnvironment,
@@ -116,7 +116,7 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    * // Use formsAppEnvironment here...
    * ```
    *
-   * @param data The data for the forms app environment template to update
+   * @param formsAppEnvironment The data for the forms app environment template to update
    */
   async updateFormsAppEnvironment(
     formsAppEnvironment?: EnvironmentTypes.FormsAppEnvironment,
