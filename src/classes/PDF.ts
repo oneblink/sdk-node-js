@@ -40,19 +40,20 @@ export default class PDF extends OneBlinkAPI {
    *   await writeFileAsync('./submission.pdf', buffer, 'binary')
    * }
    * ```
-   * @param options.formId The exact identifer of the form you wish to generate a pdf for 
-   * @param options.submissionId The submission identifier generated after a successful form submission.
-   * @param options.isDraft `true` if the submission is a draft submission, otherwise `false` 
-   * @param options.includeSubmissionIdInPdf `true` to include the submission identifier in the PDF, otherwise `false` 
-   * @param options.excludedElementIds Array of elements ids to be excluded from the PDF document  
-   * @param options.usePagesAsBreaks Whether pages in the form submission should translate to page breaks in the PDF
+   * @param options An object containing all parameters to be passed into the function. 
    */
   async generateFormSubmissionPDF(options: {
+    /** The exact identifer of the form you wish to generate a pdf for  */
     formId: number
+    /** The submission identifier generated after a successful form submission */
     submissionId: string
+    /** `true` if the submission is a draft submission, otherwise `false`  */
     isDraft?: boolean
+    /** `true` to include the submission identifier in the PDF, otherwise `false`  */
     includeSubmissionIdInPdf?: boolean
+    /** Array of elements ids to be excluded from the PDF document   */
     excludedElementIds?: string[]
+    /** Whether pages in the form submission should translate to page breaks in the PDF */
     usePagesAsBreaks?: boolean
   }): Promise<Buffer> {
     if (!options) {
@@ -140,15 +141,6 @@ export default class PDF extends OneBlinkAPI {
    *   await writeFileAsync('./custom.pdf', buffer, 'binary')
    * }
    * 
-   * @param options.body.html The HTML to render as a pdf
-   * @param options.header.html The HTML to render at the top of every page
-   * @param options.footer.html The HTML to render at the bottom of every page
-   * @param options.page.orientation `'Portrait'` or `'Landscape`'. Default is `'Portrait'`
-   * @param options.page.size `'Letter'`, `'Legal'`, `'Tabloid'`, `'Ledger'`, `'A0'`, `'A1'`, `'A2'`, `'A3'`, `'A4'`, `'A5'` or `'A6'`. Default is `'A4'`
-   * @param options.page.margins.top How much space between the top of each page and the content. Supported dimension units are: `'mm'`, `'cm'`, `'in'`, `'px'` 
-   * @param options.page.margins.bottom How much space between the bottom of the page and content
-   * @param options.page.margins.right How much space between the right of each page and the content. Supported dimension units are: `'mm'`, `'cm'`, `'in'`, `'px'`
-   * @param options.page.margins.left How much space between the left of each page and the content. Supported dimension units are: `'mm'`, `'cm'`, `'in'`, `'px'`
    * ``` */
   async generatePDF(options: PDFTypes.GeneratePDFOptions): Promise<Buffer> {
     if (!options || !options.body || !options.body.html) {
