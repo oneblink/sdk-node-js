@@ -1,9 +1,11 @@
 import {
   ApprovalTypes,
   EmailTemplateTypes,
+  EnvironmentTypes,
   FormTypes,
-  OrganisationTypes,
   SubmissionTypes,
+  MiscTypes,
+  AWSTypes,
 } from '@oneblink/types'
 import jwksClient from 'jwks-rsa'
 export * from '@oneblink/types'
@@ -13,31 +15,15 @@ export type ConstructorOptions = {
   secretKey: string
 }
 
-export type AWSCredentials = {
-  AccessKeyId: string
-  SecretAccessKey: string
-  SessionToken: string
-}
-
-export type FormRetrievalData = {
-  credentials: AWSCredentials
-  s3: {
-    bucket: string
-    key: string
-    region: string
-  }
-}
-
-export type PreFillMeta = FormRetrievalData & {
+export type PreFillMeta = AWSTypes.FormS3Credentials & {
   preFillFormDataId: string
 }
 
-export type BaseSearchResult = {
-  meta: {
-    limit: null
-    offset: null
-    nextOffset: null
-  }
+export type BaseSearchOptions = {
+  /** Limit the number of results returned */
+  limit?: number
+  /** Skip a specific number of results, used in conjunction with `limit` to enforce paging */
+  offset?: number
 }
 
 export type TenantBase = {
@@ -67,7 +53,7 @@ export type FormSubmissionApprovalHistoryRecord = {
 }
 
 export type FormSubmissionsAdministrationApprovalsResponse =
-  BaseSearchResult & {
+  MiscTypes.BaseSearchResult & {
     approvals: Array<
       FormSubmissionApprovalHistoryRecord & {
         history: FormSubmissionApprovalHistoryRecord[]
@@ -92,9 +78,9 @@ export type FormApprovalFlowInstanceResponse = {
 
 export type FormsSearchResult = {
   forms: FormTypes.Form[]
-} & BaseSearchResult
+} & MiscTypes.BaseSearchResult
 
-export type FormsSearchOptions = {
+export type FormsSearchOptions = BaseSearchOptions & {
   /**
    * Search on the `isAuthenticated` property of a form. Must be either `true`
    * or `false` or not specified.
@@ -117,39 +103,35 @@ export type FormsSearchOptions = {
    * match of a `formsAppEnvironmentId`.
    */
   formsAppEnvironmentId?: number
-  /** Limit the number of results returned */
-  limit?: number
-  /** Skip a specific number of results, used in conjunction with `limit` to enforce paging */
-  offset?: number
 }
 
-export type FormSubmissionHistorySearchParameters = {
+export type FormSubmissionHistorySearchParameters = BaseSearchOptions & {
   /** Search for Submissions for a particular form Id */
   formId: number
   /** Search for Submissions starting at this date */
   submissionDateFrom?: string
   /** Search for Submissions ending on this date */
   submissionDateTo?: string
-  /** Limit the number of results returned */
-  limit?: number
-  /** Skip a specific number of results, used in conjunction with `limit` to enforce paging */
-  offset?: number
 }
 
-export type FormSubmissionHistorySearchResults = BaseSearchResult & {
+export type FormSubmissionHistorySearchResults = MiscTypes.BaseSearchResult & {
   formSubmissionMeta: SubmissionTypes.FormSubmissionMeta[]
 }
 
 export type EmailTemplatesSearchResult = {
   formsAppEnvironments: EmailTemplateTypes.EmailTemplate[]
-} & BaseSearchResult
+} & MiscTypes.BaseSearchResult
 
-export type EmailTemplatesSearchOptions = {
+export type EmailTemplatesSearchOptions = BaseSearchOptions & {
+  /**
+   * Search on the `formsAppEnvironmentId` property of a email template. Must be
+   * the exact match of a `formsAppEnvironmentId`.
+   */
   formsAppEnvironmentId: number
-  limit?: number
-  offset?: number
 }
 
-export type OrganisationsSearchResult = {
-  organisations: OrganisationTypes.Organisation[]
-} & BaseSearchResult
+export type FormsAppEnvironmentsSearchResult = {
+  formsAppEnvironments: EnvironmentTypes.FormsAppEnvironment[]
+} & MiscTypes.BaseSearchResult
+
+export type FormsAppEnvironmentsSearchOptions = BaseSearchOptions

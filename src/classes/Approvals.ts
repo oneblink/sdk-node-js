@@ -8,7 +8,7 @@ import {
 
 export default class Approvals extends OneBlinkAPI {
   /**
-   * Example
+   * #### Example
    *
    * ```typescript
    * const OneBlink = require('@oneblink/sdk')
@@ -27,7 +27,7 @@ export default class Approvals extends OneBlinkAPI {
   }
 
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const { approvals, meta } =
@@ -93,7 +93,7 @@ export default class Approvals extends OneBlinkAPI {
   }
 
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const formSubmissionApproval =
@@ -114,7 +114,7 @@ export default class Approvals extends OneBlinkAPI {
   }
 
   /**
-   * Example
+   * #### Example
    *
    * ```javascript
    * const formSubmissionApproval =

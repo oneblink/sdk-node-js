@@ -1,9 +1,8 @@
-import { SubmissionTypes } from '@oneblink/types'
+import { AWSTypes, SubmissionTypes } from '@oneblink/types'
 import AWS from 'aws-sdk'
-import { FormRetrievalData } from '../types'
 
 export default async function getSubmissionData(
-  retrievalData: FormRetrievalData,
+  retrievalData: AWSTypes.FormS3Credentials,
 ): Promise<SubmissionTypes.S3SubmissionData> {
   const s3 = new AWS.S3({
     region: retrievalData.s3.region,

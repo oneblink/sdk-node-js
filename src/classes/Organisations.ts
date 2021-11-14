@@ -1,10 +1,6 @@
 import { OrganisationTypes } from '@oneblink/types'
 import OneBlinkAPI from '../lib/one-blink-api'
-import {
-  ConstructorOptions,
-  PreFillMeta,
-  OrganisationsSearchResult,
-} from '../types'
+import { ConstructorOptions, PreFillMeta } from '../types'
 import uploadAsset from '../lib/upload-asset'
 
 export default class Organisations extends OneBlinkAPI {
@@ -30,20 +26,19 @@ export default class Organisations extends OneBlinkAPI {
    * #### Example
    *
    * ```javascript
-   * const organisation = await organisations.getOrganisation(1)
+   * const organisation = await organisations.getOrganisation()
    * // Use organisation here...
    * ```
-   *
-   * @param id The id of the organisation
    */
-  async getOrganisation(
-    organisationId: string,
-  ): Promise<OrganisationTypes.Organisation> {
-    if (typeof organisationId !== 'string') {
-      throw new TypeError('Must supply "organisationId" as a string')
+  async getOrganisation(): Promise<OrganisationTypes.Organisation> {
+    const searchResponse = await super.getRequest<{
+      organisations: OrganisationTypes.Organisation[]
+    }>('/organisations')
+    if (!searchResponse.organisations || !searchResponse.organisations[0]) {
+      throw new TypeError('You do not have access to any organisations')
     }
 
-    return super.getRequest(`/organisations/${organisationId}`)
+    return searchResponse.organisations[0]
   }
 
   /**
@@ -72,13 +67,7 @@ export default class Organisations extends OneBlinkAPI {
     if (asset.assetContentType && typeof asset.assetContentType !== 'string') {
       throw new TypeError('If supplied, "assetContentType" must be a string')
     }
-    const searchResponse = await super.getRequest<OrganisationsSearchResult>(
-      '/organisations',
-    )
-    if (!searchResponse.organisations || !searchResponse.organisations[0]) {
-      throw new TypeError('You do not have access to any organisations')
-    }
-    const organisationId = searchResponse.organisations[0].id
+    const { id: organisationId } = await this.getOrganisation()
     const credentials = await super.postRequest<
       {
         assetPath: string
