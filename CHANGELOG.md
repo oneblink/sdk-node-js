@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.0] - 2021-11-15
+
 ### Added
 
 - `EmailTemplates` class
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [0.2.4-beta.2](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [0.1.3](https://github.com/oneblink/sdk-core-js/releases/tag/v0.1.3))
 
 ## [0.17.0] - 2021-11-11
 
