@@ -76,7 +76,7 @@
   "typedocOptions": {
     "entryPoints": ["src/oneblink.ts", "src/civicplus.ts", "src/types.ts"],
     "entryPointStrategy": "resolve",
-    "out": "docs-dist",
+    "out": "docs",
     "excludeInternal": true,
     "hideGenerator": true,
     "disableSources": true
