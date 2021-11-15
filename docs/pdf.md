@@ -121,8 +121,6 @@ async function run() {
 | `options.excludedElementIds`       | No       | `string[]` | Array of elements ids to be excluded from the PDF document                      |
 | `options.usePagesAsBreaks`         | No       | `boolean`  | Whether pages in the form submission should translate to page breaks in the PDF |
 
-usePagesAsBreaks
-
 ### Result (Resolved Promise)
 
 - A [Node.js Buffer](https://nodejs.org/api/buffer.html) containing the PDF binary data.
