@@ -30,12 +30,6 @@ before you import the SDK
    git pull
    ```
 
-1. Generate Documentation
-
-   ```
-   npm run docs
-   ```
-
 1. Start the release process
 
    ```
