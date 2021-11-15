@@ -79,6 +79,7 @@
     "out": "docs",
     "excludeInternal": true,
     "hideGenerator": true,
-    "disableSources": true
+    "disableSources": true,
+    "readme": "./DOCUMENTATION.md"
   }
 }

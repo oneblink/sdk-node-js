@@ -8,7 +8,7 @@ import {
   AWSTypes,
 } from '@oneblink/types'
 import jwksClient from 'jwks-rsa'
-import { SentMessageInfo, SendMailOptions } from 'nodemailer'
+import { SendMailOptions } from 'nodemailer'
 export * from '@oneblink/types'
 
 export type ConstructorOptions = {
@@ -131,9 +131,16 @@ export type EmailTemplatesSearchOptions = BaseSearchOptions & {
   formsAppEnvironmentId: number
 }
 
-export {
-  SendMailOptions,
-  SentMessageInfo,
+export { SendMailOptions }
+
+export type SendEmailResult = {
+  envelope: {
+    from: string
+    to: string[]
+  }
+  messageId: string
+  response: string
+  raw: string
 }
 
 export type FormsAppEnvironmentsSearchResult = {
@@ -141,3 +148,7 @@ export type FormsAppEnvironmentsSearchResult = {
 } & MiscTypes.BaseSearchResult
 
 export type FormsAppEnvironmentsSearchOptions = BaseSearchOptions
+
+export type JobsSearchResult = MiscTypes.BaseSearchResult & {
+  jobs: SubmissionTypes.FormsAppJob[]
+}

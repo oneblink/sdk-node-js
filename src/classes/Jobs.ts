@@ -3,7 +3,7 @@ import Joi from 'joi'
 
 import OneBlinkAPI from '../lib/one-blink-api'
 import setPreFillData from '../lib/pre-fill-data'
-import { ConstructorOptions, PreFillMeta } from '../types'
+import { ConstructorOptions, PreFillMeta, JobsSearchResult } from '../types'
 
 const newJobSchema = Joi.object()
   .required()
@@ -19,14 +19,6 @@ const newJobSchema = Joi.object()
       priority: Joi.number(),
     }),
   })
-
-type JobsSearchResult = {
-  meta: {
-    limit: number
-    offset: number
-  }
-  jobs: SubmissionTypes.FormsAppJob[]
-}
 
 export default class Jobs extends OneBlinkAPI {
   /**

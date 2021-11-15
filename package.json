@@ -52,7 +52,7 @@
   "files": [
     "tenants"
   ],
-  "homepage": "https://github.com/oneblink/sdk-node-js",
+  "homepage": "https://oneblink.github.io/sdk-node-js/",
   "keywords": [],
   "license": "MIT",
   "main": "./tenants/oneblink.js",
