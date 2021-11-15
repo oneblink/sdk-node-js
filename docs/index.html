@@ -4,8 +4,45 @@
 </a>
 <p>OneBlink SDK to serve as an entry point for all OneBlink Services in NodeJS</p>
 
-<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
-  <h2>Documentation</h2>
+<a href="#requirements" id="requirements" style="color: inherit; text-decoration: none;">
+  <h2>Requirements</h2>
 </a>
-<p>See the <a href="./docs/README.md">Documentation</a> directory for more details.</p>
+<ul>
+<li><a href="https://nodejs.org/">Node.js</a> 10.0 or newer</li>
+<li>NPM 6.0 or newer</li>
+</ul>
+
+<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+  <h2>Installation</h2>
+</a>
+<pre><code class="language-sh"><span class="hl-0">npm install @oneblink/sdk --save</span>
+</code></pre>
+
+<a href="#tenants" id="tenants" style="color: inherit; text-decoration: none;">
+  <h2>Tenants</h2>
+</a>
+<p>This SDK is the entry point for all OneBlink Productivity instances. The default instance is the <a href="https://console.oneblink.io">OneBlink Console</a>. To use a different tenant to the default, change the require path to include the desired tenant. The available tenants are:</p>
+<ul>
+<li><p><a href="https://console.oneblink.io">OneBlink Console</a></p>
+<pre><code class="language-js"><span class="hl-1">const</span><span class="hl-0"> </span><span class="hl-2">OneBlink</span><span class="hl-0"> = </span><span class="hl-3">require</span><span class="hl-0">(</span><span class="hl-4">&#39;@oneblink/sdk&#39;</span><span class="hl-0">)</span><br/><span class="hl-5">// or</span><br/><span class="hl-1">const</span><span class="hl-0"> </span><span class="hl-2">OneBlink</span><span class="hl-0"> = </span><span class="hl-3">require</span><span class="hl-0">(</span><span class="hl-4">&#39;@oneblink/sdk/tenants/oneblink&#39;</span><span class="hl-0">)</span>
+</code></pre>
+</li>
+<li><p><a href="https://console.transform.civicplus.com">CivicOptimize Productivity</a></p>
+<pre><code class="language-js"><span class="hl-1">const</span><span class="hl-0"> </span><span class="hl-2">CivicPlus</span><span class="hl-0"> = </span><span class="hl-3">require</span><span class="hl-0">(</span><span class="hl-4">&#39;@oneblink/sdk/tenants/civicplus&#39;</span><span class="hl-0">)</span>
+</code></pre>
+</li>
+</ul>
+<p>Once the SDK has been <code>require</code>d, all class documentation below applies to all tenants. However, all of the examples use the default tenant. If you copy and paste from the examples, please don&#39;t forget to change (replacing <code>my-tenant</code> with a valid tenant path):</p>
+<pre><code class="language-js"><span class="hl-1">const</span><span class="hl-0"> </span><span class="hl-2">OneBlink</span><span class="hl-0"> = </span><span class="hl-3">require</span><span class="hl-0">(</span><span class="hl-4">&#39;@oneblink/sdk&#39;</span><span class="hl-0">)</span><br/><span class="hl-5">// to</span><br/><span class="hl-1">const</span><span class="hl-0"> </span><span class="hl-2">MyTenant</span><span class="hl-0"> = </span><span class="hl-3">require</span><span class="hl-0">(</span><span class="hl-4">&#39;@oneblink/sdk/tenants/my-tenant&#39;</span><span class="hl-0">)</span>
+</code></pre>
+
+<a href="#typescript" id="typescript" style="color: inherit; text-decoration: none;">
+  <h2>Typescript</h2>
+</a>
+<p>This SDK also supports <a href="https://www.typescriptlang.org/docs/handbook/modules.html">Typescript Modules</a>:</p>
+<pre><code class="language-ts"><span class="hl-6">import</span><span class="hl-0"> </span><span class="hl-1">*</span><span class="hl-0"> </span><span class="hl-6">as</span><span class="hl-0"> </span><span class="hl-7">OneBlink</span><span class="hl-0"> </span><span class="hl-6">from</span><span class="hl-0"> </span><span class="hl-4">&#39;@oneblink/sdk&#39;</span>
+</code></pre>
+<p>Various Types used in this package can also be imported:</p>
+<pre><code class="language-ts"><span class="hl-6">import</span><span class="hl-0"> </span><span class="hl-1">*</span><span class="hl-0"> </span><span class="hl-6">as</span><span class="hl-0"> </span><span class="hl-7">Types</span><span class="hl-0"> </span><span class="hl-6">from</span><span class="hl-0"> </span><span class="hl-4">&#39;@oneblink/sdk/types&#39;</span>
+</code></pre>
 </div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Modules</a></li><li class=" tsd-kind-module"><a href="modules/civicplus.html">civicplus</a></li><li class=" tsd-kind-module"><a href="modules/oneblink.html">oneblink</a></li><li class=" tsd-kind-module"><a href="modules/types.html">types</a></li></ul></nav></div></div></div><footer class=""><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li><li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="overlay"></div><script src="assets/main.js"></script></body></html>
