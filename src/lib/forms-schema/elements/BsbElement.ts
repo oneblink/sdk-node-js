@@ -3,8 +3,10 @@ import {
   id,
   name,
   label,
-  required,
+  hint,
   readOnly,
+  required,
+  conditionallyShowSchemas,
   lookupSchemas,
 } from '../property-schemas'
 
@@ -14,8 +16,10 @@ export default Joi.object({
   id,
   name,
   label,
-  required,
+  hint,
   readOnly,
-  defaultValue: Joi.string().regex(/\d{3}-\d{3}/),
+  required,
+  ...conditionallyShowSchemas,
   ...lookupSchemas,
+  defaultValue: Joi.string().regex(/\d{3}-\d{3}/),
 })
