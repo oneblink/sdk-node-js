@@ -1,6 +1,10 @@
 import Joi from 'joi'
 import { formElementsService } from '@oneblink/sdk-core'
-import { FormTypes, ConditionTypes } from '@oneblink/types'
+import {
+  FormTypes,
+  ConditionTypes,
+  SubmissionEventTypes,
+} from '@oneblink/types'
 import {
   elementSchema,
   formSchema,
@@ -248,30 +252,11 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
         break
       }
       case 'PDF': {
-        if (submissionEvent.configuration.emailTemplate) {
-          for (
-            let mappingIndex = 0;
-            mappingIndex <
-            submissionEvent.configuration.emailTemplate.mapping.length;
-            mappingIndex++
-          ) {
-            const mapping =
-              submissionEvent.configuration.emailTemplate.mapping[mappingIndex]
-
-            if (mapping.type === 'FORM_ELEMENT') {
-              const element = formElementsService.findFormElement(
-                validatedForm.elements,
-                ({ id }) => id === mapping.formElementId,
-              )
-              if (!element) {
-                throw new Error(
-                  `"submissionEvents[${submissionEventIndex}].configuration.mapping[${mappingIndex}].formElementId" (${mapping.formElementId}) does not exist in "elements".`,
-                )
-              }
-            }
-          }
-        }
-
+        validateEmailTemplateMappingElements({
+          submissionEvent,
+          validatedForm,
+          submissionEventIndex,
+        })
         if (submissionEvent.configuration.excludedElementIds) {
           for (const elementId of submissionEvent.configuration
             .excludedElementIds) {
@@ -286,6 +271,14 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
             }
           }
         }
+        break
+      }
+      case 'EMAIL': {
+        validateEmailTemplateMappingElements({
+          submissionEvent,
+          validatedForm,
+          submissionEventIndex,
+        })
         break
       }
       default: {
@@ -316,6 +309,41 @@ function validateElementNamesAcrossNestedElements(
     }
   }
   return elementNames
+}
+
+function validateEmailTemplateMappingElements({
+  submissionEvent,
+  validatedForm,
+  submissionEventIndex,
+}: {
+  submissionEvent:
+    | SubmissionEventTypes.EmailOnlySubmissionEvent
+    | SubmissionEventTypes.PdfSubmissionEvent
+  validatedForm: FormTypes.Form
+  submissionEventIndex: number
+}) {
+  if (submissionEvent.configuration.emailTemplate) {
+    for (
+      let mappingIndex = 0;
+      mappingIndex < submissionEvent.configuration.emailTemplate.mapping.length;
+      mappingIndex++
+    ) {
+      const mapping =
+        submissionEvent.configuration.emailTemplate.mapping[mappingIndex]
+
+      if (mapping.type === 'FORM_ELEMENT') {
+        const element = formElementsService.findFormElement(
+          validatedForm.elements,
+          ({ id }) => id === mapping.formElementId,
+        )
+        if (!element) {
+          throw new Error(
+            `"submissionEvents[${submissionEventIndex}].configuration.mapping[${mappingIndex}].formElementId" (${mapping.formElementId}) does not exist in "elements".`,
+          )
+        }
+      }
+    }
+  }
 }
 
 function checkElementNameUniqueness(elementNames: string[], name: string) {
