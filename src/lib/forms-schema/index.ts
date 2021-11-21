@@ -5,7 +5,7 @@ import {
   ConditionalPredicatesItemSchema,
 } from './property-schemas'
 const postSubmissionActions = ['BACK', 'URL', 'CLOSE', 'FORMS_LIBRARY']
-const emailInformation = {
+const emailSubmissionEventConfiguration = {
   email: Joi.alternatives([
     Joi.string().email().required(),
     Joi.string()
@@ -81,13 +81,13 @@ const SubmissionEventsSchema = Joi.object().keys({
     .when('type', {
       is: 'EMAIL',
       then: Joi.object().keys({
-        ...emailInformation,
+        ...emailSubmissionEventConfiguration,
       }),
     })
     .when('type', {
       is: 'PDF',
       then: Joi.object().keys({
-        ...emailInformation,
+        ...emailSubmissionEventConfiguration,
         ...pdfSubmissionEventConfiguration,
       }),
     })
