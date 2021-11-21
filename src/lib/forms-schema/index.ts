@@ -5,6 +5,38 @@ import {
   ConditionalPredicatesItemSchema,
 } from './property-schemas'
 const postSubmissionActions = ['BACK', 'URL', 'CLOSE', 'FORMS_LIBRARY']
+const emailSubmissionEventConfiguration = {
+  email: Joi.alternatives([
+    Joi.string().email().required(),
+    Joi.string()
+      .regex(/^{ELEMENT:\S+}$/)
+      .required(),
+  ]),
+  emailSubjectLine: Joi.string().allow(null, ''),
+  emailTemplate: Joi.object().keys({
+    id: Joi.number().required(),
+    mapping: Joi.array()
+      .items(
+        Joi.object().keys({
+          mustacheTag: Joi.string()
+            .regex(/^custom:\S+/)
+            .required(),
+          type: Joi.string().valid('FORM_ELEMENT', 'TEXT').required(),
+          formElementId: Joi.when('type', {
+            is: 'FORM_ELEMENT',
+            then: Joi.string().uuid().required(),
+            otherwise: Joi.any().strip(),
+          }),
+          text: Joi.when('type', {
+            is: 'TEXT',
+            then: Joi.string().required(),
+            otherwise: Joi.any().strip(),
+          }),
+        }),
+      )
+      .required(),
+  }),
+}
 
 const usePagesAsBreaks = Joi.boolean()
 const includeSubmissionIdInPdf = Joi.boolean()
@@ -27,6 +59,7 @@ const SubmissionEventsSchema = Joi.object().keys({
     .valid(
       'CALLBACK',
       'PDF',
+      'EMAIL',
       'ONEBLINK_API',
       'TRIM',
       'CP_PAY',
@@ -46,38 +79,15 @@ const SubmissionEventsSchema = Joi.object().keys({
       }),
     })
     .when('type', {
+      is: 'EMAIL',
+      then: Joi.object().keys({
+        ...emailSubmissionEventConfiguration,
+      }),
+    })
+    .when('type', {
       is: 'PDF',
       then: Joi.object().keys({
-        email: Joi.alternatives([
-          Joi.string().email().required(),
-          Joi.string()
-            .regex(/^{ELEMENT:\S+}$/)
-            .required(),
-        ]),
-        emailSubjectLine: Joi.string().allow(null, ''),
-        emailTemplate: Joi.object().keys({
-          id: Joi.number().required(),
-          mapping: Joi.array()
-            .items(
-              Joi.object().keys({
-                mustacheTag: Joi.string()
-                  .regex(/^custom:\S+/)
-                  .required(),
-                type: Joi.string().valid('FORM_ELEMENT', 'TEXT').required(),
-                formElementId: Joi.when('type', {
-                  is: 'FORM_ELEMENT',
-                  then: Joi.string().uuid().required(),
-                  otherwise: Joi.any().strip(),
-                }),
-                text: Joi.when('type', {
-                  is: 'TEXT',
-                  then: Joi.string().required(),
-                  otherwise: Joi.any().strip(),
-                }),
-              }),
-            )
-            .required(),
-        }),
+        ...emailSubmissionEventConfiguration,
         ...pdfSubmissionEventConfiguration,
       }),
     })
