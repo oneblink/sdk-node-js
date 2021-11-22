@@ -4762,6 +4762,7 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
     restrictedFileTypes: ['png', 'jpg', 'gif'],
     isDataLookup: false,
     isElementLookup: false,
+    allowExtensionlessAttachments: false,
   })
 })
 
@@ -4785,6 +4786,7 @@ test('should strip restrictedFileTypes if restrictFileTypes is false', () => {
     restrictFileTypes: false,
     isDataLookup: false,
     isElementLookup: false,
+    allowExtensionlessAttachments: false,
   })
 })
 

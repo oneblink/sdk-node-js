@@ -24,6 +24,7 @@ export default Joi.object({
     then: Joi.array().items(Joi.string()).required(),
     otherwise: Joi.any().strip(),
   }),
+  allowExtensionlessAttachments: Joi.boolean().default(false),
 
   ...conditionallyShowSchemas,
 })

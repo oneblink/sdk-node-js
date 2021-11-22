@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Submission Event for only emails
 
+### Updated
+
+- File Elements to disallow extensionless files
+
 ## [0.18.1] - 2021-11-18
 
 ### Added
