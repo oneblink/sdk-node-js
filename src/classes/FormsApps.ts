@@ -125,7 +125,7 @@ export default class FormsApps extends OneBlinkAPI {
    * @param formsApp Forms App properties
    */
   async createFormsApp(
-    formsApp: FormsAppsTypes.NewFormsApp,
+    formsApp: Omit<FormsAppsTypes.NewFormsApp, 'styles'>,
   ): Promise<FormsAppsTypes.FormsApp> {
     return super.postRequest(basePath, formsApp)
   }
