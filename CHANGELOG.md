@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Updated
 
-- TRIM to disallow extensionless files
+- File Elements to disallow extensionless files
 
 ## [0.18.1] - 2021-11-18
 

@@ -26,6 +26,7 @@ export default Joi.object({
     then: Joi.array().items(Joi.string()).required(),
     otherwise: Joi.any().strip(),
   }),
+  allowExtensionlessAttachments: Joi.boolean().default(false),
   defaultValue: Joi.when('storageType', {
     is: Joi.valid('legacy', Joi.optional()),
     then: Joi.array().items(
