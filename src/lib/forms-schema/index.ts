@@ -131,6 +131,7 @@ const SubmissionEventsSchema = Joi.object().keys({
           })
           .allow(null),
         groupFiles: Joi.boolean().default(false),
+        preventExtensionlessAttachments: Joi.boolean().default(false),
       }),
     })
     .when('type', {
