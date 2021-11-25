@@ -2576,6 +2576,102 @@ describe('optionTypes', () => {
   })
 })
 
+describe('Freshdesk Submission Event', () => {
+  test('should allow Freshdesk Create Ticket submission event', () => {
+    const submissionEvents = [
+      {
+        type: 'FRESHDESK_CREATE_TICKET',
+        isDraft: false,
+        conditionallyExecute: false,
+        requiresAllConditionallyExecutePredicates: false,
+        configuration: {
+          mapping: [
+            {
+              freshdeskFieldName: 'customName',
+              type: 'FORM_ELEMENT',
+              formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            },
+            {
+              freshdeskFieldName: 'customNameTwo',
+              type: 'TEXT',
+              value: 'This is the text',
+            },
+          ],
+        },
+      },
+    ]
+    const { error, value } = formSchema.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            type: 'text',
+            name: 'firstName',
+            label: 'First Name',
+          },
+        ],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents,
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBe(undefined)
+    expect(value.submissionEvents).toEqual(submissionEvents)
+  })
+  test('should not allow Freshdesk Create Ticket submission event with wrong formElementId', () => {
+    const run = () =>
+      validateWithFormSchema({
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            type: 'text',
+            name: 'firstName',
+            label: 'First Name',
+          },
+        ],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'FRESHDESK_CREATE_TICKET',
+            configuration: {
+              mapping: [
+                {
+                  freshdeskFieldName: 'someName',
+                  type: 'FORM_ELEMENT',
+                  formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a80',
+                },
+              ],
+            },
+          },
+        ],
+      })
+    expect(run).toThrow(
+      '"submissionEvents[0].configuration.mapping[0].formElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a80) does not exist in "elements".',
+    )
+  })
+})
+
 describe('PDF submission event', () => {
   test('should allow Email submission event', () => {
     const submissionEvents = [

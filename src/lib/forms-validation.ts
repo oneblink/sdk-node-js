@@ -281,6 +281,14 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
         })
         break
       }
+      case 'FRESHDESK_CREATE_TICKET': {
+        validateFreshdeskCreateTicketMappingElements({
+          submissionEvent,
+          validatedForm,
+          submissionEventIndex,
+        })
+        break
+      }
       default: {
         break
       }
@@ -288,6 +296,36 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
   }
 
   return validatedForm
+}
+
+function validateFreshdeskCreateTicketMappingElements({
+  submissionEvent,
+  validatedForm,
+  submissionEventIndex,
+}: {
+  submissionEvent: SubmissionEventTypes.FreshdeskCreateTicketSubmissionEvent
+  validatedForm: FormTypes.Form
+  submissionEventIndex: number
+}) {
+  for (
+    let mappingIndex = 0;
+    mappingIndex < submissionEvent.configuration.mapping.length;
+    mappingIndex++
+  ) {
+    const mapping = submissionEvent.configuration.mapping[mappingIndex]
+    console.log(mapping)
+    if (mapping.type === 'FORM_ELEMENT') {
+      const element = formElementsService.findFormElement(
+        validatedForm.elements,
+        ({ id }) => id === mapping.formElementId,
+      )
+      if (!element) {
+        throw new Error(
+          `"submissionEvents[${submissionEventIndex}].configuration.mapping[${mappingIndex}].formElementId" (${mapping.formElementId}) does not exist in "elements".`,
+        )
+      }
+    }
+  }
 }
 
 function validateElementNamesAcrossNestedElements(
