@@ -214,14 +214,14 @@ const SubmissionEventsSchema = Joi.object().keys({
         mapping: Joi.array().items(
           Joi.object().keys({
             freshdeskFieldName: Joi.string().required(),
-            type: Joi.string().valid('FORM_ELEMENT', 'TEXT').required(),
+            type: Joi.string().valid('FORM_ELEMENT', 'VALUE').required(),
             formElementId: Joi.when('type', {
               is: 'FORM_ELEMENT',
               then: Joi.string().uuid().required(),
               otherwise: Joi.any().strip(),
             }),
             value: Joi.when('type', {
-              is: 'TEXT',
+              is: 'VALUE',
               then: Joi.alternatives().try(Joi.string(), Joi.number()),
               otherwise: Joi.any().strip(),
             }),

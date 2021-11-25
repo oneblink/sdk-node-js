@@ -2593,7 +2593,7 @@ describe('Freshdesk Submission Event', () => {
             },
             {
               freshdeskFieldName: 'customNameTwo',
-              type: 'TEXT',
+              type: 'VALUE',
               value: 'This is the text',
             },
           ],

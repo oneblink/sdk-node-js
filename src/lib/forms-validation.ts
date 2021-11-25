@@ -313,7 +313,6 @@ function validateFreshdeskCreateTicketMappingElements({
     mappingIndex++
   ) {
     const mapping = submissionEvent.configuration.mapping[mappingIndex]
-    console.log(mapping)
     if (mapping.type === 'FORM_ELEMENT') {
       const element = formElementsService.findFormElement(
         validatedForm.elements,
