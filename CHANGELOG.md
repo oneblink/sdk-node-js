@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added submission event for Freshdesk ticket creation
+- submission event for Freshdesk ticket creation
+- `FRESHDESK_FIELD` options type for form elements
 
 ## [0.18.2] - 2021-11-24
 
