@@ -2378,6 +2378,59 @@ test('should throw error if defaultValue contains src="data:', () => {
 })
 
 describe('optionTypes', () => {
+  describe('when freshdesk field', () => {
+    test('valid when freshdeskFieldName is provided', () => {
+      const result = formSchema.validate({
+        id: 1,
+        name: 'Inspection',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: '59cc888b8969af000fb50ddb',
+        isMultiPage: false,
+        postSubmissionAction: 'FORMS_LIBRARY',
+        tags: [],
+        elements: [
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+            name: 'Czech boxes',
+            label: 'Czechboxes',
+            type: 'checkboxes',
+            required: false,
+            optionsType: 'FRESHDESK_FIELD',
+            freshdeskFieldName: 'custom_field',
+          },
+        ],
+      })
+
+      expect(result.error).toBe(undefined)
+    })
+    test('invalid when freshdeskFieldName is NOT provided', () => {
+      const { error } = formSchema.validate({
+        id: 1,
+        name: 'Inspection',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: '59cc888b8969af000fb50ddb',
+        isMultiPage: false,
+        postSubmissionAction: 'FORMS_LIBRARY',
+        tags: [],
+        elements: [
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+            name: 'Czech boxes',
+            label: 'Czechboxes',
+            type: 'checkboxes',
+            required: false,
+            optionsType: 'FRESHDESK_FIELD',
+          },
+        ],
+      })
+
+      expect(error?.message).toContain(
+        '"elements[0].freshdeskFieldName" is required',
+      )
+    })
+  })
   describe('when dynamic', () => {
     test('valid when dynamicOptionSetId is provided', () => {
       const result = formSchema.validate({
@@ -4734,7 +4787,7 @@ describe('invalid property removal', () => {
       optionsType: 'SEARCH',
     })
     expect(error?.message).toContain(
-      '"optionsType" must be one of [CUSTOM, DYNAMIC]',
+      '"optionsType" must be one of [CUSTOM, DYNAMIC, FRESHDESK_FIELD]',
     )
   })
 
@@ -4747,7 +4800,7 @@ describe('invalid property removal', () => {
       optionsType: 'SEARCH',
     })
     expect(error?.message).toContain(
-      '"optionsType" must be one of [CUSTOM, DYNAMIC]',
+      '"optionsType" must be one of [CUSTOM, DYNAMIC, FRESHDESK_FIELD]',
     )
   })
 
@@ -4760,7 +4813,7 @@ describe('invalid property removal', () => {
       optionsType: 'SEARCH',
     })
     expect(error?.message).toContain(
-      '"optionsType" must be one of [CUSTOM, DYNAMIC]',
+      '"optionsType" must be one of [CUSTOM, DYNAMIC, FRESHDESK_FIELD]',
     )
   })
 

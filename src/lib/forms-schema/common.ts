@@ -2,9 +2,14 @@ import Joi from 'joi'
 
 export const CUSTOM_OPTION_TYPE = 'CUSTOM'
 export const DYNAMIC_OPTION_TYPE = 'DYNAMIC'
+export const FRESHDESK_FIELD_OPTION_TYPE = 'FRESHDESK_FIELD'
 export const SEARCH_OPTION_TYPE = 'SEARCH'
 
-export const optionTypes = [CUSTOM_OPTION_TYPE, DYNAMIC_OPTION_TYPE]
+export const optionTypes = [
+  CUSTOM_OPTION_TYPE,
+  DYNAMIC_OPTION_TYPE,
+  FRESHDESK_FIELD_OPTION_TYPE,
+]
 
 export const JoiRange = Joi.extend((joi: typeof Joi) => ({
   type: 'range',

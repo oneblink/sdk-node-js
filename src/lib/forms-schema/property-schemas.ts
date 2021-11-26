@@ -4,6 +4,7 @@ import {
   SEARCH_OPTION_TYPE,
   optionTypes,
   DYNAMIC_OPTION_TYPE,
+  FRESHDESK_FIELD_OPTION_TYPE,
 } from './common'
 
 export const id = Joi.string().guid().required()
@@ -75,6 +76,11 @@ const conditionallyShowOptionsElementIds = Joi.when('optionsType', {
   then: Joi.array().items(Joi.string().guid().required()),
   otherwise: Joi.any().strip(),
 })
+const freshdeskFieldName = Joi.when('optionsType', {
+  is: FRESHDESK_FIELD_OPTION_TYPE,
+  then: Joi.string().required(),
+  otherwise: Joi.any().strip(),
+})
 export const optionsSchemas = {
   optionsType,
   dynamicOptionSetId,
@@ -82,6 +88,7 @@ export const optionsSchemas = {
   attributesMapping,
   conditionallyShowOptions,
   conditionallyShowOptionsElementIds,
+  freshdeskFieldName,
 }
 
 const conditionallyShow = Joi.bool().default(false)
