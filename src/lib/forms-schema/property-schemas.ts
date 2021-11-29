@@ -81,6 +81,17 @@ const freshdeskFieldName = Joi.when('optionsType', {
   then: Joi.string().required(),
   otherwise: Joi.any().strip(),
 })
+export const defaultValueOptionsSingle = Joi.when('optionsType', {
+  is: Joi.invalid(DYNAMIC_OPTION_TYPE, FRESHDESK_FIELD_OPTION_TYPE),
+  then: Joi.string().guid(),
+  otherwise: Joi.string(),
+})
+export const defaultValueOptionsMultiple = Joi.when('optionsType', {
+  is: Joi.invalid(DYNAMIC_OPTION_TYPE, FRESHDESK_FIELD_OPTION_TYPE),
+  then: Joi.array().items(Joi.string().guid()),
+  otherwise: Joi.array().items(Joi.string()),
+})
+
 export const optionsSchemas = {
   optionsType,
   dynamicOptionSetId,
