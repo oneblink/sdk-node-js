@@ -10,8 +10,9 @@ import {
   lookupSchemas,
   optionsSchemas,
   placeholderValue,
+  defaultValueOptionsSingle,
 } from '../property-schemas'
-import { DYNAMIC_OPTION_TYPE, SEARCH_OPTION_TYPE } from '../common'
+import { SEARCH_OPTION_TYPE } from '../common'
 
 export const type = 'autocomplete'
 
@@ -25,11 +26,7 @@ export default Joi.object({
   placeholderValue,
   ...conditionallyShowSchemas,
   ...lookupSchemas,
-  defaultValue: Joi.when('optionsType', {
-    is: Joi.invalid(DYNAMIC_OPTION_TYPE),
-    then: Joi.string().guid(),
-    otherwise: Joi.string(),
-  }),
+  defaultValue: defaultValueOptionsSingle,
   searchUrl: Joi.when('optionsType', {
     is: SEARCH_OPTION_TYPE,
     then: Joi.string().required(),

@@ -11,8 +11,8 @@ import {
   buttons,
   optionsSchemas,
   canToggleAll,
+  defaultValueOptionsMultiple,
 } from '../property-schemas'
-import { DYNAMIC_OPTION_TYPE } from '../common'
 
 export const type = 'checkboxes'
 
@@ -25,11 +25,7 @@ export default Joi.object({
   readOnly,
   ...conditionallyShowSchemas,
   ...lookupSchemas,
-  defaultValue: Joi.when('optionsType', {
-    is: Joi.invalid(DYNAMIC_OPTION_TYPE),
-    then: Joi.array().items(Joi.string().guid()),
-    otherwise: Joi.array().items(Joi.string()),
-  }),
+  defaultValue: defaultValueOptionsMultiple,
   buttons,
   ...optionsSchemas,
   canToggleAll,
