@@ -2647,7 +2647,7 @@ describe('Freshdesk Submission Event', () => {
             {
               freshdeskFieldName: 'customNameTwo',
               type: 'VALUE',
-              value: 'This is the text',
+              value: true,
             },
           ],
         },
