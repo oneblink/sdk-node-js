@@ -222,7 +222,11 @@ const SubmissionEventsSchema = Joi.object().keys({
             }),
             value: Joi.when('type', {
               is: 'VALUE',
-              then: Joi.alternatives().try(Joi.string(), Joi.number()),
+              then: Joi.alternatives().try(
+                Joi.string(),
+                Joi.number(),
+                Joi.boolean(),
+              ),
               otherwise: Joi.any().strip(),
             }),
           }),
