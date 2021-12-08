@@ -68,7 +68,6 @@ import SummaryElement, {
 import ComplianceElement, {
   type as complianceElementType,
 } from './elements/ComplianceElement'
-import FileElement, { type as fileElementType } from './elements/FileElement'
 // Integration
 import GeoscapeElement, {
   type as geoscapeElementType,
@@ -84,7 +83,7 @@ import SectionElement, {
   type as sectionElementType,
 } from './elements/SectionElement'
 import BsbElement, { type as bsbElementType } from './elements/BsbElement'
-
+import AbnElement, { type as abnElementType } from './elements/AbnElement'
 // Creating an object here so we get a Typescript error when adding a
 // new element type and forgetting to add to the array of allowed types
 const elementTypesMap: Record<
@@ -119,13 +118,13 @@ const elementTypesMap: Record<
   [formElementType]: null,
   [summaryElementType]: null,
   [complianceElementType]: null,
-  [fileElementType]: null,
   [geoscapeElementType]: null,
   [pointElementType]: null,
   [civicaStreetNameElementType]: null,
   [civicaNameRecordElementType]: null,
   [sectionElementType]: null,
   [bsbElementType]: null,
+  [abnElementType]: null,
 }
 
 const typeCase = (type: FormTypes.FormElementType) => {
@@ -209,9 +208,6 @@ const schema = Joi.object({
   .when(typeCase('files'), {
     then: FilesElement,
   })
-  .when(typeCase('file'), {
-    then: FileElement,
-  })
   .when(typeCase('captcha'), {
     then: CaptchaElement,
   })
@@ -244,6 +240,9 @@ const schema = Joi.object({
   })
   .when(typeCase('bsb'), {
     then: BsbElement,
+  })
+  .when(typeCase('abn'), {
+    then: AbnElement,
   })
 
 export default schema
