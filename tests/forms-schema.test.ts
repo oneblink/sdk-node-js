@@ -337,12 +337,6 @@ describe('Valid Form Schema with Pages', () => {
               'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg',
           },
           {
-            id: '8788a2ea-a108-4362-bc37-4bf1f9d64b97',
-            name: 'file',
-            label: 'file',
-            type: 'file',
-          },
-          {
             id: 'b527bcea-dc84-477f-a5ee-d34abfec92fa',
             name: 'files',
             label: 'files',
@@ -1766,7 +1760,7 @@ test('should error if page element has child page element', () => {
   )
 
   expect(error?.details[0].message).toContain(
-    '"elements[0].elements[0].type" must be one of [autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
+    '"elements[0].elements[0].type" must be one of [abn, autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -1849,7 +1843,7 @@ test('should error if isMultiPage is set to false', () => {
   )
 
   expect(error?.details[0].message).toContain(
-    '"elements[0].type" must be one of [autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
+    '"elements[0].type" must be one of [abn, autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -2006,7 +2000,7 @@ test('should error if isMultiPage is false even if all root elements are pages',
   )
 
   expect(error?.details[0].message).toBe(
-    '"elements[0].type" must be one of [autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, file, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
+    '"elements[0].type" must be one of [abn, autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -4553,16 +4547,6 @@ describe('invalid property removal', () => {
                 type: 'image',
                 defaultValue:
                   'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg',
-              },
-              props,
-            ),
-            Object.assign(
-              {},
-              {
-                id: 'b527bcea-dc84-477f-a5ee-d34abfec92fa',
-                name: 'file',
-                label: 'file',
-                type: 'file',
               },
               props,
             ),
