@@ -319,7 +319,6 @@ const formSchema = Joi.object().keys({
   approvalEvents: Joi.array().items(SubmissionEventSchema),
   approvalSteps: Joi.array()
     .min(1)
-    .required()
     .unique('label')
     .items(
       Joi.object()

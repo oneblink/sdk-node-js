@@ -2628,7 +2628,6 @@ describe('Freshdesk Submission Event', () => {
     const submissionEvents = [
       {
         type: 'FRESHDESK_CREATE_TICKET',
-        isDraft: false,
         conditionallyExecute: false,
         requiresAllConditionallyExecutePredicates: false,
         configuration: {
@@ -2672,6 +2671,7 @@ describe('Freshdesk Submission Event', () => {
 
       {
         abortEarly: false,
+        stripUnknown: true,
       },
     )
     expect(error).toBe(undefined)
@@ -2724,7 +2724,6 @@ describe('PDF submission event', () => {
     const submissionEvents = [
       {
         type: 'EMAIL',
-        isDraft: false,
         conditionallyExecute: false,
         requiresAllConditionallyExecutePredicates: false,
         configuration: {
@@ -2781,7 +2780,6 @@ describe('PDF submission event', () => {
     const submissionEvents = [
       {
         type: 'PDF',
-        isDraft: false,
         conditionallyExecute: false,
         requiresAllConditionallyExecutePredicates: false,
         configuration: {
@@ -3109,7 +3107,7 @@ describe('TRIM submission event', () => {
 })
 
 describe('SCHEDULING submission event', () => {
-  test('should allow SCHEDULING submission event', () => {
+  test('should allow SCHEDULING form event', () => {
     const { error } = formSchema.validate(
       {
         id: 1,
@@ -3136,7 +3134,8 @@ describe('SCHEDULING submission event', () => {
         ],
         isAuthenticated: true,
         tags: [],
-        submissionEvents: [
+        submissionEvents: [],
+        schedulingEvents: [
           {
             type: 'SCHEDULING',
             configuration: {
@@ -3168,7 +3167,7 @@ describe('SCHEDULING submission event', () => {
         elements: [],
         isAuthenticated: true,
         tags: [],
-        submissionEvents: [
+        schedulingEvents: [
           {
             type: 'SCHEDULING',
             configuration: {
@@ -3180,7 +3179,7 @@ describe('SCHEDULING submission event', () => {
         ],
       }),
     ).toThrow(
-      '"submissionEvents[0].configuration.nameElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) does not exist in "elements"',
+      '"schedulingEvents[0].configuration.nameElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) does not exist in "elements"',
     )
   })
   test('should error SCHEDULING submission event if "nameElementId" references an element that is a "text" element', () => {
@@ -3204,7 +3203,7 @@ describe('SCHEDULING submission event', () => {
         ],
         isAuthenticated: true,
         tags: [],
-        submissionEvents: [
+        schedulingEvents: [
           {
             type: 'SCHEDULING',
             configuration: {
@@ -3216,7 +3215,7 @@ describe('SCHEDULING submission event', () => {
         ],
       }),
     ).toThrow(
-      '"submissionEvents[0].configuration.nameElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) references a form element that is not a "text" element.',
+      '"schedulingEvents[0].configuration.nameElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) references a form element that is not a "text" element.',
     )
   })
   test('should error SCHEDULING submission event if emailElementId does not exist', () => {
@@ -3233,7 +3232,7 @@ describe('SCHEDULING submission event', () => {
         elements: [],
         isAuthenticated: true,
         tags: [],
-        submissionEvents: [
+        schedulingEvents: [
           {
             type: 'SCHEDULING',
             configuration: {
@@ -3245,10 +3244,10 @@ describe('SCHEDULING submission event', () => {
         ],
       }),
     ).toThrow(
-      '"submissionEvents[0].configuration.emailElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) does not exist in "elements"',
+      '"schedulingEvents[0].configuration.emailElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) does not exist in "elements"',
     )
   })
-  test('should error SCHEDULING submission event if "emailElementId" references an element that is an "email" element', () => {
+  test('should error SCHEDULING submission event if "emailElementId" references an element that isn\'t an "email" element', () => {
     expect(() =>
       validateWithFormSchema({
         id: 1,
@@ -3269,7 +3268,7 @@ describe('SCHEDULING submission event', () => {
         ],
         isAuthenticated: true,
         tags: [],
-        submissionEvents: [
+        schedulingEvents: [
           {
             type: 'SCHEDULING',
             configuration: {
@@ -3281,7 +3280,7 @@ describe('SCHEDULING submission event', () => {
         ],
       }),
     ).toThrow(
-      '"submissionEvents[0].configuration.emailElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) references a form element that is not an "email" element.',
+      '"schedulingEvents[0].configuration.emailElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) references a form element that is not an "email" element.',
     )
   })
 })
@@ -3441,7 +3440,7 @@ describe('BPOINT submission event', () => {
       isAuthenticated: true,
 
       tags: [],
-      submissionEvents: [
+      paymentEvents: [
         {
           type: 'BPOINT',
           configuration: {},
@@ -3449,7 +3448,7 @@ describe('BPOINT submission event', () => {
       ],
     })
     expect(error?.message).toContain(
-      '"submissionEvents[0].configuration.elementId" is required',
+      '"paymentEvents[0].configuration.elementId" is required',
     )
   })
   test('should error for BPOINT submission event not passing "environmentId"', () => {
@@ -3466,7 +3465,7 @@ describe('BPOINT submission event', () => {
       isAuthenticated: true,
 
       tags: [],
-      submissionEvents: [
+      paymentEvents: [
         {
           type: 'BPOINT',
           configuration: {
@@ -3476,7 +3475,7 @@ describe('BPOINT submission event', () => {
       ],
     })
     expect(error?.message).toContain(
-      '"submissionEvents[0].configuration.environmentId" is required',
+      '"paymentEvents[0].configuration.environmentId" is required',
     )
   })
   test('should allow BPOINT submission event', () => {
@@ -3502,7 +3501,7 @@ describe('BPOINT submission event', () => {
         ],
         isAuthenticated: true,
 
-        submissionEvents: [
+        paymentEvents: [
           {
             type: 'BPOINT',
             configuration: {
@@ -3535,7 +3534,7 @@ describe('WESTPAC_QUICK_WEB submission event', () => {
       elements: [],
       isAuthenticated: true,
       tags: [],
-      submissionEvents: [
+      paymentEvents: [
         {
           type: 'WESTPAC_QUICK_WEB',
           configuration: {},
@@ -3543,7 +3542,7 @@ describe('WESTPAC_QUICK_WEB submission event', () => {
       ],
     })
     expect(error?.message).toContain(
-      '"submissionEvents[0].configuration.elementId" is required',
+      '"paymentEvents[0].configuration.elementId" is required',
     )
   })
   test('should error for WESTPAC_QUICK_WEB submission event not passing "environmentId"', () => {
@@ -3559,7 +3558,7 @@ describe('WESTPAC_QUICK_WEB submission event', () => {
       elements: [],
       isAuthenticated: true,
       tags: [],
-      submissionEvents: [
+      paymentEvents: [
         {
           type: 'WESTPAC_QUICK_WEB',
           configuration: {
@@ -3569,7 +3568,7 @@ describe('WESTPAC_QUICK_WEB submission event', () => {
       ],
     })
     expect(error?.message).toContain(
-      '"submissionEvents[0].configuration.environmentId" is required',
+      '"paymentEvents[0].configuration.environmentId" is required',
     )
   })
   test('should allow WESTPAC_QUICK_WEB submission event', () => {
@@ -3594,7 +3593,7 @@ describe('WESTPAC_QUICK_WEB submission event', () => {
           },
         ],
         isAuthenticated: true,
-        submissionEvents: [
+        paymentEvents: [
           {
             type: 'WESTPAC_QUICK_WEB',
             configuration: {
@@ -3638,7 +3637,7 @@ describe('CP_PAY submission event', () => {
         ],
         isAuthenticated: true,
 
-        submissionEvents: [
+        paymentEvents: [
           {
             type: 'CP_PAY',
             configuration: {
@@ -5504,12 +5503,15 @@ describe('submission event conditional logic', () => {
               email: 'developers@oneblink.io',
               includeSubmissionIdInPdf: true,
             },
+            // Should strip
+            isDraft: false,
           },
         ],
       },
 
       {
         abortEarly: false,
+        stripUnknown: true,
       },
     )
 
@@ -5522,7 +5524,6 @@ describe('submission event conditional logic', () => {
       },
       conditionallyExecute: false,
       requiresAllConditionallyExecutePredicates: false,
-      isDraft: false,
     })
     expect(result.error).toBe(undefined)
   })
