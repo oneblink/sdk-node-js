@@ -52,8 +52,67 @@ const pdfSubmissionEventConfiguration = {
   usePagesAsBreaks,
 }
 
-const SubmissionEventsSchema = Joi.object().keys({
-  isDraft: Joi.boolean().default(false),
+const formEventConditionalSchemas = {
+  conditionallyExecute: Joi.bool().default(false),
+  requiresAllConditionallyExecutePredicates: Joi.bool().default(false),
+  conditionallyExecutePredicates: Joi.when('conditionallyExecute', {
+    is: true,
+    then: Joi.array()
+      .unique('elementId')
+      .min(1)
+      .items(ConditionalPredicatesItemSchema)
+      .required(),
+    otherwise: Joi.any().strip(),
+  }),
+}
+
+const PaymentEventSchema = Joi.object({
+  type: Joi.string().required().valid('CP_PAY', 'BPOINT', 'WESTPAC_QUICK_WEB'),
+  configuration: Joi.object()
+    .required()
+    .when('type', {
+      is: 'BPOINT',
+      then: Joi.object().keys({
+        elementId: Joi.string().uuid().required(),
+        environmentId: Joi.string().uuid().required(),
+        crn2: Joi.string(),
+        crn3: Joi.string(),
+      }),
+    })
+    .when('type', {
+      is: 'WESTPAC_QUICK_WEB',
+      then: Joi.object().keys({
+        elementId: Joi.string().uuid().required(),
+        environmentId: Joi.string().uuid().required(),
+        customerReferenceNumber: Joi.string().required(),
+      }),
+    })
+    .when('type', {
+      is: 'CP_PAY',
+      then: Joi.object().keys({
+        elementId: Joi.string().uuid().required(),
+        gatewayId: Joi.string().uuid().required(),
+      }),
+    }),
+  ...formEventConditionalSchemas,
+})
+const SchedulingEventSchema = Joi.object({
+  type: Joi.string().required().valid('SCHEDULING'),
+  configuration: Joi.object()
+    .required()
+    .when('type', {
+      is: 'SCHEDULING',
+      then: Joi.object().keys({
+        nylasAccountId: Joi.string().required(),
+        nylasSchedulingPageId: Joi.number().required(),
+        nameElementId: Joi.string().guid(),
+        emailElementId: Joi.string().guid(),
+        emailDescription: Joi.string(),
+      }),
+    }),
+  ...formEventConditionalSchemas,
+})
+const SubmissionEventSchema = Joi.object().keys({
   type: Joi.string()
     .required()
     .valid(
@@ -62,12 +121,8 @@ const SubmissionEventsSchema = Joi.object().keys({
       'EMAIL',
       'ONEBLINK_API',
       'TRIM',
-      'CP_PAY',
       'CP_HCMS',
-      'BPOINT',
-      'WESTPAC_QUICK_WEB',
       'CIVICA_CRM',
-      'SCHEDULING',
       'FRESHDESK_CREATE_TICKET',
     ),
   configuration: Joi.object()
@@ -135,30 +190,6 @@ const SubmissionEventsSchema = Joi.object().keys({
       }),
     })
     .when('type', {
-      is: 'BPOINT',
-      then: Joi.object().keys({
-        elementId: Joi.string().uuid().required(),
-        environmentId: Joi.string().uuid().required(),
-        crn2: Joi.string(),
-        crn3: Joi.string(),
-      }),
-    })
-    .when('type', {
-      is: 'WESTPAC_QUICK_WEB',
-      then: Joi.object().keys({
-        elementId: Joi.string().uuid().required(),
-        environmentId: Joi.string().uuid().required(),
-        customerReferenceNumber: Joi.string().required(),
-      }),
-    })
-    .when('type', {
-      is: 'CP_PAY',
-      then: Joi.object().keys({
-        elementId: Joi.string().uuid().required(),
-        gatewayId: Joi.string().uuid().required(),
-      }),
-    })
-    .when('type', {
       is: 'CIVICA_CRM',
       then: Joi.object().keys({
         environmentId: Joi.string().uuid().required(),
@@ -199,16 +230,6 @@ const SubmissionEventsSchema = Joi.object().keys({
       }),
     })
     .when('type', {
-      is: 'SCHEDULING',
-      then: Joi.object().keys({
-        nylasAccountId: Joi.string().required(),
-        nylasSchedulingPageId: Joi.number().required(),
-        nameElementId: Joi.string().guid(),
-        emailElementId: Joi.string().guid(),
-        emailDescription: Joi.string(),
-      }),
-    })
-    .when('type', {
       is: 'FRESHDESK_CREATE_TICKET',
       then: Joi.object().keys({
         mapping: Joi.array().items(
@@ -233,17 +254,7 @@ const SubmissionEventsSchema = Joi.object().keys({
         ),
       }),
     }),
-  conditionallyExecute: Joi.bool().default(false),
-  requiresAllConditionallyExecutePredicates: Joi.bool().default(false),
-  conditionallyExecutePredicates: Joi.when('conditionallyExecute', {
-    is: true,
-    then: Joi.array()
-      .unique('elementId')
-      .min(1)
-      .items(ConditionalPredicatesItemSchema)
-      .required(),
-    otherwise: Joi.any().strip(),
-  }),
+  ...formEventConditionalSchemas,
 })
 
 const pageElementSchema = Joi.object().keys({
@@ -300,7 +311,36 @@ const formSchema = Joi.object().keys({
   isAuthenticated: Joi.bool().default(false),
   publishStartDate: Joi.string().isoDate(),
   publishEndDate: Joi.string().isoDate(),
-  submissionEvents: Joi.array().allow(null).items(SubmissionEventsSchema),
+  // Form Events and Workflow
+  draftEvents: Joi.array().items(SubmissionEventSchema),
+  schedulingEvents: Joi.array().items(SchedulingEventSchema),
+  paymentEvents: Joi.array().items(PaymentEventSchema),
+  submissionEvents: Joi.array().allow(null).items(SubmissionEventSchema),
+  approvalEvents: Joi.array().items(SubmissionEventSchema),
+  approvalSteps: Joi.array()
+    .min(1)
+    .required()
+    .unique('label')
+    .items(
+      Joi.object()
+        .required()
+        .keys({
+          label: Joi.string().required(),
+          group: Joi.string().required(),
+          isConditional: Joi.boolean().default(false),
+          requiresAllConditionalPredicates: Joi.boolean().default(false),
+          conditionalPredicates: Joi.when('isConditional', {
+            is: true,
+            then: Joi.array()
+              .unique('elementId')
+              .min(1)
+              .items(ConditionalPredicatesItemSchema)
+              .required(),
+            otherwise: Joi.any().strip(),
+          }),
+        }),
+    ),
+
   postSubmissionAction: Joi.string()
     .required()
     .valid(...postSubmissionActions),

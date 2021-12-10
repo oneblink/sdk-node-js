@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `submissionEvents` in to `formEvents`.
+
+### Added
+
+- `approvalSteps` to form definition
+
 ## [0.18.4] - 2021-12-09
 
 ### Added
