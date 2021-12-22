@@ -27,6 +27,7 @@ import {
   FormsSearchResult,
   FormSubmissionHistorySearchParameters,
   FormSubmissionHistorySearchResults,
+  FormMigrationOptions,
 } from '../types'
 
 export default class Forms extends OneBlinkAPI {
@@ -785,6 +786,39 @@ export default class Forms extends OneBlinkAPI {
 
     await super.deleteRequest(
       `/forms/${formId}${overrideLock ? '?overrideLock=true' : ''}`,
+    )
+  }
+  /**
+   * #### Example
+   *
+   * ```javascript
+   * const formId = 1
+   * forms
+   *   .migrateForm({
+   *      formsAppEnvironmentId: 2,
+   *      sourceFormId: 123,
+   *      targetFormId: 234,
+   *      elements: true,
+   *      submissionEvents: false,
+   *      serverValidation: false,
+   *      externalIdGeneration: false,
+   *      postSubmissionAction: false,
+   *   })
+   *   .then((migratedForm) => {
+   *     // do something with form
+   *   })
+   *   .catch((error) => {
+   *     // Handle error here
+   *   })
+   * ```
+   *
+   * @param formId Id of the form.
+   * @param migrationOptions Migration options
+   */
+  async migrateForm(migrationOptions: FormMigrationOptions): Promise<void> {
+    await super.postRequest<FormMigrationOptions, FormTypes.Form>(
+      `/forms/${migrationOptions.sourceFormId}/migrate`,
+      migrationOptions,
     )
   }
   /**
