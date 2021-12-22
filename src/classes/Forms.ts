@@ -798,7 +798,7 @@ export default class Forms extends OneBlinkAPI {
    *     sourceFormId: 123,
    *     targetFormId: 234,
    *     elements: true,
-   *     workflowEvents: false,
+   *     submissionEvents: false,
    *     serverValidation: false,
    *     externalIdGeneration: false,
    *     postSubmissionAction: false,
