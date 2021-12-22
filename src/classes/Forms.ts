@@ -792,7 +792,7 @@ export default class Forms extends OneBlinkAPI {
    * #### Example
    *
    * ```javascript
-   * const formId = 1
+   *
    * forms
    *   .migrateForm({
    *      formsAppEnvironmentId: 2,
@@ -812,7 +812,7 @@ export default class Forms extends OneBlinkAPI {
    *   })
    * ```
    *
-   * @param formId Id of the form.
+   *
    * @param migrationOptions Migration options
    */
   async migrateForm(migrationOptions: FormMigrationOptions): Promise<void> {
