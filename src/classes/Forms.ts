@@ -792,17 +792,16 @@ export default class Forms extends OneBlinkAPI {
    * #### Example
    *
    * ```javascript
-   *
    * forms
    *   .migrateForm({
-   *      formsAppEnvironmentId: 2,
-   *      sourceFormId: 123,
-   *      targetFormId: 234,
-   *      elements: true,
-   *      submissionEvents: false,
-   *      serverValidation: false,
-   *      externalIdGeneration: false,
-   *      postSubmissionAction: false,
+   *     formsAppEnvironmentId: 2,
+   *     sourceFormId: 123,
+   *     targetFormId: 234,
+   *     elements: true,
+   *     submissionEvents: false,
+   *     serverValidation: false,
+   *     externalIdGeneration: false,
+   *     postSubmissionAction: false,
    *   })
    *   .then((migratedForm) => {
    *     // do something with form
@@ -811,7 +810,6 @@ export default class Forms extends OneBlinkAPI {
    *     // Handle error here
    *   })
    * ```
-   *
    *
    * @param migrationOptions Migration options
    */
