@@ -167,6 +167,8 @@ export interface FormMigrationOptions {
   elements: boolean
   /** should workflow events be migrated */
   submissionEvents: boolean
+  /** should approval steps be migrated */
+  approvalSteps: boolean
   /** should server validations be migrated */
   serverValidation: boolean
   /** should external id generation config be migrated */
