@@ -337,6 +337,7 @@ const formSchema = Joi.object().keys({
               .required(),
             otherwise: Joi.any().strip(),
           }),
+          approvalFormId: Joi.number(),
         }),
     ),
 
