@@ -133,7 +133,7 @@ export type EmailTemplatesSearchOptions = BaseSearchOptions & {
 
 export type FormSubmissionMetaResult = {
   formSubmissionmeta: SubmissionTypes.FormSubmissionMeta
-  formApprovalFormInstance?: ApprovalTypes.FormApprovalFlowInstance
+  formApprovalFlowInstance?: ApprovalTypes.FormApprovalFlowInstance
   formSubmissionApprovals?: ApprovalTypes.FormSubmissionApproval[]
 }
 
