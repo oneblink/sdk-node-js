@@ -131,6 +131,12 @@ export type EmailTemplatesSearchOptions = BaseSearchOptions & {
   formsAppEnvironmentId: number
 }
 
+export type FormSubmissionMetaResult = {
+  formSubmissionmeta: SubmissionTypes.FormSubmissionMeta
+  formApprovalFormInstance?: ApprovalTypes.FormApprovalFlowInstance
+  formSubmissionApprovals?: ApprovalTypes.FormSubmissionApproval[]
+}
+
 export { SendMailOptions }
 
 export type SendEmailResult = {
@@ -154,25 +160,25 @@ export type JobsSearchResult = MiscTypes.BaseSearchResult & {
 }
 
 export interface FormMigrationOptions {
-  /** formsAppEnvironmentId is required. The Forms App Environment to migrate to */
+  /** FormsAppEnvironmentId is required. The Forms App Environment to migrate to */
   formsAppEnvironmentId: number
-  /** sourceFormId is required. The form to migrate */
+  /** SourceFormId is required. The form to migrate */
   sourceFormId: number
   /**
-   * targetFormId can be omitted to create a new form, otherwise the form Id to
+   * TargetFormId can be omitted to create a new form, otherwise the form Id to
    * update in the target environment
    */
   targetFormId?: number
-  /** should form elements be migrated */
+  /** Should form elements be migrated */
   elements: boolean
-  /** should workflow events be migrated */
+  /** Should workflow events be migrated */
   submissionEvents: boolean
-  /** should approval steps be migrated */
+  /** Should approval steps be migrated */
   approvalSteps: boolean
-  /** should server validations be migrated */
+  /** Should server validations be migrated */
   serverValidation: boolean
-  /** should external id generation config be migrated */
+  /** Should external id generation config be migrated */
   externalIdGeneration: boolean
-  /** should the post submission action be migrated */
+  /** Should the post submission action be migrated */
   postSubmissionAction: boolean
 }
