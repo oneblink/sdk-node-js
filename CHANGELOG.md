@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `approvalFormId` to approvalSteps
+- `Forms.getFormSubmissionMeta()` method
 
 ## [0.18.6] - 2021-12-23
 

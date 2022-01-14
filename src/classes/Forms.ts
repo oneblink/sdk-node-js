@@ -28,6 +28,7 @@ import {
   FormSubmissionHistorySearchParameters,
   FormSubmissionHistorySearchResults,
   FormMigrationOptions,
+  FormSubmissionMetaResult,
 } from '../types'
 
 export default class Forms extends OneBlinkAPI {
@@ -819,6 +820,38 @@ export default class Forms extends OneBlinkAPI {
       `/forms/${migrationOptions.sourceFormId}/migrate`,
       migrationOptions,
     )
+  }
+
+  /**
+   * #### Example
+   *
+   * ```javascript
+   * const submissionId = 'f1eadc2b-79c8-4f97-8d92-cde64b34911f'
+   * forms
+   *   .getFormSubmissionMeta(submissionId)
+   *   .then(
+   *     ({
+   *       formSubmissionmeta,
+   *       formApprovalFlowInstance,
+   *       formSubmissionApprovals,
+   *     }) => {
+   *       // Use results here...
+   *     },
+   *   )
+   * ```
+   *
+   * @param submissionId The exact id of the submission you wish to get the meta
+   *   result for
+   */
+  getFormSubmissionMeta(
+    submissionId: string,
+  ): Promise<FormSubmissionMetaResult> {
+    if (!submissionId || typeof submissionId !== 'string') {
+      return Promise.reject(
+        new TypeError('Must supply "submissionId" as a number'),
+      )
+    }
+    return super.getRequest(`/form-submission-meta/${submissionId}`)
   }
   /**
    * A static method available on the forms class, used for validating a
