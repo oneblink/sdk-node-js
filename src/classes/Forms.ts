@@ -848,7 +848,7 @@ export default class Forms extends OneBlinkAPI {
   ): Promise<FormSubmissionMetaResult> {
     if (!submissionId || typeof submissionId !== 'string') {
       return Promise.reject(
-        new TypeError('Must supply "submissionId" as a number'),
+        new TypeError('Must supply "submissionId" as a string'),
       )
     }
     return super.getRequest(`/form-submission-meta/${submissionId}`)
