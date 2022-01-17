@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `approvalFormsInclusion` property to configuration for approval events that generate a PDF
 - `approvalFormId` to approvalSteps
 - `Forms.getFormSubmissionMeta()` method
 
