@@ -38,6 +38,17 @@ const emailSubmissionEventConfiguration = {
   }),
 }
 
+const approvalFormsInclusionConfiguration = {
+  approvalFormsInclusion: Joi.object().keys({
+    value: Joi.string().valid('ALL', 'PARTIAL'),
+    approvalStepLabels: Joi.when('value', {
+      is: 'PARTIAL',
+      then: Joi.array().required().unique().min(1).items(Joi.string()),
+      otherwise: Joi.any().strip(),
+    }),
+  }),
+}
+
 const usePagesAsBreaks = Joi.boolean()
 const includeSubmissionIdInPdf = Joi.boolean()
 const excludedElementIds = Joi.array()
@@ -50,6 +61,7 @@ const pdfSubmissionEventConfiguration = {
   includeSubmissionIdInPdf,
   excludedElementIds,
   usePagesAsBreaks,
+  ...approvalFormsInclusionConfiguration,
 }
 
 const formEventConditionalSchemas = {
@@ -138,6 +150,7 @@ const SubmissionEventSchema = Joi.object().keys({
       is: 'EMAIL',
       then: Joi.object().keys({
         ...emailSubmissionEventConfiguration,
+        ...approvalFormsInclusionConfiguration,
       }),
     })
     .when('type', {
@@ -187,6 +200,7 @@ const SubmissionEventSchema = Joi.object().keys({
           })
           .allow(null),
         groupFiles: Joi.boolean().default(false),
+        ...approvalFormsInclusionConfiguration,
       }),
     })
     .when('type', {
@@ -227,6 +241,7 @@ const SubmissionEventSchema = Joi.object().keys({
           .unique()
           .allow(null),
         encryptPdf: Joi.boolean().default(false),
+        ...approvalFormsInclusionConfiguration,
       }),
     })
     .when('type', {
@@ -252,6 +267,7 @@ const SubmissionEventSchema = Joi.object().keys({
             }),
           }),
         ),
+        ...approvalFormsInclusionConfiguration,
       }),
     }),
   ...formEventConditionalSchemas,

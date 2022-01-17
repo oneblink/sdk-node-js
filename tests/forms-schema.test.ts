@@ -6690,3 +6690,79 @@ describe('Section Element', () => {
     )
   })
 })
+
+describe('Approval Forms Inclusion Configuration', () => {
+  const form = {
+    id: 1,
+    name: 'string',
+    description: 'string',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: 'ORGANISATION_00000000001',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    isMultiPage: false,
+    isAuthenticated: true,
+    elements: [
+      {
+        id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+        type: 'text',
+        name: 'text',
+        label: 'text',
+      },
+    ],
+    tags: [],
+  }
+
+  test('Should save correct data when selecting "ALL"', () => {
+    const submissionEvent = {
+      type: 'PDF',
+      conditionallyExecute: false,
+      requiresAllConditionallyExecutePredicates: false,
+      configuration: {
+        email: 'developers@oneblink.io',
+        excludedElementIds: [],
+        approvalFormsInclusion: {
+          value: 'ALL',
+          approvalStepLabels: [],
+        },
+      },
+    }
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      approvalEvents: [submissionEvent],
+    })
+    expect(
+      // @ts-expect-error Types
+      validatedForm.approvalEvents?.[0].configuration.approvalFormsInclusion
+        .value,
+    ).toBe('ALL')
+    expect(
+      // @ts-expect-error Types
+      validatedForm.approvalEvents?.[0].configuration.approvalFormsInclusion
+        .approvalStepLabels,
+    ).toBe(undefined)
+  })
+
+  test('Should require "approvalStepLabels" when selecting "PARTIAL"', () => {
+    const submissionEvent = {
+      type: 'PDF',
+      conditionallyExecute: false,
+      requiresAllConditionallyExecutePredicates: false,
+      configuration: {
+        email: 'developers@oneblink.io',
+        excludedElementIds: [],
+        approvalFormsInclusion: {
+          value: 'PARTIAL',
+        },
+      },
+    }
+    expect(() =>
+      validateWithFormSchema({
+        ...form,
+        approvalEvents: [submissionEvent],
+      }),
+    ).toThrow(
+      '"approvalEvents[0].configuration.approvalFormsInclusion.approvalStepLabels" is required',
+    )
+  })
+})
