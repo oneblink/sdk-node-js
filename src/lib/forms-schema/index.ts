@@ -40,7 +40,7 @@ const emailSubmissionEventConfiguration = {
 
 const approvalFormsInclusionConfiguration = {
   approvalFormsInclusion: Joi.object().keys({
-    value: Joi.string().valid('ALL', 'PARTIAL'),
+    value: Joi.string().required().valid('ALL', 'PARTIAL'),
     approvalStepLabels: Joi.when('value', {
       is: 'PARTIAL',
       then: Joi.array().required().unique().min(1).items(Joi.string()),
