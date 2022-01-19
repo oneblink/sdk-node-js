@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.7] - 2022-01-19
+
 ### Added
 
 - `approvalFormsInclusion` property to configuration for approval events that generate a PDF
