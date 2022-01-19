@@ -158,27 +158,3 @@ export type FormsAppEnvironmentsSearchOptions = BaseSearchOptions
 export type JobsSearchResult = MiscTypes.BaseSearchResult & {
   jobs: SubmissionTypes.FormsAppJob[]
 }
-
-export interface FormMigrationOptions {
-  /** FormsAppEnvironmentId is required. The Forms App Environment to migrate to */
-  formsAppEnvironmentId: number
-  /** SourceFormId is required. The form to migrate */
-  sourceFormId: number
-  /**
-   * TargetFormId can be omitted to create a new form, otherwise the form Id to
-   * update in the target environment
-   */
-  targetFormId?: number
-  /** Should form elements be migrated */
-  elements: boolean
-  /** Should workflow events be migrated */
-  submissionEvents: boolean
-  /** Should approval steps be migrated */
-  approvalSteps: boolean
-  /** Should server validations be migrated */
-  serverValidation: boolean
-  /** Should external id generation config be migrated */
-  externalIdGeneration: boolean
-  /** Should the post submission action be migrated */
-  postSubmissionAction: boolean
-}

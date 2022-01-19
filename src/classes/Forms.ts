@@ -15,6 +15,7 @@ import {
   FormsAppsTypes,
   FormTypes,
   SubmissionTypes,
+  EnvironmentTypes,
 } from '@oneblink/types'
 import {
   validateConditionalPredicates,
@@ -27,7 +28,6 @@ import {
   FormsSearchResult,
   FormSubmissionHistorySearchParameters,
   FormSubmissionHistorySearchResults,
-  FormMigrationOptions,
   FormSubmissionMetaResult,
 } from '../types'
 
@@ -799,11 +799,19 @@ export default class Forms extends OneBlinkAPI {
    *     sourceFormId: 123,
    *     targetFormId: 234,
    *     elements: true,
+   *     approvalSteps: false,
    *     submissionEvents: false,
+   *     tags: true,
    *     approvalSteps: false,
    *     serverValidation: false,
    *     externalIdGeneration: false,
    *     postSubmissionAction: false,
+   *     embeddedForms: [
+   *       {
+   *         sourceElementId: 'acbd',
+   *         targetFormId: 678,
+   *       },
+   *     ],
    *   })
    *   .then((migratedForm) => {
    *     // do something with form
@@ -815,11 +823,13 @@ export default class Forms extends OneBlinkAPI {
    *
    * @param migrationOptions Migration options
    */
-  async migrateForm(migrationOptions: FormMigrationOptions): Promise<void> {
-    await super.postRequest<FormMigrationOptions, FormTypes.Form>(
-      `/forms/${migrationOptions.sourceFormId}/migrate`,
-      migrationOptions,
-    )
+  async migrateForm(
+    migrationOptions: EnvironmentTypes.FormMigrationData,
+  ): Promise<FormTypes.Form> {
+    return await super.postRequest<
+      EnvironmentTypes.FormMigrationData,
+      FormTypes.Form
+    >(`/forms/${migrationOptions.sourceFormId}/migrate`, migrationOptions)
   }
 
   /**
