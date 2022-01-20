@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
 - Switch migrateForm() param type to `EnvironmentTypes.FormMigrationData` and now return the migrated form
+- `contentDisposition` to use SDK-Core function instead
 
 ## [0.18.7] - 2022-01-19
 

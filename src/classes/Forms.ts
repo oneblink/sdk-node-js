@@ -1,6 +1,6 @@
 import AWS from 'aws-sdk'
 import { Stream } from 'stream'
-import contentDisposition from 'content-disposition'
+import { getContentDisposition } from '@oneblink/sdk-core'
 import generateFormUrl from '../lib/generate-form-url'
 import generateJWT from '../lib/generate-jwt'
 import getSubmissionData from '../lib/retrieve-submission-data'
@@ -490,7 +490,7 @@ export default class Forms extends OneBlinkAPI {
           CacheControl: 'max-age=31536000', // Max 1 year(365 days),
           Bucket: result.s3.bucket,
           Key: result.s3.key,
-          ContentDisposition: contentDisposition(fileName),
+          ContentDisposition: getContentDisposition(fileName),
           ContentType: contentType,
           ACL: isPrivate ? 'private' : 'public-read',
           Body: body,
