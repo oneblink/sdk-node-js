@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `createSubmissionAttachment` now returns `uploadedAt`
+
 ### Changed
 
 - Switch migrateForm() param type to `EnvironmentTypes.FormMigrationData` and now return the migrated form
