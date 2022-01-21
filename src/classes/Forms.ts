@@ -509,6 +509,7 @@ export default class Forms extends OneBlinkAPI {
       isPrivate,
       url: `${OneBlinkAPI.tenant.apiOrigin}/${result.s3.key}`,
       s3: result.s3,
+      uploadedAt: result.uploadedAt,
     }
   }
   /**
