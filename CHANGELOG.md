@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.8] - 2022-01-24
+
 ### Added
 
 - `createSubmissionAttachment` now returns `uploadedAt`
@@ -15,6 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Switch migrateForm() param type to `EnvironmentTypes.FormMigrationData` and now return the migrated form
 - `contentDisposition` to use SDK-Core function instead
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [0.3.3-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [0.2.4-beta.2](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- no longer depend upon [content-disposition](https://www.npmjs.com/package/content-disposition)
 
 ## [0.18.7] - 2022-01-19
 
