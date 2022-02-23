@@ -709,7 +709,7 @@ export default class Forms extends OneBlinkAPI {
    * @param newForm The form object to create.
    */
   async createForm(
-    newForm: Omit<FormTypes.Form, 'id'>,
+    newForm: Omit<FormTypes.Form, 'id' | 'createdAt' | 'updatedAt'>,
   ): Promise<FormTypes.Form> {
     const form = validateWithFormSchema(newForm)
     const savedForm = await super.postRequest<FormTypes.Form, FormTypes.Form>(
