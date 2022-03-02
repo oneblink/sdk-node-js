@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.9] - 2022-03-02
+
 ### Fixed
 
 `Forms.createForm()` no longer requires `createdAt` and `updatedAt` properties
