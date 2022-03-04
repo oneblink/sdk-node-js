@@ -8,13 +8,15 @@
   },
   "dependencies": {
     "@oneblink/sdk-core": "^0.3.3-beta.1",
-    "aws-sdk": "^2.994.0",
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^2.0.4",
     "node-fetch": "^2.6.5",
     "nodemailer": "^6.6.5",
     "uuid": "^8.3.2"
+  },
+  "peerDependencies": {
+    "aws-sdk": "^2.994.0"
   },
   "devDependencies": {
     "@oneblink/release-cli": "^1.0.0",
