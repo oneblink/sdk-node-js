@@ -15,9 +15,6 @@
     "nodemailer": "^6.6.5",
     "uuid": "^8.3.2"
   },
-  "peerDependencies": {
-    "aws-sdk": "^2.994.0"
-  },
   "devDependencies": {
     "@oneblink/release-cli": "^1.0.0",
     "@oneblink/types": "github:oneblink/types",
@@ -57,6 +54,9 @@
   "keywords": [],
   "license": "MIT",
   "main": "./tenants/oneblink.js",
+  "peerDependencies": {
+    "aws-sdk": "^2.994.0"
+  },
   "publishConfig": {
     "access": "public"
   },
