@@ -354,6 +354,7 @@ const formSchema = Joi.object().keys({
             otherwise: Joi.any().strip(),
           }),
           approvalFormId: Joi.number(),
+          clarificationRequestEmailTemplateId: Joi.number(),
         }),
     ),
 
