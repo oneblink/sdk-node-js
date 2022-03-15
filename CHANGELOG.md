@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.10] - 2022-03-15
+
 ### Added
 
 - `clarificationRequestEmailTemplateId` to `ApprovalSteps`
@@ -14,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - move `aws-sdk` from dependencies to peerDependencies
+
+### Dependencies
+
+- no longer depend upon [aws-sdk](https://www.npmjs.com/package/aws-sdk)
 
 ## [0.18.9] - 2022-03-02
 
