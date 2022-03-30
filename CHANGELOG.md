@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Breaking Changes
+
+- `FormsApps.setSendingAddress()` now returns the `FormsAppSendingAddressResponse` type instead of the `FormsAppSendingAddress`.
+
+### Added
+
+- `FormsApps.getSendingAddress()`
+
 ## [0.18.10] - 2022-03-15
 
 ### Added
@@ -25,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-`Forms.createForm()` no longer requires `createdAt` and `updatedAt` properties
+- `Forms.createForm()` no longer requires `createdAt` and `updatedAt` properties
 
 ## [0.18.8] - 2022-01-24
 

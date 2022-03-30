@@ -250,6 +250,28 @@ export default class FormsApps extends OneBlinkAPI {
   }
 
   /**
+   * Get the email address forms app emails will be sent from
+   *
+   * #### Example
+   *
+   * ```javascript
+   * const res = await formsAppsSDK.getSendingAddress(formsAppId)
+   * ```
+   *
+   * @param formsAppId The ID of the forms app you wish to get the sending address for
+   */
+  async getSendingAddress(
+    formsAppId: number,
+  ): Promise<FormsAppsTypes.FormsAppSendingAddressResponse> {
+    if (typeof formsAppId !== 'number') {
+      return Promise.reject(
+        new TypeError('Must supply "formsAppId" as a number'),
+      )
+    }
+
+    return super.getRequest(`/v2/forms-apps/${formsAppId}/sending-address`)
+  }
+  /**
    * Set the email address forms app emails will be sent from
    *
    * #### Example
@@ -271,7 +293,7 @@ export default class FormsApps extends OneBlinkAPI {
       emailAddress: string
       emailName?: string
     },
-  ): Promise<FormsAppsTypes.FormsAppSendingAddress> {
+  ): Promise<FormsAppsTypes.FormsAppSendingAddressResponse> {
     if (typeof formsAppId !== 'number') {
       return Promise.reject(
         new TypeError('Must supply "formsAppId" as a number'),
@@ -301,7 +323,7 @@ export default class FormsApps extends OneBlinkAPI {
       )
     }
 
-    return super.postRequest(`/forms-apps/${formsAppId}/sending-address`, {
+    return super.postRequest(`/v2/forms-apps/${formsAppId}/sending-address`, {
       emailAddress: sendingAddressConfig.emailAddress,
       emailName: sendingAddressConfig.emailName,
     })
