@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Validation for form's approval steps
+
 ## [0.19.0] - 2022-03-31
 
 ### Breaking Changes
