@@ -1,6 +1,6 @@
 // TODO: Check draft strip
 
-import { validateWithFormSchema } from '../src/lib/forms-validation'
+import { validateWithFormSchema } from '../../src/lib/forms-validation'
 
 // SCHEDULING Events
 describe('Scheduling events should throw errors when not passed to "schedulingEvents" property', () => {
