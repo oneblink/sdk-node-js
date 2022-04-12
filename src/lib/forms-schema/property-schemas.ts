@@ -118,22 +118,31 @@ export const ConditionalPredicatesItemSchema = Joi.object().keys({
   optionIds: Joi.when('type', {
     is: Joi.valid('OPTIONS'),
     then: Joi.array().min(1).items(Joi.string()).required(),
-    otherwise: Joi.allow(null),
+    otherwise: Joi.any().strip(),
   }),
   operator: Joi.when('type', {
     is: Joi.valid('NUMERIC'),
     then: Joi.string().valid('>', '>=', '===', '!==', '<=', '<').required(),
-    otherwise: Joi.allow(null),
+    otherwise: Joi.any().strip(),
+  }),
+  compareWith: Joi.when('type', {
+    is: Joi.valid('NUMERIC'),
+    then: Joi.valid('ELEMENT', 'VALUE'),
+    otherwise: Joi.any().strip(),
   }),
   value: Joi.when('type', {
     is: Joi.valid('NUMERIC'),
-    then: Joi.number().required(),
-    otherwise: Joi.allow(null),
+    then: Joi.when('compareWith', {
+      is: Joi.valid('ELEMENT').required(),
+      then: Joi.string().guid().required(),
+      otherwise: Joi.number().required(),
+    }),
+    otherwise: Joi.any().strip(),
   }),
   hasValue: Joi.when('type', {
     is: Joi.valid('VALUE'),
     then: Joi.boolean().required(),
-    otherwise: Joi.allow(null),
+    otherwise: Joi.any().strip(),
   }),
   min: Joi.when('type', {
     is: Joi.valid('BETWEEN'),
