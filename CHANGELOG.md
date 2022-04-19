@@ -7,9 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.1] - 2022-04-19
+
 ### Added
 
 - `compareWith` property to Conditional Predicates
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [0.4.0-beta.2](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [0.3.3-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update [joi](https://www.npmjs.com/package/joi) to 17.6.0 (from 17.4.2)
+
+- update [jwks-rsa](https://www.npmjs.com/package/jwks-rsa) to [2.0.5](https://github.com/auth0/node-jwks-rsa/releases/tag/v2.0.5) (from [2.0.4](https://github.com/auth0/node-jwks-rsa/releases/tag/v2.0.4))
+
+- update [nodemailer](https://www.npmjs.com/package/nodemailer) to [6.7.3](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md) (from [6.6.5](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md))
 
 ## [0.19.0] - 2022-03-31
 
