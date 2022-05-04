@@ -11,14 +11,14 @@ export default async function verifyJwt<T extends Record<string, unknown>>(
 
   const getSigningKey = (header: JwtHeader, callback: SigningKeyCallback) => {
     if (!header.kid) {
-      callback(new Error('jwt does not container a "kid" claim'))
+      callback(new Error('jwt does not contain a "kid" claim'))
       return
     }
     tenant.jwksInstance.getSigningKey(header.kid, (error, key) => {
       if (error) {
         callback(error)
       } else {
-        callback(null, key.getPublicKey())
+        callback(null, key?.getPublicKey())
       }
     })
   }
