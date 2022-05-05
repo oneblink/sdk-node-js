@@ -5884,4 +5884,65 @@ describe('Approval Forms Inclusion Configuration', () => {
       '"approvalEvents[0].configuration.approvalFormsInclusion.approvalStepLabels" is required',
     )
   })
+
+  describe('Valid Form Schema', () => {
+    const result = formSchema.validate({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      isMultiPage: false,
+      postSubmissionAction: 'FORMS_LIBRARY',
+      submissionEvents: [
+        {
+          type: 'CALLBACK',
+          configuration: {
+            url: 'https://domain.io/path',
+            secret: 'abc123',
+          },
+        },
+      ],
+      tags: [],
+      elements: [
+        {
+          id: '01c69734-2543-4cc5-a3ef-d12de468475a',
+          name: 'Text_Area      ',
+          label: 'Text Areass',
+          type: 'textarea',
+          required: false,
+          defaultValue: 'Multi line text',
+        },
+        {
+          id: '9014e80c-3c68-4adb-a338-1be04ebc95ee',
+          name: 'compliance',
+          label: 'Compliance Checkbox',
+          type: 'compliance',
+          required: false,
+          defaultValue: '8be1f1dd-ec3f-4537-bb70-f0f1c7c31b26',
+          options: [
+            {
+              id: '8be1f1dd-ec3f-4537-bb70-f0f1c7c31b26',
+              value: 'ONEvalue    ',
+              label: 'One',
+            },
+            {
+              id: '0729643a-5ffe-416d-8d4b-337e73e96714',
+              value: 'twovalue',
+              label: 'Two',
+            },
+            {
+              id: 'ada69988-a8b5-4a5e-84be-e998ea27287a',
+              value: 'threevalue',
+              label: 'Three',
+            },
+          ],
+        },
+      ],
+    })
+    test.only('should not have whitespace for element name', () => {
+      console.log(result.value.elements[1].options[0])
+      expect(result.value.elements[0].name).toBe('Text_Area')
+    })
+  })
 })
