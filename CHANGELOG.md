@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `FRESHDESK_ADD_NOTE_TO_TICKET` to form validation
+
 ### Changed
 
 - Element validation to trim whitespace on name and option set value
