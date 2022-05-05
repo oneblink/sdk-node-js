@@ -2719,6 +2719,49 @@ describe('Freshdesk Submission Event', () => {
   })
 })
 
+describe('Freshdesk add note Submission Event', () => {
+  test('should allow Freshdesk Add Note To Ticket submission event', () => {
+    const submissionEvents = [
+      {
+        type: 'FRESHDESK_ADD_NOTE_TO_TICKET',
+        conditionallyExecute: false,
+        requiresAllConditionallyExecutePredicates: false,
+        configuration: {},
+      },
+    ]
+    const { error, value } = formSchema.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            type: 'text',
+            name: 'firstName',
+            label: 'First Name',
+          },
+        ],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents,
+      },
+
+      {
+        abortEarly: false,
+        stripUnknown: true,
+      },
+    )
+    expect(error).toBe(undefined)
+    expect(value.submissionEvents).toEqual(submissionEvents)
+  })
+})
+
 describe('PDF submission event', () => {
   test('should allow Email submission event', () => {
     const submissionEvents = [

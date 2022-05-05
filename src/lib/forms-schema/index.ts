@@ -136,6 +136,7 @@ const SubmissionEventSchema = Joi.object().keys({
       'CP_HCMS',
       'CIVICA_CRM',
       'FRESHDESK_CREATE_TICKET',
+      'FRESHDESK_ADD_NOTE_TO_TICKET',
     ),
   configuration: Joi.object()
     .required()
@@ -269,6 +270,10 @@ const SubmissionEventSchema = Joi.object().keys({
         ),
         ...approvalFormsInclusionConfiguration,
       }),
+    })
+    .when('type', {
+      is: 'FRESHDESK_ADD_NOTE_TO_TICKET',
+      then: Joi.object().keys(approvalFormsInclusionConfiguration),
     }),
   ...formEventConditionalSchemas,
 })
