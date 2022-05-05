@@ -8,7 +8,7 @@ import {
 } from './common'
 
 export const id = Joi.string().guid().required()
-export const name = Joi.string().required()
+export const name = Joi.string().required().trim()
 export const label = Joi.string().required()
 
 export const hint = Joi.string()
@@ -40,7 +40,7 @@ const options = Joi.when('optionsType', {
     .items(
       Joi.object().keys({
         id: Joi.string().guid().required(),
-        value: Joi.string().required(),
+        value: Joi.string().required().trim(),
         label: Joi.string().required(),
         colour: Joi.string()
           .allow(null, '')
