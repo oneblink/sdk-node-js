@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.2] - 2022-05-10
+
 ### Added
 
 - `FRESHDESK_ADD_NOTE_TO_TICKET` to form validation
