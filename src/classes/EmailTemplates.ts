@@ -183,7 +183,7 @@ export default class EmailTemplates extends OneBlinkAPI {
     templateId: number
     submissionData: SubmissionTypes.S3SubmissionData
     submissionMeta: FormSubmissionMetaResult
-    mapping: Record<string, any>
+    mapping: Record<string, string>[]
     attachments: Attachment[]
     isDraft: boolean
     formsApp: FormsAppsTypes.FormsApp
