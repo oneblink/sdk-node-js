@@ -34,7 +34,10 @@ export type TenantBase = {
 export type TenantEnvironment = {
   apiOrigin: string
   pdfOrigin: string
+  consoleOrigin: string
   jwtIssuer: string
+  formatCurrency: (value: number) => string
+  formatNumber: (value: number) => string
 }
 
 export type TenantConfiguration = TenantBase & {
@@ -158,3 +161,7 @@ export type FormsAppEnvironmentsSearchOptions = BaseSearchOptions
 export type JobsSearchResult = MiscTypes.BaseSearchResult & {
   jobs: SubmissionTypes.FormsAppJob[]
 }
+
+export type Attachment = { attachmentUrl: string; fileName: string }
+
+export type TemplateBaseParams = { [key: string]: unknown; title: string }

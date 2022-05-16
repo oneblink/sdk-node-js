@@ -18,10 +18,15 @@ export default function generateTenant(
     apiOrigin: isTest
       ? tenantConfiguration.test.apiOrigin
       : tenantConfiguration.prod.apiOrigin,
+    consoleOrigin: isTest
+      ? tenantConfiguration.test.consoleOrigin
+      : tenantConfiguration.prod.consoleOrigin,
     jwtIssuer,
     jwksInstance: jwksClient({
       cache: true,
       jwksUri: `${jwtIssuer}/.well-known/jwks.json`,
     }),
+    formatCurrency: tenantConfiguration.prod.formatCurrency,
+    formatNumber: tenantConfiguration.prod.formatNumber,
   }
 }

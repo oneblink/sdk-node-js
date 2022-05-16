@@ -10,7 +10,10 @@
     "@oneblink/sdk-core": "^0.4.0-beta.2",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
+    "juice": "^8.0.0",
     "jwks-rsa": "^2.0.5",
+    "moment": "^2.29.3",
+    "mustache": "^4.2.0",
     "node-fetch": "^2.6.5",
     "nodemailer": "^6.7.3",
     "uuid": "^8.3.2"
@@ -22,6 +25,7 @@
     "@types/jest": "^27.4.1",
     "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^8.5.8",
+    "@types/mustache": "^4.1.2",
     "@types/node-fetch": "^2.6.1",
     "@types/nodemailer": "^6.4.4",
     "@types/uuid": "^8.3.4",
