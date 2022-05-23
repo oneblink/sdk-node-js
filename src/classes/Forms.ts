@@ -842,7 +842,7 @@ export default class Forms extends OneBlinkAPI {
    *   .getFormSubmissionMeta(submissionId)
    *   .then(
    *     ({
-   *       formSubmissionmeta,
+   *       formSubmissionMeta,
    *       formApprovalFlowInstance,
    *       formSubmissionApprovals,
    *     }) => {
