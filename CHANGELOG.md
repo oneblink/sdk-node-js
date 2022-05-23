@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `formSubmissionmeta` type renamed to `formSubmissionMeta`
 
+## [0.19.3] - 2022-05-20
+
 ## [0.19.2] - 2022-05-10
 
 ### Added
