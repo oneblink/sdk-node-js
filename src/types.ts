@@ -135,6 +135,7 @@ export type FormSubmissionMetaResult = {
   formSubmissionMeta: SubmissionTypes.FormSubmissionMeta
   formApprovalFlowInstance?: ApprovalTypes.FormApprovalFlowInstance
   formSubmissionApprovals?: ApprovalTypes.FormSubmissionApproval[]
+  formSubmissionPayment?: SubmissionTypes.FormSubmissionPayment
 }
 
 export { SendMailOptions }
