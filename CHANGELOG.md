@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `formSubmissionPayment` to result from `Forms.getFormSubmissionMeta()`
+- `formSubmissionPayments` to result from `Forms.getFormSubmissionMeta()`
 
 ## [0.19.4] - 2022-05-24
 
