@@ -845,7 +845,7 @@ export default class Forms extends OneBlinkAPI {
    *       formSubmissionMeta,
    *       formApprovalFlowInstance,
    *       formSubmissionApprovals,
-   *       formSubmissionPayment,
+   *       formSubmissionPayments,
    *     }) => {
    *       // Use results here...
    *     },
