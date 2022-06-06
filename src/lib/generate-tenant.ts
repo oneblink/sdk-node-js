@@ -12,9 +12,6 @@ export default function generateTenant(
 
   return {
     awsRegion: tenantConfiguration.awsRegion,
-    pdfOrigin: isTest
-      ? tenantConfiguration.test.pdfOrigin
-      : tenantConfiguration.prod.pdfOrigin,
     apiOrigin: isTest
       ? tenantConfiguration.test.apiOrigin
       : tenantConfiguration.prod.apiOrigin,
