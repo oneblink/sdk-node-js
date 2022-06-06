@@ -33,7 +33,6 @@ export type TenantBase = {
 
 export type TenantEnvironment = {
   apiOrigin: string
-  pdfOrigin: string
   jwtIssuer: string
 }
 
