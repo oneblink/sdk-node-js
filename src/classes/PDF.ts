@@ -26,11 +26,11 @@ export default class PDF extends OneBlinkAPI {
    * ```javascript
    * const fs = require('fs')
    * const util = require('util')
-   * 
+   *
    * const writeFileAsync = util.promisify(fs.writeFile)
-   * 
+   *
    * async function run() {
-   *     const buffer = await pdf.generateFormSubmissionPDF({
+   *   const buffer = await pdf.generateFormSubmissionPDF({
    *     formId: 1,
    *     submissionId: 'c63ec3ac-12ab-447c-951c-2815d0e6fc24',
    *     isDraft: false,
@@ -40,18 +40,19 @@ export default class PDF extends OneBlinkAPI {
    *   await writeFileAsync('./submission.pdf', buffer, 'binary')
    * }
    * ```
-   * @param options An object containing all parameters to be passed into the function. 
+   *
+   * @param options An object containing all parameters to be passed into the function.
    */
   async generateFormSubmissionPDF(options: {
-    /** The exact identifer of the form you wish to generate a pdf for  */
+    /** The exact identifer of the form you wish to generate a pdf for */
     formId: number
     /** The submission identifier generated after a successful form submission */
     submissionId: string
-    /** `true` if the submission is a draft submission, otherwise `false`  */
+    /** `true` if the submission is a draft submission, otherwise `false` */
     isDraft?: boolean
-    /** `true` to include the submission identifier in the PDF, otherwise `false`  */
+    /** `true` to include the submission identifier in the PDF, otherwise `false` */
     includeSubmissionIdInPdf?: boolean
-    /** Array of elements ids to be excluded from the PDF document   */
+    /** Array of elements ids to be excluded from the PDF document */
     excludedElementIds?: string[]
     /** Whether pages in the form submission should translate to page breaks in the PDF */
     usePagesAsBreaks?: boolean
@@ -85,7 +86,7 @@ export default class PDF extends OneBlinkAPI {
       )
     }
     const response = await super.request({
-      origin: OneBlinkAPI.tenant.pdfOrigin,
+      origin: OneBlinkAPI.tenant.apiOrigin,
       method: 'POST',
       path: `/forms/${formId}/submissions/${submissionId}/pdf-document?${urlSearchParams.toString()}`,
       headers: {
@@ -97,15 +98,15 @@ export default class PDF extends OneBlinkAPI {
     return response.buffer()
   }
 
-  
   /**
    * #### Example
+   *
    * ```javascript
    * const fs = require('fs')
    * const util = require('util')
-   * 
+   *
    * const writeFileAsync = util.promisify(fs.writeFile)
-   * 
+   *
    * async function run() {
    *   const buffer = await pdf.generatePDF({
    *     body: {
@@ -140,15 +141,15 @@ export default class PDF extends OneBlinkAPI {
    *   })
    *   await writeFileAsync('./custom.pdf', buffer, 'binary')
    * }
-   * 
-   * ``` */
+   * ```
+   */
   async generatePDF(options: PDFTypes.GeneratePDFOptions): Promise<Buffer> {
     if (!options || !options.body || !options.body.html) {
       throw new TypeError('Must supply "options.body.html" as a string')
     }
 
     const response = await super.request({
-      origin: OneBlinkAPI.tenant.pdfOrigin,
+      origin: OneBlinkAPI.tenant.apiOrigin,
       method: 'POST',
       path: '/pdf-document',
       body: JSON.stringify(options),
