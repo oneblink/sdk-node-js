@@ -119,16 +119,10 @@ export type FormSubmissionHistorySearchResults = MiscTypes.BaseSearchResult & {
 }
 
 export type EmailTemplatesSearchResult = {
-  formsAppEnvironments: EmailTemplateTypes.EmailTemplate[]
+  emailTemplates: EmailTemplateTypes.EmailTemplate[]
 } & MiscTypes.BaseSearchResult
 
-export type EmailTemplatesSearchOptions = BaseSearchOptions & {
-  /**
-   * Search on the `formsAppEnvironmentId` property of a email template. Must be
-   * the exact match of a `formsAppEnvironmentId`.
-   */
-  formsAppEnvironmentId: number
-}
+export type EmailTemplatesSearchOptions = BaseSearchOptions
 
 export type FormSubmissionMetaResult = {
   formSubmissionMeta: SubmissionTypes.FormSubmissionMeta

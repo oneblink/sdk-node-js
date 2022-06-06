@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- email templates to cater for multiple environments
 - PDF origin to API origin
 
 ## [0.19.5] - 2022-05-31
