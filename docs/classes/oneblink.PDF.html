@@ -11,7 +11,7 @@ const fs = require(&#39;fs&#39;)
 const util = require(&#39;util&#39;)</p>
 </div><div><p>const writeFileAsync = util.promisify(fs.writeFile)</p>
 <p>async function run() {
-    const buffer = await pdf.generateFormSubmissionPDF({
+  const buffer = await pdf.generateFormSubmissionPDF({
     formId: 1,
     submissionId: &#39;c63ec3ac-12ab-447c-951c-2815d0e6fc24&#39;,
     isDraft: false,
@@ -19,8 +19,9 @@ const util = require(&#39;util&#39;)</p>
     excludedElementIds: [&#39;1ae6d5f5-eade-411c-b85a-45fe40fe469e&#39;],
   })
   await writeFileAsync(&#39;./submission.pdf&#39;, buffer, &#39;binary&#39;)
-}
-```</p>
+}</p>
+<pre><code>
+</code></pre>
 </div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>options: <span class="tsd-signature-symbol">{ </span>excludedElementIds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>formId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>includeSubmissionIdInPdf<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>isDraft<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>submissionId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>usePagesAsBreaks<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
 <p>An object containing all parameters to be passed into the function.</p>
 </div></div><ul class="tsd-parameters"><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> excluded<wbr/>Element<wbr/>Ids<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
@@ -40,33 +41,6 @@ const util = require(&#39;util&#39;)</p>
 <a href="#example" id="example" style="color: inherit; text-decoration: none;">
   <h4>Example</h4>
 </a>
-<p>```javascript
-const fs = require(&#39;fs&#39;)
-const util = require(&#39;util&#39;)</p>
-</div><div><p>const writeFileAsync = util.promisify(fs.writeFile)</p>
-<p>async function run() {
-  const buffer = await pdf.generatePDF({
-    body: {
-      html: <code>        &lt;p&gt;I will be in the middle&lt;/p&gt;      </code>,
-    },
-    header: {
-      html: <code>      &lt;div style=&quot;font-size: 9px; margin: 0 15px; width: 100%; text-align: center;&quot;&gt;         I will be at the top of every page       &lt;/div&gt;      </code>,
-    },
-    footer: {
-      html: <code>      &lt;div style=&quot;font-size: 9px; margin: 0 15px; width: 100%; text-align: center;&quot;&gt;         I will be at the bottom of every page ({_BLINK_PAGE_NO_}/{_BLINK_PAGES_})       &lt;/div&gt;      </code>,
-    },
-    page: {
-      orientation: &#39;Portrait&#39;,
-      size: &#39;A4&#39;,
-      margins: {
-        top: &#39;15mm&#39;,
-        right: &#39;5mm&#39;,
-        bottom: &#39;15mm&#39;,
-        left: &#39;5mm&#39;,
-      },
-    },
-  })
-  await writeFileAsync(&#39;./custom.pdf&#39;, buffer, &#39;binary&#39;)
-}</p>
-<p>```</p>
+</div><div><pre><code class="language-javascript"><span class="hl-1">const</span><span class="hl-0"> </span><span class="hl-2">fs</span><span class="hl-0"> = </span><span class="hl-3">require</span><span class="hl-0">(</span><span class="hl-4">&#39;fs&#39;</span><span class="hl-0">)</span><br/><span class="hl-1">const</span><span class="hl-0"> </span><span class="hl-2">util</span><span class="hl-0"> = </span><span class="hl-3">require</span><span class="hl-0">(</span><span class="hl-4">&#39;util&#39;</span><span class="hl-0">)</span><br/><br/><span class="hl-1">const</span><span class="hl-0"> </span><span class="hl-2">writeFileAsync</span><span class="hl-0"> = </span><span class="hl-7">util</span><span class="hl-0">.</span><span class="hl-3">promisify</span><span class="hl-0">(</span><span class="hl-7">fs</span><span class="hl-0">.</span><span class="hl-7">writeFile</span><span class="hl-0">)</span><br/><br/><span class="hl-1">async</span><span class="hl-0"> </span><span class="hl-1">function</span><span class="hl-0"> </span><span class="hl-3">run</span><span class="hl-0">() {</span><br/><span class="hl-0">  </span><span class="hl-1">const</span><span class="hl-0"> </span><span class="hl-2">buffer</span><span class="hl-0"> = </span><span class="hl-6">await</span><span class="hl-0"> </span><span class="hl-7">pdf</span><span class="hl-0">.</span><span class="hl-3">generatePDF</span><span class="hl-0">({</span><br/><span class="hl-0">    </span><span class="hl-7">body:</span><span class="hl-0"> {</span><br/><span class="hl-0">      </span><span class="hl-7">html:</span><span class="hl-0"> </span><span class="hl-4">`</span><br/><span class="hl-4">        &lt;p&gt;I will be in the middle&lt;/p&gt;</span><br/><span class="hl-4">      `</span><span class="hl-0">,</span><br/><span class="hl-0">    },</span><br/><span class="hl-0">    </span><span class="hl-7">header:</span><span class="hl-0"> {</span><br/><span class="hl-0">      </span><span class="hl-7">html:</span><span class="hl-0"> </span><span class="hl-4">`</span><br/><span class="hl-4">      &lt;div style=&quot;font-size: 9px; margin: 0 15px; width: 100%; text-align: center;&quot;&gt;</span><br/><span class="hl-4">        I will be at the top of every page</span><br/><span class="hl-4">      &lt;/div&gt;</span><br/><span class="hl-4">      `</span><span class="hl-0">,</span><br/><span class="hl-0">    },</span><br/><span class="hl-0">    </span><span class="hl-7">footer:</span><span class="hl-0"> {</span><br/><span class="hl-0">      </span><span class="hl-7">html:</span><span class="hl-0"> </span><span class="hl-4">`</span><br/><span class="hl-4">      &lt;div style=&quot;font-size: 9px; margin: 0 15px; width: 100%; text-align: center;&quot;&gt;</span><br/><span class="hl-4">        I will be at the bottom of every page ({_BLINK_PAGE_NO_}/{_BLINK_PAGES_})</span><br/><span class="hl-4">      &lt;/div&gt;</span><br/><span class="hl-4">      `</span><span class="hl-0">,</span><br/><span class="hl-0">    },</span><br/><span class="hl-0">    </span><span class="hl-7">page:</span><span class="hl-0"> {</span><br/><span class="hl-0">      </span><span class="hl-7">orientation:</span><span class="hl-0"> </span><span class="hl-4">&#39;Portrait&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">      </span><span class="hl-7">size:</span><span class="hl-0"> </span><span class="hl-4">&#39;A4&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">      </span><span class="hl-7">margins:</span><span class="hl-0"> {</span><br/><span class="hl-0">        </span><span class="hl-7">top:</span><span class="hl-0"> </span><span class="hl-4">&#39;15mm&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">        </span><span class="hl-7">right:</span><span class="hl-0"> </span><span class="hl-4">&#39;5mm&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">        </span><span class="hl-7">bottom:</span><span class="hl-0"> </span><span class="hl-4">&#39;15mm&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">        </span><span class="hl-7">left:</span><span class="hl-0"> </span><span class="hl-4">&#39;5mm&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">      },</span><br/><span class="hl-0">    },</span><br/><span class="hl-0">  })</span><br/><span class="hl-0">  </span><span class="hl-6">await</span><span class="hl-0"> </span><span class="hl-3">writeFileAsync</span><span class="hl-0">(</span><span class="hl-4">&#39;./custom.pdf&#39;</span><span class="hl-0">, </span><span class="hl-7">buffer</span><span class="hl-0">, </span><span class="hl-4">&#39;binary&#39;</span><span class="hl-0">)</span><br/><span class="hl-0">}</span>
+</code></pre>
 </div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>options: <a href="../modules/types.PDFTypes.html#GeneratePDFOptions" class="tsd-signature-type" data-tsd-kind="Type alias">GeneratePDFOptions</a></h5></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></section></section></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class=""><a href="../modules.html">Modules</a></li><li class=" tsd-kind-module"><a href="../modules/civicplus.html">civicplus</a></li><li class="current tsd-kind-module"><a href="../modules/oneblink.html">oneblink</a></li><li class=" tsd-kind-module"><a href="../modules/types.html">types</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="current tsd-kind-class tsd-parent-kind-module"><a href="oneblink.PDF.html" class="tsd-kind-icon">PDF</a><ul><li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="oneblink.PDF.html#constructor" class="tsd-kind-icon">constructor</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="oneblink.PDF.html#generateFormSubmissionPDF" class="tsd-kind-icon">generate<wbr/>Form<wbr/>SubmissionPDF</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="oneblink.PDF.html#generatePDF" class="tsd-kind-icon">generatePDF</a></li></ul></li></ul></nav></div></div></div><footer class=""><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li><li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="overlay"></div><script src="../assets/main.js"></script></body></html>
