@@ -31,7 +31,6 @@ export default class EmailTemplates extends OneBlinkAPI {
    *
    * ```javascript
    * const searchParams = {
-   *   formsAppEnvironmentId: 1,
    *   limit: 1,
    *   offset: 0,
    * }
@@ -101,8 +100,13 @@ export default class EmailTemplates extends OneBlinkAPI {
    * const data = {
    *   id: 1,
    *   name: 'my updated template',
-   *   template: 'My email template {{custom:my-custom-tag}}',
-   *   formsAppEnvironmentId: 1,
+   *   organisationId: 'abc123',
+   *   environments: [
+   *     {
+   *       template: 'My email template {{custom:my-custom-tag}}',
+   *       formsAppEnvironmentId: 1,
+   *     },
+   *   ],
    *   type: 'FORM_SUBMISSION_EVENT_PDF',
    * }
    * const emailTemplate = await emailTemplates.updateEmailTemplate(data)
