@@ -14,7 +14,7 @@ export default class PDF extends OneBlinkAPI {
    *   accessKey: '123455678901ABCDEFGHIJKL',
    *   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
    * }
-   * const keys = new OneBlink.Keys(options)
+   * const pdf = new OneBlink.PDF(options)
    * ```
    */
   constructor(options: ConstructorOptions) {
@@ -23,6 +23,8 @@ export default class PDF extends OneBlinkAPI {
   }
 
   /**
+   * #### Example
+   *
    * ```javascript
    * const fs = require('fs')
    * const util = require('util')
