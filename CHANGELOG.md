@@ -7,10 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.6] - 2022-06-09
+
 ### Changed
 
 - email templates to cater for multiple environments
 - PDF origin to API origin
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [0.4.0](https://github.com/oneblink/sdk-core-js/releases/tag/v0.4.0) (from [0.4.0-beta.2](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update [jwks-rsa](https://www.npmjs.com/package/jwks-rsa) to [2.1.4](https://github.com/auth0/node-jwks-rsa/releases/tag/v2.1.4) (from [2.0.5](https://github.com/auth0/node-jwks-rsa/releases/tag/v2.0.5))
+
+- update [node-fetch](https://www.npmjs.com/package/node-fetch) to [2.6.7](https://github.com/node-fetch/node-fetch/releases/tag/v2.6.7) (from 2.6.5)
+
+- update [nodemailer](https://www.npmjs.com/package/nodemailer) to [6.7.5](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md) (from [6.7.3](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md))
 
 ## [0.19.5] - 2022-05-31
 
