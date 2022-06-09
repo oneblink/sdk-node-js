@@ -1,18 +1,18 @@
 {
   "name": "@oneblink/sdk",
   "description": "OneBlink SDK to serve as an entry point for all OneBlink Services in NodeJS",
-  "version": "0.19.6-beta.3",
+  "version": "0.19.6-beta.4",
   "author": "OneBlink <developers@oneblink.io> (https://oneblink.io)",
   "bugs": {
     "url": "https://github.com/oneblink/sdk-node-js/issues"
   },
   "dependencies": {
-    "@oneblink/sdk-core": "^0.4.0-beta.2",
+    "@oneblink/sdk-core": "^0.4.0",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
-    "jwks-rsa": "^2.0.5",
-    "node-fetch": "^2.6.5",
-    "nodemailer": "^6.7.3",
+    "jwks-rsa": "^2.1.4",
+    "node-fetch": "^2.6.7",
+    "nodemailer": "^6.7.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
