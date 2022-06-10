@@ -1,6 +1,11 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  moduleDirectories: ['src', 'node_modules'],
+  moduleDirectories: ['<rootDir>/src', 'node_modules'],
   roots: ['.', 'src'],
+  globals: {
+    'ts-jest': {
+      isolatedModules: true,
+    },
+  },
 }

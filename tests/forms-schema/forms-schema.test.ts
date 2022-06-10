@@ -1760,7 +1760,7 @@ test('should error if page element has child page element', () => {
   )
 
   expect(error?.details[0].message).toContain(
-    '"elements[0].elements[0].type" must be one of [abn, autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
+    '"elements[0].elements[0].type" must be one of [abn, autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, files, form, freskdeskDependentField, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -1843,7 +1843,7 @@ test('should error if isMultiPage is set to false', () => {
   )
 
   expect(error?.details[0].message).toContain(
-    '"elements[0].type" must be one of [abn, autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
+    '"elements[0].type" must be one of [abn, autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, files, form, freskdeskDependentField, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -2000,7 +2000,7 @@ test('should error if isMultiPage is false even if all root elements are pages',
   )
 
   expect(error?.details[0].message).toBe(
-    '"elements[0].type" must be one of [abn, autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, files, form, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
+    '"elements[0].type" must be one of [abn, autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, files, form, freskdeskDependentField, geoscapeAddress, heading, html, image, infoPage, location, number, pointAddress, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
   )
 })
 
