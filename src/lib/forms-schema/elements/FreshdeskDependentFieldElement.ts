@@ -11,7 +11,7 @@ import {
   optionsSchemas,
 } from '../property-schemas'
 
-export const type = 'freskdeskDependentField'
+export const type = 'freshdeskDependentField'
 
 export default Joi.object({
   id,

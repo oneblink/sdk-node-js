@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `freskdeskDependentField` form element
+- `freshdeskDependentField` form element
 
 ## [0.19.6] - 2022-06-09
 

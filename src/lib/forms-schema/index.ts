@@ -251,10 +251,23 @@ const SubmissionEventSchema = Joi.object().keys({
         mapping: Joi.array().items(
           Joi.object().keys({
             freshdeskFieldName: Joi.string().required(),
-            type: Joi.string().valid('FORM_ELEMENT', 'VALUE').required(),
+            type: Joi.string()
+              .valid('FORM_ELEMENT', 'VALUE', 'DEPENDENT_FIELD_VALUE')
+              .required(),
             formElementId: Joi.when('type', {
               is: 'FORM_ELEMENT',
               then: Joi.string().uuid().required(),
+              otherwise: Joi.any().strip(),
+            }),
+            dependentFieldValue: Joi.when('type', {
+              is: 'DEPENDENT_FIELD_VALUE',
+              then: Joi.object()
+                .keys({
+                  category: Joi.string().required(),
+                  subCategory: Joi.string().required(),
+                  item: Joi.string().required(),
+                })
+                .required(),
               otherwise: Joi.any().strip(),
             }),
             value: Joi.when('type', {
