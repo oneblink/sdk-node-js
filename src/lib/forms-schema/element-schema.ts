@@ -84,9 +84,9 @@ import SectionElement, {
 } from './elements/SectionElement'
 import BsbElement, { type as bsbElementType } from './elements/BsbElement'
 import AbnElement, { type as abnElementType } from './elements/AbnElement'
-import FreskdeskDependentFieldElement, {
-  type as freskdeskDependentFieldType,
-} from './elements/FreskdeskDependentFieldElement'
+import FreshdeskDependentFieldElement, {
+  type as freshdeskDependentFieldType,
+} from './elements/FreshdeskDependentFieldElement'
 // Creating an object here so we get a Typescript error when adding a
 // new element type and forgetting to add to the array of allowed types
 const elementTypesMap: Record<
@@ -128,7 +128,7 @@ const elementTypesMap: Record<
   [sectionElementType]: null,
   [bsbElementType]: null,
   [abnElementType]: null,
-  [freskdeskDependentFieldType]: null,
+  [freshdeskDependentFieldType]: null,
 }
 
 const typeCase = (type: FormTypes.FormElementType) => {
@@ -248,8 +248,8 @@ const schema = Joi.object({
   .when(typeCase('abn'), {
     then: AbnElement,
   })
-  .when(typeCase(freskdeskDependentFieldType), {
-    then: FreskdeskDependentFieldElement,
+  .when(typeCase(freshdeskDependentFieldType), {
+    then: FreshdeskDependentFieldElement,
   })
 
 export default schema
