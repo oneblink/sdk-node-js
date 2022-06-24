@@ -97,7 +97,9 @@ export default class Approvals extends OneBlinkAPI {
    *
    * ```javascript
    * const formSubmissionApproval =
-   *   await approvals.getFormApprovalFlowInstance(1)
+   *   await approvals.getFormSubmissionApproval(
+   *     'aaaaaaaa-bbbb-4543-cccc-addddd543454',
+   *   )
    * // Use data here...
    * ```
    *
