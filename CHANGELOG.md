@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- PDF configuration options to allow appropriate submission events, including the new configuration `includePaymentInPdf`
+
 ### Fixed
 
 - `approvals.getFormSubmissionApproval()` docs

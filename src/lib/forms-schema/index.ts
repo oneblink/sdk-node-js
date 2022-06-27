@@ -49,18 +49,16 @@ const approvalFormsInclusionConfiguration = {
   }),
 }
 
-const usePagesAsBreaks = Joi.boolean()
-const includeSubmissionIdInPdf = Joi.boolean()
-const excludedElementIds = Joi.array()
-  .items(Joi.string().guid())
-  .unique()
-  .allow(null)
-  .default([])
 const pdfSubmissionEventConfiguration = {
   pdfFileName: Joi.string().allow(null, ''),
-  includeSubmissionIdInPdf,
-  excludedElementIds,
-  usePagesAsBreaks,
+  includeSubmissionIdInPdf: Joi.boolean(),
+  includePaymentInPdf: Joi.boolean(),
+  excludedElementIds: Joi.array()
+    .items(Joi.string().guid())
+    .unique()
+    .allow(null)
+    .default([]),
+  usePagesAsBreaks: Joi.boolean(),
   ...approvalFormsInclusionConfiguration,
 }
 
@@ -120,6 +118,7 @@ const SchedulingEventSchema = Joi.object({
         nameElementId: Joi.string().guid(),
         emailElementId: Joi.string().guid(),
         emailDescription: Joi.string(),
+        ...pdfSubmissionEventConfiguration,
       }),
     }),
   ...formEventConditionalSchemas,
@@ -191,9 +190,6 @@ const SubmissionEventSchema = Joi.object().keys({
           uri: Joi.number().required(),
           label: Joi.string().required(),
         }),
-        includeSubmissionIdInPdf,
-        excludedElementIds,
-        usePagesAsBreaks,
         author: Joi.object()
           .keys({
             uri: Joi.number().required(),
@@ -201,7 +197,7 @@ const SubmissionEventSchema = Joi.object().keys({
           })
           .allow(null),
         groupFiles: Joi.boolean().default(false),
-        ...approvalFormsInclusionConfiguration,
+        ...pdfSubmissionEventConfiguration,
       }),
     })
     .when('type', {
@@ -242,7 +238,7 @@ const SubmissionEventSchema = Joi.object().keys({
           .unique()
           .allow(null),
         encryptPdf: Joi.boolean().default(false),
-        ...approvalFormsInclusionConfiguration,
+        ...pdfSubmissionEventConfiguration,
       }),
     })
     .when('type', {
