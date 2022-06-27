@@ -1,5 +1,4 @@
-import { URLSearchParams } from 'url'
-import { PDFTypes } from '@oneblink/types'
+import { PDFTypes, SubmissionEventTypes } from '@oneblink/types'
 import OneBlinkAPI from '../lib/one-blink-api'
 import { ConstructorOptions } from '../types'
 
@@ -45,37 +44,31 @@ export default class PDF extends OneBlinkAPI {
    *
    * @param options An object containing all parameters to be passed into the function.
    */
-  async generateFormSubmissionPDF(options: {
-    /** The exact identifier of the form you wish to generate a pdf for */
-    formId: number
-    /** The submission identifier generated after a successful form submission */
-    submissionId: string
-    /** `true` if the submission is a draft submission, otherwise `false` */
-    isDraft?: boolean
-    /**
-     * `true` to include the payment details associated with the submission in
-     * the PDF, otherwise `false`
-     */
-    includePaymentInPdf?: boolean
-    /** `true` to include the submission identifier in the PDF, otherwise `false` */
-    includeSubmissionIdInPdf?: boolean
-    /** Array of elements ids to be excluded from the PDF document */
-    excludedElementIds?: string[]
-    /** Whether pages in the form submission should translate to page breaks in the PDF */
-    usePagesAsBreaks?: boolean
-  }): Promise<Buffer> {
+  async generateFormSubmissionPDF(
+    options: {
+      /** The exact identifier of the form you wish to generate a pdf for */
+      formId: number
+      /** The submission identifier generated after a successful form submission */
+      submissionId: string
+      /** `true` if the submission is a draft submission, otherwise `false` */
+      isDraft?: boolean
+      /**
+       * `true` to include the payment details associated with the submission in
+       * the PDF, otherwise `false`
+       */
+      includePaymentInPdf?: boolean
+      /** `true` to include the submission identifier in the PDF, otherwise `false` */
+      includeSubmissionIdInPdf?: boolean
+      /** Array of elements ids to be excluded from the PDF document */
+      excludedElementIds?: string[]
+      /** Whether pages in the form submission should translate to page breaks in the PDF */
+      usePagesAsBreaks?: boolean
+    } & SubmissionEventTypes.ApprovalFormsInclusionConfiguration,
+  ): Promise<Buffer> {
     if (!options) {
       throw new TypeError('Must supply "options" as a string')
     }
-    const {
-      submissionId,
-      formId,
-      isDraft,
-      includeSubmissionIdInPdf,
-      excludedElementIds,
-      usePagesAsBreaks,
-      includePaymentInPdf,
-    } = options
+    const { submissionId, formId, ...body } = options
     if (!submissionId || typeof submissionId !== 'string') {
       throw new TypeError('Must supply "options.submissionId" as a string')
     }
@@ -83,28 +76,14 @@ export default class PDF extends OneBlinkAPI {
       throw new TypeError('Must supply "options.formId" as a number')
     }
 
-    const urlSearchParams = new URLSearchParams()
-    if (isDraft !== undefined) {
-      urlSearchParams.append('isDraft', isDraft.toString())
-    }
-    if (includeSubmissionIdInPdf !== undefined) {
-      urlSearchParams.append(
-        'includeSubmissionIdInPdf',
-        includeSubmissionIdInPdf.toString(),
-      )
-    }
     const response = await super.request({
       origin: OneBlinkAPI.tenant.apiOrigin,
       method: 'POST',
-      path: `/forms/${formId}/submissions/${submissionId}/pdf-document?${urlSearchParams.toString()}`,
+      path: `/forms/${formId}/submissions/${submissionId}/pdf-document`,
       headers: {
         Accept: `application/pdf`,
       },
-      body: JSON.stringify({
-        excludedElementIds,
-        usePagesAsBreaks,
-        includePaymentInPdf,
-      }),
+      body: JSON.stringify(body),
     })
 
     return response.buffer()
