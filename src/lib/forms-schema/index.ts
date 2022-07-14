@@ -123,7 +123,7 @@ const SchedulingEventSchema = Joi.object({
     }),
   ...formEventConditionalSchemas,
 })
-const SubmissionEventSchema = Joi.object().keys({
+export const WorkflowEventSchema = Joi.object().keys({
   type: Joi.string()
     .required()
     .valid(
@@ -342,11 +342,11 @@ const formSchema = Joi.object().keys({
   publishStartDate: Joi.string().isoDate(),
   publishEndDate: Joi.string().isoDate(),
   // Form Events and Workflow
-  draftEvents: Joi.array().items(SubmissionEventSchema),
+  draftEvents: Joi.array().items(WorkflowEventSchema),
   schedulingEvents: Joi.array().items(SchedulingEventSchema),
   paymentEvents: Joi.array().items(PaymentEventSchema),
-  submissionEvents: Joi.array().allow(null).items(SubmissionEventSchema),
-  approvalEvents: Joi.array().items(SubmissionEventSchema),
+  submissionEvents: Joi.array().allow(null).items(WorkflowEventSchema),
+  approvalEvents: Joi.array().items(WorkflowEventSchema),
   approvalSteps: Joi.array()
     .min(1)
     .unique('label')
