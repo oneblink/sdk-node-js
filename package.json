@@ -1,7 +1,7 @@
 {
   "name": "@oneblink/sdk",
   "description": "OneBlink SDK to serve as an entry point for all OneBlink Services in NodeJS",
-  "version": "0.19.8",
+  "version": "0.19.9-beta.1",
   "author": "OneBlink <developers@oneblink.io> (https://oneblink.io)",
   "bugs": {
     "url": "https://github.com/oneblink/sdk-node-js/issues"
@@ -35,7 +35,7 @@
     "prettier": "^2.6.2",
     "prettier-plugin-jsdoc": "^0.3.38",
     "ts-jest": "^27.1.4",
-    "typedoc": "^0.22.15",
+    "typedoc": "^0.22.18",
     "typescript": "^4.6.3"
   },
   "directories": {
