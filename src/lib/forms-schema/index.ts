@@ -76,7 +76,7 @@ const formEventConditionalSchemas = {
   }),
 }
 
-const PaymentEventSchema = Joi.object({
+export const PaymentEventSchema = Joi.object({
   type: Joi.string().required().valid('CP_PAY', 'BPOINT', 'WESTPAC_QUICK_WEB'),
   configuration: Joi.object()
     .required()
@@ -106,7 +106,7 @@ const PaymentEventSchema = Joi.object({
     }),
   ...formEventConditionalSchemas,
 })
-const SchedulingEventSchema = Joi.object({
+export const SchedulingEventSchema = Joi.object({
   type: Joi.string().required().valid('SCHEDULING'),
   configuration: Joi.object()
     .required()
