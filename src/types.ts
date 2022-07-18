@@ -140,7 +140,7 @@ export type FormSubmissionMetaResult = {
   formSubmissionApprovals?: ApprovalTypes.FormSubmissionApproval[]
   /**
    * The payments made after the submission if the form had a payment event
-   * configured on the time of submission
+   * configured at the time of submission
    */
   formSubmissionPayments?: SubmissionTypes.FormSubmissionPayment[]
   /** The workflow events containing a status for each */
