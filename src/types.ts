@@ -130,7 +130,7 @@ export type FormSubmissionMetaResult = {
   formSubmissionMeta: SubmissionTypes.FormSubmissionMeta
   /**
    * The approval flow related to the submission if the form had an approval
-   * flow configured on the time of submission
+   * flow configured at the time of submission
    */
   formApprovalFlowInstance?: ApprovalTypes.FormApprovalFlowInstance
   /**
