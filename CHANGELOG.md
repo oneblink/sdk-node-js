@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 `SchedulingEventSchema` export for use in the OB api
 `PaymentEventSchema` export for use in the OB api
 
+- `formSubmissionWorkflowEvents` and `formSubmissionSchedulingBooking` to result from `Forms.getFormSubmissionMeta()`
+
 ## [0.19.8] - 2022-06-29
 
 ### Added
