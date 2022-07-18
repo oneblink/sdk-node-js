@@ -147,7 +147,7 @@ export type FormSubmissionMetaResult = {
   formSubmissionWorkflowEvents?: SubmissionTypes.FormSubmissionWorkflowEvent[]
   /**
    * The bookings made after the submission if the form had a scheduling vent
-   * configured on the time of submission
+   * configured at the time of submission
    */
   formSubmissionSchedulingBooking?: SchedulingTypes.SchedulingBooking
 }
