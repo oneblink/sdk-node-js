@@ -6,6 +6,7 @@ import {
   SubmissionTypes,
   MiscTypes,
   AWSTypes,
+  SchedulingTypes,
 } from '@oneblink/types'
 import jwksClient from 'jwks-rsa'
 import { SendMailOptions } from 'nodemailer'
@@ -125,10 +126,30 @@ export type EmailTemplatesSearchResult = {
 export type EmailTemplatesSearchOptions = BaseSearchOptions
 
 export type FormSubmissionMetaResult = {
+  /** The meta record for the submission */
   formSubmissionMeta: SubmissionTypes.FormSubmissionMeta
+  /**
+   * The approval flow related to the submission if the form had an approval
+   * flow configured on the time of submission
+   */
   formApprovalFlowInstance?: ApprovalTypes.FormApprovalFlowInstance
+  /**
+   * The approvals related to the approval flow if the form had an approval flow
+   * configured on the time of submission
+   */
   formSubmissionApprovals?: ApprovalTypes.FormSubmissionApproval[]
+  /**
+   * The payments made after the submission if the form had a payment event
+   * configured on the time of submission
+   */
   formSubmissionPayments?: SubmissionTypes.FormSubmissionPayment[]
+  /** The workflow events containing a status for each */
+  formSubmissionWorkflowEvents?: SubmissionTypes.FormSubmissionWorkflowEvent[]
+  /**
+   * The bookings made after the submission if the form had a scheduling vent
+   * configured on the time of submission
+   */
+  formSubmissionSchedulingBooking?: SchedulingTypes.SchedulingBooking
 }
 
 export { SendMailOptions }
