@@ -22,8 +22,7 @@ const validateFormEvents = ({
     const formEvent = formEvents[formEventIndex]
     validateFormEvent({
       formEvent,
-      formEventIndex,
-      propertyName,
+      propertyName: `${propertyName}[${formEventIndex}]`,
       rootFormElements,
       validatedFormElements,
     })
@@ -31,15 +30,13 @@ const validateFormEvents = ({
 }
 export default validateFormEvents
 
-const validateFormEvent = ({
+export const validateFormEvent = ({
   formEvent,
-  formEventIndex,
   rootFormElements,
   validatedFormElements,
   propertyName,
 }: {
   formEvent: SubmissionEventTypes.FormEvent
-  formEventIndex: number
   rootFormElements: FormTypes.FormElement[]
   validatedFormElements: FormTypes.FormElement[]
   propertyName: string
@@ -65,7 +62,7 @@ const validateFormEvent = ({
         )
       ) {
         throw new Error(
-          `"${propertyName}[${formEventIndex}].conditionallyExecutePredicates[${conditionallyExecutePredicateIndex}].elementId" (${conditionallyExecutePredicate.elementId}) does not exist in "elements"`,
+          `"${propertyName}.conditionallyExecutePredicates[${conditionallyExecutePredicateIndex}].elementId" (${conditionallyExecutePredicate.elementId}) does not exist in "elements"`,
         )
       }
     }
@@ -80,12 +77,12 @@ const validateFormEvent = ({
       )
       if (!formElement) {
         throw new Error(
-          `"${propertyName}[${formEventIndex}].configuration.elementId" (${formEvent.configuration.elementId}) does not exist in "elements"`,
+          `"${propertyName}.configuration.elementId" (${formEvent.configuration.elementId}) does not exist in "elements"`,
         )
       }
       if (formElement.type !== 'number' && formElement.type !== 'calculation') {
         throw new Error(
-          `"${propertyName}[${formEventIndex}].configuration.elementId" (${formEvent.configuration.elementId}) references a form element that is not a "number" or "calculation" element.`,
+          `"${propertyName}.configuration.elementId" (${formEvent.configuration.elementId}) references a form element that is not a "number" or "calculation" element.`,
         )
       }
       break
@@ -98,12 +95,12 @@ const validateFormEvent = ({
         )
         if (!formElement) {
           throw new Error(
-            `"${propertyName}[${formEventIndex}].configuration.nameElementId" (${nameElementId}) does not exist in "elements"`,
+            `"${propertyName}.configuration.nameElementId" (${nameElementId}) does not exist in "elements"`,
           )
         }
         if (formElement.type !== 'text') {
           throw new Error(
-            `"${propertyName}[${formEventIndex}].configuration.nameElementId" (${nameElementId}) references a form element that is not a "text" element.`,
+            `"${propertyName}.configuration.nameElementId" (${nameElementId}) references a form element that is not a "text" element.`,
           )
         }
       }
@@ -114,12 +111,12 @@ const validateFormEvent = ({
         )
         if (!formElement) {
           throw new Error(
-            `"${propertyName}[${formEventIndex}].configuration.emailElementId" (${emailElementId}) does not exist in "elements"`,
+            `"${propertyName}.configuration.emailElementId" (${emailElementId}) does not exist in "elements"`,
           )
         }
         if (formElement.type !== 'email') {
           throw new Error(
-            `"${propertyName}[${formEventIndex}].configuration.emailElementId" (${emailElementId}) references a form element that is not an "email" element.`,
+            `"${propertyName}.configuration.emailElementId" (${emailElementId}) references a form element that is not an "email" element.`,
           )
         }
       }
@@ -134,7 +131,7 @@ const validateFormEvent = ({
         const { formElementId } = formEvent.configuration.mapping[mappingIndex]
         if (!rootFormElements.some(({ id }) => id === formElementId)) {
           throw new Error(
-            `"${propertyName}[${formEventIndex}].configuration.mapping[${mappingIndex}].formElementId" (${formElementId}) does not exist in "elements"`,
+            `"${propertyName}.configuration.mapping[${mappingIndex}].formElementId" (${formElementId}) does not exist in "elements"`,
           )
         }
       }
@@ -181,7 +178,6 @@ const validateFormEvent = ({
       validateEmailTemplateMappingElements({
         formEvent,
         validatedFormElements,
-        formEventIndex,
         propertyName,
       })
       if (formEvent.configuration.excludedElementIds) {
@@ -203,7 +199,6 @@ const validateFormEvent = ({
       validateEmailTemplateMappingElements({
         formEvent,
         validatedFormElements,
-        formEventIndex,
         propertyName,
       })
       break
@@ -212,7 +207,6 @@ const validateFormEvent = ({
       validateFreshdeskCreateTicketMappingElements({
         formEvent,
         validatedFormElements,
-        formEventIndex,
         propertyName,
       })
       break
@@ -226,15 +220,13 @@ const validateFormEvent = ({
 function validateEmailTemplateMappingElements({
   formEvent,
   validatedFormElements,
-  formEventIndex,
   propertyName,
 }: {
   formEvent:
     | SubmissionEventTypes.EmailOnlySubmissionEvent
     | SubmissionEventTypes.PdfSubmissionEvent
   validatedFormElements: FormTypes.FormElement[]
-  formEventIndex: number
-  propertyName: string
+  propertyName?: string
 }) {
   if (formEvent.configuration.emailTemplate) {
     for (
@@ -252,7 +244,7 @@ function validateEmailTemplateMappingElements({
         )
         if (!element) {
           throw new Error(
-            `"${propertyName}[${formEventIndex}].configuration.mapping[${mappingIndex}].formElementId" (${mapping.formElementId}) does not exist in "elements".`,
+            `"${propertyName}.configuration.mapping[${mappingIndex}].formElementId" (${mapping.formElementId}) does not exist in "elements".`,
           )
         }
       }
@@ -263,13 +255,11 @@ function validateEmailTemplateMappingElements({
 function validateFreshdeskCreateTicketMappingElements({
   formEvent,
   validatedFormElements,
-  formEventIndex,
   propertyName,
 }: {
   formEvent: SubmissionEventTypes.FreshdeskCreateTicketSubmissionEvent
   validatedFormElements: FormTypes.FormElement[]
-  formEventIndex: number
-  propertyName: string
+  propertyName?: string
 }) {
   for (
     let mappingIndex = 0;
@@ -284,7 +274,7 @@ function validateFreshdeskCreateTicketMappingElements({
       )
       if (!element) {
         throw new Error(
-          `"${propertyName}[${formEventIndex}].configuration.mapping[${mappingIndex}].formElementId" (${mapping.formElementId}) does not exist in "elements".`,
+          `"${propertyName}.configuration.mapping[${mappingIndex}].formElementId" (${mapping.formElementId}) does not exist in "elements".`,
         )
       }
     }

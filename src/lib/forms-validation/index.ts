@@ -1,11 +1,16 @@
 import Joi from 'joi'
 import { formElementsService } from '@oneblink/sdk-core'
-import { FormTypes, ConditionTypes } from '@oneblink/types'
+import {
+  FormTypes,
+  ConditionTypes,
+  SubmissionEventTypes,
+} from '@oneblink/types'
 import {
   elementSchema,
   formSchema,
   pageElementSchema,
   apiRequestSchema,
+  WorkflowEventSchema,
 } from '../forms-schema'
 import { ConditionalPredicatesItemSchema } from '../forms-schema/property-schemas'
 import {
@@ -13,7 +18,23 @@ import {
   getRootFormElements,
   validateElementNamesAcrossNestedElements,
 } from './common'
-import validateFormEvents from './validate-form-events'
+import validateFormEvents, { validateFormEvent } from './validate-form-events'
+
+function validateFormEventData(
+  formElements: FormTypes.FormElement[],
+  workflowEvent: unknown,
+): SubmissionEventTypes.FormEvent {
+  const formEvent = validateJoiSchema(workflowEvent, WorkflowEventSchema, {
+    stripUnknown: true,
+  }) as SubmissionEventTypes.FormEvent
+  validateFormEvent({
+    formEvent,
+    propertyName: 'formEvent',
+    validatedFormElements: formElements,
+    rootFormElements: getRootFormElements(formElements),
+  })
+  return formEvent
+}
 
 function validateWithFormSchema(form?: unknown): FormTypes.Form {
   const validatedForm: FormTypes.Form = validateJoiSchema(form, formSchema, {
@@ -156,6 +177,7 @@ function validateApiRequest(
 }
 
 export {
+  validateFormEventData,
   validateWithFormSchema,
   validateWithElementSchema,
   validateWithPageElementSchema,
