@@ -6,7 +6,6 @@ import generateJWT from '../lib/generate-jwt'
 import getSubmissionData from '../lib/retrieve-submission-data'
 import OneBlinkAPI from '../lib/one-blink-api'
 import setPreFillData from '../lib/pre-fill-data'
-import { validateWithFormSchema } from '../lib/forms-validation'
 import generateFormElement from '../lib/generate-form-element'
 import generatePageElement from '../lib/generate-page-element'
 import { encryptUserToken, decryptUserToken } from '../lib/user-token-helpers'
@@ -16,8 +15,11 @@ import {
   FormTypes,
   SubmissionTypes,
   EnvironmentTypes,
+  SubmissionEventTypes,
 } from '@oneblink/types'
 import {
+  validateWithFormSchema,
+  validateFormEventData,
   validateConditionalPredicates,
   validateApiRequest,
 } from '../lib/forms-validation'
@@ -895,6 +897,20 @@ export default class Forms extends OneBlinkAPI {
   static validateForm(form: unknown): FormTypes.Form {
     const validatedForm = validateWithFormSchema(form)
     return validatedForm
+  }
+  /**
+   * A static method available on the forms class, used for validating a
+   * OneBlink Form Event.
+   *
+   * @param data The untrusted data to validate
+   * @param formElements The form elements to validate against the event
+   * @returns A trusted form event
+   */
+  static validateFormEvent(
+    formElements: FormTypes.FormElement[],
+    data: unknown,
+  ): SubmissionEventTypes.FormEvent {
+    return validateFormEventData(formElements, data)
   }
   /**
    * A static method available on the forms class, used for both creating and
