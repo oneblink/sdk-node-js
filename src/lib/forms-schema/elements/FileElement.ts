@@ -7,6 +7,7 @@ import {
   readOnly,
   hint,
   conditionallyShowSchemas,
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'file'
@@ -25,6 +26,6 @@ export default Joi.object({
     otherwise: Joi.any().strip(),
   }),
   allowExtensionlessAttachments: Joi.boolean().default(false),
-
   ...conditionallyShowSchemas,
+  customCssClasses,
 })

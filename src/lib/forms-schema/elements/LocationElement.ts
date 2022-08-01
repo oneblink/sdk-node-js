@@ -8,6 +8,7 @@ import {
   hint,
   conditionallyShowSchemas,
   lookupSchemas,
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'location'
@@ -21,4 +22,5 @@ export default Joi.object({
   hint,
   ...lookupSchemas,
   ...conditionallyShowSchemas,
+  customCssClasses,
 })

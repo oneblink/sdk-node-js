@@ -11,6 +11,7 @@ import {
   buttons,
   optionsSchemas,
   defaultValueOptionsSingle,
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'radio'
@@ -27,4 +28,5 @@ export default Joi.object({
   defaultValue: defaultValueOptionsSingle,
   buttons,
   ...optionsSchemas,
+  customCssClasses,
 })

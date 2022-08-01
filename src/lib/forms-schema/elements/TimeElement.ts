@@ -9,6 +9,7 @@ import {
   conditionallyShowSchemas,
   lookupSchemas,
   placeholderValue,
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'time'
@@ -24,4 +25,5 @@ export default Joi.object({
   defaultValue: Joi.alternatives([Joi.date().iso().raw(), Joi.valid('NOW')]),
   ...conditionallyShowSchemas,
   ...lookupSchemas,
+  customCssClasses,
 })

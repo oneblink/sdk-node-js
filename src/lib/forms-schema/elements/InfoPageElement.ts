@@ -1,5 +1,10 @@
 import Joi from 'joi'
-import { id, name, conditionallyShowSchemas } from '../property-schemas'
+import {
+  id,
+  name,
+  conditionallyShowSchemas,
+  customCssClasses,
+} from '../property-schemas'
 
 export const type = 'infoPage'
 
@@ -8,4 +13,5 @@ export default Joi.object({
   name,
   ...conditionallyShowSchemas,
   formId: Joi.number().required(),
+  customCssClasses,
 })

@@ -9,6 +9,7 @@ import {
   conditionallyShowSchemas,
   lookupSchemas,
   optionsSchemas,
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'freshdeskDependentField'
@@ -32,4 +33,5 @@ export default Joi.object({
     item: Joi.string(),
   }),
   ...optionsSchemas,
+  customCssClasses,
 })

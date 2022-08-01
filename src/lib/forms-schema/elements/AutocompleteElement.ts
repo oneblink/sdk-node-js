@@ -11,6 +11,7 @@ import {
   optionsSchemas,
   placeholderValue,
   defaultValueOptionsSingle,
+  customCssClasses,
 } from '../property-schemas'
 import { SEARCH_OPTION_TYPE } from '../common'
 
@@ -33,4 +34,5 @@ export default Joi.object({
     otherwise: Joi.any().strip(),
   }),
   ...optionsSchemas,
+  customCssClasses,
 })

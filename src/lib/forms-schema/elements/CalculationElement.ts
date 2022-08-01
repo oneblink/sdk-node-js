@@ -6,6 +6,7 @@ import {
   required,
   readOnly,
   conditionallyShowSchemas,
+  customCssClasses,
 } from '../property-schemas'
 import { base64DataRegex } from '../common'
 
@@ -31,4 +32,5 @@ export default Joi.object({
       invert: true,
     }),
   displayAsCurrency: Joi.boolean().allow(null),
+  customCssClasses,
 })

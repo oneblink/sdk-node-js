@@ -10,6 +10,7 @@ import {
   placeholderValue,
   lookupSchemas,
   regexSchemas,
+  customCssClasses,
 } from '../property-schemas'
 
 export const textElementType = 'text'
@@ -47,4 +48,5 @@ export default Joi.object({
     otherwise: Joi.string(),
   }),
   ...regexSchemas,
+  customCssClasses,
 })

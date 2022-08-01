@@ -11,6 +11,7 @@ import {
   optionsSchemas,
   lookupSchemas,
   defaultValueOptionsSingle,
+  customCssClasses
 } from '../property-schemas'
 
 export const type = 'compliance'
@@ -27,4 +28,5 @@ export default Joi.object({
   defaultValue: defaultValueOptionsSingle,
   ...conditionallyShowSchemas,
   ...lookupSchemas,
+  customCssClasses
 })

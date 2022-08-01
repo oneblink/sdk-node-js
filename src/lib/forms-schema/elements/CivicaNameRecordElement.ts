@@ -7,6 +7,7 @@ import {
   required,
   readOnly,
   conditionallyShowSchemas,
+  customCssClasses
 } from '../property-schemas'
 
 export const type = 'civicaNameRecord'
@@ -55,4 +56,5 @@ export default Joi.object({
   address1Label: textSchema,
   address2Label: textSchema,
   postcodeLabel: textSchema,
+  customCssClasses
 })
