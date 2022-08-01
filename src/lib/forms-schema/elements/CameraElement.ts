@@ -6,10 +6,11 @@ import {
   label,
   hint,
   required,
+  requiredMessage,
   readOnly,
   conditionallyShowSchemas,
   storageType,
-  customCssClasses
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'camera'
@@ -20,6 +21,7 @@ export default Joi.object({
   label,
   hint,
   required,
+  requiredMessage,
   readOnly,
   ...conditionallyShowSchemas,
   includeTimestampWatermark: Joi.boolean().default(false),
@@ -29,5 +31,5 @@ export default Joi.object({
     then: Joi.string().dataUri(),
     otherwise: attachment,
   }),
-  customCssClasses
+  customCssClasses,
 })

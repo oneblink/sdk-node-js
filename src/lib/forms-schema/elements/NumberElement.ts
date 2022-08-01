@@ -6,12 +6,13 @@ import {
   label,
   hint,
   required,
+  requiredMessage,
   readOnly,
   conditionallyShowSchemas,
   placeholderValue,
   lookupSchemas,
   regexSchemas,
-  customCssClasses
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'number'
@@ -22,6 +23,7 @@ export default Joi.object({
   label,
   hint,
   required,
+  requiredMessage,
   readOnly,
   placeholderValue,
   ...conditionallyShowSchemas,
@@ -101,5 +103,5 @@ export default Joi.object({
       otherwise: Joi.number(),
     }),
   ...regexSchemas,
-  customCssClasses
+  customCssClasses,
 })

@@ -5,13 +5,14 @@ import {
   label,
   readOnly,
   required,
+  requiredMessage,
   hint,
   conditionallyShowSchemas,
   storageType,
   optionsSchemas,
   lookupSchemas,
   defaultValueOptionsSingle,
-  customCssClasses
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'compliance'
@@ -21,6 +22,7 @@ export default Joi.object({
   name,
   label,
   readOnly,
+  requiredMessage,
   required,
   hint,
   storageType,
@@ -28,5 +30,5 @@ export default Joi.object({
   defaultValue: defaultValueOptionsSingle,
   ...conditionallyShowSchemas,
   ...lookupSchemas,
-  customCssClasses
+  customCssClasses,
 })

@@ -4,10 +4,11 @@ import {
   name,
   label,
   required,
+  requiredMessage,
   readOnly,
   hint,
   conditionallyShowSchemas,
-  customCssClasses
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'captcha'
@@ -17,8 +18,9 @@ export default Joi.object({
   name,
   label,
   required,
+  requiredMessage,
   readOnly,
   hint,
   ...conditionallyShowSchemas,
-  customCssClasses
+  customCssClasses,
 })

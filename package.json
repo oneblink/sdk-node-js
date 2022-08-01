@@ -7,12 +7,12 @@
     "url": "https://github.com/oneblink/sdk-node-js/issues"
   },
   "dependencies": {
-    "@oneblink/sdk-core": "^0.4.1-beta.5",
+    "@oneblink/sdk-core": "^0.4.2",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^2.1.4",
     "node-fetch": "^2.6.7",
-    "nodemailer": "^6.7.5",
+    "nodemailer": "^6.7.7",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
