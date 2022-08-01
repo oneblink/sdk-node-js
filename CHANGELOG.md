@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `customCssClasses` to form element validation
+
 ## [0.19.9] - 2022-07-29
 
 ### Added

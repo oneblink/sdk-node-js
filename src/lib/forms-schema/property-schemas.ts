@@ -227,3 +227,5 @@ export const regexSchemas = {
 }
 
 export const canToggleAll = Joi.boolean().default(false)
+
+export const customCssClasses = Joi.array().items(Joi.string())
