@@ -11,6 +11,7 @@ import {
   placeholderValue,
   lookupSchemas,
   regexSchemas,
+  customCssClasses
 } from '../property-schemas'
 
 export const type = 'number'
@@ -100,4 +101,5 @@ export default Joi.object({
       otherwise: Joi.number(),
     }),
   ...regexSchemas,
+  customCssClasses
 })

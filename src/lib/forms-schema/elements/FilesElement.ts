@@ -9,6 +9,7 @@ import {
   conditionallyShowSchemas,
   storageType,
   lookupSchemas,
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'files'
@@ -45,4 +46,5 @@ export default Joi.object({
   }),
   ...conditionallyShowSchemas,
   ...lookupSchemas,
+  customCssClasses,
 })

@@ -9,6 +9,7 @@ import {
   conditionallyShowSchemas,
   lookupSchemas,
   placeholderValue,
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'abn'
@@ -23,4 +24,5 @@ export default Joi.object({
   placeholderValue,
   ...conditionallyShowSchemas,
   ...lookupSchemas,
+  customCssClasses,
 })

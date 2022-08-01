@@ -13,6 +13,7 @@ import {
   canToggleAll,
   defaultValueOptionsSingle,
   defaultValueOptionsMultiple,
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'select'
@@ -39,4 +40,5 @@ export default Joi.object({
     then: canToggleAll,
     otherwise: Joi.any().strip(),
   }),
+  customCssClasses,
 })

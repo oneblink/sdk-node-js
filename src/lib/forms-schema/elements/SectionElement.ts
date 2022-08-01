@@ -1,5 +1,11 @@
 import Joi from 'joi'
-import { id, label, hint, conditionallyShowSchemas } from '../property-schemas'
+import {
+  id,
+  label,
+  hint,
+  conditionallyShowSchemas,
+  customCssClasses,
+} from '../property-schemas'
 import elementSchema from '../element-schema'
 
 export const type = 'section'
@@ -25,5 +31,6 @@ const schema: Joi.ObjectSchema = Joi.object({
     .min(1)
     .unique('name', { ignoreUndefined: true })
     .unique('id'),
+  customCssClasses,
 })
 export default schema

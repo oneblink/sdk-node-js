@@ -9,6 +9,7 @@ import {
   conditionallyShowSchemas,
   placeholderValue,
   lookupSchemas,
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'geoscapeAddress'
@@ -24,4 +25,5 @@ export default Joi.object({
   ...lookupSchemas,
   placeholderValue,
   stateTerritoryFilter: Joi.array().items(Joi.string()),
+  customCssClasses,
 })

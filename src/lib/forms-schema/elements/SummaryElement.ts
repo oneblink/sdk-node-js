@@ -6,6 +6,7 @@ import {
   required,
   readOnly,
   conditionallyShowSchemas,
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'summary'
@@ -22,4 +23,5 @@ export default Joi.object({
     .min(1)
     .items(Joi.string().uuid().required()),
   ...conditionallyShowSchemas,
+  customCssClasses,
 })

@@ -9,6 +9,7 @@ import {
   readOnly,
   conditionallyShowSchemas,
   storageType,
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'draw'
@@ -27,4 +28,5 @@ export default Joi.object({
     then: Joi.string().dataUri(),
     otherwise: attachment,
   }),
+  customCssClasses,
 })

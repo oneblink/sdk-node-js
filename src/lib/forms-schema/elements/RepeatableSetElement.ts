@@ -7,6 +7,7 @@ import {
   required,
   readOnly,
   conditionallyShowSchemas,
+  customCssClasses,
 } from '../property-schemas'
 import elementSchema from '../element-schema'
 
@@ -45,5 +46,6 @@ const schema: Joi.ObjectSchema = Joi.object({
     .min(1)
     .unique('name', { ignoreUndefined: true })
     .unique('id'),
+  customCssClasses,
 })
 export default schema

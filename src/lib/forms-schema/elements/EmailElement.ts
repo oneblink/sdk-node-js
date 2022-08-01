@@ -10,6 +10,7 @@ import {
   placeholderValue,
   lookupSchemas,
   regexSchemas,
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'email'
@@ -26,4 +27,5 @@ export default Joi.object({
   placeholderValue,
   defaultValue: Joi.string().email(),
   ...regexSchemas,
+  customCssClasses,
 })
