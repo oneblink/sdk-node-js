@@ -10,10 +10,15 @@ import {
 export const id = Joi.string().guid().required()
 export const name = Joi.string().required().trim()
 export const label = Joi.string().required()
-
 export const hint = Joi.string()
-export const required = Joi.bool().default(false)
-export const requiredMessage = Joi.string().trim()
+
+const required = Joi.bool().default(false)
+const requiredMessage = Joi.string().trim()
+
+export const requiredSchemas = {
+  required,
+  requiredMessage,
+}
 
 export const readOnly = Joi.bool().default(false)
 
