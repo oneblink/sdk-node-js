@@ -4,6 +4,7 @@ import {
   name,
   label,
   required,
+  requiredMessage,
   readOnly,
   conditionallyShowSchemas,
   customCssClasses,
@@ -17,6 +18,7 @@ export default Joi.object({
   name,
   label,
   required,
+  requiredMessage,
   readOnly,
   ...conditionallyShowSchemas,
   defaultValue: Joi.string().required().regex(base64DataRegex, {

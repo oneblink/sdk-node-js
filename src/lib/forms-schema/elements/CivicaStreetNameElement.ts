@@ -5,11 +5,12 @@ import {
   label,
   hint,
   required,
+  requiredMessage,
   readOnly,
   conditionallyShowSchemas,
   placeholderValue,
   lookupSchemas,
-  customCssClasses
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'civicaStreetName'
@@ -20,9 +21,10 @@ export default Joi.object({
   label,
   hint,
   required,
+  requiredMessage,
   readOnly,
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   placeholderValue,
-  customCssClasses
+  customCssClasses,
 })

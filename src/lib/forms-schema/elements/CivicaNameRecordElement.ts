@@ -5,9 +5,10 @@ import {
   label,
   hint,
   required,
+  requiredMessage,
   readOnly,
   conditionallyShowSchemas,
-  customCssClasses
+  customCssClasses,
 } from '../property-schemas'
 
 export const type = 'civicaNameRecord'
@@ -21,6 +22,7 @@ export default Joi.object({
   label,
   hint,
   required,
+  requiredMessage,
   readOnly,
   ...conditionallyShowSchemas,
   useGeoscapeAddressing: Joi.boolean().default(false),
@@ -56,5 +58,5 @@ export default Joi.object({
   address1Label: textSchema,
   address2Label: textSchema,
   postcodeLabel: textSchema,
-  customCssClasses
+  customCssClasses,
 })

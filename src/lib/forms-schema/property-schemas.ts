@@ -13,6 +13,7 @@ export const label = Joi.string().required()
 
 export const hint = Joi.string()
 export const required = Joi.bool().default(false)
+export const requiredMessage = Joi.string().trim()
 
 export const readOnly = Joi.bool().default(false)
 
