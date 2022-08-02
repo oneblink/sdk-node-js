@@ -3,7 +3,6 @@ import {
   id,
   name,
   label,
-  required,
   readOnly,
   conditionallyShowSchemas,
   customCssClasses,
@@ -15,7 +14,6 @@ export default Joi.object({
   id,
   name,
   label,
-  required,
   readOnly,
   elementIds: Joi.array()
     .required()
