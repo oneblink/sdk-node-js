@@ -46,7 +46,7 @@ describe('Scheduling events should throw errors when not passed to "schedulingEv
         submissionEvents: [schedulingEvent],
       }),
     ).toThrow(
-      '"submissionEvents[0].type" must be one of [CALLBACK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET]',
+      '"submissionEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET]',
     )
   })
   test('SCHEDULING form event should error when being passed to "paymentEvents"', () => {
@@ -98,7 +98,7 @@ describe('Payment events should throw errors when not passed to "paymentEvents" 
         submissionEvents: [paymentEvent],
       }),
     ).toThrow(
-      '"submissionEvents[0].type" must be one of [CALLBACK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET]',
+      '"submissionEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET]',
     )
   })
   test('Payment form event should error when being passed to "schedulingEvents"', () => {
@@ -218,7 +218,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         draftEvents: [paymentEvent],
       }),
     ).toThrow(
-      '"draftEvents[0].type" must be one of [CALLBACK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET]',
+      '"draftEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET]',
     )
   })
   test('SCHEDULING form event should error when being passed to "draftEvents"', () => {
@@ -228,7 +228,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         draftEvents: [schedulingEvent],
       }),
     ).toThrow(
-      '"draftEvents[0].type" must be one of [CALLBACK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET]',
+      '"draftEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET]',
     )
   })
   test('Should not error when passing submissionEvents to "draftEvents"', () => {
@@ -247,7 +247,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         approvalEvents: [paymentEvent],
       }),
     ).toThrow(
-      '"approvalEvents[0].type" must be one of [CALLBACK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET]',
+      '"approvalEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET]',
     )
   })
   test('SCHEDULING form event should error when being passed to "approvalEvents"', () => {
@@ -257,7 +257,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         approvalEvents: [schedulingEvent],
       }),
     ).toThrow(
-      '"approvalEvents[0].type" must be one of [CALLBACK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET]',
+      '"approvalEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET]',
     )
   })
   test('Should not error when passing submissionEvents to "approvalEvents"', () => {
