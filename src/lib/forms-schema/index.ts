@@ -128,6 +128,7 @@ export const WorkflowEventSchema = Joi.object().keys({
     .required()
     .valid(
       'CALLBACK',
+      'POWER_AUTOMATE_FLOW',
       'PDF',
       'EMAIL',
       'ONEBLINK_API',
@@ -144,6 +145,12 @@ export const WorkflowEventSchema = Joi.object().keys({
       then: Joi.object().keys({
         url: Joi.string().uri().required(),
         secret: Joi.string().required(),
+      }),
+    })
+    .when('type', {
+      is: 'POWER_AUTOMATE_FLOW',
+      then: Joi.object().keys({
+        url: Joi.string().uri().required(),
       }),
     })
     .when('type', {
