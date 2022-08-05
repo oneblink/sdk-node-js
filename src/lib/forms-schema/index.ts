@@ -62,7 +62,8 @@ const pdfSubmissionEventConfiguration = {
   ...approvalFormsInclusionConfiguration,
 }
 
-const formEventConditionalSchemas = {
+const formEventBaseSchema = {
+  label: Joi.string(),
   conditionallyExecute: Joi.bool().default(false),
   requiresAllConditionallyExecutePredicates: Joi.bool().default(false),
   conditionallyExecutePredicates: Joi.when('conditionallyExecute', {
@@ -104,7 +105,7 @@ export const PaymentEventSchema = Joi.object({
         gatewayId: Joi.string().uuid().required(),
       }),
     }),
-  ...formEventConditionalSchemas,
+  ...formEventBaseSchema,
 })
 export const SchedulingEventSchema = Joi.object({
   type: Joi.string().required().valid('SCHEDULING'),
@@ -121,7 +122,7 @@ export const SchedulingEventSchema = Joi.object({
         ...pdfSubmissionEventConfiguration,
       }),
     }),
-  ...formEventConditionalSchemas,
+  ...formEventBaseSchema,
 })
 export const WorkflowEventSchema = Joi.object().keys({
   type: Joi.string()
@@ -291,7 +292,7 @@ export const WorkflowEventSchema = Joi.object().keys({
       is: 'FRESHDESK_ADD_NOTE_TO_TICKET',
       then: Joi.object().keys(approvalFormsInclusionConfiguration),
     }),
-  ...formEventConditionalSchemas,
+  ...formEventBaseSchema,
 })
 
 const pageElementSchema = Joi.object().keys({
