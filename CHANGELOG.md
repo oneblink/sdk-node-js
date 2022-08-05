@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `customCssClasses` to form element validation
 - `requireMessage` to form element validation
+- `label` to form workflow event validation
 - `POWER_AUTOMATE_FLOW` workflow event
 
 ## [0.19.9] - 2022-07-29
