@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import {
-  id,
+  baseSchemas,
   name,
   label,
   hint,
@@ -15,7 +15,7 @@ import elementSchema from '../element-schema'
 export const type = 'repeatableSet'
 
 const schema: Joi.ObjectSchema = Joi.object({
-  id,
+  ...baseSchemas,
   name,
   label,
   hint,

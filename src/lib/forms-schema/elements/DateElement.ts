@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import {
-  id,
+  baseSchemas,
   name,
   label,
   hint,
@@ -46,7 +46,7 @@ export const dateElementType = 'date'
 export const datetimeElementType = 'datetime'
 
 export default Joi.object({
-  id,
+  ...baseSchemas,
   name,
   label,
   hint,

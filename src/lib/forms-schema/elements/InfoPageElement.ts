@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import {
-  id,
+  baseSchemas,
   name,
   conditionallyShowSchemas,
   customCssClasses,
@@ -9,7 +9,7 @@ import {
 export const type = 'infoPage'
 
 export default Joi.object({
-  id,
+  ...baseSchemas,
   name,
   ...conditionallyShowSchemas,
   formId: Joi.number().required(),

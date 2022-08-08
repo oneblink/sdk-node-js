@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import {
-  id,
+  baseSchemas,
   name,
   label,
   conditionallyShowSchemas,
@@ -10,7 +10,7 @@ import {
 export const type = 'image'
 
 export default Joi.object({
-  id,
+  ...baseSchemas,
   name,
   label,
   ...conditionallyShowSchemas,

@@ -1,7 +1,7 @@
 import Joi from 'joi'
 import { attachment } from '../common'
 import {
-  id,
+  baseSchemas,
   name,
   label,
   hint,
@@ -15,7 +15,7 @@ import {
 export const type = 'draw'
 
 export default Joi.object({
-  id,
+  ...baseSchemas,
   name,
   label,
   hint,
