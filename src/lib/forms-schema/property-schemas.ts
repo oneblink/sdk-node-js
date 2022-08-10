@@ -10,6 +10,20 @@ import {
 export const id = Joi.string().guid().required()
 export const name = Joi.string().required().trim()
 export const label = Joi.string().required()
+export const meta = Joi.string().custom((value) => {
+  JSON.parse(value)
+  return value
+})
+
+/**
+ * This property is spread onto every element schema. Any new properties that
+ * will be on ALL elements can be safely added here.
+ */
+export const baseSchemas = {
+  id,
+  meta,
+}
+
 export const hint = Joi.string()
 
 const required = Joi.bool().default(false)

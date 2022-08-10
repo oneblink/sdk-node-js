@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import {
-  id,
+  baseSchemas,
   name,
   label,
   readOnly,
@@ -11,7 +11,7 @@ import {
 export const type = 'summary'
 
 export default Joi.object({
-  id,
+  ...baseSchemas,
   name,
   label,
   readOnly,

@@ -1,7 +1,7 @@
 import Joi from 'joi'
 import { JoiRange } from '../common'
 import {
-  id,
+  baseSchemas,
   name,
   label,
   hint,
@@ -17,7 +17,7 @@ import {
 export const type = 'number'
 
 export default Joi.object({
-  id,
+  ...baseSchemas,
   name,
   label,
   hint,

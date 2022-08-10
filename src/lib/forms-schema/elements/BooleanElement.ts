@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import {
-  id,
+  baseSchemas,
   name,
   label,
   hint,
@@ -14,7 +14,7 @@ import {
 export const type = 'boolean'
 
 export default Joi.object({
-  id,
+  ...baseSchemas,
   name,
   label,
   hint,

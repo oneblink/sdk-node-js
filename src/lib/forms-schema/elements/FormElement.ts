@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import {
-  id,
+  baseSchemas,
   name,
   conditionallyShowSchemas,
   customCssClasses,
@@ -9,7 +9,7 @@ import {
 export const type = 'form'
 
 export default Joi.object({
-  id,
+  ...baseSchemas,
   name,
   formId: Joi.number().required(),
   ...conditionallyShowSchemas,

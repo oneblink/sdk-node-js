@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import {
-  id,
+  baseSchemas,
   name,
   label,
   requiredSchemas,
@@ -13,7 +13,7 @@ import { base64DataRegex } from '../common'
 export const type = 'calculation'
 
 export default Joi.object({
-  id,
+  ...baseSchemas,
   name,
   label,
   ...requiredSchemas,

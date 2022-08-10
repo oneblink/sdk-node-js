@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `meta` property to all Form Elements
+
+### Added
+
 - `customCssClasses` to form element validation
 - `requireMessage` to form element validation
 - `label` to form workflow event validation

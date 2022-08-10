@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import {
-  id,
+  baseSchemas,
   name,
   label,
   hint,
@@ -17,7 +17,7 @@ export const textElementType = 'text'
 export const textareaElementType = 'textarea'
 
 export default Joi.object({
-  id,
+  ...baseSchemas,
   name,
   label,
   hint,

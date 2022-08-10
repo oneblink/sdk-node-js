@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import {
-  id,
+  baseSchemas,
   name,
   label,
   hint,
@@ -15,7 +15,7 @@ import {
 export const type = 'time'
 
 export default Joi.object({
-  id,
+  ...baseSchemas,
   name,
   label,
   hint,

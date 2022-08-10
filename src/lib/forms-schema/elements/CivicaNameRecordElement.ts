@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import {
-  id,
+  baseSchemas,
   name,
   label,
   hint,
@@ -16,7 +16,7 @@ const boolSchema = Joi.boolean().default(false)
 const textSchema = Joi.string()
 
 export default Joi.object({
-  id,
+  ...baseSchemas,
   name,
   label,
   hint,

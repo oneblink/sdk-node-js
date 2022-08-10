@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import {
-  id,
+  baseSchemas,
   name,
   label,
   conditionallyShowSchemas,
@@ -11,7 +11,7 @@ import { base64DataRegex } from '../common'
 export const type = 'html'
 
 export default Joi.object({
-  id,
+  ...baseSchemas,
   name,
   label,
   ...conditionallyShowSchemas,
