@@ -10,7 +10,10 @@ import {
 export const id = Joi.string().guid().required()
 export const name = Joi.string().required().trim()
 export const label = Joi.string().required()
-export const meta = Joi.valid(Joi.array().items(Joi.any()), Joi.object())
+export const meta = Joi.string().custom((value) => {
+  JSON.parse(value)
+  return value
+})
 
 /**
  * This property is spread onto every element schema. Any new properties that
