@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.10] - 2022-08-16
+
 ### Added
 
 - `meta` property to all Form Elements
@@ -14,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `requireMessage` to form element validation
 - `label` to form workflow event validation
 - `POWER_AUTOMATE_FLOW` workflow event
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [0.4.2](https://github.com/oneblink/sdk-core-js/releases/tag/v0.4.2) (from [0.4.1-beta.5](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update [nodemailer](https://www.npmjs.com/package/nodemailer) to [6.7.7](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md) (from [6.7.5](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md))
 
 ## [0.19.9] - 2022-07-29
 
