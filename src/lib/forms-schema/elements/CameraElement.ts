@@ -24,10 +24,6 @@ export default Joi.object({
   ...conditionallyShowSchemas,
   includeTimestampWatermark: Joi.boolean().default(false),
   storageType,
-  defaultValue: Joi.when('storageType', {
-    is: Joi.valid('legacy', Joi.optional()),
-    then: Joi.string().dataUri(),
-    otherwise: attachment,
-  }),
+  defaultValue: attachment,
   customCssClasses,
 })

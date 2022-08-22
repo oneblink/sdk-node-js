@@ -28,16 +28,7 @@ export default Joi.object({
     otherwise: Joi.any().strip(),
   }),
   allowExtensionlessAttachments: Joi.boolean().default(false),
-  defaultValue: Joi.when('storageType', {
-    is: Joi.valid('legacy', Joi.optional()),
-    then: Joi.array().items(
-      Joi.object().keys({
-        data: Joi.string().required().dataUri(),
-        fileName: Joi.string().required(),
-      }),
-    ),
-    otherwise: Joi.array().items(attachment),
-  }),
+  defaultValue: Joi.array().items(attachment),
   minEntries: Joi.number().min(0),
   maxEntries: Joi.number().when('minEntries', {
     is: Joi.number().required().min(0),

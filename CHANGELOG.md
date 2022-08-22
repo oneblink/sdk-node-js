@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- form element validation to convert legacy storage type to private
+
 ## [0.19.10] - 2022-08-16
 
 ### Added
