@@ -23,10 +23,6 @@ export default Joi.object({
   readOnly,
   ...conditionallyShowSchemas,
   storageType,
-  defaultValue: Joi.when('storageType', {
-    is: Joi.valid('legacy', Joi.optional()),
-    then: Joi.string().dataUri(),
-    otherwise: attachment,
-  }),
+  defaultValue: attachment,
   customCssClasses,
 })

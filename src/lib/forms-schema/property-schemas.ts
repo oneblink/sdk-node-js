@@ -218,7 +218,23 @@ export const conditionallyShowSchemas = {
   conditionallyShowPredicates,
 }
 
-export const storageType = Joi.string().valid('legacy', 'public', 'private')
+export const storageType = Joi.string()
+  .custom((value, helpers) => {
+    // Need to keep this here so that we still allow old forms to
+    // be saved without throwing validation errors
+    if (value === 'legacy') {
+      return 'private'
+    }
+
+    if (value === 'private' || value === 'public') {
+      return value
+    }
+
+    return helpers.error('string.storageType')
+  })
+  .messages({
+    'string.storageType': '{{#label}} must be one of [public, private]',
+  })
 
 const regexPattern = Joi.string().custom((value) => {
   if (!value) return
