@@ -1,7 +1,7 @@
 {
   "name": "@oneblink/sdk",
   "description": "OneBlink SDK to serve as an entry point for all OneBlink Services in NodeJS",
-  "version": "0.19.11-beta.1",
+  "version": "0.19.11",
   "author": "OneBlink <developers@oneblink.io> (https://oneblink.io)",
   "bugs": {
     "url": "https://github.com/oneblink/sdk-node-js/issues"
@@ -16,7 +16,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@oneblink/release-cli": "^1.0.0",
+    "@oneblink/release-cli": "^1.2.0",
     "@oneblink/types": "github:oneblink/types",
     "@types/content-disposition": "^0.5.4",
     "@types/jest": "^27.4.1",
