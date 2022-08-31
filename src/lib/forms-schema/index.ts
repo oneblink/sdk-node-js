@@ -379,6 +379,11 @@ const formSchema = Joi.object().keys({
           clarificationRequestEmailTemplateId: Joi.number(),
         }),
     ),
+  approvalConfiguration: Joi.object({
+    defaultApproveNotificationEmailElementId: Joi.string().guid(),
+    defaultClarificationNotificationEmailElementId: Joi.string().guid(),
+    defaultDenyNotificationEmailElementId: Joi.string().guid(),
+  }),
 
   postSubmissionAction: Joi.string()
     .required()
