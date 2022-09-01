@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `approvalConfiguration` property to `Form`
+
 ## [0.19.11] - 2022-08-28
 
 ### Changed

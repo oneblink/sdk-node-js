@@ -120,6 +120,24 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
     })
   }
 
+  const defaultNotificationEmailElementId =
+    validatedForm.approvalConfiguration?.defaultNotificationEmailElementId
+  if (defaultNotificationEmailElementId) {
+    const element = rootFormElements.find(
+      ({ id }) => id === defaultNotificationEmailElementId,
+    )
+    if (!element) {
+      throw new Error(
+        `"approvalConfiguration.defaultNotificationEmailElementId" (${defaultNotificationEmailElementId}) does not exist in "elements"`,
+      )
+    }
+    if (element.type !== 'email') {
+      throw new Error(
+        `"approvalConfiguration.defaultNotificationEmailElementId" (${defaultNotificationEmailElementId}) references an element that is not type "email" (${element.type})`,
+      )
+    }
+  }
+
   return validatedForm
 }
 
