@@ -380,9 +380,7 @@ const formSchema = Joi.object().keys({
         }),
     ),
   approvalConfiguration: Joi.object({
-    defaultApproveNotificationEmailElementId: Joi.string().guid(),
-    defaultClarificationNotificationEmailElementId: Joi.string().guid(),
-    defaultDenyNotificationEmailElementId: Joi.string().guid(),
+    defaultNotificationEmailElementId: Joi.string().guid(),
   }),
 
   postSubmissionAction: Joi.string()

@@ -5883,6 +5883,102 @@ describe('Section Element', () => {
   })
 })
 
+describe('approvalConfiguration', () => {
+  const form = {
+    id: 1,
+    name: 'string',
+    description: 'string',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: 'ORGANISATION_00000000001',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    isMultiPage: false,
+    isAuthenticated: true,
+    elements: [
+      {
+        id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+        type: 'text',
+        name: 'text',
+        label: 'text',
+      },
+      {
+        id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a80',
+        type: 'email',
+        name: 'email',
+        label: 'email',
+      },
+    ],
+    tags: [],
+  }
+
+  test('Should save correct data valid', () => {
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      approvalConfiguration: {
+        defaultNotificationEmailElementId:
+          'ff9b04c3-f2ad-4994-a525-e7189eb67a80',
+      },
+    })
+    expect(
+      validatedForm.approvalConfiguration?.defaultNotificationEmailElementId,
+    ).toBe('ff9b04c3-f2ad-4994-a525-e7189eb67a80')
+  })
+
+  test('Should throw error if elementId is not a string', () => {
+    expect(() =>
+      validateWithFormSchema({
+        ...form,
+        approvalConfiguration: {
+          defaultNotificationEmailElementId: 1,
+        },
+      }),
+    ).toThrow(
+      '"approvalConfiguration.defaultNotificationEmailElementId" must be a string',
+    )
+  })
+
+  test('Should throw error if elementId is not a guid', () => {
+    expect(() =>
+      validateWithFormSchema({
+        ...form,
+        approvalConfiguration: {
+          defaultNotificationEmailElementId: 'not a guid',
+        },
+      }),
+    ).toThrow(
+      '"approvalConfiguration.defaultNotificationEmailElementId" must be a valid GUID',
+    )
+  })
+
+  test('Should throw error if element does not exist', () => {
+    expect(() =>
+      validateWithFormSchema({
+        ...form,
+        approvalConfiguration: {
+          defaultNotificationEmailElementId:
+            'ff9b04c3-f2ad-4994-a525-e7189eb67a81',
+        },
+      }),
+    ).toThrow(
+      '"approvalConfiguration.defaultNotificationEmailElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a81) does not exist in "elements"',
+    )
+  })
+
+  test('Should throw error if element is not an "email" type', () => {
+    expect(() =>
+      validateWithFormSchema({
+        ...form,
+        approvalConfiguration: {
+          defaultNotificationEmailElementId:
+            'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+        },
+      }),
+    ).toThrow(
+      '"approvalConfiguration.defaultNotificationEmailElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a79) references an element that is not type "email" (text)',
+    )
+  })
+})
+
 describe('Approval Forms Inclusion Configuration', () => {
   const form = {
     id: 1,
