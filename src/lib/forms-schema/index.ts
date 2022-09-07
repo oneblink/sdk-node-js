@@ -330,6 +330,17 @@ const apiRequestSchema = Joi.object({
     }),
 })
 
+const cannedResponsesSchema = Joi.array()
+  .min(1)
+  .unique('key')
+  .items(
+    Joi.object().required().keys({
+      key: Joi.string().required(),
+      label: Joi.string().required(),
+      notes: Joi.string().required(),
+    }),
+  )
+
 const formSchema = Joi.object().keys({
   id: Joi.number(),
   formsAppEnvironmentId: Joi.number().required(),
@@ -381,6 +392,9 @@ const formSchema = Joi.object().keys({
     ),
   approvalConfiguration: Joi.object({
     defaultNotificationEmailElementId: Joi.string().guid(),
+    approveCannedResponses: cannedResponsesSchema,
+    clarificationRequestCannedResponses: cannedResponsesSchema,
+    denyCannedResponses: cannedResponsesSchema,
   }),
 
   postSubmissionAction: Joi.string()
