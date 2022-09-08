@@ -114,6 +114,11 @@ export type FormSubmissionHistorySearchParameters = BaseSearchOptions & {
   submissionDateFrom?: string
   /** Search for Submissions ending on this date */
   submissionDateTo?: string
+  /**
+   * Search for only valid submissions, only invalid ones, or emit this property
+   * to search all
+   */
+  isValid?: boolean
 }
 
 export type FormSubmissionHistorySearchResults = MiscTypes.BaseSearchResult & {
