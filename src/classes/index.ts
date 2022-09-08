@@ -9,6 +9,7 @@ import PDF from './PDF'
 import Approvals from './Approvals'
 import FormsAppEnvironments from './FormsAppEnvironments'
 import EmailTemplates from './EmailTemplates'
+import DataManager from './DataManager'
 // Functions
 import sendEmail from './sendEmail'
 
@@ -23,5 +24,6 @@ export {
   Approvals,
   FormsAppEnvironments,
   EmailTemplates,
+  DataManager,
   sendEmail,
 }
