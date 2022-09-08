@@ -599,6 +599,7 @@ export default class Forms extends OneBlinkAPI {
    *   formId: 1,
    *   submissionDateFrom: '2018-08-16T05:28:26.448Z',
    *   submissionDateTo: '2019-08-16T05:28:26.448Z',
+   *   isValid: true,
    * }
    * forms
    *   .searchSubmissions(options)
@@ -645,6 +646,12 @@ export default class Forms extends OneBlinkAPI {
     if (typeof options.submissionDateTo === 'string') {
       searchParams = Object.assign(searchParams, {
         submissionDateTo: options.submissionDateTo,
+      })
+    }
+
+    if (typeof options.isValid === 'boolean') {
+      searchParams = Object.assign(searchParams, {
+        isValid: options.isValid,
       })
     }
 
