@@ -318,6 +318,7 @@ const apiRequestSchema = Joi.object({
       is: 'CALLBACK',
       then: Joi.object({
         url: Joi.string().uri().required(),
+        secret: Joi.string(),
       }),
     })
     .when('type', {
@@ -326,6 +327,7 @@ const apiRequestSchema = Joi.object({
         apiId: Joi.string().required(),
         apiEnvironment: Joi.string().required(),
         apiEnvironmentRoute: Joi.string().required(),
+        secret: Joi.string(),
       }),
     }),
 })
