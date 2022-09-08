@@ -332,7 +332,6 @@ const apiRequestSchema = Joi.object({
 
 const cannedResponsesSchema = Joi.array()
   .min(1)
-  .unique('key')
   .items(
     Joi.object().required().keys({
       key: Joi.string().required(),
