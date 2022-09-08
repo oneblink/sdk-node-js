@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `approvalConfiguration` property to `Form`
+- `DataManager` class
 
 ## [0.19.11] - 2022-08-28
 
