@@ -8,6 +8,7 @@ import {
   AWSTypes,
   SchedulingTypes,
 } from '@oneblink/types'
+import { FormStoreRecord } from '@oneblink/types/typescript/submissions'
 import jwksClient from 'jwks-rsa'
 import { SendMailOptions } from 'nodemailer'
 export * from '@oneblink/types'
@@ -172,4 +173,179 @@ export type FormsAppEnvironmentsSearchOptions = BaseSearchOptions
 
 export type JobsSearchResult = MiscTypes.BaseSearchResult & {
   jobs: SubmissionTypes.FormsAppJob[]
+}
+
+export type DataManagerRegexFilter = {
+  /** The Regular expression to search with. This can just be a simple string if desired. */
+  $regex: string
+  /**
+   * Regex options. String with any combination of the following characters:
+   * d,g,i,m,s,u,y.
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#advanced_searching_with_flags
+   */
+  $options?: string
+}
+
+export type DataManagerNumberFilter = {
+  /** Equal to */
+  $eq?: number
+  /** Greater than */
+  $gt?: number
+  /** Greater than or Equal to */
+  $gte?: number
+  /** Less than */
+  $lt?: number
+  /** Less than or Equal to */
+  $lte?: number
+}
+
+export type DataManagerMultipleSelectionsArrayFilter = {
+  $elemMatch: {
+    /**
+     * The array of strings to match. Records will be returned if any of the
+     * values in the record matches any of these
+     */
+    $in: Array<string>
+  }
+}
+
+export type DataManagerStringArrayFilter = {
+  /**
+   * The array of strings to match. Records will be returned if the value in the
+   * record matches any of these
+   */
+  $in: Array<string>
+}
+
+export type DataManagerStringArrayComplianceFilter = {
+  /** The filter for the value */
+  value?: DataManagerStringArrayFilter
+  /** The filter for the notes */
+  notes?: DataManagerRegexFilter
+}
+
+export type DataManagerBooleanFilter = {
+  /** The boolean value to match */
+  $eq: boolean
+}
+
+export type DataManagerDateTimeFilter = {
+  /** Equal to */
+  $eq?: string
+  /** Greater than */
+  $gt?: string
+  /** Greater than or Equal to */
+  $gte?: string
+  /** Less than */
+  $lt?: string
+  /** Less than or Equal to */
+  $lte?: string
+}
+
+export type DataManagerUUIDFilter = {
+  /** The UUID string to match */
+  $eq: string
+}
+
+export type DataManagerFreshdeskDependentFieldFilter = {
+  /**
+   * The filter for the `category`. This property is treated as a non multi
+   * `select` element.
+   */
+  category?: DataManagerStringArrayFilter
+  /**
+   * The filter for the `subCategory`. This property is treated as a non multi
+   * `select` element.
+   */
+  subCategory?: DataManagerStringArrayFilter
+  /** The filter for the `item`. This property is treated as a non multi `select` element. */
+  item?: DataManagerStringArrayFilter
+}
+
+export type DataManagerNestedFilterFilter = {
+  /**
+   * The filter for an element in a `repeatableSet` or `form` element. Use
+   * whichever filter type is appropriate for each element type.
+   */
+  [elementName: string]: DataManagerSubmissionPropertyFilter
+}
+
+/**
+ * Element of type: text, textarea, email, telephone, barcodeScanner: USE
+ * `DataManagerRegexFilter`.
+ *
+ * Element of type: number, calculation: USE `DataManagerNumberFilter`.
+ *
+ * Element of type: compliance: USE `DataManagerStringArrayComplianceFilter`.
+ *
+ * Element of type: checkboxes, select (multi): USE
+ * `DataManagerMultipleSelectionsArrayFilter`.
+ *
+ * Element of type: radio, autocomplete, select: USE `DataManagerStringArrayFilter`.
+ *
+ * Element of type: boolean: USE `DataManagerBooleanFilter`.
+ *
+ * Element of type: date, datetime, time: USE `DataManagerDateTimeFilter`.
+ *
+ * Element of type: freshdeskDependentField : USE
+ * `DataManagerFreshdeskDependentFieldFilter`.
+ *
+ * - Element of type: form, repeatableSet : USE `DataManagerNestedFilterFilter`.
+ *   `repeatableSet` requires `unwindRepeatableSets` be `true`
+ */
+export type DataManagerSubmissionPropertyFilter =
+  | DataManagerRegexFilter
+  | DataManagerNumberFilter
+  | DataManagerStringArrayComplianceFilter
+  | DataManagerMultipleSelectionsArrayFilter
+  | DataManagerStringArrayFilter
+  | DataManagerBooleanFilter
+  | DataManagerDateTimeFilter
+  | DataManagerFreshdeskDependentFieldFilter
+
+export type SearchDataManagerRecordsOptions = {
+  formId: number
+  /** Required for filtering by `repeatableSets` */
+  unwindRepeatableSets?: boolean
+  paging?: {
+    /** Limit results to between 1 and 50. Used for pagination. Default: 50 */
+    limit?: number
+    /** Offset results. Used for pagination. Default: 0 */
+    offset?: number
+  }
+  filters?: {
+    /**
+     * Filter by `dateTimeSubmitted`. All values as a date ISO string:
+     * https://en.wikipedia.org/wiki/ISO_8601
+     */
+    dateTimeSubmitted?: {
+      /** Equal to */
+      $eq?: string
+      /** Greater than */
+      $gt?: string
+      /** Greater than or Equal to */
+      $gte?: string
+      /** Less than */
+      $lt?: string
+      /** Less than or Equal to */
+      $lte?: string
+    }
+    /** Filter by `submissionId`. A uuid string. */
+    submissionId?: DataManagerUUIDFilter
+    /** Filter by `externalId`. */
+    externalId?: DataManagerRegexFilter
+    /** Filter by `submittedBy`. */
+    submittedBy?: DataManagerRegexFilter
+    /** Filter by values in the submission. */
+    submission?: Record<string, DataManagerSubmissionPropertyFilter>
+  }
+}
+
+export type SearchDataManagerRecordsResponse = {
+  meta: {
+    limit: number
+    offset: number
+    nextOffset?: number
+  }
+  submissions: Array<FormStoreRecord>
 }
