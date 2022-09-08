@@ -313,6 +313,13 @@ export type SearchDataManagerRecordsOptions = {
     /** Offset results. Used for pagination. Default: 0 */
     offset?: number
   }
+  /** Sort results. */
+  sorting?: Array<{
+    /** The property to sort by e.g. "submission.Element_Name" */
+    property: string
+    /** The direction to sort this property by. */
+    direction: 'ascending' | 'descending'
+  }>
   filters?: {
     /**
      * Filter by `dateTimeSubmitted`. All values as a date ISO string:
