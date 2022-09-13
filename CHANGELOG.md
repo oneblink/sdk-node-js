@@ -7,12 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.12] - 2022-09-13
+
 ### Added
 
 - `secret` validation to `serverValidation` prop on form
 - `isValid` property to `searchSubmissions` params
 - `approvalConfiguration` property to `Form`
 - `DataManager` class
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [0.4.4-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [0.4.2](https://github.com/oneblink/sdk-core-js/releases/tag/v0.4.2))
 
 ## [0.19.11] - 2022-08-28
 
