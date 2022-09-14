@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `autoDenyAfterClarificationRequest` to `approvalConfiguration` on form validation
+
 ## [0.19.12] - 2022-09-13
 
 ### Added
