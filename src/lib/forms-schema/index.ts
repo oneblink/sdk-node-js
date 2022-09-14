@@ -396,6 +396,15 @@ const formSchema = Joi.object().keys({
     approveCannedResponses: cannedResponsesSchema,
     clarificationRequestCannedResponses: cannedResponsesSchema,
     denyCannedResponses: cannedResponsesSchema,
+    autoDenyAfterClarificationRequest: Joi.object({
+      days: Joi.number().integer().required(),
+      notify: Joi.object({
+        notes: Joi.string().required(),
+        notificationEmailAddress: Joi.array().items(Joi.string().required()),
+        cannedResponseKey: Joi.string(),
+      }),
+      internalNotes: Joi.string(),
+    }),
   }),
 
   postSubmissionAction: Joi.string()
