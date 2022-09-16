@@ -340,7 +340,7 @@ const cannedResponsesSchema = Joi.array()
       label: Joi.string().required(),
       notes: Joi.string().required(),
     }),
-  )
+  ).unique('key')
 
 const formSchema = Joi.object().keys({
   id: Joi.number(),
