@@ -141,22 +141,23 @@ export const SchedulingEventSchema = Joi.object({
     }),
   ...formEventBaseSchema,
 })
-const submissionEventTypes: SubmissionEventTypes.FormWorkflowEventType[] = [
-  'CALLBACK',
-  'POWER_AUTOMATE_FLOW',
-  'PDF',
-  'EMAIL',
-  'ONEBLINK_API',
-  'TRIM',
-  'CP_HCMS',
-  'CIVICA_CRM',
-  'FRESHDESK_CREATE_TICKET',
-  'FRESHDESK_ADD_NOTE_TO_TICKET',
-]
+export const formWorkflowEventTypes: SubmissionEventTypes.FormWorkflowEventType[] =
+  [
+    'CALLBACK',
+    'POWER_AUTOMATE_FLOW',
+    'PDF',
+    'EMAIL',
+    'ONEBLINK_API',
+    'TRIM',
+    'CP_HCMS',
+    'CIVICA_CRM',
+    'FRESHDESK_CREATE_TICKET',
+    'FRESHDESK_ADD_NOTE_TO_TICKET',
+  ]
 export const WorkflowEventSchema = Joi.object().keys({
   type: Joi.string()
     .required()
-    .valid(...submissionEventTypes),
+    .valid(...formWorkflowEventTypes),
   configuration: Joi.object()
     .required()
     .when('type', {
@@ -452,8 +453,8 @@ const formSchema = Joi.object().keys({
   externalIdGeneration: apiRequestSchema,
 })
 
-export const workflowEventTypes: SubmissionEventTypes.FormEventType[] = [
-  ...submissionEventTypes,
+export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
+  ...formWorkflowEventTypes,
   ...paymentEventTypes,
   ...schedulingEventTypes,
 ]
