@@ -1,10 +1,16 @@
+import { FormTypes, SubmissionEventTypes } from '@oneblink/types'
 import Joi from 'joi'
 import elementSchema from './element-schema'
 import {
   conditionallyShowPredicates,
   ConditionalPredicatesItemSchema,
 } from './property-schemas'
-const postSubmissionActions = ['BACK', 'URL', 'CLOSE', 'FORMS_LIBRARY']
+export const postSubmissionActions: FormTypes.FormPostSubmissionAction[] = [
+  'BACK',
+  'URL',
+  'CLOSE',
+  'FORMS_LIBRARY',
+]
 const emailSubmissionEventConfiguration = {
   email: Joi.alternatives([
     Joi.string().email().required(),
@@ -77,8 +83,15 @@ const formEventBaseSchema = {
   }),
 }
 
+export const paymentEventTypes: SubmissionEventTypes.FormPaymentEventType[] = [
+  'CP_PAY',
+  'BPOINT',
+  'WESTPAC_QUICK_WEB',
+]
 export const PaymentEventSchema = Joi.object({
-  type: Joi.string().required().valid('CP_PAY', 'BPOINT', 'WESTPAC_QUICK_WEB'),
+  type: Joi.string()
+    .required()
+    .valid(...paymentEventTypes),
   configuration: Joi.object()
     .required()
     .when('type', {
@@ -107,8 +120,12 @@ export const PaymentEventSchema = Joi.object({
     }),
   ...formEventBaseSchema,
 })
+export const schedulingEventTypes: SubmissionEventTypes.FormSchedulingEventType[] =
+  ['SCHEDULING']
 export const SchedulingEventSchema = Joi.object({
-  type: Joi.string().required().valid('SCHEDULING'),
+  type: Joi.string()
+    .required()
+    .valid(...schedulingEventTypes),
   configuration: Joi.object()
     .required()
     .when('type', {
@@ -124,21 +141,22 @@ export const SchedulingEventSchema = Joi.object({
     }),
   ...formEventBaseSchema,
 })
+const submissionEventTypes: SubmissionEventTypes.FormWorkflowEventType[] = [
+  'CALLBACK',
+  'POWER_AUTOMATE_FLOW',
+  'PDF',
+  'EMAIL',
+  'ONEBLINK_API',
+  'TRIM',
+  'CP_HCMS',
+  'CIVICA_CRM',
+  'FRESHDESK_CREATE_TICKET',
+  'FRESHDESK_ADD_NOTE_TO_TICKET',
+]
 export const WorkflowEventSchema = Joi.object().keys({
   type: Joi.string()
     .required()
-    .valid(
-      'CALLBACK',
-      'POWER_AUTOMATE_FLOW',
-      'PDF',
-      'EMAIL',
-      'ONEBLINK_API',
-      'TRIM',
-      'CP_HCMS',
-      'CIVICA_CRM',
-      'FRESHDESK_CREATE_TICKET',
-      'FRESHDESK_ADD_NOTE_TO_TICKET',
-    ),
+    .valid(...submissionEventTypes),
   configuration: Joi.object()
     .required()
     .when('type', {
@@ -340,7 +358,8 @@ const cannedResponsesSchema = Joi.array()
       label: Joi.string().required(),
       notes: Joi.string().required(),
     }),
-  ).unique('key')
+  )
+  .unique('key')
 
 const formSchema = Joi.object().keys({
   id: Joi.number(),
@@ -432,5 +451,11 @@ const formSchema = Joi.object().keys({
   serverValidation: apiRequestSchema,
   externalIdGeneration: apiRequestSchema,
 })
+
+export const workflowEventTypes: SubmissionEventTypes.FormEventType[] = [
+  ...submissionEventTypes,
+  ...paymentEventTypes,
+  ...schedulingEventTypes,
+]
 
 export { formSchema, elementSchema, pageElementSchema, apiRequestSchema }
