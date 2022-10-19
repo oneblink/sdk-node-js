@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.14] - 2022-10-19
+
 ### Added
 
 - form events and post submission actions to exports
