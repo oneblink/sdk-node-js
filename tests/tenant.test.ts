@@ -24,7 +24,7 @@ describe('Region URL selecting', () => {
     process.env.ONEBLINK_SDK_ENVIRONMENT = 'test'
     const { Forms } = await import('../src/oneblink')
     return expect(Forms.tenant.apiOrigin).toBe(
-      'https://auth-api-test.blinkm.io',
+      'https://auth-api.test.blinkm.io',
     )
   })
 
@@ -32,7 +32,7 @@ describe('Region URL selecting', () => {
     process.env.ONEBLINK_SDK_ENVIRONMENT = 'test'
     const { Forms } = await import('../src/civicplus')
     return expect(Forms.tenant.apiOrigin).toBe(
-      'https://auth-api-test.transform.civicplus.com',
+      'https://auth-api.test.transform.civicplus.com',
     )
   })
 })
