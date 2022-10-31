@@ -341,6 +341,31 @@ export default class Forms extends OneBlinkAPI {
    * #### Example
    *
    * ```javascript
+   * const formId = 1
+   * const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+   * forms
+   *   .getSubmissionAttachmentMeta(formId, attachmentId)
+   *   .then((result) => {
+   *     // Use result here
+   *   })
+   *   .catch((error) => {
+   *     // Handle error here
+   *   })
+   * ```
+   *
+   * @param formId The exact id of the form the attachment was uploaded on
+   * @param attachmentId The attachment identifier from the form submission data
+   */
+  async getSubmissionAttachmentMeta(formId: number, attachmentId: string) {
+    const response = await this.getRequest(
+      `/submissions/${formId}/attachments/${attachmentId}/meta`,
+    )
+    return response as AWS.S3.HeadObjectOutput
+  }
+  /**
+   * #### Example
+   *
+   * ```javascript
    * const fs = require('fs')
    * const util = require('util')
    * const stream = require('stream')
