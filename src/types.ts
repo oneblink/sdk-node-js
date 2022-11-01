@@ -9,9 +9,12 @@ import {
   SchedulingTypes,
 } from '@oneblink/types'
 import { FormStoreRecord } from '@oneblink/types/typescript/submissions'
+import { HeadObjectOutput } from 'aws-sdk/clients/s3'
 import jwksClient from 'jwks-rsa'
 import { SendMailOptions } from 'nodemailer'
 export * from '@oneblink/types'
+
+export { HeadObjectOutput }
 
 export type ConstructorOptions = {
   accessKey: string
