@@ -358,7 +358,7 @@ export default class Forms extends OneBlinkAPI {
    */
   async getSubmissionAttachmentMeta(formId: number, attachmentId: string) {
     const response = await this.getRequest(
-      `/submissions/${formId}/attachments/${attachmentId}/meta`,
+      `/forms/${formId}/attachments/${attachmentId}/meta`,
     )
     return response as AWS.S3.HeadObjectOutput
   }
