@@ -25,7 +25,7 @@ export default class FormsApps extends OneBlinkAPI {
   }
 
   /**
-   * A Static function to verify a JWT and return its result
+   * Verify a JWT and return its result
    *
    * #### Example
    *
@@ -46,20 +46,28 @@ export default class FormsApps extends OneBlinkAPI {
    *
    * @param token The JWT you wish to verify
    */
-  static async verifyJWT<T extends Record<string, unknown>>(
+  async verifyJWT<T extends Record<string, unknown>>(
     token: string,
   ): Promise<T> {
     if (token.includes('Bearer ')) {
       token = token.split(' ')[1]
     }
 
+    await this.getMyFormsApp(token)
+
+    return jwt.decode(token) as T
+  }
+
+  /** @deprecated Use `(new FormsApps()).verifyJWT()` instead */
+  static async verifyJWT<T extends Record<string, unknown>>(
+    token: string,
+  ): Promise<T> {
     const formsAppsClient = new FormsApps({
       accessKey: 'not used',
       secretKey: 'not used',
     })
-    await formsAppsClient.getMyFormsApp(token)
 
-    return jwt.decode(token) as T
+    return await formsAppsClient.verifyJWT(token)
   }
 
   /**
