@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.17] - 2022-11-08
+
 ### Changed
 
 - verifyJWT to call API instead of using cognito
+
+### Dependencies
+
+- no longer depend upon [jwks-rsa](https://www.npmjs.com/package/jwks-rsa)
 
 ## [0.19.16] - 2022-11-02
 
