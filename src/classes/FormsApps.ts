@@ -1,7 +1,7 @@
 import { FormsAppsTypes } from '@oneblink/types'
 import OneBlinkAPI from '../lib/one-blink-api'
 import { ConstructorOptions } from '../types'
-import jwt from 'jsonwebtoken'
+import verifyJWT from '../lib/verify-jwt'
 
 const basePath = `/forms-apps`
 
@@ -25,7 +25,7 @@ export default class FormsApps extends OneBlinkAPI {
   }
 
   /**
-   * Verify a JWT and return its result
+   * A Static function to verify a JWT and return its result
    *
    * #### Example
    *
@@ -46,28 +46,10 @@ export default class FormsApps extends OneBlinkAPI {
    *
    * @param token The JWT you wish to verify
    */
-  async verifyJWT<T extends Record<string, unknown>>(
-    token: string,
-  ): Promise<T> {
-    if (token.includes('Bearer ')) {
-      token = token.split(' ')[1]
-    }
-
-    await this.getMyFormsApp(token)
-
-    return jwt.decode(token) as T
-  }
-
-  /** @deprecated Use `(new FormsApps()).verifyJWT()` instead */
   static async verifyJWT<T extends Record<string, unknown>>(
     token: string,
   ): Promise<T> {
-    const formsAppsClient = new FormsApps({
-      accessKey: 'not used',
-      secretKey: 'not used',
-    })
-
-    return await formsAppsClient.verifyJWT(token)
+    return verifyJWT<T>(token, OneBlinkAPI.tenant)
   }
 
   /**

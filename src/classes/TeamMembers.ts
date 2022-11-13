@@ -40,7 +40,9 @@ export default class TeamMembers extends OneBlinkAPI {
       return Promise.reject(new TypeError('Must supply "email" as a string'))
     }
 
-    const { permissions } = await super.searchRequest('/permissions', {
+    const { permissions } = await super.searchRequest<{
+      permissions: TeamMemberTypes.Permission[]
+    }>('/permissions', {
       email,
     })
     if (
