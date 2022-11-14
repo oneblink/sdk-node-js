@@ -10,6 +10,7 @@ import {
 } from '@oneblink/types'
 import { FormStoreRecord } from '@oneblink/types/typescript/submissions'
 import { HeadObjectOutput } from 'aws-sdk/clients/s3'
+import jwksClient from 'jwks-rsa'
 import { SendMailOptions } from 'nodemailer'
 export * from '@oneblink/types'
 
@@ -37,6 +38,7 @@ export type TenantBase = {
 
 export type TenantEnvironment = {
   apiOrigin: string
+  jwtIssuer: string
 }
 
 export type TenantConfiguration = TenantBase & {
@@ -44,7 +46,10 @@ export type TenantConfiguration = TenantBase & {
   prod: TenantEnvironment
 }
 
-export type Tenant = TenantBase & TenantEnvironment
+export type Tenant = TenantBase &
+  TenantEnvironment & {
+    jwksInstance: jwksClient.JwksClient
+  }
 
 export type FormSubmissionApprovalHistoryRecord = {
   formSubmissionMeta: SubmissionTypes.FormSubmissionMeta

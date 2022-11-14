@@ -1,4 +1,5 @@
 import AWS from 'aws-sdk'
+import { PutObjectRequest } from 'aws-sdk/clients/s3'
 import { PreFillMeta } from '../types'
 
 export default async function uploadAsset<T>(
@@ -13,10 +14,10 @@ export default async function uploadAsset<T>(
     sessionToken: assetCredentials.credentials.SessionToken,
   })
 
-  const objectMeta = {
+  const objectMeta: PutObjectRequest = {
     Bucket: assetCredentials.s3.bucket,
     Key: assetCredentials.s3.key,
-    Body: data,
+    Body: data as PutObjectRequest['Body'],
     Expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)), // Max 1 year
     CacheControl: 'max-age=31536000', // Max 1 year(365 days),
     ContentType: assetContentType,

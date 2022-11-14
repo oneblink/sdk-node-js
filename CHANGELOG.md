@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **BREAKING** drop support for NodeJS 12
+- `FormsApps.verifyJWT()` to use cognito directly
+
+### Removed
+
+- `(new FormsApps()).verifyJWT()` instance function
+
 ## [0.19.17] - 2022-11-08
 
 ### Changed
