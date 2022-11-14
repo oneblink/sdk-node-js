@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2022-11-14
+
 ### Changed
 
 - **BREAKING** drop support for NodeJS 12
@@ -15,6 +17,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - `(new FormsApps()).verifyJWT()` instance function
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [0.4.4](https://github.com/oneblink/sdk-core-js/releases/tag/v0.4.4) (from [0.4.4-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update [joi](https://www.npmjs.com/package/joi) to 17.7.0 (from 17.6.0)
+
+- update [nodemailer](https://www.npmjs.com/package/nodemailer) to [6.8.0](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md) (from [6.7.7](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md))
+
+- update [uuid](https://www.npmjs.com/package/uuid) to [9.0.0](https://github.com/uuidjs/uuid/blob/master/CHANGELOG.md) (from [8.3.2](https://github.com/uuidjs/uuid/blob/master/CHANGELOG.md))
+
+- depend upon [jwks-rsa](https://www.npmjs.com/package/jwks-rsa) [3.0.0](https://github.com/auth0/node-jwks-rsa/releases/tag/v3.0.0)
 
 ## [0.19.17] - 2022-11-08
 
