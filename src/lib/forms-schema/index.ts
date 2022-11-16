@@ -171,6 +171,7 @@ export const WorkflowEventSchema = Joi.object().keys({
       is: 'POWER_AUTOMATE_FLOW',
       then: Joi.object().keys({
         url: Joi.string().uri().required(),
+        formId: Joi.number(),
       }),
     })
     .when('type', {
