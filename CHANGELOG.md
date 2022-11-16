@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `formId` to validation for `POWER_AUTOMATE_FLOW` workflow event configuration
+
 ## [1.0.0] - 2022-11-14
 
 ### Changed
