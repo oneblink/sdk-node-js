@@ -209,11 +209,11 @@ export const WorkflowEventSchema = Joi.object().keys({
           uri: Joi.number().required(),
           label: Joi.string().required(),
         }),
-        actionDefinition: Joi.object().keys({
+        actionDefinition: Joi.object().optional().keys({
           uri: Joi.number().required(),
           label: Joi.string().required(),
         }),
-        location: Joi.object().keys({
+        location: Joi.object().optional().keys({
           uri: Joi.number().required(),
           label: Joi.string().required(),
         }),

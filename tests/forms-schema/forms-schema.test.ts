@@ -3147,6 +3147,137 @@ describe('TRIM submission event', () => {
       '"submissionEvents[0].configuration.environmentId" is required',
     )
   })
+
+  test('should allow TRIM submission event without location or action', () => {
+    const { error, value } = formSchema.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'TRIM',
+            configuration: {
+              environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              container: {
+                uri: 4,
+                label: 'URI Label',
+              },
+              recordType: {
+                uri: 1,
+                label: 'Record Type Label',
+              },
+              groupFiles: true,
+            },
+          },
+        ],
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBe(undefined)
+    expect(value.submissionEvents[0].configuration.groupFiles).toBe(true)
+  })
+
+  test('should allow TRIM submission event without location', () => {
+    const { error, value } = formSchema.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'TRIM',
+            configuration: {
+              environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              container: {
+                uri: 4,
+                label: 'URI Label',
+              },
+              actionDefinition: {
+                uri: 2,
+                label: 'Action Definition Label',
+              },
+              recordType: {
+                uri: 1,
+                label: 'Record Type Label',
+              },
+              groupFiles: true,
+            },
+          },
+        ],
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBe(undefined)
+    expect(value.submissionEvents[0].configuration.groupFiles).toBe(true)
+  })
+
+  test('should allow TRIM submission event without action', () => {
+    const { error, value } = formSchema.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'TRIM',
+            configuration: {
+              environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              container: {
+                uri: 4,
+                label: 'URI Label',
+              },
+              location: {
+                uri: 3,
+                label: 'Location Label',
+              },
+              recordType: {
+                uri: 1,
+                label: 'Record Type Label',
+              },
+              groupFiles: true,
+            },
+          },
+        ],
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBe(undefined)
+    expect(value.submissionEvents[0].configuration.groupFiles).toBe(true)
+  })
 })
 
 describe('SCHEDULING submission event', () => {
