@@ -447,7 +447,6 @@ const formSchema = Joi.object().keys({
     then: Joi.string().required(),
     otherwise: Joi.any().strip(),
   }),
-  isInfoPage: Joi.bool().default(false),
   formsAppIds: Joi.array().items(Joi.number()).required(),
   createdAt: Joi.string().allow('', null),
   updatedAt: Joi.string().allow('', null),

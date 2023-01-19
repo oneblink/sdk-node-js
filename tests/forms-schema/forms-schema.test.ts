@@ -4738,7 +4738,6 @@ describe('invalid property removal', () => {
       tags: [],
       elements: [],
       isAuthenticated: false,
-      isInfoPage: false,
       isMultiPage: false,
     })
   })
