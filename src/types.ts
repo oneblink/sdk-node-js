@@ -94,11 +94,6 @@ export type FormsSearchOptions = BaseSearchOptions & {
   /** Search on the `name` property of a form. Can be a prefix, suffix or partial match */
   name?: string
   /**
-   * Search on the `isInfoPage` property of a form. Must be either `true` or
-   * `false` or not specified.
-   */
-  isInfoPage?: boolean
-  /**
    * Search on the `formsAppIds` property of a form. Must be the exact match of
    * one the ids in `formsAppIds`.
    */

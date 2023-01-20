@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## Updated
+### Removed
+
+`isInfoPage` prop from Forms
+
+### Updated
 
 - Validation for TRIM to optionally require `location` and `actionDefinition`
 
