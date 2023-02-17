@@ -429,6 +429,7 @@ const formSchema = Joi.object().keys({
       }),
       internalNotes: Joi.string(),
     }),
+    disallowApprovingWhenAwaitingClarification: Joi.boolean(),
   }),
 
   postSubmissionAction: Joi.string()
