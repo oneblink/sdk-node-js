@@ -611,7 +611,7 @@ export default class Forms extends OneBlinkAPI {
    * @param searchParams Search options.
    */
   searchForms(searchParams?: FormsSearchOptions): Promise<FormsSearchResult> {
-    return super.searchRequest(`/forms`, searchParams)
+    return super.searchRequest(`/v2/forms`, searchParams)
   }
   /**
    * Search for details on submissions that match the search parameters. Then

@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `disallowApprovingWhenAwaitingClarification` to `approvalConfiguration`
 
+### Updated
+
+- `searchForms` to use `/v2/forms`
+
 ## [1.0.2] - 2023-02-16
 
 ### Removed
