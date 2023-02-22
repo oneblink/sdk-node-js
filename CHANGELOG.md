@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Updated
 
-- `searchForms` to use `/v2/forms`
+- **BREAKING** `searchForms` to use `/v2/forms` (see [migration guide](./README.md#migrating-to-v2))
 
 ## [1.0.2] - 2023-02-16
 
