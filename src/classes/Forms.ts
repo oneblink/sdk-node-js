@@ -179,6 +179,11 @@ export default class Forms extends OneBlinkAPI {
           formIds: [formId],
         },
       },
+      forms: {
+        read: {
+          ids: [formId],
+        },
+      },
     }
     let preFillFormDataId
     if (parameters.preFillData) {
