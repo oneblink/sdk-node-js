@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `'oneblink:access'` claim to JWT for signed URL to submit an authenticated form
+
 ## [2.0.0] - 2023-02-22
 
 ### Added
