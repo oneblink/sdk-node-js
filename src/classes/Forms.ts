@@ -16,6 +16,7 @@ import {
   SubmissionTypes,
   EnvironmentTypes,
   SubmissionEventTypes,
+  KeyTypes,
 } from '@oneblink/types'
 import {
   validateWithFormSchema,
@@ -75,7 +76,8 @@ export default class Forms extends OneBlinkAPI {
    * })
    * ```
    *
-   * @param parameters An object containing all parameters to be passed to the function
+   * @param parameters An object containing all parameters to be passed to the
+   *   function
    */
   async generateFormUrl(parameters: {
     /** The exact id of the form you wish to generate a URL for */
@@ -101,7 +103,10 @@ export default class Forms extends OneBlinkAPI {
      * to the first forms app the form was added to by default.
      */
     formsAppId?: number
-    /** An object with the form field names as keys and the prefill data as the values */
+    /**
+     * An object with the form field names as keys and the prefill data as the
+     * values
+     */
     preFillData?: Record<string, unknown>
     /**
      * An identifier for the user completing the form. Use this if you would
@@ -168,6 +173,13 @@ export default class Forms extends OneBlinkAPI {
       `/forms-apps/${formsAppId}`,
     )
 
+    const developerKeyAccess: KeyTypes.DeveloperKeyAccess = {
+      submissions: {
+        create: {
+          formIds: [formId],
+        },
+      },
+    }
     let preFillFormDataId
     if (parameters.preFillData) {
       const preFillMeta = await super.postEmptyRequest<PreFillMeta>(
@@ -175,12 +187,22 @@ export default class Forms extends OneBlinkAPI {
       )
       await setPreFillData(preFillMeta, parameters.preFillData)
       preFillFormDataId = preFillMeta.preFillFormDataId
+      developerKeyAccess.prefillData = {
+        read: {
+          ids: [preFillFormDataId],
+        },
+      }
     }
 
     // Default expiry for token is 8 hours
     const jwtExpiry = expiryInSeconds || 28800
 
-    const token = generateJWT(this.accessKey, this.secretKey, jwtExpiry)
+    const token = generateJWT(
+      this.accessKey,
+      this.secretKey,
+      jwtExpiry,
+      developerKeyAccess,
+    )
 
     let userToken = undefined
     const username = parameters.username
@@ -292,7 +314,8 @@ export default class Forms extends OneBlinkAPI {
    * @param submissionId The submission identifier generated after a successful
    *   form submission, this will be return to you after a successful forms
    *   submission via a callback URL
-   * @param isDraft `true` if the submission is a draft submission, otherwise `false`
+   * @param isDraft `true` if the submission is a draft submission, otherwise
+   *   `false`
    */
   async getSubmissionData(
     formId: number,
@@ -490,7 +513,10 @@ export default class Forms extends OneBlinkAPI {
      * not (`true`)
      */
     isPrivate: boolean
-    /** An optional username to allow a single user to download he attachment file */
+    /**
+     * An optional username to allow a single user to download he attachment
+     * file
+     */
     username?: string
   }): Promise<SubmissionTypes.FormSubmissionAttachment> {
     const result = await super.postRequest<
@@ -615,7 +641,8 @@ export default class Forms extends OneBlinkAPI {
   }
   /**
    * Search for details on submissions that match the search parameters. Then
-   * use the information to fetch the actual submission data, if it is still available
+   * use the information to fetch the actual submission data, if it is still
+   * available
    *
    * #### Example
    *
