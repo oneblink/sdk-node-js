@@ -69,7 +69,8 @@ export default class Approvals extends OneBlinkAPI {
     offset: number
     /**
      * An array of statuses to filter by (`'PENDING'`,
-     * `'CLARIFICATION_RECEIVED'`, `'CLARIFICATION_REQUIRED'`, `'APPROVED'`, `'CLOSED'`)
+     * `'CLARIFICATION_RECEIVED'`, `'CLARIFICATION_REQUIRED'`, `'APPROVED'`,
+     * `'CLOSED'`)
      */
     statuses?: string[]
     /** The date updated after as an ISO string */
@@ -78,6 +79,8 @@ export default class Approvals extends OneBlinkAPI {
     updatedBeforeDateTime?: string
     /** An array of usernames to filter by */
     lastUpdatedBy?: string[]
+    /** The exact formApprovalFlowInstanceId to search by */
+    formApprovalFlowInstanceId?: number
   }): Promise<FormSubmissionsAdministrationApprovalsResponse> {
     if (typeof formsAppId !== 'number') {
       throw new Error('"formsAppId" must be a number and is required')
