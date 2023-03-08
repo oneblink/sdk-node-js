@@ -31,4 +31,5 @@ export default Joi.object({
   ...optionsSchemas,
   canToggleAll,
   customCssClasses,
+  requiredAll: Joi.bool(),
 })

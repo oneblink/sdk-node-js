@@ -2552,7 +2552,8 @@ describe('optionTypes', () => {
             name: 'Czech boxes',
             label: 'Czechboxes',
             type: 'checkboxes',
-            required: false,
+            required: true,
+            requiredAll: true,
             options: [
               {
                 id: '25ec5754-0d9a-4783-82d4-fd6ecce35d2f',
@@ -2566,6 +2567,7 @@ describe('optionTypes', () => {
 
       expect(error).toBe(undefined)
       expect(value.elements[0].optionsType).toBe('CUSTOM')
+      expect(value.elements[0].requiredAll).toBe(true)
     })
     test('valid when options are provided', () => {
       const result = formSchema.validate({
