@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `formApprovalFlowInstanceId` to `Approvals.searchFormSubmissionAdministrationApprovals()`
 - `requiredAll` to checkbox form element
+- `RECEIPT_ID` option to external id generation for forms
 
 ### Dependencies
 
