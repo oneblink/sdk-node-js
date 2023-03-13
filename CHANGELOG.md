@@ -7,10 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.2] - 2023-03-13
+
 ### Added
 
 - `formApprovalFlowInstanceId` to `Approvals.searchFormSubmissionAdministrationApprovals()`
 - `requiredAll` to checkbox form element
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [0.4.6](https://github.com/oneblink/sdk-core-js/releases/tag/v0.4.6) (from [0.4.4](https://github.com/oneblink/sdk-core-js/releases/tag/v0.4.4))
+
+- update [joi](https://www.npmjs.com/package/joi) to 17.8.3 (from 17.7.0)
+
+- update [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) to [9.0.0](https://github.com/auth0/node-jsonwebtoken/blob/master/CHANGELOG.md) (from [8.5.1](https://github.com/auth0/node-jsonwebtoken/blob/master/CHANGELOG.md))
+
+- update [jwks-rsa](https://www.npmjs.com/package/jwks-rsa) to [3.0.1](https://github.com/auth0/node-jwks-rsa/releases/tag/v3.0.1) (from [3.0.0](https://github.com/auth0/node-jwks-rsa/releases/tag/v3.0.0))
+
+- update [node-fetch](https://www.npmjs.com/package/node-fetch) to [2.6.9](https://github.com/node-fetch/node-fetch/releases/tag/v2.6.9) (from [2.6.7](https://github.com/node-fetch/node-fetch/releases/tag/v2.6.7))
+
+- update [nodemailer](https://www.npmjs.com/package/nodemailer) to [6.9.1](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md) (from [6.8.0](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md))
 
 ## [2.0.1] - 2023-03-03
 
