@@ -372,15 +372,7 @@ const externalIdGenerationSchema = Joi.object({
               is: 'date',
               then: Joi.string()
                 .required()
-                .valid(
-                  'dayOfMonth',
-                  'dayOfWeek',
-                  'monthInitial',
-                  'monthNumber',
-                  'yearShort',
-                  'year',
-                  'monthNameShort',
-                ),
+                .valid('dayOfMonth', 'monthNumber', 'yearShort', 'year'),
               otherwise: Joi.any().strip(),
             }),
             length: Joi.when('type', {
