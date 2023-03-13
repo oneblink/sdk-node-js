@@ -1,5 +1,6 @@
 import { FormTypes, SubmissionEventTypes } from '@oneblink/types'
 import Joi from 'joi'
+import { htmlString } from './common'
 import elementSchema from './element-schema'
 import {
   conditionallyShowPredicates,
@@ -489,6 +490,13 @@ const formSchema = Joi.object().keys({
   redirectUrl: Joi.when('postSubmissionAction', {
     is: 'URL',
     then: Joi.string().required(),
+    otherwise: Joi.any().strip(),
+  }),
+  postSubmissionReceipt: Joi.when('postSubmissionAction', {
+    is: Joi.valid('BACK', 'CLOSE', 'FORMS_LIBRARY'),
+    then: Joi.object({
+      html: htmlString.required(),
+    }),
     otherwise: Joi.any().strip(),
   }),
   cancelAction: Joi.string()

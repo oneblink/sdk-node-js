@@ -6,7 +6,7 @@ import {
   conditionallyShowSchemas,
   customCssClasses,
 } from '../property-schemas'
-import { base64DataRegex } from '../common'
+import { htmlString } from '../common'
 
 export const type = 'html'
 
@@ -15,9 +15,6 @@ export default Joi.object({
   name,
   label,
   ...conditionallyShowSchemas,
-  defaultValue: Joi.string().required().regex(base64DataRegex, {
-    name: 'No Binary Data',
-    invert: true,
-  }),
+  defaultValue: htmlString.required(),
   customCssClasses,
 })

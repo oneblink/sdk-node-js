@@ -48,8 +48,13 @@ export const JoiRange = Joi.extend((joi: typeof Joi) => ({
   },
 }))
 
-export const base64DataRegex =
-  /<[^>]*src="data:([a-zA-Z]*)\/([a-zA-Z]*);base64,([^"]*)".*>/m
+export const htmlString = Joi.string().regex(
+  /<[^>]*src="data:([a-zA-Z]*)\/([a-zA-Z]*);base64,([^"]*)".*>/m,
+  {
+    name: 'No Binary Data',
+    invert: true,
+  },
+)
 
 export const attachment = Joi.object().keys({
   id: Joi.string().required(),
