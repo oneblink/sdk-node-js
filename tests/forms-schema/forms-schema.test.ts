@@ -4744,6 +4744,77 @@ describe('invalid property removal', () => {
     })
   })
 
+  test('should strip out `postSubmissionReceipt` if `postSubmissionAction` is "URL"', () => {
+    const { error, value } = formSchema.validate({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'URL',
+      redirectUrl: 'http://google.com',
+      postSubmissionReceipt: {
+        html: '<p>test</p>',
+      },
+      cancelAction: 'BACK',
+      submissionEvents: [],
+      tags: [],
+      elements: [],
+    })
+    expect(error).toBeFalsy()
+    expect(value).toEqual({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'URL',
+      redirectUrl: 'http://google.com',
+      cancelAction: 'BACK',
+      submissionEvents: [],
+      tags: [],
+      elements: [],
+      isAuthenticated: false,
+      isMultiPage: false,
+    })
+  })
+
+  test('should allow `postSubmissionReceipt` if `postSubmissionAction` is not "URL"', () => {
+    const { error, value } = formSchema.validate({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'BACK',
+      postSubmissionReceipt: {
+        html: '<p>test</p>',
+      },
+      cancelAction: 'BACK',
+      submissionEvents: [],
+      tags: [],
+      elements: [],
+    })
+    expect(error).toBeFalsy()
+    expect(value).toEqual({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'BACK',
+      postSubmissionReceipt: {
+        html: '<p>test</p>',
+      },
+      cancelAction: 'BACK',
+      submissionEvents: [],
+      tags: [],
+      elements: [],
+      isAuthenticated: false,
+      isMultiPage: false,
+    })
+  })
+
   test('should strip out label" for `form` element type', () => {
     const { error, value } = elementSchema.validate({
       id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
@@ -6257,7 +6328,7 @@ describe('server validation', () => {
   })
 })
 
-describe.only('external id generation', () => {
+describe('external id generation', () => {
   const form = {
     id: 1,
     name: 'string',

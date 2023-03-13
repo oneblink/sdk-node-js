@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `RECEIPT_ID` option to external id generation for forms
+- `postSubmissionReceipt` property to form validation
 
 ## [2.0.2] - 2023-03-13
 

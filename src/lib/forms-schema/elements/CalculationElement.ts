@@ -8,7 +8,7 @@ import {
   conditionallyShowSchemas,
   customCssClasses,
 } from '../property-schemas'
-import { base64DataRegex } from '../common'
+import { htmlString } from '../common'
 
 export const type = 'calculation'
 
@@ -19,18 +19,9 @@ export default Joi.object({
   ...requiredSchemas,
   readOnly,
   ...conditionallyShowSchemas,
-  defaultValue: Joi.string().required().regex(base64DataRegex, {
-    name: 'No Binary Data',
-    invert: true,
-  }),
+  defaultValue: htmlString.required(),
   calculation: Joi.string().required(),
-  preCalculationDisplay: Joi.string()
-
-    .allow(null)
-    .regex(base64DataRegex, {
-      name: 'No Binary Data',
-      invert: true,
-    }),
+  preCalculationDisplay: htmlString.allow(null),
   displayAsCurrency: Joi.boolean().allow(null),
   customCssClasses,
 })
