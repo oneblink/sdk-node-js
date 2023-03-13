@@ -6186,3 +6186,164 @@ describe('Approval Forms Inclusion Configuration', () => {
     )
   })
 })
+
+describe('server validation', () => {
+  const form = {
+    id: 1,
+    name: 'string',
+    description: 'string',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: 'ORGANISATION_00000000001',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    isMultiPage: false,
+    isAuthenticated: true,
+    elements: [],
+    tags: [],
+  }
+
+  test('should save correct data for "CALLBACK" server validation', () => {
+    const configuration = {
+      url: 'https://google.com',
+      secret: 'shh',
+    }
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      serverValidation: {
+        type: 'CALLBACK',
+        configuration,
+      },
+    })
+    expect(validatedForm.serverValidation?.type).toBe('CALLBACK')
+    expect(validatedForm.serverValidation?.configuration).toEqual(configuration)
+  })
+
+  test('should save correct data for "ONEBLINK_API" server validation', () => {
+    const configuration = {
+      apiId: 'customer-project.api.oneblink.io',
+      apiEnvironment: 'dev',
+      apiEnvironmentRoute: '/pathname',
+      secret: 'shh',
+    }
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      serverValidation: {
+        type: 'ONEBLINK_API',
+        configuration,
+      },
+    })
+    expect(validatedForm.serverValidation?.type).toBe('ONEBLINK_API')
+    expect(validatedForm.serverValidation?.configuration).toEqual(configuration)
+  })
+
+  test('should throw error for "RECEIPT_ID" server validation', () => {
+    const configuration = {
+      externalIdGenerator: [
+        {
+          type: 'text',
+          value: 'value',
+        },
+      ],
+    }
+    expect(() =>
+      validateWithFormSchema({
+        ...form,
+        serverValidation: {
+          type: 'RECEIPT_ID',
+          configuration,
+        },
+      }),
+    ).toThrow('"serverValidation.type" must be one of [CALLBACK, ONEBLINK_API]')
+  })
+})
+
+describe.only('external id generation', () => {
+  const form = {
+    id: 1,
+    name: 'string',
+    description: 'string',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: 'ORGANISATION_00000000001',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    isMultiPage: false,
+    isAuthenticated: true,
+    elements: [],
+    tags: [],
+  }
+
+  test('should save correct data for "CALLBACK" external id generation', () => {
+    const configuration = {
+      url: 'https://google.com',
+      secret: 'shh',
+    }
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      externalIdGeneration: {
+        type: 'CALLBACK',
+        configuration,
+      },
+    })
+    expect(validatedForm.externalIdGeneration?.type).toBe('CALLBACK')
+    expect(validatedForm.externalIdGeneration?.configuration).toEqual(
+      configuration,
+    )
+  })
+
+  test('should save correct data for "ONEBLINK_API" external id generation', () => {
+    const configuration = {
+      apiId: 'customer-project.api.oneblink.io',
+      apiEnvironment: 'dev',
+      apiEnvironmentRoute: '/pathname',
+      secret: 'shh',
+    }
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      externalIdGeneration: {
+        type: 'ONEBLINK_API',
+        configuration,
+      },
+    })
+    expect(validatedForm.externalIdGeneration?.type).toBe('ONEBLINK_API')
+    expect(validatedForm.externalIdGeneration?.configuration).toEqual(
+      configuration,
+    )
+  })
+
+  test('should save correct data for "RECEIPT_ID" external id generation', () => {
+    const configuration = {
+      externalIdGenerator: [
+        {
+          type: 'text',
+          value: 'value',
+        },
+        {
+          type: 'date',
+          format: 'dayOfMonth',
+        },
+        {
+          type: 'random',
+          length: 2,
+          uppercase: true,
+          lowercase: true,
+          numbers: true,
+        },
+        {
+          type: 'text',
+          value: 'value',
+        },
+      ],
+    }
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      externalIdGeneration: {
+        type: 'RECEIPT_ID',
+        configuration,
+      },
+    })
+    expect(validatedForm.externalIdGeneration?.type).toBe('RECEIPT_ID')
+    expect(validatedForm.externalIdGeneration?.configuration).toEqual(
+      configuration,
+    )
+  })
+})

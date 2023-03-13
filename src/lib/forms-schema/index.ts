@@ -333,26 +333,77 @@ const pageElementSchema = Joi.object().keys({
     .unique('id'),
 })
 
+const apiRequestSchemaConfiguration = Joi.object()
+  .required()
+  .when('type', {
+    is: 'CALLBACK',
+    then: Joi.object({
+      url: Joi.string().uri().required(),
+      secret: Joi.string(),
+    }),
+  })
+  .when('type', {
+    is: 'ONEBLINK_API',
+    then: Joi.object({
+      apiId: Joi.string().required(),
+      apiEnvironment: Joi.string().required(),
+      apiEnvironmentRoute: Joi.string().required(),
+      secret: Joi.string(),
+    }),
+  })
+
+const externalIdGenerationSchema = Joi.object({
+  type: Joi.string().required().valid('CALLBACK', 'ONEBLINK_API', 'RECEIPT_ID'),
+  configuration: apiRequestSchemaConfiguration.when('type', {
+    is: 'RECEIPT_ID',
+    then: Joi.object({
+      externalIdGenerator: Joi.array()
+        .required()
+        .min(1)
+        .items(
+          Joi.object({
+            type: Joi.string().required().valid('text', 'date', 'random'),
+            value: Joi.when('type', {
+              is: 'text',
+              then: Joi.string().required(),
+              otherwise: Joi.any().strip(),
+            }),
+            format: Joi.when('type', {
+              is: 'date',
+              then: Joi.string()
+                .required()
+                .valid('dayOfMonth', 'monthNumber', 'yearShort', 'year'),
+              otherwise: Joi.any().strip(),
+            }),
+            length: Joi.when('type', {
+              is: 'random',
+              then: Joi.number().required().min(1),
+              otherwise: Joi.any().strip(),
+            }),
+            numbers: Joi.when('type', {
+              is: 'random',
+              then: Joi.boolean().default(false),
+              otherwise: Joi.any().strip(),
+            }),
+            uppercase: Joi.when('type', {
+              is: 'random',
+              then: Joi.boolean().default(false),
+              otherwise: Joi.any().strip(),
+            }),
+            lowercase: Joi.when('type', {
+              is: 'random',
+              then: Joi.boolean().default(false),
+              otherwise: Joi.any().strip(),
+            }),
+          }),
+        ),
+    }),
+  }),
+})
+
 const apiRequestSchema = Joi.object({
   type: Joi.string().required().valid('CALLBACK', 'ONEBLINK_API'),
-  configuration: Joi.object()
-    .required()
-    .when('type', {
-      is: 'CALLBACK',
-      then: Joi.object({
-        url: Joi.string().uri().required(),
-        secret: Joi.string(),
-      }),
-    })
-    .when('type', {
-      is: 'ONEBLINK_API',
-      then: Joi.object({
-        apiId: Joi.string().required(),
-        apiEnvironment: Joi.string().required(),
-        apiEnvironmentRoute: Joi.string().required(),
-        secret: Joi.string(),
-      }),
-    }),
+  configuration: apiRequestSchemaConfiguration,
 })
 
 const cannedResponsesSchema = Joi.array()
@@ -454,7 +505,7 @@ const formSchema = Joi.object().keys({
   // TAGS
   tags: Joi.array().default([]).items(Joi.string()),
   serverValidation: apiRequestSchema,
-  externalIdGeneration: apiRequestSchema,
+  externalIdGeneration: externalIdGenerationSchema,
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
