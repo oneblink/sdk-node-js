@@ -7,6 +7,7 @@ import {
   readOnly,
   conditionallyShowSchemas,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 import elementSchema from '../element-schema'
 
@@ -19,6 +20,7 @@ const schema: Joi.ObjectSchema = Joi.object({
   name,
   label,
   hint,
+  hintPosition,
   readOnly,
   ...conditionallyShowSchemas,
   minSetEntries: Joi.number().min(0),

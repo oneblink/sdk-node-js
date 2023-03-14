@@ -12,6 +12,7 @@ import {
   optionsSchemas,
   defaultValueOptionsSingle,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 
 export const type = 'radio'
@@ -21,6 +22,7 @@ export default Joi.object({
   name,
   label,
   hint,
+  hintPosition,
   ...requiredSchemas,
   readOnly,
   ...conditionallyShowSchemas,

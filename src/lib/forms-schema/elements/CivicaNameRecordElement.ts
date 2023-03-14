@@ -8,6 +8,7 @@ import {
   readOnly,
   conditionallyShowSchemas,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 
 export const type = 'civicaNameRecord'
@@ -20,6 +21,7 @@ export default Joi.object({
   name,
   label,
   hint,
+  hintPosition,
   ...requiredSchemas,
   readOnly,
   ...conditionallyShowSchemas,

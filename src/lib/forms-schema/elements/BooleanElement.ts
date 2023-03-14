@@ -9,6 +9,7 @@ import {
   conditionallyShowSchemas,
   lookupSchemas,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 
 export const type = 'boolean'
@@ -18,6 +19,7 @@ export default Joi.object({
   name,
   label,
   hint,
+  hintPosition,
   readOnly,
   ...requiredSchemas,
   ...conditionallyShowSchemas,

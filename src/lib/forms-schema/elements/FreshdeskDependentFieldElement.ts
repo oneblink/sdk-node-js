@@ -10,6 +10,7 @@ import {
   lookupSchemas,
   optionsSchemas,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 
 export const type = 'freshdeskDependentField'
@@ -19,6 +20,7 @@ export default Joi.object({
   name,
   label,
   hint,
+  hintPosition,
   subCategoryLabel: label,
   subCategoryHint: hint,
   itemLabel: label,

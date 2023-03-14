@@ -10,6 +10,7 @@ import {
   storageType,
   lookupSchemas,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 
 export const type = 'files'
@@ -20,6 +21,7 @@ export default Joi.object({
   label,
   readOnly,
   hint,
+  hintPosition,
   storageType,
   restrictFileTypes: Joi.boolean().default(false),
   restrictedFileTypes: Joi.when('restrictFileTypes', {
