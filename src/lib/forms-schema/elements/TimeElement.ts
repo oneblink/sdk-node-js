@@ -10,6 +10,7 @@ import {
   lookupSchemas,
   placeholderValue,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 
 export const type = 'time'
@@ -19,6 +20,7 @@ export default Joi.object({
   name,
   label,
   hint,
+  hintPosition,
   ...requiredSchemas,
   readOnly,
   placeholderValue,

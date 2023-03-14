@@ -12,6 +12,7 @@ import {
   placeholderValue,
   defaultValueOptionsSingle,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 import { SEARCH_OPTION_TYPE } from '../common'
 
@@ -22,6 +23,7 @@ export default Joi.object({
   name,
   label,
   hint,
+  hintPosition,
   ...requiredSchemas,
   readOnly,
   placeholderValue,

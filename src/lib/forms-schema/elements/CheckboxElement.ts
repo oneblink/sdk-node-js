@@ -13,6 +13,7 @@ import {
   canToggleAll,
   defaultValueOptionsMultiple,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 
 export const type = 'checkboxes'
@@ -22,6 +23,7 @@ export default Joi.object({
   name,
   label,
   hint,
+  hintPosition,
   ...requiredSchemas,
   readOnly,
   ...conditionallyShowSchemas,

@@ -11,6 +11,7 @@ import {
   lookupSchemas,
   regexSchemas,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 
 export const type = 'barcodeScanner'
@@ -20,6 +21,7 @@ export default Joi.object({
   name,
   label,
   hint,
+  hintPosition,
   ...requiredSchemas,
   readOnly,
   ...conditionallyShowSchemas,

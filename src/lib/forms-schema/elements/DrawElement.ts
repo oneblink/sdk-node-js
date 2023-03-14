@@ -10,6 +10,7 @@ import {
   conditionallyShowSchemas,
   storageType,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 
 export const type = 'draw'
@@ -19,6 +20,7 @@ export default Joi.object({
   name,
   label,
   hint,
+  hintPosition,
   ...requiredSchemas,
   readOnly,
   ...conditionallyShowSchemas,

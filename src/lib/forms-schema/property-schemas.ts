@@ -26,6 +26,22 @@ export const baseSchemas = {
 
 export const hint = Joi.string()
 
+export const hintPosition = Joi.string()
+  .custom((value, helpers) => {
+    if (!value) {
+      return 'TOOLTIP'
+    }
+
+    if (value === 'BELOW_LABEL' || value === 'TOOLTIP') {
+      return value
+    }
+
+    return helpers.error('string.hintPosition')
+  })
+  .messages({
+    'string.hintPosition': '{{#label}} must be one of [BELOW_LABEL, TOOLTIP]',
+  })
+
 const required = Joi.bool().default(false)
 const requiredMessage = Joi.string().trim()
 

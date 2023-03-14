@@ -10,6 +10,7 @@ import {
   lookupSchemas,
   placeholderValue,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 
 export const type = 'abn'
@@ -19,6 +20,7 @@ export default Joi.object({
   name,
   label,
   hint,
+  hintPosition,
   readOnly,
   ...requiredSchemas,
   placeholderValue,

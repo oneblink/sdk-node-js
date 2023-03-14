@@ -10,6 +10,7 @@ import {
   lookupSchemas,
   placeholderValue,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 
 const nowSchema = Joi.valid('NOW')
@@ -50,6 +51,7 @@ export default Joi.object({
   name,
   label,
   hint,
+  hintPosition,
   ...requiredSchemas,
   readOnly,
   placeholderValue,

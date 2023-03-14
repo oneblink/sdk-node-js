@@ -8,6 +8,7 @@ import {
   hint,
   conditionallyShowSchemas,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 
 export const type = 'captcha'
@@ -19,6 +20,7 @@ export default Joi.object({
   ...requiredSchemas,
   readOnly,
   hint,
+  hintPosition,
   ...conditionallyShowSchemas,
   customCssClasses,
 })

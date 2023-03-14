@@ -14,6 +14,7 @@ import {
   defaultValueOptionsSingle,
   defaultValueOptionsMultiple,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 
 export const type = 'select'
@@ -23,6 +24,7 @@ export default Joi.object({
   name,
   label,
   hint,
+  hintPosition,
   ...requiredSchemas,
   readOnly,
   ...conditionallyShowSchemas,

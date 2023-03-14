@@ -5,6 +5,7 @@ import {
   hint,
   conditionallyShowSchemas,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 import elementSchema from '../element-schema'
 
@@ -14,6 +15,7 @@ const schema: Joi.ObjectSchema = Joi.object({
   ...baseSchemas,
   label,
   hint,
+  hintPosition,
   ...conditionallyShowSchemas,
   isCollapsed: Joi.boolean().default(false),
   elements: Joi.array()

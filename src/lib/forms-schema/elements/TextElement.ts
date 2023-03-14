@@ -11,6 +11,7 @@ import {
   lookupSchemas,
   regexSchemas,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 
 export const textElementType = 'text'
@@ -21,6 +22,7 @@ export default Joi.object({
   name,
   label,
   hint,
+  hintPosition,
   ...requiredSchemas,
   readOnly,
   ...conditionallyShowSchemas,

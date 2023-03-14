@@ -12,6 +12,7 @@ import {
   lookupSchemas,
   regexSchemas,
   customCssClasses,
+  hintPosition,
 } from '../property-schemas'
 
 export const type = 'number'
@@ -21,6 +22,7 @@ export default Joi.object({
   name,
   label,
   hint,
+  hintPosition,
   ...requiredSchemas,
   readOnly,
   placeholderValue,
