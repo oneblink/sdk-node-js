@@ -6309,7 +6309,7 @@ describe('server validation', () => {
 
   test('should throw error for "RECEIPT_ID" server validation', () => {
     const configuration = {
-      externalIdGenerator: [
+      receiptComponents: [
         {
           type: 'text',
           value: 'value',
@@ -6383,7 +6383,7 @@ describe('external id generation', () => {
 
   test('should save correct data for "RECEIPT_ID" external id generation', () => {
     const configuration = {
-      externalIdGenerator: [
+      receiptComponents: [
         {
           type: 'text',
           value: 'value',
