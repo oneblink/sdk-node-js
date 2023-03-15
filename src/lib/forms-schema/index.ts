@@ -358,7 +358,7 @@ const externalIdGenerationSchema = Joi.object({
   configuration: apiRequestSchemaConfiguration.when('type', {
     is: 'RECEIPT_ID',
     then: Joi.object({
-      externalIdGenerator: Joi.array()
+      receiptComponents: Joi.array()
         .required()
         .min(1)
         .items(
