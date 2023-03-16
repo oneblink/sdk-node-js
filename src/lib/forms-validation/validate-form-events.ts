@@ -175,6 +175,7 @@ export const validateFormEvent = ({
       break
     }
     case 'PDF': {
+      validateEmailAddressConfiguration({ formEvent, propertyName })
       validateEmailTemplateMappingElements({
         formEvent,
         validatedFormElements,
@@ -196,6 +197,7 @@ export const validateFormEvent = ({
       break
     }
     case 'EMAIL': {
+      validateEmailAddressConfiguration({ formEvent, propertyName })
       validateEmailTemplateMappingElements({
         formEvent,
         validatedFormElements,
@@ -214,6 +216,24 @@ export const validateFormEvent = ({
     default: {
       break
     }
+  }
+}
+
+function validateEmailAddressConfiguration({
+  formEvent,
+  propertyName,
+}: {
+  formEvent:
+    | SubmissionEventTypes.EmailOnlySubmissionEvent
+    | SubmissionEventTypes.PdfSubmissionEvent
+  propertyName: string
+}) {
+  const { email, toEmail, ccEmail, bccEmail } = formEvent.configuration
+  // at least one must be provided
+  if (!email && !toEmail?.length && !ccEmail?.length && !bccEmail?.length) {
+    throw new Error(
+      `"${propertyName}.configuration" must contain at least email address in either email, toEmail, ccEmail or bccEmail properties`,
+    )
   }
 }
 
