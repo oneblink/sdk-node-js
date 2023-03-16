@@ -495,7 +495,8 @@ const formSchema = Joi.object().keys({
   postSubmissionReceipt: Joi.when('postSubmissionAction', {
     is: Joi.valid('BACK', 'CLOSE', 'FORMS_LIBRARY'),
     then: Joi.object({
-      html: htmlString.required(),
+      html: htmlString,
+      allowPDFDownload: Joi.object(pdfSubmissionEventConfiguration),
     }),
     otherwise: Joi.any().strip(),
   }),
