@@ -14,11 +14,27 @@ export const postSubmissionActions: FormTypes.FormPostSubmissionAction[] = [
 ]
 const emailSubmissionEventConfiguration = {
   email: Joi.alternatives([
-    Joi.string().email().required(),
-    Joi.string()
-      .regex(/^{ELEMENT:\S+}$/)
-      .required(),
+    Joi.string().email(),
+    Joi.string().regex(/^{ELEMENT:\S+}$/),
   ]),
+  toEmail: Joi.array().items(
+    Joi.alternatives([
+      Joi.string().email(),
+      Joi.string().regex(/^{ELEMENT:\S+}$/),
+    ]),
+  ),
+  ccEmail: Joi.array().items(
+    Joi.alternatives([
+      Joi.string().email(),
+      Joi.string().regex(/^{ELEMENT:\S+}$/),
+    ]),
+  ),
+  bccEmail: Joi.array().items(
+    Joi.alternatives([
+      Joi.string().email(),
+      Joi.string().regex(/^{ELEMENT:\S+}$/),
+    ]),
+  ),
   emailSubjectLine: Joi.string().allow(null, ''),
   emailTemplate: Joi.object().keys({
     id: Joi.number().required(),
