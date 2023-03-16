@@ -138,6 +138,23 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
     }
   }
 
+  if (
+    validatedForm.postSubmissionReceipt?.allowPDFDownload?.excludedElementIds
+  ) {
+    for (const elementId of validatedForm.postSubmissionReceipt.allowPDFDownload
+      .excludedElementIds) {
+      const element = formElementsService.findFormElement(
+        validatedForm.elements,
+        ({ id }) => id === elementId,
+      )
+      if (!element) {
+        throw new Error(
+          `You tried to reference an element (${elementId}) in "postSubmissionReceipt.allowPDFDownload.excludedElementIds" that does not exist on the form.`,
+        )
+      }
+    }
+  }
+
   return validatedForm
 }
 

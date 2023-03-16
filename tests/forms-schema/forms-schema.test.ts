@@ -4779,7 +4779,7 @@ describe('invalid property removal', () => {
     })
   })
 
-  test('should allow `postSubmissionReceipt` if `postSubmissionAction` is not "URL"', () => {
+  test('should allow `postSubmissionReceipt.html` if `postSubmissionAction` is not "URL"', () => {
     const { error, value } = formSchema.validate({
       id: 1,
       name: 'Inspection',
@@ -4813,6 +4813,82 @@ describe('invalid property removal', () => {
       isAuthenticated: false,
       isMultiPage: false,
     })
+  })
+  test('should allow `postSubmissionReceipt.allowPDFDownload` if `postSubmissionAction` is not "URL"', () => {
+    const { error, value } = formSchema.validate({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'BACK',
+      postSubmissionReceipt: {
+        allowPDFDownload: {
+          pdfFileName: 'my.pdf',
+          includeSubmissionIdInPdf: true,
+          includePaymentInPdf: true,
+          excludedElementIds: [],
+          usePagesAsBreaks: true,
+          approvalFormsInclusion: {
+            value: 'ALL',
+          },
+        },
+      },
+      cancelAction: 'BACK',
+      submissionEvents: [],
+      tags: [],
+      elements: [],
+    })
+    expect(error).toBeFalsy()
+    expect(value).toEqual({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'BACK',
+      postSubmissionReceipt: {
+        allowPDFDownload: {
+          pdfFileName: 'my.pdf',
+          includeSubmissionIdInPdf: true,
+          includePaymentInPdf: true,
+          excludedElementIds: [],
+          usePagesAsBreaks: true,
+          approvalFormsInclusion: {
+            value: 'ALL',
+          },
+        },
+      },
+      cancelAction: 'BACK',
+      submissionEvents: [],
+      tags: [],
+      elements: [],
+      isAuthenticated: false,
+      isMultiPage: false,
+    })
+  })
+  test('should throw error for `postSubmissionReceipt.allowPdfDownload.excludedElementIds` contains element ids that do not exist on the form', () => {
+    const run = () =>
+      validateWithFormSchema({
+        id: 1,
+        name: 'Inspection',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: '59cc888b8969af000fb50ddb',
+        postSubmissionAction: 'BACK',
+        postSubmissionReceipt: {
+          allowPDFDownload: {
+            excludedElementIds: ['a5289278-5cb4-4103-90b6-f67ffe84dee7'],
+          },
+        },
+        cancelAction: 'BACK',
+        submissionEvents: [],
+        tags: [],
+        elements: [],
+      })
+    expect(run).toThrow(
+      'You tried to reference an element (a5289278-5cb4-4103-90b6-f67ffe84dee7) in "postSubmissionReceipt.allowPDFDownload.excludedElementIds" that does not exist on the form.',
+    )
   })
 
   test('should strip out label" for `form` element type', () => {
