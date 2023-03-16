@@ -42,7 +42,8 @@ export default class PDF extends OneBlinkAPI {
    * }
    * ```
    *
-   * @param options An object containing all parameters to be passed into the function.
+   * @param options An object containing all parameters to be passed into the
+   *   function.
    */
   async generateFormSubmissionPDF(
     options: {
@@ -52,18 +53,7 @@ export default class PDF extends OneBlinkAPI {
       submissionId: string
       /** `true` if the submission is a draft submission, otherwise `false` */
       isDraft?: boolean
-      /**
-       * `true` to include the payment details associated with the submission in
-       * the PDF, otherwise `false`
-       */
-      includePaymentInPdf?: boolean
-      /** `true` to include the submission identifier in the PDF, otherwise `false` */
-      includeSubmissionIdInPdf?: boolean
-      /** Array of elements ids to be excluded from the PDF document */
-      excludedElementIds?: string[]
-      /** Whether pages in the form submission should translate to page breaks in the PDF */
-      usePagesAsBreaks?: boolean
-    } & SubmissionEventTypes.ApprovalFormsInclusionConfiguration,
+    } & Omit<SubmissionEventTypes.PDFConfiguration, 'fileName'>,
   ): Promise<Buffer> {
     if (!options) {
       throw new TypeError('Must supply "options" as a string')
