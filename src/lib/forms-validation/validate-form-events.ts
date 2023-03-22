@@ -228,11 +228,11 @@ function validateEmailAddressConfiguration({
     | SubmissionEventTypes.PdfSubmissionEvent
   propertyName: string
 }) {
-  const { email, toEmail, ccEmail, bccEmail } = formEvent.configuration
+  const { email, toEmail } = formEvent.configuration
   // at least one must be provided
-  if (!email && !toEmail?.length && !ccEmail?.length && !bccEmail?.length) {
+  if (!email && !toEmail?.length) {
     throw new Error(
-      `"${propertyName}.configuration" must contain at least email address in either email, toEmail, ccEmail or bccEmail properties`,
+      `"${propertyName}.configuration" must contain at least one email address in either email or toEmail properties`,
     )
   }
 }
