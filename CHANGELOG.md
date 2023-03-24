@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `postSubmissionReceipt` property to form validation
 - `hintPosition` property to element validation
 - `toEmail`, `ccEmail` and `bccEmail` to `emailSubmissionEventConfiguration`
+- html string validation to form element hint
 
 ### Changed
 
