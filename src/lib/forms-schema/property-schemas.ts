@@ -1,5 +1,6 @@
 import Joi from 'joi'
 import {
+  htmlString,
   CUSTOM_OPTION_TYPE,
   SEARCH_OPTION_TYPE,
   optionTypes,
@@ -24,7 +25,7 @@ export const baseSchemas = {
   meta,
 }
 
-export const hint = Joi.string()
+export const hint = htmlString
 
 export const hintPosition = Joi.string()
   .custom((value, helpers) => {
