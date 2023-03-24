@@ -82,6 +82,10 @@ const pdfSubmissionEventConfiguration = {
     .allow(null)
     .default([]),
   usePagesAsBreaks: Joi.boolean(),
+  excludedCSSClasses: Joi.array()
+    .items(Joi.string().regex(/^-?[_a-z]+[_a-z0-9-]*$/i)) //regex from here https://stackoverflow.com/a/449000
+    .allow(null)
+    .default([]),
   ...approvalFormsInclusionConfiguration,
 }
 
