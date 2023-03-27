@@ -197,11 +197,7 @@ export const ConditionalPredicatesItemSchema = Joi.object().keys({
 
 export const conditionallyShowPredicates = Joi.when('conditionallyShow', {
   is: true,
-  then: Joi.array()
-    .unique('elementId')
-    .min(1)
-    .items(ConditionalPredicatesItemSchema)
-    .required(),
+  then: Joi.array().min(1).items(ConditionalPredicatesItemSchema).required(),
   otherwise: Joi.any().strip(),
 })
 
