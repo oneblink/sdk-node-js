@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `hintPosition` property to element validation
 - `toEmail`, `ccEmail` and `bccEmail` to `emailSubmissionEventConfiguration`
 - html string validation to form element hint
+- `excludedCSSClasses` to `pdfSubmissionEventConfiguration`
 
 ### Changed
 

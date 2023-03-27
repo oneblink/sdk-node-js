@@ -2830,6 +2830,7 @@ describe('PDF submission event', () => {
         configuration: {
           email: 'developers@oneblink.io',
           excludedElementIds: [],
+          excludedCSSClasses: [],
           emailTemplate: {
             id: 1,
             mapping: [
@@ -4853,6 +4854,7 @@ describe('invalid property removal', () => {
           includeSubmissionIdInPdf: true,
           includePaymentInPdf: true,
           excludedElementIds: [],
+          excludedCSSClasses: [],
           usePagesAsBreaks: true,
           approvalFormsInclusion: {
             value: 'ALL',
