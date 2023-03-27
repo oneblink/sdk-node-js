@@ -185,7 +185,6 @@ function validateConditionalPredicates(
   predicates: Array<unknown>,
 ): Array<ConditionTypes.ConditionalPredicate> {
   const schema = Joi.array()
-    .unique('elementId')
     .min(1)
     .items(ConditionalPredicatesItemSchema)
     .required()
