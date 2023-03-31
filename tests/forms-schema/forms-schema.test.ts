@@ -5777,6 +5777,292 @@ describe('Date and Time `NOW` option', () => {
     expect(result.value.elements[1].toDateDaysOffset).toBe(undefined)
   })
 
+  test('should allow fromDateDaysOffset when fromDateElementId is set', () => {
+    const result = formSchema.validate({
+      ...form,
+      elements: [
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+          fromDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          fromDateDaysOffset: 6,
+        },
+      ],
+    })
+    expect(result.error).toBe(undefined)
+    expect(result.value.elements[0].fromDateElementId).toBe(
+      'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+    )
+    expect(result.value.elements[0].fromDateDaysOffset).toBe(6)
+  })
+
+  test('should allow toDateDaysOffset when toDateElementId is set', () => {
+    const result = formSchema.validate({
+      ...form,
+      elements: [
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+          toDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          toDateDaysOffset: 8,
+        },
+      ],
+    })
+    expect(result.error).toBe(undefined)
+    expect(result.value.elements[0].toDateElementId).toBe(
+      'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+    )
+    expect(result.value.elements[0].toDateDaysOffset).toBe(8)
+  })
+
+  test('should throw error when `toDateElementId` is before `fromDateElementId`', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+            fromDateElementId: '1424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            fromDateDaysOffset: -6,
+            toDateElementId: '3424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            toDateDaysOffset: -8,
+          },
+        ],
+      },
+
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error?.details[0].message).toBe(
+      '"elements[0].toDateDaysOffset" must be greater than or equal to -6',
+    )
+  })
+
+  test('Should allow both toDate and toDateElementId', () => {
+    const result = formSchema.validate({
+      ...form,
+      elements: [
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+          toDate: 'NOW',
+          toDateElementId: '1424f4ea-35a0-47ee-9c22-ef8e16cb12ef',
+        },
+      ],
+    })
+    expect(result.error).toBe(undefined)
+    expect(result.value.elements[0].toDateElementId).toBe(
+      '1424f4ea-35a0-47ee-9c22-ef8e16cb12ef',
+    )
+    expect(result.value.elements[0].toDate).toBe('NOW')
+  })
+
+  test('Should allow both fromDate and fromDateElementId', () => {
+    const result = formSchema.validate({
+      ...form,
+      elements: [
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+          fromDate: 'NOW',
+          fromDateElementId: '1424f4ea-35a0-47ee-9c22-ef8e16cb12ec',
+        },
+      ],
+    })
+
+    expect(result.error).toBe(undefined)
+    expect(result.value.elements[0].fromDateElementId).toBe(
+      '1424f4ea-35a0-47ee-9c22-ef8e16cb12ec',
+    )
+    expect(result.value.elements[0].fromDate).toBe('NOW')
+  })
+
+  test('Should generate fromDateDaysOffset even though there is fromDate and fromDateElementId', () => {
+    const result = formSchema.validate({
+      ...form,
+      elements: [
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+          fromDate: 'NOW',
+          fromDateElementId: '1424f4ea-35a0-47ee-9c22-ef8e16cb12ef',
+          fromDateDaysOffset: 6,
+        },
+      ],
+    })
+    expect(result.error).toBe(undefined)
+    expect(result.value.elements[0].fromDateElementId).toBe(
+      '1424f4ea-35a0-47ee-9c22-ef8e16cb12ef',
+    )
+    expect(result.value.elements[0].fromDate).toBe('NOW')
+
+    expect(result.value.elements[0].fromDateDaysOffset).toBe(6)
+  })
+
+  test('Should generate toDateDaysOffset even though there is toDate and toDateElementId', () => {
+    const result = formSchema.validate({
+      ...form,
+      elements: [
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+          toDate: 'NOW',
+          toDateElementId: '1424f4ea-35a0-47ee-9c22-ef8e16cb12e5',
+          toDateDaysOffset: 8,
+        },
+      ],
+    })
+    expect(result.error).toBe(undefined)
+    expect(result.value.elements[0].toDateElementId).toBe(
+      '1424f4ea-35a0-47ee-9c22-ef8e16cb12e5',
+    )
+    expect(result.value.elements[0].toDate).toBe('NOW')
+
+    expect(result.value.elements[0].toDateDaysOffset).toBe(8)
+  })
+
+  test('Should allow mixture of elementIds and dates', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
+            name: 'Date_and_Time',
+            label: 'Date and Time',
+            type: 'datetime',
+            required: false,
+            defaultValue: 'NOW',
+            defaultValueDaysOffset: 5,
+            fromDateElementId: '1424f4ea-35a0-47ee-9c22-ef8e16cb12ee',
+            fromDateDaysOffset: 2,
+            toDate: 'NOW',
+            toDateDaysOffset: 6,
+          },
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+            fromDate: 'NOW',
+            fromDateDaysOffset: -6,
+            toDateElementId: '1424f4ea-35a0-47ee-9c22-ef8e16cb12aa',
+            toDateDaysOffset: 2,
+          },
+        ],
+      },
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error).toBe(undefined)
+
+    expect(result.value.elements[0].fromDateElementId).toBe(
+      '1424f4ea-35a0-47ee-9c22-ef8e16cb12ee',
+    )
+    expect(result.value.elements[0].fromDateDaysOffset).toBe(2)
+    expect(result.value.elements[0].toDate).toBe('NOW')
+    expect(result.value.elements[0].toDateDaysOffset).toBe(6)
+
+    expect(result.value.elements[1].fromDate).toBe('NOW')
+    expect(result.value.elements[1].fromDateDaysOffset).toBe(-6)
+    expect(result.value.elements[1].toDateElementId).toBe(
+      '1424f4ea-35a0-47ee-9c22-ef8e16cb12aa',
+    )
+    expect(result.value.elements[1].toDateDaysOffset).toBe(2)
+  })
+
+  test('Should not allow invalid guid', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+            toDate: 'NOW',
+            toDateElementId: '123',
+            toDateDaysOffset: 8,
+          },
+        ],
+      },
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error?.details[0].message).toBe(
+      '"elements[0].toDateElementId" must be a valid GUID',
+    )
+  })
+
+  test('Should not allow if one guid is invalid', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+            fromDateElementId: '123',
+            toDateElementId: '2424f4ea-35a0-47ee-9c22-ef8e16cb12e3',
+          },
+        ],
+      },
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error?.details[0].message).toBe(
+      '"elements[0].fromDateElementId" must be a valid GUID',
+    )
+  })
+
   test('should throw error when `toDate` is before `fromDate`', () => {
     const result = formSchema.validate(
       {
