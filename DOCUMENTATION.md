@@ -29,7 +29,7 @@ This SDK is the entry point for all OneBlink Productivity instances. The default
   const CivicPlus = require('@oneblink/sdk/tenants/civicplus')
   ```
 
-Once the SDK has been `require`d, all class documentation below applies to all tenants. However, all of the examples use the default tenant. If you copy and paste from the examples, please don't forget to change (replacing `my-tenant` with a valid tenant path):
+Once the SDK has been `required`, all class documentation below applies to all tenants. However, all of the examples use the default tenant. If you copy and paste from the examples, please don't forget to change (replacing `my-tenant` with a valid tenant path):
 
 ```js
 const OneBlink = require('@oneblink/sdk')
