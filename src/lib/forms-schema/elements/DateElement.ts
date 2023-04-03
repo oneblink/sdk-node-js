@@ -28,11 +28,19 @@ const toDate = Joi.when('fromDate', {
   otherwise: Joi.alternatives([dateSchema, nowSchema]),
 }).allow(null)
 
+const toDateElementId = Joi.string().uuid()
+const fromDateElementId = Joi.string().uuid()
+
 const fromDateDaysOffset = Joi.when('fromDate', {
   is: nowSchema.required(),
   then: daysOffsetSchema,
-  otherwise: Joi.any().strip(),
+  otherwise: Joi.when('fromDateElementId', {
+    is: fromDateElementId.required(),
+    then: daysOffsetSchema,
+    otherwise: Joi.any().strip(),
+  }),
 })
+
 const toDateDaysOffset = Joi.when('toDate', {
   is: nowSchema.required(),
   then: Joi.when('fromDateDaysOffset', {
@@ -40,7 +48,17 @@ const toDateDaysOffset = Joi.when('toDate', {
     then: daysOffsetSchema.min(Joi.ref('fromDateDaysOffset', { render: true })),
     otherwise: daysOffsetSchema,
   }),
-  otherwise: Joi.any().strip(),
+  otherwise: Joi.when('toDateElementId', {
+    is: toDateElementId.required(),
+    then: Joi.when('fromDateDaysOffset', {
+      is: daysOffsetSchema.required(),
+      then: daysOffsetSchema.min(
+        Joi.ref('fromDateDaysOffset', { render: true }),
+      ),
+      otherwise: daysOffsetSchema,
+    }),
+    otherwise: Joi.any().strip(),
+  }),
 })
 
 export const dateElementType = 'date'
@@ -55,8 +73,10 @@ export default Joi.object({
   ...requiredSchemas,
   readOnly,
   placeholderValue,
+  fromDateElementId,
   fromDate,
   fromDateDaysOffset,
+  toDateElementId,
   toDate,
   toDateDaysOffset,
   defaultValue: Joi.alternatives([
