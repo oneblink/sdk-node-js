@@ -1715,6 +1715,140 @@ test('should error if repeatableSet type element min or max entries is less then
   )
 })
 
+test('should error if repeatableSet element names not unique', () => {
+  expect(() =>
+    validateWithFormSchema({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      submissionEvents: [],
+      tags: [],
+      elements: [
+        {
+          id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+          name: 'repeatableSet',
+          type: 'repeatableSet',
+          label: 'repeatableSet',
+          minSetEntries: 1,
+          maxSetEntries: 2,
+          elements: [
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+              name: 'What_was_the_time',
+              label: 'What was the time',
+              type: 'time',
+              required: false,
+              defaultValue: '1970-01-01T05:28:26.448Z',
+            },
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+              name: 'What_was_the_time',
+              label: 'What is the time',
+              type: 'time',
+              required: false,
+              defaultValue: '1970-01-01T05:28:26.448Z',
+            },
+          ],
+        },
+      ],
+    }),
+  ).toThrow('"elements[0].elements[1]" contains a duplicate value')
+})
+
+test('should error if repeatableSet summary element references element that is not valid', () => {
+  expect(() =>
+    validateWithFormSchema({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      submissionEvents: [],
+      tags: [],
+      elements: [
+        {
+          id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+          name: 'repeatableSet',
+          type: 'repeatableSet',
+          label: 'repeatableSet',
+          minSetEntries: 1,
+          maxSetEntries: 2,
+          elements: [
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700f',
+              name: 'heading',
+              label: 'Heading',
+              type: 'heading',
+              headingType: 1,
+            },
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+              name: 'What_was_the_time',
+              label: 'What was the time',
+              type: 'time',
+              required: false,
+              defaultValue: '1970-01-01T05:28:26.448Z',
+            },
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
+              name: 'time_summary',
+              label: 'Time summary',
+              type: 'summary',
+              elementIds: ['2424f4ea-35a0-47ee-9c22-ef8e16cb700f'],
+            },
+          ],
+        },
+      ],
+    }),
+  ).toThrow('Summarised element type not valid')
+})
+
+test('should error if repeatableSet summary element references element that does not exist', () => {
+  expect(() =>
+    validateWithFormSchema({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      submissionEvents: [],
+      tags: [],
+      elements: [
+        {
+          id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+          name: 'repeatableSet',
+          type: 'repeatableSet',
+          label: 'repeatableSet',
+          minSetEntries: 1,
+          maxSetEntries: 2,
+          elements: [
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+              name: 'What_was_the_time',
+              label: 'What was the time',
+              type: 'time',
+              required: false,
+              defaultValue: '1970-01-01T05:28:26.448Z',
+            },
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
+              name: 'time_summary',
+              label: 'Time summary',
+              type: 'summary',
+              elementIds: ['2424f4ea-35a0-47ee-9c22-ef8e16cb700f'],
+            },
+          ],
+        },
+      ],
+    }),
+  ).toThrow('Summarised elementId not found')
+})
+
 test('should error if page element has child page element', () => {
   const { error } = formSchema.validate(
     {
@@ -6091,6 +6225,125 @@ describe('Date and Time `NOW` option', () => {
     expect(result.error?.details[0].message).toBe(
       '"elements[0].toDateDaysOffset" must be greater than or equal to -6',
     )
+  })
+
+  test('should throw error when toDateElementId does not exist', () => {
+    expect(() =>
+      validateWithFormSchema({
+        ...form,
+        elements: [
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+            toDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          },
+        ],
+      }),
+    ).toThrow('Referenced toDateElementId not found')
+  })
+
+  test('should throw error when toDateElementId is not the same type', () => {
+    expect(() =>
+      validateWithFormSchema({
+        ...form,
+        elements: [
+          {
+            id: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+          },
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Another_Date',
+            label: 'Another Date',
+            type: 'datetime',
+            required: false,
+            defaultValue: 'NOW',
+            toDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          },
+        ],
+      }),
+    ).toThrow('Referenced toDateElementId not a datetime')
+  })
+
+  test('should throw error when fromDateElementId does not exist', () => {
+    expect(() =>
+      validateWithFormSchema({
+        ...form,
+        elements: [
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+            fromDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          },
+        ],
+      }),
+    ).toThrow('Referenced fromDateElementId not found')
+  })
+
+  test('should throw error when fromDateElementId is not the same type', () => {
+    expect(() =>
+      validateWithFormSchema({
+        ...form,
+        elements: [
+          {
+            id: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+          },
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Another_Date',
+            label: 'Another Date',
+            type: 'datetime',
+            required: false,
+            defaultValue: 'NOW',
+            fromDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          },
+        ],
+      }),
+    ).toThrow('Referenced fromDateElementId not a datetime')
+  })
+
+  test('should allow when toDateElementId and fromDateElement are correctly configured', () => {
+    validateWithFormSchema({
+      ...form,
+      elements: [
+        {
+          id: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+        },
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Another_Date',
+          label: 'Another Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+          fromDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          toDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          toDateDaysOffset: 8,
+        },
+      ],
+    })
   })
 })
 

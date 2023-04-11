@@ -36,38 +36,43 @@ function validateFormEventData(
   return formEvent
 }
 
-function validateWithFormSchema(form?: unknown): FormTypes.Form {
-  const validatedForm: FormTypes.Form = validateJoiSchema(form, formSchema, {
-    stripUnknown: true,
-  })
-
-  // validate element names are unique (including elements without a name with children)
-  validateElementNamesAcrossNestedElements(validatedForm.elements)
-
-  const { publishStartDate, publishEndDate } = validatedForm
-  if (!!publishStartDate && !!publishEndDate) {
-    const startDate = new Date(publishStartDate)
-    const endDate = new Date(publishEndDate)
-    if (startDate >= endDate)
-      throw new Error('Publish Start Date must be before Publish End Date')
+function validateReferenceDate({
+  element,
+  referenceType,
+  elements,
+}: {
+  element: FormTypes.DateElement | FormTypes.DateTimeElement
+  referenceType: 'toDateElementId' | 'fromDateElementId'
+  elements: FormTypes.FormElement[]
+}) {
+  if (element[referenceType]) {
+    //ensure element exists and is the same type
+    const referencedElement = elements.find(
+      (el) => el.id === element[referenceType],
+    )
+    if (!referencedElement) {
+      throw new Error(`Referenced ${referenceType} not found`)
+    }
+    if (referencedElement.type !== element.type) {
+      throw new Error(`Referenced ${referenceType} not a ${element.type}`)
+    }
   }
+}
 
-  if (!validatedForm.submissionEvents) {
-    validatedForm.submissionEvents = []
-  }
-
-  const rootFormElements = getRootFormElements(validatedForm.elements)
-
+function validateFormElementReferences(
+  rootElements: FormTypes.FormElement[],
+  formElements: FormTypes.FormElement[],
+) {
   // Element References
-  for (const rootFormElement of rootFormElements) {
-    switch (rootFormElement.type) {
+  for (const element of rootElements) {
+    switch (element.type) {
       case 'summary': {
-        rootFormElement.elementIds.forEach((elementId) => {
-          if (elementId === rootFormElement.id) {
+        element.elementIds.forEach((elementId) => {
+          if (elementId === element.id) {
             throw new Error('Summary element cannot summarised self')
           }
           const summarizedElement = formElementsService.findFormElement(
-            validatedForm.elements,
+            formElements,
             (formElement) => formElement.id === elementId,
           )
           if (!summarizedElement) {
@@ -100,8 +105,57 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
         })
         break
       }
+      case 'date':
+      case 'datetime': {
+        if (element.toDateElementId) {
+          validateReferenceDate({
+            element,
+            referenceType: 'toDateElementId',
+            elements: rootElements,
+          })
+        }
+        if (element.fromDateElementId) {
+          validateReferenceDate({
+            element,
+            referenceType: 'fromDateElementId',
+            elements: rootElements,
+          })
+        }
+        break
+      }
+      case 'repeatableSet': {
+        validateElementNamesAcrossNestedElements(element.elements)
+        const repSetRootElements = getRootFormElements(element.elements)
+        validateFormElementReferences(repSetRootElements, element.elements)
+        break
+      }
     }
   }
+}
+
+function validateWithFormSchema(form?: unknown): FormTypes.Form {
+  const validatedForm: FormTypes.Form = validateJoiSchema(form, formSchema, {
+    stripUnknown: true,
+  })
+
+  // validate element names are unique (including elements without a name with children)
+  validateElementNamesAcrossNestedElements(validatedForm.elements)
+
+  const { publishStartDate, publishEndDate } = validatedForm
+  if (!!publishStartDate && !!publishEndDate) {
+    const startDate = new Date(publishStartDate)
+    const endDate = new Date(publishEndDate)
+    if (startDate >= endDate)
+      throw new Error('Publish Start Date must be before Publish End Date')
+  }
+
+  if (!validatedForm.submissionEvents) {
+    validatedForm.submissionEvents = []
+  }
+
+  const rootFormElements = getRootFormElements(validatedForm.elements)
+
+  validateFormElementReferences(rootFormElements, validatedForm.elements)
 
   // Form Event References
   const formEventPropsToValidate = [
