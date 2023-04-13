@@ -4753,7 +4753,7 @@ describe('invalid property removal', () => {
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'URL',
-      redirectUrl: 'http://google.com',
+      redirectUrl: 'https://google.com',
       postSubmissionReceipt: {
         html: '<p>test</p>',
       },
@@ -4770,7 +4770,7 @@ describe('invalid property removal', () => {
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'URL',
-      redirectUrl: 'http://google.com',
+      redirectUrl: 'https://google.com',
       cancelAction: 'BACK',
       submissionEvents: [],
       tags: [],
@@ -4957,7 +4957,7 @@ describe('invalid property removal', () => {
       name: 'autocomplete',
       label: 'autocomplete',
       optionsType: 'SEARCH',
-      searchUrl: 'http://search.com',
+      searchUrl: 'https://search.com',
     })
     expect(error).toBeFalsy()
     expect(value).toEqual({
@@ -4972,7 +4972,7 @@ describe('invalid property removal', () => {
       readOnly: false,
       required: false,
       type: 'autocomplete',
-      searchUrl: 'http://search.com',
+      searchUrl: 'https://search.com',
     })
   })
 
@@ -4983,7 +4983,7 @@ describe('invalid property removal', () => {
       name: 'autocomplete',
       label: 'autocomplete',
       optionsType: 'SEARCH',
-      searchUrl: 'http://search.com',
+      searchUrl: 'https://search.com',
     })
     expect(error).toBeFalsy()
     expect(value).toEqual({
@@ -4998,7 +4998,7 @@ describe('invalid property removal', () => {
       readOnly: false,
       required: false,
       type: 'autocomplete',
-      searchUrl: 'http://search.com',
+      searchUrl: 'https://search.com',
     })
   })
 
