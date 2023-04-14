@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `SUBMISSION_ID` and `EXTERNAL_ID` to FreshDesk mapping in form workflow events
+
 ## [2.3.0] - 2023-04-14
 
 ### Added

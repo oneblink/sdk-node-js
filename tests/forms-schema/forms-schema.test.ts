@@ -2778,6 +2778,14 @@ describe('Freshdesk Submission Event', () => {
               type: 'VALUE',
               value: true,
             },
+            {
+              freshdeskFieldName: 'customNameThree',
+              type: 'SUBMISSION_ID',
+            },
+            {
+              freshdeskFieldName: 'customNameFour',
+              type: 'EXTERNAL_ID',
+            },
           ],
         },
       },
