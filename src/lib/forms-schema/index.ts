@@ -300,7 +300,7 @@ export const WorkflowEventSchema = Joi.object().keys({
           Joi.object().keys({
             freshdeskFieldName: Joi.string().required(),
             type: Joi.string()
-              .valid('FORM_ELEMENT', 'VALUE', 'DEPENDENT_FIELD_VALUE')
+              .valid('FORM_ELEMENT', 'VALUE', 'DEPENDENT_FIELD_VALUE', 'SUBMISSION_ID', 'EXTERNAL_ID')
               .required(),
             formElementId: Joi.when('type', {
               is: 'FORM_ELEMENT',

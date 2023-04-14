@@ -10,6 +10,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `@microsoft/eslint-plugin-sdl` eslint plugin
+- `SUBMISSION_ID` and `EXTERNAL_ID` to FreshDesk mapping in form workflow events
+
+## [2.3.0] - 2023-04-14
+
+### Added
+
+- elementId validation for date/datetime elements
+
+### Changed
+
+- validate elements inside repeatable sets
 
 ## [2.2.0] - 2023-04-02
 

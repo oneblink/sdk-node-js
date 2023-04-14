@@ -1715,6 +1715,140 @@ test('should error if repeatableSet type element min or max entries is less then
   )
 })
 
+test('should error if repeatableSet element names not unique', () => {
+  expect(() =>
+    validateWithFormSchema({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      submissionEvents: [],
+      tags: [],
+      elements: [
+        {
+          id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+          name: 'repeatableSet',
+          type: 'repeatableSet',
+          label: 'repeatableSet',
+          minSetEntries: 1,
+          maxSetEntries: 2,
+          elements: [
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+              name: 'What_was_the_time',
+              label: 'What was the time',
+              type: 'time',
+              required: false,
+              defaultValue: '1970-01-01T05:28:26.448Z',
+            },
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+              name: 'What_was_the_time',
+              label: 'What is the time',
+              type: 'time',
+              required: false,
+              defaultValue: '1970-01-01T05:28:26.448Z',
+            },
+          ],
+        },
+      ],
+    }),
+  ).toThrow('"elements[0].elements[1]" contains a duplicate value')
+})
+
+test('should error if repeatableSet summary element references element that is not valid', () => {
+  expect(() =>
+    validateWithFormSchema({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      submissionEvents: [],
+      tags: [],
+      elements: [
+        {
+          id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+          name: 'repeatableSet',
+          type: 'repeatableSet',
+          label: 'repeatableSet',
+          minSetEntries: 1,
+          maxSetEntries: 2,
+          elements: [
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700f',
+              name: 'heading',
+              label: 'Heading',
+              type: 'heading',
+              headingType: 1,
+            },
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+              name: 'What_was_the_time',
+              label: 'What was the time',
+              type: 'time',
+              required: false,
+              defaultValue: '1970-01-01T05:28:26.448Z',
+            },
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
+              name: 'time_summary',
+              label: 'Time summary',
+              type: 'summary',
+              elementIds: ['2424f4ea-35a0-47ee-9c22-ef8e16cb700f'],
+            },
+          ],
+        },
+      ],
+    }),
+  ).toThrow('Summarised element type not valid')
+})
+
+test('should error if repeatableSet summary element references element that does not exist', () => {
+  expect(() =>
+    validateWithFormSchema({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      submissionEvents: [],
+      tags: [],
+      elements: [
+        {
+          id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+          name: 'repeatableSet',
+          type: 'repeatableSet',
+          label: 'repeatableSet',
+          minSetEntries: 1,
+          maxSetEntries: 2,
+          elements: [
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+              name: 'What_was_the_time',
+              label: 'What was the time',
+              type: 'time',
+              required: false,
+              defaultValue: '1970-01-01T05:28:26.448Z',
+            },
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
+              name: 'time_summary',
+              label: 'Time summary',
+              type: 'summary',
+              elementIds: ['2424f4ea-35a0-47ee-9c22-ef8e16cb700f'],
+            },
+          ],
+        },
+      ],
+    }),
+  ).toThrow('Summarised elementId not found')
+})
+
 test('should error if page element has child page element', () => {
   const { error } = formSchema.validate(
     {
@@ -2643,6 +2777,14 @@ describe('Freshdesk Submission Event', () => {
               freshdeskFieldName: 'customNameTwo',
               type: 'VALUE',
               value: true,
+            },
+            {
+              freshdeskFieldName: 'customNameThree',
+              type: 'SUBMISSION_ID',
+            },
+            {
+              freshdeskFieldName: 'customNameFour',
+              type: 'EXTERNAL_ID',
             },
           ],
         },
@@ -5777,6 +5919,292 @@ describe('Date and Time `NOW` option', () => {
     expect(result.value.elements[1].toDateDaysOffset).toBe(undefined)
   })
 
+  test('should allow fromDateDaysOffset when fromDateElementId is set', () => {
+    const result = formSchema.validate({
+      ...form,
+      elements: [
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+          fromDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          fromDateDaysOffset: 6,
+        },
+      ],
+    })
+    expect(result.error).toBe(undefined)
+    expect(result.value.elements[0].fromDateElementId).toBe(
+      'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+    )
+    expect(result.value.elements[0].fromDateDaysOffset).toBe(6)
+  })
+
+  test('should allow toDateDaysOffset when toDateElementId is set', () => {
+    const result = formSchema.validate({
+      ...form,
+      elements: [
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+          toDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          toDateDaysOffset: 8,
+        },
+      ],
+    })
+    expect(result.error).toBe(undefined)
+    expect(result.value.elements[0].toDateElementId).toBe(
+      'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+    )
+    expect(result.value.elements[0].toDateDaysOffset).toBe(8)
+  })
+
+  test('should throw error when `toDateElementId` is before `fromDateElementId`', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+            fromDateElementId: '1424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            fromDateDaysOffset: -6,
+            toDateElementId: '3424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            toDateDaysOffset: -8,
+          },
+        ],
+      },
+
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error?.details[0].message).toBe(
+      '"elements[0].toDateDaysOffset" must be greater than or equal to -6',
+    )
+  })
+
+  test('Should allow both toDate and toDateElementId', () => {
+    const result = formSchema.validate({
+      ...form,
+      elements: [
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+          toDate: 'NOW',
+          toDateElementId: '1424f4ea-35a0-47ee-9c22-ef8e16cb12ef',
+        },
+      ],
+    })
+    expect(result.error).toBe(undefined)
+    expect(result.value.elements[0].toDateElementId).toBe(
+      '1424f4ea-35a0-47ee-9c22-ef8e16cb12ef',
+    )
+    expect(result.value.elements[0].toDate).toBe('NOW')
+  })
+
+  test('Should allow both fromDate and fromDateElementId', () => {
+    const result = formSchema.validate({
+      ...form,
+      elements: [
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+          fromDate: 'NOW',
+          fromDateElementId: '1424f4ea-35a0-47ee-9c22-ef8e16cb12ec',
+        },
+      ],
+    })
+
+    expect(result.error).toBe(undefined)
+    expect(result.value.elements[0].fromDateElementId).toBe(
+      '1424f4ea-35a0-47ee-9c22-ef8e16cb12ec',
+    )
+    expect(result.value.elements[0].fromDate).toBe('NOW')
+  })
+
+  test('Should generate fromDateDaysOffset even though there is fromDate and fromDateElementId', () => {
+    const result = formSchema.validate({
+      ...form,
+      elements: [
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+          fromDate: 'NOW',
+          fromDateElementId: '1424f4ea-35a0-47ee-9c22-ef8e16cb12ef',
+          fromDateDaysOffset: 6,
+        },
+      ],
+    })
+    expect(result.error).toBe(undefined)
+    expect(result.value.elements[0].fromDateElementId).toBe(
+      '1424f4ea-35a0-47ee-9c22-ef8e16cb12ef',
+    )
+    expect(result.value.elements[0].fromDate).toBe('NOW')
+
+    expect(result.value.elements[0].fromDateDaysOffset).toBe(6)
+  })
+
+  test('Should generate toDateDaysOffset even though there is toDate and toDateElementId', () => {
+    const result = formSchema.validate({
+      ...form,
+      elements: [
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+          toDate: 'NOW',
+          toDateElementId: '1424f4ea-35a0-47ee-9c22-ef8e16cb12e5',
+          toDateDaysOffset: 8,
+        },
+      ],
+    })
+    expect(result.error).toBe(undefined)
+    expect(result.value.elements[0].toDateElementId).toBe(
+      '1424f4ea-35a0-47ee-9c22-ef8e16cb12e5',
+    )
+    expect(result.value.elements[0].toDate).toBe('NOW')
+
+    expect(result.value.elements[0].toDateDaysOffset).toBe(8)
+  })
+
+  test('Should allow mixture of elementIds and dates', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '398de8c3-104e-427f-bd90-099c00fd5d5b',
+            name: 'Date_and_Time',
+            label: 'Date and Time',
+            type: 'datetime',
+            required: false,
+            defaultValue: 'NOW',
+            defaultValueDaysOffset: 5,
+            fromDateElementId: '1424f4ea-35a0-47ee-9c22-ef8e16cb12ee',
+            fromDateDaysOffset: 2,
+            toDate: 'NOW',
+            toDateDaysOffset: 6,
+          },
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+            fromDate: 'NOW',
+            fromDateDaysOffset: -6,
+            toDateElementId: '1424f4ea-35a0-47ee-9c22-ef8e16cb12aa',
+            toDateDaysOffset: 2,
+          },
+        ],
+      },
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error).toBe(undefined)
+
+    expect(result.value.elements[0].fromDateElementId).toBe(
+      '1424f4ea-35a0-47ee-9c22-ef8e16cb12ee',
+    )
+    expect(result.value.elements[0].fromDateDaysOffset).toBe(2)
+    expect(result.value.elements[0].toDate).toBe('NOW')
+    expect(result.value.elements[0].toDateDaysOffset).toBe(6)
+
+    expect(result.value.elements[1].fromDate).toBe('NOW')
+    expect(result.value.elements[1].fromDateDaysOffset).toBe(-6)
+    expect(result.value.elements[1].toDateElementId).toBe(
+      '1424f4ea-35a0-47ee-9c22-ef8e16cb12aa',
+    )
+    expect(result.value.elements[1].toDateDaysOffset).toBe(2)
+  })
+
+  test('Should not allow invalid guid', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+            toDate: 'NOW',
+            toDateElementId: '123',
+            toDateDaysOffset: 8,
+          },
+        ],
+      },
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error?.details[0].message).toBe(
+      '"elements[0].toDateElementId" must be a valid GUID',
+    )
+  })
+
+  test('Should not allow if one guid is invalid', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+            fromDateElementId: '123',
+            toDateElementId: '2424f4ea-35a0-47ee-9c22-ef8e16cb12e3',
+          },
+        ],
+      },
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+
+    expect(result.error?.details[0].message).toBe(
+      '"elements[0].fromDateElementId" must be a valid GUID',
+    )
+  })
+
   test('should throw error when `toDate` is before `fromDate`', () => {
     const result = formSchema.validate(
       {
@@ -5805,6 +6233,125 @@ describe('Date and Time `NOW` option', () => {
     expect(result.error?.details[0].message).toBe(
       '"elements[0].toDateDaysOffset" must be greater than or equal to -6',
     )
+  })
+
+  test('should throw error when toDateElementId does not exist', () => {
+    expect(() =>
+      validateWithFormSchema({
+        ...form,
+        elements: [
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+            toDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          },
+        ],
+      }),
+    ).toThrow('Referenced toDateElementId not found')
+  })
+
+  test('should throw error when toDateElementId is not the same type', () => {
+    expect(() =>
+      validateWithFormSchema({
+        ...form,
+        elements: [
+          {
+            id: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+          },
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Another_Date',
+            label: 'Another Date',
+            type: 'datetime',
+            required: false,
+            defaultValue: 'NOW',
+            toDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          },
+        ],
+      }),
+    ).toThrow('Referenced toDateElementId not a datetime')
+  })
+
+  test('should throw error when fromDateElementId does not exist', () => {
+    expect(() =>
+      validateWithFormSchema({
+        ...form,
+        elements: [
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+            fromDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          },
+        ],
+      }),
+    ).toThrow('Referenced fromDateElementId not found')
+  })
+
+  test('should throw error when fromDateElementId is not the same type', () => {
+    expect(() =>
+      validateWithFormSchema({
+        ...form,
+        elements: [
+          {
+            id: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+            name: 'Just_Date',
+            label: 'Just Date',
+            type: 'date',
+            required: false,
+            defaultValue: 'NOW',
+          },
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+            name: 'Another_Date',
+            label: 'Another Date',
+            type: 'datetime',
+            required: false,
+            defaultValue: 'NOW',
+            fromDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          },
+        ],
+      }),
+    ).toThrow('Referenced fromDateElementId not a datetime')
+  })
+
+  test('should allow when toDateElementId and fromDateElement are correctly configured', () => {
+    validateWithFormSchema({
+      ...form,
+      elements: [
+        {
+          id: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          name: 'Just_Date',
+          label: 'Just Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+        },
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb12ed',
+          name: 'Another_Date',
+          label: 'Another Date',
+          type: 'date',
+          required: false,
+          defaultValue: 'NOW',
+          fromDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          toDateElementId: 'e5a05567-c666-45e3-bcd8-10e6ca0c2e1a',
+          toDateDaysOffset: 8,
+        },
+      ],
+    })
   })
 })
 
