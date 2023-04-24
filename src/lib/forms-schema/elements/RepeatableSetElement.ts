@@ -23,12 +23,24 @@ const schema: Joi.ObjectSchema = Joi.object({
   hintPosition,
   readOnly,
   ...conditionallyShowSchemas,
-  minSetEntries: Joi.number().min(0),
-  maxSetEntries: Joi.number().when('minSetEntries', {
-    is: Joi.number().required().min(0),
-    then: Joi.number().min(Joi.ref('minSetEntries', { render: true })),
-    otherwise: Joi.number().min(0),
-  }),
+  minSetEntries: Joi.alternatives([
+    Joi.number().min(0),
+    Joi.object({
+      type: Joi.string().valid('FORM_ELEMENT').required(),
+      elementId: Joi.string().uuid().required(),
+    }),
+  ]),
+  maxSetEntries: Joi.alternatives([
+    Joi.number().when('minSetEntries', {
+      is: Joi.number().required().min(0),
+      then: Joi.number().min(Joi.ref('minSetEntries', { render: true })),
+      otherwise: Joi.number().min(0),
+    }),
+    Joi.object({
+      type: Joi.string().valid('FORM_ELEMENT').required(),
+      elementId: Joi.string().uuid().required(),
+    }),
+  ]),
   addSetEntryLabel: Joi.string(),
   removeSetEntryLabel: Joi.string(),
   elements: Joi.array()
