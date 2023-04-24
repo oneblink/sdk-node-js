@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Element ID validation for min and max entry properties on 'repeatableSet` elements
+
 ## [2.3.1] - 2023-04-20
 
 ### Added
