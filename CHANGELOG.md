@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.4.0] - 2023-04-27
-
 ### Added
 
 - `displayAlways` to options sets option attribute for use with Autocomplete elements
+
+## [2.4.0] - 2023-04-27
 
 ### Added
 
