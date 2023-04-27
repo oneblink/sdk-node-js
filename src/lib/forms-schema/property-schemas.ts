@@ -88,6 +88,7 @@ const options = Joi.when('optionsType', {
             elementId: Joi.string().guid().required(),
           }),
         ),
+        displayAlways: Joi.boolean().default(false),
       }),
     )
     .required(),
