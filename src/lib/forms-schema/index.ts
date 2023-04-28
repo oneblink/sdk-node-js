@@ -289,6 +289,16 @@ export const WorkflowEventSchema = Joi.object().keys({
           .items(Joi.string().guid())
           .unique()
           .allow(null),
+        tags: Joi.array().min(1).items(Joi.string()).unique(),
+        categories: Joi.array()
+          .min(1)
+          .items(
+            Joi.object().keys({
+              id: Joi.string().uuid().required(),
+              name: Joi.string().required(),
+            }),
+          )
+          .unique('id'),
         encryptPdf: Joi.boolean().default(false),
         ...pdfSubmissionEventConfiguration,
       }),
@@ -300,7 +310,13 @@ export const WorkflowEventSchema = Joi.object().keys({
           Joi.object().keys({
             freshdeskFieldName: Joi.string().required(),
             type: Joi.string()
-              .valid('FORM_ELEMENT', 'VALUE', 'DEPENDENT_FIELD_VALUE', 'SUBMISSION_ID', 'EXTERNAL_ID')
+              .valid(
+                'FORM_ELEMENT',
+                'VALUE',
+                'DEPENDENT_FIELD_VALUE',
+                'SUBMISSION_ID',
+                'EXTERNAL_ID',
+              )
               .required(),
             formElementId: Joi.when('type', {
               is: 'FORM_ELEMENT',

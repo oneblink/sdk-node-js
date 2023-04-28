@@ -3976,69 +3976,73 @@ describe('CP_PAY submission event', () => {
 })
 
 describe('CP_HCMS submission event', () => {
+  const form = {
+    id: 1,
+    name: 'string',
+    description: 'string',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: 'ORGANISATION_00000000001',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    isMultiPage: false,
+    tags: [],
+    elements: [
+      {
+        id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+        name: 'Numbers',
+        label: 'Numbers',
+        type: 'number',
+        required: false,
+      },
+    ],
+    isAuthenticated: true,
+  }
   test('should allow CP_HCMS submission event', () => {
-    const { error } = formSchema.validate(
-      {
-        id: 1,
-        name: 'string',
-        description: 'string',
-        formsAppEnvironmentId: 1,
-        formsAppIds: [1],
-        organisationId: 'ORGANISATION_00000000001',
-        postSubmissionAction: 'FORMS_LIBRARY',
-        isMultiPage: false,
-        tags: [],
-        elements: [
-          {
-            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
-            name: 'Numbers',
-            label: 'Numbers',
-            type: 'number',
-            required: false,
+    const input = {
+      ...form,
+      submissionEvents: [
+        {
+          type: 'CP_HCMS',
+          configuration: {
+            contentTypeName: 'contenttypename-1',
+            encryptedElementIds: ['b941ea2d-965c-4d40-8c1d-e5a231fc18b1'],
+            tags: ['my-tag', 'your-tag'],
+            categories: [
+              {
+                id: 'c028c583-6c58-4d8f-8ff8-c9fbc870069e',
+                name: 'Animals',
+              },
+              {
+                id: '7117543b-faf3-476c-8d10-ef45757485d1',
+                name: 'Old Stuff',
+              },
+            ],
           },
-        ],
-        isAuthenticated: true,
-
-        submissionEvents: [
-          {
-            type: 'CP_HCMS',
-            configuration: {
-              contentTypeName: 'contenttypename-1',
-              encryptedElementIds: ['b941ea2d-965c-4d40-8c1d-e5a231fc18b1'],
-            },
-          },
-        ],
-      },
-
-      {
-        abortEarly: false,
-      },
-    )
+        },
+      ],
+    }
+    const { error, value } = formSchema.validate(input, {
+      abortEarly: false,
+    })
     expect(error).toBe(undefined)
+    expect(
+      input.submissionEvents.map((s) => ({
+        ...s,
+        conditionallyExecute: false,
+        requiresAllConditionallyExecutePredicates: false,
+        configuration: {
+          ...s.configuration,
+          excludedCSSClasses: [],
+          excludedElementIds: [],
+          encryptPdf: false,
+        },
+      })),
+    ).toEqual(value.submissionEvents)
   })
   test('should reject CP_HCMS submission event with contentType name > 40', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
-        name: 'string',
-        description: 'string',
-        formsAppEnvironmentId: 1,
-        formsAppIds: [1],
-        organisationId: 'ORGANISATION_00000000001',
-        postSubmissionAction: 'FORMS_LIBRARY',
-        isMultiPage: false,
-        tags: [],
-        elements: [
-          {
-            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
-            name: 'Numbers',
-            label: 'Numbers',
-            type: 'number',
-            required: false,
-          },
-        ],
-        isAuthenticated: true,
-
+        ...form,
         submissionEvents: [
           {
             type: 'CP_HCMS',
@@ -4049,7 +4053,6 @@ describe('CP_HCMS submission event', () => {
           },
         ],
       },
-
       {
         abortEarly: false,
       },
@@ -4061,26 +4064,7 @@ describe('CP_HCMS submission event', () => {
   test('should reject CP_HCMS submission event with contentType name uppercase', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
-        name: 'string',
-        description: 'string',
-        formsAppEnvironmentId: 1,
-        formsAppIds: [1],
-        organisationId: 'ORGANISATION_00000000001',
-        postSubmissionAction: 'FORMS_LIBRARY',
-        isMultiPage: false,
-        tags: [],
-        elements: [
-          {
-            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
-            name: 'Numbers',
-            label: 'Numbers',
-            type: 'number',
-            required: false,
-          },
-        ],
-        isAuthenticated: true,
-
+        ...form,
         submissionEvents: [
           {
             type: 'CP_HCMS',
@@ -4100,26 +4084,7 @@ describe('CP_HCMS submission event', () => {
   test('should reject CP_HCMS submission event with duplicate encryptedElementIds', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
-        name: 'string',
-        description: 'string',
-        formsAppEnvironmentId: 1,
-        formsAppIds: [1],
-        organisationId: 'ORGANISATION_00000000001',
-        postSubmissionAction: 'FORMS_LIBRARY',
-        isMultiPage: false,
-        tags: [],
-        elements: [
-          {
-            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
-            name: 'Numbers',
-            label: 'Numbers',
-            type: 'number',
-            required: false,
-          },
-        ],
-        isAuthenticated: true,
-
+        ...form,
         submissionEvents: [
           {
             type: 'CP_HCMS',
@@ -4140,6 +4105,107 @@ describe('CP_HCMS submission event', () => {
     )
     expect(error?.message).toContain(
       '"submissionEvents[0].configuration.encryptedElementIds[1]" contains a duplicate value',
+    )
+  })
+  test('should reject CP_HCMS submission event with duplicate tags', () => {
+    const { error } = formSchema.validate(
+      {
+        ...form,
+        submissionEvents: [
+          {
+            type: 'CP_HCMS',
+            configuration: {
+              contentTypeName: 'contenttypename-1',
+              tags: ['duplicate', 'duplicate'],
+            },
+          },
+        ],
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error?.message).toContain(
+      '"submissionEvents[0].configuration.tags[1]" contains a duplicate value',
+    )
+  })
+  test('should reject CP_HCMS submission event with duplicate categories', () => {
+    const { error } = formSchema.validate(
+      {
+        ...form,
+        submissionEvents: [
+          {
+            type: 'CP_HCMS',
+            configuration: {
+              contentTypeName: 'contenttypename-1',
+              categories: [
+                {
+                  id: 'c028c583-6c58-4d8f-8ff8-c9fbc870069e',
+                  name: 'Animals',
+                },
+                {
+                  id: 'c028c583-6c58-4d8f-8ff8-c9fbc870069e',
+                  name: 'Animals Duplicate',
+                },
+              ],
+            },
+          },
+        ],
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error?.message).toContain(
+      '"submissionEvents[0].configuration.categories[1]" contains a duplicate value',
+    )
+  })
+  test('should reject CP_HCMS submission event with empty tags', () => {
+    const { error } = formSchema.validate(
+      {
+        ...form,
+        submissionEvents: [
+          {
+            type: 'CP_HCMS',
+            configuration: {
+              contentTypeName: 'contenttypename-1',
+              tags: [],
+            },
+          },
+        ],
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error?.message).toContain(
+      '"submissionEvents[0].configuration.tags" must contain at least 1 items',
+    )
+  })
+  test('should reject CP_HCMS submission event with empty categories', () => {
+    const { error } = formSchema.validate(
+      {
+        ...form,
+        submissionEvents: [
+          {
+            type: 'CP_HCMS',
+            configuration: {
+              contentTypeName: 'contenttypename-1',
+              categories: [],
+            },
+          },
+        ],
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error?.message).toContain(
+      '"submissionEvents[0].configuration.categories" must contain at least 1 items',
     )
   })
 })
