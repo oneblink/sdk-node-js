@@ -473,6 +473,7 @@ const formSchema = Joi.object().keys({
   isAuthenticated: Joi.bool().default(false),
   publishStartDate: Joi.string().isoDate(),
   publishEndDate: Joi.string().isoDate(),
+  unpublishedUserMessage: Joi.string(),
   // Form Events and Workflow
   draftEvents: Joi.array().items(WorkflowEventSchema),
   schedulingEvents: Joi.array().items(SchedulingEventSchema),
