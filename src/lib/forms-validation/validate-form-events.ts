@@ -287,7 +287,10 @@ function validateFreshdeskCreateTicketMappingElements({
     mappingIndex++
   ) {
     const mapping = formEvent.configuration.mapping[mappingIndex]
-    if (mapping.type === 'FORM_ELEMENT') {
+    if (
+      mapping.type === 'FORM_ELEMENT' ||
+      mapping.type === 'FORM_FORM_ELEMENT'
+    ) {
       const element = formElementsService.findFormElement(
         validatedFormElements,
         ({ id }) => id === mapping.formElementId,
@@ -295,6 +298,11 @@ function validateFreshdeskCreateTicketMappingElements({
       if (!element) {
         throw new Error(
           `"${propertyName}.configuration.mapping[${mappingIndex}].formElementId" (${mapping.formElementId}) does not exist in "elements".`,
+        )
+      }
+      if (mapping.type === 'FORM_FORM_ELEMENT' && element.type !== 'form') {
+        throw new Error(
+          `"${propertyName}.configuration.mapping[${mappingIndex}].formElementId" (${mapping.formElementId}) must be the "id" for a "form" type element.`,
         )
       }
     }
