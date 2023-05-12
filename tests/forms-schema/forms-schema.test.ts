@@ -2769,6 +2769,21 @@ describe('Freshdesk Submission Event', () => {
         configuration: {
           mapping: [
             {
+              freshdeskFieldName: 'customNameNested',
+              type: 'FORM_FORM_ELEMENT',
+              formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+              mapping: {
+                freshdeskFieldName: 'customNameNested',
+                type: 'FORM_FORM_ELEMENT',
+                formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a90',
+                mapping: {
+                  freshdeskFieldName: 'customNameNested',
+                  type: 'FORM_ELEMENT',
+                  formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a90',
+                },
+              },
+            },
+            {
               freshdeskFieldName: 'customName',
               type: 'FORM_ELEMENT',
               formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
@@ -2806,6 +2821,12 @@ describe('Freshdesk Submission Event', () => {
             type: 'text',
             name: 'firstName',
             label: 'First Name',
+          },
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+            type: 'form',
+            name: 'nested',
+            formId: 1,
           },
         ],
         isAuthenticated: true,

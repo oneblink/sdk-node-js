@@ -307,10 +307,11 @@ export const WorkflowEventSchema = Joi.object().keys({
       is: 'FRESHDESK_CREATE_TICKET',
       then: Joi.object().keys({
         mapping: Joi.array().items(
-          Joi.object().keys({
+          Joi.object({
             freshdeskFieldName: Joi.string().required(),
             type: Joi.string()
               .valid(
+                'FORM_FORM_ELEMENT',
                 'FORM_ELEMENT',
                 'VALUE',
                 'DEPENDENT_FIELD_VALUE',
@@ -319,8 +320,13 @@ export const WorkflowEventSchema = Joi.object().keys({
               )
               .required(),
             formElementId: Joi.when('type', {
-              is: 'FORM_ELEMENT',
+              is: Joi.valid('FORM_FORM_ELEMENT', 'FORM_ELEMENT'),
               then: Joi.string().uuid().required(),
+              otherwise: Joi.any().strip(),
+            }),
+            mapping: Joi.when('type', {
+              is: 'FORM_FORM_ELEMENT',
+              then: Joi.link('#FreshdeskMappingSchema').required(),
               otherwise: Joi.any().strip(),
             }),
             dependentFieldValue: Joi.when('type', {
@@ -343,7 +349,7 @@ export const WorkflowEventSchema = Joi.object().keys({
               ),
               otherwise: Joi.any().strip(),
             }),
-          }),
+          }).id('FreshdeskMappingSchema'),
         ),
         ...approvalFormsInclusionConfiguration,
       }),
