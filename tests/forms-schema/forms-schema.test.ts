@@ -5187,6 +5187,7 @@ describe('invalid property removal', () => {
       label: 'autocomplete',
       optionsType: 'SEARCH',
       searchUrl: 'https://search.com',
+      searchQuerystringParameter: 'filter',
     })
     expect(error).toBeFalsy()
     expect(value).toEqual({
@@ -5202,6 +5203,7 @@ describe('invalid property removal', () => {
       required: false,
       type: 'autocomplete',
       searchUrl: 'https://search.com',
+      searchQuerystringParameter: 'filter',
     })
   })
 
