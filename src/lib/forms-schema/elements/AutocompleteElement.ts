@@ -35,6 +35,11 @@ export default Joi.object({
     then: Joi.string().required(),
     otherwise: Joi.any().strip(),
   }),
+  searchQuerystringParameter: Joi.when('optionsType', {
+    is: SEARCH_OPTION_TYPE,
+    then: Joi.string(),
+    otherwise: Joi.any().strip(),
+  }),
   ...optionsSchemas,
   customCssClasses,
 })
