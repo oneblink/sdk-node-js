@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `searchQuerystringParameter` to `autocomplete` form element
+- `externalIdGenerationOnSubmit` and `personalisation` to form validation
 
 ## [2.7.0] - 2023-05-22
 
