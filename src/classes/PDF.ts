@@ -36,6 +36,7 @@ export default class PDF extends OneBlinkAPI {
    *     submissionId: 'c63ec3ac-12ab-447c-951c-2815d0e6fc24',
    *     isDraft: false,
    *     includeSubmissionIdInPdf: false,
+   *     includeExternalIdInPdf: false,
    *     excludedElementIds: ['1ae6d5f5-eade-411c-b85a-45fe40fe469e'],
    *   })
    *   await writeFileAsync('./submission.pdf', buffer, 'binary')

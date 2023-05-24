@@ -75,6 +75,7 @@ const approvalFormsInclusionConfiguration = {
 const pdfSubmissionEventConfiguration = {
   pdfFileName: Joi.string().allow(null, ''),
   includeSubmissionIdInPdf: Joi.boolean(),
+  includeExternalIdInPdf: Joi.boolean(),
   includePaymentInPdf: Joi.boolean(),
   excludedElementIds: Joi.array()
     .items(Joi.string().guid())
