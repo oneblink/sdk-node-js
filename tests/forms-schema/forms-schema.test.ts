@@ -7042,7 +7042,7 @@ describe('server validation', () => {
   })
 })
 
-describe('external id generation', () => {
+describe('external id generation and personalisation', () => {
   const form = {
     id: 1,
     name: 'string',
@@ -7129,6 +7129,304 @@ describe('external id generation', () => {
     expect(validatedForm.externalIdGeneration?.type).toBe('RECEIPT_ID')
     expect(validatedForm.externalIdGeneration?.configuration).toEqual(
       configuration,
+    )
+  })
+
+  test('should save data for "ONEBLINK_API" externalIdGenerationOnSubmit', () => {
+    const configuration = {
+      apiId: 'customer-project.api.oneblink.io',
+      apiEnvironment: 'dev',
+      apiEnvironmentRoute: '/pathname',
+      secret: 'shh',
+    }
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      externalIdGenerationOnSubmit: {
+        type: 'ONEBLINK_API',
+        configuration,
+      },
+    })
+    expect(validatedForm.externalIdGenerationOnSubmit?.type).toBe(
+      'ONEBLINK_API',
+    )
+    expect(validatedForm.externalIdGenerationOnSubmit?.configuration).toEqual(
+      configuration,
+    )
+  })
+
+  test('should save data for "CALLBACK" externalIdGenerationOnSubmit', () => {
+    const configuration = {
+      url: 'https://google.com',
+      secret: 'shh',
+    }
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      externalIdGenerationOnSubmit: {
+        type: 'CALLBACK',
+        configuration,
+      },
+    })
+    expect(validatedForm.externalIdGenerationOnSubmit?.type).toBe('CALLBACK')
+    expect(validatedForm.externalIdGenerationOnSubmit?.configuration).toEqual(
+      configuration,
+    )
+  })
+
+  test('should save data for "RECEIPT_ID" externalIdGenerationOnSubmit', () => {
+    const configuration = {
+      receiptComponents: [
+        {
+          type: 'text',
+          value: 'value',
+        },
+        {
+          type: 'date',
+          format: 'dayOfMonth',
+        },
+        {
+          type: 'random',
+          length: 2,
+          uppercase: true,
+          lowercase: true,
+          numbers: true,
+        },
+        {
+          type: 'text',
+          value: 'value',
+        },
+      ],
+    }
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      externalIdGenerationOnSubmit: {
+        type: 'RECEIPT_ID',
+        configuration,
+      },
+    })
+    expect(validatedForm.externalIdGenerationOnSubmit?.type).toBe('RECEIPT_ID')
+    expect(validatedForm.externalIdGenerationOnSubmit?.configuration).toEqual(
+      configuration,
+    )
+  })
+
+  test('should throw error when trying to do "RECEIPT_ID" on personalisation', () => {
+    const configuration = {
+      receiptComponents: [
+        {
+          type: 'text',
+          value: 'value',
+        },
+      ],
+    }
+
+    expect(() =>
+      validateWithFormSchema({
+        ...form,
+        personalisation: {
+          type: 'RECEIPT_ID',
+          configuration,
+        },
+      }),
+    ).toThrow('"personalisation.type" must be one of [CALLBACK, ONEBLINK_API]')
+  })
+
+  test('should save "ONEBLINK_API" for personalisation', () => {
+    const configuration = {
+      apiId: 'customer-project.api.oneblink.io',
+      apiEnvironment: 'dev',
+      apiEnvironmentRoute: '/pathname',
+      secret: 'shh',
+    }
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      personalisation: {
+        type: 'ONEBLINK_API',
+        configuration,
+      },
+    })
+    expect(validatedForm.personalisation?.type).toBe('ONEBLINK_API')
+    expect(validatedForm.personalisation?.configuration).toEqual(configuration)
+  })
+
+  test('should save "CALLBACK" for personalisation', () => {
+    const configuration = {
+      url: 'https://google.com',
+      secret: 'shh',
+    }
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      personalisation: {
+        type: 'CALLBACK',
+        configuration,
+      },
+    })
+    expect(validatedForm.personalisation?.type).toBe('CALLBACK')
+    expect(validatedForm.personalisation?.configuration).toEqual(configuration)
+  })
+
+  test('should save data when externalIdGenerationOnSubmit and personalisation exist', () => {
+    const personalisationConfiguration = {
+      apiId: 'customer-project.api.oneblink.io',
+      apiEnvironment: 'dev',
+      apiEnvironmentRoute: '/personalisation',
+      secret: 'shh',
+    }
+    const externalIdConfiguration = {
+      apiId: 'customer-project.api.oneblink.io',
+      apiEnvironment: 'dev',
+      apiEnvironmentRoute: '/external-id',
+      secret: 'shh',
+    }
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      externalIdGenerationOnSubmit: {
+        type: 'ONEBLINK_API',
+        configuration: externalIdConfiguration,
+      },
+      personalisation: {
+        type: 'ONEBLINK_API',
+        configuration: personalisationConfiguration,
+      },
+    })
+
+    expect(validatedForm.externalIdGenerationOnSubmit?.type).toBe(
+      'ONEBLINK_API',
+    )
+    expect(validatedForm.externalIdGenerationOnSubmit?.configuration).toEqual(
+      externalIdConfiguration,
+    )
+
+    expect(validatedForm.personalisation?.type).toBe('ONEBLINK_API')
+    expect(validatedForm.personalisation?.configuration).toEqual(
+      personalisationConfiguration,
+    )
+  })
+
+  //probably delete these later on when we completely remove it.
+  test('should allow both externalIdGeneration and externalIdGenerationOnSubmit', () => {
+    const externalIdGenerationConfiguration = {
+      apiId: 'customer-project.api.oneblink.io',
+      apiEnvironment: 'dev',
+      apiEnvironmentRoute: '/personalisation',
+      secret: 'shh',
+    }
+    const externalIdGenerationOnSubmitConfiguration = {
+      apiId: 'customer-project.api.oneblink.io',
+      apiEnvironment: 'dev',
+      apiEnvironmentRoute: '/external-id',
+      secret: 'shh',
+    }
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      externalIdGeneration: {
+        type: 'ONEBLINK_API',
+        configuration: externalIdGenerationConfiguration,
+      },
+      externalIdGenerationOnSubmit: {
+        type: 'ONEBLINK_API',
+        configuration: externalIdGenerationOnSubmitConfiguration,
+      },
+    })
+
+    expect(validatedForm.externalIdGeneration?.type).toBe('ONEBLINK_API')
+    expect(validatedForm.externalIdGeneration?.configuration).toEqual(
+      externalIdGenerationConfiguration,
+    )
+
+    expect(validatedForm.externalIdGenerationOnSubmit?.type).toBe(
+      'ONEBLINK_API',
+    )
+    expect(validatedForm.externalIdGenerationOnSubmit?.configuration).toEqual(
+      externalIdGenerationOnSubmitConfiguration,
+    )
+  })
+
+  test('should allow both externalIdGeneration and personalisation', () => {
+    const personalisationConfiguration = {
+      apiId: 'customer-project.api.oneblink.io',
+      apiEnvironment: 'dev',
+      apiEnvironmentRoute: '/personalisation',
+      secret: 'shh',
+    }
+    const externalIdGenerationConfiguration = {
+      apiId: 'customer-project.api.oneblink.io',
+      apiEnvironment: 'dev',
+      apiEnvironmentRoute: '/external-id',
+      secret: 'shh',
+    }
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      personalisation: {
+        type: 'ONEBLINK_API',
+        configuration: personalisationConfiguration,
+      },
+      externalIdGeneration: {
+        type: 'ONEBLINK_API',
+        configuration: externalIdGenerationConfiguration,
+      },
+    })
+
+    expect(validatedForm.personalisation?.type).toBe('ONEBLINK_API')
+    expect(validatedForm.personalisation?.configuration).toEqual(
+      personalisationConfiguration,
+    )
+
+    expect(validatedForm.externalIdGeneration?.type).toBe('ONEBLINK_API')
+    expect(validatedForm.externalIdGeneration?.configuration).toEqual(
+      externalIdGenerationConfiguration,
+    )
+  })
+
+  test('should allow externalIdGeneration, externalIdGenerationOnSubmit and personalisation', () => {
+    const personalisationConfiguration = {
+      apiId: 'customer-project.api.oneblink.io',
+      apiEnvironment: 'dev',
+      apiEnvironmentRoute: '/personalisation',
+      secret: 'shh',
+    }
+    const externalIdGenerationConfiguration = {
+      apiId: 'customer-project.api.oneblink.io',
+      apiEnvironment: 'dev',
+      apiEnvironmentRoute: '/external-id',
+      secret: 'shh',
+    }
+    const externalIdGenerationOnSubmitConfiguration = {
+      apiId: 'customer-project.api.oneblink.io',
+      apiEnvironment: 'dev',
+      apiEnvironmentRoute: '/external-id',
+      secret: 'shh',
+    }
+    const validatedForm = validateWithFormSchema({
+      ...form,
+      personalisation: {
+        type: 'ONEBLINK_API',
+        configuration: personalisationConfiguration,
+      },
+      externalIdGeneration: {
+        type: 'ONEBLINK_API',
+        configuration: externalIdGenerationConfiguration,
+      },
+      externalIdGenerationOnSubmit: {
+        type: 'ONEBLINK_API',
+        configuration: externalIdGenerationOnSubmitConfiguration,
+      },
+    })
+
+    expect(validatedForm.personalisation?.type).toBe('ONEBLINK_API')
+    expect(validatedForm.personalisation?.configuration).toEqual(
+      personalisationConfiguration,
+    )
+
+    expect(validatedForm.externalIdGeneration?.type).toBe('ONEBLINK_API')
+    expect(validatedForm.externalIdGeneration?.configuration).toEqual(
+      externalIdGenerationConfiguration,
+    )
+
+    expect(validatedForm.externalIdGenerationOnSubmit?.type).toBe(
+      'ONEBLINK_API',
+    )
+    expect(validatedForm.externalIdGenerationOnSubmit?.configuration).toEqual(
+      externalIdGenerationConfiguration,
     )
   })
 })
