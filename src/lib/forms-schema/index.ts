@@ -559,6 +559,8 @@ const formSchema = Joi.object().keys({
   tags: Joi.array().default([]).items(Joi.string()),
   serverValidation: apiRequestSchema,
   externalIdGeneration: externalIdGenerationSchema,
+  externalIdGenerationOnSubmit: externalIdGenerationSchema,
+  personalisation: apiRequestSchema,
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
