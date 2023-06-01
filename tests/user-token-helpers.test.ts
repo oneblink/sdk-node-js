@@ -4,7 +4,7 @@ import {
 } from '../src/lib/user-token-helpers'
 
 describe('User Token Helpers', () => {
-  test('should encrypt a secret with less then 32 characters', () => {
+  test('should encrypt a secret with less than 32 characters', () => {
     const secret = 'secret'
     const username = 'username'
 

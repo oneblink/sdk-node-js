@@ -1669,7 +1669,7 @@ test('should error if repeatableSet type element min entries is more than max en
   )
 })
 
-test('should error if repeatableSet type element min or max entries is less then 0', () => {
+test('should error if repeatableSet type element min or max entries is less than 0', () => {
   const { error } = formSchema.validate(
     {
       id: 1,
@@ -3064,6 +3064,12 @@ describe('PDF submission event', () => {
               email: '{ELEMENT:abc}',
             },
           },
+          {
+            type: 'PDF',
+            configuration: {
+              email: '{USER:email}',
+            },
+          },
         ],
       },
 
@@ -3093,6 +3099,7 @@ describe('PDF submission event', () => {
             type: 'PDF',
             configuration: {
               email: 'sdfsdfsd',
+              ccEmail: ['{USER:name}'],
             },
           },
         ],
@@ -3102,8 +3109,12 @@ describe('PDF submission event', () => {
         abortEarly: false,
       },
     )
+    expect(error?.details.length).toBe(2)
     expect(error?.details[0].message).toBe(
       '"submissionEvents[0].configuration.email" does not match any of the allowed types',
+    )
+    expect(error?.details[1].message).toBe(
+      '"submissionEvents[0].configuration.ccEmail[0]" does not match any of the allowed types',
     )
   })
   test('should disallow PDF submission event with email template mapping referencing element that does not exist', () => {
