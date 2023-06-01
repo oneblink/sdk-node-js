@@ -12,29 +12,18 @@ export const postSubmissionActions: FormTypes.FormPostSubmissionAction[] = [
   'CLOSE',
   'FORMS_LIBRARY',
 ]
+
+const emailSchema = Joi.alternatives([
+  Joi.string().email(),
+  Joi.string().regex(/^{ELEMENT:\S+}$/),
+  Joi.string().regex(/^{USER:email}$/),
+])
+
 const emailSubmissionEventConfiguration = {
-  email: Joi.alternatives([
-    Joi.string().email(),
-    Joi.string().regex(/^{ELEMENT:\S+}$/),
-  ]),
-  toEmail: Joi.array().items(
-    Joi.alternatives([
-      Joi.string().email(),
-      Joi.string().regex(/^{ELEMENT:\S+}$/),
-    ]),
-  ),
-  ccEmail: Joi.array().items(
-    Joi.alternatives([
-      Joi.string().email(),
-      Joi.string().regex(/^{ELEMENT:\S+}$/),
-    ]),
-  ),
-  bccEmail: Joi.array().items(
-    Joi.alternatives([
-      Joi.string().email(),
-      Joi.string().regex(/^{ELEMENT:\S+}$/),
-    ]),
-  ),
+  email: emailSchema,
+  toEmail: Joi.array().items(emailSchema),
+  ccEmail: Joi.array().items(emailSchema),
+  bccEmail: Joi.array().items(emailSchema),
   emailSubjectLine: Joi.string().allow(null, ''),
   emailTemplate: Joi.object().keys({
     id: Joi.number().required(),
