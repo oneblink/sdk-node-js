@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2023-06-05
+
 ### Removed
 
 - **[BREAKING]** support for NodeJS 14
@@ -18,6 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `includeExternalIdInPdf` to `pdfSubmissionEventConfiguration`
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [3.0.0-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [0.4.6](https://github.com/oneblink/sdk-core-js/releases/tag/v0.4.6))
 
 ## [2.8.0] - 2023-05-26
 
