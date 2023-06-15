@@ -515,6 +515,7 @@ const formSchema = Joi.object().keys({
       internalNotes: Joi.string(),
     }),
     disallowApprovingWhenAwaitingClarification: Joi.boolean(),
+    defaultPreventPaymentOnClarificationRequest: Joi.boolean(),
   }),
 
   postSubmissionAction: Joi.string()
