@@ -135,7 +135,7 @@ export const PaymentEventSchema = Joi.object({
       then: Joi.object().keys({
         elementId: Joi.string().uuid().required(),
         primaryAgencyId: Joi.string().uuid().required(),
-        productDescription: Joi.string().required(),
+        productDescription: Joi.string().required().max(250),
         customerReference: Joi.string().max(250),
         subAgencyCode: Joi.string(),
       }),
