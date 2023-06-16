@@ -71,7 +71,8 @@ export const validateFormEvent = ({
   switch (formEvent.type) {
     case 'CP_PAY':
     case 'WESTPAC_QUICK_WEB':
-    case 'BPOINT': {
+    case 'BPOINT':
+    case 'GOV_PAY': {
       const formElement = rootFormElements.find(
         ({ id }) => id === formEvent.configuration.elementId,
       )

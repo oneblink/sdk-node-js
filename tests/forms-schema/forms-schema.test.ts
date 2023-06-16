@@ -4007,6 +4007,101 @@ describe('CP_PAY submission event', () => {
   })
 })
 
+describe('GOV_PAY submission event', () => {
+  test('should error for GOV_PAY submission event not passing "elementId"', () => {
+    const { error } = formSchema.validate({
+      id: 1,
+      name: 'string',
+      description: 'string',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: 'ORGANISATION_00000000001',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      elements: [],
+      isAuthenticated: true,
+
+      tags: [],
+      paymentEvents: [
+        {
+          type: 'GOV_PAY',
+          configuration: {},
+        },
+      ],
+    })
+    expect(error?.message).toContain(
+      '"paymentEvents[0].configuration.elementId" is required',
+    )
+  })
+  test('should error for GOV_PAY submission event not passing "primaryAgencyId"', () => {
+    const { error } = formSchema.validate({
+      id: 1,
+      name: 'string',
+      description: 'string',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: 'ORGANISATION_00000000001',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      elements: [],
+      isAuthenticated: true,
+
+      tags: [],
+      paymentEvents: [
+        {
+          type: 'GOV_PAY',
+          configuration: {
+            elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+          },
+        },
+      ],
+    })
+    expect(error?.message).toContain(
+      '"paymentEvents[0].configuration.primaryAgencyId" is required',
+    )
+  })
+  test('should allow GOV_PAY submission event', () => {
+    const { error } = formSchema.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        tags: [],
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+            required: false,
+          },
+        ],
+        isAuthenticated: true,
+
+        paymentEvents: [
+          {
+            type: 'GOV_PAY',
+            configuration: {
+              elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              primaryAgencyId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            },
+          },
+        ],
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBe(undefined)
+  })
+})
+
 describe('CP_HCMS submission event', () => {
   const form = {
     id: 1,
