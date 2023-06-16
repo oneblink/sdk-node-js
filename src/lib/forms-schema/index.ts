@@ -98,6 +98,7 @@ export const paymentEventTypes: SubmissionEventTypes.FormPaymentEventType[] = [
   'CP_PAY',
   'BPOINT',
   'WESTPAC_QUICK_WEB',
+  'GOV_PAY',
 ]
 export const PaymentEventSchema = Joi.object({
   type: Joi.string()
@@ -127,6 +128,16 @@ export const PaymentEventSchema = Joi.object({
       then: Joi.object().keys({
         elementId: Joi.string().uuid().required(),
         gatewayId: Joi.string().uuid().required(),
+      }),
+    })
+    .when('type', {
+      is: 'GOV_PAY',
+      then: Joi.object().keys({
+        elementId: Joi.string().uuid().required(),
+        primaryAgencyId: Joi.string().uuid().required(),
+        productDescription: Joi.string().required().max(250),
+        customerReference: Joi.string().max(250),
+        subAgencyCode: Joi.string(),
       }),
     }),
   ...formEventBaseSchema,

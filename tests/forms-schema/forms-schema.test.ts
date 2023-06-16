@@ -4007,6 +4007,221 @@ describe('CP_PAY submission event', () => {
   })
 })
 
+describe('GOV_PAY submission event', () => {
+  test('should error for GOV_PAY submission event not passing "elementId"', () => {
+    const { error } = formSchema.validate({
+      id: 1,
+      name: 'string',
+      description: 'string',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: 'ORGANISATION_00000000001',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      elements: [],
+      isAuthenticated: true,
+
+      tags: [],
+      paymentEvents: [
+        {
+          type: 'GOV_PAY',
+          configuration: {},
+        },
+      ],
+    })
+    expect(error?.message).toContain(
+      '"paymentEvents[0].configuration.elementId" is required',
+    )
+  })
+  test('should error for GOV_PAY submission event not passing "primaryAgencyId"', () => {
+    const { error } = formSchema.validate({
+      id: 1,
+      name: 'string',
+      description: 'string',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: 'ORGANISATION_00000000001',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      elements: [],
+      isAuthenticated: true,
+
+      tags: [],
+      paymentEvents: [
+        {
+          type: 'GOV_PAY',
+          configuration: {
+            elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+          },
+        },
+      ],
+    })
+    expect(error?.message).toContain(
+      '"paymentEvents[0].configuration.primaryAgencyId" is required',
+    )
+  })
+  test('should error for GOV_PAY submission event not passing "productDescription"', () => {
+    const { error } = formSchema.validate({
+      id: 1,
+      name: 'string',
+      description: 'string',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: 'ORGANISATION_00000000001',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      elements: [],
+      isAuthenticated: true,
+
+      tags: [],
+      paymentEvents: [
+        {
+          type: 'GOV_PAY',
+          configuration: {
+            elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            primaryAgencyId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+          },
+        },
+      ],
+    })
+    expect(error?.message).toContain(
+      '"paymentEvents[0].configuration.productDescription" is required',
+    )
+  })
+  test('should allow GOV_PAY submission event', () => {
+    const { error } = formSchema.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        tags: [],
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+            required: false,
+          },
+        ],
+        isAuthenticated: true,
+
+        paymentEvents: [
+          {
+            type: 'GOV_PAY',
+            configuration: {
+              elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              primaryAgencyId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              productDescription: 'This is the description',
+            },
+          },
+        ],
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBe(undefined)
+  })
+
+  test('should not allow GOV_PAY submission event with a "customerReference" of character length over 250', () => {
+    const { error } = formSchema.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        tags: [],
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+            required: false,
+          },
+        ],
+        isAuthenticated: true,
+
+        paymentEvents: [
+          {
+            type: 'GOV_PAY',
+            configuration: {
+              elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              primaryAgencyId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              productDescription: 'This is the description',
+              customerReference:
+                'dkjfshfhdsaklhfdskhafldskhfdskhjfdskhjfl20934h723h5t8734th48743hwg54wby5nb4v3987t5437829n42897t23vfc54nv9g7w9n578245h432iu5h32fn39n9739nb9n75b99898rf32tg58f5fh08gfh348uvt8bnh38qhrefhgysdgfjdshy90283hr14ytgu4yt43thyu344yu34w5fbqnv84vt4v23t4vg3b542bv25123',
+            },
+          },
+        ],
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error?.message).toContain(
+      '"paymentEvents[0].configuration.customerReference" length must be less than or equal to 250 characters long',
+    )
+  })
+
+  test('should not allow GOV_PAY submission event with a "productDescription" of character length over 250', () => {
+    const { error } = formSchema.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        tags: [],
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+            required: false,
+          },
+        ],
+        isAuthenticated: true,
+
+        paymentEvents: [
+          {
+            type: 'GOV_PAY',
+            configuration: {
+              elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              primaryAgencyId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              productDescription:
+                'dkjfshfhdsaklhfdskhafldskhfdskhjfdskhjfl20934h723h5t8734th48743hwg54wby5nb4v3987t5437829n42897t23vfc54nv9g7w9n578245h432iu5h32fn39n9739nb9n75b99898rf32tg58f5fh08gfh348uvt8bnh38qhrefhgysdgfjdshy90283hr14ytgu4yt43thyu344yu34w5fbqnv84vt4v23t4vg3b542bv25123',
+            },
+          },
+        ],
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error?.message).toContain(
+      '"paymentEvents[0].configuration.productDescription" length must be less than or equal to 250 characters long',
+    )
+  })
+})
+
 describe('CP_HCMS submission event', () => {
   const form = {
     id: 1,
