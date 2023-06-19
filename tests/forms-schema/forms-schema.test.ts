@@ -4007,8 +4007,8 @@ describe('CP_PAY submission event', () => {
   })
 })
 
-describe('GOV_PAY submission event', () => {
-  test('should error for GOV_PAY submission event not passing "elementId"', () => {
+describe('NSW_GOV_PAY submission event', () => {
+  test('should error for NSW_GOV_PAY submission event not passing "elementId"', () => {
     const { error } = formSchema.validate({
       id: 1,
       name: 'string',
@@ -4024,7 +4024,7 @@ describe('GOV_PAY submission event', () => {
       tags: [],
       paymentEvents: [
         {
-          type: 'GOV_PAY',
+          type: 'NSW_GOV_PAY',
           configuration: {},
         },
       ],
@@ -4033,7 +4033,7 @@ describe('GOV_PAY submission event', () => {
       '"paymentEvents[0].configuration.elementId" is required',
     )
   })
-  test('should error for GOV_PAY submission event not passing "primaryAgencyId"', () => {
+  test('should error for NSW_GOV_PAY submission event not passing "primaryAgencyId"', () => {
     const { error } = formSchema.validate({
       id: 1,
       name: 'string',
@@ -4049,7 +4049,7 @@ describe('GOV_PAY submission event', () => {
       tags: [],
       paymentEvents: [
         {
-          type: 'GOV_PAY',
+          type: 'NSW_GOV_PAY',
           configuration: {
             elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
           },
@@ -4060,7 +4060,7 @@ describe('GOV_PAY submission event', () => {
       '"paymentEvents[0].configuration.primaryAgencyId" is required',
     )
   })
-  test('should error for GOV_PAY submission event not passing "productDescription"', () => {
+  test('should error for NSW_GOV_PAY submission event not passing "productDescription"', () => {
     const { error } = formSchema.validate({
       id: 1,
       name: 'string',
@@ -4076,7 +4076,7 @@ describe('GOV_PAY submission event', () => {
       tags: [],
       paymentEvents: [
         {
-          type: 'GOV_PAY',
+          type: 'NSW_GOV_PAY',
           configuration: {
             elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
             primaryAgencyId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
@@ -4088,7 +4088,7 @@ describe('GOV_PAY submission event', () => {
       '"paymentEvents[0].configuration.productDescription" is required',
     )
   })
-  test('should allow GOV_PAY submission event', () => {
+  test('should allow NSW_GOV_PAY submission event', () => {
     const { error } = formSchema.validate(
       {
         id: 1,
@@ -4113,7 +4113,7 @@ describe('GOV_PAY submission event', () => {
 
         paymentEvents: [
           {
-            type: 'GOV_PAY',
+            type: 'NSW_GOV_PAY',
             configuration: {
               elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
               primaryAgencyId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
@@ -4130,7 +4130,7 @@ describe('GOV_PAY submission event', () => {
     expect(error).toBe(undefined)
   })
 
-  test('should not allow GOV_PAY submission event with a "customerReference" of character length over 250', () => {
+  test('should not allow NSW_GOV_PAY submission event with a "customerReference" of character length over 250', () => {
     const { error } = formSchema.validate(
       {
         id: 1,
@@ -4155,7 +4155,7 @@ describe('GOV_PAY submission event', () => {
 
         paymentEvents: [
           {
-            type: 'GOV_PAY',
+            type: 'NSW_GOV_PAY',
             configuration: {
               elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
               primaryAgencyId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
@@ -4176,7 +4176,7 @@ describe('GOV_PAY submission event', () => {
     )
   })
 
-  test('should not allow GOV_PAY submission event with a "productDescription" of character length over 250', () => {
+  test('should not allow NSW_GOV_PAY submission event with a "productDescription" of character length over 250', () => {
     const { error } = formSchema.validate(
       {
         id: 1,
@@ -4201,7 +4201,7 @@ describe('GOV_PAY submission event', () => {
 
         paymentEvents: [
           {
-            type: 'GOV_PAY',
+            type: 'NSW_GOV_PAY',
             configuration: {
               elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
               primaryAgencyId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
