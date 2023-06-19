@@ -98,7 +98,7 @@ export const paymentEventTypes: SubmissionEventTypes.FormPaymentEventType[] = [
   'CP_PAY',
   'BPOINT',
   'WESTPAC_QUICK_WEB',
-  'GOV_PAY',
+  'NSW_GOV_PAY',
 ]
 export const PaymentEventSchema = Joi.object({
   type: Joi.string()
@@ -131,7 +131,7 @@ export const PaymentEventSchema = Joi.object({
       }),
     })
     .when('type', {
-      is: 'GOV_PAY',
+      is: 'NSW_GOV_PAY',
       then: Joi.object().keys({
         elementId: Joi.string().uuid().required(),
         primaryAgencyId: Joi.string().uuid().required(),

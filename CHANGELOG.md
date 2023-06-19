@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `defaultPreventPaymentOnClarificationRequest` to form
-- `gov_pay` payment event added to validation
+- `NSW_GOV_PAY` payment event added to validation
 
 ## [3.0.0] - 2023-06-05
 

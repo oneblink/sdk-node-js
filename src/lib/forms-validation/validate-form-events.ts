@@ -72,7 +72,7 @@ export const validateFormEvent = ({
     case 'CP_PAY':
     case 'WESTPAC_QUICK_WEB':
     case 'BPOINT':
-    case 'GOV_PAY': {
+    case 'NSW_GOV_PAY': {
       const formElement = rootFormElements.find(
         ({ id }) => id === formEvent.configuration.elementId,
       )
