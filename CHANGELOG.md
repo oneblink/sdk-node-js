@@ -7,10 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0] - 2023-06-23
+
 ### Added
 
 - `defaultPreventPaymentOnClarificationRequest` to form
 - `NSW_GOV_PAY` payment event added to validation
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [3.1.0-beta.4](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [3.0.0-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
 
 ## [3.0.0] - 2023-06-05
 
