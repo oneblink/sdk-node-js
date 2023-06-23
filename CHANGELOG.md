@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- lookupButton prop to form elements
+
+### Added
+
 - `defaultPreventPaymentOnClarificationRequest` to form
 - `NSW_GOV_PAY` payment event added to validation
 
