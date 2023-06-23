@@ -219,11 +219,17 @@ const elementLookupId = Joi.when('isElementLookup', {
   otherwise: Joi.any().strip(),
 })
 
+const lookupButton = Joi.object({
+  icon: Joi.string(),
+  label: Joi.string(),
+})
+
 export const lookupSchemas = {
   isDataLookup,
   dataLookupId,
   isElementLookup,
   elementLookupId,
+  lookupButton,
 }
 
 export const conditionallyShowSchemas = {
