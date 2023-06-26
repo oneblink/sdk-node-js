@@ -17,9 +17,9 @@ export function validateJoiSchema<T>(
 
 /**
  * Reduce an array of form elements down to the elements that are not purely to
- * determine the layout of the form. I.e. Strip's out "page" and "section" form
+ * determine the layout of the form. I.e. Strips out "page" and "section" form
  * elements as they only contribute to the layout of the form. "repeatableSet"
- * form elements are not striped out because they contribute to the submission
+ * form elements are not stripped out because they contribute to the submission
  * data.
  *
  * @param elements
