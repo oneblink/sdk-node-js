@@ -111,6 +111,113 @@ describe('Payment events should throw errors when not passed to "paymentEvents" 
   })
 })
 
+describe('CP Pay', () => {
+  test('fails when cp pay payment elementId is not found', async () => {
+    expect(() =>
+      validateWithFormSchema({
+        id: 1,
+        formsAppEnvironmentId: 1,
+        name: 'Inspection',
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        submissionEvents: [],
+        paymentEvents: [
+          {
+            type: 'CP_PAY',
+            configuration: {
+              gatewayId: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+              elementId: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+            },
+          },
+        ],
+        elements: [
+          {
+            id: '31042cfe-65e0-4a85-826b-ae6a2e48da10',
+            type: 'number',
+            name: 'payment_element',
+            label: 'Payment element',
+          },
+        ],
+      }),
+    ).toThrow(
+      '"paymentEvents[0].configuration.elementId" (31042cfe-65e0-4a85-826b-ae6a2e48da11) does not exist in "elements"',
+    )
+  })
+  test('fails when cp pay payment elementId is not a valid type', async () => {
+    expect(() =>
+      validateWithFormSchema({
+        id: 1,
+        formsAppEnvironmentId: 1,
+        name: 'Inspection',
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        submissionEvents: [],
+        paymentEvents: [
+          {
+            type: 'CP_PAY',
+            configuration: {
+              gatewayId: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+              elementId: '31042cfe-65e0-4a85-826b-ae6a2e48da10',
+            },
+          },
+        ],
+        elements: [
+          {
+            id: '31042cfe-65e0-4a85-826b-ae6a2e48da10',
+            type: 'text',
+            name: 'payment_element',
+            label: 'Payment element',
+          },
+        ],
+      }),
+    ).toThrow(
+      '"paymentEvents[0].configuration.elementId" (31042cfe-65e0-4a85-826b-ae6a2e48da10) references a form element that is not a "number" or "calculation" element.',
+    )
+  })
+  test('fails when cp pay payment elementId is a child of a repeatableSet', async () => {
+    expect(() =>
+      validateWithFormSchema({
+        id: 1,
+        formsAppEnvironmentId: 1,
+        name: 'Inspection',
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        submissionEvents: [],
+        paymentEvents: [
+          {
+            type: 'CP_PAY',
+            configuration: {
+              gatewayId: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+              elementId: '31042cfe-65e0-4a85-826b-ae6a2e48da10',
+            },
+          },
+        ],
+        elements: [
+          {
+            id: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+            type: 'repeatableSet',
+            name: 'rs_element',
+            label: 'RS element',
+            elements: [
+              {
+                id: '31042cfe-65e0-4a85-826b-ae6a2e48da10',
+                type: 'number',
+                name: 'payment_element',
+                label: 'Payment element',
+              },
+            ],
+          },
+        ],
+      }),
+    ).toThrow(
+      'paymentEvents[0].configuration.elementId" (31042cfe-65e0-4a85-826b-ae6a2e48da10) does not exist in "elements"',
+    )
+  })
+})
+
 // Submission Events
 describe('Submission events should throw errors when not passed to "paymentEvents" property', () => {
   const submissionEvent = {

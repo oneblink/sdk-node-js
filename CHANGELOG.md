@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - lookupButton prop to form elements
 
+### Fixed
+
+- summary form element validation not allowing referenced elements from outside the scope of the summary element when using repeatable sets
+
 ## [3.1.0] - 2023-06-23
 
 ### Added

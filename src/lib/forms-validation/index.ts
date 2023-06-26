@@ -15,7 +15,7 @@ import {
 import { ConditionalPredicatesItemSchema } from '../forms-schema/property-schemas'
 import {
   validateJoiSchema,
-  getRootFormElements,
+  stripLayoutFormElements,
   validateElementNamesAcrossNestedElements,
 } from './common'
 import validateFormEvents, { validateFormEvent } from './validate-form-events'
@@ -31,7 +31,7 @@ function validateFormEventData(
     formEvent,
     propertyName: 'formEvent',
     validatedFormElements: formElements,
-    rootFormElements: getRootFormElements(formElements),
+    rootFormElements: stripLayoutFormElements(formElements),
   })
   return formEvent
 }
@@ -59,24 +59,87 @@ function validateReferenceDate({
   }
 }
 
-function validateFormElementReferences(
-  rootElements: FormTypes.FormElement[],
-  formElements: FormTypes.FormElement[],
-) {
+function validateFormElementReferences(formElements: FormTypes.FormElement[]) {
+  const availableFormElements = stripLayoutFormElements(formElements)
   // Element References
-  for (const element of rootElements) {
+  for (const element of availableFormElements) {
     switch (element.type) {
+      case 'date':
+      case 'datetime': {
+        if (element.toDateElementId) {
+          validateReferenceDate({
+            element,
+            referenceType: 'toDateElementId',
+            elements: availableFormElements,
+          })
+        }
+        if (element.fromDateElementId) {
+          validateReferenceDate({
+            element,
+            referenceType: 'fromDateElementId',
+            elements: availableFormElements,
+          })
+        }
+        break
+      }
+      case 'repeatableSet': {
+        validateElementNamesAcrossNestedElements(element.elements)
+        validateFormElementReferences(element.elements)
+        break
+      }
+    }
+  }
+}
+
+/**
+ * Validate each summary form element's references to other form elements. A
+ * summary form element can reference form elements from anywhere in the form.
+ *
+ * @param form
+ * @param formElements
+ */
+function validateSummaryFormElements(
+  form: FormTypes.Form,
+  formElements: FormTypes.FormElement[],
+  propertyName: string,
+) {
+  for (
+    let formElementIndex = 0;
+    formElementIndex < formElements.length;
+    formElementIndex++
+  ) {
+    const element = formElements[formElementIndex]
+    switch (element.type) {
+      case 'section':
+      case 'page':
+      case 'repeatableSet': {
+        validateSummaryFormElements(
+          form,
+          element.elements,
+          `${propertyName}[${formElementIndex}].elements`,
+        )
+        break
+      }
       case 'summary': {
-        element.elementIds.forEach((elementId) => {
+        for (
+          let elementIdIndex = 0;
+          elementIdIndex < element.elementIds.length;
+          elementIdIndex++
+        ) {
+          const elementId = element.elementIds[elementIdIndex]
           if (elementId === element.id) {
-            throw new Error('Summary element cannot summarised self')
+            throw new Error(
+              `"${propertyName}[${formElementIndex}].elementIds" cannot contain a reference to itself`,
+            )
           }
           const summarizedElement = formElementsService.findFormElement(
-            formElements,
+            form.elements,
             (formElement) => formElement.id === elementId,
           )
           if (!summarizedElement) {
-            throw new Error('Summarised elementId not found')
+            throw new Error(
+              `"${propertyName}[${formElementIndex}].elementIds[${elementIdIndex}]" (${elementId}) does not exist in "elements"`,
+            )
           }
 
           const validSummaryElementTypes = [
@@ -100,33 +163,11 @@ function validateFormElementReferences(
               (type) => type === summarizedElement.type,
             )
           ) {
-            throw new Error('Summarised element type not valid')
+            throw new Error(
+              `"${propertyName}[${formElementIndex}].elementIds[${elementIdIndex}]" (${elementId}) references a form element type (${summarizedElement.type}) that cannot be summarised`,
+            )
           }
-        })
-        break
-      }
-      case 'date':
-      case 'datetime': {
-        if (element.toDateElementId) {
-          validateReferenceDate({
-            element,
-            referenceType: 'toDateElementId',
-            elements: rootElements,
-          })
         }
-        if (element.fromDateElementId) {
-          validateReferenceDate({
-            element,
-            referenceType: 'fromDateElementId',
-            elements: rootElements,
-          })
-        }
-        break
-      }
-      case 'repeatableSet': {
-        validateElementNamesAcrossNestedElements(element.elements)
-        const repSetRootElements = getRootFormElements(element.elements)
-        validateFormElementReferences(repSetRootElements, element.elements)
         break
       }
     }
@@ -153,9 +194,10 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
     validatedForm.submissionEvents = []
   }
 
-  const rootFormElements = getRootFormElements(validatedForm.elements)
+  validateSummaryFormElements(validatedForm, validatedForm.elements, 'elements')
+  validateFormElementReferences(validatedForm.elements)
 
-  validateFormElementReferences(rootFormElements, validatedForm.elements)
+  const rootFormElements = stripLayoutFormElements(validatedForm.elements)
 
   // Form Event References
   const formEventPropsToValidate = [
