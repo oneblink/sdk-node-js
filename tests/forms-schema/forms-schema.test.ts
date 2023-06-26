@@ -1758,57 +1758,413 @@ test('should error if repeatableSet element names not unique', () => {
   ).toThrow('"elements[0].elements[1]" contains a duplicate value')
 })
 
-test('should error if repeatableSet summary element references element that is not valid', () => {
-  expect(() =>
-    validateWithFormSchema({
-      id: 1,
-      name: 'Inspection',
-      formsAppEnvironmentId: 1,
-      formsAppIds: [1],
-      organisationId: '59cc888b8969af000fb50ddb',
-      postSubmissionAction: 'FORMS_LIBRARY',
-      submissionEvents: [],
-      tags: [],
-      elements: [
-        {
-          id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
-          name: 'repeatableSet',
-          type: 'repeatableSet',
-          label: 'repeatableSet',
-          minSetEntries: 1,
-          maxSetEntries: 2,
-          elements: [
-            {
-              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700f',
-              name: 'heading',
-              label: 'Heading',
-              type: 'heading',
-              headingType: 1,
-            },
-            {
-              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
-              name: 'What_was_the_time',
-              label: 'What was the time',
-              type: 'time',
-              required: false,
-              defaultValue: '1970-01-01T05:28:26.448Z',
-            },
-            {
-              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
-              name: 'time_summary',
-              label: 'Time summary',
-              type: 'summary',
-              elementIds: ['2424f4ea-35a0-47ee-9c22-ef8e16cb700f'],
-            },
-          ],
-        },
-      ],
-    }),
-  ).toThrow('Summarised element type not valid')
-})
+describe('summary form elements', () => {
+  test('should error if repeatableSet summary element references element that is not valid', () => {
+    expect(() =>
+      validateWithFormSchema({
+        id: 1,
+        name: 'Inspection',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: '59cc888b8969af000fb50ddb',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        submissionEvents: [],
+        tags: [],
+        elements: [
+          {
+            id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+            name: 'repeatableSet',
+            type: 'repeatableSet',
+            label: 'repeatableSet',
+            minSetEntries: 1,
+            maxSetEntries: 2,
+            elements: [
+              {
+                id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700f',
+                name: 'heading',
+                label: 'Heading',
+                type: 'heading',
+                headingType: 1,
+              },
+              {
+                id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+                name: 'What_was_the_time',
+                label: 'What was the time',
+                type: 'time',
+                required: false,
+                defaultValue: '1970-01-01T05:28:26.448Z',
+              },
+              {
+                id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
+                name: 'time_summary',
+                label: 'Time summary',
+                type: 'summary',
+                elementIds: ['2424f4ea-35a0-47ee-9c22-ef8e16cb700f'],
+              },
+            ],
+          },
+        ],
+      }),
+    ).toThrow(
+      '"elements[0].elements[2].elementIds[0]" (2424f4ea-35a0-47ee-9c22-ef8e16cb700f) references a form element type (heading) that cannot be summarised',
+    )
+  })
+  test('should error if repeatableSet summary element references element that is not valid on multi page form', () => {
+    expect(() =>
+      validateWithFormSchema({
+        id: 1,
+        name: 'Inspection',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: '59cc888b8969af000fb50ddb',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        submissionEvents: [],
+        tags: [],
+        isMultiPage: true,
+        elements: [
+          {
+            id: '74375ac0-9a0e-11e8-8fc5-63e99eca0ebb',
+            type: 'page',
+            label: 'page 1',
+            elements: [
+              {
+                id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+                name: 'repeatableSet',
+                type: 'repeatableSet',
+                label: 'repeatableSet',
+                minSetEntries: 1,
+                maxSetEntries: 2,
+                elements: [
+                  {
+                    id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700f',
+                    name: 'heading',
+                    label: 'Heading',
+                    type: 'heading',
+                    headingType: 1,
+                  },
+                  {
+                    id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+                    name: 'What_was_the_time',
+                    label: 'What was the time',
+                    type: 'time',
+                    required: false,
+                    defaultValue: '1970-01-01T05:28:26.448Z',
+                  },
+                  {
+                    id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
+                    name: 'time_summary',
+                    label: 'Time summary',
+                    type: 'summary',
+                    elementIds: ['2424f4ea-35a0-47ee-9c22-ef8e16cb700f'],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: '74375ac0-9a0e-11e8-8fc5-63e99eca0eaa',
+            type: 'page',
+            label: 'page 2',
+            elements: [
+              {
+                id: '2424f4ea-35a0-47ee-9c22-ef8e16cb7aaa',
+                name: 'heading_page_two',
+                label: 'Heading Page 2',
+                type: 'heading',
+                headingType: 1,
+              },
+            ],
+          },
+        ],
+      }),
+    ).toThrow(
+      '"elements[0].elements[0].elements[2].elementIds[0]" (2424f4ea-35a0-47ee-9c22-ef8e16cb700f) references a form element type (heading) that cannot be summarised',
+    )
+  })
+  test('should error if repeatableSet summary element references element that does not exist', () => {
+    expect(() =>
+      validateWithFormSchema({
+        id: 1,
+        name: 'Inspection',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: '59cc888b8969af000fb50ddb',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        submissionEvents: [],
+        tags: [],
+        elements: [
+          {
+            id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+            name: 'repeatableSet',
+            type: 'repeatableSet',
+            label: 'repeatableSet',
+            minSetEntries: 1,
+            maxSetEntries: 2,
+            elements: [
+              {
+                id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+                name: 'What_was_the_time',
+                label: 'What was the time',
+                type: 'time',
+                required: false,
+                defaultValue: '1970-01-01T05:28:26.448Z',
+              },
+              {
+                id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
+                name: 'time_summary',
+                label: 'Time summary',
+                type: 'summary',
+                elementIds: ['2424f4ea-35a0-47ee-9c22-ef8e16cb700f'],
+              },
+            ],
+          },
+        ],
+      }),
+    ).toThrow(
+      '"elements[0].elements[1].elementIds[0]" (2424f4ea-35a0-47ee-9c22-ef8e16cb700f) does not exist in "elements"',
+    )
+  })
 
-test('should error if repeatableSet summary element references element that does not exist', () => {
-  expect(() =>
+  test('fails when summary elementIds contains a invalidId', () => {
+    expect(() =>
+      validateWithFormSchema({
+        id: 1,
+        formsAppEnvironmentId: 1,
+        name: 'Inspection',
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        submissionEvents: [],
+        paymentEvents: [],
+        elements: [
+          {
+            id: '31042cfe-65e0-4a85-826b-ae6a2e48da10',
+            type: 'text',
+            name: 'text',
+            label: 'text',
+          },
+          {
+            id: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+            type: 'summary',
+            name: 'summary',
+            label: 'text summary',
+            elementIds: ['31042cfe-65e0-4a85-826b-ae6a2e48da12'],
+          },
+        ],
+      }),
+    ).toThrow(
+      '"elements[1].elementIds[0]" (31042cfe-65e0-4a85-826b-ae6a2e48da12) does not exist in "elements"',
+    )
+  })
+
+  test('fails when summary elementIds contains a invalid type', () => {
+    expect(() =>
+      validateWithFormSchema({
+        id: 1,
+        formsAppEnvironmentId: 1,
+        name: 'Inspection',
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        submissionEvents: [],
+        paymentEvents: [],
+        elements: [
+          {
+            id: '31042cfe-65e0-4a85-826b-ae6a2e48da10',
+            type: 'heading',
+            name: 'text',
+            label: 'text',
+            headingType: 1,
+          },
+          {
+            id: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+            type: 'summary',
+            name: 'summary',
+            label: 'text summary',
+            elementIds: ['31042cfe-65e0-4a85-826b-ae6a2e48da10'],
+          },
+        ],
+      }),
+    ).toThrow(
+      '"elements[1].elementIds[0]" (31042cfe-65e0-4a85-826b-ae6a2e48da10) references a form element type (heading) that cannot be summarised',
+    )
+  })
+
+  test('fails when summary elementIds references self', () => {
+    expect(() =>
+      validateWithFormSchema({
+        id: 1,
+        formsAppEnvironmentId: 1,
+        name: 'Inspection',
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        submissionEvents: [],
+        paymentEvents: [],
+        elements: [
+          {
+            id: '31042cfe-65e0-4a85-826b-ae6a2e48da10',
+            type: 'text',
+            name: 'text',
+            label: 'text',
+          },
+          {
+            id: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+            type: 'summary',
+            name: 'summary',
+            label: 'text summary',
+            elementIds: [
+              '31042cfe-65e0-4a85-826b-ae6a2e48da10',
+              '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+            ],
+          },
+        ],
+      }),
+    ).toThrow('"elements[1].elementIds" cannot contain a reference to itself')
+  })
+
+  test('succeeds when summary elementIds are valid', () => {
+    validateWithFormSchema({
+      id: 1,
+      formsAppEnvironmentId: 1,
+      name: 'Inspection',
+      formsAppIds: [1],
+      organisationId: 'ORGANISATION_00000000001',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      submissionEvents: [],
+      paymentEvents: [],
+      elements: [
+        {
+          id: '31042cfe-65e0-4a85-826b-ae6a2e48da10',
+          type: 'text',
+          name: 'text',
+          label: 'text',
+        },
+        {
+          id: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+          type: 'summary',
+          name: 'summary',
+          label: 'text summary',
+          elementIds: ['31042cfe-65e0-4a85-826b-ae6a2e48da10'],
+        },
+      ],
+    })
+  })
+
+  test('succeeds when repeatable set summary elementIds are referencing elements in root elements', () => {
+    validateWithFormSchema({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      submissionEvents: [],
+      tags: [],
+      elements: [
+        {
+          id: '94375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+          name: 'text',
+          type: 'text',
+          label: 'text',
+        },
+        {
+          id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+          name: 'repeatableSet',
+          type: 'repeatableSet',
+          label: 'repeatableSet',
+          minSetEntries: 1,
+          maxSetEntries: 2,
+          elements: [
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+              name: 'What_was_the_time',
+              label: 'What was the time',
+              type: 'time',
+              required: false,
+              defaultValue: '1970-01-01T05:28:26.448Z',
+            },
+            {
+              id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
+              name: 'text_and_time_summary',
+              label: 'Text and Time summary',
+              type: 'summary',
+              elementIds: [
+                '94375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+                '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+              ],
+            },
+          ],
+        },
+      ],
+    })
+  })
+
+  test('succeeds when repeatable set summary elementIds are referencing elements in root elements on another page', () => {
+    validateWithFormSchema({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      submissionEvents: [],
+      isMultiPage: true,
+      tags: [],
+      elements: [
+        {
+          id: '74375ac0-9a0e-11e8-8fc5-63e99eca0eaa',
+          type: 'page',
+          label: 'page 1',
+          elements: [
+            {
+              id: '94375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+              name: 'text',
+              type: 'text',
+              label: 'text',
+            },
+          ],
+        },
+        {
+          id: '74375ac0-9a0e-11e8-8fc5-63e99eca0ebb',
+          type: 'page',
+          label: 'page 2',
+          elements: [
+            {
+              id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+              name: 'repeatableSet',
+              type: 'repeatableSet',
+              label: 'repeatableSet',
+              minSetEntries: 1,
+              maxSetEntries: 2,
+              elements: [
+                {
+                  id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+                  name: 'What_was_the_time',
+                  label: 'What was the time',
+                  type: 'time',
+                  required: false,
+                  defaultValue: '1970-01-01T05:28:26.448Z',
+                },
+                {
+                  id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
+                  name: 'text_and_time_summary',
+                  label: 'Text and Time summary',
+                  type: 'summary',
+                  elementIds: [
+                    '94375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+                    '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    })
+  })
+
+  test('succeeds when summary elementIds are referencing elements in a repeatable set in root elements', () => {
     validateWithFormSchema({
       id: 1,
       name: 'Inspection',
@@ -1836,17 +2192,90 @@ test('should error if repeatableSet summary element references element that does
               defaultValue: '1970-01-01T05:28:26.448Z',
             },
             {
+              id: '94375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+              name: 'text',
+              type: 'text',
+              label: 'text',
+            },
+          ],
+        },
+        {
+          id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
+          name: 'text_and_time_summary',
+          label: 'Text and Time summary',
+          type: 'summary',
+          elementIds: [
+            '94375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+            '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+          ],
+        },
+      ],
+    })
+  })
+
+  test('succeeds when summary elementIds are referencing elements in a repeatable set on another page', () => {
+    validateWithFormSchema({
+      id: 1,
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      submissionEvents: [],
+      isMultiPage: true,
+      tags: [],
+      elements: [
+        {
+          id: '74375ac0-9a0e-11e8-8fc5-63e99eca0ebb',
+          type: 'page',
+          label: 'page 1',
+          elements: [
+            {
+              id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+              name: 'repeatableSet',
+              type: 'repeatableSet',
+              label: 'repeatableSet',
+              minSetEntries: 1,
+              maxSetEntries: 2,
+              elements: [
+                {
+                  id: '94375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+                  name: 'text',
+                  type: 'text',
+                  label: 'text',
+                },
+                {
+                  id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+                  name: 'What_was_the_time',
+                  label: 'What was the time',
+                  type: 'time',
+                  required: false,
+                  defaultValue: '1970-01-01T05:28:26.448Z',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: '74375ac0-9a0e-11e8-8fc5-63e99eca0eaa',
+          type: 'page',
+          label: 'page 2',
+          elements: [
+            {
               id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700d',
-              name: 'time_summary',
-              label: 'Time summary',
+              name: 'text_and_time_summary',
+              label: 'Text and Time summary',
               type: 'summary',
-              elementIds: ['2424f4ea-35a0-47ee-9c22-ef8e16cb700f'],
+              elementIds: [
+                '94375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+                '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+              ],
             },
           ],
         },
       ],
-    }),
-  ).toThrow('Summarised elementId not found')
+    })
+  })
 })
 
 test('should error if page element has child page element', () => {

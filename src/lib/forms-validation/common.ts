@@ -1,3 +1,4 @@
+import { typeCastService } from '@oneblink/sdk-core'
 import { FormTypes } from '@oneblink/types'
 import Joi from 'joi'
 
@@ -14,13 +15,27 @@ export function validateJoiSchema<T>(
   return result.value as T
 }
 
-export const getRootFormElements = (
+/**
+ * Reduce an array of form elements down to the elements that are not purely to
+ * determine the layout of the form. I.e. Strips out "page" and "section" form
+ * elements as they only contribute to the layout of the form. "repeatableSet"
+ * form elements are not stripped out because they contribute to the submission
+ * data.
+ *
+ * @param elements
+ * @returns
+ */
+export const stripLayoutFormElements = (
   elements: Array<FormTypes.FormElement>,
 ): Array<FormTypes.FormElement> => {
   const rootFormElements = []
   for (const element of elements) {
-    if (element.type === 'page' || element.type === 'section') {
-      rootFormElements.push(...getRootFormElements(element.elements))
+    const namelessElement =
+      typeCastService.formElements.toNamelessElement(element)
+    if (namelessElement) {
+      rootFormElements.push(
+        ...stripLayoutFormElements(namelessElement.elements),
+      )
     } else {
       rootFormElements.push(element)
     }
