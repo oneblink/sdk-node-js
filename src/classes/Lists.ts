@@ -86,12 +86,15 @@ export default class Lists extends OneBlinkAPI {
    * @param data The data for the new list
    */
   async createList(
-    data: FormTypes.NewFormElementOptionSet,
+    newList: FormTypes.NewFormElementOptionSet,
   ): Promise<FormTypes.FormElementOptionSet> {
+    if (!newList || typeof newList !== 'object') {
+      return Promise.reject(new TypeError('Must supply "newList" as an object'))
+    }
     return super.postRequest<
       FormTypes.NewFormElementOptionSet,
       FormTypes.FormElementOptionSet
-    >(basePath, data)
+    >(basePath, newList)
   }
 
   /**
@@ -130,16 +133,20 @@ export default class Lists extends OneBlinkAPI {
    * @param data The data for the list to update
    */
   async updateList(
-    data: FormTypes.FormElementOptionSet,
+    list: FormTypes.FormElementOptionSet,
   ): Promise<FormTypes.FormElementOptionSet> {
-    if (!data || typeof data.id !== 'number') {
-      throw new TypeError('Must supply "List.id" as a number')
+    if (!list || typeof list !== 'object') {
+      throw new TypeError('Must supply "list" as an object')
+    }
+
+    if (typeof list.id !== 'number') {
+      throw new TypeError('Must supply "list.id" as a number')
     }
 
     return super.putRequest<
       FormTypes.FormElementOptionSet,
       FormTypes.FormElementOptionSet
-    >(`${basePath}/${data.id}`, data)
+    >(`${basePath}/${list.id}`, list)
   }
 
   /**
