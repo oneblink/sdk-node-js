@@ -10,6 +10,8 @@ import Approvals from './Approvals'
 import FormsAppEnvironments from './FormsAppEnvironments'
 import EmailTemplates from './EmailTemplates'
 import DataManager from './DataManager'
+import Lookups from './Lookups'
+import Lists from './Lists'
 // Functions
 import sendEmail from './sendEmail'
 
@@ -25,5 +27,7 @@ export {
   FormsAppEnvironments,
   EmailTemplates,
   DataManager,
+  Lookups,
+  Lists,
   sendEmail,
 }
