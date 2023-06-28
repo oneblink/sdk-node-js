@@ -87,8 +87,11 @@ export default class Lists extends OneBlinkAPI {
    */
   async createList(
     data: FormTypes.NewFormElementOptionSet,
-  ): Promise<FormTypes.NewFormElementOptionSet> {
-    return super.postRequest(basePath, data)
+  ): Promise<FormTypes.FormElementOptionSet> {
+    return super.postRequest<
+      FormTypes.NewFormElementOptionSet,
+      FormTypes.FormElementOptionSet
+    >(basePath, data)
   }
 
   /**
@@ -133,7 +136,10 @@ export default class Lists extends OneBlinkAPI {
       throw new TypeError('Must supply "List.id" as a number')
     }
 
-    return super.putRequest(`${basePath}/${data.id}`, data)
+    return super.putRequest<
+      FormTypes.FormElementOptionSet,
+      FormTypes.FormElementOptionSet
+    >(`${basePath}/${data.id}`, data)
   }
 
   /**
