@@ -40,9 +40,7 @@ export default class Lists extends OneBlinkAPI {
    *
    * @param searchParams Search options
    */
-  async searchLists(
-    searchParams: ListSearchOptions,
-  ): Promise<
+  async searchLists(searchParams: ListSearchOptions): Promise<
     Omit<ListSearchResult, 'formElementDynamicOptionSets'> & {
       lists: FormTypes.FormElementOptionSet[]
     }
@@ -98,6 +96,7 @@ export default class Lists extends OneBlinkAPI {
    *
    * ```javascript
    * const data = {
+   *   id: 1,
    *   name: 'my list',
    *   organisationId: 'abc123',
    *   environments: [
