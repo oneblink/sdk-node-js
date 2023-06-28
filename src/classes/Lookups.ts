@@ -125,7 +125,7 @@ export default class Lookups extends OneBlinkAPI {
    *   environments: [
    *     {
    *       formsAppEnvironmentId: 1,
-   *       urL: 'https://my-url.com/lookup',
+   *       url: 'https://my-url.com/lookup',
    *     },
    *   ],
    *   type: 'DATA',
