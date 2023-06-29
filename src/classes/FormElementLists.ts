@@ -2,24 +2,24 @@ import { FormTypes } from '@oneblink/types'
 import OneBlinkAPI from '../lib/one-blink-api'
 import {
   ConstructorOptions,
-  ListSearchOptions,
-  ListSearchResult,
+  FormElementListSearchOptions,
+  FormElementListSearchResult,
 } from '../types'
 
 const basePath = `/form-element-options/dynamic`
 
-export default class Lists extends OneBlinkAPI {
+export default class FormElementLists extends OneBlinkAPI {
   /**
    * #### Example
    *
    * ```typescript
-   * import { Lists } from '@oneblink/sdk'
+   * import { FormElementLists } from '@oneblink/sdk'
    *
    * const options = {
    *   accessKey: '123455678901ABCDEFGHIJKL',
    *   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
    * }
-   * const lists = new Lists(options)
+   * const formElementListsClient = new FormElementLists(options)
    * ```
    */
   constructor(options: ConstructorOptions) {
@@ -35,27 +35,24 @@ export default class Lists extends OneBlinkAPI {
    *   limit: 1,
    *   offset: 0,
    * }
-   * const { formElementLists, meta } = await lists.searchLists(
-   *   searchParams,
-   * )
+   * const { formElementLists, meta } =
+   *   await formElementListsClient.searchFormElementLists(searchParams)
    * ```
    *
    * @param searchParams Search options
    */
-  async searchLists(
-    searchParams: ListSearchOptions,
-  ): Promise<ListSearchResult> {
+  async searchFormElementLists(
+    searchParams: FormElementListSearchOptions,
+  ): Promise<FormElementListSearchResult> {
     if (
       !searchParams ||
       typeof searchParams !== 'object' ||
       typeof searchParams.organisationId !== 'string'
     ) {
-      return Promise.reject(
-        new TypeError('Must supply "options.organisationId" as a string'),
-      )
+      throw new TypeError('Must supply "options.organisationId" as a string')
     }
     const result = await super.searchRequest<
-      Omit<ListSearchResult, 'formElementLists'> & {
+      Omit<FormElementListSearchResult, 'formElementLists'> & {
         formElementDynamicOptionSets: FormTypes.FormElementOptionSet[]
       }
     >(basePath, searchParams)
@@ -89,22 +86,22 @@ export default class Lists extends OneBlinkAPI {
    *   ],
    *   type: 'STATIC',
    * }
-   * const list = await lists.createList(data)
+   * const list = await formElementListsClient.createFormElementList(data)
    * // Use list here...
    * ```
    *
-   * @param newList The data for the new list
+   * @param newFormElementList The data for the new list
    */
-  async createList(
-    newList: FormTypes.NewFormElementOptionSet,
+  async createFormElementList(
+    newFormElementList: FormTypes.NewFormElementOptionSet,
   ): Promise<FormTypes.FormElementOptionSet> {
-    if (!newList || typeof newList !== 'object') {
-      return Promise.reject(new TypeError('Must supply "newList" as an object'))
+    if (!newFormElementList || typeof newFormElementList !== 'object') {
+      throw new TypeError('Must supply "newList" as an object')
     }
     return super.postRequest<
       FormTypes.NewFormElementOptionSet,
       FormTypes.FormElementOptionSet
-    >(basePath, newList)
+    >(basePath, newFormElementList)
   }
 
   /**
@@ -136,13 +133,13 @@ export default class Lists extends OneBlinkAPI {
    *   ],
    *   type: 'STATIC',
    * }
-   * const list = await list.updateList(data)
+   * const list = await formElementListsClient.updateFormElementList(data)
    * // Use list here...
    * ```
    *
    * @param list The data for the list to update
    */
-  async updateList(
+  async updateFormElementList(
     list: FormTypes.FormElementOptionSet,
   ): Promise<FormTypes.FormElementOptionSet> {
     if (!list || typeof list !== 'object') {
@@ -163,13 +160,13 @@ export default class Lists extends OneBlinkAPI {
    * #### Example
    *
    * ```javascript
-   * await lists.deleteList(1)
+   * await formElementListsClient.deleteFormElementList(1)
    * ```
    *
    * @param id The id of the list to delete
    */
-  async deleteList(id: number): Promise<void> {
-    if (typeof id !== 'number') {
+  async deleteFormElementList(id: number): Promise<void> {
+    if (typeof id !== 'number' || Number.isNaN(id)) {
       throw new TypeError('Must supply "id" as a number')
     }
 
