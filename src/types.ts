@@ -376,3 +376,11 @@ export type SearchDataManagerRecordsResponse = {
 export type LookupsSearchResult = {
   formElementLookups: FormTypes.FormElementLookup[]
 } & MiscTypes.BaseSearchResult
+
+export type ListSearchResult = {
+  formElementLists: FormTypes.FormElementOptionSet[]
+} & MiscTypes.BaseSearchResult
+
+export type ListSearchOptions = BaseSearchOptions & {
+  organisationId: string
+}
