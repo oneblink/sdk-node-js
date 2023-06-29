@@ -92,7 +92,7 @@ export default class Lists extends OneBlinkAPI {
    * // Use list here...
    * ```
    *
-   * @param data The data for the new list
+   * @param newList The data for the new list
    */
   async createList(
     newList: FormTypes.NewFormElementOptionSet,
@@ -139,7 +139,7 @@ export default class Lists extends OneBlinkAPI {
    * // Use list here...
    * ```
    *
-   * @param data The data for the list to update
+   * @param list The data for the list to update
    */
   async updateList(
     list: FormTypes.FormElementOptionSet,
