@@ -378,7 +378,7 @@ export type LookupsSearchResult = {
 } & MiscTypes.BaseSearchResult
 
 export type ListSearchResult = {
-  formElementDynamicOptionSets: FormTypes.FormElementOptionSet[]
+  formElementLists: FormTypes.FormElementOptionSet[]
 } & MiscTypes.BaseSearchResult
 
 export type ListSearchOptions = BaseSearchOptions & {

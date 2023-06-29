@@ -42,11 +42,9 @@ export default class Lists extends OneBlinkAPI {
    *
    * @param searchParams Search options
    */
-  async searchLists(searchParams: ListSearchOptions): Promise<
-    Omit<ListSearchResult, 'formElementDynamicOptionSets'> & {
-      formElementLists: FormTypes.FormElementOptionSet[]
-    }
-  > {
+  async searchLists(
+    searchParams: ListSearchOptions,
+  ): Promise<ListSearchResult> {
     if (
       !searchParams ||
       typeof searchParams !== 'object' ||
@@ -56,10 +54,11 @@ export default class Lists extends OneBlinkAPI {
         new TypeError('Must supply "options.organisationId" as a string'),
       )
     }
-    const result = await super.searchRequest<ListSearchResult>(
-      basePath,
-      searchParams,
-    )
+    const result = await super.searchRequest<
+      Omit<ListSearchResult, 'formElementLists'> & {
+        formElementDynamicOptionSets: FormTypes.FormElementOptionSet[]
+      }
+    >(basePath, searchParams)
     return {
       meta: result.meta,
       formElementLists: result.formElementDynamicOptionSets,
