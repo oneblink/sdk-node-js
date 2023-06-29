@@ -35,14 +35,16 @@ export default class Lists extends OneBlinkAPI {
    *   limit: 1,
    *   offset: 0,
    * }
-   * const { lists, meta } = await lists.searchLists(searchParams)
+   * const { formElementLists, meta } = await lists.searchLists(
+   *   searchParams,
+   * )
    * ```
    *
    * @param searchParams Search options
    */
   async searchLists(searchParams: ListSearchOptions): Promise<
     Omit<ListSearchResult, 'formElementDynamicOptionSets'> & {
-      lists: FormTypes.FormElementOptionSet[]
+      formElementLists: FormTypes.FormElementOptionSet[]
     }
   > {
     if (
@@ -60,7 +62,7 @@ export default class Lists extends OneBlinkAPI {
     )
     return {
       meta: result.meta,
-      lists: result.formElementDynamicOptionSets,
+      formElementLists: result.formElementDynamicOptionSets,
     }
   }
 
