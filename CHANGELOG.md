@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `Lookups` class
+- `FormElementLookups` class
+- `FormElementLists` class
 - lookupButton prop to form elements
 
 ### Fixed
