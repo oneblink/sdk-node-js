@@ -1,6 +1,6 @@
 import { FormTypes } from '@oneblink/types'
 import OneBlinkAPI from '../lib/one-blink-api'
-import { ConstructorOptions } from '../types'
+import { ConstructorOptions, LookupsSearchResult } from '../types'
 
 export default class Lookups extends OneBlinkAPI {
   /**
@@ -24,7 +24,7 @@ export default class Lookups extends OneBlinkAPI {
   /**
    * #### Example
    *
-   * ```javascript
+   * ```typescript
    * const lookupId = 1
    * const lookup = await lookups.getLookup(lookupId)
    * // Use lookup here
@@ -44,7 +44,7 @@ export default class Lookups extends OneBlinkAPI {
   /**
    * #### Example
    *
-   * ```javascript
+   * ```typescript
    * const organisationId = '2i4321a7n2389a2700065425'
    * const lookups = await lookups.searchLookups({
    *   organisationId,
@@ -62,7 +62,7 @@ export default class Lookups extends OneBlinkAPI {
     organisationId: string
     limit?: number
     offset?: number
-  }): Promise<FormTypes.FormElementLookup> {
+  }): Promise<LookupsSearchResult> {
     if (
       !options ||
       typeof options !== 'object' ||

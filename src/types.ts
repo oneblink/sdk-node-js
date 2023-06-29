@@ -28,7 +28,10 @@ export type PreFillMeta = AWSTypes.FormS3Credentials & {
 export type BaseSearchOptions = {
   /** Limit the number of results returned */
   limit?: number
-  /** Skip a specific number of results, used in conjunction with `limit` to enforce paging */
+  /**
+   * Skip a specific number of results, used in conjunction with `limit` to
+   * enforce paging
+   */
   offset?: number
 }
 
@@ -91,7 +94,10 @@ export type FormsSearchOptions = BaseSearchOptions & {
    * or `false` or not specified.
    */
   isAuthenticated?: boolean
-  /** Search on the `name` property of a form. Can be a prefix, suffix or partial match */
+  /**
+   * Search on the `name` property of a form. Can be a prefix, suffix or partial
+   * match
+   */
   name?: string
   /**
    * Search on the `formsAppIds` property of a form. Must be the exact match of
@@ -179,7 +185,10 @@ export type JobsSearchResult = MiscTypes.BaseSearchResult & {
 }
 
 export type DataManagerRegexFilter = {
-  /** The Regular expression to search with. This can just be a simple string if desired. */
+  /**
+   * The Regular expression to search with. This can just be a simple string if
+   * desired.
+   */
   $regex: string
   /**
    * Regex options. String with any combination of the following characters:
@@ -261,7 +270,10 @@ export type DataManagerFreshdeskDependentFieldFilter = {
    * `select` element.
    */
   subCategory?: DataManagerStringArrayFilter
-  /** The filter for the `item`. This property is treated as a non multi `select` element. */
+  /**
+   * The filter for the `item`. This property is treated as a non multi `select`
+   * element.
+   */
   item?: DataManagerStringArrayFilter
 }
 
@@ -284,7 +296,8 @@ export type DataManagerNestedFilterFilter = {
  * Element of type: checkboxes, select (multi): USE
  * `DataManagerMultipleSelectionsArrayFilter`.
  *
- * Element of type: radio, autocomplete, select: USE `DataManagerStringArrayFilter`.
+ * Element of type: radio, autocomplete, select: USE
+ * `DataManagerStringArrayFilter`.
  *
  * Element of type: boolean: USE `DataManagerBooleanFilter`.
  *
@@ -359,3 +372,7 @@ export type SearchDataManagerRecordsResponse = {
   }
   submissions: Array<FormStoreRecord>
 }
+
+export type LookupsSearchResult = {
+  formElementLookups: FormTypes.FormElementLookup[]
+} & MiscTypes.BaseSearchResult
