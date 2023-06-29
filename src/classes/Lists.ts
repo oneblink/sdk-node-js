@@ -45,6 +45,15 @@ export default class Lists extends OneBlinkAPI {
       lists: FormTypes.FormElementOptionSet[]
     }
   > {
+    if (
+      !searchParams ||
+      typeof searchParams !== 'object' ||
+      typeof searchParams.organisationId !== 'string'
+    ) {
+      return Promise.reject(
+        new TypeError('Must supply "options.organisationId" as a string'),
+      )
+    }
     const result = await super.searchRequest<ListSearchResult>(
       basePath,
       searchParams,
