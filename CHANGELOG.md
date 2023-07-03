@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.0] - 2023-07-03
+
 ### Added
 
 - `FormElementLookups` class
@@ -16,6 +18,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - summary form element validation not allowing referenced elements from outside the scope of the summary element when using repeatable sets
+
+### Dependencies
+
+- update [joi](https://www.npmjs.com/package/joi) to 17.9.2 (from 17.8.3)
+
+- update [node-fetch](https://www.npmjs.com/package/node-fetch) to [2.6.11](https://github.com/node-fetch/node-fetch/releases/tag/v2.6.11) (from [2.6.9](https://github.com/node-fetch/node-fetch/releases/tag/v2.6.9))
+
+- update [nodemailer](https://www.npmjs.com/package/nodemailer) to [6.9.3](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md) (from [6.9.1](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md))
 
 ## [3.1.0] - 2023-06-23
 
