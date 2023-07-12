@@ -664,7 +664,7 @@ export default class Forms extends OneBlinkAPI {
     submissionId: number
   }): Promise<{ url: string }> {
     if (!options) {
-      throw new TypeError('Must supply "formId" as a number')
+      throw new TypeError('Must supply "options" as an object')
     }
     const { formId, attachmentId, submissionId } = options
     if (typeof formId !== 'number') {
