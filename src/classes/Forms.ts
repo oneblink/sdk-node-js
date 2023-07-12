@@ -571,6 +571,12 @@ export default class Forms extends OneBlinkAPI {
     }
   }
   /**
+   * Generate a url to download an attachment. The expiration of the URL is
+   * determined by input parameters and only last a maximum of 12 hours. This
+   * should be used for short lived URLs that will be used immediately. If you
+   * require a URL that needs to last longer, consider using the
+   * `generateWorkflowAttachmentLink()` function.
+   *
    * #### Example
    *
    * ```javascript
@@ -593,6 +599,7 @@ export default class Forms extends OneBlinkAPI {
    * @param attachmentId The attachment identifier from the form submission data
    * @param expiryInSeconds The number of seconds the signed URL should be valid
    *   for, must be greater than or equal to `900`
+   * @returns An absolute URL that that can be used to download the attachment
    */
   async generateSubmissionAttachmentUrl(
     formId: number,
@@ -619,6 +626,60 @@ export default class Forms extends OneBlinkAPI {
       {
         expiryInSeconds,
       },
+    )
+  }
+  /**
+   * Generate a workflow attachment link for an attachment. The expiration of
+   * the link is configured for the account and cannot be changed for generated
+   * links. If you require a URL that should be short lived, consider using the
+   * `generateSubmissionAttachmentUrl()` function.
+   *
+   * #### Example
+   *
+   * ```javascript
+   * const formId = 1
+   * const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+   * const submissionId = '49ae3fa9-798d-467c-96e1-5c606fe42fbb'
+   * forms
+   *   .generateWorkflowAttachmentLink({
+   *     formId,
+   *     attachmentId,
+   *     submissionId,
+   *   })
+   *   .then((result) => {
+   *     const attachmentUrl = result.url
+   *     // Use URL here...
+   *   })
+   * ```
+   *
+   * @param options The options required to generate a link
+   * @returns An absolute URL that that can be used to download the attachment
+   */
+  async generateWorkflowAttachmentLink(options: {
+    /** The exact id of the form you wish to generate a URL for */
+    formId: number
+    /** The attachment identifier from the form submission data */
+    attachmentId: string
+    /** The submission identifier for the the form submission */
+    submissionId: number
+  }): Promise<{ url: string }> {
+    if (!options) {
+      throw new TypeError('Must supply "options" as an object')
+    }
+    const { formId, attachmentId, submissionId } = options
+    if (typeof formId !== 'number') {
+      throw new TypeError('Must supply "formId" as a number')
+    }
+    if (typeof attachmentId !== 'string') {
+      throw new TypeError('Must supply "attachmentId" as a string')
+    }
+    if (typeof submissionId !== 'string') {
+      throw new TypeError('Must supply "submissionId" as a string')
+    }
+
+    return super.postRequest(
+      `/forms/${formId}/submissions/${submissionId}/attachments/${attachmentId}/workflow-link`,
+      {},
     )
   }
   /**
