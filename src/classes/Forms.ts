@@ -661,7 +661,7 @@ export default class Forms extends OneBlinkAPI {
     /** The attachment identifier from the form submission data */
     attachmentId: string
     /** The submission identifier for the the form submission */
-    submissionId: number
+    submissionId: string
   }): Promise<{ url: string }> {
     if (!options) {
       throw new TypeError('Must supply "options" as an object')
