@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `runLookupOnClear` prop to form elements
+
 ## [3.3.1] - 2023-07-12
 
 ### Fixed
@@ -25,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `FormElementLookups` class
 - `FormElementLists` class
-- lookupButton prop to form elements
+- `lookupButton` prop to form elements
 
 ### Fixed
 
