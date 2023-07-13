@@ -11,6 +11,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `runLookupOnClear` prop to form elements
 
+## [3.3.1] - 2023-07-12
+
+### Fixed
+
+- `submissionId` typed as `number` instead of `string`
+
+## [3.3.0] - 2023-07-12
+
+### Added
+
+- `generateWorkflowAttachmentLink()` function to `Forms` class
+
 ## [3.2.0] - 2023-07-03
 
 ### Added
