@@ -224,15 +224,12 @@ const lookupButton = Joi.object({
   label: Joi.string(),
 })
 
-const runLookupOnClear = Joi.boolean().default(false)
-
 export const lookupSchemas = {
   isDataLookup,
   dataLookupId,
   isElementLookup,
   elementLookupId,
   lookupButton,
-  runLookupOnClear,
 }
 
 export const conditionallyShowSchemas = {
