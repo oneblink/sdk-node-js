@@ -5851,7 +5851,6 @@ describe('invalid property removal', () => {
       id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
       isDataLookup: false,
       isElementLookup: false,
-      runLookupOnClear: false,
       label: 'autocomplete',
       name: 'autocomplete',
       optionsType: 'SEARCH',
@@ -5878,7 +5877,6 @@ describe('invalid property removal', () => {
       conditionallyShowOptions: false,
       id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
       isDataLookup: false,
-      runLookupOnClear: false,
       isElementLookup: false,
       label: 'autocomplete',
       name: 'autocomplete',
@@ -5931,7 +5929,6 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
     restrictFileTypes: true,
     restrictedFileTypes: ['png', 'jpg', 'gif'],
     isDataLookup: false,
-    runLookupOnClear: false,
     isElementLookup: false,
     allowExtensionlessAttachments: false,
   })
@@ -5956,7 +5953,6 @@ test('should strip restrictedFileTypes if restrictFileTypes is false', () => {
     conditionallyShow: false,
     restrictFileTypes: false,
     isDataLookup: false,
-    runLookupOnClear: false,
     isElementLookup: false,
     allowExtensionlessAttachments: false,
   })
