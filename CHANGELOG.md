@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.4.0] - 2023-07-26
 
+### Added
+
+- `runLookupOnClear` to `FormElementLookup` type
+
 ## [3.3.1] - 2023-07-12
 
 ### Fixed
