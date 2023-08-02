@@ -83,7 +83,8 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    *     isCloningFormSubmissionEvents: true
    *     isCloningFormPostSubmissionActions: true
    *     isCloningFormServerValidation: true
-   *     isCloningFormExternalIdGeneration: true
+   *     isCloningFormExternalIdGenerationOnSubmit: true
+   *     isCloningFormPersonalisation: true
    *   }
    * }
    * const formsAppEnvironment = await formsAppEnvironments.createFormsAppEnvironment(
@@ -116,7 +117,8 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    * // Use formsAppEnvironment here...
    * ```
    *
-   * @param formsAppEnvironment The data for the forms app environment template to update
+   * @param formsAppEnvironment The data for the forms app environment template
+   *   to update
    */
   async updateFormsAppEnvironment(
     formsAppEnvironment?: EnvironmentTypes.FormsAppEnvironment,

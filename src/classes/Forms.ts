@@ -932,7 +932,8 @@ export default class Forms extends OneBlinkAPI {
    *     tags: true,
    *     approvalSteps: false,
    *     serverValidation: false,
-   *     externalIdGeneration: false,
+   *     externalIdGenerationOnSubmit: false,
+   *     personalisation: false,
    *     postSubmissionAction: false,
    *     embeddedForms: [
    *       {
