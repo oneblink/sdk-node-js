@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `submissionTitle` to `Form` type
+- `submissionTitle` to `forms.searchSubmissions()`
 
 ### Removed
 
