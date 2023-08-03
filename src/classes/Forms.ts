@@ -772,6 +772,11 @@ export default class Forms extends OneBlinkAPI {
         isValid: options.isValid,
       })
     }
+    if (typeof options.submissionTitle === 'string') {
+      searchParams = Object.assign(searchParams, {
+        submissionTitle: options.submissionTitle,
+      })
+    }
 
     searchParams = Object.assign(searchParams, {
       offset:

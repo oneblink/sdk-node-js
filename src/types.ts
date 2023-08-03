@@ -123,6 +123,8 @@ export type FormSubmissionHistorySearchParameters = BaseSearchOptions & {
    * to search all
    */
   isValid?: boolean
+  /** Search for submission that contain this title */
+  submissionTitle?: string
 }
 
 export type FormSubmissionHistorySearchResults = MiscTypes.BaseSearchResult & {
