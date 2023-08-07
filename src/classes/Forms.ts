@@ -718,6 +718,7 @@ export default class Forms extends OneBlinkAPI {
    *   submissionDateFrom: '2018-08-16T05:28:26.448Z',
    *   submissionDateTo: '2019-08-16T05:28:26.448Z',
    *   isValid: true,
+   *   submissionTitle: 'Smith',
    * }
    * forms
    *   .searchSubmissions(options)
