@@ -148,7 +148,7 @@ const requiresAllConditionallyShowPredicates = Joi.when('conditionallyShow', {
   otherwise: Joi.any().strip(),
 })
 
-export const ConditionalPredicatesItemSchema = Joi.object().keys({
+const ConditionalPredicatesItemBaseSchema = Joi.object().keys({
   elementId: Joi.string().guid().required(),
   type: Joi.string()
     .default('OPTIONS')
@@ -195,6 +195,17 @@ export const ConditionalPredicatesItemSchema = Joi.object().keys({
     otherwise: Joi.any().strip(),
   }),
 })
+
+export const ConditionalPredicatesItemSchema = Joi.object()
+  .keys({
+    type: Joi.string().valid('REPEATABLESET'),
+    repeatableSetPredicate: Joi.when('type', {
+      is: Joi.valid('REPEATABLESET'),
+      then: ConditionalPredicatesItemBaseSchema,
+      otherwise: Joi.any().strip(),
+    }),
+  })
+  .concat(ConditionalPredicatesItemBaseSchema)
 
 export const conditionallyShowPredicates = Joi.when('conditionallyShow', {
   is: true,
