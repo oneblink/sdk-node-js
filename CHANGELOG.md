@@ -7,12 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `REPEATABLESET` type to conditional predicates
+
 ## [4.0.1] - 2023-10-15
 
 ### Added
 
 - CI job for building docs
-- `REPEATABLESET` type to conditional predicates
 
 ## [4.0.0] - 2023-08-17
 
