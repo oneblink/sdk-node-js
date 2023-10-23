@@ -1,15 +1,18 @@
-import AWS from 'aws-sdk'
+import { S3Client } from '@aws-sdk/client-s3'
+import { Upload } from '@aws-sdk/lib-storage'
 import { PreFillMeta } from '../types'
 
 export default async function setPreFillData(
   preFillMeta: PreFillMeta,
   data: unknown,
 ): Promise<void> {
-  const s3 = new AWS.S3({
+  const s3Client = new S3Client({
     region: preFillMeta.s3.region,
-    accessKeyId: preFillMeta.credentials.AccessKeyId,
-    secretAccessKey: preFillMeta.credentials.SecretAccessKey,
-    sessionToken: preFillMeta.credentials.SessionToken,
+    credentials: {
+      accessKeyId: preFillMeta.credentials.AccessKeyId,
+      secretAccessKey: preFillMeta.credentials.SecretAccessKey,
+      sessionToken: preFillMeta.credentials.SessionToken,
+    },
   })
 
   const objectMeta = {
@@ -20,9 +23,17 @@ export default async function setPreFillData(
     CacheControl: 'max-age=31536000', // Max 1 year(365 days)
     ContentType: 'application/json',
   }
-  const uploadOptions = {
+  const managedUpload = new Upload({
+    client: s3Client,
+    params: objectMeta,
     partSize: 5 * 1024 * 1024,
     queueSize: 1,
-  }
-  await s3.upload(objectMeta, uploadOptions).promise()
+    //Related github issue: https://github.com/aws/aws-sdk-js-v3/issues/2311
+    //This is a variable that is set to false by default, setting it to true
+    //means that it will force the upload to fail when one part fails on
+    //an upload. The S3 client has built in retry logic to retry uploads by default
+    leavePartsOnError: true,
+  })
+
+  await managedUpload.done()
 }

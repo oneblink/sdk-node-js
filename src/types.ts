@@ -9,9 +9,10 @@ import {
   SchedulingTypes,
 } from '@oneblink/types'
 import { FormStoreRecord } from '@oneblink/types/typescript/submissions'
-import { HeadObjectOutput } from 'aws-sdk/clients/s3'
+import { HeadObjectOutput } from '@aws-sdk/client-s3'
 import jwksClient from 'jwks-rsa'
 import { SendMailOptions } from 'nodemailer'
+import { SendEmailCommandOutput } from '@aws-sdk/client-sesv2'
 export * from '@oneblink/types'
 
 export { HeadObjectOutput }
@@ -166,15 +167,7 @@ export type FormSubmissionMetaResult = {
 
 export { SendMailOptions }
 
-export type SendEmailResult = {
-  envelope: {
-    from: string
-    to: string[]
-  }
-  messageId: string
-  response: string
-  raw: string
-}
+export type SendEmailResult = SendEmailCommandOutput
 
 export type FormsAppEnvironmentsSearchResult = {
   formsAppEnvironments: EnvironmentTypes.FormsAppEnvironment[]
