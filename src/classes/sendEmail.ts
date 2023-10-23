@@ -1,6 +1,6 @@
-import { SES } from 'aws-sdk'
+import { SESv2Client, SendEmailCommand } from '@aws-sdk/client-sesv2'
 // Have to use nodemailer as aws-sdk can not send attachments
-import nodemailer from 'nodemailer'
+import MailComposer from 'nodemailer/lib/mail-composer'
 import OneBlinkAPI from '../lib/one-blink-api'
 
 import { SendMailOptions, SendEmailResult } from '../types'
@@ -41,11 +41,25 @@ import { SendMailOptions, SendEmailResult } from '../types'
 export default async function sendEmail(
   options: SendMailOptions,
 ): Promise<SendEmailResult> {
-  const transporter = nodemailer.createTransport({
-    SES: new SES({ region: OneBlinkAPI.tenant.awsRegion }),
-  })
+  const mailComposer = new MailComposer(options)
+  const mimeNode = mailComposer.compile()
+  //@ts-expect-error This exists but not on the type. Additionally, this
+  //needs to be included so that the BCC won't be stripped from the email.
+  //Link to related docs: https://nodemailer.com/extras/mailcomposer/#bcc
+  mimeNode.keepBcc = true
+  const rawMailData = await mimeNode.build()
 
-  const result = await transporter.sendMail(options)
-  // @ts-expect-error Provided type is bad
-  return result
+  const sesv2Client = new SESv2Client({
+    region: OneBlinkAPI.tenant.awsRegion,
+  })
+  const sendEmailCommandOutput = await sesv2Client.send(
+    new SendEmailCommand({
+      Content: {
+        Raw: {
+          Data: rawMailData,
+        },
+      },
+    }),
+  )
+  return sendEmailCommandOutput
 }
