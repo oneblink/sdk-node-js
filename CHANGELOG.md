@@ -7,9 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.0] - 2023-10-25
+
 ### Changed
 
 - **[BREAKING]** `sendEmail()` result
+
+### Dependencies
+
+- depend upon [@aws-sdk/client-s3](https://www.npmjs.com/package/@aws-sdk/client-s3) [3.433.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.433.0)
+
+- depend upon [@aws-sdk/client-sesv2](https://www.npmjs.com/package/@aws-sdk/client-sesv2) [3.433.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.433.0)
+
+- depend upon [@aws-sdk/lib-storage](https://www.npmjs.com/package/@aws-sdk/lib-storage) [3.433.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.433.0)
+
+- depend upon [@aws-sdk/s3-request-presigner](https://www.npmjs.com/package/@aws-sdk/s3-request-presigner) [3.433.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.433.0)
 
 ## [4.1.0] - 2023-10-23
 
