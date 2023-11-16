@@ -562,6 +562,7 @@ const formSchema = Joi.object().keys({
   externalIdGenerationOnSubmit: externalIdGenerationSchema,
   personalisation: apiRequestSchema,
   submissionTitle: Joi.string(),
+  continueWithAutosave: Joi.boolean(),
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
