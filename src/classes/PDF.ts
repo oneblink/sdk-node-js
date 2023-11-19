@@ -163,7 +163,7 @@ export default class PDF extends OneBlinkAPI {
    *      submission: {
    *        myElementName: 'text 123'
    *      }
-   *      defintition: {} // form defintion
+   *      definition: {} // form definition
    *      submissionTimestamp: new Date().toISOString(),
    *      formsAppId: 1
    *      }
