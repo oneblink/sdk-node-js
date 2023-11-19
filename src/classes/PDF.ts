@@ -1,4 +1,8 @@
-import { PDFTypes, SubmissionEventTypes } from '@oneblink/types'
+import {
+  PDFTypes,
+  SubmissionEventTypes,
+  SubmissionTypes,
+} from '@oneblink/types'
 import OneBlinkAPI from '../lib/one-blink-api'
 import { ConstructorOptions } from '../types'
 
@@ -134,6 +138,53 @@ export default class PDF extends OneBlinkAPI {
       origin: OneBlinkAPI.tenant.apiOrigin,
       method: 'POST',
       path: '/pdf-document',
+      body: JSON.stringify(options),
+      headers: {
+        Accept: `application/pdf`,
+        'Content-Type': `application/json`,
+      },
+    })
+
+    return response.buffer()
+  }
+
+  /**
+   * #### Example
+   *
+   * ```javascript
+   * const fs = require('fs')
+   * const util = require('util')
+   *
+   * const writeFileAsync = util.promisify(fs.writeFile)
+   *
+   * async function run() {
+   *   const buffer = await pdf.generatePdfFromSubmissionData({
+   *     submissionData: {
+   *      submission: {
+   *        myElementName: 'text 123'
+   *      }
+   *      definition: {} // form definition
+   *      submissionTimestamp: new Date().toISOString(),
+   *      formsAppId: 1
+   *      }
+   *   })
+   *   await writeFileAsync('./submission.pdf', buffer, 'binary')
+   * }
+   * ```
+   *
+   * @param options An object containing all parameters to be passed into the
+   *   function.
+   */
+  async generatePdfFromSubmissionData(options: {
+    submissionData: SubmissionTypes.S3SubmissionData
+    excludedElementIds?: string[]
+    usePagesBreaks?: boolean
+    excludedCSSClasses?: string[]
+  }): Promise<Buffer> {
+    const response = await super.request({
+      origin: OneBlinkAPI.tenant.apiOrigin,
+      method: 'POST',
+      path: '/generate-pdf',
       body: JSON.stringify(options),
       headers: {
         Accept: `application/pdf`,
