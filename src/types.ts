@@ -126,6 +126,8 @@ export type FormSubmissionHistorySearchParameters = BaseSearchOptions & {
   isValid?: boolean
   /** Search for submission that contain this title */
   submissionTitle?: string
+  /** Search for submissions based on the external Id */
+  externalId?: string
 }
 
 export type FormSubmissionHistorySearchResults = MiscTypes.BaseSearchResult & {
