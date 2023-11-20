@@ -160,13 +160,17 @@ export default class PDF extends OneBlinkAPI {
    * async function run() {
    *   const buffer = await pdf.generatePdfFromSubmissionData({
    *     submissionData: {
-   *      submission: {
-   *        myElementName: 'text 123'
-   *      }
-   *      definition: {} // form definition
-   *      submissionTimestamp: new Date().toISOString(),
-   *      formsAppId: 1
-   *      }
+   *       submission: {
+   *         myElementName: 'text 123'
+   *       },
+   *       definition: {} // form definition
+   *       submissionTimestamp: new Date().toISOString(),
+   *       formsAppId: 1
+   *     },
+   *     excludedElementIds: ['1ae6d5f5-eade-411c-b85a-45fe40fe469e'],
+   *     usePagesBreaks: true,
+   *     excludedCSSClasses: []
+   *     includeExternalIdInPdf: false,
    *   })
    *   await writeFileAsync('./submission.pdf', buffer, 'binary')
    * }
@@ -180,6 +184,7 @@ export default class PDF extends OneBlinkAPI {
     excludedElementIds?: string[]
     usePagesBreaks?: boolean
     excludedCSSClasses?: string[]
+    includeExternalIdInPdf?: boolean
   }): Promise<Buffer> {
     const response = await super.request({
       origin: OneBlinkAPI.tenant.apiOrigin,
