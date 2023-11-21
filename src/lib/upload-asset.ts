@@ -1,8 +1,4 @@
-import {
-  CompleteMultipartUploadCommandOutput,
-  PutObjectCommandInput,
-  S3Client,
-} from '@aws-sdk/client-s3'
+import { PutObjectCommandInput, S3Client } from '@aws-sdk/client-s3'
 import { Upload } from '@aws-sdk/lib-storage'
 import { PreFillMeta } from '../types'
 
@@ -41,9 +37,8 @@ export default async function uploadAsset<T>(
     leavePartsOnError: true,
   })
 
-  const completeMultipartUploadCommandOutput: CompleteMultipartUploadCommandOutput =
-    await managedUpload.done()
-  return completeMultipartUploadCommandOutput as {
-    Location: string
+  await managedUpload.done()
+  return {
+    Location: `https://s3.${assetCredentials.s3.region}.amazonaws.com/${assetCredentials.s3.bucket}/${assetCredentials.s3.key}`,
   }
 }
