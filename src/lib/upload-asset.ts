@@ -39,6 +39,8 @@ export default async function uploadAsset<T>(
 
   await managedUpload.done()
   return {
-    Location: `https://s3.${assetCredentials.s3.region}.amazonaws.com/${assetCredentials.s3.bucket}/${assetCredentials.s3.key}`,
+    Location: encodeURI(
+      `https://s3.${assetCredentials.s3.region}.amazonaws.com/${assetCredentials.s3.bucket}/${assetCredentials.s3.key}`,
+    ),
   }
 }
