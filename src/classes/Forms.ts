@@ -760,6 +760,12 @@ export default class Forms extends OneBlinkAPI {
       throw new Error('formId must be a number and is required')
     }
 
+    if (typeof options.externalId === 'string') {
+      searchParams = Object.assign(searchParams, {
+        externalId: options.externalId,
+      })
+    }
+
     if (typeof options.submissionDateFrom === 'string') {
       searchParams = Object.assign(searchParams, {
         submissionDateFrom: options.submissionDateFrom,
