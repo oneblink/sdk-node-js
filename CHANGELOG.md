@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.1.3] - 2023-12-12
+
 ### Fixed
 
 - `externalId` not being used as search param in `searchSubmissions()`
