@@ -3380,6 +3380,15 @@ describe('PDF submission event', () => {
               },
             ],
           },
+          emailAttachmentsWebhook: {
+            type: 'ONEBLINK_API',
+            configuration: {
+              apiId: 'customer-project.api.oneblink.io',
+              apiEnvironment: 'dev',
+              apiEnvironmentRoute: '/attachments',
+              secret: 'string',
+            },
+          },
         },
       },
     ]
@@ -3437,6 +3446,13 @@ describe('PDF submission event', () => {
                 text: 'This is the text',
               },
             ],
+          },
+          emailAttachmentsWebhook: {
+            type: 'CALLBACK',
+            configuration: {
+              url: 'https://customer-project-dev.api.oneblink.io/attachments',
+              secret: 'string',
+            },
           },
         },
       },

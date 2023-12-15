@@ -19,6 +19,30 @@ const emailSchema = Joi.alternatives([
   Joi.string().regex(/^{USER:email}$/),
 ])
 
+const apiRequestSchemaConfiguration = Joi.object()
+  .required()
+  .when('type', {
+    is: 'CALLBACK',
+    then: Joi.object({
+      url: Joi.string().uri().required(),
+      secret: Joi.string(),
+    }),
+  })
+  .when('type', {
+    is: 'ONEBLINK_API',
+    then: Joi.object({
+      apiId: Joi.string().required(),
+      apiEnvironment: Joi.string().required(),
+      apiEnvironmentRoute: Joi.string().required(),
+      secret: Joi.string(),
+    }),
+  })
+
+const apiRequestSchema = Joi.object({
+  type: Joi.string().required().valid('CALLBACK', 'ONEBLINK_API'),
+  configuration: apiRequestSchemaConfiguration,
+})
+
 const emailSubmissionEventConfiguration = {
   email: emailSchema,
   toEmail: Joi.array().items(emailSchema),
@@ -48,6 +72,7 @@ const emailSubmissionEventConfiguration = {
       )
       .required(),
   }),
+  emailAttachmentsWebhook: apiRequestSchema,
 }
 
 const approvalFormsInclusionConfiguration = {
@@ -377,25 +402,6 @@ const pageElementSchema = Joi.object().keys({
     .unique('id'),
 })
 
-const apiRequestSchemaConfiguration = Joi.object()
-  .required()
-  .when('type', {
-    is: 'CALLBACK',
-    then: Joi.object({
-      url: Joi.string().uri().required(),
-      secret: Joi.string(),
-    }),
-  })
-  .when('type', {
-    is: 'ONEBLINK_API',
-    then: Joi.object({
-      apiId: Joi.string().required(),
-      apiEnvironment: Joi.string().required(),
-      apiEnvironmentRoute: Joi.string().required(),
-      secret: Joi.string(),
-    }),
-  })
-
 const externalIdGenerationSchema = Joi.object({
   type: Joi.string().required().valid('CALLBACK', 'ONEBLINK_API', 'RECEIPT_ID'),
   configuration: apiRequestSchemaConfiguration.when('type', {
@@ -443,11 +449,6 @@ const externalIdGenerationSchema = Joi.object({
         ),
     }),
   }),
-})
-
-const apiRequestSchema = Joi.object({
-  type: Joi.string().required().valid('CALLBACK', 'ONEBLINK_API'),
-  configuration: apiRequestSchemaConfiguration,
 })
 
 const cannedResponsesSchema = Joi.array()
