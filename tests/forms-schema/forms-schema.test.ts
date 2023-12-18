@@ -3380,7 +3380,7 @@ describe('PDF submission event', () => {
               },
             ],
           },
-          emailAttachmentsWebhook: {
+          emailAttachmentsEndpoint: {
             type: 'ONEBLINK_API',
             configuration: {
               apiId: 'customer-project.api.oneblink.io',
@@ -3447,7 +3447,7 @@ describe('PDF submission event', () => {
               },
             ],
           },
-          emailAttachmentsWebhook: {
+          emailAttachmentsEndpoint: {
             type: 'CALLBACK',
             configuration: {
               url: 'https://customer-project-dev.api.oneblink.io/attachments',

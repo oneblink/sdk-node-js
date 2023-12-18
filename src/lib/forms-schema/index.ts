@@ -72,7 +72,7 @@ const emailSubmissionEventConfiguration = {
       )
       .required(),
   }),
-  emailAttachmentsWebhook: apiRequestSchema,
+  emailAttachmentsEndpoint: apiRequestSchema,
 }
 
 const approvalFormsInclusionConfiguration = {
