@@ -695,24 +695,16 @@ export default class Forms extends OneBlinkAPI {
    *
    * ```javascript
    * export async function post(request) {
-   *   const documentFileName = 'document.text'
-   *   const documentContentType = 'text/plain'
    *   const readableStream = fs.createReadStream(documentFileName)
    *
-   *   const s3 = await forms.uploadEmailAttachment({
-   *     filename: documentFileName,
-   *     contentType: documentContentType,
+   *   const emailAttachment = await forms.uploadEmailAttachment({
+   *     filename: 'document.text',
+   *     contentType: 'text/plain',
    *     body: readableStream,
    *   })
    *
    *   return {
-   *     attachments: [
-   *       {
-   *         filename: documentFileName,
-   *         contentType: documentContentType,
-   *         s3,
-   *       },
-   *     ],
+   *     attachments: [emailAttachment],
    *   }
    * }
    * ```
@@ -727,7 +719,11 @@ export default class Forms extends OneBlinkAPI {
     contentType: string
     /** The attachment's file content to upload */
     body: Readable | Buffer | string
-  }): Promise<AWSTypes.S3Configuration> {
+  }): Promise<{
+    filename: string
+    contentType: string
+    s3: AWSTypes.S3Configuration
+  }> {
     const result = await super.postRequest<
       { filename: string },
       AWSTypes.S3ObjectCredentials
@@ -767,7 +763,11 @@ export default class Forms extends OneBlinkAPI {
 
     await managedUpload.done()
 
-    return result.s3
+    return {
+      filename: options.filename,
+      contentType: options.contentType,
+      s3: result.s3,
+    }
   }
 
   /**
