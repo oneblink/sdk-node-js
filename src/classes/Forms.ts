@@ -686,6 +686,90 @@ export default class Forms extends OneBlinkAPI {
       {},
     )
   }
+
+  /**
+   * Upload a file to use as an attachment for an email based form workflow
+   * event.
+   *
+   * ### Example
+   *
+   * ```javascript
+   * export async function post(request) {
+   *   const documentFileName = 'document.text'
+   *   const documentContentType = 'text/plain'
+   *   const readableStream = fs.createReadStream(documentFileName)
+   *
+   *   const s3 = await forms.uploadEmailAttachment({
+   *     filename: documentFileName,
+   *     contentType: documentContentType,
+   *     body: readableStream,
+   *   })
+   *
+   *   return {
+   *     attachments: [
+   *       {
+   *         filename: documentFileName,
+   *         contentType: documentContentType,
+   *         s3,
+   *       },
+   *     ],
+   *   }
+   * }
+   * ```
+   *
+   * @param options Available options for uploading attachment.
+   * @returns The configuration required to add custom attachments to an email.
+   */
+  async uploadEmailAttachment(options: {
+    /** The attachment's file name */
+    filename: string
+    /** The attachment's content type */
+    contentType: string
+    /** The attachment's file content to upload */
+    body: Readable | Buffer | string
+  }): Promise<AWSTypes.S3Configuration> {
+    const result = await super.postRequest<
+      { filename: string },
+      AWSTypes.S3ObjectCredentials
+    >('/email-attachment-upload-credentials', {
+      filename: options.filename,
+    })
+
+    const s3Client = new S3Client({
+      region: result.s3.region,
+      credentials: {
+        accessKeyId: result.credentials.AccessKeyId,
+        secretAccessKey: result.credentials.SecretAccessKey,
+        sessionToken: result.credentials.SessionToken,
+      },
+    })
+
+    const managedUpload = new Upload({
+      client: s3Client,
+      params: {
+        ServerSideEncryption: 'AES256',
+        Expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)), // Max 1 year
+        CacheControl: 'max-age=31536000', // Max 1 year(365 days),
+        Bucket: result.s3.bucket,
+        Key: result.s3.key,
+        ContentType: options.contentType,
+        ACL: 'private',
+        Body: options.body,
+      },
+      partSize: 5 * 1024 * 1024,
+      queueSize: 5,
+      //Related github issue: https://github.com/aws/aws-sdk-js-v3/issues/2311
+      //This is a variable that is set to false by default, setting it to true
+      //means that it will force the upload to fail when one part fails on
+      //an upload. The S3 client has built in retry logic to retry uploads by default
+      leavePartsOnError: true,
+    })
+
+    await managedUpload.done()
+
+    return result.s3
+  }
+
   /**
    * #### Example
    *
