@@ -123,6 +123,7 @@ export const paymentEventTypes: SubmissionEventTypes.FormPaymentEventType[] = [
   'CP_PAY',
   'BPOINT',
   'WESTPAC_QUICK_WEB',
+  'WESTPAC_QUICK_STREAM',
   'NSW_GOV_PAY',
 ]
 export const PaymentEventSchema = Joi.object({
@@ -141,7 +142,7 @@ export const PaymentEventSchema = Joi.object({
       }),
     })
     .when('type', {
-      is: 'WESTPAC_QUICK_WEB',
+      is: Joi.valid('WESTPAC_QUICK_WEB', 'WESTPAC_QUICK_STREAM'),
       then: Joi.object().keys({
         elementId: Joi.string().uuid().required(),
         environmentId: Joi.string().uuid().required(),

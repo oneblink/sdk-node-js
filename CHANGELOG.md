@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `uploadEmailAttachment` to `Forms` class
 - `emailAttachmentsEndpoint` to email form workflow events validation
+- `WESTPAC_QUICK_STREAM` payment event to form schema
 
 ## [5.1.3] - 2023-12-12
 

@@ -4409,6 +4409,99 @@ describe('WESTPAC_QUICK_WEB submission event', () => {
   })
 })
 
+describe('WESTPAC_QUICK_STREAM submission event', () => {
+  test('should error for WESTPAC_QUICK_STREAM submission event not passing "elementId"', () => {
+    const { error } = formSchema.validate({
+      id: 1,
+      name: 'string',
+      description: 'string',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: 'ORGANISATION_00000000001',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      elements: [],
+      isAuthenticated: true,
+      tags: [],
+      paymentEvents: [
+        {
+          type: 'WESTPAC_QUICK_STREAM',
+          configuration: {},
+        },
+      ],
+    })
+    expect(error?.message).toContain(
+      '"paymentEvents[0].configuration.elementId" is required',
+    )
+  })
+  test('should error for WESTPAC_QUICK_STREAM submission event not passing "environmentId"', () => {
+    const { error } = formSchema.validate({
+      id: 1,
+      name: 'string',
+      description: 'string',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: 'ORGANISATION_00000000001',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      elements: [],
+      isAuthenticated: true,
+      tags: [],
+      paymentEvents: [
+        {
+          type: 'WESTPAC_QUICK_STREAM',
+          configuration: {
+            elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+          },
+        },
+      ],
+    })
+    expect(error?.message).toContain(
+      '"paymentEvents[0].configuration.environmentId" is required',
+    )
+  })
+  test('should allow WESTPAC_QUICK_STREAM submission event', () => {
+    const { error } = formSchema.validate(
+      {
+        id: 1,
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        tags: [],
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+            required: false,
+          },
+        ],
+        isAuthenticated: true,
+        paymentEvents: [
+          {
+            type: 'WESTPAC_QUICK_STREAM',
+            configuration: {
+              elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+              customerReferenceNumber: 'abc',
+            },
+          },
+        ],
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBe(undefined)
+  })
+})
+
 describe('CP_PAY submission event', () => {
   test('should allow CP_PAY submission event', () => {
     const { error } = formSchema.validate(
