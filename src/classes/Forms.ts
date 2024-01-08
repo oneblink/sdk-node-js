@@ -308,8 +308,8 @@ export default class Forms extends OneBlinkAPI {
    * forms
    *   .getSubmissionData(formId, submissionId, isDraft)
    *   .then((result) => {
-   *     const definition = result.definition
-   *     const submission = result.submission
+   *     const definition = result?.definition
+   *     const submission = result?.submission
    *   })
    *   .catch((error) => {
    *     // Handle error here
