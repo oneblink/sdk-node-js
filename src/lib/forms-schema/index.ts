@@ -5,6 +5,7 @@ import elementSchema from './element-schema'
 import {
   conditionallyShowPredicates,
   ConditionalPredicatesItemSchema,
+  customCssClasses,
 } from './property-schemas'
 export const postSubmissionActions: FormTypes.FormPostSubmissionAction[] = [
   'BACK',
@@ -564,6 +565,7 @@ const formSchema = Joi.object().keys({
   personalisation: apiRequestSchema,
   submissionTitle: Joi.string(),
   continueWithAutosave: Joi.boolean(),
+  customCssClasses,
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
