@@ -308,8 +308,8 @@ export default class Forms extends OneBlinkAPI {
    * forms
    *   .getSubmissionData(formId, submissionId, isDraft)
    *   .then((result) => {
-   *     const definition = result.definition
-   *     const submission = result.submission
+   *     const definition = result?.definition
+   *     const submission = result?.submission
    *   })
    *   .catch((error) => {
    *     // Handle error here
@@ -327,7 +327,7 @@ export default class Forms extends OneBlinkAPI {
     formId: number,
     submissionId: string,
     isDraft: boolean,
-  ): Promise<SubmissionTypes.S3SubmissionData> {
+  ): Promise<SubmissionTypes.S3SubmissionData | undefined> {
     if (typeof formId !== 'number') {
       return Promise.reject(new TypeError('Must supply "formId" as a number'))
     }
@@ -344,7 +344,14 @@ export default class Forms extends OneBlinkAPI {
 
     const credentials =
       await super.postEmptyRequest<AWSTypes.FormS3Credentials>(url)
-    return await getSubmissionData(credentials)
+    try {
+      return await getSubmissionData(credentials)
+    } catch (err) {
+      if ((err as Error).name === 'AccessDenied') {
+        return
+      }
+      throw err
+    }
   }
 
   /** @internal */

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Updated
+
+- `forms.getSubmissionData` to return undefined when an `AccessDenied` error is thrown
+
 ### Added
 
 - `uploadEmailAttachment` to `Forms` class
