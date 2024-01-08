@@ -344,14 +344,7 @@ export default class Forms extends OneBlinkAPI {
 
     const credentials =
       await super.postEmptyRequest<AWSTypes.FormS3Credentials>(url)
-    try {
-      return await getSubmissionData(credentials)
-    } catch (err) {
-      if ((err as Error).name === 'AccessDenied') {
-        return
-      }
-      throw err
-    }
+    return await getSubmissionData(credentials)
   }
 
   /** @internal */
