@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Updated
 
+- PDF config validation to include PDF Page size
+
+### Updated
+
 - `forms.getSubmissionData` to return undefined when an `AccessDenied` error is thrown
 
 ### Added
