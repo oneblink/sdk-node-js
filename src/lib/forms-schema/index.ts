@@ -102,6 +102,7 @@ const pdfSubmissionEventConfiguration = {
     .items(Joi.string().regex(/^-?[_a-z]+[_a-z0-9-]*$/i)) //regex from here https://stackoverflow.com/a/449000
     .allow(null)
     .default([]),
+  pdfSize: Joi.valid('A4', 'Letter'),
   ...approvalFormsInclusionConfiguration,
 }
 
