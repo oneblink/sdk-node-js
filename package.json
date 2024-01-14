@@ -22,7 +22,7 @@
   "devDependencies": {
     "@microsoft/eslint-plugin-sdl": "^0.2.2",
     "@oneblink/release-cli": "^3.0.0",
-    "@oneblink/types": "github:oneblink/types",
+    "@oneblink/types": "github:oneblink/types#ccebf73457152a346003a53c20a8d8d6aa609962",
     "@types/content-disposition": "^0.5.8",
     "@types/jest": "^29.5.11",
     "@types/joi": "^17.2.3",
