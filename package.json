@@ -11,7 +11,7 @@
     "@aws-sdk/client-sesv2": "^3.474.0",
     "@aws-sdk/lib-storage": "^3.474.0",
     "@aws-sdk/s3-request-presigner": "^3.474.0",
-    "@oneblink/sdk-core": "^5.1.1-beta.1",
+    "@oneblink/sdk-core": "^5.2.0-beta.1",
     "joi": "^17.11.0",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.1.0",
