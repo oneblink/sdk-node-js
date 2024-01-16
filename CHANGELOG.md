@@ -7,10 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
-
-- `nswAPILiquorLicense` form element
-
 ### Updated
 
 - PDF config validation to include PDF Page size
@@ -19,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `nswAPILiquorLicence` form element
 - `uploadEmailAttachment` to `Forms` class
 - `emailAttachmentsEndpoint` to email form workflow events validation
 

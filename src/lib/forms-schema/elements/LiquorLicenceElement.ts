@@ -13,7 +13,7 @@ import {
   hintPosition,
 } from '../property-schemas'
 
-export const type = 'apiNSWLiquorLicense'
+export const type = 'apiNSWLiquorLicence'
 
 export default Joi.object({
   ...baseSchemas,

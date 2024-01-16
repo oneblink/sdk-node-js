@@ -11,7 +11,7 @@
     "@aws-sdk/client-sesv2": "^3.474.0",
     "@aws-sdk/lib-storage": "^3.474.0",
     "@aws-sdk/s3-request-presigner": "^3.474.0",
-    "@oneblink/sdk-core": "^5.1.1-beta.1",
+    "@oneblink/sdk-core": "^5.2.0-beta.1",
     "joi": "^17.11.0",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.1.0",
@@ -22,7 +22,7 @@
   "devDependencies": {
     "@microsoft/eslint-plugin-sdl": "^0.2.2",
     "@oneblink/release-cli": "^3.0.0",
-    "@oneblink/types": "github:oneblink/types#ccebf73457152a346003a53c20a8d8d6aa609962",
+    "@oneblink/types": "github:oneblink/types",
     "@types/content-disposition": "^0.5.8",
     "@types/jest": "^29.5.11",
     "@types/joi": "^17.2.3",
