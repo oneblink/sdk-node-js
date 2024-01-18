@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.2.0] - 2024-01-18
+
 ### Updated
 
 - PDF config validation to include PDF Page size
@@ -18,6 +20,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `nswAPILiquorLicence` form element
 - `uploadEmailAttachment` to `Forms` class
 - `emailAttachmentsEndpoint` to email form workflow events validation
+
+### Dependencies
+
+- update [@aws-sdk/client-s3](https://www.npmjs.com/package/@aws-sdk/client-s3) to [3.474.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.474.0) (from [3.433.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.433.0))
+
+- update [@aws-sdk/client-sesv2](https://www.npmjs.com/package/@aws-sdk/client-sesv2) to [3.474.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.474.0) (from [3.433.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.433.0))
+
+- update [@aws-sdk/lib-storage](https://www.npmjs.com/package/@aws-sdk/lib-storage) to [3.474.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.474.0) (from [3.433.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.433.0))
+
+- update [@aws-sdk/s3-request-presigner](https://www.npmjs.com/package/@aws-sdk/s3-request-presigner) to [3.474.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.474.0) (from [3.433.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.433.0))
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [5.2.0-beta.2](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [3.1.0-beta.4](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update [joi](https://www.npmjs.com/package/joi) to 17.11.0 (from 17.9.2)
+
+- update [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) to [9.0.2](https://github.com/auth0/node-jsonwebtoken/blob/master/CHANGELOG.md) (from [9.0.0](https://github.com/auth0/node-jsonwebtoken/blob/master/CHANGELOG.md))
+
+- update [jwks-rsa](https://www.npmjs.com/package/jwks-rsa) to [3.1.0](https://github.com/auth0/node-jwks-rsa/releases/tag/v3.1.0) (from [3.0.1](https://github.com/auth0/node-jwks-rsa/releases/tag/v3.0.1))
+
+- update [node-fetch](https://www.npmjs.com/package/node-fetch) to [2.7.0](https://github.com/node-fetch/node-fetch/releases/tag/v2.7.0) (from [2.6.11](https://github.com/node-fetch/node-fetch/releases/tag/v2.6.11))
+
+- update [nodemailer](https://www.npmjs.com/package/nodemailer) to [6.9.7](https://github.com/nodemailer/nodemailer/releases/tag/v6.9.7) (from [6.9.3](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md))
+
+- update [uuid](https://www.npmjs.com/package/uuid) to [9.0.1](https://github.com/uuidjs/uuid/blob/master/CHANGELOG.md) (from [9.0.0](https://github.com/uuidjs/uuid/blob/master/CHANGELOG.md))
 
 ## [5.1.3] - 2023-12-12
 
