@@ -56,7 +56,7 @@ describe('Scheduling events should throw errors when not passed to "schedulingEv
         paymentEvents: [schedulingEvent],
       }),
     ).toThrow(
-      '"paymentEvents[0].type" must be one of [CP_PAY, BPOINT, WESTPAC_QUICK_WEB, NSW_GOV_PAY]',
+      '"paymentEvents[0].type" must be one of [CP_PAY, BPOINT, WESTPAC_QUICK_WEB, WESTPAC_QUICK_STREAM, NSW_GOV_PAY]',
     )
   })
 })
@@ -255,7 +255,7 @@ describe('Submission events should throw errors when not passed to "paymentEvent
         paymentEvents: [submissionEvent],
       }),
     ).toThrow(
-      '"paymentEvents[0].type" must be one of [CP_PAY, BPOINT, WESTPAC_QUICK_WEB, NSW_GOV_PAY]',
+      '"paymentEvents[0].type" must be one of [CP_PAY, BPOINT, WESTPAC_QUICK_WEB, WESTPAC_QUICK_STREAM, NSW_GOV_PAY]',
     )
   })
 })
