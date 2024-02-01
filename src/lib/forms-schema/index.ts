@@ -108,6 +108,7 @@ const pdfSubmissionEventConfiguration = {
 
 const formEventBaseSchema = {
   label: Joi.string(),
+  isRetryable: Joi.boolean(),
   conditionallyExecute: Joi.bool().default(false),
   requiresAllConditionallyExecutePredicates: Joi.bool().default(false),
   conditionallyExecutePredicates: Joi.when('conditionallyExecute', {
