@@ -3627,6 +3627,7 @@ describe('CALLBACK submission event', () => {
         submissionEvents: [
           {
             type: 'CALLBACK',
+            isRetryable: true,
             configuration: {
               url: 'https://google.com',
               secret: 'abc123',
@@ -3691,6 +3692,7 @@ describe('TRIM submission event', () => {
         submissionEvents: [
           {
             type: 'TRIM',
+            isRetryable: true,
             configuration: {
               environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
               container: {
@@ -3721,6 +3723,7 @@ describe('TRIM submission event', () => {
     )
     expect(error).toBe(undefined)
     expect(value.submissionEvents[0].configuration.groupFiles).toBe(true)
+    expect(value.submissionEvents[0].isRetryable).toBe(true)
   })
   test('should error TRIM submission event not passing environmentId', () => {
     const { error } = formSchema.validate(
