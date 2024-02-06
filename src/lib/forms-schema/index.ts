@@ -532,6 +532,10 @@ const formSchema = Joi.object().keys({
     }),
     disallowApprovingWhenAwaitingClarification: Joi.boolean(),
     defaultPreventPaymentOnClarificationRequest: Joi.boolean(),
+    approvalCreatedEmailTemplateId: Joi.number().integer(),
+    clarificationRequestEmailTemplateId: Joi.number().integer(),
+    approvedEmailTemplateId: Joi.number().integer(),
+    deniedEmailTemplateId: Joi.number().integer(),
   }),
 
   postSubmissionAction: Joi.string()
