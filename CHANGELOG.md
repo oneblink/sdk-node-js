@@ -7,9 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.4.0] - 2024-02-07
+
 ### Added
 
 - `isRetryable` to form workflow events
+
+### Dependencies
+
+- update [@aws-sdk/client-s3](https://www.npmjs.com/package/@aws-sdk/client-s3) to [3.504.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md) (from [3.474.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md))
+
+- update [@aws-sdk/client-sesv2](https://www.npmjs.com/package/@aws-sdk/client-sesv2) to [3.504.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md) (from [3.474.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md))
+
+- update [@aws-sdk/lib-storage](https://www.npmjs.com/package/@aws-sdk/lib-storage) to [3.504.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md) (from [3.474.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md))
+
+- update [@aws-sdk/s3-request-presigner](https://www.npmjs.com/package/@aws-sdk/s3-request-presigner) to [3.504.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md) (from [3.474.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md))
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [5.3.0](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [5.2.0-beta.2](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update [joi](https://www.npmjs.com/package/joi) to 17.12.1 (from 17.11.0)
+
+- update [nodemailer](https://www.npmjs.com/package/nodemailer) to [6.9.9](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md) (from [6.9.7](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md))
 
 ## [5.3.0] - 2024-01-30
 
