@@ -90,6 +90,9 @@ import FreshdeskDependentFieldElement, {
 import LiquorLicenceElement, {
   type as liquorLicenceElementType,
 } from './elements/LiquorLicenceElement'
+import ArcGISWebMapElement, {
+  type as ArcGISWebMapElementType,
+} from './elements/ArcGISWebMapElement'
 // Creating an object here so we get a Typescript error when adding a
 // new element type and forgetting to add to the array of allowed types
 const elementTypesMap: Record<
@@ -133,6 +136,7 @@ const elementTypesMap: Record<
   [abnElementType]: null,
   [freshdeskDependentFieldType]: null,
   [liquorLicenceElementType]: null,
+  [ArcGISWebMapElementType]: null,
 }
 
 const typeCase = (type: FormTypes.FormElementType) => {
@@ -256,5 +260,6 @@ const schema = Joi.object({
     then: FreshdeskDependentFieldElement,
   })
   .when(typeCase(liquorLicenceElementType), { then: LiquorLicenceElement })
+  .when(typeCase(ArcGISWebMapElementType), { then: ArcGISWebMapElement })
 
 export default schema
