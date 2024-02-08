@@ -1041,6 +1041,7 @@ export default class Forms extends OneBlinkAPI {
    *         targetFormId: 678,
    *       },
    *     ],
+   *     versionId: 5,
    *   })
    *   .then((migratedForm) => {
    *     // do something with form
