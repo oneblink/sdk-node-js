@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
@@ -6,26 +6,26 @@ import {
   hint,
   requiredSchemas,
   readOnly,
-  conditionallyShowSchemas,
-  lookupSchemas,
+  ConditionallyShowSchema,
+  LookupFormElementSchema,
   placeholderValue,
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
 
-export const type = 'time'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  hint,
-  hintPosition,
-  ...requiredSchemas,
-  readOnly,
-  placeholderValue,
-  defaultValue: Joi.alternatives([Joi.date().iso().raw(), Joi.valid('NOW')]),
-  ...conditionallyShowSchemas,
-  ...lookupSchemas,
-  customCssClasses,
-})
+export default z
+  .object({
+    type: z.literal('time'),
+    ...baseSchemas,
+    name,
+    label,
+    hint,
+    hintPosition,
+    ...requiredSchemas,
+    readOnly,
+    placeholderValue,
+    defaultValue: z.union([z.string().datetime(), z.literal('NOW')]).optional(),
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)
+  .and(LookupFormElementSchema)

@@ -1,17 +1,26 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
-  conditionallyShowSchemas,
+  ConditionallyShowSchema,
   customCssClasses,
 } from '../property-schemas'
 
-export const type = 'form'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  formId: Joi.number().required(),
-  ...conditionallyShowSchemas,
-  customCssClasses,
-})
+export default z
+  .object({
+    ...baseSchemas,
+    name,
+    formId: z.number(),
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)
+  .and(
+    z.union([
+      z.object({
+        type: z.literal('form'),
+      }),
+      z.object({
+        type: z.literal('infoPage'),
+      }),
+    ]),
+  )

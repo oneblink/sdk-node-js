@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import { attachment } from '../common'
 import {
   baseSchemas,
@@ -7,25 +7,25 @@ import {
   hint,
   requiredSchemas,
   readOnly,
-  conditionallyShowSchemas,
+  ConditionallyShowSchema,
   storageType,
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
 
-export const type = 'camera'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  hint,
-  hintPosition,
-  ...requiredSchemas,
-  readOnly,
-  ...conditionallyShowSchemas,
-  includeTimestampWatermark: Joi.boolean().default(false),
-  storageType,
-  defaultValue: attachment,
-  customCssClasses,
-})
+export default z
+  .object({
+    type: z.literal('camera'),
+    ...baseSchemas,
+    name,
+    label,
+    hint,
+    hintPosition,
+    ...requiredSchemas,
+    readOnly,
+    includeTimestampWatermark: z.boolean().default(false),
+    storageType,
+    defaultValue: attachment.optional(),
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)

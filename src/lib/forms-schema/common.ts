@@ -1,72 +1,28 @@
-import Joi from 'joi'
+import { SubmissionTypes } from '@oneblink/types'
+import { z } from 'zod'
 
-export const CUSTOM_OPTION_TYPE = 'CUSTOM'
-export const DYNAMIC_OPTION_TYPE = 'DYNAMIC'
-export const FRESHDESK_FIELD_OPTION_TYPE = 'FRESHDESK_FIELD'
-export const SEARCH_OPTION_TYPE = 'SEARCH'
-
-export const optionTypes = [
-  CUSTOM_OPTION_TYPE,
-  DYNAMIC_OPTION_TYPE,
-  FRESHDESK_FIELD_OPTION_TYPE,
-]
-
-export const JoiRange = Joi.extend((joi: typeof Joi) => ({
-  type: 'range',
-  base: joi.number(),
-  messages: {
-    'range.within':
-      'Must not exceed range of values {{#min}} and {{#max}}: ({{#v}})',
+export const htmlString = z.string().refine(
+  (value) => {
+    // return falsy for invalid data
+    return !/<[^>]*src="data:([a-zA-Z]*)\/([a-zA-Z]*);base64,([^"]*)".*>/m.test(
+      value,
+    )
   },
-  rules: {
-    within: {
-      method(min, max) {
-        return this.$_addRule({ name: 'within', args: { min, max } })
-      },
-      args: [
-        {
-          name: 'min',
-          ref: true,
-          assert: joi.number(),
-        },
-        {
-          name: 'max',
-          ref: true,
-          assert: joi.number(),
-        },
-      ],
-      validate(value, helpers, args) {
-        const max = args.max
-        const min = args.min
-        const range = max - min
-        if (value > range) {
-          return helpers.error('range.within', { v: value, min, max })
-        }
-        return value
-      },
-    },
-  },
-}))
-
-export const htmlString = Joi.string().regex(
-  /<[^>]*src="data:([a-zA-Z]*)\/([a-zA-Z]*);base64,([^"]*)".*>/m,
   {
-    name: 'No Binary Data',
-    invert: true,
+    message: 'cannot include binary data',
   },
 )
 
-export const attachment = Joi.object().keys({
-  id: Joi.string().required(),
-  url: Joi.string().required().uri(),
-  contentType: Joi.string().required(),
-  fileName: Joi.string().required(),
-  isPrivate: Joi.boolean().required(),
-  s3: Joi.object()
-    .keys({
-      bucket: Joi.string().required(),
-      key: Joi.string().required(),
-      region: Joi.string().required(),
-    })
-    .required(),
-})
+export const attachment: z.ZodType<SubmissionTypes.FormSubmissionAttachment> =
+  z.object({
+    id: z.string(),
+    url: z.string().url(),
+    contentType: z.string(),
+    fileName: z.string(),
+    isPrivate: z.boolean(),
+    s3: z.object({
+      bucket: z.string(),
+      key: z.string(),
+      region: z.string(),
+    }),
+  })

@@ -1,27 +1,34 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
   label,
   requiredSchemas,
   readOnly,
-  conditionallyShowSchemas,
+  ConditionallyShowSchema,
   customCssClasses,
 } from '../property-schemas'
 import { htmlString } from '../common'
 
-export const type = 'calculation'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  ...requiredSchemas,
-  readOnly,
-  ...conditionallyShowSchemas,
-  defaultValue: htmlString.required(),
-  calculation: Joi.string().required(),
-  preCalculationDisplay: htmlString.allow(null),
-  displayAsCurrency: Joi.boolean().allow(null),
-  customCssClasses,
-})
+export default z
+  .object({
+    type: z.literal('calculation'),
+    ...baseSchemas,
+    name,
+    label,
+    ...requiredSchemas,
+    readOnly,
+    defaultValue: htmlString,
+    calculation: z.string(),
+    preCalculationDisplay: htmlString
+      .optional()
+      .nullable()
+      .transform((value) => value ?? undefined),
+    displayAsCurrency: z
+      .boolean()
+      .optional()
+      .nullable()
+      .transform((value) => value ?? undefined),
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)

@@ -1,63 +1,64 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
   label,
   hint,
   readOnly,
-  conditionallyShowSchemas,
+  ConditionallyShowSchema,
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
 import elementSchema from '../element-schema'
 
-// Think this needs to be a variable because of recursive dependency
-
-export const type = 'repeatableSet'
-
-const schema: Joi.ObjectSchema = Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  hint,
-  hintPosition,
-  readOnly,
-  ...conditionallyShowSchemas,
-  minSetEntries: Joi.alternatives([
-    Joi.number().min(0),
-    Joi.object({
-      type: Joi.string().valid('FORM_ELEMENT').required(),
-      elementId: Joi.string().uuid().required(),
-    }),
-  ]),
-  maxSetEntries: Joi.alternatives([
-    Joi.number().when('minSetEntries', {
-      is: Joi.number().required().min(0),
-      then: Joi.number().min(Joi.ref('minSetEntries', { render: true })),
-      otherwise: Joi.number().min(0),
-    }),
-    Joi.object({
-      type: Joi.string().valid('FORM_ELEMENT').required(),
-      elementId: Joi.string().uuid().required(),
-    }),
-  ]),
-  addSetEntryLabel: Joi.string(),
-  removeSetEntryLabel: Joi.string(),
-  elements: Joi.array()
-    .items(
-      Joi.custom((value) => {
-        if (!value) return
-        const result = elementSchema.validate(value)
-        if (result.error) {
-          throw result.error
-        }
-        return result.value
-      }),
-    )
-    .required()
-    .min(1)
-    .unique('name', { ignoreUndefined: true })
-    .unique('id'),
-  customCssClasses,
-})
-export default schema
+export default z
+  .object({
+    type: z.literal('repeatableSet'),
+    ...baseSchemas,
+    name,
+    label,
+    hint,
+    hintPosition,
+    readOnly,
+    minSetEntries: z
+      .union([
+        z.number().min(0),
+        z.object({
+          type: z.literal('FORM_ELEMENT'),
+          elementId: z.string().uuid(),
+        }),
+      ])
+      .optional(),
+    maxSetEntries: z
+      .union([
+        z.number().min(0),
+        z.object({
+          type: z.literal('FORM_ELEMENT'),
+          elementId: z.string().uuid(),
+        }),
+      ])
+      .optional(),
+    addSetEntryLabel: z.string().optional(),
+    removeSetEntryLabel: z.string().optional(),
+    elements: z.lazy(() =>
+      elementSchema
+        .array()
+        // TODO .unique('id')
+        .min(1),
+    ),
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)
+  .refine(
+    (value) => {
+      return (
+        typeof value.minSetEntries !== 'number' ||
+        typeof value.maxSetEntries !== 'number' ||
+        value.minSetEntries <= value.maxSetEntries
+      )
+    },
+    {
+      message: 'must be greater than or equal to "minSetEntries"',
+      path: ['maxSetEntries'],
+    },
+  )

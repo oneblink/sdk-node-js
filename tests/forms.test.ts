@@ -243,13 +243,10 @@ describe('Forms SDK Class', () => {
             },
           ],
         }
-        const forms = await getFormsSdk()
-        return expect(
-          forms.createForm(
-            // @ts-expect-error test invalid values
-            form,
-          ),
-        ).rejects.toThrow('Element name is not unique: text')
+        const OneBlinkSDK = await import('../src/oneblink')
+        return expect(() => OneBlinkSDK.Forms.validateForm(form)).toThrow(
+          'Element name is not unique: text',
+        )
       })
     })
   })

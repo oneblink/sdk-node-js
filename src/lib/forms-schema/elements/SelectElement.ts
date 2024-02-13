@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
@@ -6,41 +6,44 @@ import {
   hint,
   requiredSchemas,
   readOnly,
-  conditionallyShowSchemas,
-  lookupSchemas,
+  ConditionallyShowSchema,
+  LookupFormElementSchema,
   buttons,
-  optionsSchemas,
+  OptionsFormElementSchema,
   canToggleAll,
-  defaultValueOptionsSingle,
-  defaultValueOptionsMultiple,
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
 
-export const type = 'select'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  hint,
-  hintPosition,
-  ...requiredSchemas,
-  readOnly,
-  ...conditionallyShowSchemas,
-  ...lookupSchemas,
-  multi: Joi.boolean(),
-  defaultValue: Joi.when('multi', {
-    is: true,
-    then: defaultValueOptionsMultiple,
-    otherwise: defaultValueOptionsSingle,
-  }),
-  buttons,
-  ...optionsSchemas,
-  canToggleAll: Joi.when('multi', {
-    is: true,
-    then: canToggleAll,
-    otherwise: Joi.any().strip(),
-  }),
-  customCssClasses,
-})
+export default z
+  .object({
+    type: z.literal('select'),
+    ...baseSchemas,
+    name,
+    label,
+    hint,
+    hintPosition,
+    ...requiredSchemas,
+    readOnly,
+    buttons,
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)
+  .and(LookupFormElementSchema)
+  .and(OptionsFormElementSchema)
+  .and(
+    z.union([
+      z.object({
+        multi: z
+          .literal(false)
+          .optional()
+          .transform(() => false),
+        defaultValue: z.string().optional(),
+      }),
+      z.object({
+        multi: z.literal(true),
+        defaultValue: z.string().array().optional(),
+        canToggleAll,
+      }),
+    ]),
+  )

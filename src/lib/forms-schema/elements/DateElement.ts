@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
@@ -6,96 +6,51 @@ import {
   hint,
   requiredSchemas,
   readOnly,
-  conditionallyShowSchemas,
-  lookupSchemas,
+  ConditionallyShowSchema,
+  LookupFormElementSchema,
   placeholderValue,
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
 
-const nowSchema = Joi.valid('NOW')
-const dateSchema = Joi.date().iso().raw()
-const daysOffsetSchema = Joi.number().integer()
+const daysOffsetSchema = z.number().int().optional()
+const datePropertySchema = z
+  .union([z.string().datetime(), z.literal('NOW')])
+  .nullable()
+  .optional()
+  .transform((value) => value ?? undefined)
 
-const fromDate = Joi.alternatives([dateSchema, nowSchema]).allow(null)
-const toDate = Joi.when('fromDate', {
-  is: Joi.date().iso().raw().required(),
-  // SET MIN IF FROMDATE IS A STATIC DATE
-  then: Joi.alternatives([
-    dateSchema.min(Joi.ref('fromDate', { render: true })),
-    nowSchema,
-  ]),
-  otherwise: Joi.alternatives([dateSchema, nowSchema]),
-}).allow(null)
+const dateElementId = z.string().uuid().optional()
 
-const toDateElementId = Joi.string().uuid()
-const fromDateElementId = Joi.string().uuid()
-
-const fromDateDaysOffset = Joi.when('fromDate', {
-  is: nowSchema.required(),
-  then: daysOffsetSchema,
-  otherwise: Joi.when('fromDateElementId', {
-    is: fromDateElementId.required(),
-    then: daysOffsetSchema,
-    otherwise: Joi.any().strip(),
-  }),
-})
-
-const toDateDaysOffset = Joi.when('toDate', {
-  is: nowSchema.required(),
-  then: Joi.when('fromDateDaysOffset', {
-    is: daysOffsetSchema.required(),
-    then: daysOffsetSchema.min(Joi.ref('fromDateDaysOffset', { render: true })),
-    otherwise: daysOffsetSchema,
-  }),
-  otherwise: Joi.when('toDateElementId', {
-    is: toDateElementId.required(),
-    then: Joi.when('fromDateDaysOffset', {
-      is: daysOffsetSchema.required(),
-      then: daysOffsetSchema.min(
-        Joi.ref('fromDateDaysOffset', { render: true }),
-      ),
-      otherwise: daysOffsetSchema,
-    }),
-    otherwise: Joi.any().strip(),
-  }),
-})
-
-export const dateElementType = 'date'
-export const datetimeElementType = 'datetime'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  hint,
-  hintPosition,
-  ...requiredSchemas,
-  readOnly,
-  placeholderValue,
-  fromDateElementId,
-  fromDate,
-  fromDateDaysOffset,
-  toDateElementId,
-  toDate,
-  toDateDaysOffset,
-  defaultValue: Joi.alternatives([
-    dateSchema
-      .when('fromDate', {
-        is: dateSchema.required(),
-        then: dateSchema.min(Joi.ref('fromDate', { render: true })),
-      })
-      .when('toDate', {
-        is: dateSchema.required(),
-        then: dateSchema.max(Joi.ref('toDate', { render: true })),
+export default z
+  .object({
+    ...baseSchemas,
+    name,
+    label,
+    hint,
+    hintPosition,
+    ...requiredSchemas,
+    readOnly,
+    placeholderValue,
+    fromDateElementId: dateElementId,
+    fromDate: datePropertySchema,
+    fromDateDaysOffset: daysOffsetSchema,
+    toDateElementId: dateElementId,
+    toDate: datePropertySchema,
+    toDateDaysOffset: daysOffsetSchema,
+    defaultValue: datePropertySchema,
+    defaultValueDaysOffset: daysOffsetSchema, // set to null if defaultValue is not 'NOW'
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)
+  .and(LookupFormElementSchema)
+  .and(
+    z.union([
+      z.object({
+        type: z.literal('date'),
       }),
-    nowSchema,
-  ]),
-  defaultValueDaysOffset: Joi.when('defaultValue', {
-    is: nowSchema.required(),
-    then: Joi.number().integer(),
-  }),
-  ...conditionallyShowSchemas,
-  ...lookupSchemas,
-  customCssClasses,
-})
+      z.object({
+        type: z.literal('datetime'),
+      }),
+    ]),
+  )

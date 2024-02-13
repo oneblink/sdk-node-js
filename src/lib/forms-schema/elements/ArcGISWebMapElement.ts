@@ -1,20 +1,20 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
   label,
-  conditionallyShowSchemas,
+  ConditionallyShowSchema,
   customCssClasses,
 } from '../property-schemas'
 
-export const type = 'arcGISWebMap'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  ...conditionallyShowSchemas,
-  customCssClasses,
-  webMapId: Joi.string().required(),
-  showLayerPanel: Joi.boolean().default(false),
-})
+export default z
+  .object({
+    type: z.literal('arcGISWebMap'),
+    ...baseSchemas,
+    name,
+    label,
+    customCssClasses,
+    webMapId: z.string(),
+    showLayerPanel: z.boolean().default(false),
+  })
+  .and(ConditionallyShowSchema)

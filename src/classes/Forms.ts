@@ -23,7 +23,7 @@ import {
   validateWithFormSchema,
   validateFormEventData,
   validateConditionalPredicates,
-  validateApiRequest,
+  validateEndpointConfiguration,
 } from '../lib/forms-validation'
 import {
   ConstructorOptions,
@@ -935,14 +935,11 @@ export default class Forms extends OneBlinkAPI {
    *
    * @param newForm The form object to create.
    */
-  async createForm(
-    newForm: Omit<FormTypes.Form, 'id' | 'createdAt' | 'updatedAt'>,
-  ): Promise<FormTypes.Form> {
-    const form = validateWithFormSchema(newForm)
-    const savedForm = await super.postRequest<FormTypes.Form, FormTypes.Form>(
-      '/forms',
-      form,
-    )
+  async createForm(newForm: FormTypes.NewForm): Promise<FormTypes.Form> {
+    const savedForm = await super.postRequest<
+      FormTypes.NewForm,
+      FormTypes.Form
+    >('/forms', newForm)
     return savedForm
   }
   /**
@@ -982,10 +979,9 @@ export default class Forms extends OneBlinkAPI {
     form: FormTypes.Form,
     overrideLock?: boolean,
   ): Promise<FormTypes.Form> {
-    const validatedForm = validateWithFormSchema(form)
     const savedForm = await super.putRequest<FormTypes.Form, FormTypes.Form>(
-      `/forms/${validatedForm.id}${overrideLock ? '?overrideLock=true' : ''}`,
-      validatedForm,
+      `/forms/${form.id}${overrideLock ? '?overrideLock=true' : ''}`,
+      form,
     )
     return savedForm
   }
@@ -1121,7 +1117,7 @@ export default class Forms extends OneBlinkAPI {
    *
    * @param form The form object to validate.
    */
-  static validateForm(form: unknown): FormTypes.Form {
+  static validateForm(form: unknown): FormTypes.NewForm {
     const validatedForm = validateWithFormSchema(form)
     return validatedForm
   }
@@ -1263,18 +1259,18 @@ export default class Forms extends OneBlinkAPI {
    * #### Example
    *
    * ```javascript
-   * const apiRequest = {
+   * const data = {
    *   type: 'CALLBACK',
    *   configuration: {
    *     url: 'https://a-website.com/endpoint',
    *   },
    * }
    *
-   * const validatedApiRequest =
-   *   OneBlink.Forms.validateApiRequest(apiRequest)
+   * const endpointConfiguration =
+   *   OneBlink.Forms.validateEndpointConfiguration(data)
    *
-   * return validatedApiRequest
+   * return endpointConfiguration
    * ```
    */
-  static validateApiRequest = validateApiRequest
+  static validateEndpointConfiguration = validateEndpointConfiguration
 }

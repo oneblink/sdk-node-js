@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
@@ -6,32 +6,31 @@ import {
   hint,
   requiredSchemas,
   readOnly,
-  conditionallyShowSchemas,
-  lookupSchemas,
+  ConditionallyShowSchema,
+  LookupFormElementSchema,
   buttons,
-  optionsSchemas,
+  OptionsFormElementSchema,
   canToggleAll,
-  defaultValueOptionsMultiple,
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
 
-export const type = 'checkboxes'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  hint,
-  hintPosition,
-  ...requiredSchemas,
-  readOnly,
-  ...conditionallyShowSchemas,
-  ...lookupSchemas,
-  defaultValue: defaultValueOptionsMultiple,
-  buttons,
-  ...optionsSchemas,
-  canToggleAll,
-  customCssClasses,
-  requiredAll: Joi.bool(),
-})
+export default z
+  .object({
+    type: z.literal('checkboxes'),
+    ...baseSchemas,
+    name,
+    label,
+    hint,
+    hintPosition,
+    ...requiredSchemas,
+    readOnly,
+    defaultValue: z.string().array().optional(),
+    buttons,
+    canToggleAll,
+    customCssClasses,
+    requiredAll: z.boolean().optional(),
+  })
+  .and(ConditionallyShowSchema)
+  .and(LookupFormElementSchema)
+  .and(OptionsFormElementSchema)

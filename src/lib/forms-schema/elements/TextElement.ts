@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
@@ -6,49 +6,85 @@ import {
   hint,
   requiredSchemas,
   readOnly,
-  conditionallyShowSchemas,
   placeholderValue,
-  lookupSchemas,
-  regexSchemas,
   customCssClasses,
   hintPosition,
+  ConditionallyShowSchema,
+  LookupFormElementSchema,
+  RegexFormElementSchema,
 } from '../property-schemas'
+import { FormTypes } from '@oneblink/types'
 
-export const textElementType = 'text'
-export const textareaElementType = 'textarea'
+const TextElementSchema: z.ZodType<
+  FormTypes.TextElement | FormTypes.TextareaElement,
+  z.ZodTypeDef,
+  unknown
+> = z
+  .object({
+    ...baseSchemas,
+    name,
+    label,
+    hint,
+    hintPosition,
+    ...requiredSchemas,
+    readOnly,
+    placeholderValue,
+    minLength: z.number().min(0).optional(),
+    maxLength: z.number().min(0).optional(),
+    defaultValue: z.string().optional(),
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)
+  .and(LookupFormElementSchema)
+  .and(RegexFormElementSchema)
+  .refine(
+    (value) => {
+      return (
+        value.minLength === undefined ||
+        value.maxLength === undefined ||
+        value.minLength <= value.maxLength
+      )
+    },
+    {
+      message: 'must be greater than or equal to "minLength"',
+      path: ['maxLength'],
+    },
+  )
+  .refine(
+    (value) => {
+      return (
+        !value.defaultValue ||
+        value.minLength === undefined ||
+        value.defaultValue.length >= value.minLength
+      )
+    },
+    {
+      message: 'must be greater than or equal to "minLength"',
+      path: ['defaultValue'],
+    },
+  )
+  .refine(
+    (value) => {
+      return (
+        !value.defaultValue ||
+        value.maxLength === undefined ||
+        value.defaultValue.length <= value.maxLength
+      )
+    },
+    {
+      message: 'must be less than or equal to "maxLength"',
+      path: ['defaultValue'],
+    },
+  )
+  .and(
+    z.union([
+      z.object({
+        type: z.literal('text'),
+      }),
+      z.object({
+        type: z.literal('textarea'),
+      }),
+    ]),
+  )
 
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  hint,
-  hintPosition,
-  ...requiredSchemas,
-  readOnly,
-  ...conditionallyShowSchemas,
-  ...lookupSchemas,
-  placeholderValue,
-  minLength: Joi.number().min(0),
-  maxLength: Joi.number()
-    .min(0)
-    .when('minLength', {
-      is: Joi.number().required(),
-      then: Joi.number().min(Joi.ref('minLength', { render: true })),
-    }),
-  defaultValue: Joi.when('minLength', {
-    is: Joi.number().required(),
-    then: Joi.string().when('maxLength', {
-      is: Joi.number().required(),
-      then: Joi.string()
-        .min(Joi.ref('minLength', { render: true }))
-        .max(Joi.ref('maxLength', { render: true })),
-      otherwise: Joi.string().min(Joi.ref('minLength', { render: true })),
-    }),
-  }).when('maxLength', {
-    is: Joi.number().required(),
-    then: Joi.string().max(Joi.ref('maxLength', { render: true })),
-    otherwise: Joi.string(),
-  }),
-  ...regexSchemas,
-  customCssClasses,
-})
+export default TextElementSchema

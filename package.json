@@ -12,20 +12,19 @@
     "@aws-sdk/lib-storage": "^3.504.0",
     "@aws-sdk/s3-request-presigner": "^3.504.0",
     "@oneblink/sdk-core": "^5.4.0-beta.1",
-    "joi": "^17.12.1",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.1.0",
     "node-fetch": "^2.7.0",
     "nodemailer": "^6.9.9",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@microsoft/eslint-plugin-sdl": "^0.2.2",
     "@oneblink/release-cli": "^3.0.2",
-    "@oneblink/types": "github:oneblink/types",
+    "@oneblink/types": "github:oneblink/types#ON-38118",
     "@types/content-disposition": "^0.5.8",
     "@types/jest": "^29.5.12",
-    "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node-fetch": "^2.6.11",
     "@types/nodemailer": "^6.4.14",
@@ -77,7 +76,7 @@
     "pretest": "npm run eslint && tsc --noEmit && npm run fixpack",
     "release": "oneblink-release repository --no-name",
     "test": "npm run jest",
-    "types": "npm i -D github:oneblink/types",
+    "types": "npm i -D github:oneblink/types#ON-38118",
     "typescript": "tsc --noEmit"
   }
 }

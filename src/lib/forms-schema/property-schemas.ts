@@ -1,20 +1,26 @@
-import Joi from 'joi'
-import {
-  htmlString,
-  CUSTOM_OPTION_TYPE,
-  SEARCH_OPTION_TYPE,
-  optionTypes,
-  DYNAMIC_OPTION_TYPE,
-  FRESHDESK_FIELD_OPTION_TYPE,
-} from './common'
+import { z } from 'zod'
+import { htmlString } from './common'
+import { ConditionTypes } from '@oneblink/types'
 
-export const id = Joi.string().guid().required()
-export const name = Joi.string().required().trim()
-export const label = Joi.string().required()
-export const meta = Joi.string().custom((value) => {
-  JSON.parse(value)
-  return value
-})
+export const id = z.string().uuid()
+export const name = z.string().trim()
+export const label = z.string()
+export const meta = z
+  .string()
+  .refine(
+    (value) => {
+      try {
+        JSON.parse(value)
+        return true
+      } catch {
+        return false
+      }
+    },
+    {
+      message: 'Invalid JSON string',
+    },
+  )
+  .optional()
 
 /**
  * This property is spread onto every element schema. Any new properties that
@@ -25,277 +31,249 @@ export const baseSchemas = {
   meta,
 }
 
-export const hint = htmlString
+export const hint = htmlString.optional()
 
-export const hintPosition = Joi.string()
-  .custom((value, helpers) => {
-    if (!value) {
-      return 'TOOLTIP'
-    }
+export const hintPosition = z
+  .enum(['BELOW_LABEL', 'TOOLTIP'])
+  .default('TOOLTIP')
 
-    if (value === 'BELOW_LABEL' || value === 'TOOLTIP') {
-      return value
-    }
-
-    return helpers.error('string.hintPosition')
-  })
-  .messages({
-    'string.hintPosition': '{{#label}} must be one of [BELOW_LABEL, TOOLTIP]',
-  })
-
-const required = Joi.bool().default(false)
-const requiredMessage = Joi.string().trim()
+const required = z.boolean().default(false)
+const requiredMessage = z.string().trim().optional()
 
 export const requiredSchemas = {
   required,
   requiredMessage,
 }
 
-export const readOnly = Joi.bool().default(false)
+export const readOnly = z.boolean().default(false)
 
-export const placeholderValue = Joi.string()
+export const placeholderValue = z.string().optional()
 
-export const buttons = Joi.boolean().default(false)
+export const buttons = z.boolean().default(false)
 
-const optionsType = Joi.string()
-  .default(CUSTOM_OPTION_TYPE)
-  .when('type', {
-    is: 'autocomplete',
-    then: Joi.valid(...optionTypes, SEARCH_OPTION_TYPE),
-    otherwise: Joi.valid(...optionTypes),
+export const OptionsFormElementSchema = z.union([
+  z.object({
+    optionsType: z
+      .literal('CUSTOM')
+      .optional()
+      .default('CUSTOM' as const),
+    options: z
+      .object({
+        id: z.string().uuid(),
+        value: z.string().trim(),
+        label: z.string(),
+        colour: z
+          .string()
+          .regex(/^#[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$/)
+          .optional()
+          .nullable()
+          .transform((value) => value ?? undefined),
+        attributes: z
+          .object({
+            optionIds: z.string().array(),
+            elementId: z.string().uuid(),
+          })
+          .array()
+          .optional(),
+        displayAlways: z.boolean().default(false),
+      })
+      // TODO .unique('id')
+      .array(),
+  }),
+  z.object({
+    optionsType: z.literal('DYNAMIC'),
+    dynamicOptionSetId: z.number(),
+    attributesMapping: z
+      .object({
+        elementId: z.string().uuid(),
+        attribute: z.string(),
+      })
+      .array()
+      .optional(),
+  }),
+  z.object({
+    optionsType: z.literal('FRESHDESK_FIELD'),
+    freshdeskFieldName: z.string(),
+  }),
+])
+
+export const conditionallyShowOptionsSchema = z.union([
+  z.object({
+    conditionallyShowOptions: z.literal(false).optional(),
+  }),
+  z.object({
+    conditionallyShowOptions: z.literal(true),
+    conditionallyShowOptionsElementIds: z.string().uuid().array().min(1),
+  }),
+])
+
+const ConditionalPredicatesItemBaseSchema = z
+  .object({
+    elementId: z.string().uuid(),
   })
-
-const dynamicOptionSetId = Joi.when('optionsType', {
-  is: DYNAMIC_OPTION_TYPE,
-  then: Joi.number().required(),
-  otherwise: Joi.any().strip(),
-})
-const options = Joi.when('optionsType', {
-  is: CUSTOM_OPTION_TYPE,
-  then: Joi.array()
-    .unique('id')
-    .items(
-      Joi.object().keys({
-        id: Joi.string().guid().required(),
-        value: Joi.string().required().trim(),
-        label: Joi.string().required(),
-        colour: Joi.string()
-          .allow(null, '')
-          .regex(/^#[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$/),
-        attributes: Joi.array().items(
-          Joi.object().keys({
-            optionIds: Joi.array().required().items(Joi.string()),
-            elementId: Joi.string().guid().required(),
-          }),
-        ),
-        displayAlways: Joi.boolean().default(false),
+  .and(
+    z.union([
+      z.object({
+        type: z
+          .literal('OPTIONS')
+          .optional()
+          .transform(() => 'OPTIONS' as const),
+        optionIds: z.string().array().min(1),
       }),
-    )
-    .required(),
-  otherwise: Joi.any().strip(),
-})
-const attributesMapping = Joi.when('optionsType', {
-  is: DYNAMIC_OPTION_TYPE,
-  then: Joi.array().items(
-    Joi.object().keys({
-      elementId: Joi.string().guid().required(),
-      attribute: Joi.string().required(),
-    }),
-  ),
-  otherwise: Joi.any().strip(),
-})
-const conditionallyShowOptions = Joi.when('type', {
-  is: Joi.valid('checkboxes', 'radio', 'select', 'autocomplete', 'compliance'),
-  then: Joi.boolean().default(false),
-  otherwise: Joi.any().strip(),
-})
-const conditionallyShowOptionsElementIds = Joi.when('optionsType', {
-  is: CUSTOM_OPTION_TYPE,
-  then: Joi.array().items(Joi.string().guid().required()),
-  otherwise: Joi.any().strip(),
-})
-const freshdeskFieldName = Joi.when('optionsType', {
-  is: FRESHDESK_FIELD_OPTION_TYPE,
-  then: Joi.string().required(),
-  otherwise: Joi.any().strip(),
-})
-export const defaultValueOptionsSingle = Joi.when('optionsType', {
-  is: Joi.invalid(DYNAMIC_OPTION_TYPE, FRESHDESK_FIELD_OPTION_TYPE),
-  then: Joi.string().guid(),
-  otherwise: Joi.string(),
-})
-export const defaultValueOptionsMultiple = Joi.when('optionsType', {
-  is: Joi.invalid(DYNAMIC_OPTION_TYPE, FRESHDESK_FIELD_OPTION_TYPE),
-  then: Joi.array().items(Joi.string().guid()),
-  otherwise: Joi.array().items(Joi.string()),
-})
-
-export const optionsSchemas = {
-  optionsType,
-  dynamicOptionSetId,
-  options,
-  attributesMapping,
-  conditionallyShowOptions,
-  conditionallyShowOptionsElementIds,
-  freshdeskFieldName,
-}
-
-const conditionallyShow = Joi.bool().default(false)
-
-const requiresAllConditionallyShowPredicates = Joi.when('conditionallyShow', {
-  is: true,
-  then: Joi.bool().default(false),
-  otherwise: Joi.any().strip(),
-})
-
-const ConditionalPredicatesItemBaseSchema = Joi.object().keys({
-  elementId: Joi.string().guid().required(),
-  type: Joi.string()
-    .default('OPTIONS')
-    .valid('OPTIONS', 'NUMERIC', 'VALUE', 'BETWEEN'),
-  optionIds: Joi.when('type', {
-    is: Joi.valid('OPTIONS'),
-    then: Joi.array().min(1).items(Joi.string()).required(),
-    otherwise: Joi.any().strip(),
-  }),
-  operator: Joi.when('type', {
-    is: Joi.valid('NUMERIC'),
-    then: Joi.string().valid('>', '>=', '===', '!==', '<=', '<').required(),
-    otherwise: Joi.any().strip(),
-  }),
-  compareWith: Joi.when('type', {
-    is: Joi.valid('NUMERIC'),
-    then: Joi.valid('ELEMENT', 'VALUE'),
-    otherwise: Joi.any().strip(),
-  }),
-  value: Joi.when('type', {
-    is: Joi.valid('NUMERIC'),
-    then: Joi.when('compareWith', {
-      is: Joi.valid('ELEMENT').required(),
-      then: Joi.string().guid().required(),
-      otherwise: Joi.number().required(),
-    }),
-    otherwise: Joi.any().strip(),
-  }),
-  hasValue: Joi.when('type', {
-    is: Joi.valid('VALUE'),
-    then: Joi.boolean().required(),
-    otherwise: Joi.any().strip(),
-  }),
-  min: Joi.when('type', {
-    is: Joi.valid('BETWEEN'),
-    then: Joi.number().required(),
-    otherwise: Joi.any().strip(),
-  }),
-  max: Joi.when('type', {
-    is: Joi.valid('BETWEEN'),
-    then: Joi.number()
-      .min(Joi.ref('min', { render: true }))
-      .required(),
-    otherwise: Joi.any().strip(),
-  }),
-})
-
-export const ConditionalPredicatesItemSchema = Joi.object()
-  .keys({
-    type: Joi.string().valid('REPEATABLESET'),
-    repeatableSetPredicate: Joi.when('type', {
-      is: Joi.valid('REPEATABLESET'),
-      then: ConditionalPredicatesItemBaseSchema,
-      otherwise: Joi.any().strip(),
-    }),
-  })
-  .concat(ConditionalPredicatesItemBaseSchema)
-
-export const conditionallyShowPredicates = Joi.when('conditionallyShow', {
-  is: true,
-  then: Joi.array().min(1).items(ConditionalPredicatesItemSchema).required(),
-  otherwise: Joi.any().strip(),
-})
+      z
+        .object({
+          type: z.literal('NUMERIC'),
+          operator: z.enum(['>', '>=', '===', '!==', '<=', '<']),
+        })
+        .and(
+          z.union([
+            z.object({
+              compareWith: z.literal('ELEMENT'),
+              value: z.string().uuid(),
+            }),
+            z.object({
+              compareWith: z.literal('VALUE').optional(),
+              value: z.number(),
+            }),
+          ]),
+        ),
+      z.object({
+        type: z.literal('VALUE'),
+        hasValue: z.boolean(),
+      }),
+      z
+        .object({
+          type: z.literal('BETWEEN'),
+          min: z.number(),
+          max: z.number(),
+        })
+        .refine(
+          (predicate) => {
+            return predicate.min <= predicate.max
+          },
+          {
+            message: 'must be greater than or equal to "min"',
+            path: ['max'],
+          },
+        ),
+    ]),
+  )
 
 // Data lookup configuration
-const isDataLookup = Joi.boolean().default(false)
-const dataLookupId = Joi.when('isDataLookup', {
-  is: true,
-  then: Joi.number().required(),
-  otherwise: Joi.any().strip(),
-})
+export const dataLookupSchema = z
+  .union([
+    z.object({
+      isDataLookup: z.literal(false).optional(),
+    }),
+    z.object({
+      isDataLookup: z.literal(true),
+      dataLookupId: z.number(),
+    }),
+  ])
+  .transform((value) => ({
+    ...value,
+    isDataLookup: !!value.isDataLookup,
+  }))
 
 // Element lookup configuration
-const isElementLookup = Joi.boolean().default(false)
+export const elementLookupSchema = z
+  .union([
+    z.object({
+      isElementLookup: z.literal(false).optional(),
+    }),
+    z.object({
+      isElementLookup: z.literal(true),
+      elementLookupId: z.number(),
+    }),
+  ])
+  .transform((value) => ({
+    ...value,
+    isElementLookup: !!value.isElementLookup,
+  }))
 
-const elementLookupId = Joi.when('isElementLookup', {
-  is: true,
-  then: Joi.number().required(),
-  otherwise: Joi.any().strip(),
+const lookupButtonSchema = z.object({
+  lookupButton: z
+    .object({
+      icon: z.string().optional(),
+      label: z.string().optional(),
+    })
+    .optional(),
 })
 
-const lookupButton = Joi.object({
-  icon: Joi.string(),
-  label: Joi.string(),
-})
+export const LookupFormElementSchema = dataLookupSchema
+  .and(elementLookupSchema)
+  .and(lookupButtonSchema)
 
-export const lookupSchemas = {
-  isDataLookup,
-  dataLookupId,
-  isElementLookup,
-  elementLookupId,
-  lookupButton,
-}
+export const ConditionalPredicatesSchema: z.ZodType<
+  ConditionTypes.ConditionalPredicate[],
+  z.ZodTypeDef,
+  unknown
+> = z
+  .union([
+    ConditionalPredicatesItemBaseSchema,
+    z.object({
+      type: z.literal('REPEATABLESET'),
+      elementId: z.string().uuid(),
+      repeatableSetPredicate: ConditionalPredicatesItemBaseSchema,
+    }),
+  ])
+  .array()
+  // TODO .unique('elementId')
+  .min(1)
 
-export const conditionallyShowSchemas = {
-  conditionallyShow,
-  requiresAllConditionallyShowPredicates,
-  conditionallyShowPredicates,
-}
+export const ConditionallyShowSchema = z
+  .union([
+    z.object({
+      conditionallyShow: z.literal(false).optional(),
+    }),
+    z.object({
+      conditionallyShow: z.literal(true),
+      requiresAllConditionallyShowPredicates: z.boolean().default(false),
+      conditionallyShowPredicates: ConditionalPredicatesSchema,
+    }),
+  ])
+  .transform((value) => ({
+    ...value,
+    conditionallyShow: !!value.conditionallyShow,
+  }))
 
-export const storageType = Joi.string()
-  .custom((value, helpers) => {
-    // Need to keep this here so that we still allow old forms to
-    // be saved without throwing validation errors
+export const storageType = z
+  .enum(['private', 'public', 'legacy'])
+  .optional()
+  .transform((value) => {
     if (value === 'legacy') {
       return 'private'
     }
-
-    if (value === 'private' || value === 'public') {
-      return value
-    }
-
-    return helpers.error('string.storageType')
-  })
-  .messages({
-    'string.storageType': '{{#label}} must be one of [public, private]',
-  })
-
-const regexPattern = Joi.string().custom((value) => {
-  if (!value) return
-  try {
-    new RegExp(value)
     return value
-  } catch (err) {
-    throw new Error('it was an invalid regex pattern')
-  }
-})
-const regexFlags = Joi.when('regexPattern', {
-  is: Joi.string().required(),
-  then: Joi.string().regex(/^[dgimsuy]+$/),
-  otherwise: Joi.any().strip(),
-})
-const regexMessage = Joi.string().when('regexPattern', {
-  is: Joi.string().required(),
-  then: Joi.required(),
-  otherwise: Joi.any().strip(),
-})
+  })
 
-export const regexSchemas = {
-  regexPattern,
-  regexFlags,
-  regexMessage,
-}
+export const RegexFormElementSchema = z.union([
+  z.object({
+    regexPattern: z.string().refine((value) => {
+      if (!value) return
+      try {
+        new RegExp(value)
+        return value
+      } catch (err) {
+        throw new Error('it was an invalid regex pattern')
+      }
+    }),
+    regexFlags: z
+      .string()
+      .regex(/^[dgimsuy]+$/)
+      .optional(),
+    regexMessage: z.string(),
+  }),
+  z.object({
+    regexPattern: z.undefined().optional(),
+  }),
+])
 
-export const canToggleAll = Joi.boolean().default(false)
+export const canToggleAll = z.boolean().default(false)
 
-export const customCssClasses = Joi.array().items(
-  //regex from here https://stackoverflow.com/a/449000
-  Joi.string().regex(/^-?[_a-z]+[_a-z0-9-]*$/i),
-)
+export const customCssClasses = z
+  .string()
+  // regex from here https://stackoverflow.com/a/449000
+  .regex(/^-?[_a-z]+[_a-z0-9-]*$/i)
+  .array()
+  .optional()

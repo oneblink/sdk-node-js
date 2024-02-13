@@ -1,19 +1,19 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
   label,
-  conditionallyShowSchemas,
+  ConditionallyShowSchema,
   customCssClasses,
 } from '../property-schemas'
 
-export const type = 'image'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  ...conditionallyShowSchemas,
-  defaultValue: Joi.string().required().uri(),
-  customCssClasses,
-})
+export default z
+  .object({
+    type: z.literal('image'),
+    ...baseSchemas,
+    name,
+    label,
+    defaultValue: z.string().url(),
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)

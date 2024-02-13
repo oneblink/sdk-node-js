@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
@@ -6,29 +6,28 @@ import {
   hint,
   requiredSchemas,
   readOnly,
-  conditionallyShowSchemas,
-  lookupSchemas,
+  ConditionallyShowSchema,
+  LookupFormElementSchema,
   buttons,
-  optionsSchemas,
-  defaultValueOptionsSingle,
+  OptionsFormElementSchema,
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
 
-export const type = 'radio'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  hint,
-  hintPosition,
-  ...requiredSchemas,
-  readOnly,
-  ...conditionallyShowSchemas,
-  ...lookupSchemas,
-  defaultValue: defaultValueOptionsSingle,
-  buttons,
-  ...optionsSchemas,
-  customCssClasses,
-})
+export default z
+  .object({
+    type: z.literal('radio'),
+    ...baseSchemas,
+    name,
+    label,
+    hint,
+    hintPosition,
+    ...requiredSchemas,
+    readOnly,
+    defaultValue: z.string().optional(),
+    buttons,
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)
+  .and(LookupFormElementSchema)
+  .and(OptionsFormElementSchema)

@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
@@ -6,25 +6,25 @@ import {
   hint,
   requiredSchemas,
   readOnly,
-  conditionallyShowSchemas,
+  ConditionallyShowSchema,
   placeholderValue,
-  lookupSchemas,
+  LookupFormElementSchema,
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
 
-export const type = 'apiNSWLiquorLicence'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  hint,
-  hintPosition,
-  ...requiredSchemas,
-  readOnly,
-  ...conditionallyShowSchemas,
-  ...lookupSchemas,
-  placeholderValue,
-  customCssClasses,
-})
+export default z
+  .object({
+    type: z.literal('apiNSWLiquorLicence'),
+    ...baseSchemas,
+    name,
+    label,
+    hint,
+    hintPosition,
+    ...requiredSchemas,
+    readOnly,
+    placeholderValue,
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)
+  .and(LookupFormElementSchema)

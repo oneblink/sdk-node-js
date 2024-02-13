@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
@@ -6,40 +6,37 @@ import {
   hint,
   requiredSchemas,
   readOnly,
-  conditionallyShowSchemas,
-  lookupSchemas,
-  optionsSchemas,
+  ConditionallyShowSchema,
+  LookupFormElementSchema,
+  OptionsFormElementSchema,
   placeholderValue,
-  defaultValueOptionsSingle,
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
-import { SEARCH_OPTION_TYPE } from '../common'
 
-export const type = 'autocomplete'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  hint,
-  hintPosition,
-  ...requiredSchemas,
-  readOnly,
-  placeholderValue,
-  ...conditionallyShowSchemas,
-  ...lookupSchemas,
-  defaultValue: defaultValueOptionsSingle,
-  searchUrl: Joi.when('optionsType', {
-    is: SEARCH_OPTION_TYPE,
-    then: Joi.string().required(),
-    otherwise: Joi.any().strip(),
-  }),
-  searchQuerystringParameter: Joi.when('optionsType', {
-    is: SEARCH_OPTION_TYPE,
-    then: Joi.string(),
-    otherwise: Joi.any().strip(),
-  }),
-  ...optionsSchemas,
-  customCssClasses,
-})
+export default z
+  .object({
+    type: z.literal('autocomplete'),
+    ...baseSchemas,
+    name,
+    label,
+    hint,
+    hintPosition,
+    ...requiredSchemas,
+    readOnly,
+    placeholderValue,
+    defaultValue: z.string().optional(),
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)
+  .and(LookupFormElementSchema)
+  .and(
+    z.union([
+      OptionsFormElementSchema,
+      z.object({
+        optionsType: z.literal('SEARCH'),
+        searchUrl: z.string().url(),
+        searchQuerystringParameter: z.string().optional(),
+      }),
+    ]),
+  )

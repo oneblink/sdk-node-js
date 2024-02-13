@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
@@ -6,34 +6,42 @@ import {
   hint,
   requiredSchemas,
   readOnly,
-  conditionallyShowSchemas,
+  ConditionallyShowSchema,
   placeholderValue,
-  lookupSchemas,
-  regexSchemas,
+  LookupFormElementSchema,
+  RegexFormElementSchema,
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
 
-export const type = 'barcodeScanner'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  hint,
-  hintPosition,
-  ...requiredSchemas,
-  readOnly,
-  ...conditionallyShowSchemas,
-  ...lookupSchemas,
-  placeholderValue,
-  defaultValue: Joi.string(),
-  restrictBarcodeTypes: Joi.boolean().default(false),
-  restrictedBarcodeTypes: Joi.when('restrictBarcodeTypes', {
-    is: true,
-    then: Joi.array().items(Joi.string()).required(),
-    otherwise: Joi.any().strip(),
-  }),
-  ...regexSchemas,
-  customCssClasses,
-})
+export default z
+  .object({
+    type: z.literal('barcodeScanner'),
+    ...baseSchemas,
+    name,
+    label,
+    hint,
+    hintPosition,
+    ...requiredSchemas,
+    readOnly,
+    placeholderValue,
+    defaultValue: z.string().optional(),
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)
+  .and(LookupFormElementSchema)
+  .and(RegexFormElementSchema)
+  .and(
+    z.union([
+      z.object({
+        restrictBarcodeTypes: z
+          .literal(false)
+          .optional()
+          .transform(() => false),
+      }),
+      z.object({
+        restrictBarcodeTypes: z.literal(true),
+        restrictedBarcodeTypes: z.string().array(),
+      }),
+    ]),
+  )

@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
@@ -6,28 +6,28 @@ import {
   hint,
   requiredSchemas,
   readOnly,
-  conditionallyShowSchemas,
+  ConditionallyShowSchema,
   placeholderValue,
-  lookupSchemas,
-  regexSchemas,
+  LookupFormElementSchema,
+  RegexFormElementSchema,
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
 
-export const type = 'email'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  hint,
-  hintPosition,
-  ...requiredSchemas,
-  readOnly,
-  ...conditionallyShowSchemas,
-  ...lookupSchemas,
-  placeholderValue,
-  defaultValue: Joi.string().email(),
-  ...regexSchemas,
-  customCssClasses,
-})
+export default z
+  .object({
+    type: z.literal('email'),
+    ...baseSchemas,
+    name,
+    label,
+    hint,
+    hintPosition,
+    ...requiredSchemas,
+    readOnly,
+    placeholderValue,
+    defaultValue: z.string().email().optional(),
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)
+  .and(LookupFormElementSchema)
+  .and(RegexFormElementSchema)

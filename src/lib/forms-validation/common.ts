@@ -1,19 +1,5 @@
 import { typeCastService } from '@oneblink/sdk-core'
 import { FormTypes } from '@oneblink/types'
-import Joi from 'joi'
-
-export function validateJoiSchema<T>(
-  data: unknown,
-  schema: Joi.Schema,
-  options?: Joi.ValidationOptions,
-): T {
-  const result = schema.validate(data, options)
-  if (result.error) {
-    throw result.error
-  }
-
-  return result.value as T
-}
 
 /**
  * Reduce an array of form elements down to the elements that are not purely to

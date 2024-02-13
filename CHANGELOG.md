@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `arcGISWebMap` form element
 
+### Changed
+
+- **[BREAKING]** `Forms.validateApiRequest()` to `Forms.validateEndpointConfiguration()`
+- **[BREAKING]** `Forms.validateForm()` to return a `NewForm` (does not include `id`, `createdAt`, `updatedAt` properties)
+
 ## [5.4.0] - 2024-02-07
 
 ### Added

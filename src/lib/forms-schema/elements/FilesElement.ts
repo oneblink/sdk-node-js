@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import { attachment } from '../common'
 import {
   baseSchemas,
@@ -6,38 +6,81 @@ import {
   label,
   readOnly,
   hint,
-  conditionallyShowSchemas,
+  ConditionallyShowSchema,
   storageType,
-  lookupSchemas,
+  LookupFormElementSchema,
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
 
-export const type = 'files'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  readOnly,
-  hint,
-  hintPosition,
-  storageType,
-  restrictFileTypes: Joi.boolean().default(false),
-  restrictedFileTypes: Joi.when('restrictFileTypes', {
-    is: Joi.valid(true),
-    then: Joi.array().items(Joi.string()).required(),
-    otherwise: Joi.any().strip(),
-  }),
-  allowExtensionlessAttachments: Joi.boolean().default(false),
-  defaultValue: Joi.array().items(attachment),
-  minEntries: Joi.number().min(0),
-  maxEntries: Joi.number().when('minEntries', {
-    is: Joi.number().required().min(0),
-    then: Joi.number().min(Joi.ref('minEntries', { render: true })),
-    otherwise: Joi.number().min(0),
-  }),
-  ...conditionallyShowSchemas,
-  ...lookupSchemas,
-  customCssClasses,
-})
+export default z
+  .object({
+    type: z.literal('files'),
+    ...baseSchemas,
+    name,
+    label,
+    readOnly,
+    hint,
+    hintPosition,
+    storageType,
+    allowExtensionlessAttachments: z.boolean().default(false),
+    defaultValue: attachment.array().optional(),
+    minEntries: z.number().min(0).optional(),
+    maxEntries: z.number().min(0).optional(),
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)
+  .and(LookupFormElementSchema)
+  .and(
+    z.union([
+      z.object({
+        restrictFileTypes: z
+          .literal(false)
+          .optional()
+          .transform(() => false),
+      }),
+      z.object({
+        restrictFileTypes: z.literal(true),
+        restrictedFileTypes: z.string().array(),
+      }),
+    ]),
+  )
+  .refine(
+    (value) => {
+      return (
+        value.minEntries === undefined ||
+        value.maxEntries === undefined ||
+        value.minEntries <= value.maxEntries
+      )
+    },
+    {
+      message: 'must be greater than or equal to "minEntries"',
+      path: ['maxEntries'],
+    },
+  )
+  .refine(
+    (value) => {
+      return (
+        !value.defaultValue ||
+        value.minEntries === undefined ||
+        value.defaultValue.length >= value.minEntries
+      )
+    },
+    {
+      message: 'must be greater than or equal to "minEntries"',
+      path: ['defaultValue'],
+    },
+  )
+  .refine(
+    (value) => {
+      return (
+        !value.defaultValue ||
+        value.maxEntries === undefined ||
+        value.defaultValue.length <= value.maxEntries
+      )
+    },
+    {
+      message: 'must be less than or equal to "maxEntries"',
+      path: ['defaultValue'],
+    },
+  )

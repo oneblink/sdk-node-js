@@ -1,19 +1,27 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
   label,
-  conditionallyShowSchemas,
+  ConditionallyShowSchema,
   customCssClasses,
 } from '../property-schemas'
 
-export const type = 'heading'
+export const type = ''
 
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  ...conditionallyShowSchemas,
-  headingType: Joi.number().required().valid(1, 2, 3, 4, 5),
-  customCssClasses,
-})
+export default z
+  .object({
+    type: z.literal('heading'),
+    ...baseSchemas,
+    name,
+    label,
+    headingType: z.nativeEnum({
+      h1: 1,
+      h2: 2,
+      h3: 3,
+      h4: 4,
+      h5: 5,
+    }),
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)

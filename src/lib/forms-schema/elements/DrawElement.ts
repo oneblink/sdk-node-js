@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import { attachment } from '../common'
 import {
   baseSchemas,
@@ -7,24 +7,24 @@ import {
   hint,
   requiredSchemas,
   readOnly,
-  conditionallyShowSchemas,
+  ConditionallyShowSchema,
   storageType,
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
 
-export const type = 'draw'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  hint,
-  hintPosition,
-  ...requiredSchemas,
-  readOnly,
-  ...conditionallyShowSchemas,
-  storageType,
-  defaultValue: attachment,
-  customCssClasses,
-})
+export default z
+  .object({
+    type: z.literal('draw'),
+    ...baseSchemas,
+    name,
+    label,
+    hint,
+    hintPosition,
+    ...requiredSchemas,
+    readOnly,
+    storageType,
+    defaultValue: attachment.optional(),
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)

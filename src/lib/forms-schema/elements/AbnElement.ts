@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
@@ -6,25 +6,25 @@ import {
   hint,
   readOnly,
   requiredSchemas,
-  conditionallyShowSchemas,
-  lookupSchemas,
+  ConditionallyShowSchema,
+  LookupFormElementSchema,
   placeholderValue,
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
 
-export const type = 'abn'
-
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  hint,
-  hintPosition,
-  readOnly,
-  ...requiredSchemas,
-  placeholderValue,
-  ...conditionallyShowSchemas,
-  ...lookupSchemas,
-  customCssClasses,
-})
+export default z
+  .object({
+    type: z.literal('abn'),
+    ...baseSchemas,
+    name,
+    label,
+    hint,
+    hintPosition,
+    readOnly,
+    ...requiredSchemas,
+    placeholderValue,
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)
+  .and(LookupFormElementSchema)

@@ -1,32 +1,29 @@
-import Joi from 'joi'
 import { formElementsService } from '@oneblink/sdk-core'
 import {
   FormTypes,
   ConditionTypes,
   SubmissionEventTypes,
+  MiscTypes,
 } from '@oneblink/types'
 import {
-  elementSchema,
-  formSchema,
-  pageElementSchema,
-  apiRequestSchema,
+  NewFormSchema,
+  endpointConfigurationSchema,
   WorkflowEventSchema,
 } from '../forms-schema'
-import { ConditionalPredicatesItemSchema } from '../forms-schema/property-schemas'
+import { ConditionalPredicatesSchema } from '../forms-schema/property-schemas'
 import {
-  validateJoiSchema,
   stripLayoutFormElements,
   validateElementNamesAcrossNestedElements,
 } from './common'
 import validateFormEvents, { validateFormEvent } from './validate-form-events'
+import FormElementSchema from '../forms-schema/element-schema'
+import PageElementSchema from '../forms-schema/elements/PageElement'
 
 function validateFormEventData(
   formElements: FormTypes.FormElement[],
   workflowEvent: unknown,
 ): SubmissionEventTypes.FormEvent {
-  const formEvent = validateJoiSchema(workflowEvent, WorkflowEventSchema, {
-    stripUnknown: true,
-  }) as SubmissionEventTypes.FormEvent
+  const formEvent = WorkflowEventSchema.parse(workflowEvent)
   validateFormEvent({
     formEvent,
     propertyName: 'formEvent',
@@ -99,7 +96,7 @@ function validateFormElementReferences(formElements: FormTypes.FormElement[]) {
  * @param formElements
  */
 function validateSummaryFormElements(
-  form: FormTypes.Form,
+  form: FormTypes.NewForm,
   formElements: FormTypes.FormElement[],
   propertyName: string,
 ) {
@@ -174,10 +171,12 @@ function validateSummaryFormElements(
   }
 }
 
-function validateWithFormSchema(form?: unknown): FormTypes.Form {
-  const validatedForm: FormTypes.Form = validateJoiSchema(form, formSchema, {
-    stripUnknown: true,
-  })
+function validateWithFormSchema(form?: unknown): FormTypes.NewForm {
+  const validatedData = NewFormSchema.parse(form)
+  const validatedForm: FormTypes.NewForm = {
+    ...validatedData,
+    isMultiPage: !!validatedData.isMultiPage,
+  }
 
   // validate element names are unique (including elements without a name with children)
   validateElementNamesAcrossNestedElements(validatedForm.elements)
@@ -257,53 +256,25 @@ function validateWithFormSchema(form?: unknown): FormTypes.Form {
 function validateWithElementSchema<T extends FormTypes._FormElementBase>(
   element: unknown,
 ): T {
-  const validatedElement = validateJoiSchema<T>(element, elementSchema, {
-    stripUnknown: true,
-  })
-
-  return validatedElement
+  return FormElementSchema.parse(element) as unknown as T
 }
 
 function validateWithPageElementSchema(
   element: unknown,
 ): FormTypes.PageElement {
-  const validatedElement = validateJoiSchema<FormTypes.PageElement>(
-    element,
-    pageElementSchema,
-    {
-      stripUnknown: true,
-    },
-  )
-  return validatedElement
+  return PageElementSchema.parse(element)
 }
 
 function validateConditionalPredicates(
   predicates: Array<unknown>,
 ): Array<ConditionTypes.ConditionalPredicate> {
-  const schema = Joi.array()
-    .min(1)
-    .items(ConditionalPredicatesItemSchema)
-    .required()
-
-  const validatedPredicates = validateJoiSchema<
-    Array<ConditionTypes.ConditionalPredicate>
-  >(predicates, schema, {
-    stripUnknown: true,
-  })
-  return validatedPredicates
+  return ConditionalPredicatesSchema.parse(predicates)
 }
 
-function validateApiRequest(
+function validateEndpointConfiguration(
   apiRequest: unknown,
-): FormTypes.FormServerValidation {
-  const validatedApiRequest = validateJoiSchema<FormTypes.FormServerValidation>(
-    apiRequest,
-    apiRequestSchema,
-    {
-      stripUnknown: true,
-    },
-  )
-  return validatedApiRequest
+): MiscTypes.EndpointConfiguration {
+  return endpointConfigurationSchema.parse(apiRequest)
 }
 
 export {
@@ -312,5 +283,5 @@ export {
   validateWithElementSchema,
   validateWithPageElementSchema,
   validateConditionalPredicates,
-  validateApiRequest,
+  validateEndpointConfiguration,
 }

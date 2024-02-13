@@ -1,20 +1,23 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
   label,
-  conditionallyShowSchemas,
+  ConditionallyShowSchema,
   customCssClasses,
 } from '../property-schemas'
 import { htmlString } from '../common'
 
 export const type = 'html'
 
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  ...conditionallyShowSchemas,
-  defaultValue: htmlString.required(),
-  customCssClasses,
-})
+export default z
+  .object({
+    type: z.literal('html'),
+    ...baseSchemas,
+    name,
+    label,
+    defaultValue: htmlString,
+    customCssClasses,
+  })
+
+  .and(ConditionallyShowSchema)

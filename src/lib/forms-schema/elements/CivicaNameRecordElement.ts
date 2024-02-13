@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import { z } from 'zod'
 import {
   baseSchemas,
   name,
@@ -6,57 +6,57 @@ import {
   hint,
   requiredSchemas,
   readOnly,
-  conditionallyShowSchemas,
+  ConditionallyShowSchema,
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
 
-export const type = 'civicaNameRecord'
+const boolSchema = z.boolean().default(false)
+const textSchema = z.string().optional()
 
-const boolSchema = Joi.boolean().default(false)
-const textSchema = Joi.string()
+export default z
+  .object({
+    type: z.literal('civicaNameRecord'),
+    ...baseSchemas,
+    name,
+    label,
+    hint,
+    hintPosition,
+    ...requiredSchemas,
+    readOnly,
+    useGeoscapeAddressing: boolSchema,
 
-export default Joi.object({
-  ...baseSchemas,
-  name,
-  label,
-  hint,
-  hintPosition,
-  ...requiredSchemas,
-  readOnly,
-  ...conditionallyShowSchemas,
-  useGeoscapeAddressing: Joi.boolean().default(false),
+    titleLabel: textSchema,
+    familyNameLabel: textSchema,
 
-  titleLabel: textSchema,
-  familyNameLabel: textSchema,
+    givenName1Label: textSchema,
+    givenName1IsRequired: boolSchema,
+    givenName1IsHidden: boolSchema,
 
-  givenName1Label: textSchema,
-  givenName1IsRequired: boolSchema,
-  givenName1IsHidden: boolSchema,
+    emailAddressLabel: textSchema,
+    emailAddressIsRequired: boolSchema,
+    emailAddressIsHidden: boolSchema,
 
-  emailAddressLabel: textSchema,
-  emailAddressIsRequired: boolSchema,
-  emailAddressIsHidden: boolSchema,
+    homePhoneLabel: textSchema,
+    homePhoneIsRequired: boolSchema,
+    homePhoneIsHidden: boolSchema,
 
-  homePhoneLabel: textSchema,
-  homePhoneIsRequired: boolSchema,
-  homePhoneIsHidden: boolSchema,
+    businessPhoneLabel: textSchema,
+    businessPhoneIsRequired: boolSchema,
+    businessPhoneIsHidden: boolSchema,
 
-  businessPhoneLabel: textSchema,
-  businessPhoneIsRequired: boolSchema,
-  businessPhoneIsHidden: boolSchema,
+    mobilePhoneLabel: textSchema,
+    mobilePhoneIsRequired: boolSchema,
+    mobilePhoneIsHidden: boolSchema,
 
-  mobilePhoneLabel: textSchema,
-  mobilePhoneIsRequired: boolSchema,
-  mobilePhoneIsHidden: boolSchema,
+    faxPhoneLabel: textSchema,
+    faxPhoneIsRequired: boolSchema,
+    faxPhoneIsHidden: boolSchema,
 
-  faxPhoneLabel: textSchema,
-  faxPhoneIsRequired: boolSchema,
-  faxPhoneIsHidden: boolSchema,
-
-  streetAddressesLabel: textSchema,
-  address1Label: textSchema,
-  address2Label: textSchema,
-  postcodeLabel: textSchema,
-  customCssClasses,
-})
+    streetAddressesLabel: textSchema,
+    address1Label: textSchema,
+    address2Label: textSchema,
+    postcodeLabel: textSchema,
+    customCssClasses,
+  })
+  .and(ConditionallyShowSchema)

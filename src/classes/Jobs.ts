@@ -1,24 +1,8 @@
 import { SubmissionTypes } from '@oneblink/types'
-import Joi from 'joi'
 
 import OneBlinkAPI from '../lib/one-blink-api'
 import setPreFillData from '../lib/pre-fill-data'
 import { ConstructorOptions, PreFillMeta, JobsSearchResult } from '../types'
-
-const newJobSchema = Joi.object()
-  .required()
-  .keys({
-    username: Joi.string().required(),
-    formId: Joi.number().required().min(1),
-    externalId: Joi.string(),
-    details: Joi.object().required().keys({
-      key: Joi.string(),
-      title: Joi.string().required(),
-      description: Joi.string(),
-      type: Joi.string(),
-      priority: Joi.number(),
-    }),
-  })
 
 export default class Jobs extends OneBlinkAPI {
   /**
@@ -73,16 +57,9 @@ export default class Jobs extends OneBlinkAPI {
    *   the pre-fill data as the values
    */
   async createJob(
-    data: SubmissionTypes.NewFormsAppJob,
+    newJob: SubmissionTypes.NewFormsAppJob,
     preFillData?: Record<string, unknown>,
   ): Promise<SubmissionTypes.FormsAppJob> {
-    const result = newJobSchema.validate(data, { stripUnknown: true })
-    if (result.error) {
-      throw result.error
-    }
-
-    const newJob = result.value as SubmissionTypes.NewFormsAppJob
-
     if (preFillData) {
       const preFillMeta = await super.postEmptyRequest<PreFillMeta>(
         `/forms/${newJob.formId}/pre-fill-credentials`,

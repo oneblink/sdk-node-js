@@ -1,584 +1,561 @@
 import { FormTypes, SubmissionEventTypes } from '@oneblink/types'
-import Joi from 'joi'
+import { z } from 'zod'
 import { htmlString } from './common'
-import elementSchema from './element-schema'
+import FormElementSchema from './element-schema'
 import {
-  conditionallyShowPredicates,
-  ConditionalPredicatesItemSchema,
+  ConditionalPredicatesSchema,
   customCssClasses,
 } from './property-schemas'
-export const postSubmissionActions: FormTypes.FormPostSubmissionAction[] = [
-  'BACK',
-  'URL',
-  'CLOSE',
-  'FORMS_LIBRARY',
-]
+import PageElementSchema from './elements/PageElement'
 
-const emailSchema = Joi.alternatives([
-  Joi.string().email(),
-  Joi.string().regex(/^{ELEMENT:\S+}$/),
-  Joi.string().regex(/^{USER:email}$/),
+const emailSchema = z.union([
+  z.string().email(),
+  z.string().regex(/^{ELEMENT:\S+}$/),
+  z.string().regex(/^{USER:email}$/),
 ])
 
-const apiRequestSchemaConfiguration = Joi.object()
-  .required()
-  .when('type', {
-    is: 'CALLBACK',
-    then: Joi.object({
-      url: Joi.string().uri().required(),
-      secret: Joi.string(),
-    }),
-  })
-  .when('type', {
-    is: 'ONEBLINK_API',
-    then: Joi.object({
-      apiId: Joi.string().required(),
-      apiEnvironment: Joi.string().required(),
-      apiEnvironmentRoute: Joi.string().required(),
-      secret: Joi.string(),
-    }),
-  })
-
-const apiRequestSchema = Joi.object({
-  type: Joi.string().required().valid('CALLBACK', 'ONEBLINK_API'),
-  configuration: apiRequestSchemaConfiguration,
+const endpointConfigurationCallbackSchema = z.object({
+  type: z.literal('CALLBACK'),
+  configuration: z.object({
+    url: z.string().url(),
+    secret: z.string().optional(),
+  }),
+})
+const endpointConfigurationApiSchema = z.object({
+  type: z.literal('ONEBLINK_API'),
+  configuration: z.object({
+    apiId: z.string(),
+    apiEnvironment: z.string(),
+    apiEnvironmentRoute: z.string(),
+    secret: z.string().optional(),
+  }),
 })
 
+const endpointConfigurationSchema = z.union([
+  endpointConfigurationCallbackSchema,
+  endpointConfigurationApiSchema,
+])
+
 const emailSubmissionEventConfiguration = {
-  email: emailSchema,
-  toEmail: Joi.array().items(emailSchema),
-  ccEmail: Joi.array().items(emailSchema),
-  bccEmail: Joi.array().items(emailSchema),
-  emailSubjectLine: Joi.string().allow(null, ''),
-  emailTemplate: Joi.object().keys({
-    id: Joi.number().required(),
-    mapping: Joi.array()
-      .items(
-        Joi.object().keys({
-          mustacheTag: Joi.string()
-            .regex(/^custom:\S+/)
-            .required(),
-          type: Joi.string().valid('FORM_ELEMENT', 'TEXT').required(),
-          formElementId: Joi.when('type', {
-            is: 'FORM_ELEMENT',
-            then: Joi.string().uuid().required(),
-            otherwise: Joi.any().strip(),
+  email: emailSchema.optional(),
+  toEmail: emailSchema.array().optional(),
+  ccEmail: emailSchema.array().optional(),
+  bccEmail: emailSchema.array().optional(),
+  emailSubjectLine: z
+    .string()
+    .nullish()
+    .transform((value) => value ?? undefined),
+  emailTemplate: z
+    .object({
+      id: z.number(),
+      mapping: z
+        .intersection(
+          z.object({
+            mustacheTag: z.string().regex(/^custom:\S+/),
           }),
-          text: Joi.when('type', {
-            is: 'TEXT',
-            then: Joi.string().required(),
-            otherwise: Joi.any().strip(),
-          }),
-        }),
-      )
-      .required(),
-  }),
-  emailAttachmentsEndpoint: apiRequestSchema,
+          z.union([
+            z.object({
+              type: z.literal('FORM_ELEMENT'),
+              formElementId: z.string().uuid(),
+            }),
+            z.object({
+              type: z.literal('TEXT'),
+              text: z.string(),
+            }),
+          ]),
+        )
+        .array(),
+    })
+    .optional(),
+  emailAttachmentsEndpoint: endpointConfigurationSchema.optional(),
 }
 
 const approvalFormsInclusionConfiguration = {
-  approvalFormsInclusion: Joi.object().keys({
-    value: Joi.string().required().valid('ALL', 'PARTIAL'),
-    approvalStepLabels: Joi.when('value', {
-      is: 'PARTIAL',
-      then: Joi.array().required().unique().min(1).items(Joi.string()),
-      otherwise: Joi.any().strip(),
-    }),
-  }),
+  approvalFormsInclusion: z
+    .union([
+      z.object({
+        value: z.literal('ALL'),
+      }),
+      z.object({
+        value: z.literal('PARTIAL'),
+        approvalStepLabels: z
+          .string()
+          .array()
+          // TODO .unique()
+          .min(1),
+      }),
+    ])
+    .optional(),
 }
 
 const pdfSubmissionEventConfiguration = {
-  pdfFileName: Joi.string().allow(null, ''),
-  includeSubmissionIdInPdf: Joi.boolean(),
-  includeExternalIdInPdf: Joi.boolean(),
-  includePaymentInPdf: Joi.boolean(),
-  excludedElementIds: Joi.array()
-    .items(Joi.string().guid())
-    .unique()
-    .allow(null)
-    .default([]),
-  usePagesAsBreaks: Joi.boolean(),
-  excludedCSSClasses: Joi.array()
-    .items(Joi.string().regex(/^-?[_a-z]+[_a-z0-9-]*$/i)) //regex from here https://stackoverflow.com/a/449000
-    .allow(null)
-    .default([]),
-  pdfSize: Joi.valid('A4', 'Letter'),
+  pdfFileName: z
+    .string()
+    .nullish()
+    .transform((value) => value ?? undefined),
+  includeSubmissionIdInPdf: z.boolean().optional(),
+  includeExternalIdInPdf: z.boolean().optional(),
+  includePaymentInPdf: z.boolean().optional(),
+  excludedElementIds: z
+    .string()
+    .uuid()
+    .array()
+    // TODO .unique()
+    .optional()
+    // .nullable()
+    .transform((value) => (value === null ? undefined : value)),
+  usePagesAsBreaks: z.boolean().optional(),
+  excludedCSSClasses: z
+    .string()
+    //regex from here https://stackoverflow.com/a/449000
+    .regex(/^-?[_a-z]+[_a-z0-9-]*$/i)
+    .array()
+    .optional()
+    // .nullable()
+    .transform((value) => (value === null ? undefined : value)),
+  pdfSize: z.enum(['A4', 'Letter']).optional(),
   ...approvalFormsInclusionConfiguration,
 }
 
-const formEventBaseSchema = {
-  label: Joi.string(),
-  isRetryable: Joi.boolean(),
-  conditionallyExecute: Joi.bool().default(false),
-  requiresAllConditionallyExecutePredicates: Joi.bool().default(false),
-  conditionallyExecutePredicates: Joi.when('conditionallyExecute', {
-    is: true,
-    then: Joi.array()
-      .unique('elementId')
-      .min(1)
-      .items(ConditionalPredicatesItemSchema)
-      .required(),
-    otherwise: Joi.any().strip(),
-  }),
-}
-
-export const paymentEventTypes: SubmissionEventTypes.FormPaymentEventType[] = [
-  'CP_PAY',
-  'BPOINT',
-  'WESTPAC_QUICK_WEB',
-  'WESTPAC_QUICK_STREAM',
-  'NSW_GOV_PAY',
-]
-export const PaymentEventSchema = Joi.object({
-  type: Joi.string()
-    .required()
-    .valid(...paymentEventTypes),
-  configuration: Joi.object()
-    .required()
-    .when('type', {
-      is: 'BPOINT',
-      then: Joi.object().keys({
-        elementId: Joi.string().uuid().required(),
-        environmentId: Joi.string().uuid().required(),
-        crn2: Joi.string(),
-        crn3: Joi.string(),
-      }),
-    })
-    .when('type', {
-      is: Joi.valid('WESTPAC_QUICK_WEB', 'WESTPAC_QUICK_STREAM'),
-      then: Joi.object().keys({
-        elementId: Joi.string().uuid().required(),
-        environmentId: Joi.string().uuid().required(),
-        customerReferenceNumber: Joi.string().required(),
-      }),
-    })
-    .when('type', {
-      is: 'CP_PAY',
-      then: Joi.object().keys({
-        elementId: Joi.string().uuid().required(),
-        gatewayId: Joi.string().uuid().required(),
-      }),
-    })
-    .when('type', {
-      is: 'NSW_GOV_PAY',
-      then: Joi.object().keys({
-        elementId: Joi.string().uuid().required(),
-        primaryAgencyId: Joi.string().uuid().required(),
-        productDescription: Joi.string().required().max(250),
-        customerReference: Joi.string().max(250),
-        subAgencyCode: Joi.string(),
-      }),
-    }),
-  ...formEventBaseSchema,
-})
-export const schedulingEventTypes: SubmissionEventTypes.FormSchedulingEventType[] =
-  ['SCHEDULING']
-export const SchedulingEventSchema = Joi.object({
-  type: Joi.string()
-    .required()
-    .valid(...schedulingEventTypes),
-  configuration: Joi.object()
-    .required()
-    .when('type', {
-      is: 'SCHEDULING',
-      then: Joi.object().keys({
-        nylasAccountId: Joi.string().required(),
-        nylasSchedulingPageId: Joi.number().required(),
-        nameElementId: Joi.string().guid(),
-        emailElementId: Joi.string().guid(),
-        emailDescription: Joi.string(),
-        ...pdfSubmissionEventConfiguration,
-      }),
-    }),
-  ...formEventBaseSchema,
-})
-export const formWorkflowEventTypes: SubmissionEventTypes.FormWorkflowEventType[] =
-  [
-    'CALLBACK',
-    'POWER_AUTOMATE_FLOW',
-    'PDF',
-    'EMAIL',
-    'ONEBLINK_API',
-    'TRIM',
-    'CP_HCMS',
-    'CIVICA_CRM',
-    'FRESHDESK_CREATE_TICKET',
-    'FRESHDESK_ADD_NOTE_TO_TICKET',
-  ]
-export const WorkflowEventSchema = Joi.object().keys({
-  type: Joi.string()
-    .required()
-    .valid(...formWorkflowEventTypes),
-  configuration: Joi.object()
-    .required()
-    .when('type', {
-      is: 'CALLBACK',
-      then: Joi.object().keys({
-        url: Joi.string().uri().required(),
-        secret: Joi.string().required(),
-      }),
-    })
-    .when('type', {
-      is: 'POWER_AUTOMATE_FLOW',
-      then: Joi.object().keys({
-        url: Joi.string().uri().required(),
-      }),
-    })
-    .when('type', {
-      is: 'EMAIL',
-      then: Joi.object().keys({
-        ...emailSubmissionEventConfiguration,
-        ...approvalFormsInclusionConfiguration,
-      }),
-    })
-    .when('type', {
-      is: 'PDF',
-      then: Joi.object().keys({
-        ...emailSubmissionEventConfiguration,
-        ...pdfSubmissionEventConfiguration,
-      }),
-    })
-    .when('type', {
-      is: 'ONEBLINK_API',
-      then: Joi.object().keys({
-        apiId: Joi.string().required(),
-        apiEnvironment: Joi.string().required(),
-        apiEnvironmentRoute: Joi.string().required(),
-        secret: Joi.string().required(),
-      }),
-    })
-    .when('type', {
-      is: 'TRIM',
-      then: Joi.object().keys({
-        environmentId: Joi.string().uuid().required(),
-        recordTitle: Joi.string().allow(null, ''),
-        container: Joi.object().keys({
-          uri: Joi.number().required(),
-          label: Joi.string().required(),
+const FormEventBaseSchema = z
+  .object({
+    label: z.string().optional(),
+    isRetryable: z.boolean().optional(),
+  })
+  .and(
+    z
+      .union([
+        z.object({
+          conditionallyExecute: z.literal(false).optional(),
         }),
-        recordType: Joi.object().keys({
-          uri: Joi.number().required(),
-          label: Joi.string().required(),
+        z.object({
+          conditionallyExecute: z.literal(true),
+          requiresAllConditionallyExecutePredicates: z.boolean().default(false),
+          conditionallyExecutePredicates: ConditionalPredicatesSchema,
         }),
-        actionDefinition: Joi.object()
-          .keys({
-            uri: Joi.number().required(),
-            label: Joi.string().required(),
-          })
-          .allow(null),
-        location: Joi.object()
-          .keys({
-            uri: Joi.number().required(),
-            label: Joi.string().required(),
-          })
-          .allow(null),
-        author: Joi.object()
-          .keys({
-            uri: Joi.number().required(),
-            label: Joi.string().required(),
-          })
-          .allow(null),
-        groupFiles: Joi.boolean().default(false),
-        ...pdfSubmissionEventConfiguration,
-      }),
-    })
-    .when('type', {
-      is: 'CIVICA_CRM',
-      then: Joi.object().keys({
-        environmentId: Joi.string().uuid().required(),
-        civicaCustomerContactMethod: Joi.object({
-          code: Joi.string().required(),
-          description: Joi.string().required(),
-        }).required(),
-        civicaCategory: Joi.object({
-          id: Joi.number().required(),
-          label: Joi.string().required(),
-        }).required(),
-        mapping: Joi.array()
-          .required()
-          .min(1)
-          .unique('civicaCategoryItemNumber')
-          .items(
-            Joi.object({
-              civicaCategoryItemNumber: Joi.number().required(),
-              formElementId: Joi.string().uuid().required(),
-              isDescription: Joi.boolean().default(false),
-            }),
-          ),
-        ...pdfSubmissionEventConfiguration,
-      }),
-    })
-    .when('type', {
-      is: 'CP_HCMS',
-      then: Joi.object().keys({
-        contentTypeName: Joi.string()
-          .regex(/^[a-z0-9-]+$/)
-          .required()
-          .max(40),
-        encryptedElementIds: Joi.array()
-          .items(Joi.string().guid())
-          .unique()
-          .allow(null),
-        tags: Joi.array().min(1).items(Joi.string()).unique(),
-        categories: Joi.array()
-          .min(1)
-          .items(
-            Joi.object().keys({
-              id: Joi.string().uuid().required(),
-              name: Joi.string().required(),
-            }),
-          )
-          .unique('id'),
-        encryptPdf: Joi.boolean().default(false),
-        ...pdfSubmissionEventConfiguration,
-      }),
-    })
-    .when('type', {
-      is: 'FRESHDESK_CREATE_TICKET',
-      then: Joi.object().keys({
-        mapping: Joi.array().items(
-          Joi.object({
-            freshdeskFieldName: Joi.string().required(),
-            type: Joi.string()
-              .valid(
-                'FORM_FORM_ELEMENT',
-                'FORM_ELEMENT',
-                'VALUE',
-                'DEPENDENT_FIELD_VALUE',
-                'SUBMISSION_ID',
-                'EXTERNAL_ID',
-              )
-              .required(),
-            formElementId: Joi.when('type', {
-              is: Joi.valid('FORM_FORM_ELEMENT', 'FORM_ELEMENT'),
-              then: Joi.string().uuid().required(),
-              otherwise: Joi.any().strip(),
-            }),
-            mapping: Joi.when('type', {
-              is: 'FORM_FORM_ELEMENT',
-              then: Joi.link('#FreshdeskMappingSchema').required(),
-              otherwise: Joi.any().strip(),
-            }),
-            dependentFieldValue: Joi.when('type', {
-              is: 'DEPENDENT_FIELD_VALUE',
-              then: Joi.object()
-                .keys({
-                  category: Joi.string().required(),
-                  subCategory: Joi.string().required(),
-                  item: Joi.string().required(),
-                })
-                .required(),
-              otherwise: Joi.any().strip(),
-            }),
-            value: Joi.when('type', {
-              is: 'VALUE',
-              then: Joi.alternatives().try(
-                Joi.string(),
-                Joi.number(),
-                Joi.boolean(),
-              ),
-              otherwise: Joi.any().strip(),
-            }),
-          }).id('FreshdeskMappingSchema'),
-        ),
-        ...approvalFormsInclusionConfiguration,
-      }),
-    })
-    .when('type', {
-      is: 'FRESHDESK_ADD_NOTE_TO_TICKET',
-      then: Joi.object().keys(approvalFormsInclusionConfiguration),
-    }),
-  ...formEventBaseSchema,
-})
-
-const pageElementSchema = Joi.object().keys({
-  id: Joi.string().guid().required(),
-  label: Joi.string().required(),
-  type: Joi.valid('page'),
-  conditionallyShow: Joi.bool().default(false),
-  conditionallyShowPredicates: conditionallyShowPredicates,
-  requiresAllConditionallyShowPredicates: Joi.bool().default(false),
-  elements: Joi.array()
-    .required()
-    .items(elementSchema)
-    .min(1)
-    .unique('name', { ignoreUndefined: true })
-    .unique('id'),
-})
-
-const externalIdGenerationSchema = Joi.object({
-  type: Joi.string().required().valid('CALLBACK', 'ONEBLINK_API', 'RECEIPT_ID'),
-  configuration: apiRequestSchemaConfiguration.when('type', {
-    is: 'RECEIPT_ID',
-    then: Joi.object({
-      receiptComponents: Joi.array()
-        .required()
-        .min(1)
-        .items(
-          Joi.object({
-            type: Joi.string().required().valid('text', 'date', 'random'),
-            value: Joi.when('type', {
-              is: 'text',
-              then: Joi.string().required(),
-              otherwise: Joi.any().strip(),
-            }),
-            format: Joi.when('type', {
-              is: 'date',
-              then: Joi.string()
-                .required()
-                .valid('dayOfMonth', 'monthNumber', 'yearShort', 'year'),
-              otherwise: Joi.any().strip(),
-            }),
-            length: Joi.when('type', {
-              is: 'random',
-              then: Joi.number().required().min(1),
-              otherwise: Joi.any().strip(),
-            }),
-            numbers: Joi.when('type', {
-              is: 'random',
-              then: Joi.boolean().default(false),
-              otherwise: Joi.any().strip(),
-            }),
-            uppercase: Joi.when('type', {
-              is: 'random',
-              then: Joi.boolean().default(false),
-              otherwise: Joi.any().strip(),
-            }),
-            lowercase: Joi.when('type', {
-              is: 'random',
-              then: Joi.boolean().default(false),
-              otherwise: Joi.any().strip(),
-            }),
-          }),
-        ),
-    }),
-  }),
-})
-
-const cannedResponsesSchema = Joi.array()
-  .min(1)
-  .items(
-    Joi.object().required().keys({
-      key: Joi.string().required(),
-      label: Joi.string().required(),
-      notes: Joi.string().required(),
-    }),
+      ])
+      .transform((value) => ({
+        ...value,
+        conditionallyExecute: !!value.conditionallyExecute,
+      })),
   )
-  .unique('key')
 
-const formSchema = Joi.object().keys({
-  id: Joi.number(),
-  formsAppEnvironmentId: Joi.number().required(),
-  name: Joi.string().required(),
-  description: Joi.string().allow('', null),
-  organisationId: Joi.string().required(),
-  elements: Joi.array().when('isMultiPage', {
-    is: false,
-    then: Joi.array()
-      .required()
-      .items(elementSchema)
-      .unique('name', { ignoreUndefined: true })
-      .unique('id'),
-    otherwise: Joi.array().items(pageElementSchema),
-  }),
-  isMultiPage: Joi.bool().default(false),
-  isAuthenticated: Joi.bool().default(false),
-  publishStartDate: Joi.string().isoDate(),
-  publishEndDate: Joi.string().isoDate(),
-  unpublishedUserMessage: Joi.string(),
-  // Form Events and Workflow
-  draftEvents: Joi.array().items(WorkflowEventSchema),
-  schedulingEvents: Joi.array().items(SchedulingEventSchema),
-  paymentEvents: Joi.array().items(PaymentEventSchema),
-  submissionEvents: Joi.array().allow(null).items(WorkflowEventSchema),
-  approvalEvents: Joi.array().items(WorkflowEventSchema),
-  approvalSteps: Joi.array()
-    .min(1)
-    .unique('label')
-    .items(
-      Joi.object()
-        .required()
-        .keys({
-          label: Joi.string().required(),
-          group: Joi.string().required(),
-          isConditional: Joi.boolean().default(false),
-          requiresAllConditionalPredicates: Joi.boolean().default(false),
-          conditionalPredicates: Joi.when('isConditional', {
-            is: true,
-            then: Joi.array()
-              .unique('elementId')
-              .min(1)
-              .items(ConditionalPredicatesItemSchema)
-              .required(),
-            otherwise: Joi.any().strip(),
-          }),
-          approvalFormId: Joi.number(),
-          clarificationRequestEmailTemplateId: Joi.number(),
-        }),
-    ),
-  approvalConfiguration: Joi.object({
-    defaultNotificationEmailElementId: Joi.string().guid(),
-    approveCannedResponses: cannedResponsesSchema,
-    clarificationRequestCannedResponses: cannedResponsesSchema,
-    denyCannedResponses: cannedResponsesSchema,
-    autoDenyAfterClarificationRequest: Joi.object({
-      days: Joi.number().integer().required(),
-      notify: Joi.object({
-        notes: Joi.string().required(),
-        notificationEmailAddress: Joi.array().items(Joi.string().required()),
-        cannedResponseKey: Joi.string(),
+const PaymentEventSchema = z
+  .union([
+    z.object({
+      type: z.literal('CP_PAY'),
+      configuration: z.object({
+        elementId: z.string().uuid(),
+        gatewayId: z.string().uuid(),
       }),
-      internalNotes: Joi.string(),
     }),
-    disallowApprovingWhenAwaitingClarification: Joi.boolean(),
-    defaultPreventPaymentOnClarificationRequest: Joi.boolean(),
-    approvalCreatedEmailTemplateId: Joi.number().integer(),
-    clarificationRequestEmailTemplateId: Joi.number().integer(),
-    approvedEmailTemplateId: Joi.number().integer(),
-    deniedEmailTemplateId: Joi.number().integer(),
-  }),
-
-  postSubmissionAction: Joi.string()
-    .required()
-    .valid(...postSubmissionActions),
-  redirectUrl: Joi.when('postSubmissionAction', {
-    is: 'URL',
-    then: Joi.string().required(),
-    otherwise: Joi.any().strip(),
-  }),
-  postSubmissionReceipt: Joi.when('postSubmissionAction', {
-    is: Joi.valid('BACK', 'CLOSE', 'FORMS_LIBRARY'),
-    then: Joi.object({
-      html: htmlString,
-      allowPDFDownload: Joi.object(pdfSubmissionEventConfiguration),
+    z.object({
+      type: z.literal('BPOINT'),
+      configuration: z.object({
+        elementId: z.string().uuid(),
+        environmentId: z.string().uuid(),
+        crn2: z.string().optional(),
+        crn3: z.string().optional(),
+      }),
     }),
-    otherwise: Joi.any().strip(),
-  }),
-  cancelAction: Joi.string()
-    .default('BACK')
-    .valid(...postSubmissionActions),
-  cancelRedirectUrl: Joi.when('cancelAction', {
-    is: 'URL',
-    then: Joi.string().required(),
-    otherwise: Joi.any().strip(),
-  }),
-  formsAppIds: Joi.array().items(Joi.number()).required(),
-  createdAt: Joi.string().allow('', null),
-  updatedAt: Joi.string().allow('', null),
-  // TAGS
-  tags: Joi.array().default([]).items(Joi.string()),
-  serverValidation: apiRequestSchema,
-  externalIdGenerationOnSubmit: externalIdGenerationSchema,
-  personalisation: apiRequestSchema,
-  submissionTitle: Joi.string(),
-  continueWithAutosave: Joi.boolean(),
-  customCssClasses,
-})
+    z.object({
+      type: z.enum(['WESTPAC_QUICK_WEB', 'WESTPAC_QUICK_STREAM']),
+      configuration: z.object({
+        elementId: z.string().uuid(),
+        environmentId: z.string().uuid(),
+        customerReferenceNumber: z.string(),
+      }),
+    }),
+    z.object({
+      type: z.literal('NSW_GOV_PAY'),
+      configuration: z.object({
+        elementId: z.string().uuid(),
+        primaryAgencyId: z.string().uuid(),
+        productDescription: z.string().max(250),
+        customerReference: z.string().max(250).optional(),
+        subAgencyCode: z.string().optional(),
+      }),
+    }),
+  ])
+  .and(FormEventBaseSchema)
 
-export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
-  ...formWorkflowEventTypes,
-  ...paymentEventTypes,
-  ...schedulingEventTypes,
-]
+const SchedulingEventSchema: z.ZodType<
+  SubmissionEventTypes.SchedulingSubmissionEvent,
+  z.ZodTypeDef,
+  unknown
+> = z
+  .object({
+    type: z.literal('SCHEDULING'),
+    configuration: z.object({
+      nylasAccountId: z.string(),
+      nylasSchedulingPageId: z.number(),
+      nameElementId: z.string().uuid().optional(),
+      emailElementId: z.string().uuid().optional(),
+      emailDescription: z.string().optional(),
+      ...pdfSubmissionEventConfiguration,
+    }),
+  })
+  .and(FormEventBaseSchema)
 
-export { formSchema, elementSchema, pageElementSchema, apiRequestSchema }
+const FreshdeskFieldMappingSchema: z.ZodType<
+  SubmissionEventTypes.FreshdeskSubmissionEventFieldMapping,
+  z.ZodTypeDef,
+  unknown
+> = z
+  .object({
+    freshdeskFieldName: z.string(),
+  })
+  .and(
+    z.union([
+      z.object({
+        type: z.literal('FORM_FORM_ELEMENT'),
+        formElementId: z.string().uuid(),
+        mapping: z.lazy(() => FreshdeskFieldMappingSchema),
+      }),
+      z.object({
+        type: z.literal('FORM_ELEMENT'),
+        formElementId: z.string().uuid(),
+      }),
+      z.object({
+        type: z.literal('VALUE'),
+        value: z.union([z.string(), z.number(), z.boolean()]),
+      }),
+      z.object({
+        type: z.literal('DEPENDENT_FIELD_VALUE'),
+        dependentFieldValue: z.object({
+          category: z.string(),
+          subCategory: z.string(),
+          item: z.string(),
+        }),
+      }),
+      z.object({
+        type: z.enum(['SUBMISSION_ID', 'EXTERNAL_ID']),
+      }),
+    ]),
+  )
+
+const WorkflowEventSchema: z.ZodType<
+  SubmissionEventTypes.FormWorkflowEvent,
+  z.ZodTypeDef,
+  unknown
+> = z
+  .union([
+    z.object({
+      type: z.literal('CALLBACK'),
+      configuration: z.object({
+        url: z.string().url(),
+        secret: z.string(),
+      }),
+    }),
+    z.object({
+      type: z.literal('POWER_AUTOMATE_FLOW'),
+      configuration: z.object({
+        url: z.string().url(),
+      }),
+    }),
+    z.object({
+      type: z.literal('PDF'),
+      configuration: z.object({
+        ...emailSubmissionEventConfiguration,
+        ...pdfSubmissionEventConfiguration,
+      }),
+    }),
+    z.object({
+      type: z.literal('EMAIL'),
+      configuration: z.object({
+        ...emailSubmissionEventConfiguration,
+        ...approvalFormsInclusionConfiguration,
+      }),
+    }),
+    z.object({
+      type: z.literal('ONEBLINK_API'),
+      configuration: z.object({
+        apiId: z.string(),
+        apiEnvironment: z.string(),
+        apiEnvironmentRoute: z.string(),
+        secret: z.string(),
+      }),
+    }),
+    z.object({
+      type: z.literal('TRIM'),
+      configuration: z.object({
+        environmentId: z.string().uuid(),
+        recordTitle: z
+          .string()
+          .nullable()
+          .optional()
+          .transform((value) => value ?? undefined),
+        container: z.object({
+          uri: z.number(),
+          label: z.string(),
+        }),
+        recordType: z.object({
+          uri: z.number(),
+          label: z.string(),
+        }),
+        actionDefinition: z
+          .object({
+            uri: z.number(),
+            label: z.string(),
+          })
+          .optional()
+          .nullable()
+          .transform((value) => value ?? undefined),
+        location: z
+          .object({
+            uri: z.number(),
+            label: z.string(),
+          })
+          .optional()
+          .nullable()
+          .transform((value) => value ?? undefined),
+        author: z
+          .object({
+            uri: z.number(),
+            label: z.string(),
+          })
+          .optional()
+          .nullable()
+          .transform((value) => value ?? undefined),
+        groupFiles: z.boolean().default(false),
+        ...pdfSubmissionEventConfiguration,
+      }),
+    }),
+    z.object({
+      type: z.literal('CP_HCMS'),
+      configuration: z.object({
+        contentTypeName: z
+          .string()
+          .regex(/^[a-z0-9-]+$/)
+          .max(40),
+        encryptedElementIds: z
+          .string()
+          .uuid()
+          .array()
+          // TODO .unique()
+          .optional()
+          .nullable()
+          .transform((value) => value ?? undefined),
+        tags: z
+          .string()
+          .array()
+          // TODO .unique()
+          .min(1),
+        categories: z
+          .object({
+            id: z.string().uuid(),
+            name: z.string(),
+          })
+          .array()
+          // TODO .unique('id')
+          .min(1),
+        encryptPdf: z.boolean().default(false),
+        ...pdfSubmissionEventConfiguration,
+      }),
+    }),
+    z.object({
+      type: z.literal('CIVICA_CRM'),
+      configuration: z.object({
+        environmentId: z.string().uuid(),
+        civicaCustomerContactMethod: z.object({
+          code: z.string(),
+          description: z.string(),
+        }),
+        civicaCategory: z.object({
+          id: z.number(),
+          label: z.string(),
+        }),
+        mapping: z
+          .object({
+            civicaCategoryItemNumber: z.number(),
+            formElementId: z.string().uuid(),
+            isDescription: z.boolean().default(false),
+          })
+          .array()
+          // TODO .unique('civicaCategoryItemNumber'),
+          .min(1),
+        ...pdfSubmissionEventConfiguration,
+      }),
+    }),
+    z.object({
+      type: z.literal('FRESHDESK_CREATE_TICKET'),
+      configuration: z.object({
+        mapping: FreshdeskFieldMappingSchema.array(),
+        ...approvalFormsInclusionConfiguration,
+      }),
+    }),
+    z.object({
+      type: z.literal('FRESHDESK_ADD_NOTE_TO_TICKET'),
+      configuration: z.object(approvalFormsInclusionConfiguration),
+    }),
+  ])
+  .and(FormEventBaseSchema)
+
+const externalIdGenerationSchema = z.union([
+  endpointConfigurationCallbackSchema,
+  endpointConfigurationApiSchema,
+  z.object({
+    type: z.literal('RECEIPT_ID'),
+    configuration: z.object({
+      receiptComponents: z
+        .union([
+          z.object({
+            type: z.literal('text'),
+            value: z.string(),
+          }),
+          z.object({
+            type: z.literal('date'),
+            format: z.enum(['dayOfMonth', 'monthNumber', 'yearShort', 'year']),
+          }),
+          z.object({
+            type: z.literal('random'),
+            length: z.number().min(1),
+            numbers: z.boolean().default(false),
+            uppercase: z.boolean().default(false),
+            lowercase: z.boolean().default(false),
+          }),
+        ])
+        .array(),
+    }),
+  }),
+])
+
+const cannedResponsesSchema = z
+  .object({
+    key: z.string(),
+    label: z.string(),
+    notes: z.string(),
+  })
+  .array()
+  // TODO .unique('key')
+  .min(1)
+  .optional()
+
+const NewFormSchema: z.ZodType<FormTypes.NewForm, z.ZodTypeDef, unknown> = z
+  .object({
+    formsAppEnvironmentId: z.number(),
+    name: z.string(),
+    description: z
+      .string()
+      .nullable()
+      .optional()
+      .transform((value) => value ?? ''),
+    organisationId: z.string(),
+    isAuthenticated: z.boolean().default(false),
+    publishStartDate: z.string().optional(),
+    publishEndDate: z.string().optional(),
+    unpublishedUserMessage: z.string().optional(),
+    // Form Events and Workflow
+    draftEvents: WorkflowEventSchema.array().optional(),
+    schedulingEvents: SchedulingEventSchema.array().optional(),
+    paymentEvents: PaymentEventSchema.array().optional(),
+    submissionEvents: WorkflowEventSchema.array()
+      .nullable()
+      .optional()
+      .transform((value) => value || []),
+    approvalEvents: WorkflowEventSchema.array().optional(),
+    approvalSteps: z
+      .object({
+        label: z.string(),
+        group: z.string(),
+        approvalFormId: z.number().optional(),
+        clarificationRequestEmailTemplateId: z.number().optional(),
+      })
+      .and(
+        z.union([
+          z.object({
+            isConditional: z.literal(false).optional(),
+          }),
+          z.object({
+            isConditional: z.literal(true),
+            requiresAllConditionalPredicates: z.boolean().default(false),
+            conditionalPredicates: ConditionalPredicatesSchema,
+          }),
+        ]),
+      )
+      .array()
+      // TODO .unique('label')
+      .min(1)
+      .optional(),
+    approvalConfiguration: z
+      .object({
+        defaultNotificationEmailElementId: z.string().uuid().optional(),
+        approveCannedResponses: cannedResponsesSchema,
+        clarificationRequestCannedResponses: cannedResponsesSchema,
+        denyCannedResponses: cannedResponsesSchema,
+        autoDenyAfterClarificationRequest: z
+          .object({
+            days: z.number().int(),
+            notify: z
+              .object({
+                notes: z.string(),
+                notificationEmailAddress: z.string().array().optional(),
+                cannedResponseKey: z.string().optional(),
+              })
+              .optional(),
+            internalNotes: z.string().optional(),
+          })
+          .optional(),
+        disallowApprovingWhenAwaitingClarification: z.boolean().optional(),
+        defaultPreventPaymentOnClarificationRequest: z.boolean().optional(),
+        approvalCreatedEmailTemplateId: z.number().int().optional(),
+        clarificationRequestEmailTemplateId: z.number().int().optional(),
+        approvedEmailTemplateId: z.number().int().optional(),
+        deniedEmailTemplateId: z.number().int().optional(),
+      })
+      .optional(),
+    formsAppIds: z.number().array(),
+    tags: z.string().array().default([]),
+    serverValidation: endpointConfigurationSchema.optional(),
+    externalIdGenerationOnSubmit: externalIdGenerationSchema.optional(),
+    personalisation: endpointConfigurationSchema.optional(),
+    submissionTitle: z.string().optional(),
+    continueWithAutosave: z.boolean().optional(),
+    customCssClasses,
+  })
+  .and(
+    z.union([
+      z.object({
+        isMultiPage: z.literal(false).optional().default(false),
+        elements: FormElementSchema.array(), // TODO .unique('id')
+      }),
+      z.object({
+        isMultiPage: z.literal(true),
+        elements: PageElementSchema.array(), // TODO .unique('id')
+      }),
+    ]),
+  )
+  .and(
+    z.union([
+      z.object({
+        postSubmissionAction: z.literal('URL'),
+        redirectUrl: z.string().url(), // TODO support relative URLs
+      }),
+      z.object({
+        postSubmissionAction: z.enum(['BACK', 'CLOSE', 'FORMS_LIBRARY']),
+        postSubmissionReceipt: z
+          .object({
+            html: htmlString.optional(),
+            allowPDFDownload: z
+              .object(pdfSubmissionEventConfiguration)
+              .optional(),
+          })
+          .optional(),
+      }),
+    ]),
+  )
+  .and(
+    z.union([
+      z.object({
+        cancelAction: z.literal('URL'),
+        cancelRedirectUrl: z.string().url(), // TODO support relative URLs
+      }),
+      z.object({
+        cancelAction: z
+          .enum(['BACK', 'CLOSE', 'FORMS_LIBRARY'])
+          .default('BACK'),
+      }),
+    ]),
+  )
+
+export { NewFormSchema, endpointConfigurationSchema, WorkflowEventSchema }
