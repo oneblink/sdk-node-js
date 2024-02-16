@@ -14,8 +14,6 @@ import {
   hintPosition,
 } from '../property-schemas'
 
-export const type = ''
-
 export default z
   .object({
     type: z.literal('telephone'),

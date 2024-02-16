@@ -10,6 +10,10 @@ import {
   hintPosition,
 } from '../property-schemas'
 import elementSchema from '../element-schema'
+import {
+  refineMaxGreaterThanMin,
+  getRefineUniquePropInArrayArgs,
+} from '../common'
 
 export default z
   .object({
@@ -43,22 +47,21 @@ export default z
     elements: z.lazy(() =>
       elementSchema
         .array()
-        // TODO .unique('id')
-        .min(1),
+        .min(1)
+        .refine(...getRefineUniquePropInArrayArgs('id')),
     ),
     customCssClasses,
   })
   .and(ConditionallyShowSchema)
   .refine(
-    (value) => {
-      return (
-        typeof value.minSetEntries !== 'number' ||
-        typeof value.maxSetEntries !== 'number' ||
-        value.minSetEntries <= value.maxSetEntries
-      )
-    },
-    {
-      message: 'must be greater than or equal to "minSetEntries"',
-      path: ['maxSetEntries'],
-    },
+    refineMaxGreaterThanMin.validation({
+      getMin: (v) =>
+        typeof v.minSetEntries === 'number' ? v.minSetEntries : undefined,
+      getMax: (v) =>
+        typeof v.maxSetEntries === 'number' ? v.maxSetEntries : undefined,
+    }),
+    refineMaxGreaterThanMin.error({
+      min: 'minSetEntries',
+      max: 'maxSetEntries',
+    }),
   )

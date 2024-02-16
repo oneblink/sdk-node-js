@@ -8,6 +8,7 @@ import {
   hintPosition,
 } from '../property-schemas'
 import elementSchema from '../element-schema'
+import { getRefineUniquePropInArrayArgs } from '../common'
 
 export default z
   .object({
@@ -20,8 +21,8 @@ export default z
     elements: z.lazy(() =>
       elementSchema
         .array()
-        // TODO .unique('id')
-        .min(1),
+        .min(1)
+        .refine(...getRefineUniquePropInArrayArgs('id')),
     ),
     customCssClasses,
   })

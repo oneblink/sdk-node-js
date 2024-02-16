@@ -21,13 +21,11 @@ export default z
     defaultValue: htmlString,
     calculation: z.string(),
     preCalculationDisplay: htmlString
-      .optional()
-      .nullable()
+      .nullish()
       .transform((value) => value ?? undefined),
     displayAsCurrency: z
       .boolean()
-      .optional()
-      .nullable()
+      .nullish()
       .transform((value) => value ?? undefined),
     customCssClasses,
   })

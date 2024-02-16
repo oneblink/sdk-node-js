@@ -7,6 +7,7 @@ import {
   customCssClasses,
 } from '../property-schemas'
 import { FormTypes } from '@oneblink/types'
+import { getRefineUniquePropInArrayArgs } from '../common'
 
 const PageElementSchema: z.ZodType<
   FormTypes.PageElement,
@@ -20,8 +21,8 @@ const PageElementSchema: z.ZodType<
     customCssClasses,
     elements: z.lazy(() =>
       FormElementSchema.array()
-        // TODO .unique('id')
-        .min(1),
+        .min(1)
+        .refine(...getRefineUniquePropInArrayArgs('id')),
     ),
   })
   .and(ConditionallyShowSchema)

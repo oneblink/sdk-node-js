@@ -34,10 +34,7 @@ export default z
   .and(
     z.union([
       z.object({
-        restrictBarcodeTypes: z
-          .literal(false)
-          .optional()
-          .transform(() => false),
+        restrictBarcodeTypes: z.literal(false).default(false),
       }),
       z.object({
         restrictBarcodeTypes: z.literal(true),

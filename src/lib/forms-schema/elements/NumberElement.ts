@@ -13,6 +13,7 @@ import {
   customCssClasses,
   hintPosition,
 } from '../property-schemas'
+import { refineRange, refineMaxGreaterThanMin } from '../common'
 
 export default z
   .object({
@@ -25,17 +26,13 @@ export default z
     ...requiredSchemas,
     readOnly,
     placeholderValue,
-    isSlider: z.boolean().default(false),
-    sliderIncrement: z.number().optional(),
     minNumber: z
       .number()
-      .optional()
-      .nullable()
+      .nullish()
       .transform((value) => value ?? undefined),
     maxNumber: z
       .number()
-      .optional()
-      .nullable()
+      .nullish()
       .transform((value) => value ?? undefined),
     isInteger: z.boolean().optional(),
     defaultValue: z.number().optional(),
@@ -47,24 +44,14 @@ export default z
   .and(
     z.union([
       z.object({
-        isSlider: z
-          .literal(false)
-          .optional()
-          .transform(() => false),
-        sliderIncrement: z.string().optional(),
+        isSlider: z.literal(false).default(false),
       }),
       z.object({
         isSlider: z.literal(true),
-        sliderIncrement: z.string().array().optional(),
+        sliderIncrement: z.number().optional(),
       }),
     ]),
   )
-  .transform((value) => {
-    if (!value.isSlider) {
-      value.sliderIncrement = undefined
-    }
-    return value
-  })
   .refine(
     (value) => {
       return !value.isSlider || typeof value.minNumber === 'number'
@@ -72,6 +59,15 @@ export default z
     {
       message: 'is required if "isSlider" is true',
       path: ['minNumber'],
+    },
+  )
+  .refine(
+    (value) => {
+      return !value.isSlider || typeof value.maxNumber === 'number'
+    },
+    {
+      message: 'is required if "isSlider" is true',
+      path: ['maxNumber'],
     },
   )
   .refine(
@@ -89,15 +85,6 @@ export default z
   )
   .refine(
     (value) => {
-      return !value.isSlider || typeof value.maxNumber === 'number'
-    },
-    {
-      message: 'is required if "isSlider" is true',
-      path: ['maxNumber'],
-    },
-  )
-  .refine(
-    (value) => {
       return (
         !value.isInteger ||
         value.maxNumber === undefined ||
@@ -110,43 +97,26 @@ export default z
     },
   )
   .refine(
-    (value) => {
-      return (
-        value.minNumber === undefined ||
-        value.maxNumber === undefined ||
-        value.minNumber <= value.maxNumber
-      )
-    },
-    {
-      message: 'must be greater than or equal to "minNumber"',
-      path: ['maxNumber'],
-    },
+    refineMaxGreaterThanMin.validation({
+      getMin: (v) => v.minNumber,
+      getMax: (v) => v.maxNumber,
+    }),
+    refineMaxGreaterThanMin.error({
+      min: 'minNumber',
+      max: 'maxNumber',
+    }),
   )
   .refine(
-    (value) => {
-      return (
-        value.defaultValue === undefined ||
-        value.minNumber === undefined ||
-        value.defaultValue >= value.minNumber
-      )
-    },
-    {
-      message: 'must be greater than or equal to "minNumber"',
-      path: ['defaultValue'],
-    },
-  )
-  .refine(
-    (value) => {
-      return (
-        value.defaultValue === undefined ||
-        value.maxNumber === undefined ||
-        value.defaultValue <= value.maxNumber
-      )
-    },
-    {
-      message: 'must be less than or equal to "maxNumber"',
-      path: ['defaultValue'],
-    },
+    refineRange.validation({
+      getMin: (v) => v.minNumber,
+      getMax: (v) => v.maxNumber,
+      getField: (v) => v.defaultValue,
+    }),
+    refineRange.error({
+      path: 'defaultValue',
+      min: 'minNumber',
+      max: 'maxNumber',
+    }),
   )
   .refine(
     (value) => {
@@ -175,15 +145,14 @@ export default z
     },
   )
   .refine(
-    (value) => {
-      return (
-        value.sliderIncrement === undefined ||
-        value.minNumber === undefined ||
-        value.sliderIncrement >= value.minNumber
-      )
-    },
-    {
-      message: 'must be greater than or equal to "minNumber"',
-      path: ['sliderIncrement'],
-    },
+    refineRange.validation({
+      getMin: (v) => v.minNumber,
+      getMax: (v) => v.maxNumber,
+      getField: (v) => (v.isSlider ? v.sliderIncrement : undefined),
+    }),
+    refineRange.error({
+      path: 'sliderIncrement',
+      min: 'minNumber',
+      max: 'maxNumber',
+    }),
   )

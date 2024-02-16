@@ -172,11 +172,7 @@ function validateSummaryFormElements(
 }
 
 function validateWithFormSchema(form?: unknown): FormTypes.NewForm {
-  const validatedData = NewFormSchema.parse(form)
-  const validatedForm: FormTypes.NewForm = {
-    ...validatedData,
-    isMultiPage: !!validatedData.isMultiPage,
-  }
+  const validatedForm = NewFormSchema.parse(form)
 
   // validate element names are unique (including elements without a name with children)
   validateElementNamesAcrossNestedElements(validatedForm.elements)

@@ -1,6 +1,10 @@
 import { FormTypes, SubmissionEventTypes } from '@oneblink/types'
 import { z } from 'zod'
-import { htmlString } from './common'
+import {
+  getRefineUniquePropInArrayArgs,
+  getUniqueLiteralInArray,
+  htmlString,
+} from './common'
 import FormElementSchema from './element-schema'
 import {
   ConditionalPredicatesSchema,
@@ -81,8 +85,8 @@ const approvalFormsInclusionConfiguration = {
         approvalStepLabels: z
           .string()
           .array()
-          // TODO .unique()
-          .min(1),
+          .min(1)
+          .refine(...getUniqueLiteralInArray),
       }),
     ])
     .optional(),
@@ -100,19 +104,17 @@ const pdfSubmissionEventConfiguration = {
     .string()
     .uuid()
     .array()
-    // TODO .unique()
-    .optional()
-    // .nullable()
-    .transform((value) => (value === null ? undefined : value)),
+    .refine(...getUniqueLiteralInArray)
+    .nullish()
+    .transform((value) => value ?? undefined),
   usePagesAsBreaks: z.boolean().optional(),
   excludedCSSClasses: z
     .string()
     //regex from here https://stackoverflow.com/a/449000
     .regex(/^-?[_a-z]+[_a-z0-9-]*$/i)
     .array()
-    .optional()
-    // .nullable()
-    .transform((value) => (value === null ? undefined : value)),
+    .nullish()
+    .transform((value) => value ?? undefined),
   pdfSize: z.enum(['A4', 'Letter']).optional(),
   ...approvalFormsInclusionConfiguration,
 }
@@ -332,23 +334,22 @@ const WorkflowEventSchema: z.ZodType<
           .string()
           .uuid()
           .array()
-          // TODO .unique()
-          .optional()
-          .nullable()
+          .refine(...getUniqueLiteralInArray)
+          .nullish()
           .transform((value) => value ?? undefined),
         tags: z
           .string()
           .array()
-          // TODO .unique()
-          .min(1),
+          .min(1)
+          .refine(...getUniqueLiteralInArray),
         categories: z
           .object({
             id: z.string().uuid(),
             name: z.string(),
           })
           .array()
-          // TODO .unique('id')
-          .min(1),
+          .min(1)
+          .refine(...getRefineUniquePropInArrayArgs('id')),
         encryptPdf: z.boolean().default(false),
         ...pdfSubmissionEventConfiguration,
       }),
@@ -372,8 +373,10 @@ const WorkflowEventSchema: z.ZodType<
             isDescription: z.boolean().default(false),
           })
           .array()
-          // TODO .unique('civicaCategoryItemNumber'),
-          .min(1),
+          .min(1)
+          .refine(
+            ...getRefineUniquePropInArrayArgs('civicaCategoryItemNumber'),
+          ),
         ...pdfSubmissionEventConfiguration,
       }),
     }),
@@ -427,8 +430,8 @@ const cannedResponsesSchema = z
     notes: z.string(),
   })
   .array()
-  // TODO .unique('key')
   .min(1)
+  .refine(...getRefineUniquePropInArrayArgs('key'))
   .optional()
 
 const NewFormSchema: z.ZodType<FormTypes.NewForm, z.ZodTypeDef, unknown> = z
@@ -474,8 +477,8 @@ const NewFormSchema: z.ZodType<FormTypes.NewForm, z.ZodTypeDef, unknown> = z
         ]),
       )
       .array()
-      // TODO .unique('label')
       .min(1)
+      .refine(...getRefineUniquePropInArrayArgs('label'))
       .optional(),
     approvalConfiguration: z
       .object({
@@ -517,11 +520,15 @@ const NewFormSchema: z.ZodType<FormTypes.NewForm, z.ZodTypeDef, unknown> = z
     z.union([
       z.object({
         isMultiPage: z.literal(false).optional().default(false),
-        elements: FormElementSchema.array(), // TODO .unique('id')
+        elements: FormElementSchema.array().refine(
+          ...getRefineUniquePropInArrayArgs('id'),
+        ),
       }),
       z.object({
         isMultiPage: z.literal(true),
-        elements: PageElementSchema.array(), // TODO .unique('id')
+        elements: PageElementSchema.array().refine(
+          ...getRefineUniquePropInArrayArgs('id'),
+        ),
       }),
     ]),
   )
@@ -529,7 +536,7 @@ const NewFormSchema: z.ZodType<FormTypes.NewForm, z.ZodTypeDef, unknown> = z
     z.union([
       z.object({
         postSubmissionAction: z.literal('URL'),
-        redirectUrl: z.string().url(), // TODO support relative URLs
+        redirectUrl: z.string().url(), // TODO: support relative URLs
       }),
       z.object({
         postSubmissionAction: z.enum(['BACK', 'CLOSE', 'FORMS_LIBRARY']),

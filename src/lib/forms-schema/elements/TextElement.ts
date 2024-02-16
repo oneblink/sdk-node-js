@@ -14,6 +14,7 @@ import {
   RegexFormElementSchema,
 } from '../property-schemas'
 import { FormTypes } from '@oneblink/types'
+import { refineRange, refineMaxGreaterThanMin } from '../common'
 
 const TextElementSchema: z.ZodType<
   FormTypes.TextElement | FormTypes.TextareaElement,
@@ -38,43 +39,26 @@ const TextElementSchema: z.ZodType<
   .and(LookupFormElementSchema)
   .and(RegexFormElementSchema)
   .refine(
-    (value) => {
-      return (
-        value.minLength === undefined ||
-        value.maxLength === undefined ||
-        value.minLength <= value.maxLength
-      )
-    },
-    {
-      message: 'must be greater than or equal to "minLength"',
-      path: ['maxLength'],
-    },
+    refineMaxGreaterThanMin.validation({
+      getMin: (v) => v.minLength,
+      getMax: (v) => v.maxLength,
+    }),
+    refineMaxGreaterThanMin.error({
+      min: 'minLength',
+      max: 'maxLength',
+    }),
   )
   .refine(
-    (value) => {
-      return (
-        !value.defaultValue ||
-        value.minLength === undefined ||
-        value.defaultValue.length >= value.minLength
-      )
-    },
-    {
-      message: 'must be greater than or equal to "minLength"',
-      path: ['defaultValue'],
-    },
-  )
-  .refine(
-    (value) => {
-      return (
-        !value.defaultValue ||
-        value.maxLength === undefined ||
-        value.defaultValue.length <= value.maxLength
-      )
-    },
-    {
-      message: 'must be less than or equal to "maxLength"',
-      path: ['defaultValue'],
-    },
+    refineRange.validation({
+      getField: (v) => v.defaultValue?.length,
+      getMin: (v) => v.minLength,
+      getMax: (v) => v.maxLength,
+    }),
+    refineRange.error({
+      path: 'defaultValue',
+      min: 'minLength',
+      max: 'maxLength',
+    }),
   )
   .and(
     z.union([

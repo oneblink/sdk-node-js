@@ -11,6 +11,8 @@ import {
   LookupFormElementSchema,
   customCssClasses,
   hintPosition,
+  refineRange,
+  refineMaxGreaterThanMin,
 } from '../property-schemas'
 
 export default z
@@ -46,41 +48,24 @@ export default z
     ]),
   )
   .refine(
-    (value) => {
-      return (
-        value.minEntries === undefined ||
-        value.maxEntries === undefined ||
-        value.minEntries <= value.maxEntries
-      )
-    },
-    {
-      message: 'must be greater than or equal to "minEntries"',
-      path: ['maxEntries'],
-    },
+    refineMaxGreaterThanMin.validation({
+      getMin: (v) => v.minEntries,
+      getMax: (v) => v.maxEntries,
+    }),
+    refineMaxGreaterThanMin.error({
+      min: 'minEntries',
+      max: 'maxEntries',
+    }),
   )
   .refine(
-    (value) => {
-      return (
-        !value.defaultValue ||
-        value.minEntries === undefined ||
-        value.defaultValue.length >= value.minEntries
-      )
-    },
-    {
-      message: 'must be greater than or equal to "minEntries"',
-      path: ['defaultValue'],
-    },
-  )
-  .refine(
-    (value) => {
-      return (
-        !value.defaultValue ||
-        value.maxEntries === undefined ||
-        value.defaultValue.length <= value.maxEntries
-      )
-    },
-    {
-      message: 'must be less than or equal to "maxEntries"',
-      path: ['defaultValue'],
-    },
+    refineRange.validation({
+      getField: (v) => v.defaultValue?.length,
+      getMin: (v) => v.minEntries,
+      getMax: (v) => v.maxEntries,
+    }),
+    refineRange.error({
+      path: 'defaultValue',
+      min: 'minEntries',
+      max: 'maxEntries',
+    }),
   )
