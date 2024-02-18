@@ -5,6 +5,8 @@ import {
   label,
   conditionallyShowSchemas,
   customCssClasses,
+  hint,
+  hintPosition,
 } from '../property-schemas'
 
 export const type = 'arcGISWebMap'
@@ -13,6 +15,8 @@ export default Joi.object({
   ...baseSchemas,
   name,
   label,
+  hint,
+  hintPosition,
   ...conditionallyShowSchemas,
   customCssClasses,
   webMapId: Joi.string().required(),
