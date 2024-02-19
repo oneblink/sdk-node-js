@@ -4,7 +4,6 @@ describe('submission event conditional logic', () => {
   test('should allow both OPTIONS and NUMERIC conditional types', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'conditionally execute event via number input',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -79,7 +78,6 @@ describe('submission event conditional logic', () => {
   test('should set correct defaults for submission event conditional properties', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'conditionally show via number input',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -136,7 +134,6 @@ describe('submission event conditional logic', () => {
   test('should allow element with valid between conditional logic', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'conditionally show element via number input',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -189,7 +186,6 @@ describe('submission event conditional logic', () => {
   test('should reject element with missing property in between conditional logic', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'conditionally show element via number input',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -244,7 +240,6 @@ describe('submission event conditional logic', () => {
   test('should reject element with conditional between predicate where max is lower than min', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'conditionally show element via number input',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -300,7 +295,6 @@ describe('submission event conditional logic', () => {
   test('should reject element if maxLength is less than minLength', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'min & max text element length',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -341,7 +335,6 @@ describe('submission event conditional logic', () => {
   test('should not reject element if maxLength is greater than minLength', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'min & max text element length',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -380,7 +373,6 @@ describe('submission event conditional logic', () => {
   test('should reject element if defaultValue is less than minLength', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'min & max text element length',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -421,7 +413,6 @@ describe('submission event conditional logic', () => {
   test('should reject element if defaultValue is greater than maxLength', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'min & max text element length',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -462,7 +453,6 @@ describe('submission event conditional logic', () => {
   test('should not reject element if defaultValue is between minLength and maxLength', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'min & max text element length',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -501,7 +491,6 @@ describe('submission event conditional logic', () => {
   test('should reject element if minLength is negative', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'min & max text element length',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -541,7 +530,6 @@ describe('submission event conditional logic', () => {
   test('should reject element if maxLength is negative', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'min & max text element length',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -580,7 +568,6 @@ describe('submission event conditional logic', () => {
   test('should reject number element with decimal default value when isInteger set to true', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'conditionally show element via number input',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -615,7 +602,6 @@ describe('submission event conditional logic', () => {
   test('should allow property: "includeTimestampWatermark" to be set for camera elements', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'conditionally show element via number input',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -646,7 +632,6 @@ describe('submission event conditional logic', () => {
   test('should strip property: "includeTimestampWatermark" if element is not of type "camera"', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'conditionally show element via number input',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -677,7 +662,6 @@ describe('submission event conditional logic', () => {
   test('should reject property: "includeTimestampWatermark" if it is not a boolean', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'conditionally show element via number input',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -712,7 +696,6 @@ describe('Conditional Predicates', () => {
   test('should allow both OPTIONS and NUMERIC conditional types', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'conditionally show via number input',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -795,7 +778,6 @@ describe('Conditional Predicates', () => {
   test('should error if conditional predicate types are missing required values', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'conditionally show via number input',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -884,7 +866,6 @@ describe('Conditional Predicates', () => {
   test('should throw error when passing number value with `compareWith`: `ELEMENT`', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'conditionally show via number input',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -939,7 +920,6 @@ describe('Conditional Predicates', () => {
   test('should throw error when passing string to value with `compareWith`: `VALUE` | `undefined`', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'conditionally show via number input',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -1014,7 +994,6 @@ describe('Conditional Predicates', () => {
     console.log(formSchema)
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'conditionally show element via number input',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -1082,7 +1061,6 @@ describe('Conditional Predicates', () => {
     console.log(formSchema)
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'conditionally show element via number input',
         description: 'string',
         formsAppEnvironmentId: 1,
