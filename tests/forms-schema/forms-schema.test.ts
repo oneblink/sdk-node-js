@@ -12,7 +12,6 @@ function validateFormThrowError(data: unknown) {
 
 describe('Valid Form Schema with Pages', () => {
   const result = formSchema.validate({
-    id: 1,
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -452,7 +451,6 @@ describe('Valid Form Schema with Pages', () => {
 
 describe('Valid Form Schema', () => {
   const result = formSchema.validate({
-    id: 1,
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -832,7 +830,6 @@ describe('Valid Form Schema', () => {
 test('should set default for radio "buttons" property', () => {
   const { error, value } = formSchema.validate(
     {
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -880,7 +877,6 @@ test('should set default for radio "buttons" property', () => {
 test('should error if "buttons" is not a boolean', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       organisationId: '59cc888b8969af000fb50ddb',
@@ -926,7 +922,6 @@ test('should error if "buttons" is not a boolean', () => {
 test('should error if element "id" is not supplied', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -953,7 +948,6 @@ test('should error if element "id" is not supplied', () => {
 test('should error if element "id" is not a guid', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -981,7 +975,6 @@ test('should error if element "id" is not a guid', () => {
 test('should error if element "id" is not unique', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -1016,7 +1009,6 @@ test('should error if element "id" is not unique', () => {
 test('should not error if number min is the same as max', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -1049,7 +1041,6 @@ test('should not error if number min is the same as max', () => {
 test('should error if number min is greater than max', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -1084,7 +1075,6 @@ test('should error if number min is greater than max', () => {
 test('should throw error if minNumber is not provided for number element with isSlider as true', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -1116,7 +1106,6 @@ test('should throw error if minNumber is not provided for number element with is
 
 test('should error if number min is not an integer when number isInteger', () => {
   const { error } = formSchema.validate({
-    id: 1,
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -1143,7 +1132,6 @@ test('should error if number min is not an integer when number isInteger', () =>
 
 test('should error if number max is not an integer when number isInteger', () => {
   const { error } = formSchema.validate({
-    id: 1,
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -1170,7 +1158,6 @@ test('should error if number max is not an integer when number isInteger', () =>
 
 test('should throw error if maxNumber is not provided for number element with isSlider as true', () => {
   const { error } = formSchema.validate({
-    id: 1,
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -1197,7 +1184,6 @@ test('should throw error if maxNumber is not provided for number element with is
 
 test('should error if "toDate" is greater than "fromDate"', () => {
   const { error } = formSchema.validate({
-    id: 1,
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -1225,7 +1211,6 @@ test('should error if "toDate" is greater than "fromDate"', () => {
 test('should error if "defaultValue" does not match what is valid for each type', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -1461,7 +1446,6 @@ test('should error if "defaultValue" does not match what is valid for each type'
 
 test('should not error if number type element has a "defaultValue" but does not have a "minNumber" or "maxNumber"', () => {
   const { error } = formSchema.validate({
-    id: 1,
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -1485,7 +1469,6 @@ test('should not error if number type element has a "defaultValue" but does not 
 
 test('should error if number type element has a "defaultValue" less than "minNumber"', () => {
   const { error } = formSchema.validate({
-    id: 1,
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -1512,7 +1495,6 @@ test('should error if number type element has a "defaultValue" less than "minNum
 
 test('should error if number type element has a "defaultValue" more than "maxNumber"', () => {
   const { error } = formSchema.validate({
-    id: 1,
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -1539,7 +1521,6 @@ test('should error if number type element has a "defaultValue" more than "maxNum
 
 test('should not error if date type element has a "defaultValue" but does not have a "fromDate" or "toDate"', () => {
   const { error } = formSchema.validate({
-    id: 1,
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -1563,7 +1544,6 @@ test('should not error if date type element has a "defaultValue" but does not ha
 
 test('should error if date type element has a "defaultValue" less than "fromDate"', () => {
   const { error } = formSchema.validate({
-    id: 1,
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -1590,7 +1570,6 @@ test('should error if date type element has a "defaultValue" less than "fromDate
 
 test('should error if date type element has a "defaultValue" more than "toDate"', () => {
   const { error } = formSchema.validate({
-    id: 1,
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -1617,7 +1596,6 @@ test('should error if date type element has a "defaultValue" more than "toDate"'
 
 test('should error if repeatableSet type element has no elements', () => {
   const { error } = formSchema.validate({
-    id: 1,
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -1642,7 +1620,6 @@ test('should error if repeatableSet type element has no elements', () => {
 
 test('should error if repeatableSet type element min entries is more than max entries', () => {
   const { error } = formSchema.validate({
-    id: 1,
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -1680,7 +1657,6 @@ test('should error if repeatableSet type element min entries is more than max en
 test('should error if repeatableSet type element min or max entries is less than 0', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -1726,7 +1702,6 @@ test('should error if repeatableSet type element min or max entries is less than
 test('should error if repeatableSet element names not unique', () => {
   expect(() =>
     validateFormThrowError({
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -1770,7 +1745,6 @@ describe('summary form elements', () => {
   test('should error if repeatableSet summary element references element that is not valid', () => {
     expect(() =>
       validateFormThrowError({
-        id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
@@ -1820,7 +1794,6 @@ describe('summary form elements', () => {
   test('should error if repeatableSet summary element references element that is not valid on multi page form', () => {
     expect(() =>
       validateFormThrowError({
-        id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
@@ -1892,7 +1865,6 @@ describe('summary form elements', () => {
   test('should error if repeatableSet summary element references element that does not exist', () => {
     expect(() =>
       validateFormThrowError({
-        id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
@@ -1936,7 +1908,6 @@ describe('summary form elements', () => {
   test('fails when summary elementIds contains a invalidId', () => {
     expect(() =>
       validateFormThrowError({
-        id: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
         formsAppIds: [1],
@@ -1968,7 +1939,6 @@ describe('summary form elements', () => {
   test('fails when summary elementIds contains a invalid type', () => {
     expect(() =>
       validateFormThrowError({
-        id: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
         formsAppIds: [1],
@@ -2001,7 +1971,6 @@ describe('summary form elements', () => {
   test('fails when summary elementIds references self', () => {
     expect(() =>
       validateFormThrowError({
-        id: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
         formsAppIds: [1],
@@ -2033,7 +2002,6 @@ describe('summary form elements', () => {
 
   test('succeeds when summary elementIds are valid', () => {
     validateFormThrowError({
-      id: 1,
       formsAppEnvironmentId: 1,
       name: 'Inspection',
       formsAppIds: [1],
@@ -2061,7 +2029,6 @@ describe('summary form elements', () => {
 
   test('succeeds when repeatable set summary elementIds are referencing elements in root elements', () => {
     validateFormThrowError({
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -2110,7 +2077,6 @@ describe('summary form elements', () => {
 
   test('succeeds when repeatable set summary elementIds are referencing elements in root elements on another page', () => {
     validateFormThrowError({
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -2174,7 +2140,6 @@ describe('summary form elements', () => {
 
   test('succeeds when summary elementIds are referencing elements in a repeatable set in root elements', () => {
     validateFormThrowError({
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -2223,7 +2188,6 @@ describe('summary form elements', () => {
 
   test('succeeds when summary elementIds are referencing elements in a repeatable set on another page', () => {
     validateFormThrowError({
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -2289,7 +2253,6 @@ describe('summary form elements', () => {
 test('should error if page element has child page element', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2338,7 +2301,6 @@ test('should error if page element has child page element', () => {
 test('should error if page element has no elements', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       isMultiPage: true,
       name: 'string',
       description: 'string',
@@ -2372,7 +2334,6 @@ test('should error if page element has no elements', () => {
 test('should error if isMultiPage is set to false', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2421,7 +2382,6 @@ test('should error if isMultiPage is set to false', () => {
 test('should allow multiple pages', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2475,7 +2435,6 @@ test('should allow multiple pages', () => {
 test('should error if root elements arent all page elements', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2522,7 +2481,6 @@ test('should error if root elements arent all page elements', () => {
 test('should error if isMultiPage is false even if all root elements are pages', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2578,7 +2536,6 @@ test('should error if isMultiPage is false even if all root elements are pages',
 test('should error if image element does not have a default value', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2615,7 +2572,6 @@ test('should error if image element does not have a default value', () => {
 test('should error if HTML element does not have a default value', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2652,7 +2608,6 @@ test('should error if HTML element does not have a default value', () => {
 test('should error if calculation element does not have a default value', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2692,7 +2647,6 @@ test('should error if calculation element does not have a default value', () => 
 test('should allow array of restricted barcode types', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2730,7 +2684,6 @@ test('should allow array of restricted barcode types', () => {
 test('should require restricted barcode types if restrictBarcodeTypes boolean is true', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2769,7 +2722,6 @@ test('should require restricted barcode types if restrictBarcodeTypes boolean is
 test('should throw error if postSubmissionAction is an invalid type', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2796,7 +2748,6 @@ test('should throw error if postSubmissionAction is an invalid type', () => {
 test('should throw error if cancelAction is an invalid type', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2824,7 +2775,6 @@ test('should throw error if cancelAction is an invalid type', () => {
 test('should throw error if postSubmissionAction is missing', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2848,7 +2798,6 @@ test('should throw error if postSubmissionAction is missing', () => {
 test('should throw error if postSubmissionAction is URL but no URL is present', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2873,7 +2822,6 @@ test('should throw error if postSubmissionAction is URL but no URL is present', 
 test('should throw error if defaultValue for email is not valid', () => {
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2910,7 +2858,6 @@ test('should throw error if defaultValue contains src="data:', () => {
     '<p>a<img src="https://git.blinkm.co/uploads/-/system/group/avatar/64/1blinkblack.png"><img src="data:image/jpeg;base64,/9j/4AA9k=" alt="Image result"></p>'
   const { error } = formSchema.validate(
     {
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -2946,7 +2893,6 @@ describe('optionTypes', () => {
   describe('when freshdesk field', () => {
     test('valid when freshdeskFieldName is provided', () => {
       const result = formSchema.validate({
-        id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
@@ -2971,7 +2917,6 @@ describe('optionTypes', () => {
     })
     test('invalid when freshdeskFieldName is NOT provided', () => {
       const { error } = formSchema.validate({
-        id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
@@ -2999,7 +2944,6 @@ describe('optionTypes', () => {
   describe('when dynamic', () => {
     test('valid when dynamicOptionSetId is provided', () => {
       const result = formSchema.validate({
-        id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
@@ -3024,7 +2968,6 @@ describe('optionTypes', () => {
     })
     test('invalid when dynamicOptionSetId is NOT provided', () => {
       const { error } = formSchema.validate({
-        id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
@@ -3052,7 +2995,6 @@ describe('optionTypes', () => {
   describe('when custom', () => {
     test('valid when options are provided', () => {
       const result = formSchema.validate({
-        id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
@@ -3083,7 +3025,6 @@ describe('optionTypes', () => {
     })
     test('invalid when options are NOT provided', () => {
       const { error } = formSchema.validate({
-        id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
@@ -3109,7 +3050,6 @@ describe('optionTypes', () => {
   describe('when not provided', () => {
     test('defaults to custom', () => {
       const { error, value } = formSchema.validate({
-        id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
@@ -3142,7 +3082,6 @@ describe('optionTypes', () => {
     })
     test('valid when options are provided', () => {
       const result = formSchema.validate({
-        id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
@@ -3172,7 +3111,6 @@ describe('optionTypes', () => {
     })
     test('invalid when options are NOT provided', () => {
       const { error } = formSchema.validate({
-        id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
@@ -3244,7 +3182,6 @@ describe('Freshdesk Submission Event', () => {
     ]
     const { error, value } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3282,7 +3219,6 @@ describe('Freshdesk Submission Event', () => {
   test('should not allow Freshdesk Create Ticket submission event with wrong formElementId', () => {
     const run = () =>
       validateFormThrowError({
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3333,7 +3269,6 @@ describe('Freshdesk add note Submission Event', () => {
     ]
     const { error, value } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3402,7 +3337,6 @@ describe('PDF submission event', () => {
     ]
     const { error, value } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3467,7 +3401,6 @@ describe('PDF submission event', () => {
     ]
     const { error, value } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3498,7 +3431,6 @@ describe('PDF submission event', () => {
   test('should allow PDF submission event with field value', () => {
     const result = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3535,7 +3467,6 @@ describe('PDF submission event', () => {
   test('should disallow PDF submission event with email that is not a email address or a field:', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3573,7 +3504,6 @@ describe('PDF submission event', () => {
   test('should disallow PDF submission event with email template mapping referencing element that does not exist', () => {
     const run = () =>
       validateFormThrowError({
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3620,7 +3550,6 @@ describe('CALLBACK submission event', () => {
   test('should allow CALLBACK submission event with url and secrent', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3653,7 +3582,6 @@ describe('CALLBACK submission event', () => {
   test('should disallow CALLBACK submission event without url and secrent', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3686,7 +3614,6 @@ describe('TRIM submission event', () => {
   test('should allow TRIM submission event', () => {
     const { error, value } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3736,7 +3663,6 @@ describe('TRIM submission event', () => {
   test('should error TRIM submission event not passing environmentId', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3784,7 +3710,6 @@ describe('TRIM submission event', () => {
   test('should allow TRIM submission event without location or action', () => {
     const { error, value } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3825,7 +3750,6 @@ describe('TRIM submission event', () => {
   test('should allow TRIM submission event without location', () => {
     const { error, value } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3870,7 +3794,6 @@ describe('TRIM submission event', () => {
   test('should allow TRIM submission event without action', () => {
     const { error, value } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3917,7 +3840,6 @@ describe('SCHEDULING submission event', () => {
   test('should allow SCHEDULING form event', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3963,7 +3885,6 @@ describe('SCHEDULING submission event', () => {
   test('should error SCHEDULING submission event if nameElementId does not exist', () => {
     expect(() =>
       validateFormThrowError({
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -3992,7 +3913,6 @@ describe('SCHEDULING submission event', () => {
   test('should error SCHEDULING submission event if "nameElementId" references an element that is a "text" element', () => {
     expect(() =>
       validateFormThrowError({
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -4028,7 +3948,6 @@ describe('SCHEDULING submission event', () => {
   test('should error SCHEDULING submission event if emailElementId does not exist', () => {
     expect(() =>
       validateFormThrowError({
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -4057,7 +3976,6 @@ describe('SCHEDULING submission event', () => {
   test('should error SCHEDULING submission event if "emailElementId" references an element that isn\'t an "email" element', () => {
     expect(() =>
       validateFormThrowError({
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -4095,7 +4013,6 @@ describe('CIVICA_CRM submission event', () => {
   test('should allow CIVICA_CRM submission event', () => {
     const { error, value } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -4148,7 +4065,6 @@ describe('CIVICA_CRM submission event', () => {
   test('should error CIVICA_CRM submission event not passing environmentId', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -4185,7 +4101,6 @@ describe('CIVICA_CRM submission event', () => {
   test('should error CIVICA_CRM submission event if mapping contains a formElementId that does not exist', () => {
     expect(() =>
       validateFormThrowError({
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -4235,7 +4150,6 @@ describe('CIVICA_CRM submission event', () => {
 describe('BPOINT submission event', () => {
   test('should error for BPOINT submission event not passing "elementId"', () => {
     const { error } = formSchema.validate({
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -4260,7 +4174,6 @@ describe('BPOINT submission event', () => {
   })
   test('should error for BPOINT submission event not passing "environmentId"', () => {
     const { error } = formSchema.validate({
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -4288,7 +4201,6 @@ describe('BPOINT submission event', () => {
   test('should allow BPOINT submission event', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -4330,7 +4242,6 @@ describe('BPOINT submission event', () => {
 describe('WESTPAC_QUICK_WEB submission event', () => {
   test('should error for WESTPAC_QUICK_WEB submission event not passing "elementId"', () => {
     const { error } = formSchema.validate({
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -4354,7 +4265,6 @@ describe('WESTPAC_QUICK_WEB submission event', () => {
   })
   test('should error for WESTPAC_QUICK_WEB submission event not passing "environmentId"', () => {
     const { error } = formSchema.validate({
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -4381,7 +4291,6 @@ describe('WESTPAC_QUICK_WEB submission event', () => {
   test('should allow WESTPAC_QUICK_WEB submission event', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -4423,7 +4332,6 @@ describe('WESTPAC_QUICK_WEB submission event', () => {
 describe('WESTPAC_QUICK_STREAM submission event', () => {
   test('should error for WESTPAC_QUICK_STREAM submission event not passing "elementId"', () => {
     const { error } = formSchema.validate({
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -4447,7 +4355,6 @@ describe('WESTPAC_QUICK_STREAM submission event', () => {
   })
   test('should error for WESTPAC_QUICK_STREAM submission event not passing "environmentId"', () => {
     const { error } = formSchema.validate({
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -4474,7 +4381,6 @@ describe('WESTPAC_QUICK_STREAM submission event', () => {
   test('should allow WESTPAC_QUICK_STREAM submission event', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -4517,7 +4423,6 @@ describe('CP_PAY submission event', () => {
   test('should allow CP_PAY submission event', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -4559,7 +4464,6 @@ describe('CP_PAY submission event', () => {
 describe('NSW_GOV_PAY submission event', () => {
   test('should error for NSW_GOV_PAY submission event not passing "elementId"', () => {
     const { error } = formSchema.validate({
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -4584,7 +4488,6 @@ describe('NSW_GOV_PAY submission event', () => {
   })
   test('should error for NSW_GOV_PAY submission event not passing "primaryAgencyId"', () => {
     const { error } = formSchema.validate({
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -4611,7 +4514,6 @@ describe('NSW_GOV_PAY submission event', () => {
   })
   test('should error for NSW_GOV_PAY submission event not passing "productDescription"', () => {
     const { error } = formSchema.validate({
-      id: 1,
       name: 'string',
       description: 'string',
       formsAppEnvironmentId: 1,
@@ -4640,7 +4542,6 @@ describe('NSW_GOV_PAY submission event', () => {
   test('should allow NSW_GOV_PAY submission event', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -4682,7 +4583,6 @@ describe('NSW_GOV_PAY submission event', () => {
   test('should not allow NSW_GOV_PAY submission event with a "customerReference" of character length over 250', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -4728,7 +4628,6 @@ describe('NSW_GOV_PAY submission event', () => {
   test('should not allow NSW_GOV_PAY submission event with a "productDescription" of character length over 250', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -4773,7 +4672,6 @@ describe('NSW_GOV_PAY submission event', () => {
 
 describe('CP_HCMS submission event', () => {
   const form = {
-    id: 1,
     name: 'string',
     description: 'string',
     formsAppEnvironmentId: 1,
@@ -5010,7 +4908,6 @@ describe('Data Lookup enabled', () => {
   test('should allow id for data lookup enabled type', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -5049,7 +4946,6 @@ describe('Data Lookup enabled', () => {
   test('should require id if data lookup boolean is true', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -5089,7 +4985,6 @@ describe('Data Lookup enabled', () => {
   test('should require id if element lookup boolean is true', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -5130,7 +5025,6 @@ describe('Data Lookup enabled', () => {
 describe('invalid property removal', () => {
   const createForm = (props: Record<string, unknown>) => {
     return {
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -5690,7 +5584,6 @@ describe('invalid property removal', () => {
     }
 
     const { error, value } = formSchema.validate({
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -5721,7 +5614,6 @@ describe('invalid property removal', () => {
 
   test('should strip out `redirectUrl` if `postSubmissionAction` is not "URL" and set default cancelAction', () => {
     const { error, value } = formSchema.validate({
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -5734,7 +5626,6 @@ describe('invalid property removal', () => {
     })
     expect(error).toBeFalsy()
     expect(value).toEqual({
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -5751,7 +5642,6 @@ describe('invalid property removal', () => {
 
   test('should strip out `postSubmissionReceipt` if `postSubmissionAction` is "URL"', () => {
     const { error, value } = formSchema.validate({
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -5768,7 +5658,6 @@ describe('invalid property removal', () => {
     })
     expect(error).toBeFalsy()
     expect(value).toEqual({
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -5786,7 +5675,6 @@ describe('invalid property removal', () => {
 
   test('should allow `postSubmissionReceipt.html` if `postSubmissionAction` is not "URL"', () => {
     const { error, value } = formSchema.validate({
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -5802,7 +5690,6 @@ describe('invalid property removal', () => {
     })
     expect(error).toBeFalsy()
     expect(value).toEqual({
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -5821,7 +5708,6 @@ describe('invalid property removal', () => {
   })
   test('should allow `postSubmissionReceipt.allowPDFDownload` if `postSubmissionAction` is not "URL"', () => {
     const { error, value } = formSchema.validate({
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -5846,7 +5732,6 @@ describe('invalid property removal', () => {
     })
     expect(error).toBeFalsy()
     expect(value).toEqual({
-      id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -5876,7 +5761,6 @@ describe('invalid property removal', () => {
   test('should throw error for `postSubmissionReceipt.allowPdfDownload.excludedElementIds` contains element ids that do not exist on the form', () => {
     const run = () =>
       validateFormThrowError({
-        id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
@@ -6408,7 +6292,6 @@ test('should allow defaultValue in "private" format for draw element with no sto
 
 test('should allow placeholderValue property for these elements', () => {
   const result = formSchema.validate({
-    id: 1,
     name: 'Placeholders Form',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -6518,7 +6401,6 @@ test('should allow placeholderValue property for these elements', () => {
 
 test('should allow forms without tags', () => {
   const result = formSchema.validate({
-    id: 1,
     name: 'Tags Form',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -6535,7 +6417,6 @@ test('should allow forms without tags', () => {
 test('should not allow publish start date after publish end date', () => {
   expect(() =>
     validateFormThrowError({
-      id: 1,
       name: 'Tags Form',
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
@@ -6554,7 +6435,6 @@ describe('submission event configuration', () => {
   test('should reject if configuration is not supplied', () => {
     const { error } = formSchema.validate(
       {
-        id: 1,
         name: 'string',
         description: 'string',
         formsAppEnvironmentId: 1,
@@ -6584,7 +6464,6 @@ describe('submission event configuration', () => {
 
 describe('Date and Time `NOW` option', () => {
   const form = {
-    id: 1,
     name: 'Form',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -7221,7 +7100,6 @@ describe('Date and Time `NOW` option', () => {
 
 describe('Regex Custom Validation Properties', () => {
   const form = {
-    id: 1,
     name: 'Form',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -7349,7 +7227,6 @@ describe('Regex Custom Validation Properties', () => {
 
 describe('canToggleAll property', () => {
   const form = {
-    id: 1,
     name: 'Form',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -7416,7 +7293,6 @@ describe('canToggleAll property', () => {
 
 describe('Section Element', () => {
   const form = {
-    id: 1,
     name: 'Form',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -7577,7 +7453,6 @@ describe('Section Element', () => {
 
 describe('approvalConfiguration', () => {
   const form = {
-    id: 1,
     name: 'string',
     description: 'string',
     formsAppEnvironmentId: 1,
@@ -7673,7 +7548,6 @@ describe('approvalConfiguration', () => {
 
 describe('Approval Forms Inclusion Configuration', () => {
   const form = {
-    id: 1,
     name: 'string',
     description: 'string',
     formsAppEnvironmentId: 1,
@@ -7749,7 +7623,6 @@ describe('Approval Forms Inclusion Configuration', () => {
 
 describe('server validation', () => {
   const form = {
-    id: 1,
     name: 'string',
     description: 'string',
     formsAppEnvironmentId: 1,
@@ -7819,7 +7692,6 @@ describe('server validation', () => {
 
 describe('external id generation and personalisation', () => {
   const form = {
-    id: 1,
     name: 'string',
     description: 'string',
     formsAppEnvironmentId: 1,
@@ -8005,7 +7877,6 @@ describe('external id generation and personalisation', () => {
   describe('should reject with correct validation errors for non unique element names', () => {
     expect(() =>
       validateFormThrowError({
-        id: 1,
         name: 'Form',
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
