@@ -27,6 +27,9 @@ export default function generatePageElement(
   if (!Array.isArray(formElement.elements)) {
     formElement.elements = [generateFormElement({})]
   }
-  const element = validateWithPageElementSchema(formElement)
-  return element
+  const result = validateWithPageElementSchema(formElement)
+  if (!result.success) {
+    throw result.error
+  }
+  return result.data
 }

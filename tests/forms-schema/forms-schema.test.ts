@@ -2,6 +2,14 @@ import { formSchema, elementSchema } from '../../src/lib/forms-schema'
 import { validateWithFormSchema } from '../../src/lib/forms-validation'
 import { FormTypes } from '@oneblink/types'
 
+function validateFormThrowError(data: unknown) {
+  const result = validateWithFormSchema(data)
+  if (!result.success) {
+    throw result.error
+  }
+  return result.data
+}
+
 describe('Valid Form Schema with Pages', () => {
   const result = formSchema.validate({
     id: 1,
@@ -1717,7 +1725,7 @@ test('should error if repeatableSet type element min or max entries is less than
 
 test('should error if repeatableSet element names not unique', () => {
   expect(() =>
-    validateWithFormSchema({
+    validateFormThrowError({
       id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
@@ -1761,7 +1769,7 @@ test('should error if repeatableSet element names not unique', () => {
 describe('summary form elements', () => {
   test('should error if repeatableSet summary element references element that is not valid', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
@@ -1811,7 +1819,7 @@ describe('summary form elements', () => {
   })
   test('should error if repeatableSet summary element references element that is not valid on multi page form', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
@@ -1883,7 +1891,7 @@ describe('summary form elements', () => {
   })
   test('should error if repeatableSet summary element references element that does not exist', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
@@ -1927,7 +1935,7 @@ describe('summary form elements', () => {
 
   test('fails when summary elementIds contains a invalidId', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
@@ -1959,7 +1967,7 @@ describe('summary form elements', () => {
 
   test('fails when summary elementIds contains a invalid type', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
@@ -1992,7 +2000,7 @@ describe('summary form elements', () => {
 
   test('fails when summary elementIds references self', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
@@ -2024,7 +2032,7 @@ describe('summary form elements', () => {
   })
 
   test('succeeds when summary elementIds are valid', () => {
-    validateWithFormSchema({
+    validateFormThrowError({
       id: 1,
       formsAppEnvironmentId: 1,
       name: 'Inspection',
@@ -2052,7 +2060,7 @@ describe('summary form elements', () => {
   })
 
   test('succeeds when repeatable set summary elementIds are referencing elements in root elements', () => {
-    validateWithFormSchema({
+    validateFormThrowError({
       id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
@@ -2101,7 +2109,7 @@ describe('summary form elements', () => {
   })
 
   test('succeeds when repeatable set summary elementIds are referencing elements in root elements on another page', () => {
-    validateWithFormSchema({
+    validateFormThrowError({
       id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
@@ -2165,7 +2173,7 @@ describe('summary form elements', () => {
   })
 
   test('succeeds when summary elementIds are referencing elements in a repeatable set in root elements', () => {
-    validateWithFormSchema({
+    validateFormThrowError({
       id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
@@ -2214,7 +2222,7 @@ describe('summary form elements', () => {
   })
 
   test('succeeds when summary elementIds are referencing elements in a repeatable set on another page', () => {
-    validateWithFormSchema({
+    validateFormThrowError({
       id: 1,
       name: 'Inspection',
       formsAppEnvironmentId: 1,
@@ -3273,7 +3281,7 @@ describe('Freshdesk Submission Event', () => {
   })
   test('should not allow Freshdesk Create Ticket submission event with wrong formElementId', () => {
     const run = () =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         name: 'string',
         description: 'string',
@@ -3564,7 +3572,7 @@ describe('PDF submission event', () => {
   })
   test('should disallow PDF submission event with email template mapping referencing element that does not exist', () => {
     const run = () =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         name: 'string',
         description: 'string',
@@ -3954,7 +3962,7 @@ describe('SCHEDULING submission event', () => {
   })
   test('should error SCHEDULING submission event if nameElementId does not exist', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         name: 'string',
         description: 'string',
@@ -3983,7 +3991,7 @@ describe('SCHEDULING submission event', () => {
   })
   test('should error SCHEDULING submission event if "nameElementId" references an element that is a "text" element', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         name: 'string',
         description: 'string',
@@ -4019,7 +4027,7 @@ describe('SCHEDULING submission event', () => {
   })
   test('should error SCHEDULING submission event if emailElementId does not exist', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         name: 'string',
         description: 'string',
@@ -4048,7 +4056,7 @@ describe('SCHEDULING submission event', () => {
   })
   test('should error SCHEDULING submission event if "emailElementId" references an element that isn\'t an "email" element', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         name: 'string',
         description: 'string',
@@ -4176,7 +4184,7 @@ describe('CIVICA_CRM submission event', () => {
   })
   test('should error CIVICA_CRM submission event if mapping contains a formElementId that does not exist', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         name: 'string',
         description: 'string',
@@ -5867,7 +5875,7 @@ describe('invalid property removal', () => {
   })
   test('should throw error for `postSubmissionReceipt.allowPdfDownload.excludedElementIds` contains element ids that do not exist on the form', () => {
     const run = () =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         name: 'Inspection',
         formsAppEnvironmentId: 1,
@@ -6526,7 +6534,7 @@ test('should allow forms without tags', () => {
 
 test('should not allow publish start date after publish end date', () => {
   expect(() =>
-    validateWithFormSchema({
+    validateFormThrowError({
       id: 1,
       name: 'Tags Form',
       formsAppEnvironmentId: 1,
@@ -7093,7 +7101,7 @@ describe('Date and Time `NOW` option', () => {
 
   test('should throw error when toDateElementId does not exist', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         elements: [
           {
@@ -7112,7 +7120,7 @@ describe('Date and Time `NOW` option', () => {
 
   test('should throw error when toDateElementId is not the same type', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         elements: [
           {
@@ -7139,7 +7147,7 @@ describe('Date and Time `NOW` option', () => {
 
   test('should throw error when fromDateElementId does not exist', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         elements: [
           {
@@ -7158,7 +7166,7 @@ describe('Date and Time `NOW` option', () => {
 
   test('should throw error when fromDateElementId is not the same type', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         elements: [
           {
@@ -7184,7 +7192,7 @@ describe('Date and Time `NOW` option', () => {
   })
 
   test('should allow when toDateElementId and fromDateElement are correctly configured', () => {
-    validateWithFormSchema({
+    validateFormThrowError({
       ...form,
       elements: [
         {
@@ -7596,7 +7604,7 @@ describe('approvalConfiguration', () => {
   }
 
   test('Should save correct data valid', () => {
-    const validatedForm = validateWithFormSchema({
+    const validatedForm = validateFormThrowError({
       ...form,
       approvalConfiguration: {
         defaultNotificationEmailElementId:
@@ -7610,7 +7618,7 @@ describe('approvalConfiguration', () => {
 
   test('Should throw error if elementId is not a string', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         approvalConfiguration: {
           defaultNotificationEmailElementId: 1,
@@ -7623,7 +7631,7 @@ describe('approvalConfiguration', () => {
 
   test('Should throw error if elementId is not a guid', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         approvalConfiguration: {
           defaultNotificationEmailElementId: 'not a guid',
@@ -7636,7 +7644,7 @@ describe('approvalConfiguration', () => {
 
   test('Should throw error if element does not exist', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         approvalConfiguration: {
           defaultNotificationEmailElementId:
@@ -7650,7 +7658,7 @@ describe('approvalConfiguration', () => {
 
   test('Should throw error if element is not an "email" type', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         approvalConfiguration: {
           defaultNotificationEmailElementId:
@@ -7699,7 +7707,7 @@ describe('Approval Forms Inclusion Configuration', () => {
         },
       },
     }
-    const validatedForm = validateWithFormSchema({
+    const validatedForm = validateFormThrowError({
       ...form,
       approvalEvents: [submissionEvent],
     })
@@ -7729,7 +7737,7 @@ describe('Approval Forms Inclusion Configuration', () => {
       },
     }
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         approvalEvents: [submissionEvent],
       }),
@@ -7759,7 +7767,7 @@ describe('server validation', () => {
       url: 'https://google.com',
       secret: 'shh',
     }
-    const validatedForm = validateWithFormSchema({
+    const validatedForm = validateFormThrowError({
       ...form,
       serverValidation: {
         type: 'CALLBACK',
@@ -7777,7 +7785,7 @@ describe('server validation', () => {
       apiEnvironmentRoute: '/pathname',
       secret: 'shh',
     }
-    const validatedForm = validateWithFormSchema({
+    const validatedForm = validateFormThrowError({
       ...form,
       serverValidation: {
         type: 'ONEBLINK_API',
@@ -7798,7 +7806,7 @@ describe('server validation', () => {
       ],
     }
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         serverValidation: {
           type: 'RECEIPT_ID',
@@ -7831,7 +7839,7 @@ describe('external id generation and personalisation', () => {
       apiEnvironmentRoute: '/pathname',
       secret: 'shh',
     }
-    const validatedForm = validateWithFormSchema({
+    const validatedForm = validateFormThrowError({
       ...form,
       externalIdGenerationOnSubmit: {
         type: 'ONEBLINK_API',
@@ -7851,7 +7859,7 @@ describe('external id generation and personalisation', () => {
       url: 'https://google.com',
       secret: 'shh',
     }
-    const validatedForm = validateWithFormSchema({
+    const validatedForm = validateFormThrowError({
       ...form,
       externalIdGenerationOnSubmit: {
         type: 'CALLBACK',
@@ -7888,7 +7896,7 @@ describe('external id generation and personalisation', () => {
         },
       ],
     }
-    const validatedForm = validateWithFormSchema({
+    const validatedForm = validateFormThrowError({
       ...form,
       externalIdGenerationOnSubmit: {
         type: 'RECEIPT_ID',
@@ -7912,7 +7920,7 @@ describe('external id generation and personalisation', () => {
     }
 
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         personalisation: {
           type: 'RECEIPT_ID',
@@ -7929,7 +7937,7 @@ describe('external id generation and personalisation', () => {
       apiEnvironmentRoute: '/pathname',
       secret: 'shh',
     }
-    const validatedForm = validateWithFormSchema({
+    const validatedForm = validateFormThrowError({
       ...form,
       personalisation: {
         type: 'ONEBLINK_API',
@@ -7945,7 +7953,7 @@ describe('external id generation and personalisation', () => {
       url: 'https://google.com',
       secret: 'shh',
     }
-    const validatedForm = validateWithFormSchema({
+    const validatedForm = validateFormThrowError({
       ...form,
       personalisation: {
         type: 'CALLBACK',
@@ -7969,7 +7977,7 @@ describe('external id generation and personalisation', () => {
       apiEnvironmentRoute: '/external-id',
       secret: 'shh',
     }
-    const validatedForm = validateWithFormSchema({
+    const validatedForm = validateFormThrowError({
       ...form,
       externalIdGenerationOnSubmit: {
         type: 'ONEBLINK_API',
@@ -7992,5 +8000,62 @@ describe('external id generation and personalisation', () => {
     expect(validatedForm.personalisation?.configuration).toEqual(
       personalisationConfiguration,
     )
+  })
+
+  describe('should reject with correct validation errors for non unique element names', () => {
+    expect(() =>
+      validateFormThrowError({
+        id: 1,
+        name: 'Form',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: '59cc888b8969af000fb50ddb',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: true,
+        submissionEvents: [],
+        elements: [
+          {
+            id: '9014e80c-3c68-4adb-a335-1be04ebc95ee',
+            label: 'Page Heading',
+            type: 'page',
+            elements: [
+              {
+                id: '9014e80c-3c68-4adb-a335-1be04ebc95ee',
+                label: 'section 1',
+                type: 'section',
+                elements: [
+                  {
+                    id: 'dee04cf1-ab5a-4854-9166-e71a87404fd1',
+                    name: 'text',
+                    type: 'text',
+                    label: 'text 1',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: '9014e80c-3c68-4adb-a335-1be04ebc95e2',
+            label: 'Page Heading 2',
+            type: 'page',
+            elements: [
+              {
+                id: '9014e80c-3c68-4adb-a335-1be04ebc95ef',
+                label: 'section 2',
+                type: 'section',
+                elements: [
+                  {
+                    id: 'dee04cf1-ab5a-4854-9166-e71a87404fd2',
+                    name: 'text',
+                    type: 'text',
+                    label: 'text 2',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      }),
+    ).toThrow('Element name is not unique: text')
   })
 })

@@ -16,14 +16,12 @@ import {
   FormTypes,
   SubmissionTypes,
   EnvironmentTypes,
-  SubmissionEventTypes,
   KeyTypes,
 } from '@oneblink/types'
 import {
   validateWithFormSchema,
   validateFormEventData,
-  validateConditionalPredicates,
-  validateApiRequest,
+  validateEndpointConfiguration,
 } from '../lib/forms-validation'
 import {
   ConstructorOptions,
@@ -935,14 +933,11 @@ export default class Forms extends OneBlinkAPI {
    *
    * @param newForm The form object to create.
    */
-  async createForm(
-    newForm: Omit<FormTypes.Form, 'id' | 'createdAt' | 'updatedAt'>,
-  ): Promise<FormTypes.Form> {
-    const form = validateWithFormSchema(newForm)
-    const savedForm = await super.postRequest<FormTypes.Form, FormTypes.Form>(
-      '/forms',
-      form,
-    )
+  async createForm(newForm: FormTypes.NewForm): Promise<FormTypes.Form> {
+    const savedForm = await super.postRequest<
+      FormTypes.NewForm,
+      FormTypes.Form
+    >('/forms', newForm)
     return savedForm
   }
   /**
@@ -982,10 +977,9 @@ export default class Forms extends OneBlinkAPI {
     form: FormTypes.Form,
     overrideLock?: boolean,
   ): Promise<FormTypes.Form> {
-    const validatedForm = validateWithFormSchema(form)
     const savedForm = await super.putRequest<FormTypes.Form, FormTypes.Form>(
-      `/forms/${validatedForm.id}${overrideLock ? '?overrideLock=true' : ''}`,
-      validatedForm,
+      `/forms/${form.id}${overrideLock ? '?overrideLock=true' : ''}`,
+      form,
     )
     return savedForm
   }
@@ -1114,16 +1108,19 @@ export default class Forms extends OneBlinkAPI {
    *   formsAppIds: [1, 2, 3],
    * }
    *
-   * const validatedForm = OneBlink.Forms.validateForm(form)
+   * const result = OneBlink.Forms.validateForm(form)
+   * if (!result.success) {
+   *   throw result.error
+   * }
    *
+   * const validatedForm = result.data
    * return validatedForm
    * ```
    *
    * @param form The form object to validate.
    */
-  static validateForm(form: unknown): FormTypes.Form {
-    const validatedForm = validateWithFormSchema(form)
-    return validatedForm
+  static validateForm(form: unknown) {
+    return validateWithFormSchema(form)
   }
   /**
    * A static method available on the forms class, used for validating a
@@ -1136,7 +1133,7 @@ export default class Forms extends OneBlinkAPI {
   static validateFormEvent(
     formElements: FormTypes.FormElement[],
     data: unknown,
-  ): SubmissionEventTypes.FormEvent {
+  ) {
     return validateFormEventData(formElements, data)
   }
   /**
@@ -1228,53 +1225,29 @@ export default class Forms extends OneBlinkAPI {
   }
 
   /**
-   * A static method available on the forms class, used for validating an array
-   * of Conditional Predicates found on form elements or submission events.
-   *
-   * #### Example
-   *
-   * ```javascript
-   * const predicates = [
-   *   {
-   *     elementId: 'f1eadc2b-79c8-4f97-8d92-cde64b34911f',
-   *     type: 'NUMERIC',
-   *     operator: '===',
-   *     value: 5,
-   *   },
-   *   {
-   *     elementId: '32g6dc5j-79c8-gf4z-8d92-cde64b34911f',
-   *     type: 'VALUE',
-   *     hasValue: true,
-   *   },
-   * ]
-   *
-   * const validatedPredicates =
-   *   OneBlink.Forms.validateConditionalPredicates(predicates)
-   *
-   * return validatedPredicates
-   * ```
-   */
-  static validateConditionalPredicates = validateConditionalPredicates
-
-  /**
    * A static method available on the forms class, used for validating a api
    * request configuration.
    *
    * #### Example
    *
    * ```javascript
-   * const apiRequest = {
+   * const endpointConfiguration = {
    *   type: 'CALLBACK',
    *   configuration: {
    *     url: 'https://a-website.com/endpoint',
    *   },
    * }
    *
-   * const validatedApiRequest =
-   *   OneBlink.Forms.validateApiRequest(apiRequest)
+   * const result = OneBlink.Forms.validateEndpointConfiguration(
+   *   endpointConfiguration,
+   * )
+   * if (!result.success) {
+   *   throw result.error
+   * }
    *
-   * return validatedApiRequest
+   * const validatedEndpointConfiguration = result.data
+   * return validatedEndpointConfiguration
    * ```
    */
-  static validateApiRequest = validateApiRequest
+  static validateEndpointConfiguration = validateEndpointConfiguration
 }

@@ -4,15 +4,29 @@ import Joi from 'joi'
 
 export function validateJoiSchema<T>(
   data: unknown,
-  schema: Joi.Schema,
-  options?: Joi.ValidationOptions,
-): T {
-  const result = schema.validate(data, options)
+  schema: Joi.Schema<T>,
+):
+  | {
+      success: true
+      data: T
+    }
+  | {
+      success: false
+      error: Joi.ValidationError
+    } {
+  const result = schema.validate(data, {
+    stripUnknown: true,
+  })
   if (result.error) {
-    throw result.error
+    return {
+      success: false,
+      error: result.error,
+    }
   }
-
-  return result.value as T
+  return {
+    success: true,
+    data: result.value,
+  }
 }
 
 /**
