@@ -20,7 +20,7 @@ const emailSchema = Joi.alternatives([
   Joi.string().regex(/^{USER:email}$/),
 ])
 
-const apiRequestSchemaConfiguration = Joi.object()
+const endpointConfigurationSchemaConfiguration = Joi.object()
   .required()
   .when('type', {
     is: 'CALLBACK',
@@ -39,9 +39,9 @@ const apiRequestSchemaConfiguration = Joi.object()
     }),
   })
 
-const apiRequestSchema = Joi.object({
+const endpointConfigurationSchema = Joi.object({
   type: Joi.string().required().valid('CALLBACK', 'ONEBLINK_API'),
-  configuration: apiRequestSchemaConfiguration,
+  configuration: endpointConfigurationSchemaConfiguration,
 })
 
 const emailSubmissionEventConfiguration = {
@@ -73,7 +73,7 @@ const emailSubmissionEventConfiguration = {
       )
       .required(),
   }),
-  emailAttachmentsEndpoint: apiRequestSchema,
+  emailAttachmentsEndpoint: endpointConfigurationSchema,
 }
 
 const approvalFormsInclusionConfiguration = {
@@ -408,7 +408,7 @@ const pageElementSchema = Joi.object().keys({
 
 const externalIdGenerationSchema = Joi.object({
   type: Joi.string().required().valid('CALLBACK', 'ONEBLINK_API', 'RECEIPT_ID'),
-  configuration: apiRequestSchemaConfiguration.when('type', {
+  configuration: endpointConfigurationSchemaConfiguration.when('type', {
     is: 'RECEIPT_ID',
     then: Joi.object({
       receiptComponents: Joi.array()
@@ -567,9 +567,9 @@ const formSchema = Joi.object().keys({
   updatedAt: Joi.string().allow('', null),
   // TAGS
   tags: Joi.array().default([]).items(Joi.string()),
-  serverValidation: apiRequestSchema,
+  serverValidation: endpointConfigurationSchema,
   externalIdGenerationOnSubmit: externalIdGenerationSchema,
-  personalisation: apiRequestSchema,
+  personalisation: endpointConfigurationSchema,
   submissionTitle: Joi.string(),
   continueWithAutosave: Joi.boolean(),
   customCssClasses,
@@ -581,4 +581,9 @@ export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
   ...schedulingEventTypes,
 ]
 
-export { formSchema, elementSchema, pageElementSchema, apiRequestSchema }
+export {
+  formSchema,
+  elementSchema,
+  pageElementSchema,
+  endpointConfigurationSchema,
+}

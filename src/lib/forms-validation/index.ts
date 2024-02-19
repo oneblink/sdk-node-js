@@ -1,39 +1,53 @@
-import Joi from 'joi'
 import { formElementsService } from '@oneblink/sdk-core'
-import {
-  FormTypes,
-  ConditionTypes,
-  SubmissionEventTypes,
-} from '@oneblink/types'
+import { FormTypes, SubmissionEventTypes } from '@oneblink/types'
 import {
   elementSchema,
   formSchema,
   pageElementSchema,
-  apiRequestSchema,
+  endpointConfigurationSchema,
   WorkflowEventSchema,
 } from '../forms-schema'
-import { ConditionalPredicatesItemSchema } from '../forms-schema/property-schemas'
 import {
   validateJoiSchema,
   stripLayoutFormElements,
   validateElementNamesAcrossNestedElements,
 } from './common'
 import validateFormEvents, { validateFormEvent } from './validate-form-events'
+import Joi from 'joi'
 
 function validateFormEventData(
   formElements: FormTypes.FormElement[],
   workflowEvent: unknown,
-): SubmissionEventTypes.FormEvent {
-  const formEvent = validateJoiSchema(workflowEvent, WorkflowEventSchema, {
-    stripUnknown: true,
-  }) as SubmissionEventTypes.FormEvent
-  validateFormEvent({
-    formEvent,
-    propertyName: 'formEvent',
-    validatedFormElements: formElements,
-    rootFormElements: stripLayoutFormElements(formElements),
-  })
-  return formEvent
+):
+  | {
+      success: false
+      error: Joi.ValidationError
+    }
+  | {
+      success: true
+      data: SubmissionEventTypes.FormEvent
+    } {
+  const result = validateJoiSchema<SubmissionEventTypes.FormEvent>(
+    workflowEvent,
+    WorkflowEventSchema,
+  )
+  if (!result.success) {
+    return result
+  }
+  try {
+    validateFormEvent({
+      formEvent: result.data,
+      propertyName: 'formEvent',
+      validatedFormElements: formElements,
+      rootFormElements: stripLayoutFormElements(formElements),
+    })
+    return result
+  } catch (error) {
+    return {
+      success: false,
+      error: error as Joi.ValidationError,
+    }
+  }
 }
 
 function validateReferenceDate({
@@ -174,136 +188,135 @@ function validateSummaryFormElements(
   }
 }
 
-function validateWithFormSchema(form?: unknown): FormTypes.Form {
-  const validatedForm: FormTypes.Form = validateJoiSchema(form, formSchema, {
-    stripUnknown: true,
-  })
-
-  // validate element names are unique (including elements without a name with children)
-  validateElementNamesAcrossNestedElements(validatedForm.elements)
-
-  const { publishStartDate, publishEndDate } = validatedForm
-  if (!!publishStartDate && !!publishEndDate) {
-    const startDate = new Date(publishStartDate)
-    const endDate = new Date(publishEndDate)
-    if (startDate >= endDate)
-      throw new Error('Publish Start Date must be before Publish End Date')
+function validateWithFormSchema(form?: unknown):
+  | {
+      success: false
+      error: Joi.ValidationError
+    }
+  | {
+      success: true
+      data: FormTypes.Form
+    } {
+  const result = validateJoiSchema<FormTypes.Form>(form, formSchema)
+  if (!result.success) {
+    return result
   }
+  const validatedForm = result.data
 
-  if (!validatedForm.submissionEvents) {
-    validatedForm.submissionEvents = []
-  }
+  try {
+    // validate element names are unique (including elements without a name with children)
+    validateElementNamesAcrossNestedElements(validatedForm.elements)
 
-  validateSummaryFormElements(validatedForm, validatedForm.elements, 'elements')
-  validateFormElementReferences(validatedForm.elements)
+    const { publishStartDate, publishEndDate } = validatedForm
+    if (!!publishStartDate && !!publishEndDate) {
+      const startDate = new Date(publishStartDate)
+      const endDate = new Date(publishEndDate)
+      if (startDate >= endDate)
+        throw new Error('Publish Start Date must be before Publish End Date')
+    }
 
-  const rootFormElements = stripLayoutFormElements(validatedForm.elements)
+    if (!validatedForm.submissionEvents) {
+      validatedForm.submissionEvents = []
+    }
 
-  // Form Event References
-  const formEventPropsToValidate = [
-    'draftEvents',
-    'schedulingEvents',
-    'paymentEvents',
-    'submissionEvents',
-    'approvalEvents',
-  ] as const
-  for (const formEventProp of formEventPropsToValidate) {
-    validateFormEvents({
-      formEvents: validatedForm[formEventProp] || [],
-      propertyName: formEventProp,
-      rootFormElements,
-      validatedFormElements: validatedForm.elements,
-    })
-  }
-
-  const defaultNotificationEmailElementId =
-    validatedForm.approvalConfiguration?.defaultNotificationEmailElementId
-  if (defaultNotificationEmailElementId) {
-    const element = rootFormElements.find(
-      ({ id }) => id === defaultNotificationEmailElementId,
+    validateSummaryFormElements(
+      validatedForm,
+      validatedForm.elements,
+      'elements',
     )
-    if (!element) {
-      throw new Error(
-        `"approvalConfiguration.defaultNotificationEmailElementId" (${defaultNotificationEmailElementId}) does not exist in "elements"`,
-      )
-    }
-    if (element.type !== 'email') {
-      throw new Error(
-        `"approvalConfiguration.defaultNotificationEmailElementId" (${defaultNotificationEmailElementId}) references an element that is not type "email" (${element.type})`,
-      )
-    }
-  }
+    validateFormElementReferences(validatedForm.elements)
 
-  if (
-    validatedForm.postSubmissionReceipt?.allowPDFDownload?.excludedElementIds
-  ) {
-    for (const elementId of validatedForm.postSubmissionReceipt.allowPDFDownload
-      .excludedElementIds) {
-      const element = formElementsService.findFormElement(
-        validatedForm.elements,
-        ({ id }) => id === elementId,
+    const rootFormElements = stripLayoutFormElements(validatedForm.elements)
+
+    // Form Event References
+    const formEventPropsToValidate = [
+      'draftEvents',
+      'schedulingEvents',
+      'paymentEvents',
+      'submissionEvents',
+      'approvalEvents',
+    ] as const
+    for (const formEventProp of formEventPropsToValidate) {
+      validateFormEvents({
+        formEvents: validatedForm[formEventProp] || [],
+        propertyName: formEventProp,
+        rootFormElements,
+        validatedFormElements: validatedForm.elements,
+      })
+    }
+
+    const defaultNotificationEmailElementId =
+      validatedForm.approvalConfiguration?.defaultNotificationEmailElementId
+    if (defaultNotificationEmailElementId) {
+      const element = rootFormElements.find(
+        ({ id }) => id === defaultNotificationEmailElementId,
       )
       if (!element) {
         throw new Error(
-          `You tried to reference an element (${elementId}) in "postSubmissionReceipt.allowPDFDownload.excludedElementIds" that does not exist on the form.`,
+          `"approvalConfiguration.defaultNotificationEmailElementId" (${defaultNotificationEmailElementId}) does not exist in "elements"`,
+        )
+      }
+      if (element.type !== 'email') {
+        throw new Error(
+          `"approvalConfiguration.defaultNotificationEmailElementId" (${defaultNotificationEmailElementId}) references an element that is not type "email" (${element.type})`,
         )
       }
     }
-  }
 
-  return validatedForm
+    if (
+      validatedForm.postSubmissionReceipt?.allowPDFDownload?.excludedElementIds
+    ) {
+      for (const elementId of validatedForm.postSubmissionReceipt
+        .allowPDFDownload.excludedElementIds) {
+        const element = formElementsService.findFormElement(
+          validatedForm.elements,
+          ({ id }) => id === elementId,
+        )
+        if (!element) {
+          throw new Error(
+            `You tried to reference an element (${elementId}) in "postSubmissionReceipt.allowPDFDownload.excludedElementIds" that does not exist on the form.`,
+          )
+        }
+      }
+    }
+
+    return {
+      success: true,
+      data: validatedForm,
+    }
+  } catch (error) {
+    return {
+      success: false,
+      error: error as Joi.ValidationError,
+    }
+  }
 }
 
 function validateWithElementSchema<T extends FormTypes._FormElementBase>(
   element: unknown,
-): T {
-  const validatedElement = validateJoiSchema<T>(element, elementSchema, {
-    stripUnknown: true,
-  })
+) {
+  const validatedElement = validateJoiSchema<T>(element, elementSchema)
 
   return validatedElement
 }
 
-function validateWithPageElementSchema(
-  element: unknown,
-): FormTypes.PageElement {
-  const validatedElement = validateJoiSchema<FormTypes.PageElement>(
-    element,
-    pageElementSchema,
-    {
-      stripUnknown: true,
-    },
-  )
-  return validatedElement
+function validateWithPageElementSchema(element: unknown) {
+  return validateJoiSchema<FormTypes.PageElement>(element, pageElementSchema)
 }
 
-function validateConditionalPredicates(
-  predicates: Array<unknown>,
-): Array<ConditionTypes.ConditionalPredicate> {
-  const schema = Joi.array()
-    .min(1)
-    .items(ConditionalPredicatesItemSchema)
-    .required()
-
-  const validatedPredicates = validateJoiSchema<
-    Array<ConditionTypes.ConditionalPredicate>
-  >(predicates, schema, {
-    stripUnknown: true,
-  })
-  return validatedPredicates
-}
-
-function validateApiRequest(
-  apiRequest: unknown,
-): FormTypes.FormServerValidation {
-  const validatedApiRequest = validateJoiSchema<FormTypes.FormServerValidation>(
-    apiRequest,
-    apiRequestSchema,
-    {
-      stripUnknown: true,
-    },
+function validateEndpointConfiguration(data: unknown):
+  | {
+      success: false
+      error: Joi.ValidationError
+    }
+  | {
+      success: true
+      data: FormTypes.FormServerValidation
+    } {
+  return validateJoiSchema<FormTypes.FormServerValidation>(
+    data,
+    endpointConfigurationSchema,
   )
-  return validatedApiRequest
 }
 
 export {
@@ -311,6 +324,5 @@ export {
   validateWithFormSchema,
   validateWithElementSchema,
   validateWithPageElementSchema,
-  validateConditionalPredicates,
-  validateApiRequest,
+  validateEndpointConfiguration,
 }

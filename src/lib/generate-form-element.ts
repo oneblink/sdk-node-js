@@ -53,6 +53,10 @@ export default function generateFormElement<
   }
   formElement.label = label
 
-  const validatedFormElement = validateWithElementSchema<T>(formElement)
-  return validatedFormElement
+  const result = validateWithElementSchema<T>(formElement)
+  if (!result.success) {
+    throw result.error
+  }
+
+  return result.data
 }

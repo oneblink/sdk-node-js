@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `Forms.validateEndpointConfiguration()`
+
+### Changed
+
+- **[BREAKING]** `Forms.validateForm()` and `Forms.validateFormEvent()` to return an object with a result or an error instead of throwing errors
+
+### Removed
+
+- **[BREAKING]** `Forms.validateApiRequest()`
+- **[BREAKING]** `Forms.validateConditionalPredicates()`
+
 ## [5.5.0] - 2024-02-18
 
 ### Added

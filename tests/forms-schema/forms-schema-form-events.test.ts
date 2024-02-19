@@ -2,6 +2,14 @@
 
 import { validateWithFormSchema } from '../../src/lib/forms-validation'
 
+function validateFormThrowError(data: unknown) {
+  const result = validateWithFormSchema(data)
+  if (!result.success) {
+    throw result.error
+  }
+  return result.data
+}
+
 // SCHEDULING Events
 describe('Scheduling events should throw errors when not passed to "schedulingEvents" property', () => {
   const schedulingEvent = {
@@ -41,7 +49,7 @@ describe('Scheduling events should throw errors when not passed to "schedulingEv
   }
   test('SCHEDULING form event should error when being passed to "submissionEvents"', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         submissionEvents: [schedulingEvent],
       }),
@@ -51,7 +59,7 @@ describe('Scheduling events should throw errors when not passed to "schedulingEv
   })
   test('SCHEDULING form event should error when being passed to "paymentEvents"', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         paymentEvents: [schedulingEvent],
       }),
@@ -93,7 +101,7 @@ describe('Payment events should throw errors when not passed to "paymentEvents" 
   }
   test('Payment form event should error when being passed to "submissionEvents"', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         submissionEvents: [paymentEvent],
       }),
@@ -103,7 +111,7 @@ describe('Payment events should throw errors when not passed to "paymentEvents" 
   })
   test('Payment form event should error when being passed to "schedulingEvents"', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         schedulingEvents: [paymentEvent],
       }),
@@ -114,7 +122,7 @@ describe('Payment events should throw errors when not passed to "paymentEvents" 
 describe('CP Pay', () => {
   test('fails when cp pay payment elementId is not found', async () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
@@ -146,7 +154,7 @@ describe('CP Pay', () => {
   })
   test('fails when cp pay payment elementId is not a valid type', async () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
@@ -178,7 +186,7 @@ describe('CP Pay', () => {
   })
   test('fails when cp pay payment elementId is a child of a repeatableSet', async () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         id: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
@@ -242,7 +250,7 @@ describe('Submission events should throw errors when not passed to "paymentEvent
   }
   test('Submission form event should error when being passed to "schedulingEvents"', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         schedulingEvents: [submissionEvent],
       }),
@@ -250,7 +258,7 @@ describe('Submission events should throw errors when not passed to "paymentEvent
   })
   test('Submission form event should error when being passed to "paymentEvents"', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         paymentEvents: [submissionEvent],
       }),
@@ -320,7 +328,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
   }
   test('Payment form event should error when being passed to "draftEvents"', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         draftEvents: [paymentEvent],
       }),
@@ -330,7 +338,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
   })
   test('SCHEDULING form event should error when being passed to "draftEvents"', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         draftEvents: [schedulingEvent],
       }),
@@ -340,7 +348,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
   })
   test('Should not error when passing submissionEvents to "draftEvents"', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         draftEvents: [submissionEvent],
       }),
@@ -349,7 +357,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
 
   test('Payment form event should error when being passed to "approvalEvents"', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         approvalEvents: [paymentEvent],
       }),
@@ -359,7 +367,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
   })
   test('SCHEDULING form event should error when being passed to "approvalEvents"', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         approvalEvents: [schedulingEvent],
       }),
@@ -369,7 +377,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
   })
   test('Should not error when passing submissionEvents to "approvalEvents"', () => {
     expect(() =>
-      validateWithFormSchema({
+      validateFormThrowError({
         ...form,
         approvalEvents: [submissionEvent],
       }),
