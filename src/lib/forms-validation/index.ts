@@ -113,7 +113,7 @@ function validateFormElementReferences(formElements: FormTypes.FormElement[]) {
  * @param formElements
  */
 function validateSummaryFormElements(
-  form: FormTypes.Form,
+  form: FormTypes.NewForm,
   formElements: FormTypes.FormElement[],
   propertyName: string,
 ) {
@@ -195,9 +195,9 @@ function validateWithFormSchema(form?: unknown):
     }
   | {
       success: true
-      data: FormTypes.Form
+      data: FormTypes.NewForm
     } {
-  const result = validateJoiSchema<FormTypes.Form>(form, formSchema)
+  const result = validateJoiSchema<FormTypes.NewForm>(form, formSchema)
   if (!result.success) {
     return result
   }

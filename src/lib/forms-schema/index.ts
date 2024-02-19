@@ -467,7 +467,6 @@ const cannedResponsesSchema = Joi.array()
   .unique('key')
 
 const formSchema = Joi.object().keys({
-  id: Joi.number(),
   formsAppEnvironmentId: Joi.number().required(),
   name: Joi.string().required(),
   description: Joi.string().allow('', null),
@@ -563,8 +562,6 @@ const formSchema = Joi.object().keys({
     otherwise: Joi.any().strip(),
   }),
   formsAppIds: Joi.array().items(Joi.number()).required(),
-  createdAt: Joi.string().allow('', null),
-  updatedAt: Joi.string().allow('', null),
   // TAGS
   tags: Joi.array().default([]).items(Joi.string()),
   serverValidation: endpointConfigurationSchema,

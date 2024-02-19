@@ -1113,8 +1113,8 @@ export default class Forms extends OneBlinkAPI {
    *   throw result.error
    * }
    *
-   * const validatedForm = result.data
-   * return validatedForm
+   * const validatedNewForm = result.data
+   * return validatedNewForm
    * ```
    *
    * @param form The form object to validate.

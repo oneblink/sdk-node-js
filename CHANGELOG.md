@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **[BREAKING]** `Forms.validateForm()` and `Forms.validateFormEvent()` to return an object with a result or an error instead of throwing errors
+- **[BREAKING]** `Forms.validateForm()` to return a `NewForm` (a `Form` with the `id`, `createdAt` and `updatedAt` properties)
 
 ### Removed
 
