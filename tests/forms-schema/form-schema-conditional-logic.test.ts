@@ -991,7 +991,6 @@ describe('Conditional Predicates', () => {
     )
   })
   test('should allow REPEATABLESET conditional predicate type', () => {
-    console.log(formSchema)
     const result = formSchema.validate(
       {
         name: 'conditionally show element via number input',
@@ -1058,7 +1057,6 @@ describe('Conditional Predicates', () => {
   })
 
   test('should NOT allow REPEATABLESET conditional predicate type in repeatableSetPredicate', () => {
-    console.log(formSchema)
     const result = formSchema.validate(
       {
         name: 'conditionally show element via number input',
