@@ -174,6 +174,24 @@ export const validateFormEvent = ({
           }
         }
       }
+      console.log('hello')
+      if (formEvent.configuration.notificationElementId) {
+        console.log('in here?')
+        const elementId = formEvent.configuration.notificationElementId
+        const element = formElementsService.findFormElement(
+          validatedFormElements,
+          ({ id }) => id === elementId,
+        )
+        console.log('got here')
+        if (!element) {
+          throw new Error(
+            `You tried to reference an element ${elementId} that does not exist on the form, in a ${formEvent.type} form event.`,
+          )
+        }
+        if (element.type !== 'boolean') {
+          throw new Error('Notification element is not a boolean element')
+        }
+      }
       break
     }
     case 'PDF': {

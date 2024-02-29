@@ -4694,6 +4694,15 @@ describe('CP_HCMS submission event', () => {
   test('should allow CP_HCMS submission event', () => {
     const input = {
       ...form,
+      elements: [
+        ...form.elements,
+        {
+          id: 'f75ae5bf-e729-4816-b040-f67ddfe54824',
+          name: 'notification',
+          label: 'Notification',
+          type: 'boolean',
+        },
+      ],
       submissionEvents: [
         {
           type: 'CP_HCMS',
@@ -4711,6 +4720,7 @@ describe('CP_HCMS submission event', () => {
                 name: 'Old Stuff',
               },
             ],
+            notificationElementId: 'f75ae5bf-e729-4816-b040-f67ddfe54824',
           },
         },
       ],
@@ -4901,6 +4911,49 @@ describe('CP_HCMS submission event', () => {
     expect(error?.message).toContain(
       '"submissionEvents[0].configuration.categories" must contain at least 1 items',
     )
+  })
+  test('should reject CP_HCMS submission event with bad notification element reference - non-existant', () => {
+    const validation = () =>
+      validateFormThrowError({
+        ...form,
+        submissionEvents: [
+          {
+            type: 'CP_HCMS',
+            configuration: {
+              contentTypeName: 'contenttypename-1',
+              notificationElementId: 'f75ae5bf-e729-4816-b040-f67ddfe54824',
+            },
+          },
+        ],
+      })
+    expect(validation).toThrow(
+      'You tried to reference an element f75ae5bf-e729-4816-b040-f67ddfe54824 that does not exist on the form, in a CP_HCMS form event.',
+    )
+  })
+  test('should reject CP_HCMS submission event with bad notification element reference - wrong type', () => {
+    const validation = () =>
+      validateFormThrowError({
+        ...form,
+        elements: [
+          ...form.elements,
+          {
+            id: 'f75ae5bf-e729-4816-b040-f67ddfe54824',
+            name: 'notification',
+            label: 'Notification',
+            type: 'text',
+          },
+        ],
+        submissionEvents: [
+          {
+            type: 'CP_HCMS',
+            configuration: {
+              contentTypeName: 'contenttypename-1',
+              notificationElementId: 'f75ae5bf-e729-4816-b040-f67ddfe54824',
+            },
+          },
+        ],
+      })
+    expect(validation).toThrow('Notification element is not a boolean element')
   })
 })
 
