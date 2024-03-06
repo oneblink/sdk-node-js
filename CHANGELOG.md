@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.0.1] - 2024-03-06
+
+### Dependencies
+
+- update [@aws-sdk/client-s3](https://www.npmjs.com/package/@aws-sdk/client-s3) to [3.521.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md) (from [3.504.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md))
+
+- update [@aws-sdk/client-sesv2](https://www.npmjs.com/package/@aws-sdk/client-sesv2) to [3.521.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md) (from [3.504.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md))
+
+- update [@aws-sdk/lib-storage](https://www.npmjs.com/package/@aws-sdk/lib-storage) to [3.521.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md) (from [3.504.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md))
+
+- update [@aws-sdk/s3-request-presigner](https://www.npmjs.com/package/@aws-sdk/s3-request-presigner) to [3.521.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md) (from [3.504.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md))
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [6.0.0-beta.3](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [5.4.0-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update [joi](https://www.npmjs.com/package/joi) to 17.12.2 (from 17.12.1)
+
+- update [nodemailer](https://www.npmjs.com/package/nodemailer) to [6.9.10](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md) (from [6.9.9](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md))
+
 ## [6.0.0] - 2024-02-21
 
 ### Added
