@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `notificationElementId` to HCMS form workflow event
+
 ## [6.0.1] - 2024-03-06
 
 ### Dependencies
