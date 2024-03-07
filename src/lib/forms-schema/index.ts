@@ -330,6 +330,7 @@ export const WorkflowEventSchema = Joi.object().keys({
           )
           .unique('id'),
         encryptPdf: Joi.boolean().default(false),
+        notificationElementId: Joi.string().uuid(),
         ...pdfSubmissionEventConfiguration,
       }),
     })
