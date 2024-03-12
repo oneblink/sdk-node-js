@@ -15,5 +15,6 @@ export default Joi.object({
   label,
   ...conditionallyShowSchemas,
   defaultValue: Joi.string().required().uri(),
+  decorativeImage: Joi.boolean(),
   customCssClasses,
 })
