@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@microsoft/eslint-plugin-sdl": "^0.2.2",
-    "@oneblink/release-cli": "^3.0.2",
+    "@oneblink/release-cli": "^3.1.0",
     "@oneblink/types": "github:oneblink/types",
     "@types/content-disposition": "^0.5.8",
     "@types/jest": "^29.5.12",
@@ -78,6 +78,7 @@
     "release": "oneblink-release repository --no-name",
     "test": "npm run jest",
     "types": "npm i -D github:oneblink/types",
-    "typescript": "tsc --noEmit"
+    "typescript": "tsc --noEmit",
+    "update-dependents": "oneblink-release update-dependents"
   }
 }
