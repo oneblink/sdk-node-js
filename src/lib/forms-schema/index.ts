@@ -536,6 +536,9 @@ const formSchema = Joi.object().keys({
     clarificationRequestEmailTemplateId: Joi.number().integer(),
     approvedEmailTemplateId: Joi.number().integer(),
     deniedEmailTemplateId: Joi.number().integer(),
+    pendingApprovalsReminder: Joi.object({
+      daysInterval: Joi.number().integer().required(),
+    }),
   }),
 
   postSubmissionAction: Joi.string()
