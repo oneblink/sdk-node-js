@@ -152,7 +152,7 @@ const ConditionalPredicatesItemBaseSchema = Joi.object().keys({
   elementId: Joi.string().guid().required(),
   type: Joi.string()
     .default('OPTIONS')
-    .valid('OPTIONS', 'NUMERIC', 'VALUE', 'BETWEEN'),
+    .valid('OPTIONS', 'NUMERIC', 'VALUE', 'BETWEEN', 'FORM'),
   optionIds: Joi.when('type', {
     is: Joi.valid('OPTIONS'),
     then: Joi.array().min(1).items(Joi.string()).required(),
@@ -194,6 +194,11 @@ const ConditionalPredicatesItemBaseSchema = Joi.object().keys({
       .required(),
     otherwise: Joi.any().strip(),
   }),
+  predicate: Joi.when('type', {
+    is: Joi.valid('FORM'),
+    then: Joi.link('#ConditionalPredicatesItemSchema'),
+    otherwise: Joi.any().strip(),
+  }),
 })
 
 export const ConditionalPredicatesItemSchema = Joi.object()
@@ -206,6 +211,7 @@ export const ConditionalPredicatesItemSchema = Joi.object()
     }),
   })
   .concat(ConditionalPredicatesItemBaseSchema)
+  .id('ConditionalPredicatesItemSchema')
 
 export const conditionallyShowPredicates = Joi.when('conditionallyShow', {
   is: true,
