@@ -1118,7 +1118,113 @@ describe('Conditional Predicates', () => {
       },
     )
     expect(result.error?.message).toBe(
-      '"elements[1].conditionallyShowPredicates[0].repeatableSetPredicate.type" must be one of [OPTIONS, NUMERIC, VALUE, BETWEEN]',
+      '"elements[1].conditionallyShowPredicates[0].repeatableSetPredicate.type" must be one of [OPTIONS, NUMERIC, VALUE, BETWEEN, FORM]',
+    )
+  })
+
+  test('Should allow FORM type predicates', () => {
+    const result = formSchema.validate(
+      {
+        name: 'conditionally show element via number input',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b7',
+            name: 'Form',
+            type: 'form',
+            formId: 1,
+          },
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: true,
+            requiresAllConditionallyShowPredicates: false,
+            conditionallyShowPredicates: [
+              {
+                elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b7',
+                type: 'FORM',
+                predicate: {
+                  elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+                  type: 'NUMERIC',
+                  operator: '>',
+                  value: 1,
+                },
+              },
+            ],
+          },
+        ],
+        isAuthenticated: true,
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(result.error?.message).toBe(undefined)
+  })
+
+  test('Should validate predicates within FORM type predicates', () => {
+    const result = formSchema.validate(
+      {
+        name: 'conditionally show element via number input',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b7',
+            name: 'Form',
+            type: 'form',
+            formId: 1,
+          },
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: true,
+            requiresAllConditionallyShowPredicates: false,
+            conditionallyShowPredicates: [
+              {
+                elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b7',
+                type: 'FORM',
+                predicate: {
+                  elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+                  type: 'INVALID_TYPE',
+                },
+              },
+            ],
+          },
+        ],
+        isAuthenticated: true,
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(result.error?.message).toBe(
+      '"elements[1].conditionallyShowPredicates[0].predicate.type" must be one of [REPEATABLESET, OPTIONS, NUMERIC, VALUE, BETWEEN, FORM]',
     )
   })
 })
