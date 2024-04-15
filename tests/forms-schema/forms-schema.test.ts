@@ -7472,8 +7472,6 @@ describe('Section Element', () => {
     ).toBe('section')
   })
 
-  test('showStreetAddress Location element', () => {})
-
   test('should reject section elements with invalid properties', () => {
     const result = formSchema.validate(
       {
