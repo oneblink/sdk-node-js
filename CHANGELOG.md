@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `FORM` type to conditional predicates schema
+- LocationElement validation for `showStreetAddress` and `formattedAddressElementId`
 
 ## [6.1.1] - 2024-04-10
 

@@ -25,4 +25,10 @@ export default Joi.object({
   ...lookupSchemas,
   ...conditionallyShowSchemas,
   customCssClasses,
+  showStreetAddress: Joi.boolean(),
+  formattedAddressElementId: Joi.when('showStreetAddress', {
+    is: true,
+    then: Joi.string().uuid().required(),
+    otherwise: Joi.any().strip(),
+  }),
 })

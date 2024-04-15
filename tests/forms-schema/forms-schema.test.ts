@@ -7504,6 +7504,129 @@ describe('Section Element', () => {
   })
 })
 
+describe('Location Element', () => {
+  const form = {
+    name: 'Form',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: '59cc888b8969af000fb50ddb',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    isMultiPage: false,
+    submissionEvents: [],
+  }
+
+  it('should pass validation', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: 'f689bc42-7412-4133-9f87-0da56bb9a922',
+            label: 'Location',
+            name: 'location',
+            type: 'location',
+            required: false,
+          },
+          {
+            id: '1500d34b-616c-4690-b49b-f2803c37ce49',
+            label: 'Location2',
+            name: 'location2',
+            type: 'location',
+            required: false,
+            showStreetAddress: true,
+            formattedAddressElementId: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
+          },
+          {
+            id: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
+            label: 'Text',
+            name: 'text',
+            type: 'text',
+            required: false,
+          },
+          {
+            id: '0cc654c2-4826-407e-9955-3be56c584623',
+            label: 'Location3',
+            name: 'location3',
+            type: 'location',
+            required: false,
+            showStreetAddress: false,
+          },
+        ],
+      },
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error).toBe(undefined)
+    expect(result.value.elements[1].showStreetAddress).toBe(true)
+    expect(result.value.elements[1].formattedAddressElementId).toBe(
+      '45d3d40a-c68c-4a87-b751-8246a2466ddb',
+    )
+    expect(result.value.elements[3].showStreetAddress).toBe(false)
+    expect(result.value.elements[3].formattedAddressElementId).toBe(undefined)
+  })
+
+  it('should fail validation - invalid element Id', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...form,
+        elements: [
+          {
+            id: '1500d34b-616c-4690-b49b-f2803c37ce49',
+            label: 'Location',
+            name: 'location',
+            type: 'location',
+            required: false,
+            showStreetAddress: true,
+            formattedAddressElementId: '45d3d40a-c68c-4a87-b751-8246a2466ddc',
+          },
+          {
+            id: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
+            label: 'Text',
+            name: 'text',
+            type: 'text',
+            required: false,
+          },
+        ],
+      }),
+    ).toThrow('Referenced formattedAddressElementId not found')
+  })
+
+  it('should fail validation - missing element Id', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '1500d34b-616c-4690-b49b-f2803c37ce49',
+            label: 'Location',
+            name: 'location',
+            type: 'location',
+            required: false,
+            showStreetAddress: true,
+          },
+          {
+            id: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
+            label: 'Text',
+            name: 'text',
+            type: 'text',
+            required: false,
+          },
+        ],
+      },
+
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error?.details[0].message).toBe(
+      '"elements[0].formattedAddressElementId" is required',
+    )
+  })
+})
+
 describe('approvalConfiguration', () => {
   const form = {
     name: 'string',

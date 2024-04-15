@@ -540,7 +540,6 @@ const formSchema = Joi.object().keys({
       daysInterval: Joi.number().integer().required(),
     }),
   }),
-
   postSubmissionAction: Joi.string()
     .required()
     .valid(...postSubmissionActions),

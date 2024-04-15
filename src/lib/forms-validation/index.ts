@@ -73,6 +73,35 @@ function validateReferenceDate({
   }
 }
 
+function validateLocationReferenceElement({
+  formattedAddressElementId,
+  elements,
+}: {
+  formattedAddressElementId: string | undefined
+  elements: FormTypes.FormElement[]
+}) {
+  if (!formattedAddressElementId) {
+    throw new Error('formattedAddressElementId does not have a value')
+  }
+  //ensure element exists and is a valid type
+  const referencedElement = elements.find(
+    (el) => el.id === formattedAddressElementId,
+  )
+  if (!referencedElement) {
+    throw new Error(`Referenced formattedAddressElementId not found`)
+  }
+  const validReferenceTypes: FormTypes.FormElement['type'][] = [
+    'text',
+    'pointAddress',
+    'geoscapeAddress',
+  ]
+  if (!validReferenceTypes.includes(referencedElement.type)) {
+    throw new Error(
+      `Referenced ${referencedElement.type} type not one of ${validReferenceTypes.join(',')}`,
+    )
+  }
+}
+
 function validateFormElementReferences(formElements: FormTypes.FormElement[]) {
   const availableFormElements = stripLayoutFormElements(formElements)
   // Element References
@@ -100,6 +129,14 @@ function validateFormElementReferences(formElements: FormTypes.FormElement[]) {
         validateElementNamesAcrossNestedElements(element.elements)
         validateFormElementReferences(element.elements)
         break
+      }
+      case 'location': {
+        if (element.showStreetAddress) {
+          validateLocationReferenceElement({
+            formattedAddressElementId: element.formattedAddressElementId,
+            elements: availableFormElements,
+          })
+        }
       }
     }
   }
