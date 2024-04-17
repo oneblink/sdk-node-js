@@ -31,4 +31,9 @@ export default Joi.object({
     then: Joi.string().uuid().required(),
     otherwise: Joi.any().strip(),
   }),
+  integrationEnvironmentId: Joi.when('showStreetAddress', {
+    is: true,
+    then: Joi.string().uuid().required(),
+    otherwise: Joi.any().strip(),
+  }),
 })
