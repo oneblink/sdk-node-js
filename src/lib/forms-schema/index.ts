@@ -113,11 +113,7 @@ const formEventBaseSchema = {
   requiresAllConditionallyExecutePredicates: Joi.bool().default(false),
   conditionallyExecutePredicates: Joi.when('conditionallyExecute', {
     is: true,
-    then: Joi.array()
-      .unique('elementId')
-      .min(1)
-      .items(ConditionalPredicatesItemSchema)
-      .required(),
+    then: Joi.array().min(1).items(ConditionalPredicatesItemSchema).required(),
     otherwise: Joi.any().strip(),
   }),
 }
@@ -506,7 +502,6 @@ const formSchema = Joi.object().keys({
           conditionalPredicates: Joi.when('isConditional', {
             is: true,
             then: Joi.array()
-              .unique('elementId')
               .min(1)
               .items(ConditionalPredicatesItemSchema)
               .required(),

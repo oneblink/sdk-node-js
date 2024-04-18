@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `FORM` type to conditional predicates schema
 - LocationElement validation for `showStreetAddress`, `formattedAddressElementId` and `integrationEnvironmentId`
 
+### Removed
+
+- unique elementId constraint from form event and approval step validation
+
 ## [6.1.1] - 2024-04-10
 
 ### Added
