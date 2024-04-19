@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `FORM` type to conditional predicates schema
-- LocationElement validation for `showStreetAddress`, `formattedAddressElementId` and `integrationEnvironmentId`
+- `googleMapsIntegrationEnvironmentId` for Form Validation
+- LocationElement validation for `showStreetAddress` and `formattedAddressElementId`
 
 ### Removed
 

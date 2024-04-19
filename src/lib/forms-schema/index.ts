@@ -568,6 +568,7 @@ const formSchema = Joi.object().keys({
   submissionTitle: Joi.string(),
   continueWithAutosave: Joi.boolean(),
   customCssClasses,
+  googleMapsIntegrationEnvironmentId: Joi.string().uuid(),
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
