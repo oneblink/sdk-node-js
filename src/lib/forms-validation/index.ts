@@ -92,7 +92,6 @@ function validateLocationReferenceElement({
   }
   const validReferenceTypes: FormTypes.FormElement['type'][] = [
     'text',
-    'pointAddress',
     'geoscapeAddress',
   ]
   if (!validReferenceTypes.includes(referencedElement.type)) {
