@@ -4,7 +4,6 @@ import generateFormUrl from '../lib/generate-form-url'
 import generateJWT from '../lib/generate-jwt'
 import getSubmissionData from '../lib/retrieve-submission-data'
 import OneBlinkAPI from '../lib/one-blink-api'
-import setPreFillData from '../lib/pre-fill-data'
 import generateFormElement from '../lib/generate-form-element'
 import generatePageElement from '../lib/generate-page-element'
 import { encryptUserToken, decryptUserToken } from '../lib/user-token-helpers'
@@ -183,13 +182,11 @@ export default class Forms extends OneBlinkAPI {
     }
     let preFillFormDataId
     if (parameters.preFillData) {
-      const { preFillFormDataId } = await setPreFillData(
-        this.oneBlinkUploader,
-        {
+      const { preFillFormDataId } =
+        await this.oneBlinkUploader.uploadPrefillData({
           formId,
           prefillData: parameters.preFillData,
-        },
-      )
+        })
 
       developerKeyAccess.prefillData = {
         read: {
