@@ -123,10 +123,22 @@ describe('Jobs SDK Class', () => {
           },
         })
 
-        expect(mockPostRequest).toBeCalledTimes(1)
+        expect(mockPostRequest).toHaveBeenCalledTimes(1)
       })
 
       test('should call pre-fill data endpoints', async () => {
+        const mockSetPreFillData = jest
+          .fn()
+          .mockImplementation(() => Promise.resolve({}))
+
+        jest.mock('@oneblink/storage', () => ({
+          OneBlinkUploader: class {
+            uploadPrefillData() {
+              return mockSetPreFillData()
+            }
+          },
+        }))
+
         const mockPostRequest = jest
           .fn()
           .mockImplementation(() => Promise.resolve({}))
@@ -134,18 +146,14 @@ describe('Jobs SDK Class', () => {
           '../src/lib/one-blink-api',
           () =>
             class {
-              postRequest() {
-                return mockPostRequest()
+              oneBlinkUploader = {
+                uploadPrefillData: mockSetPreFillData,
               }
-              postEmptyRequest() {
+              postRequest() {
                 return mockPostRequest()
               }
             },
         )
-        const mockSetPreFillData = jest
-          .fn()
-          .mockImplementation(() => Promise.resolve())
-        jest.mock('../src/lib/pre-fill-data', () => mockSetPreFillData)
 
         const jobs = await getJobsSdk()
         const options = {
@@ -161,8 +169,8 @@ describe('Jobs SDK Class', () => {
         }
         await jobs.createJob(options, preFillData)
 
-        expect(mockPostRequest).toBeCalledTimes(2)
-        expect(mockSetPreFillData).toBeCalledTimes(1)
+        expect(mockPostRequest).toHaveBeenCalledTimes(1)
+        expect(mockSetPreFillData).toHaveBeenCalledTimes(1)
       })
     })
   })

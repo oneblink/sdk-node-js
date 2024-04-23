@@ -1,12 +1,9 @@
-import { HeadObjectOutput, S3Client } from '@aws-sdk/client-s3'
-import { Upload } from '@aws-sdk/lib-storage'
+import { HeadObjectOutput } from '@aws-sdk/client-s3'
 import { Readable } from 'stream'
-import { fileUploadService } from '@oneblink/sdk-core'
 import generateFormUrl from '../lib/generate-form-url'
 import generateJWT from '../lib/generate-jwt'
 import getSubmissionData from '../lib/retrieve-submission-data'
 import OneBlinkAPI from '../lib/one-blink-api'
-import setPreFillData from '../lib/pre-fill-data'
 import generateFormElement from '../lib/generate-form-element'
 import generatePageElement from '../lib/generate-page-element'
 import { encryptUserToken, decryptUserToken } from '../lib/user-token-helpers'
@@ -25,7 +22,6 @@ import {
 } from '../lib/forms-validation'
 import {
   ConstructorOptions,
-  PreFillMeta,
   FormsSearchOptions,
   FormsSearchResult,
   FormSubmissionHistorySearchParameters,
@@ -186,11 +182,12 @@ export default class Forms extends OneBlinkAPI {
     }
     let preFillFormDataId
     if (parameters.preFillData) {
-      const preFillMeta = await super.postEmptyRequest<PreFillMeta>(
-        `/forms/${formId}/pre-fill-credentials`,
-      )
-      await setPreFillData(preFillMeta, parameters.preFillData)
-      preFillFormDataId = preFillMeta.preFillFormDataId
+      const { preFillFormDataId } =
+        await this.oneBlinkUploader.uploadPrefillData({
+          formId,
+          prefillData: parameters.preFillData,
+        })
+
       developerKeyAccess.prefillData = {
         read: {
           ids: [preFillFormDataId],
@@ -522,52 +519,21 @@ export default class Forms extends OneBlinkAPI {
      */
     username?: string
   }): Promise<SubmissionTypes.FormSubmissionAttachment> {
-    const result = await super.postRequest<
-      { username?: string },
-      AWSTypes.FormAttachmentS3Credentials
-    >(`/forms/${formId}/upload-attachment-credentials`, {
+    const result = await this.oneBlinkUploader.uploadAttachment({
+      formId,
+      fileName,
+      contentType,
+      isPrivate,
+      data: body,
       username,
     })
-
-    const s3Client = new S3Client({
-      region: result.s3.region,
-      credentials: {
-        accessKeyId: result.credentials.AccessKeyId,
-        secretAccessKey: result.credentials.SecretAccessKey,
-        sessionToken: result.credentials.SessionToken,
-      },
-    })
-
-    const managedUpload = new Upload({
-      client: s3Client,
-      params: {
-        ServerSideEncryption: 'AES256',
-        Expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)), // Max 1 year
-        CacheControl: 'max-age=31536000', // Max 1 year(365 days),
-        Bucket: result.s3.bucket,
-        Key: result.s3.key,
-        ContentDisposition: fileUploadService.getContentDisposition(fileName),
-        ContentType: contentType,
-        ACL: isPrivate ? 'private' : 'public-read',
-        Body: body,
-      },
-      partSize: 5 * 1024 * 1024,
-      queueSize: 5,
-      //Related github issue: https://github.com/aws/aws-sdk-js-v3/issues/2311
-      //This is a variable that is set to false by default, setting it to true
-      //means that it will force the upload to fail when one part fails on
-      //an upload. The S3 client has built in retry logic to retry uploads by default
-      leavePartsOnError: true,
-    })
-
-    await managedUpload.done()
 
     return {
       id: result.attachmentDataId,
       contentType,
       fileName,
       isPrivate,
-      url: `${OneBlinkAPI.tenant.apiOrigin}/${result.s3.key}`,
+      url: result.url,
       s3: result.s3,
       uploadedAt: result.uploadedAt,
     }
@@ -722,49 +688,16 @@ export default class Forms extends OneBlinkAPI {
     contentType: string
     s3: AWSTypes.S3Configuration
   }> {
-    const result = await super.postRequest<
-      { filename: string },
-      AWSTypes.S3ObjectCredentials
-    >('/email-attachment-upload-credentials', {
-      filename: options.filename,
+    const { s3 } = await this.oneBlinkUploader.uploadEmailAttachment({
+      data: options.body,
+      contentType: options.contentType,
+      fileName: options.filename,
     })
-
-    const s3Client = new S3Client({
-      region: result.s3.region,
-      credentials: {
-        accessKeyId: result.credentials.AccessKeyId,
-        secretAccessKey: result.credentials.SecretAccessKey,
-        sessionToken: result.credentials.SessionToken,
-      },
-    })
-
-    const managedUpload = new Upload({
-      client: s3Client,
-      params: {
-        ServerSideEncryption: 'AES256',
-        Expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)), // Max 1 year
-        CacheControl: 'max-age=31536000', // Max 1 year(365 days),
-        Bucket: result.s3.bucket,
-        Key: result.s3.key,
-        ContentType: options.contentType,
-        ACL: 'private',
-        Body: options.body,
-      },
-      partSize: 5 * 1024 * 1024,
-      queueSize: 5,
-      //Related github issue: https://github.com/aws/aws-sdk-js-v3/issues/2311
-      //This is a variable that is set to false by default, setting it to true
-      //means that it will force the upload to fail when one part fails on
-      //an upload. The S3 client has built in retry logic to retry uploads by default
-      leavePartsOnError: true,
-    })
-
-    await managedUpload.done()
 
     return {
       filename: options.filename,
       contentType: options.contentType,
-      s3: result.s3,
+      s3,
     }
   }
 
