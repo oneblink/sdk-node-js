@@ -35,7 +35,7 @@ export default class OneBlinkAPI {
   /** @internal */
   jwtExpiry: number
   /** @internal */
-  _oneBlinkUploader: OneBlinkUploader | undefined
+  oneBlinkUploader: OneBlinkUploader
 
   constructor(accessKey: unknown, secretKey: unknown) {
     if (!accessKey || typeof accessKey !== 'string') {
@@ -49,24 +49,15 @@ export default class OneBlinkAPI {
     this.jwtExpiry = 300
     this.accessKey = accessKey
     this.secretKey = secretKey
-  }
-
-  /** @internal */
-  get oneBlinkUploader(): OneBlinkUploader {
-    if (this._oneBlinkUploader) {
-      return this._oneBlinkUploader
-    }
-    const uploader = new OneBlinkUploader({
+    this.oneBlinkUploader = new OneBlinkUploader({
       apiOrigin: OneBlinkAPI.tenant.apiOrigin,
       region: OneBlinkAPI.tenant.awsRegion,
       getIdToken: () => {
         return Promise.resolve(
-          generateJWT(this.accessKey, this.secretKey, this.jwtExpiry),
+          `Bearer ${generateJWT(this.accessKey, this.secretKey, this.jwtExpiry)}`,
         )
       },
     })
-    this._oneBlinkUploader
-    return uploader
   }
 
   /** @internal */
