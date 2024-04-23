@@ -3,7 +3,7 @@ import Joi from 'joi'
 
 import OneBlinkAPI from '../lib/one-blink-api'
 import setPreFillData from '../lib/pre-fill-data'
-import { ConstructorOptions, PreFillMeta, JobsSearchResult } from '../types'
+import { ConstructorOptions, JobsSearchResult } from '../types'
 
 const newJobSchema = Joi.object()
   .required()
@@ -84,11 +84,14 @@ export default class Jobs extends OneBlinkAPI {
     const newJob = result.value as SubmissionTypes.NewFormsAppJob
 
     if (preFillData) {
-      const preFillMeta = await super.postEmptyRequest<PreFillMeta>(
-        `/forms/${newJob.formId}/pre-fill-credentials`,
+      const { preFillFormDataId } = await setPreFillData(
+        this.oneBlinkUploader,
+        {
+          formId: data.formId,
+          prefillData: preFillData,
+        },
       )
-      await setPreFillData(preFillMeta, preFillData)
-      newJob.preFillFormDataId = preFillMeta.preFillFormDataId
+      newJob.preFillFormDataId = preFillFormDataId
     }
 
     const job: SubmissionTypes.FormsAppJob = await super.postRequest(

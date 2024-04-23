@@ -1,6 +1,7 @@
 import querystring from 'querystring'
 
 import fetch, { Response, BodyInit } from 'node-fetch'
+import { OneBlinkUploader } from '@oneblink/storage'
 
 import pkg from './package'
 import generateJWT from './generate-jwt'
@@ -33,6 +34,8 @@ export default class OneBlinkAPI {
   secretKey: string
   /** @internal */
   jwtExpiry: number
+  /** @internal */
+  _oneBlinkUploader: OneBlinkUploader | undefined
 
   constructor(accessKey: unknown, secretKey: unknown) {
     if (!accessKey || typeof accessKey !== 'string') {
@@ -46,6 +49,24 @@ export default class OneBlinkAPI {
     this.jwtExpiry = 300
     this.accessKey = accessKey
     this.secretKey = secretKey
+  }
+
+  /** @internal */
+  get oneBlinkUploader(): OneBlinkUploader {
+    if (this._oneBlinkUploader) {
+      return this._oneBlinkUploader
+    }
+    const uploader = new OneBlinkUploader({
+      apiOrigin: OneBlinkAPI.tenant.apiOrigin,
+      region: OneBlinkAPI.tenant.awsRegion,
+      getIdToken: () => {
+        return Promise.resolve(
+          generateJWT(this.accessKey, this.secretKey, this.jwtExpiry),
+        )
+      },
+    })
+    this._oneBlinkUploader
+    return uploader
   }
 
   /** @internal */

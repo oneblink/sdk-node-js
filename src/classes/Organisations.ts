@@ -1,7 +1,7 @@
 import { OrganisationTypes } from '@oneblink/types'
 import OneBlinkAPI from '../lib/one-blink-api'
-import { ConstructorOptions, PreFillMeta } from '../types'
-import uploadAsset from '../lib/upload-asset'
+import { ConstructorOptions } from '../types'
+import { Readable } from 'stream'
 
 export default class Organisations extends OneBlinkAPI {
   /**
@@ -61,29 +61,35 @@ export default class Organisations extends OneBlinkAPI {
     assetFileName?: unknown
     assetContentType?: string
   }): Promise<{ location: string }> {
-    if (typeof asset.assetFileName !== 'string') {
+    const { assetData, assetFileName, assetContentType } = asset
+    if (typeof assetFileName !== 'string') {
       throw new TypeError('Must supply "assetFileName" as a string')
     }
-    if (asset.assetContentType && typeof asset.assetContentType !== 'string') {
+    if (assetContentType && typeof assetContentType !== 'string') {
       throw new TypeError('If supplied, "assetContentType" must be a string')
     }
+
+    if (
+      typeof assetData !== 'string' &&
+      !(
+        assetData instanceof Buffer ||
+        assetData instanceof Uint8Array ||
+        assetData instanceof Readable
+      )
+    ) {
+      throw new TypeError(
+        '"assetData" must be either a string, Uint8Array, Buffer or Readable',
+      )
+    }
     const { id: organisationId } = await this.getOrganisation()
-    const credentials = await super.postRequest<
-      {
-        assetPath: string
-        organisationId: string
-      },
-      PreFillMeta
-    >('/asset-upload-credentials', {
-      assetPath: `assets/${asset.assetFileName}`,
+
+    const { url } = await this.oneBlinkUploader.uploadAsset({
+      data: assetData,
+      // S3 defaults unknown file types to the following, do the same here
+      contentType: assetContentType ?? 'application/octet-stream',
+      fileName: assetFileName,
       organisationId,
     })
-
-    const uploadDetails = await uploadAsset(
-      credentials,
-      asset.assetData,
-      asset.assetContentType,
-    )
-    return { location: uploadDetails.Location }
+    return { location: url }
   }
 }
