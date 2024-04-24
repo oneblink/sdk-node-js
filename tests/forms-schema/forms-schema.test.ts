@@ -7535,6 +7535,7 @@ describe('Location Element', () => {
             required: false,
             reverseGeocoding: {
               formattedAddressElementId: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
+              integrationType: 'GEOSCAPE',
             },
           },
           {
@@ -7561,6 +7562,7 @@ describe('Location Element', () => {
     expect(result.error).toBe(undefined)
     expect(result.value.elements[1].reverseGeocoding).toEqual({
       formattedAddressElementId: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
+      integrationType: 'GEOSCAPE',
     })
   })
 
@@ -7577,6 +7579,7 @@ describe('Location Element', () => {
             required: false,
             reverseGeocoding: {
               formattedAddressElementId: '45d3d40a-c68c-4a87-b751-8246a2466ddc',
+              integrationType: 'GEOSCAPE',
             },
           },
           {
@@ -7621,6 +7624,41 @@ describe('Location Element', () => {
     )
     expect(result.error?.details[0].message).toBe(
       '"elements[0].reverseGeocoding.formattedAddressElementId" is required',
+    )
+  })
+
+  it('should fail validation - bad integration type', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '1500d34b-616c-4690-b49b-f2803c37ce49',
+            label: 'Location',
+            name: 'location',
+            type: 'location',
+            required: false,
+            reverseGeocoding: {
+              formattedAddressElementId: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
+            },
+          },
+          {
+            id: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
+            label: 'Text',
+            name: 'text',
+            type: 'text',
+            required: false,
+          },
+        ],
+      },
+
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error?.details[0].message).toBe(
+      '"elements[0].reverseGeocoding.integrationType" is required',
     )
   })
 })

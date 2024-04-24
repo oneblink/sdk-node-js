@@ -27,5 +27,6 @@ export default Joi.object({
   customCssClasses,
   reverseGeocoding: Joi.object({
     formattedAddressElementId: Joi.string().uuid().required(),
+    integrationType: Joi.string().allow('GEOSCAPE').required(),
   }),
 })
