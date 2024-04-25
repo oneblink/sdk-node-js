@@ -130,9 +130,10 @@ function validateFormElementReferences(formElements: FormTypes.FormElement[]) {
         break
       }
       case 'location': {
-        if (element.showStreetAddress) {
+        if (element.reverseGeocoding) {
           validateLocationReferenceElement({
-            formattedAddressElementId: element.formattedAddressElementId,
+            formattedAddressElementId:
+              element.reverseGeocoding.formattedAddressElementId,
             elements: availableFormElements,
           })
         }

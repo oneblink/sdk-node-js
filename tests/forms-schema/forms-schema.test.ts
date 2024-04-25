@@ -7533,8 +7533,10 @@ describe('Location Element', () => {
             name: 'location2',
             type: 'location',
             required: false,
-            showStreetAddress: true,
-            formattedAddressElementId: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
+            reverseGeocoding: {
+              formattedAddressElementId: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
+              integrationType: 'GEOSCAPE',
+            },
           },
           {
             id: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
@@ -7549,7 +7551,6 @@ describe('Location Element', () => {
             name: 'location3',
             type: 'location',
             required: false,
-            showStreetAddress: false,
           },
         ],
       },
@@ -7559,12 +7560,10 @@ describe('Location Element', () => {
       },
     )
     expect(result.error).toBe(undefined)
-    expect(result.value.elements[1].showStreetAddress).toBe(true)
-    expect(result.value.elements[1].formattedAddressElementId).toBe(
-      '45d3d40a-c68c-4a87-b751-8246a2466ddb',
-    )
-    expect(result.value.elements[3].showStreetAddress).toBe(false)
-    expect(result.value.elements[3].formattedAddressElementId).toBe(undefined)
+    expect(result.value.elements[1].reverseGeocoding).toEqual({
+      formattedAddressElementId: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
+      integrationType: 'GEOSCAPE',
+    })
   })
 
   it('should fail validation - invalid element Id', () => {
@@ -7578,8 +7577,10 @@ describe('Location Element', () => {
             name: 'location',
             type: 'location',
             required: false,
-            showStreetAddress: true,
-            formattedAddressElementId: '45d3d40a-c68c-4a87-b751-8246a2466ddc',
+            reverseGeocoding: {
+              formattedAddressElementId: '45d3d40a-c68c-4a87-b751-8246a2466ddc',
+              integrationType: 'GEOSCAPE',
+            },
           },
           {
             id: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
@@ -7604,7 +7605,7 @@ describe('Location Element', () => {
             name: 'location',
             type: 'location',
             required: false,
-            showStreetAddress: true,
+            reverseGeocoding: {},
           },
           {
             id: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
@@ -7622,7 +7623,42 @@ describe('Location Element', () => {
       },
     )
     expect(result.error?.details[0].message).toBe(
-      '"elements[0].formattedAddressElementId" is required',
+      '"elements[0].reverseGeocoding.formattedAddressElementId" is required',
+    )
+  })
+
+  it('should fail validation - bad integration type', () => {
+    const result = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            id: '1500d34b-616c-4690-b49b-f2803c37ce49',
+            label: 'Location',
+            name: 'location',
+            type: 'location',
+            required: false,
+            reverseGeocoding: {
+              formattedAddressElementId: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
+            },
+          },
+          {
+            id: '45d3d40a-c68c-4a87-b751-8246a2466ddb',
+            label: 'Text',
+            name: 'text',
+            type: 'text',
+            required: false,
+          },
+        ],
+      },
+
+      {
+        stripUnknown: true,
+        abortEarly: false,
+      },
+    )
+    expect(result.error?.details[0].message).toBe(
+      '"elements[0].reverseGeocoding.integrationType" is required',
     )
   })
 })
@@ -8104,41 +8140,5 @@ describe('external id generation and personalisation', () => {
         ],
       }),
     ).toThrow('Element name is not unique: text')
-  })
-})
-
-describe('Google Maps Integration Environment Id on form config', () => {
-  const form = {
-    name: 'string',
-    description: 'string',
-    formsAppEnvironmentId: 1,
-    formsAppIds: [1],
-    organisationId: 'ORGANISATION_00000000001',
-    postSubmissionAction: 'FORMS_LIBRARY',
-    isMultiPage: false,
-    isAuthenticated: true,
-    elements: [],
-    tags: [],
-  }
-
-  test('Should be valid when a valid guid is passed', () => {
-    const validatedForm = validateFormThrowError({
-      ...form,
-      googleMapsIntegrationEnvironmentId:
-        '55d3d40a-c68c-4a87-b751-8246a2466ddb',
-    })
-
-    expect(validatedForm.googleMapsIntegrationEnvironmentId).toBe(
-      '55d3d40a-c68c-4a87-b751-8246a2466ddb',
-    )
-  })
-
-  test('Error should throw with non-valid guid is used', () => {
-    expect(() =>
-      validateFormThrowError({
-        ...form,
-        googleMapsIntegrationEnvironmentId: '55d3d40a-c68c-8246a2466ddb',
-      }),
-    ).toThrow('"googleMapsIntegrationEnvironmentId" must be a valid GUID')
   })
 })
