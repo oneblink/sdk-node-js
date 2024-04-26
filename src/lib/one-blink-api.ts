@@ -52,11 +52,8 @@ export default class OneBlinkAPI {
     this.oneBlinkUploader = new OneBlinkUploader({
       apiOrigin: OneBlinkAPI.tenant.apiOrigin,
       region: OneBlinkAPI.tenant.awsRegion,
-      getIdToken: () => {
-        return Promise.resolve(
-          `Bearer ${generateJWT(this.accessKey, this.secretKey, this.jwtExpiry)}`,
-        )
-      },
+      getIdToken: async () =>
+        generateJWT(this.accessKey, this.secretKey, this.jwtExpiry),
     })
   }
 
