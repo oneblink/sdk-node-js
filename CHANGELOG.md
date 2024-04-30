@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.2.0] - 2024-04-30
+
 ### Added
 
 - `FORM` type to conditional predicates schema
@@ -15,6 +17,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - unique elementId constraint from form event and approval step validation
+
+### Dependencies
+
+- no longer depend upon [@aws-sdk/lib-storage](https://www.npmjs.com/package/@aws-sdk/lib-storage)
+
+- no longer depend upon [@aws-sdk/s3-request-presigner](https://www.npmjs.com/package/@aws-sdk/s3-request-presigner)
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [6.1.0-beta.2](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [6.0.1-beta.2](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- depend upon [@oneblink/storage](https://www.npmjs.com/package/@oneblink/storage) [1.0.0-beta.13](https://github.com/oneblink/storage/blob/master/CHANGELOG.md)
 
 ## [6.1.1] - 2024-04-10
 
