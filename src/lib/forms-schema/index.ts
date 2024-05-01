@@ -92,6 +92,7 @@ const pdfSubmissionEventConfiguration = {
   includeSubmissionIdInPdf: Joi.boolean(),
   includeExternalIdInPdf: Joi.boolean(),
   includePaymentInPdf: Joi.boolean(),
+  includeCalendarBookingInPdf: Joi.boolean(),
   excludedElementIds: Joi.array()
     .items(Joi.string().guid())
     .unique()

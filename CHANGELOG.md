@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `includeCalendarBookingInPdf` config to be added to `PDF` events
+
 ## [6.2.0] - 2024-04-30
 
 ### Added
