@@ -968,6 +968,12 @@ export default class Forms extends OneBlinkAPI {
    *         targetFormId: 678,
    *       },
    *     ],
+   *     approvalForms: [
+   *      {
+   *        stepLabel: 'Approve',
+   *        targetFormId: 53
+   *      }
+   *     ]
    *     versionId: 5,
    *   })
    *   .then((migratedForm) => {
