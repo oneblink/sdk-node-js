@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.4.0] - 2024-05-20
+
 ### Added
 
 - support for `approvalForms` in `migrateForm`
+
+### Dependencies
+
+- update [@oneblink/storage](https://www.npmjs.com/package/@oneblink/storage) to [2.0.0-beta.2](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [1.0.0-beta.13](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
 
 ## [6.3.0] - 2024-05-10
 

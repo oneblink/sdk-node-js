@@ -1,7 +1,7 @@
 {
   "name": "@oneblink/sdk",
   "description": "OneBlink SDK to serve as an entry point for all OneBlink Services in NodeJS",
-  "version": "6.3.0",
+  "version": "6.4.0",
   "author": "OneBlink <developers@oneblink.io> (https://oneblink.io)",
   "bugs": {
     "url": "https://github.com/oneblink/sdk-node-js/issues"
@@ -10,7 +10,7 @@
     "@aws-sdk/client-s3": "^3.521.0",
     "@aws-sdk/client-sesv2": "^3.521.0",
     "@oneblink/sdk-core": "^6.1.0-beta.2",
-    "@oneblink/storage": "^1.0.0-beta.13",
+    "@oneblink/storage": "^2.0.0-beta.2",
     "joi": "^17.12.2",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.1.0",
