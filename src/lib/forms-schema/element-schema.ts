@@ -73,6 +73,9 @@ import GeoscapeElement, {
   type as geoscapeElementType,
 } from './elements/GeoscapeElement'
 import PointElement, { type as pointElementType } from './elements/PointElement'
+import GoogleAddressElement, {
+  type as googleAddressElementType,
+} from './elements/GoogleAddressElement'
 import CivicaStreetNameElement, {
   type as civicaStreetNameElementType,
 } from './elements/CivicaStreetNameElement'
@@ -129,6 +132,7 @@ const elementTypesMap: Record<
   [complianceElementType]: null,
   [geoscapeElementType]: null,
   [pointElementType]: null,
+  [googleAddressElementType]: null,
   [civicaStreetNameElementType]: null,
   [civicaNameRecordElementType]: null,
   [sectionElementType]: null,
@@ -237,6 +241,9 @@ const schema = Joi.object({
   })
   .when(typeCase('pointAddress'), {
     then: PointElement,
+  })
+  .when(typeCase('googleAddress'), {
+    then: GoogleAddressElement,
   })
   .when(typeCase('boolean'), {
     then: BooleanElement,
