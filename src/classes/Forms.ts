@@ -182,11 +182,11 @@ export default class Forms extends OneBlinkAPI {
     }
     let preFillFormDataId
     if (parameters.preFillData) {
-      const { preFillFormDataId } =
-        await this.oneBlinkUploader.uploadPrefillData({
-          formId,
-          prefillData: parameters.preFillData,
-        })
+      const result = await this.oneBlinkUploader.uploadPrefillData({
+        formId,
+        prefillData: parameters.preFillData,
+      })
+      preFillFormDataId = result.preFillFormDataId
 
       developerKeyAccess.prefillData = {
         read: {
