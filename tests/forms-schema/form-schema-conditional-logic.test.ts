@@ -123,6 +123,7 @@ describe('submission event conditional logic', () => {
         email: 'developers@oneblink.io',
         includeSubmissionIdInPdf: true,
         excludedElementIds: [],
+        excludedAttachmentElementIds: [],
         excludedCSSClasses: [],
       },
       conditionallyExecute: false,

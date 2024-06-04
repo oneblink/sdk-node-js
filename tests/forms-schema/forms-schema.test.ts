@@ -3332,6 +3332,7 @@ describe('PDF submission event', () => {
               secret: 'string',
             },
           },
+          excludedAttachmentElementIds: [],
         },
       },
     ]
@@ -3373,6 +3374,7 @@ describe('PDF submission event', () => {
         configuration: {
           email: 'developers@oneblink.io',
           excludedElementIds: [],
+          excludedAttachmentElementIds: [],
           excludedCSSClasses: [],
           emailTemplate: {
             id: 1,
