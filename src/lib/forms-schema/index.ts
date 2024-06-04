@@ -74,6 +74,11 @@ const emailSubmissionEventConfiguration = {
       .required(),
   }),
   emailAttachmentsEndpoint: endpointConfigurationSchema,
+  excludedAttachmentElementIds: Joi.array()
+    .items(Joi.string().guid())
+    .unique()
+    .allow(null)
+    .default([]),
 }
 
 const approvalFormsInclusionConfiguration = {

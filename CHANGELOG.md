@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `excludedAttachmentElementIds` to email and PDF events
+
 ## [6.5.0] - 2024-06-04
 
 ### Added
