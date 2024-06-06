@@ -14,6 +14,7 @@ import {
   SubmissionTypes,
   EnvironmentTypes,
   KeyTypes,
+  SubmissionEventTypes,
 } from '@oneblink/types'
 import {
   validateWithFormSchema,
@@ -924,7 +925,7 @@ export default class Forms extends OneBlinkAPI {
    * forms
    *   .deleteForm(formId, true)
    *   .then(() => {
-   *     // Form is not deleted
+   *     // Form is deleted
    *   })
    *   .catch((error) => {
    *     // Handle error here
@@ -1027,6 +1028,61 @@ export default class Forms extends OneBlinkAPI {
     }
     return super.getRequest(`/form-submission-meta/${submissionId}`)
   }
+
+  /**
+   * #### Example
+   *
+   * ```javascript
+   * const parameters = {
+   *  formId: 1,
+   *  submissionId: 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+   *  submissionEvent: {
+   *    type: 'PDF',
+   *    configuration: {
+   *      toEmail: ['{ELEMENT:Email}'],
+   *      emailSubjectLine: 'Email Subject',
+   *      excludedElementIds: [],
+   *    },
+   *  }
+   * }
+   *
+   *
+   * forms
+   *  .executeWorkflowEvent(parameters)
+   *  .then(() => {
+   *    // Workflow event has been triggered
+   *  })
+   *  .catch((error) => {
+   *    // Handle error here
+   *  })
+   *
+   * ```
+   *
+   * @param params An object containing all parameters to be passed to the
+   *   function
+   */
+  executeWorkflowEvent(params: {
+    /** The submission identifier for the workflow event you want to replay */
+    submissionId: string
+    /** The form identifier for the workflow event you want to replay */
+    formId: number
+    /** The configuration of the workflow event you want to replay */
+    submissionEvent: SubmissionEventTypes.FormWorkflowEvent
+  }): Promise<void> {
+    if (!params.submissionId || typeof params.submissionId !== 'string') {
+      return Promise.reject(
+        new TypeError('Must supply "submissionId" as a string'),
+      )
+    }
+    if (typeof params.formId !== 'number') {
+      throw new TypeError('Must supply "formId" as a number')
+    }
+    return super.postRequest(
+      '/form-submission-meta/replay-submission-event',
+      params,
+    )
+  }
+
   /**
    * A static method available on the forms class, used for validating a
    * OneBlink compatible Forms Definition.
