@@ -1048,7 +1048,7 @@ export default class Forms extends OneBlinkAPI {
    *
    *
    * forms
-   *  .triggerWorkflowEvent(parameters)
+   *  .executeWorkflowEvent(parameters)
    *  .then(() => {
    *    // Workflow event has been triggered
    *  })
@@ -1061,7 +1061,7 @@ export default class Forms extends OneBlinkAPI {
    * @param params An object containing all parameters to be passed to the
    *   function
    */
-  triggerWorkflowEvent(params: {
+  executeWorkflowEvent(params: {
     /** The submission identifier for the workflow event you want to replay */
     submissionId: string
     /** The for identifier for the workflow event you want to replay */
