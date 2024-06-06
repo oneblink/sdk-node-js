@@ -1064,7 +1064,7 @@ export default class Forms extends OneBlinkAPI {
   executeWorkflowEvent(params: {
     /** The submission identifier for the workflow event you want to replay */
     submissionId: string
-    /** The for identifier for the workflow event you want to replay */
+    /** The form identifier for the workflow event you want to replay */
     formId: number
     /** The configuration of the workflow event you want to replay */
     submissionEvent: SubmissionEventTypes.FormWorkflowEvent
