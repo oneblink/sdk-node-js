@@ -1050,7 +1050,7 @@ export default class Forms extends OneBlinkAPI {
    * forms
    *  .executeWorkflowEvent(parameters)
    *  .then(() => {
-   *    // Workflow event has been triggered
+   *    // Workflow event has been executed
    *  })
    *  .catch((error) => {
    *    // Handle error here
