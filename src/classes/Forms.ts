@@ -1036,7 +1036,7 @@ export default class Forms extends OneBlinkAPI {
    * const parameters = {
    *  formId: 1,
    *  submissionId: 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
-   *  submissionEvent: {
+   *  workflowEvent: {
    *    type: 'PDF',
    *    configuration: {
    *      toEmail: ['{ELEMENT:Email}'],
@@ -1067,20 +1067,23 @@ export default class Forms extends OneBlinkAPI {
     /** The form identifier for the workflow event you want to replay */
     formId: number
     /** The configuration of the workflow event you want to replay */
-    submissionEvent: SubmissionEventTypes.FormWorkflowEvent
+    workflowEvent: SubmissionEventTypes.FormWorkflowEvent
   }): Promise<void> {
-    if (!params.submissionId || typeof params.submissionId !== 'string') {
+    const { submissionId, formId, workflowEvent: submissionEvent } = params
+    if (!submissionId || typeof submissionId !== 'string') {
       return Promise.reject(
         new TypeError('Must supply "submissionId" as a string'),
       )
     }
-    if (typeof params.formId !== 'number') {
+    if (typeof formId !== 'number') {
       throw new TypeError('Must supply "formId" as a number')
     }
-    return super.postRequest(
-      '/form-submission-meta/replay-submission-event',
-      params,
-    )
+
+    return super.postRequest('/form-submission-meta/replay-submission-event', {
+      submissionId,
+      formId,
+      submissionEvent,
+    })
   }
 
   /**
