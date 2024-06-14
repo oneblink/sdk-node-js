@@ -28,5 +28,6 @@ export default Joi.object({
   placeholderValue,
   stateTerritoryFilter: Joi.array().items(Joi.string()),
   addressTypeFilter: Joi.array().items(Joi.string()),
+  environmentId: Joi.string().required(),
   customCssClasses,
 })
