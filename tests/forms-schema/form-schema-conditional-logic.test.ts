@@ -928,7 +928,7 @@ describe('Conditional Predicates', () => {
     )
   })
 
-  test.only('should throw error when if compareWith element does not exist', () => {
+  test('should throw error when if compareWith element does not exist', () => {
     const func = () =>
       validateFormThrowError({
         name: 'conditionally show via number input',
@@ -987,7 +987,7 @@ describe('Conditional Predicates', () => {
     expect(func).toThrow('Referenced elementId not found')
   })
 
-  test.only('should throw error when if compareWith element is not correct type', () => {
+  test('should throw error when if compareWith element is not correct type', () => {
     const func = () =>
       validateFormThrowError({
         name: 'conditionally show via number input',
@@ -1537,7 +1537,7 @@ describe('Conditional Predicates', () => {
     expect(func).toThrow('Referenced elementId not found')
   })
 
-  test.only('should throw error if referenced element incorrect in REPEATABLESET repeatableSetPredicate', () => {
+  test('should throw error if referenced element incorrect in REPEATABLESET repeatableSetPredicate', () => {
     const func = () =>
       validateFormThrowError({
         name: 'conditionally show element via number input',
@@ -1718,6 +1718,7 @@ describe('Conditional Predicates', () => {
             label: 'Address',
             name: 'Address',
             type: 'pointAddress',
+            environmentId: 'abc',
           },
           {
             id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
@@ -1792,6 +1793,7 @@ describe('Conditional Predicates', () => {
             label: 'Address',
             name: 'Address',
             type: 'pointAddress',
+            environmentId: 'abc',
           },
           {
             id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
@@ -1868,6 +1870,7 @@ describe('Conditional Predicates', () => {
             label: 'Address',
             name: 'address',
             type: 'pointAddress',
+            environmentId: 'abc',
           },
           {
             id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
