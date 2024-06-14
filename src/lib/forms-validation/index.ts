@@ -1,5 +1,9 @@
 import { formElementsService } from '@oneblink/sdk-core'
-import { FormTypes, SubmissionEventTypes } from '@oneblink/types'
+import {
+  FormTypes,
+  SubmissionEventTypes,
+  ConditionTypes,
+} from '@oneblink/types'
 import {
   elementSchema,
   formSchema,
@@ -142,6 +146,106 @@ function validateFormElementReferences(formElements: FormTypes.FormElement[]) {
   }
 }
 
+const validAddressReferenceTypes: FormTypes.FormElement['type'][] = [
+  'pointAddress',
+  'geoscapeAddress',
+]
+const validNumericReferenceTypes: FormTypes.FormElement['type'][] = [
+  'number',
+  'calculation',
+]
+
+function validateConditionallyShowPredicateReferencedElement({
+  referencedElement,
+  availableFormElements,
+  conditionalPredicate,
+}: {
+  referencedElement: FormTypes.FormElement | undefined
+  availableFormElements: FormTypes.FormElement[]
+  conditionalPredicate: ConditionTypes.ConditionalPredicate
+}) {
+  if (!referencedElement) {
+    throw new Error('Referenced elementId not found')
+  }
+  switch (conditionalPredicate.type) {
+    case 'ADDRESS_PROPERTY': {
+      if (!validAddressReferenceTypes.includes(referencedElement.type)) {
+        throw new Error(
+          `Referenced ${referencedElement.type} type not one of ${validAddressReferenceTypes.join(',')}`,
+        )
+      }
+      break
+    }
+
+    case 'NUMERIC':
+    case 'BETWEEN': {
+      if (!validNumericReferenceTypes.includes(referencedElement.type)) {
+        throw new Error(
+          `Referenced ${referencedElement.type} type not one of ${validNumericReferenceTypes.join(',')}`,
+        )
+      }
+      if (conditionalPredicate.type === 'NUMERIC') {
+        if (conditionalPredicate.compareWith === 'ELEMENT') {
+          const compareWithElement = availableFormElements.find(
+            (el) => el.id === conditionalPredicate.value,
+          )
+          if (!compareWithElement) {
+            throw new Error('Referenced elementId not found')
+          }
+          if (!validNumericReferenceTypes.includes(compareWithElement.type)) {
+            throw new Error(
+              `Referenced compareWith element ${compareWithElement.type} type not one of ${validNumericReferenceTypes.join(',')}`,
+            )
+          }
+        }
+      }
+      break
+    }
+
+    case 'REPEATABLESET': {
+      if (referencedElement.type !== 'repeatableSet') {
+        throw new Error(
+          `Referenced ${referencedElement.type} type not a repeatableSet}`,
+        )
+      }
+      const nestedReferencedElement = formElementsService.findFormElement(
+        referencedElement.elements,
+        (el) => el.id === conditionalPredicate.repeatableSetPredicate.elementId,
+      )
+      validateConditionallyShowPredicateReferencedElement({
+        referencedElement: nestedReferencedElement,
+        conditionalPredicate: conditionalPredicate.repeatableSetPredicate,
+        availableFormElements: stripLayoutFormElements(
+          referencedElement.elements,
+        ),
+      })
+    }
+  }
+}
+
+function validateConditionallyShowPredicateReferences(
+  formElements: FormTypes.FormElement[],
+) {
+  const availableFormElements = stripLayoutFormElements(formElements)
+  // Element References
+  for (const element of availableFormElements) {
+    if (element.conditionallyShow) {
+      console.log(element.conditionallyShowPredicates)
+      for (const conditionalPredicate of element.conditionallyShowPredicates ??
+        []) {
+        const referencedElement = availableFormElements.find(
+          (el) => el.id === conditionalPredicate.elementId,
+        )
+        validateConditionallyShowPredicateReferencedElement({
+          referencedElement,
+          conditionalPredicate,
+          availableFormElements,
+        })
+      }
+    }
+  }
+}
+
 /**
  * Validate each summary form element's references to other form elements. A
  * summary form element can reference form elements from anywhere in the form.
@@ -262,6 +366,8 @@ function validateWithFormSchema(form?: unknown):
       'elements',
     )
     validateFormElementReferences(validatedForm.elements)
+
+    validateConditionallyShowPredicateReferences(validatedForm.elements)
 
     const rootFormElements = stripLayoutFormElements(validatedForm.elements)
 

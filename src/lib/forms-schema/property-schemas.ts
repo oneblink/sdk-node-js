@@ -206,7 +206,7 @@ const ConditionalPredicatesItemBaseSchema = Joi.object().keys({
     then: Joi.link('#ConditionalPredicatesItemSchema'),
     otherwise: Joi.any().strip(),
   }),
-  condition: Joi.when('type', {
+  definition: Joi.when('type', {
     is: Joi.valid('ADDRESS_PROPERTY'),
     then: Joi.object()
       .keys({

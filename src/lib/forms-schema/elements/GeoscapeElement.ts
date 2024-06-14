@@ -26,6 +26,8 @@ export default Joi.object({
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   placeholderValue,
-  stateTerritoryFilter: Joi.array().items(Joi.string()),
+  stateTerritoryFilter: Joi.array().items(
+    Joi.string().valid('NSW', 'QLD', 'VIC', 'ACT', 'TAS', 'SA', 'NT', 'WA'),
+  ),
   customCssClasses,
 })
