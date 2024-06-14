@@ -152,7 +152,14 @@ const ConditionalPredicatesItemBaseSchema = Joi.object().keys({
   elementId: Joi.string().guid().required(),
   type: Joi.string()
     .default('OPTIONS')
-    .valid('OPTIONS', 'NUMERIC', 'VALUE', 'BETWEEN', 'FORM'),
+    .valid(
+      'OPTIONS',
+      'NUMERIC',
+      'VALUE',
+      'BETWEEN',
+      'FORM',
+      'ADDRESS_PROPERTY',
+    ),
   optionIds: Joi.when('type', {
     is: Joi.valid('OPTIONS'),
     then: Joi.array().min(1).items(Joi.string()).required(),
@@ -198,6 +205,26 @@ const ConditionalPredicatesItemBaseSchema = Joi.object().keys({
     is: Joi.valid('FORM'),
     then: Joi.link('#ConditionalPredicatesItemSchema'),
     otherwise: Joi.any().strip(),
+  }),
+  condition: Joi.when('type', {
+    is: Joi.valid('ADDRESS_PROPERTY'),
+    then: Joi.object()
+      .keys({
+        property: Joi.string().valid('IS_PO_BOX_ADDRESS', 'STATE_EQUALITY'),
+        value: Joi.when('property', {
+          switch: [
+            {
+              is: Joi.valid('IS_PO_BOX_ADDRESS'),
+              then: Joi.boolean().required(),
+            },
+            {
+              is: Joi.valid('STATE_EQUALITY'),
+              then: Joi.string().required(),
+            },
+          ],
+        }),
+      })
+      .required(),
   }),
 })
 
