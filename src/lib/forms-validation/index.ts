@@ -205,7 +205,7 @@ function validateConditionallyShowPredicateReferencedElement({
     case 'REPEATABLESET': {
       if (referencedElement.type !== 'repeatableSet') {
         throw new Error(
-          `Referenced ${referencedElement.type} type not a repeatableSet}`,
+          `Referenced ${referencedElement.type} type not a repeatableSet`,
         )
       }
       const nestedReferencedElement = formElementsService.findFormElement(
@@ -230,7 +230,6 @@ function validateConditionallyShowPredicateReferences(
   // Element References
   for (const element of availableFormElements) {
     if (element.conditionallyShow) {
-      console.log(element.conditionallyShowPredicates)
       for (const conditionalPredicate of element.conditionallyShowPredicates ??
         []) {
         const referencedElement = availableFormElements.find(
