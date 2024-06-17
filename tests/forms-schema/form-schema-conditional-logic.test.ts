@@ -918,6 +918,7 @@ describe('Conditional Predicates', () => {
       '"elements[1].conditionallyShowPredicates[0].value" must be a string',
     )
   })
+
   test('should throw error when passing string to value with `compareWith`: `VALUE` | `undefined`', () => {
     const { error } = formSchema.validate(
       {
@@ -991,6 +992,7 @@ describe('Conditional Predicates', () => {
       '"elements[2].conditionallyShowPredicates[1].value" must be a number',
     )
   })
+
   test('should allow REPEATABLESET conditional predicate type', () => {
     const result = formSchema.validate(
       {
@@ -1119,7 +1121,7 @@ describe('Conditional Predicates', () => {
       },
     )
     expect(result.error?.message).toBe(
-      '"elements[1].conditionallyShowPredicates[0].repeatableSetPredicate.type" must be one of [OPTIONS, NUMERIC, VALUE, BETWEEN, FORM]',
+      '"elements[1].conditionallyShowPredicates[0].repeatableSetPredicate.type" must be one of [OPTIONS, NUMERIC, VALUE, BETWEEN, FORM, ADDRESS_PROPERTY]',
     )
   })
 
@@ -1225,7 +1227,159 @@ describe('Conditional Predicates', () => {
       },
     )
     expect(result.error?.message).toBe(
-      '"elements[1].conditionallyShowPredicates[0].predicate.type" must be one of [REPEATABLESET, OPTIONS, NUMERIC, VALUE, BETWEEN, FORM]',
+      '"elements[1].conditionallyShowPredicates[0].predicate.type" must be one of [REPEATABLESET, OPTIONS, NUMERIC, VALUE, BETWEEN, FORM, ADDRESS_PROPERTY]',
+    )
+  })
+
+  test('Should allow ADDRESS_PROPERTY type predicates', () => {
+    const result = formSchema.validate(
+      {
+        name: 'conditionally show element via number input',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b7',
+            label: 'Address',
+            name: 'Address',
+            type: 'pointAddress',
+            environmentId: 'abc',
+          },
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: true,
+            requiresAllConditionallyShowPredicates: false,
+            conditionallyShowPredicates: [
+              {
+                elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b7',
+                type: 'ADDRESS_PROPERTY',
+                definition: {
+                  property: 'IS_PO_BOX_ADDRESS',
+                  value: true,
+                },
+              },
+            ],
+          },
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b24',
+            name: 'Text2',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: true,
+            requiresAllConditionallyShowPredicates: false,
+            conditionallyShowPredicates: [
+              {
+                elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b7',
+                type: 'ADDRESS_PROPERTY',
+                definition: {
+                  property: 'STATE_EQUALITY',
+                  value: 'NSW',
+                },
+              },
+            ],
+          },
+        ],
+        isAuthenticated: true,
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(result.error?.message).toBe(undefined)
+  })
+
+  test('Should validate conditions within ADDRESS_PROPERTY type', () => {
+    const result = formSchema.validate(
+      {
+        name: 'conditionally show element via number input',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b7',
+            label: 'Address',
+            name: 'Address',
+            type: 'pointAddress',
+            environmentId: 'abc',
+          },
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: true,
+            requiresAllConditionallyShowPredicates: false,
+            conditionallyShowPredicates: [
+              {
+                elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b7',
+                type: 'ADDRESS_PROPERTY',
+                definition: {
+                  property: 'IS_PO_BOX_ADDRESS',
+                  value: 'NSW',
+                },
+              },
+            ],
+          },
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b24',
+            name: 'Text2',
+            label: 'Text',
+            type: 'text',
+            required: false,
+            defaultValue: 'text',
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            conditionallyShow: true,
+            requiresAllConditionallyShowPredicates: false,
+            conditionallyShowPredicates: [
+              {
+                elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b7',
+                type: 'ADDRESS_PROPERTY',
+                definition: {
+                  property: 'STATE_EQUALITY',
+                  value: true,
+                },
+              },
+            ],
+          },
+        ],
+        isAuthenticated: true,
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(result.error?.message).toBe(
+      '"elements[1].conditionallyShowPredicates[0].definition.value" must be a boolean. "elements[2].conditionallyShowPredicates[0].definition.value" must be one of [NSW, VIC, QLD, SA, WA, TAS, ACT, NT, OT]. "elements[2].conditionallyShowPredicates[0].definition.value" must be a string',
     )
   })
 })
