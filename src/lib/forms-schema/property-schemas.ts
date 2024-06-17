@@ -219,7 +219,19 @@ const ConditionalPredicatesItemBaseSchema = Joi.object().keys({
             },
             {
               is: Joi.valid('STATE_EQUALITY'),
-              then: Joi.string().required(),
+              then: Joi.string()
+                .valid(
+                  'NSW',
+                  'VIC',
+                  'QLD',
+                  'SA',
+                  'WA',
+                  'TAS',
+                  'ACT',
+                  'NT',
+                  'OT',
+                )
+                .required(),
             },
           ],
         }),
