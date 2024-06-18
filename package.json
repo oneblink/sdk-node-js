@@ -50,7 +50,7 @@
   },
   "engines": {
     "node": ">=16",
-    "npm": ">=8"
+    "npm": ">=10"
   },
   "files": [
     "tenants"
