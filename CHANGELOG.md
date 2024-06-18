@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `environmentId` to point address element
 - `ADDRESS_PROPERTY` to conditional predicates schema
 
+### Removed
+
+- **[BREAKING]** support for NodeJS 16
+
 ## [6.6.0] - 2024-06-13
 
 ### Added

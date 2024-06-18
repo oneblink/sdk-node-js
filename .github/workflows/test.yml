@@ -15,14 +15,14 @@ jobs:
 
     strategy:
       matrix:
-        node: ['16', '18', '20']
+        node: ['18', '20', '22']
         os: [ubuntu-latest]
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-      - run: npm install --global npm@8
+      - run: npm install --global npm@10
       - run: npm ci
       - run: npm test

@@ -54,21 +54,27 @@ function validateReferenceDate({
   element,
   referenceType,
   elements,
+  propertyName,
 }: {
   element: FormTypes.DateElement | FormTypes.DateTimeElement
   referenceType: 'toDateElementId' | 'fromDateElementId'
   elements: FormTypes.FormElement[]
+  propertyName: string
 }) {
   if (element[referenceType]) {
-    //ensure element exists and is the same type
+    // Ensure element exists and is the same type
     const referencedElement = elements.find(
       (el) => el.id === element[referenceType],
     )
     if (!referencedElement) {
-      throw new Error(`Referenced ${referenceType} not found`)
+      throw new Error(
+        `"${propertyName}.${referenceType}" (${element[referenceType]}) references a form element that does not exist in the scope of this element`,
+      )
     }
     if (referencedElement.type !== element.type) {
-      throw new Error(`Referenced ${referenceType} not a ${element.type}`)
+      throw new Error(
+        `"${propertyName}.${referenceType}" (${element[referenceType]}) references a form element type (${referencedElement.type}) that does not match it's type (${element.type})`,
+      )
     }
   }
 }
@@ -76,19 +82,20 @@ function validateReferenceDate({
 function validateLocationReferenceElement({
   formattedAddressElementId,
   elements,
+  propertyName,
 }: {
   formattedAddressElementId: string | undefined
   elements: FormTypes.FormElement[]
+  propertyName: string
 }) {
-  if (!formattedAddressElementId) {
-    throw new Error('formattedAddressElementId does not have a value')
-  }
-  //ensure element exists and is a valid type
+  // Ensure element exists and is a valid type
   const referencedElement = elements.find(
     (el) => el.id === formattedAddressElementId,
   )
   if (!referencedElement) {
-    throw new Error(`Referenced formattedAddressElementId not found`)
+    throw new Error(
+      `"${propertyName}.formattedAddressElementId" (${formattedAddressElementId}) references a form element that does not exist in the scope of this element`,
+    )
   }
   const validReferenceTypes: FormTypes.FormElement['type'][] = [
     'text',
@@ -96,37 +103,67 @@ function validateLocationReferenceElement({
   ]
   if (!validReferenceTypes.includes(referencedElement.type)) {
     throw new Error(
-      `Referenced ${referencedElement.type} type not one of ${validReferenceTypes.join(',')}`,
+      `"${propertyName}.formattedAddressElementId" (${formattedAddressElementId}) references a form element with an unsupported type (${referencedElement.type}). Supported types: ${validReferenceTypes.join(', ')}`,
     )
   }
 }
 
-function validateFormElementReferences(formElements: FormTypes.FormElement[]) {
-  const availableFormElements = stripLayoutFormElements(formElements)
+function validateFormElementReferences({
+  availableFormElements,
+  formElements,
+  propertyName,
+}: {
+  availableFormElements: FormTypes.FormElement[]
+  formElements: FormTypes.FormElement[]
+  propertyName: string
+}) {
+  const formElementsInScope = stripLayoutFormElements(availableFormElements)
   // Element References
-  for (const element of availableFormElements) {
+  let formElementIndex = -1
+  for (const element of formElements) {
+    formElementIndex++
+    const currentPropertyName = `${propertyName}[${formElementIndex}]`
     switch (element.type) {
+      case 'page':
+      case 'section': {
+        validateFormElementReferences({
+          availableFormElements,
+          formElements: element.elements,
+          propertyName: `${currentPropertyName}.elements`,
+        })
+        break
+      }
       case 'date':
       case 'datetime': {
         if (element.toDateElementId) {
           validateReferenceDate({
             element,
             referenceType: 'toDateElementId',
-            elements: availableFormElements,
+            elements: formElementsInScope,
+            propertyName: currentPropertyName,
           })
         }
         if (element.fromDateElementId) {
           validateReferenceDate({
             element,
             referenceType: 'fromDateElementId',
-            elements: availableFormElements,
+            elements: formElementsInScope,
+            propertyName: currentPropertyName,
           })
         }
         break
       }
       case 'repeatableSet': {
-        validateElementNamesAcrossNestedElements(element.elements)
-        validateFormElementReferences(element.elements)
+        const nextPropertyName = `${currentPropertyName}.elements`
+        validateElementNamesAcrossNestedElements(
+          element.elements,
+          nextPropertyName,
+        )
+        validateFormElementReferences({
+          availableFormElements: element.elements,
+          formElements: element.elements,
+          propertyName: nextPropertyName,
+        })
         break
       }
       case 'location': {
@@ -134,7 +171,8 @@ function validateFormElementReferences(formElements: FormTypes.FormElement[]) {
           validateLocationReferenceElement({
             formattedAddressElementId:
               element.reverseGeocoding.formattedAddressElementId,
-            elements: availableFormElements,
+            elements: formElementsInScope,
+            propertyName: currentPropertyName,
           })
         }
       }
@@ -242,14 +280,16 @@ function validateWithFormSchema(form?: unknown):
 
   try {
     // validate element names are unique (including elements without a name with children)
-    validateElementNamesAcrossNestedElements(validatedForm.elements)
+    validateElementNamesAcrossNestedElements(validatedForm.elements, 'elements')
 
     const { publishStartDate, publishEndDate } = validatedForm
     if (!!publishStartDate && !!publishEndDate) {
       const startDate = new Date(publishStartDate)
       const endDate = new Date(publishEndDate)
       if (startDate >= endDate)
-        throw new Error('Publish Start Date must be before Publish End Date')
+        throw new Error(
+          `"publishStartDate" (${publishStartDate}) must be before "publishEndDate" (${publishEndDate})`,
+        )
     }
 
     if (!validatedForm.submissionEvents) {
@@ -261,7 +301,11 @@ function validateWithFormSchema(form?: unknown):
       validatedForm.elements,
       'elements',
     )
-    validateFormElementReferences(validatedForm.elements)
+    validateFormElementReferences({
+      availableFormElements: validatedForm.elements,
+      formElements: validatedForm.elements,
+      propertyName: 'elements',
+    })
 
     const rootFormElements = stripLayoutFormElements(validatedForm.elements)
 
