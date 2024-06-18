@@ -41,33 +41,6 @@ export const validateFormEvent = ({
   validatedFormElements: FormTypes.FormElement[]
   propertyName: string
 }) => {
-  // CHECK ANY CONDITIONAL ELEMENT IDS ARE IN THE FORM
-  if (
-    formEvent.conditionallyExecutePredicates &&
-    formEvent.conditionallyExecute
-  ) {
-    for (
-      let conditionallyExecutePredicateIndex = 0;
-      conditionallyExecutePredicateIndex <
-      formEvent.conditionallyExecutePredicates.length;
-      conditionallyExecutePredicateIndex++
-    ) {
-      const conditionallyExecutePredicate =
-        formEvent.conditionallyExecutePredicates[
-          conditionallyExecutePredicateIndex
-        ]
-      if (
-        !rootFormElements.some(
-          ({ id }) => id === conditionallyExecutePredicate.elementId,
-        )
-      ) {
-        throw new Error(
-          `"${propertyName}.conditionallyExecutePredicates[${conditionallyExecutePredicateIndex}].elementId" (${conditionallyExecutePredicate.elementId}) does not exist in "elements"`,
-        )
-      }
-    }
-  }
-
   switch (formEvent.type) {
     case 'CP_PAY':
     case 'WESTPAC_QUICK_STREAM':

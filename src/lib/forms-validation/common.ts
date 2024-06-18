@@ -57,30 +57,43 @@ export const stripLayoutFormElements = (
   return rootFormElements
 }
 
-function checkElementNameUniqueness(elementNames: string[], name: string) {
+function checkElementNameUniqueness(
+  elementNames: string[],
+  name: string,
+  propertyName: string,
+) {
   // check if name already exists
-  const existingName = elementNames.find((e) => e === name)
+  const existingName = elementNames.includes(name)
   if (existingName) {
-    throw new Error(`Element name is not unique: ${name}`)
+    throw new Error(
+      `"${propertyName}" contains an element with a "name" (${name}) property that is not unique`,
+    )
   }
 }
 
 export function validateElementNamesAcrossNestedElements(
   elements: FormTypes.FormElement[],
+  propertyName: string,
 ): string[] {
   const elementNames = []
   for (const element of elements) {
-    if (element.type === 'page' || element.type === 'section') {
-      const childNames = validateElementNamesAcrossNestedElements(
-        element.elements,
-      )
-      for (const name of childNames) {
-        checkElementNameUniqueness(elementNames, name)
-        elementNames.push(name)
+    switch (element.type) {
+      case 'page':
+      case 'section': {
+        const childNames = validateElementNamesAcrossNestedElements(
+          element.elements,
+          propertyName,
+        )
+        for (const name of childNames) {
+          checkElementNameUniqueness(elementNames, name, propertyName)
+          elementNames.push(name)
+        }
+        break
       }
-    } else {
-      checkElementNameUniqueness(elementNames, element.name)
-      elementNames.push(element.name)
+      default: {
+        checkElementNameUniqueness(elementNames, element.name, propertyName)
+        elementNames.push(element.name)
+      }
     }
   }
   return elementNames

@@ -6480,10 +6480,12 @@ test('should not allow publish start date after publish end date', () => {
       isMultiPage: false,
       submissionEvents: [],
       elements: [],
-      publishStartDate: '2020-06-21 12:00:00',
-      publishEndDate: '2020-06-20 12:00:00',
+      publishStartDate: '2020-06-21T02:00:00.000Z',
+      publishEndDate: '2020-06-20T02:00:00.000Z',
     }),
-  ).toThrow('Publish Start Date must be before Publish End Date')
+  ).toThrow(
+    '"publishStartDate" (2020-06-21T02:00:00.000Z) must be before "publishEndDate" (2020-06-20T02:00:00.000Z)',
+  )
 })
 
 describe('submission event configuration', () => {
@@ -7049,7 +7051,9 @@ describe('Date and Time `NOW` option', () => {
           },
         ],
       }),
-    ).toThrow('Referenced toDateElementId not found')
+    ).toThrow(
+      '"elements[0].toDateElementId" (e5a05567-c666-45e3-bcd8-10e6ca0c2e1a) references a form element that does not exist in the scope of this element',
+    )
   })
 
   test('should throw error when toDateElementId is not the same type', () => {
@@ -7076,7 +7080,9 @@ describe('Date and Time `NOW` option', () => {
           },
         ],
       }),
-    ).toThrow('Referenced toDateElementId not a datetime')
+    ).toThrow(
+      '"elements[1].toDateElementId" (e5a05567-c666-45e3-bcd8-10e6ca0c2e1a) references a form element type (date) that does not match it\'s type (datetime)',
+    )
   })
 
   test('should throw error when fromDateElementId does not exist', () => {
@@ -7095,7 +7101,9 @@ describe('Date and Time `NOW` option', () => {
           },
         ],
       }),
-    ).toThrow('Referenced fromDateElementId not found')
+    ).toThrow(
+      '"elements[0].fromDateElementId" (e5a05567-c666-45e3-bcd8-10e6ca0c2e1a) references a form element that does not exist in the scope of this element',
+    )
   })
 
   test('should throw error when fromDateElementId is not the same type', () => {
@@ -7122,7 +7130,9 @@ describe('Date and Time `NOW` option', () => {
           },
         ],
       }),
-    ).toThrow('Referenced fromDateElementId not a datetime')
+    ).toThrow(
+      '"elements[1].fromDateElementId" (e5a05567-c666-45e3-bcd8-10e6ca0c2e1a) references a form element type (date) that does not match it\'s type (datetime)',
+    )
   })
 
   test('should allow when toDateElementId and fromDateElement are correctly configured', () => {
@@ -7593,7 +7603,9 @@ describe('Location Element', () => {
           },
         ],
       }),
-    ).toThrow('Referenced formattedAddressElementId not found')
+    ).toThrow(
+      '"elements[0].formattedAddressElementId" (45d3d40a-c68c-4a87-b751-8246a2466ddc) references a form element that does not exist in the scope of this element',
+    )
   })
 
   it('should fail validation - missing element Id', () => {
@@ -8141,6 +8153,8 @@ describe('external id generation and personalisation', () => {
           },
         ],
       }),
-    ).toThrow('Element name is not unique: text')
+    ).toThrow(
+      '"elements" contains an element with a "name" (text) property that is not unique',
+    )
   })
 })
