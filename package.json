@@ -49,7 +49,7 @@
     "test": "test"
   },
   "engines": {
-    "node": ">=16",
+    "node": ">=18",
     "npm": ">=10"
   },
   "files": [
