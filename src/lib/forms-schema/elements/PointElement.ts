@@ -40,6 +40,5 @@ export default Joi.object({
     ),
   ),
   addressTypeFilter: Joi.array().items(Joi.string()),
-  environmentId: Joi.string().required(),
   customCssClasses,
 })
