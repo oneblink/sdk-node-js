@@ -64,7 +64,7 @@ describe('Scheduling events should throw errors when not passed to "schedulingEv
         paymentEvents: [schedulingEvent],
       }),
     ).toThrow(
-      '"paymentEvents[0].type" must be one of [CP_PAY, BPOINT, WESTPAC_QUICK_WEB, WESTPAC_QUICK_STREAM, NSW_GOV_PAY]',
+      '"paymentEvents[0].type" must be one of [CP_PAY, BPOINT, WESTPAC_QUICK_STREAM, NSW_GOV_PAY]',
     )
   })
 })
@@ -232,7 +232,7 @@ describe('Submission events should throw errors when not passed to "paymentEvent
     type: 'CALLBACK',
     configuration: {
       url: 'https://domain.io/path',
-      secret: 'abc123',
+      organisationManagedSecretId: 1,
     },
   }
   const form = {
@@ -263,7 +263,7 @@ describe('Submission events should throw errors when not passed to "paymentEvent
         paymentEvents: [submissionEvent],
       }),
     ).toThrow(
-      '"paymentEvents[0].type" must be one of [CP_PAY, BPOINT, WESTPAC_QUICK_WEB, WESTPAC_QUICK_STREAM, NSW_GOV_PAY]',
+      '"paymentEvents[0].type" must be one of [CP_PAY, BPOINT, WESTPAC_QUICK_STREAM, NSW_GOV_PAY]',
     )
   })
 })
@@ -273,7 +273,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
     type: 'CALLBACK',
     configuration: {
       url: 'https://domain.io/path',
-      secret: 'abc123',
+      organisationManagedSecretId: 1,
     },
   }
   const paymentEvent = {

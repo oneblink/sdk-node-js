@@ -26,7 +26,7 @@ const endpointConfigurationSchemaConfiguration = Joi.object()
     is: 'CALLBACK',
     then: Joi.object({
       url: Joi.string().uri().required(),
-      secret: Joi.string(),
+      organisationManagedSecretId: Joi.number(),
     }),
   })
   .when('type', {
@@ -35,7 +35,7 @@ const endpointConfigurationSchemaConfiguration = Joi.object()
       apiId: Joi.string().required(),
       apiEnvironment: Joi.string().required(),
       apiEnvironmentRoute: Joi.string().required(),
-      secret: Joi.string(),
+      organisationManagedSecretId: Joi.number(),
     }),
   })
 
@@ -127,7 +127,6 @@ const formEventBaseSchema = {
 export const paymentEventTypes: SubmissionEventTypes.FormPaymentEventType[] = [
   'CP_PAY',
   'BPOINT',
-  'WESTPAC_QUICK_WEB',
   'WESTPAC_QUICK_STREAM',
   'NSW_GOV_PAY',
 ]
@@ -147,7 +146,7 @@ export const PaymentEventSchema = Joi.object({
       }),
     })
     .when('type', {
-      is: Joi.valid('WESTPAC_QUICK_WEB', 'WESTPAC_QUICK_STREAM'),
+      is: Joi.valid('WESTPAC_QUICK_STREAM'),
       then: Joi.object().keys({
         elementId: Joi.string().uuid().required(),
         environmentId: Joi.string().uuid().required(),
@@ -217,7 +216,7 @@ export const WorkflowEventSchema = Joi.object().keys({
       is: 'CALLBACK',
       then: Joi.object().keys({
         url: Joi.string().uri().required(),
-        secret: Joi.string().required(),
+        organisationManagedSecretId: Joi.number().required(),
       }),
     })
     .when('type', {
@@ -246,7 +245,7 @@ export const WorkflowEventSchema = Joi.object().keys({
         apiId: Joi.string().required(),
         apiEnvironment: Joi.string().required(),
         apiEnvironmentRoute: Joi.string().required(),
-        secret: Joi.string().required(),
+        organisationManagedSecretId: Joi.number().required(),
       }),
     })
     .when('type', {
