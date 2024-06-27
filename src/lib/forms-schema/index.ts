@@ -574,6 +574,7 @@ const formSchema = Joi.object().keys({
   continueWithAutosave: Joi.boolean(),
   customCssClasses,
   pointAddressEnvironmentId: Joi.string(),
+  allowGeoscapeAddresses: Joi.boolean(),
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
