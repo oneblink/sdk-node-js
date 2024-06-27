@@ -197,6 +197,7 @@ export const formWorkflowEventTypes: SubmissionEventTypes.FormWorkflowEventType[
   [
     'CALLBACK',
     'POWER_AUTOMATE_FLOW',
+    'CP_INTEGRATION_HUB_WEBHOOK',
     'PDF',
     'EMAIL',
     'ONEBLINK_API',
@@ -220,9 +221,10 @@ export const WorkflowEventSchema = Joi.object().keys({
       }),
     })
     .when('type', {
-      is: 'POWER_AUTOMATE_FLOW',
+      is: Joi.valid('POWER_AUTOMATE_FLOW', 'CP_INTEGRATION_HUB_WEBHOOK'),
       then: Joi.object().keys({
         url: Joi.string().uri().required(),
+        formId: Joi.number(),
       }),
     })
     .when('type', {
