@@ -217,7 +217,7 @@ export const WorkflowEventSchema = Joi.object().keys({
       is: 'CALLBACK',
       then: Joi.object().keys({
         url: Joi.string().uri().required(),
-        organisationManagedSecretId: Joi.number().required(),
+        organisationManagedSecretId: Joi.number(),
       }),
     })
     .when('type', {
