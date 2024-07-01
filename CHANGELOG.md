@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- form submissions and draft downloads to use storage endpoints
+
 ## [7.1.3] - 2024-07-01
 
 ### Fixed

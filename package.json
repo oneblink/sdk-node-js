@@ -7,10 +7,9 @@
     "url": "https://github.com/oneblink/sdk-node-js/issues"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.521.0",
-    "@aws-sdk/client-sesv2": "^3.521.0",
+    "@aws-sdk/client-sesv2": "^3.606.0",
     "@oneblink/sdk-core": "^6.3.0-beta.2",
-    "@oneblink/storage": "^2.0.0-beta.2",
+    "@oneblink/storage": "^2.1.0-beta.2",
     "joi": "^17.12.2",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.1.0",
@@ -19,6 +18,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.606.0",
     "@microsoft/eslint-plugin-sdl": "^0.2.2",
     "@oneblink/release-cli": "^3.2.1",
     "@oneblink/types": "github:oneblink/types",

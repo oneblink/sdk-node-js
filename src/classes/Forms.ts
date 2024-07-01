@@ -2,7 +2,6 @@ import { HeadObjectOutput } from '@aws-sdk/client-s3'
 import { Readable } from 'stream'
 import generateFormUrl from '../lib/generate-form-url'
 import generateJWT from '../lib/generate-jwt'
-import getSubmissionData from '../lib/retrieve-submission-data'
 import OneBlinkAPI from '../lib/one-blink-api'
 import generateFormElement from '../lib/generate-form-element'
 import generatePageElement from '../lib/generate-page-element'
@@ -333,14 +332,17 @@ export default class Forms extends OneBlinkAPI {
       )
     }
 
-    let url = `/forms/${formId}/retrieval-credentials/${submissionId}`
     if (isDraft) {
-      url = `/forms/${formId}/download-draft-data-credentials/${submissionId}`
+      return await this.oneBlinkDownloader.downloadDraftSubmission({
+        formSubmissionDraftVersionId: submissionId,
+        formId,
+      })
+    } else {
+      return await this.oneBlinkDownloader.downloadSubmission({
+        submissionId,
+        formId,
+      })
     }
-
-    const credentials =
-      await super.postEmptyRequest<AWSTypes.FormS3Credentials>(url)
-    return await getSubmissionData(credentials)
   }
 
   /** @internal */
@@ -358,7 +360,7 @@ export default class Forms extends OneBlinkAPI {
     const response = await this.request({
       origin: OneBlinkAPI.tenant.apiOrigin,
       method: 'GET',
-      path: `/submissions/${formId}/attachments/${attachmentId}`,
+      path: `/storage/forms/${formId}/attachments/${attachmentId}`,
     })
     return response
   }
