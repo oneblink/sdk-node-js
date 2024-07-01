@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.1.3] - 2024-07-01
+
 ### Fixed
 
 - Removed ALLOW_TAG_PREFIX from release workflow
