@@ -335,7 +335,6 @@ export default class Forms extends OneBlinkAPI {
     if (isDraft) {
       return await this.oneBlinkDownloader.downloadDraftSubmission({
         formSubmissionDraftVersionId: submissionId,
-        formId,
       })
     } else {
       return await this.oneBlinkDownloader.downloadSubmission({
