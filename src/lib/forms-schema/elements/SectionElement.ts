@@ -34,5 +34,6 @@ const schema: Joi.ObjectSchema = Joi.object({
     .unique('name', { ignoreUndefined: true })
     .unique('id'),
   customCssClasses,
+  canCollapseFromBottom: Joi.boolean(),
 })
 export default schema
