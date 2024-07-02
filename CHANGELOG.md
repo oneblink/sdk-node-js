@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `canCollapseFromBottom` to section element
+
 ### Changed
 
 - form submissions and draft downloads to use storage endpoints
