@@ -1,7 +1,11 @@
 import querystring from 'querystring'
 
 import fetch, { Response, BodyInit } from 'node-fetch'
-import { OneBlinkUploader } from '@oneblink/storage'
+import {
+  OneBlinkDownloader,
+  OneBlinkUploader,
+  StorageConstructorOptions,
+} from '@oneblink/storage'
 
 import pkg from './package'
 import generateJWT from './generate-jwt'
@@ -36,6 +40,8 @@ export default class OneBlinkAPI {
   jwtExpiry: number
   /** @internal */
   oneBlinkUploader: OneBlinkUploader
+  /** @internal */
+  oneBlinkDownloader: OneBlinkDownloader
 
   constructor(accessKey: unknown, secretKey: unknown) {
     if (!accessKey || typeof accessKey !== 'string') {
@@ -49,12 +55,15 @@ export default class OneBlinkAPI {
     this.jwtExpiry = 300
     this.accessKey = accessKey
     this.secretKey = secretKey
-    this.oneBlinkUploader = new OneBlinkUploader({
+
+    const storageConstructorOptions: StorageConstructorOptions = {
       apiOrigin: OneBlinkAPI.tenant.apiOrigin,
       region: OneBlinkAPI.tenant.awsRegion,
       getBearerToken: async () =>
         generateJWT(this.accessKey, this.secretKey, this.jwtExpiry),
-    })
+    }
+    this.oneBlinkUploader = new OneBlinkUploader(storageConstructorOptions)
+    this.oneBlinkDownloader = new OneBlinkDownloader(storageConstructorOptions)
   }
 
   /** @internal */
