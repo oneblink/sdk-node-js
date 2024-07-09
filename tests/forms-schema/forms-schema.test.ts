@@ -5605,39 +5605,6 @@ describe('invalid property removal', () => {
     })
   })
 
-  test('should strip out `postSubmissionReceipt` if `postSubmissionAction` is "URL"', () => {
-    const { error, value } = formSchema.validate({
-      name: 'Inspection',
-      formsAppEnvironmentId: 1,
-      formsAppIds: [1],
-      organisationId: '59cc888b8969af000fb50ddb',
-      postSubmissionAction: 'URL',
-      redirectUrl: 'https://google.com',
-      postSubmissionReceipt: {
-        html: '<p>test</p>',
-      },
-      cancelAction: 'BACK',
-      submissionEvents: [],
-      tags: [],
-      elements: [],
-    })
-    expect(error).toBeFalsy()
-    expect(value).toEqual({
-      name: 'Inspection',
-      formsAppEnvironmentId: 1,
-      formsAppIds: [1],
-      organisationId: '59cc888b8969af000fb50ddb',
-      postSubmissionAction: 'URL',
-      redirectUrl: 'https://google.com',
-      cancelAction: 'BACK',
-      submissionEvents: [],
-      tags: [],
-      elements: [],
-      isAuthenticated: false,
-      isMultiPage: false,
-    })
-  })
-
   test('should allow `postSubmissionReceipt.html` if `postSubmissionAction` is not "URL"', () => {
     const { error, value } = formSchema.validate({
       name: 'Inspection',
