@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.2.0] - 2024-07-10
+
 ### Added
 
 - `canCollapseFromBottom` to section element
@@ -14,6 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - form submissions and draft downloads to use storage endpoints
+
+### Dependencies
+
+- no longer depend upon [@aws-sdk/client-s3](https://www.npmjs.com/package/@aws-sdk/client-s3)
+
+- update [@aws-sdk/client-sesv2](https://www.npmjs.com/package/@aws-sdk/client-sesv2) to [3.606.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md) (from [3.521.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md))
+
+- update [@oneblink/storage](https://www.npmjs.com/package/@oneblink/storage) to [2.1.0-beta.3](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [2.0.0-beta.2](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
 
 ## [7.1.3] - 2024-07-01
 
