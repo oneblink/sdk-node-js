@@ -27,7 +27,7 @@ export default class EmailTemplates extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const searchParams = {
@@ -39,6 +39,11 @@ export default class EmailTemplates extends OneBlinkAPI {
    * ```
    *
    * @param searchParams Search options
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Email Templates: `Manager` or`Read Only`
    */
   searchEmailTemplates(
     searchParams: EmailTemplatesSearchOptions,
@@ -47,7 +52,7 @@ export default class EmailTemplates extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const emailTemplate = await emailTemplates.getEmailTemplate(1)
@@ -55,6 +60,11 @@ export default class EmailTemplates extends OneBlinkAPI {
    * ```
    *
    * @param id The id of the email template
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Email Templates: `Manager` or`Read Only`
    */
   async getEmailTemplate(
     id: number,
@@ -67,7 +77,7 @@ export default class EmailTemplates extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const data = {
@@ -86,6 +96,11 @@ export default class EmailTemplates extends OneBlinkAPI {
    * ```
    *
    * @param data The data for the new email template
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Email Templates: `Manager`
    */
   async createEmailTemplate(
     data: EmailTemplateTypes.NewEmailTemplate,
@@ -94,7 +109,7 @@ export default class EmailTemplates extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const data = {
@@ -114,6 +129,11 @@ export default class EmailTemplates extends OneBlinkAPI {
    * ```
    *
    * @param data The data for the email template to update
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Email Templates: `Manager` or`Read Only`
    */
   async updateEmailTemplate(
     data: EmailTemplateTypes.EmailTemplate,
@@ -126,13 +146,18 @@ export default class EmailTemplates extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * await emailTemplates.deleteEmailTemplate(1)
    * ```
    *
    * @param id The id of the email template to delete
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Email Templates: `Manager` or`Read Only`
    */
   async deleteEmailTemplate(id: number): Promise<void> {
     if (typeof id !== 'number') {

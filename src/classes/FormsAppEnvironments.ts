@@ -9,7 +9,7 @@ import {
 const basePath = `/forms-app-environments`
 export default class FormsAppEnvironments extends OneBlinkAPI {
   /**
-   * #### Example
+   * ## Example
    *
    * ```typescript
    * const OneBlink = require('@oneblink/sdk')
@@ -27,7 +27,7 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const searchParams = {
@@ -39,6 +39,11 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    * ```
    *
    * @param searchParams Search options
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Forms App Environments: `Manager` or `Read Only`
    */
   searchFormsAppEnvironments(
     searchParams?: FormsAppEnvironmentsSearchOptions,
@@ -47,7 +52,7 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const formsAppEnvironment =
@@ -56,6 +61,11 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    * ```
    *
    * @param id The id of the forms app environment
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Forms App Environments: `Manager` or `Read Only`
    */
   async getFormsAppEnvironment(
     formsAppEnvironmentId: number,
@@ -68,7 +78,7 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const data = {
@@ -94,6 +104,11 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    * ```
    *
    * @param newFormsAppEnvironment The data for the new forms app environment
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Forms App Environments: `Manager`
    */
   async createFormsAppEnvironment(
     newFormsAppEnvironment: EnvironmentTypes.NewFormsAppEnvironment,
@@ -102,7 +117,7 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const data = {
@@ -119,6 +134,11 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    *
    * @param formsAppEnvironment The data for the forms app environment template
    *   to update
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Forms App Environments: `Manager`
    */
   async updateFormsAppEnvironment(
     formsAppEnvironment?: EnvironmentTypes.FormsAppEnvironment,
@@ -134,13 +154,18 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
-   * await formsAppEnvironments.deleteEmailTemplate(1)
+   * await formsAppEnvironments.deleteFormsAppEnvironment(1)
    * ```
    *
    * @param id The id of the forms app environment to delete
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Forms App Environments: `Manager`
    */
   async deleteFormsAppEnvironment(
     formsAppEnvironmentId: number,

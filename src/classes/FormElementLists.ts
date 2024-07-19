@@ -10,7 +10,7 @@ const basePath = `/form-element-options/dynamic`
 
 export default class FormElementLists extends OneBlinkAPI {
   /**
-   * #### Example
+   * ## Example
    *
    * ```typescript
    * import { FormElementLists } from '@oneblink/sdk'
@@ -28,7 +28,7 @@ export default class FormElementLists extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const searchParams = {
@@ -40,6 +40,11 @@ export default class FormElementLists extends OneBlinkAPI {
    * ```
    *
    * @param searchParams Search options
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   No Permissions Required
    */
   async searchFormElementLists(
     searchParams: FormElementListSearchOptions,
@@ -63,7 +68,7 @@ export default class FormElementLists extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const data = {
@@ -91,6 +96,11 @@ export default class FormElementLists extends OneBlinkAPI {
    * ```
    *
    * @param newFormElementList The data for the new list
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Form Element Lists: `Manager`
    */
   async createFormElementList(
     newFormElementList: FormTypes.NewFormElementOptionSet,
@@ -105,7 +115,7 @@ export default class FormElementLists extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const data = {
@@ -138,6 +148,11 @@ export default class FormElementLists extends OneBlinkAPI {
    * ```
    *
    * @param list The data for the list to update
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Form Element Lists: `Manager`
    */
   async updateFormElementList(
     list: FormTypes.FormElementOptionSet,
@@ -157,13 +172,18 @@ export default class FormElementLists extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * await formElementListsClient.deleteFormElementList(1)
    * ```
    *
    * @param id The id of the list to delete
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Form Element Lists: `Manager`
    */
   async deleteFormElementList(id: number): Promise<void> {
     if (typeof id !== 'number' || Number.isNaN(id)) {

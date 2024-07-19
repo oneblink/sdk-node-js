@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `staticDocs/Permissions.md` for Permissions
+- Permissions required for functions
+
 ### Changed
 
 - allow `postSubmissionReceipt` if `postSubmissionAction` is `URL`
+- typedoc configuration
 
 ## [7.2.0] - 2024-07-10
 
