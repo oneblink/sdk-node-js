@@ -1,13 +1,14 @@
 # OneBlink Role Permissions
 
-There are a collections of permissions that are required to use different functions within the OneBlink SDK. These permissions can be set within the [OneBlink Console](console.oneblink.io). If you do not have access, you will need to work with your Administrator to set the permissions that you need.
-Without certain permissions, you will be unable to complete actions with the OneBlink SDK. The required permissions are included on the function and they will be listed below.
+Certain actions in the OneBlink SDK require that your key has particular permissions.
+These permissions can be set in the [OneBlink Console](console.oneblink.io). If you do not have access to the OneBlink console, you will need to work with your Administrator to associate the permissions that you require with your key.
+Without the associated permissions for a particular action, you will be prohibited from completing that action using the OneBlink SDK. The associated permissions for each function are detailed on the function definitions in addition to being listed below.
 
-## Endpoints and their Required Roles
+## Functions and their Required Roles
 
 ### Approvals
 
-| Endpoint                                      | Permission | Permission Level |
+| Function                                      | Permission | Permission Level |
 | --------------------------------------------- | ---------- | ---------------- |
 | getFormApprovalFlowInstance()                 | FaaS       | Developer        |
 | getFormSubmissionApproval()                   | FaaS       | Developer        |
@@ -15,14 +16,14 @@ Without certain permissions, you will be unable to complete actions with the One
 
 ### Data Manager
 
-| Endpoint            | Permission       | Permission Level   |
+| Function            | Permission       | Permission Level   |
 | ------------------- | ---------------- | ------------------ |
 | getFormDefinition() | Form Submissions | Manager, Read Only |
 | searchRecords()     | Form Submissions | Manager, Read Only |
 
 ### Email Templates
 
-| Endpoint              | Permission      | Permission Level   |
+| Function              | Permission      | Permission Level   |
 | --------------------- | --------------- | ------------------ |
 | createEmailTemplate() | Email Templates | Manager            |
 | deleteEmailTemplate() | Email Templates | Manager            |
@@ -32,7 +33,7 @@ Without certain permissions, you will be unable to complete actions with the One
 
 ### Form Element Lists
 
-| Endpoint                 | Permission         | Permission Level |
+| Function                 | Permission         | Permission Level |
 | ------------------------ | ------------------ | ---------------- |
 | createFormElementList()  | Form Element Lists | Manager          |
 | deleteFormElementList()  | Form Element Lists | Manager          |
@@ -41,7 +42,7 @@ Without certain permissions, you will be unable to complete actions with the One
 
 ### Form Element Lookups
 
-| Endpoint                   | Permission           | Permission Level   |
+| Function                   | Permission           | Permission Level   |
 | -------------------------- | -------------------- | ------------------ |
 | createFormElementLookup()  | Form Element Lookups | Manager            |
 | deleteFormElementLookup()  | Form Element Lookups | Manager            |
@@ -51,7 +52,7 @@ Without certain permissions, you will be unable to complete actions with the One
 
 ### Forms
 
-| Endpoint                          | Permission       | Permission Level   |
+| Function                          | Permission       | Permission Level   |
 | --------------------------------- | ---------------- | ------------------ |
 | createForm()                      | Forms            | Manager            |
 | createSubmissionAttachment()      | FaaS             | Developer          |
@@ -82,11 +83,11 @@ Without certain permissions, you will be unable to complete actions with the One
 | validateFormEvent()               | ---              | ---                |
 
 \* For Private Forms
-\*\* For Pre-Fill Data
+\*\* For Form Submission and Pre-Fill Data
 
 ### Forms App Environments
 
-| Endpoint                     | Permission             | Permission Level   |
+| Function                     | Permission             | Permission Level   |
 | ---------------------------- | ---------------------- | ------------------ |
 | createFormsAppEnvironment()  | Forms App Environments | Manager            |
 | deleteFormsAppEnvironment()  | Forms App Environments | Manager            |
@@ -96,7 +97,7 @@ Without certain permissions, you will be unable to complete actions with the One
 
 ### Forms Apps
 
-| Endpoint               | Permission                          | Permission Level   |
+| Function               | Permission                          | Permission Level   |
 | ---------------------- | ----------------------------------- | ------------------ |
 | createFormsApp()       | Apps                                | Manager            |
 |                        | Data Manager, Approvals, Volunteers | Manager            |
@@ -117,7 +118,7 @@ Without certain permissions, you will be unable to complete actions with the One
 
 ### Jobs
 
-| Endpoint     | Permission | Permission Level   |
+| Function     | Permission | Permission Level   |
 | ------------ | ---------- | ------------------ |
 | createJob()  | Jobs       | Manager            |
 | deleteJob()  | Jobs       | Manager            |
@@ -125,20 +126,20 @@ Without certain permissions, you will be unable to complete actions with the One
 
 ### Keys
 
-| Endpoint | Permission                                         | Permission Level |
-| -------- | -------------------------------------------------- | ---------------- |
-| getKey() | Calendar Bookings, Integrations & Development Keys | Manager          |
+| Function | Permission                                         | Permission Level   |
+| -------- | -------------------------------------------------- | ------------------ |
+| getKey() | Calendar Bookings, Integrations & Development Keys | Manager, Read Only |
 
 ### Organisations
 
-| Endpoint          | Permission | Permission Level                             |
+| Function          | Permission | Permission Level                             |
 | ----------------- | ---------- | -------------------------------------------- |
 | getOrganisation() | ---        | You need to have a key from the Organisation |
 | uploadAsset()     | ---        | You need to have a key from the Organisation |
 
 ### PDF
 
-| Endpoint                        | Permission       | Permission Level   |
+| Function                        | Permission       | Permission Level   |
 | ------------------------------- | ---------------- | ------------------ |
 | generateFormSubmissionPDF()     | Form Submissions | Manager, Read Only |
 | generatePDF()                   | PDF              | Developer          |
@@ -146,6 +147,6 @@ Without certain permissions, you will be unable to complete actions with the One
 
 ### Team Member
 
-| Endpoint           | Permission | Permission Level |
-| ------------------ | ---------- | ---------------- |
-| getTeamMeberRole() | ---        | ---              |
+| Function            | Permission | Permission Level |
+| ------------------- | ---------- | ---------------- |
+| getTeamMemberRole() | ---        | ---              |

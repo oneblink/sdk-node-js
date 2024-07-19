@@ -36,7 +36,8 @@ export default class Keys extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Calendar Bookings, Integrations & Development Keys: `Manager`
+   *   Calendar Bookings, Integrations & Development Keys: `Manager` or `Read
+   *   Only`
    */
   getKey(keyId: string): Promise<KeyTypes.Key> {
     if (typeof keyId !== 'string') {

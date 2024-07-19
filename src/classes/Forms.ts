@@ -87,7 +87,7 @@ export default class Forms extends OneBlinkAPI {
    *
    *   Apps: `Manager` or `Read Only`
    *
-   *   ### Pre-Fill data permissions
+   *   ### For Form Submission and Pre-Fill Data
    *
    *   FaaS: `Developer`
    */

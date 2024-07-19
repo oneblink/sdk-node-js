@@ -60,7 +60,7 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    * // Use data here...
    * ```
    *
-   * @param id The id of the forms app environment
+   * @param formsAppEnvironmentId The id of the forms app environment
    * @returns
    *
    *   ## Role Permissions Required
@@ -160,7 +160,7 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    * await formsAppEnvironments.deleteFormsAppEnvironment(1)
    * ```
    *
-   * @param id The id of the forms app environment to delete
+   * @param formsAppEnvironmentId The id of the forms app environment to delete
    * @returns
    *
    *   ## Role Permissions Required

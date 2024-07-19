@@ -43,7 +43,7 @@ export default class EmailTemplates extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Email Templates: `Manager` or`Read Only`
+   *   Email Templates: `Manager` or `Read Only`
    */
   searchEmailTemplates(
     searchParams: EmailTemplatesSearchOptions,
@@ -64,7 +64,7 @@ export default class EmailTemplates extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Email Templates: `Manager` or`Read Only`
+   *   Email Templates: `Manager` or `Read Only`
    */
   async getEmailTemplate(
     id: number,
