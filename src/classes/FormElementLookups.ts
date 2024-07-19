@@ -35,7 +35,7 @@ export default class FormElementLookups extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Form Element Lookups: `Manager` or`Read Only`
+   *   Form Element Lookups: `Manager` or `Read Only`
    */
   async getFormElementLookup(id: number): Promise<FormTypes.FormElementLookup> {
     if (typeof id !== 'number' || Number.isNaN(id)) {

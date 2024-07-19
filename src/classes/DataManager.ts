@@ -38,7 +38,7 @@ export default class DataManager extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Form Submissions: `Manager` or`Read Only`
+   *   Form Submissions: `Manager` or `Read Only`
    */
   async getFormDefinition(id: number): Promise<FormStoreDefinition> {
     if (typeof id !== 'number') {

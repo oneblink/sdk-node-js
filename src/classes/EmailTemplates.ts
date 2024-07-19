@@ -133,7 +133,7 @@ export default class EmailTemplates extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Email Templates: `Manager` or`Read Only`
+   *   Email Templates: `Manager` or `Read Only`
    */
   async updateEmailTemplate(
     data: EmailTemplateTypes.EmailTemplate,
@@ -157,7 +157,7 @@ export default class EmailTemplates extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Email Templates: `Manager` or`Read Only`
+   *   Email Templates: `Manager` or `Read Only`
    */
   async deleteEmailTemplate(id: number): Promise<void> {
     if (typeof id !== 'number') {
