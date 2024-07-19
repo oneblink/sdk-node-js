@@ -319,7 +319,9 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   App Users: `Manager`
+   *   For Apps: `Manager` or `Read Only`.
+   *
+   *   For Data Manager, Approvers, Volunteers: `Manager` or `Read Only`
    */
   async getSendingAddress(
     formsAppId: number,
@@ -352,7 +354,9 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   App Users: `Manager`
+   *   For Apps: `Manager` or `Read Only`.
+   *
+   *   For Data Manager, Approvers, Volunteers: `Manager` or `Read Only`
    */
   async setSendingAddress(
     formsAppId: number,
@@ -412,7 +416,9 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   App Users: `Manager`
+   *   For Apps: `Manager` or `Read Only`.
+   *
+   *   For Data Manager, Approvers, Volunteers: `Manager` or `Read Only`
    */
   async deleteSendingAddress(formsAppId: number): Promise<void> {
     if (typeof formsAppId !== 'number') {
