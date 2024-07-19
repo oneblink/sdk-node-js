@@ -80,7 +80,6 @@
     "excludeInternal": true,
     "hideGenerator": true,
     "disableSources": true,
-    "projectDocuments": ["staticDocs"],
     "readme": "./DOCUMENTATION.md"
   }
 }
