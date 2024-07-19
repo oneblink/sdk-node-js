@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Permissions required for functions
 
+### Changed
+
+- allow `postSubmissionReceipt` if `postSubmissionAction` is `URL`
+
 ## [7.2.0] - 2024-07-10
 
 ### Added
