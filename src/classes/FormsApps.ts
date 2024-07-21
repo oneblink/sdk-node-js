@@ -76,7 +76,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   For Apps: `Manager` or `Read Only`.
    *
-   *   Data Manager, Approvers, Volunteers: `Manager` or `Read Only`
+   *   Data Manager, Approvals, Volunteers: `Manager` or `Read Only`
    */
   async getFormsApp(formsAppId: number): Promise<FormsAppsTypes.FormsApp> {
     if (typeof formsAppId !== 'number') {
@@ -146,7 +146,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   For Apps: `Manager`
    *
-   *   For Data Manager, Approvers, Volunteers: `Manager`
+   *   For Data Manager, Approvals, Volunteers: `Manager`
    */
   async createFormsApp(
     formsApp: Omit<FormsAppsTypes.NewFormsApp, 'styles'>,
@@ -172,7 +172,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   For Apps: `Manager`
    *
-   *   Data Manager, Approvers, Volunteers: `Manager`
+   *   Data Manager, Approvals, Volunteers: `Manager`
    */
   async updateFormsApp(
     formsApp: FormsAppsTypes.FormsApp,
@@ -205,7 +205,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   For Apps: `Manager`
    *
-   *   Data Manager, Approvers, Volunteers: `Manager`
+   *   Data Manager, Approvals, Volunteers: `Manager`
    */
   async deleteFormsApp(formsAppId: number): Promise<void> {
     if (typeof formsAppId !== 'number') {
@@ -321,7 +321,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   For Apps: `Manager` or `Read Only`.
    *
-   *   For Data Manager, Approvers, Volunteers: `Manager` or `Read Only`
+   *   For Data Manager, Approvals, Volunteers: `Manager` or `Read Only`
    */
   async getSendingAddress(
     formsAppId: number,
@@ -356,7 +356,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   For Apps: `Manager` or `Read Only`.
    *
-   *   For Data Manager, Approvers, Volunteers: `Manager` or `Read Only`
+   *   For Data Manager, Approvals, Volunteers: `Manager` or `Read Only`
    */
   async setSendingAddress(
     formsAppId: number,
@@ -418,7 +418,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   For Apps: `Manager` or `Read Only`.
    *
-   *   For Data Manager, Approvers, Volunteers: `Manager` or `Read Only`
+   *   For Data Manager, Approvals, Volunteers: `Manager` or `Read Only`
    */
   async deleteSendingAddress(formsAppId: number): Promise<void> {
     if (typeof formsAppId !== 'number') {
