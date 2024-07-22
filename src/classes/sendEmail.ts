@@ -42,7 +42,11 @@ import { SendMailOptions, SendEmailResult } from '../types'
  *
  *   ## Role Permissions Required
  *
- *   No Permissions Required
+ *   In AWS, you will require an IAM Role associated with the email used that has
+ *   the permissions in order to use this function:
+ *
+ *   - SendEmail
+ *   - SendRawEmail
  */
 export default async function sendEmail(
   options: SendMailOptions,

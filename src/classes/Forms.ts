@@ -1223,10 +1223,6 @@ export default class Forms extends OneBlinkAPI {
    *
    * @param form The form object to validate.
    * @returns
-   *
-   *   ## Roles Permissions Required
-   *
-   *   No Permissions Required
    */
   static validateForm(form: unknown) {
     return validateWithFormSchema(form)
@@ -1238,10 +1234,6 @@ export default class Forms extends OneBlinkAPI {
    * @param data The untrusted data to validate
    * @param formElements The form elements to validate against the event
    * @returns A trusted form event
-   *
-   *   ## Roles Permissions Required
-   *
-   *   No Permissions Required
    */
   static validateFormEvent(
     formElements: FormTypes.FormElement[],
@@ -1269,10 +1261,6 @@ export default class Forms extends OneBlinkAPI {
    * ```
    *
    * @returns
-   *
-   *   ## Roles Permissions Required
-   *
-   *   No Permissions Required
    */
   static generateFormElement<T extends FormTypes._FormElementBase>(
     formElementGenerationData?: Record<string, unknown>,
@@ -1305,10 +1293,6 @@ export default class Forms extends OneBlinkAPI {
    * ```
    *
    * @returns
-   *
-   *   ## Roles Permissions Required
-   *
-   *   No Permissions Required
    */
   static generatePageElement(
     formElementGenerationData?: Record<string, unknown>,
@@ -1324,10 +1308,6 @@ export default class Forms extends OneBlinkAPI {
    * `secret` options.
    *
    * @returns The encrypted representation of the username
-   *
-   *   ## Roles Permissions Required
-   *
-   *   No Permissions Required
    */
   static encryptUserToken(details: {
     /** The username to encrypt */
@@ -1343,10 +1323,6 @@ export default class Forms extends OneBlinkAPI {
    * This token is passed to OneBlink webhooks in the `userToken` property.
    *
    * @returns The decrypted username
-   *
-   *   ## Roles Permissions Required
-   *
-   *   No Permissions Required
    */
   static decryptUserToken(details: {
     /** The user token to decrypt */
@@ -1383,10 +1359,6 @@ export default class Forms extends OneBlinkAPI {
    * ```
    *
    * @returns
-   *
-   *   ## Roles Permissions Required
-   *
-   *   No Permissions Required
    */
   static validateEndpointConfiguration = validateEndpointConfiguration
 }

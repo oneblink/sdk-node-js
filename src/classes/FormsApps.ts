@@ -46,10 +46,6 @@ export default class FormsApps extends OneBlinkAPI {
    *
    * @param token The JWT you wish to verify
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   No Permissions Required
    */
   static async verifyJWT<T extends Record<string, unknown>>(
     token: string,
