@@ -736,7 +736,7 @@ export default class Forms extends OneBlinkAPI {
    *
    *   ## Roles Permissions Required
    *
-   *   FaaS: `Developer`
+   *   Email Attachment: `Developer`
    */
   async uploadEmailAttachment(options: {
     /** The attachment's file name */
