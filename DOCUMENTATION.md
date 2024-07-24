@@ -61,7 +61,7 @@ Actions that require a developer key with a minimum role permission will have th
 
 **Minimum Role Permission**
 
-The developer key used must be assigned a role with at least the permission documented for each action. E.g. If action's minimum role permission is _Forms: Read Only_, the role assigned to the developer key could have _Forms: Read Only_ or _Forms: Manager_.
+The developer key used must be assigned a role with at least the permission documented for each action. E.g. If the action's minimum role permission is _Forms: Read Only_, the role assigned to the developer key could have _Forms: Read Only_ or _Forms: Manager_.
 
 ### Developer Key & App Association
 
