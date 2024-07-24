@@ -86,6 +86,7 @@ export default class FormElementLists extends OneBlinkAPI {
    *     ],
    *     type: 'STATIC',
    *   }
+   *   const list = await formElementListsClient.createFormElementList(data)
    *   // Use list here...
    *
    * @param newFormElementList The data for the new list
