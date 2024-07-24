@@ -31,65 +31,48 @@ import {
 
 export default class Forms extends OneBlinkAPI {
   /**
-   * ## Example
-   *
-   * ```javascript
-   * const OneBlink = require('@oneblink/sdk')
-   *
-   * const options = {
-   *   accessKey: '123455678901ABCDEFGHIJKL',
-   *   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-   * }
-   * const forms = new OneBlink.Forms(options)
-   * ```
+   * @example
+   *   const OneBlink = require('@oneblink/sdk')
+   *   const options = {
+   *     accessKey: '123455678901ABCDEFGHIJKL',
+   *     secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+   *   }
+   *   const forms = new OneBlink.Forms(options)
    */
   constructor(options: ConstructorOptions) {
     options = options || {}
     super(options.accessKey, options.secretKey)
   }
   /**
-   * ## Example
+   * **App Association Required**
    *
-   * ```javascript
-   * const parameters = {
-   *   formId: 1,
-   *   formsAppId: 2,
-   *   externalId: 'My Custom Identifier',
-   *   preFillData: {
-   *     FieldName1: 'A Machine',
-   *     FieldName2: 'Room B',
-   *   },
-   *   expiryInSeconds: 36800,
-   *   username: 'username',
-   *   secret: 'sshh',
-   *   previousFormSubmissionApprovalId: 1,
-   * }
+   * **Minimum Role Permission** (only if using `preFillData`)
    *
-   * forms.generateFormUrl(parameters).then((result) => {
-   *   const formUrl = result.formUrl
-   *   // Use form URL here...
-   * })
-   * ```
+   * Jobs: _Manager_
+   *
+   * @example
+   *   const parameters = {
+   *     formId: 1,
+   *     formsAppId: 2,
+   *     externalId: 'My Custom Identifier',
+   *     preFillData: {
+   *       FieldName1: 'A Machine',
+   *       FieldName2: 'Room B',
+   *     },
+   *     expiryInSeconds: 36800,
+   *     username: 'username',
+   *     secret: 'sshh',
+   *     previousFormSubmissionApprovalId: 1,
+   *   }
+   *
+   *   forms.generateFormUrl(parameters).then((result) => {
+   *     const formUrl = result.formUrl
+   *     // Use form URL here...
+   *   })
    *
    * @param parameters An object containing all parameters to be passed to the
    *   function
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   ### For Private Forms
-   *
-   *   Forms: `Manager` or `Read Only`
-   *
-   *   Apps: `Manager` or `Read Only`
-   *
-   *   ### For Public Forms
-   *
-   *   Apps: `Manager` or `Read Only`
-   *
-   *   ### For Form Submission and Pre-Fill Data
-   *
-   *   FaaS: `Developer`
    */
   async generateFormUrl(parameters: {
     /** The exact id of the form you wish to generate a URL for */
@@ -261,19 +244,20 @@ export default class Forms extends OneBlinkAPI {
     }
   }
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const formId = 1
-   * const submissionId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
-   * const expiryInSeconds = 900
-   * forms
-   *   .generateSubmissionDataUrl(formId, submissionId, expiryInSeconds)
-   *   .then((result) => {
-   *     const submissionDataUrl = result.url
-   *     // Use URL here...
-   *   })
-   * ```
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const formId = 1
+   *   const submissionId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+   *   const expiryInSeconds = 900
+   *   forms
+   *     .generateSubmissionDataUrl(formId, submissionId, expiryInSeconds)
+   *     .then((result) => {
+   *       const submissionDataUrl = result.url
+   *       // Use URL here...
+   *     })
    *
    * @param formId The exact id of the form you wish to generate a URL for
    * @param submissionId The submission identifier generated after a successful
@@ -282,10 +266,6 @@ export default class Forms extends OneBlinkAPI {
    * @param expiryInSeconds The number of seconds the signed URL should be valid
    *   for, must be greater than or equal to `900`
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager` or `Read Only`
    */
   async generateSubmissionDataUrl(
     formId: number,
@@ -316,22 +296,23 @@ export default class Forms extends OneBlinkAPI {
     )
   }
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const formId = 1
-   * const submissionId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
-   * const isDraft = false
-   * forms
-   *   .getSubmissionData(formId, submissionId, isDraft)
-   *   .then((result) => {
-   *     const definition = result?.definition
-   *     const submission = result?.submission
-   *   })
-   *   .catch((error) => {
-   *     // Handle error here
-   *   })
-   * ```
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const formId = 1
+   *   const submissionId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+   *   const isDraft = false
+   *   forms
+   *     .getSubmissionData(formId, submissionId, isDraft)
+   *     .then((result) => {
+   *       const definition = result?.definition
+   *       const submission = result?.submission
+   *     })
+   *     .catch((error) => {
+   *       // Handle error here
+   *     })
    *
    * @param formId The exact id of the form you wish to get submission data for
    * @param submissionId The submission identifier generated after a successful
@@ -340,10 +321,6 @@ export default class Forms extends OneBlinkAPI {
    * @param isDraft `true` if the submission is a draft submission, otherwise
    *   `false`
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager` or `Read Only`
    */
   async getSubmissionData(
     formId: number,
@@ -391,28 +368,25 @@ export default class Forms extends OneBlinkAPI {
     return response
   }
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const formId = 1
-   * const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
-   * forms
-   *   .getSubmissionAttachmentMeta(formId, attachmentId)
-   *   .then((result) => {
-   *     // Use result here
-   *   })
-   *   .catch((error) => {
-   *     // Handle error here
-   *   })
-   * ```
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const formId = 1
+   *   const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+   *   forms
+   *     .getSubmissionAttachmentMeta(formId, attachmentId)
+   *     .then((result) => {
+   *       // Use result here
+   *     })
+   *     .catch((error) => {
+   *       // Handle error here
+   *     })
    *
    * @param formId The exact id of the form the attachment was uploaded on
    * @param attachmentId The attachment identifier from the form submission data
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager` or `Read Only`
    */
   async getSubmissionAttachmentMeta(formId: number, attachmentId: string) {
     return await this.getRequest<HeadObjectOutput>(
@@ -420,37 +394,34 @@ export default class Forms extends OneBlinkAPI {
     )
   }
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const fs = require('fs')
-   * const util = require('util')
-   * const stream = require('stream')
+   * Submission Data: _Read Only_
    *
-   * const finishedAsync = util.promisify(stream.finished)
+   * @example
+   *   const fs = require('fs')
+   *   const util = require('util')
+   *   const stream = require('stream')
    *
-   * async function run() {
-   *   const formId = 1
-   *   const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
-   *   const readableStream = await forms.getSubmissionAttachmentStream(
-   *     formId,
-   *     attachmentId,
-   *   )
+   *   const finishedAsync = util.promisify(stream.finished)
    *
-   *   const writableStream = fs.createWriteStream('file.png')
-   *   readableStream.pipe(writableStream)
-   *   await finishedAsync(readableStream)
-   *   writableStream.end()
-   * }
-   * ```
+   *   async function run() {
+   *     const formId = 1
+   *     const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+   *     const readableStream = await forms.getSubmissionAttachmentStream(
+   *       formId,
+   *       attachmentId,
+   *     )
+   *
+   *     const writableStream = fs.createWriteStream('file.png')
+   *     readableStream.pipe(writableStream)
+   *     await finishedAsync(readableStream)
+   *     writableStream.end()
+   *   }
    *
    * @param formId The exact id of the form the attachment was uploaded on
    * @param attachmentId The attachment identifier from the form submission data
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager` or `Read Only`
    */
   async getSubmissionAttachmentStream(
     formId: number,
@@ -463,33 +434,30 @@ export default class Forms extends OneBlinkAPI {
     return response.body
   }
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const fs = require('fs')
-   * const util = require('util')
+   * Submission Data: _Read Only_
    *
-   * const writeFileAsync = util.promisify(fs.writeFile)
+   * @example
+   *   const fs = require('fs')
+   *   const util = require('util')
    *
-   * async function run() {
-   *   const formId = 1
-   *   const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
-   *   const buffer = await forms.getSubmissionAttachmentBuffer(
-   *     formId,
-   *     attachmentId,
-   *   )
+   *   const writeFileAsync = util.promisify(fs.writeFile)
    *
-   *   await writeFileAsync('file.png', buffer)
-   * }
-   * ```
+   *   async function run() {
+   *     const formId = 1
+   *     const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+   *     const buffer = await forms.getSubmissionAttachmentBuffer(
+   *       formId,
+   *       attachmentId,
+   *     )
+   *
+   *     await writeFileAsync('file.png', buffer)
+   *   }
    *
    * @param formId The exact id of the form the attachment was uploaded on
    * @param attachmentId The attachment identifier from the form submission data
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager` or `Read Only`
    */
   async getSubmissionAttachmentBuffer(
     formId: number,
@@ -502,45 +470,41 @@ export default class Forms extends OneBlinkAPI {
     return await response.buffer()
   }
   /**
-   * ## Example
+   * **App Association Required**
    *
-   * ```javascript
-   * const fs = require('fs')
-   * const util = require('util')
+   * @example
+   *   const fs = require('fs')
+   *   const util = require('util')
    *
-   * const readFileAsync = util.promisify(fs.readFile)
+   *   const readFileAsync = util.promisify(fs.readFile)
    *
-   * async function run() {
-   *   const formId = 1
+   *   async function run() {
+   *     const formId = 1
    *
-   *   const imageFileName = 'profile-picture.png'
-   *   const imageBuffer = await readFileAsync(imageFileName)
-   *   const imageResult = await forms.createSubmissionAttachment({
-   *     formId,
-   *     body: imageBuffer,
-   *     isPrivate: false,
-   *     contentType: 'image/png',
-   *     fileName: imageFileName,
-   *   })
+   *     const imageFileName = 'profile-picture.png'
+   *     const imageBuffer = await readFileAsync(imageFileName)
+   *     const imageResult = await forms.createSubmissionAttachment({
+   *       formId,
+   *       body: imageBuffer,
+   *       isPrivate: false,
+   *       contentType: 'image/png',
+   *       fileName: imageFileName,
+   *     })
    *
-   *   const documentFileName = 'secrets.text'
-   *   const readableStream = fs.createReadStream(documentFileName)
-   *   const documentResult = await forms.createSubmissionAttachment({
-   *     formId,
-   *     isPrivate: true,
-   *     contentType: 'text/plain',
-   *     fileName: documentFileName,
-   *     body: readableStream,
-   *     username: 'user@example.com',
-   *   })
-   * }
-   * ```
+   *     const documentFileName = 'secrets.text'
+   *     const readableStream = fs.createReadStream(documentFileName)
+   *     const documentResult = await forms.createSubmissionAttachment({
+   *       formId,
+   *       isPrivate: true,
+   *       contentType: 'text/plain',
+   *       fileName: documentFileName,
+   *       body: readableStream,
+   *       username: 'user@example.com',
+   *     })
+   *   }
    *
+   * @param attachment The attachment to upload
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   FaaS: `Developer`
    */
   async createSubmissionAttachment({
     formId,
@@ -595,33 +559,30 @@ export default class Forms extends OneBlinkAPI {
    * require a URL that needs to last longer, consider using the
    * `generateWorkflowAttachmentLink()` function.
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const formId = 1
-   * const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
-   * const expiryInSeconds = 900
-   * forms
-   *   .generateSubmissionAttachmentUrl(
-   *     formId,
-   *     attachmentId,
-   *     expiryInSeconds,
-   *   )
-   *   .then((result) => {
-   *     const attachmentUrl = result.url
-   *     // Use URL here...
-   *   })
-   * ```
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const formId = 1
+   *   const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+   *   const expiryInSeconds = 900
+   *   forms
+   *     .generateSubmissionAttachmentUrl(
+   *       formId,
+   *       attachmentId,
+   *       expiryInSeconds,
+   *     )
+   *     .then((result) => {
+   *       const attachmentUrl = result.url
+   *       // Use URL here...
+   *     })
    *
    * @param formId The exact id of the form you wish to generate a URL for
    * @param attachmentId The attachment identifier from the form submission data
    * @param expiryInSeconds The number of seconds the signed URL should be valid
    *   for, must be greater than or equal to `900`
    * @returns An absolute URL that that can be used to download the attachment
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager` or `Read Only`
    */
   async generateSubmissionAttachmentUrl(
     formId: number,
@@ -656,30 +617,27 @@ export default class Forms extends OneBlinkAPI {
    * links. If you require a URL that should be short lived, consider using the
    * `generateSubmissionAttachmentUrl()` function.
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const formId = 1
-   * const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
-   * const submissionId = '49ae3fa9-798d-467c-96e1-5c606fe42fbb'
-   * forms
-   *   .generateWorkflowAttachmentLink({
-   *     formId,
-   *     attachmentId,
-   *     submissionId,
-   *   })
-   *   .then((result) => {
-   *     const attachmentUrl = result.url
-   *     // Use URL here...
-   *   })
-   * ```
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const formId = 1
+   *   const attachmentId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+   *   const submissionId = '49ae3fa9-798d-467c-96e1-5c606fe42fbb'
+   *   forms
+   *     .generateWorkflowAttachmentLink({
+   *       formId,
+   *       attachmentId,
+   *       submissionId,
+   *     })
+   *     .then((result) => {
+   *       const attachmentUrl = result.url
+   *       // Use URL here...
+   *     })
    *
    * @param options The options required to generate a link
    * @returns An absolute URL that that can be used to download the attachment
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager` or `Read Only`
    */
   async generateWorkflowAttachmentLink(options: {
     /** The exact id of the form you wish to generate a URL for */
@@ -713,30 +671,27 @@ export default class Forms extends OneBlinkAPI {
    * Upload a file to use as an attachment for an email based form workflow
    * event.
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * export async function post(request) {
-   *   const readableStream = fs.createReadStream(documentFileName)
+   * Email Attachments: _On_
    *
-   *   const emailAttachment = await forms.uploadEmailAttachment({
-   *     filename: 'document.text',
-   *     contentType: 'text/plain',
-   *     body: readableStream,
-   *   })
+   * @example
+   *   export async function post(request) {
+   *     const readableStream = fs.createReadStream(documentFileName)
    *
-   *   return {
-   *     attachments: [emailAttachment],
+   *     const emailAttachment = await forms.uploadEmailAttachment({
+   *       filename: 'document.text',
+   *       contentType: 'text/plain',
+   *       body: readableStream,
+   *     })
+   *
+   *     return {
+   *       attachments: [emailAttachment],
+   *     }
    *   }
-   * }
-   * ```
    *
    * @param options Available options for uploading attachment.
    * @returns The configuration required to add custom attachments to an email.
-   *
-   *   ## Role Permissions Required
-   *
-   *   Email Attachments: `On`
    */
   async uploadEmailAttachment(options: {
     /** The attachment's file name */
@@ -764,29 +719,26 @@ export default class Forms extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const options = {
-   *   isAuthenticated: true,
-   *   name: 'Form Name',
-   * }
-   * forms
-   *   .searchForms(options)
-   *   .then((result) => {
-   *     const forms = result.forms
-   *   })
-   *   .catch((error) => {
-   *     // Handle error here
-   *   })
-   * ```
+   * Forms: _Read Only_
+   *
+   * @example
+   *   const options = {
+   *     isAuthenticated: true,
+   *     name: 'Form Name',
+   *   }
+   *   forms
+   *     .searchForms(options)
+   *     .then((result) => {
+   *       const forms = result.forms
+   *     })
+   *     .catch((error) => {
+   *       // Handle error here
+   *     })
    *
    * @param searchParams Search options.
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Forms: `Manager` or `Read Only`
    */
   searchForms(searchParams?: FormsSearchOptions): Promise<FormsSearchResult> {
     return super.searchRequest(`/v2/forms`, searchParams)
@@ -796,43 +748,40 @@ export default class Forms extends OneBlinkAPI {
    * use the information to fetch the actual submission data, if it is still
    * available
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const options = {
-   *   formId: 1,
-   *   submissionDateFrom: '2018-08-16T05:28:26.448Z',
-   *   submissionDateTo: '2019-08-16T05:28:26.448Z',
-   *   isValid: true,
-   *   submissionTitle: 'Smith',
-   * }
-   * forms
-   *   .searchSubmissions(options)
-   *   .then((result) => {
-   *     const submissionDetails = result.formSubmissionMeta
-   *     return Promise.all(
-   *       submissionDetails.map((metaData) =>
-   *         forms.getSubmissionData(
-   *           metaData.formId,
-   *           metaData.submissionId,
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const options = {
+   *     formId: 1,
+   *     submissionDateFrom: '2018-08-16T05:28:26.448Z',
+   *     submissionDateTo: '2019-08-16T05:28:26.448Z',
+   *     isValid: true,
+   *     submissionTitle: 'Smith',
+   *   }
+   *   forms
+   *     .searchSubmissions(options)
+   *     .then((result) => {
+   *       const submissionDetails = result.formSubmissionMeta
+   *       return Promise.all(
+   *         submissionDetails.map((metaData) =>
+   *           forms.getSubmissionData(
+   *             metaData.formId,
+   *             metaData.submissionId,
+   *           ),
    *         ),
-   *       ),
-   *     )
-   *   })
-   *   .then((submissions) => {
-   *     // something...
-   *   })
-   *   .catch((error) => {
-   *     // Handle error here
-   *   })
-   * ```
+   *       )
+   *     })
+   *     .then((submissions) => {
+   *       // something...
+   *     })
+   *     .catch((error) => {
+   *       // Handle error here
+   *     })
    *
    * @param options Search options.
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager` or `Read Only`
    */
   searchSubmissions(
     options: FormSubmissionHistorySearchParameters,
@@ -888,24 +837,21 @@ export default class Forms extends OneBlinkAPI {
     return super.searchRequest(`/form-submission-meta`, searchParams)
   }
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const formId = 1
-   * const injectForms = false
-   * forms.getForm(formId, injectForms).then((form) => {
-   *   // Use form here...
-   * })
-   * ```
+   * Forms: _Read Only_
+   *
+   * @example
+   *   const formId = 1
+   *   const injectForms = false
+   *   forms.getForm(formId, injectForms).then((form) => {
+   *     // Use form here...
+   *   })
    *
    * @param formId The exact id of the form you wish to get
    * @param injectForms Set to `true` to inject form elements from nested Form
    *   elements and Info Page elements.
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Forms: `Manager` or `Read Only`
    */
   getForm(formId: number, injectForms?: boolean): Promise<FormTypes.Form> {
     if (typeof formId !== 'number') {
@@ -917,52 +863,13 @@ export default class Forms extends OneBlinkAPI {
     })
   }
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * forms
-   *   .createForm({
-   *     name: 'testsform',
-   *     formsAppEnvironmentId: 1,
-   *     description: 'a form',
-   *     organisationId: '0101010101010',
-   *     formsAppEnvironmentId: 1,
-   *     elements: [],
-   *     isAuthenticated: false,
-   *     submissionEvents: [],
-   *     postSubmissionAction: 'FORMS_LIBRARY',
-   *     formsAppIds: [1, 2, 3],
-   *   })
-   *   .then((form) => {
-   *     // use form here
-   *   })
-   *   .catch((error) => {
-   *     // Handle error here
-   *   })
-   * ```
+   * Forms: _Manager_
    *
-   * @param newForm The form object to create.
-   * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Forms: `Manager`
-   */
-  async createForm(newForm: FormTypes.NewForm): Promise<FormTypes.Form> {
-    const savedForm = await super.postRequest<
-      FormTypes.NewForm,
-      FormTypes.Form
-    >('/forms', newForm)
-    return savedForm
-  }
-  /**
-   * ## Example
-   *
-   * ```javascript
-   * forms
-   *   .updateForm(
-   *     {
-   *       id: 1,
+   * @example
+   *   forms
+   *     .createForm({
    *       name: 'testsform',
    *       formsAppEnvironmentId: 1,
    *       description: 'a form',
@@ -973,25 +880,58 @@ export default class Forms extends OneBlinkAPI {
    *       submissionEvents: [],
    *       postSubmissionAction: 'FORMS_LIBRARY',
    *       formsAppIds: [1, 2, 3],
-   *     },
-   *     true,
-   *   )
-   *   .then((form) => {
-   *     // use form here
-   *   })
-   *   .catch((error) => {
-   *     // Handle error here
-   *   })
-   * ```
+   *     })
+   *     .then((form) => {
+   *       // use form here
+   *     })
+   *     .catch((error) => {
+   *       // Handle error here
+   *     })
+   *
+   * @param newForm The form object to create.
+   * @returns
+   */
+  async createForm(newForm: FormTypes.NewForm): Promise<FormTypes.Form> {
+    const savedForm = await super.postRequest<
+      FormTypes.NewForm,
+      FormTypes.Form
+    >('/forms', newForm)
+    return savedForm
+  }
+  /**
+   * **Minimum Role Permission**
+   *
+   * Forms: _Manager_
+   *
+   * @example
+   *   forms
+   *     .updateForm(
+   *       {
+   *         id: 1,
+   *         name: 'testsform',
+   *         formsAppEnvironmentId: 1,
+   *         description: 'a form',
+   *         organisationId: '0101010101010',
+   *         formsAppEnvironmentId: 1,
+   *         elements: [],
+   *         isAuthenticated: false,
+   *         submissionEvents: [],
+   *         postSubmissionAction: 'FORMS_LIBRARY',
+   *         formsAppIds: [1, 2, 3],
+   *       },
+   *       true,
+   *     )
+   *     .then((form) => {
+   *       // use form here
+   *     })
+   *     .catch((error) => {
+   *       // Handle error here
+   *     })
    *
    * @param form The form object to update
    * @param overrideLock Defaults to `false`. Set to true to force updating of
    *   the form if the form is locked via the form builder
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Forms: `Manager`
    */
   async updateForm(
     form: FormTypes.Form,
@@ -1004,28 +944,25 @@ export default class Forms extends OneBlinkAPI {
     return savedForm
   }
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const formId = 1
-   * forms
-   *   .deleteForm(formId, true)
-   *   .then(() => {
-   *     // Form is deleted
-   *   })
-   *   .catch((error) => {
-   *     // Handle error here
-   *   })
-   * ```
+   * Forms: _Manager_
+   *
+   * @example
+   *   const formId = 1
+   *   forms
+   *     .deleteForm(formId, true)
+   *     .then(() => {
+   *       // Form is deleted
+   *     })
+   *     .catch((error) => {
+   *       // Handle error here
+   *     })
    *
    * @param formId Id of the form.
    * @param overrideLock Defaults to `false`. Set to true to force deleting of
    *   the form if the form is locked via the form builder
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Forms: `Manager`
    */
   async deleteForm(formId: number, overrideLock?: boolean): Promise<void> {
     if (typeof formId !== 'number') {
@@ -1037,51 +974,48 @@ export default class Forms extends OneBlinkAPI {
     )
   }
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * forms
-   *   .migrateForm({
-   *     formsAppEnvironmentId: 2,
-   *     sourceFormId: 123,
-   *     targetFormId: 234,
-   *     elements: true,
-   *     approvalSteps: false,
-   *     submissionEvents: false,
-   *     tags: true,
-   *     approvalSteps: false,
-   *     serverValidation: false,
-   *     externalIdGenerationOnSubmit: false,
-   *     personalisation: false,
-   *     postSubmissionAction: false,
-   *     embeddedForms: [
-   *       {
-   *         sourceElementId: 'acbd',
-   *         targetFormId: 678,
-   *       },
-   *     ],
-   *     approvalForms: [
-   *      {
-   *        stepLabel: 'Approve',
-   *        targetFormId: 53
-   *      }
-   *     ]
-   *     versionId: 5,
-   *   })
-   *   .then((migratedForm) => {
-   *     // do something with form
-   *   })
-   *   .catch((error) => {
-   *     // Handle error here
-   *   })
-   * ```
+   * Forms: _Manager_
+   *
+   * @example
+   *   forms
+   *     .migrateForm({
+   *       formsAppEnvironmentId: 2,
+   *       sourceFormId: 123,
+   *       targetFormId: 234,
+   *       elements: true,
+   *       approvalSteps: false,
+   *       submissionEvents: false,
+   *       tags: true,
+   *       approvalSteps: false,
+   *       serverValidation: false,
+   *       externalIdGenerationOnSubmit: false,
+   *       personalisation: false,
+   *       postSubmissionAction: false,
+   *       embeddedForms: [
+   *         {
+   *           sourceElementId: 'acbd',
+   *           targetFormId: 678,
+   *         },
+   *       ],
+   *       approvalForms: [
+   *         {
+   *           stepLabel: 'Approve',
+   *           targetFormId: 53,
+   *         },
+   *       ],
+   *       versionId: 5,
+   *     })
+   *     .then((migratedForm) => {
+   *       // do something with form
+   *     })
+   *     .catch((error) => {
+   *       // Handle error here
+   *     })
    *
    * @param migrationOptions Migration options
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Forms: `Manager`
    */
   async migrateForm(
     migrationOptions: EnvironmentTypes.FormMigrationData,
@@ -1093,31 +1027,28 @@ export default class Forms extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const submissionId = 'f1eadc2b-79c8-4f97-8d92-cde64b34911f'
-   * forms
-   *   .getFormSubmissionMeta(submissionId)
-   *   .then(
-   *     ({
-   *       formSubmissionMeta,
-   *       formApprovalFlowInstance,
-   *       formSubmissionApprovals,
-   *       formSubmissionPayments,
-   *     }) => {
-   *       // Use results here...
-   *     },
-   *   )
-   * ```
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const submissionId = 'f1eadc2b-79c8-4f97-8d92-cde64b34911f'
+   *   forms
+   *     .getFormSubmissionMeta(submissionId)
+   *     .then(
+   *       ({
+   *         formSubmissionMeta,
+   *         formApprovalFlowInstance,
+   *         formSubmissionApprovals,
+   *         formSubmissionPayments,
+   *       }) => {
+   *         // Use results here...
+   *       },
+   *     )
    *
    * @param submissionId The exact id of the submission you wish to get the meta
    *   result for
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager` or `Read Only`
    */
   getFormSubmissionMeta(
     submissionId: string,
@@ -1131,41 +1062,36 @@ export default class Forms extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const parameters = {
-   *  formId: 1,
-   *  submissionId: 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
-   *  workflowEvent: {
-   *    type: 'PDF',
-   *    configuration: {
-   *      toEmail: ['{ELEMENT:Email}'],
-   *      emailSubjectLine: 'Email Subject',
-   *      excludedElementIds: [],
-   *    },
-   *  }
-   * }
+   * Submission Data: _Manager_
    *
+   * @example
+   *   const parameters = {
+   *     formId: 1,
+   *     submissionId: 'c1f0f27b-4289-4ce5-9807-bf84971991aa',
+   *     workflowEvent: {
+   *       type: 'PDF',
+   *       configuration: {
+   *         toEmail: ['{ELEMENT:Email}'],
+   *         emailSubjectLine: 'Email Subject',
+   *         excludedElementIds: [],
+   *       },
+   *     },
+   *   }
    *
-   * forms
-   *  .executeWorkflowEvent(parameters)
-   *  .then(() => {
-   *    // Workflow event has been executed
-   *  })
-   *  .catch((error) => {
-   *    // Handle error here
-   *  })
-   *
-   * ```
+   *   forms
+   *     .executeWorkflowEvent(parameters)
+   *     .then(() => {
+   *       // Workflow event has been executed
+   *     })
+   *     .catch((error) => {
+   *       // Handle error here
+   *     })
    *
    * @param params An object containing all parameters to be passed to the
    *   function
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager`
    */
   executeWorkflowEvent(params: {
     /** The submission identifier for the workflow event you want to replay */
@@ -1196,30 +1122,27 @@ export default class Forms extends OneBlinkAPI {
    * A static method available on the forms class, used for validating a
    * OneBlink compatible Forms Definition.
    *
-   * ## Example
+   * @example
+   *   const form = {
+   *     id: 1,
+   *     name: 'testsform',
+   *     formsAppEnvironmentId: 1,
+   *     description: 'a form',
+   *     organisationId: '0101010101010',
+   *     elements: [],
+   *     isAuthenticated: false,
+   *     submissionEvents: [],
+   *     postSubmissionAction: 'FORMS_LIBRARY',
+   *     formsAppIds: [1, 2, 3],
+   *   }
    *
-   * ```javascript
-   * const form = {
-   *   id: 1,
-   *   name: 'testsform',
-   *   formsAppEnvironmentId: 1,
-   *   description: 'a form',
-   *   organisationId: '0101010101010',
-   *   elements: [],
-   *   isAuthenticated: false,
-   *   submissionEvents: [],
-   *   postSubmissionAction: 'FORMS_LIBRARY',
-   *   formsAppIds: [1, 2, 3],
-   * }
+   *   const result = OneBlink.Forms.validateForm(form)
+   *   if (!result.success) {
+   *     throw result.error
+   *   }
    *
-   * const result = OneBlink.Forms.validateForm(form)
-   * if (!result.success) {
-   *   throw result.error
-   * }
-   *
-   * const validatedNewForm = result.data
-   * return validatedNewForm
-   * ```
+   *   const validatedNewForm = result.data
+   *   return validatedNewForm
    *
    * @param form The form object to validate.
    * @returns
@@ -1248,17 +1171,14 @@ export default class Forms extends OneBlinkAPI {
    * The method will set reasonable defaults for any values not passed to it,
    * and validate ones that are against our Element Schema.
    *
-   * ## Example
+   * @example
+   *   const element = {
+   *     name: 'my test element',
+   *   }
    *
-   * ```javascript
-   * const element = {
-   *   name: 'my test element',
-   * }
+   *   const generatedElement = OneBlink.Forms.generateFormElement(element)
    *
-   * const generatedElement = OneBlink.Forms.generateFormElement(element)
-   *
-   * return generatedElement
-   * ```
+   *   return generatedElement
    *
    * @returns
    */
@@ -1275,22 +1195,19 @@ export default class Forms extends OneBlinkAPI {
    * The method will set reasonable defaults for any values not passed to it,
    * and validate ones that are against our Element Schema.
    *
-   * ## Example
+   * @example
+   *   const childElement = Forms.generateFormElement({
+   *     label: 'my first element',
+   *   })
    *
-   * ```javascript
-   * const childElement = Forms.generateFormElement({
-   *   label: 'my first element',
-   * })
+   *   const element = {
+   *     name: 'my test element',
+   *     elements: [childElement],
+   *   }
    *
-   * const element = {
-   *   name: 'my test element',
-   *   elements: [childElement],
-   * }
+   *   const generatedElement = OneBlink.Forms.generatePageElement(element)
    *
-   * const generatedElement = OneBlink.Forms.generatePageElement(element)
-   *
-   * return generatedElement
-   * ```
+   *   return generatedElement
    *
    * @returns
    */
@@ -1337,26 +1254,23 @@ export default class Forms extends OneBlinkAPI {
    * A static method available on the forms class, used for validating a api
    * request configuration.
    *
-   * ## Example
+   * @example
+   *   const endpointConfiguration = {
+   *     type: 'CALLBACK',
+   *     configuration: {
+   *       url: 'https://a-website.com/endpoint',
+   *     },
+   *   }
    *
-   * ```javascript
-   * const endpointConfiguration = {
-   *   type: 'CALLBACK',
-   *   configuration: {
-   *     url: 'https://a-website.com/endpoint',
-   *   },
-   * }
+   *   const result = OneBlink.Forms.validateEndpointConfiguration(
+   *     endpointConfiguration,
+   *   )
+   *   if (!result.success) {
+   *     throw result.error
+   *   }
    *
-   * const result = OneBlink.Forms.validateEndpointConfiguration(
-   *   endpointConfiguration,
-   * )
-   * if (!result.success) {
-   *   throw result.error
-   * }
-   *
-   * const validatedEndpointConfiguration = result.data
-   * return validatedEndpointConfiguration
-   * ```
+   *   const validatedEndpointConfiguration = result.data
+   *   return validatedEndpointConfiguration
    *
    * @returns
    */

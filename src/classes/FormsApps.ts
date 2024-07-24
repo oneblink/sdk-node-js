@@ -7,17 +7,13 @@ const basePath = `/forms-apps`
 
 export default class FormsApps extends OneBlinkAPI {
   /**
-   * ## Example
-   *
-   * ```typescript
-   * const OneBlink = require('@oneblink/sdk')
-   *
-   * const options = {
-   *   accessKey: '123455678901ABCDEFGHIJKL',
-   *   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-   * }
-   * const formsAppsSDK = new OneBlink.FormsApps(options)
-   * ```
+   * @example
+   *   const OneBlink = require('@oneblink/sdk')
+   *   const options = {
+   *     accessKey: '123455678901ABCDEFGHIJKL',
+   *     secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+   *   }
+   *   const formsAppsSDK = new OneBlink.FormsApps(options)
    */
   constructor(options: ConstructorOptions) {
     options = options || {}
@@ -27,22 +23,19 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * A Static function to verify a JWT and return its result
    *
-   * ## Example
-   *
-   * ```javascript
-   * const token =
-   *   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
-   * // or
-   * const token =
-   *   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
-   * OneBlink.FormsApps.verifyJWT(token)
-   *   .then((result) => {
-   *     // Result is Decoded Token
-   *   })
-   *   .catch((e) => {
-   *     // Token was invalid
-   *   })
-   * ```
+   * @example
+   *   const token =
+   *     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+   *   // or
+   *   const token =
+   *     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+   *   OneBlink.FormsApps.verifyJWT(token)
+   *     .then((result) => {
+   *       // Result is Decoded Token
+   *     })
+   *     .catch((e) => {
+   *       // Token was invalid
+   *     })
    *
    * @param token The JWT you wish to verify
    * @returns
@@ -56,21 +49,18 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Get a single Forms App by its identifier
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const formsAppId = 1
-   * formsAppsSDK.getFormsApp(formsAppId).then((formsApp) => {
-   *   // Use Forms App here...
-   * })
-   * ```
+   * Apps: _Read Only_
+   *
+   * @example
+   *   const formsAppId = 1
+   *   formsAppsSDK.getFormsApp(formsAppId).then((formsApp) => {
+   *     // Use Forms App here...
+   *   })
    *
    * @param formsAppId The exact identifier of the Forms App you wish to get
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Apps: `Manager` or `Read Only`.
    */
   async getFormsApp(formsAppId: number): Promise<FormsAppsTypes.FormsApp> {
     if (typeof formsAppId !== 'number') {
@@ -85,22 +75,15 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Get a single Forms App for the Bearer token of a Forms App User
    *
-   * ## Example
-   *
-   * ```javascript
-   * const bearerToken = ''
-   * formsAppsSDK.getMyFormsApp(bearerToken).then((formsApp) => {
-   *   // Use Forms App here...
-   * })
-   * ```
+   * @example
+   *   const bearerToken = ''
+   *   formsAppsSDK.getMyFormsApp(bearerToken).then((formsApp) => {
+   *     // Use Forms App here...
+   *   })
    *
    * @param formsAppUserToken The Bearer token in the `Authorization` header
    *   from a request from an App User
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   No Permissions Required.
    */
   async getMyFormsApp(
     formsAppUserToken?: unknown,
@@ -125,20 +108,17 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Create a Forms App
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * formsAppsSDK.createFormsApp(formsApp).then((savedFormsApp) => {
-   *   // Use Forms App here...
-   * })
-   * ```
+   * Apps: _Manager_
+   *
+   * @example
+   *   formsAppsSDK.createFormsApp(formsApp).then((savedFormsApp) => {
+   *     // Use Forms App here...
+   *   })
    *
    * @param formsApp Forms App properties
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Apps: `Manager`
    */
   async createFormsApp(
     formsApp: Omit<FormsAppsTypes.NewFormsApp, 'styles'>,
@@ -149,20 +129,17 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Update a Forms App
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
-   *   // Use Forms App here...
-   * })
-   * ```
+   * Apps: _Manager_
+   *
+   * @example
+   *   formsAppsSDK.updateFormsApp(formsApp).then((savedFormsApp) => {
+   *     // Use Forms App here...
+   *   })
    *
    * @param formsApp Forms App properties
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Apps: `Manager`
    */
   async updateFormsApp(
     formsApp: FormsAppsTypes.FormsApp,
@@ -179,21 +156,18 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Delete a Forms App by its identifier
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const formsAppId = 1
-   * formsAppsSDK.deleteFormsApp(formsAppId).then(() => {
-   *   // Forms App has been deleted...
-   * })
-   * ```
+   * Apps: _Manager_
+   *
+   * @example
+   *   const formsAppId = 1
+   *   formsAppsSDK.deleteFormsApp(formsAppId).then(() => {
+   *     // Forms App has been deleted...
+   *   })
    *
    * @param formsAppId The exact identifier of the Forms App you wish to delete
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Apps: `Manager`
    */
   async deleteFormsApp(formsAppId: number): Promise<void> {
     if (typeof formsAppId !== 'number') {
@@ -208,22 +182,19 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Update styles for Forms App
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
-   *   // Styles have been updated...
-   * })
-   * ```
+   * App Customisation: _Manager_
+   *
+   * @example
+   *   formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
+   *     // Styles have been updated...
+   *   })
    *
    * @param formsAppId The exact identifier of the Forms App you wish to update
    *   the styles
    * @param styles Forms App styles properties
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   App Customisation: `Manager`
    */
   async updateStyles(
     formsAppId: number,
@@ -241,20 +212,17 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Create a Forms App User
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * formsAppsSDK.createUser(formsAppUser).then((savedFormsAppUser) => {
-   *   // Use Forms App User here...
-   * })
-   * ```
+   * App Users: _Manager_
+   *
+   * @example
+   *   formsAppsSDK.createUser(formsAppUser).then((savedFormsAppUser) => {
+   *     // Use Forms App User here...
+   *   })
    *
    * @param formsAppUser Forms App User
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   App Users: `Manager`
    */
   async createUser(
     formsAppUser: FormsAppsTypes.NewFormsAppUser,
@@ -265,22 +233,19 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Delete a Forms App User by its identifier
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const formsAppUserId = 1
-   * formsAppsSDK.deleteUser(formsAppUserId).then(() => {
-   *   // Forms App User has been deleted...
-   * })
-   * ```
+   * App Users: _Manager_
+   *
+   * @example
+   *   const formsAppUserId = 1
+   *   formsAppsSDK.deleteUser(formsAppUserId).then(() => {
+   *     // Forms App User has been deleted...
+   *   })
    *
    * @param formsAppUserId The exact Forms App User identifier you wish to
    *   delete
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   App Users: `Manager`
    */
   async deleteUser(formsAppUserId: number): Promise<void> {
     if (typeof formsAppUserId !== 'number') {
@@ -295,19 +260,16 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Get the email address forms app emails will be sent from
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const res = await formsAppsSDK.getSendingAddress(formsAppId)
-   * ```
+   * Apps: _Read Only_
+   *
+   * @example
+   *   const res = await formsAppsSDK.getSendingAddress(formsAppId)
    *
    * @param formsAppId The ID of the forms app you wish to get the sending
    *   address for
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Apps: `Manager` or `Read Only`.
    */
   async getSendingAddress(
     formsAppId: number,
@@ -323,24 +285,21 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Set the email address forms app emails will be sent from
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const res = await formsAppsSDK.setSendingAddress(
-   *   formsAppId,
-   *   sendingAddressConfig,
-   * )
-   * ```
+   * Apps: _Manager_
+   *
+   * @example
+   *   const res = await formsAppsSDK.setSendingAddress(
+   *     formsAppId,
+   *     sendingAddressConfig,
+   *   )
    *
    * @param formsAppId The ID of the forms app you wish to set the sending
    *   address for
    * @param sendingAddressConfig The object containing the `emailAddress` &
    *   `emailName` properties
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Apps: `Manager` or `Read Only`.
    */
   async setSendingAddress(
     formsAppId: number,
@@ -387,20 +346,17 @@ export default class FormsApps extends OneBlinkAPI {
   /**
    * Remove a custom sending address for a forms app
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const formsAppId = 1
-   * await formsAppsSDK.deleteSendingAddress(formsAppId)
-   * ```
+   * Apps: _Manager_
+   *
+   * @example
+   *   const formsAppId = 1
+   *   await formsAppsSDK.deleteSendingAddress(formsAppId)
    *
    * @param formsAppId The ID of the forms app you wish to remove the sending
    *   address from
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Apps: `Manager` or `Read Only`.
    */
   async deleteSendingAddress(formsAppId: number): Promise<void> {
     if (typeof formsAppId !== 'number') {

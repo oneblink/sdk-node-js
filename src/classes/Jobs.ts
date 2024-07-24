@@ -21,17 +21,13 @@ const newJobSchema = Joi.object()
 
 export default class Jobs extends OneBlinkAPI {
   /**
-   * ## Example
-   *
-   * ```typescript
-   * const OneBlink = require('@oneblink/sdk')
-   *
-   * const options = {
-   *   accessKey: '123455678901ABCDEFGHIJKL',
-   *   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-   * }
-   * const jobs = new OneBlink.Jobs(options)
-   * ```
+   * @example
+   *   const OneBlink = require('@oneblink/sdk')
+   *   const options = {
+   *     accessKey: '123455678901ABCDEFGHIJKL',
+   *     secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+   *   }
+   *   const jobs = new OneBlink.Jobs(options)
    */
   constructor(options: ConstructorOptions) {
     options = options || {}
@@ -41,40 +37,37 @@ export default class Jobs extends OneBlinkAPI {
   /**
    * Create a single Job
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const newJob = {
-   *   username: 'user@domain.io',
-   *   formId: 1,
-   *   externalId: 'your-job-identifier',
-   *   details: {
-   *     key: 'JOB-123',
-   *     title: 'Job Title',
-   *     description: 'Job description',
-   *     type: 'Type',
-   *     priority: 3,
-   *   },
-   * }
+   * Jobs: _Manager_
    *
-   * const preFillData = {
-   *   text_element: 'abc',
-   *   number_element: 123,
-   * }
+   * @example
+   *   const newJob = {
+   *     username: 'user@domain.io',
+   *     formId: 1,
+   *     externalId: 'your-job-identifier',
+   *     details: {
+   *       key: 'JOB-123',
+   *       title: 'Job Title',
+   *       description: 'Job description',
+   *       type: 'Type',
+   *       priority: 3,
+   *     },
+   *   }
    *
-   * jobs.createJob(newJob, preFillData).then((job) => {
-   *   // job.id can be used to delete the Job
-   * })
-   * ```
+   *   const preFillData = {
+   *     text_element: 'abc',
+   *     number_element: 123,
+   *   }
+   *
+   *   jobs.createJob(newJob, preFillData).then((job) => {
+   *     // job.id can be used to delete the Job
+   *   })
    *
    * @param data The Job to create
    * @param preFillData Key/value pairs with the form field names as keys and
    *   the pre-fill data as the values
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Jobs: `Manager`
    */
   async createJob(
     data: SubmissionTypes.NewFormsAppJob,
@@ -107,21 +100,18 @@ export default class Jobs extends OneBlinkAPI {
   /**
    * Delete a single Job
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const jobId = 'f73985fd-2dba-4bf7-abbe-e204889f5216'
-   * jobs.deleteJob(jobId).then(() => {
-   *   // Job has been deleted
-   * })
-   * ```
+   * Jobs: _Manager_
+   *
+   * @example
+   *   const jobId = 'f73985fd-2dba-4bf7-abbe-e204889f5216'
+   *   jobs.deleteJob(jobId).then(() => {
+   *     // Job has been deleted
+   *   })
    *
    * @param jobId The exact id of the job you wish to delete
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Jobs: `Manager`
    */
   deleteJob(jobId: string): Promise<void> {
     if (!jobId || typeof jobId !== 'string') {
@@ -134,24 +124,21 @@ export default class Jobs extends OneBlinkAPI {
   /**
    * Search Jobs
    *
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const results = await jobs.searchJobs({
-   *   username: 'user@domain.io',
-   *   formId: 10,
-   * })
+   * Jobs: _Read Only_
    *
-   * // an array of jobs
-   * const jobs = results.jobs
-   * ```
+   * @example
+   *   const results = await jobs.searchJobs({
+   *     username: 'user@domain.io',
+   *     formId: 10,
+   *   })
+   *
+   *   // an array of jobs
+   *   const jobs = results.jobs
    *
    * @param options Search options
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Jobs: `Manager` or `Read Only`
    */
   async searchJobs(options?: {
     /** The `externalId` property of a job */

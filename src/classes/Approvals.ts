@@ -8,18 +8,13 @@ import {
 
 export default class Approvals extends OneBlinkAPI {
   /**
-   * ## Example
-   *
-   * ```typescript
-   * const OneBlink = require('@oneblink/sdk')
-   *
-   * const options = {
-   *   accessKey: '123455678901ABCDEFGHIJKL',
-   *   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-   * }
-   *
-   * const approvals = new OneBlink.Approvals(options)
-   * ```
+   * @example
+   *   const OneBlink = require('@oneblink/sdk')
+   *   const options = {
+   *     accessKey: '123455678901ABCDEFGHIJKL',
+   *     secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+   *   }
+   *   const approvals = new OneBlink.Approvals(options)
    */
   constructor(options: ConstructorOptions) {
     options = options || {}
@@ -27,24 +22,21 @@ export default class Approvals extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const { approvals, meta } =
-   *   await approvals.searchFormSubmissionAdministrationApprovals({
-   *     formsAppId: 1,
-   *     formId: 2,
-   *     limit: 50,
-   *     offset: 0,
-   *   })
-   * ```
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const { approvals, meta } =
+   *     await approvals.searchFormSubmissionAdministrationApprovals({
+   *       formsAppId: 1,
+   *       formId: 2,
+   *       limit: 50,
+   *       offset: 0,
+   *     })
    *
    * @param options Search options
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager` or `Read Only`
    */
   async searchFormSubmissionAdministrationApprovals({
     formsAppId,
@@ -100,22 +92,19 @@ export default class Approvals extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const formSubmissionApproval =
-   *   await approvals.getFormSubmissionApproval(
-   *     'aaaaaaaa-bbbb-4543-cccc-addddd543454',
-   *   )
-   * // Use data here...
-   * ```
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const formSubmissionApproval =
+   *     await approvals.getFormSubmissionApproval(
+   *       'aaaaaaaa-bbbb-4543-cccc-addddd543454',
+   *     )
+   *   // Use data here...
    *
    * @param id The id of the form submission approval
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager` or `Read Only`
    */
   async getFormSubmissionApproval(
     id: string,
@@ -127,20 +116,17 @@ export default class Approvals extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const formSubmissionApproval =
-   *   await approvals.getFormApprovalFlowInstance(1)
-   * // Use data here...
-   * ```
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const formSubmissionApproval =
+   *     await approvals.getFormApprovalFlowInstance(1)
+   *   // Use data here...
    *
    * @param id The id of the form approval flow instance
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager` or `Read Only`
    */
   async getFormApprovalFlowInstance(
     id: number,
