@@ -73,5 +73,5 @@ In the case of any actions relating to forms, the assigned app must be associate
 
 - For _Forms List_ type apps, the form can be in the _Forms List_ menu item.
 - For _Tiles_ type apps, the form can be in a _Container_ menu item or added directly to the menu via a _Form_ menu item.
-- For _Tiles_ or _Forms List_ type apps, the form can be assigned to an action in a scheduled task.
+- For _Tiles_ or _Forms List_ type apps, the form can be assigned to an action in a _Scheduled task_.
 - For _Approvals_ type apps, the form can be an approval form.
