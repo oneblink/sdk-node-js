@@ -69,7 +69,7 @@ Actions that require a developer key to be assigned to an app will have the foll
 
 **App Association Required**
 
-These actions require the developer key to be associated with an app that is associated with the form that is being actioned. A form can be associated with an app in the following ways:
+In the case of any actions relating to forms, the assigned app must be associated with the form that is being actioned. A form can be associated with an app in the following ways:
 
 - For _Forms List_ type apps, the form can be in the _Forms List_ menu item.
 - For _Tiles_ type apps, the form can be in a _Container_ menu item or added directly to the menu via a _Form_ menu item.
