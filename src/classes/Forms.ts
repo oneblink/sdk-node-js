@@ -619,9 +619,9 @@ export default class Forms extends OneBlinkAPI {
    *   for, must be greater than or equal to `900`
    * @returns An absolute URL that that can be used to download the attachment
    *
-   *   ## Roles Permissions Required
+   *   ## Role Permissions Required
    *
-   *   Form Submission: `Manager` or `Read Only`
+   *   Submission Data: `Manager` or `Read Only`
    */
   async generateSubmissionAttachmentUrl(
     formId: number,
@@ -677,9 +677,9 @@ export default class Forms extends OneBlinkAPI {
    * @param options The options required to generate a link
    * @returns An absolute URL that that can be used to download the attachment
    *
-   *   ## Roles Permissions Required
+   *   ## Role Permissions Required
    *
-   *   Form Submission: `Manager` or `Read Only`
+   *   Submission Data: `Manager` or `Read Only`
    */
   async generateWorkflowAttachmentLink(options: {
     /** The exact id of the form you wish to generate a URL for */
@@ -734,7 +734,7 @@ export default class Forms extends OneBlinkAPI {
    * @param options Available options for uploading attachment.
    * @returns The configuration required to add custom attachments to an email.
    *
-   *   ## Roles Permissions Required
+   *   ## Role Permissions Required
    *
    *   Email Attachments: `On`
    */
@@ -784,9 +784,9 @@ export default class Forms extends OneBlinkAPI {
    * @param searchParams Search options.
    * @returns
    *
-   *   ## Roles Permissions Required
+   *   ## Role Permissions Required
    *
-   *   Form: `Manager` or `Read Only`
+   *   Forms: `Manager` or `Read Only`
    */
   searchForms(searchParams?: FormsSearchOptions): Promise<FormsSearchResult> {
     return super.searchRequest(`/v2/forms`, searchParams)
@@ -830,9 +830,9 @@ export default class Forms extends OneBlinkAPI {
    * @param options Search options.
    * @returns
    *
-   *   ## Roles Permissions Required
+   *   ## Role Permissions Required
    *
-   *   Form Submission: `Manager` or `Read Only`
+   *   Submission Data: `Manager` or `Read Only`
    */
   searchSubmissions(
     options: FormSubmissionHistorySearchParameters,
@@ -903,9 +903,9 @@ export default class Forms extends OneBlinkAPI {
    *   elements and Info Page elements.
    * @returns
    *
-   *   ## Roles Permissions Required
+   *   ## Role Permissions Required
    *
-   *   Form: `Manager` or `Read Only`
+   *   Forms: `Manager` or `Read Only`
    */
   getForm(formId: number, injectForms?: boolean): Promise<FormTypes.Form> {
     if (typeof formId !== 'number') {
@@ -944,9 +944,9 @@ export default class Forms extends OneBlinkAPI {
    * @param newForm The form object to create.
    * @returns
    *
-   *   ## Roles Permissions Required
+   *   ## Role Permissions Required
    *
-   *   Form: `Manager`
+   *   Forms: `Manager`
    */
   async createForm(newForm: FormTypes.NewForm): Promise<FormTypes.Form> {
     const savedForm = await super.postRequest<
@@ -989,9 +989,9 @@ export default class Forms extends OneBlinkAPI {
    *   the form if the form is locked via the form builder
    * @returns
    *
-   *   ## Roles Permissions Required
+   *   ## Role Permissions Required
    *
-   *   Form: `Manager`
+   *   Forms: `Manager`
    */
   async updateForm(
     form: FormTypes.Form,
@@ -1023,9 +1023,9 @@ export default class Forms extends OneBlinkAPI {
    *   the form if the form is locked via the form builder
    * @returns
    *
-   *   ## Roles Permissions Required
+   *   ## Role Permissions Required
    *
-   *   Form: `Manager`
+   *   Forms: `Manager`
    */
   async deleteForm(formId: number, overrideLock?: boolean): Promise<void> {
     if (typeof formId !== 'number') {
@@ -1079,9 +1079,9 @@ export default class Forms extends OneBlinkAPI {
    * @param migrationOptions Migration options
    * @returns
    *
-   *   ## Roles Permissions Required
+   *   ## Role Permissions Required
    *
-   *   Form: `Manager`
+   *   Forms: `Manager`
    */
   async migrateForm(
     migrationOptions: EnvironmentTypes.FormMigrationData,
@@ -1115,9 +1115,9 @@ export default class Forms extends OneBlinkAPI {
    *   result for
    * @returns
    *
-   *   ## Roles Permissions Required
+   *   ## Role Permissions Required
    *
-   *   Form Submissions: `Manager` or `Read Only`
+   *   Submission Data: `Manager` or `Read Only`
    */
   getFormSubmissionMeta(
     submissionId: string,
@@ -1163,9 +1163,9 @@ export default class Forms extends OneBlinkAPI {
    *   function
    * @returns
    *
-   *   ## Roles Permissions Required
+   *   ## Role Permissions Required
    *
-   *   Form Submission: `Manager`
+   *   Submission Data: `Manager`
    */
   executeWorkflowEvent(params: {
     /** The submission identifier for the workflow event you want to replay */
