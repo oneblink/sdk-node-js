@@ -5,7 +5,7 @@ import { Readable } from 'stream'
 
 export default class Organisations extends OneBlinkAPI {
   /**
-   * #### Example
+   * ## Example
    *
    * ```typescript
    * const OneBlink = require('@oneblink/sdk')
@@ -23,12 +23,18 @@ export default class Organisations extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const organisation = await organisations.getOrganisation()
    * // Use organisation here...
    * ```
+   *
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   No Permissions Required
    */
   async getOrganisation(): Promise<OrganisationTypes.Organisation> {
     const searchResponse = await super.getRequest<{
@@ -42,7 +48,7 @@ export default class Organisations extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const asset = {
@@ -55,6 +61,11 @@ export default class Organisations extends OneBlinkAPI {
    * ```
    *
    * @param asset The properties of the asset to upload
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   No Permissions Required
    */
   async uploadAsset(asset: {
     assetData: unknown

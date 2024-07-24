@@ -5,7 +5,7 @@ import OneBlinkAPI from '../lib/one-blink-api'
 
 import { SendMailOptions, SendEmailResult } from '../types'
 /**
- * #### Example
+ * ## Example
  *
  * ```javascript
  * const OneBlink = require('@oneblink/sdk')
@@ -31,12 +31,22 @@ import { SendMailOptions, SendEmailResult } from '../types'
  * })
  * ```
  *
- * #### Options
+ * ## Options
  *
  * This function uses the popular
  * [`nodemailer`](https://www.npmjs.com/package/nodemailer) internally to send
  * emails. Please see the documentation for [Message
  * Configuration](https://nodemailer.com/message/) for available options.
+ *
+ * @returns
+ *
+ *   ## Role Permissions Required
+ *
+ *   In AWS, you will require an IAM Role associated with the email used that has
+ *   the permissions in order to use this function:
+ *
+ *   - SendEmail
+ *   - SendRawEmail
  */
 export default async function sendEmail(
   options: SendMailOptions,

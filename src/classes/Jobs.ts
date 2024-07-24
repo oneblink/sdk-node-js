@@ -21,7 +21,7 @@ const newJobSchema = Joi.object()
 
 export default class Jobs extends OneBlinkAPI {
   /**
-   * #### Example
+   * ## Example
    *
    * ```typescript
    * const OneBlink = require('@oneblink/sdk')
@@ -41,7 +41,7 @@ export default class Jobs extends OneBlinkAPI {
   /**
    * Create a single Job
    *
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const newJob = {
@@ -70,6 +70,11 @@ export default class Jobs extends OneBlinkAPI {
    * @param data The Job to create
    * @param preFillData Key/value pairs with the form field names as keys and
    *   the pre-fill data as the values
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Jobs: `Manager`
    */
   async createJob(
     data: SubmissionTypes.NewFormsAppJob,
@@ -102,7 +107,7 @@ export default class Jobs extends OneBlinkAPI {
   /**
    * Delete a single Job
    *
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const jobId = 'f73985fd-2dba-4bf7-abbe-e204889f5216'
@@ -112,6 +117,11 @@ export default class Jobs extends OneBlinkAPI {
    * ```
    *
    * @param jobId The exact id of the job you wish to delete
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Jobs: `Manager`
    */
   deleteJob(jobId: string): Promise<void> {
     if (!jobId || typeof jobId !== 'string') {
@@ -124,7 +134,7 @@ export default class Jobs extends OneBlinkAPI {
   /**
    * Search Jobs
    *
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const results = await jobs.searchJobs({
@@ -137,6 +147,11 @@ export default class Jobs extends OneBlinkAPI {
    * ```
    *
    * @param options Search options
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Jobs: `Manager` or `Read Only`
    */
   async searchJobs(options?: {
     /** The `externalId` property of a job */

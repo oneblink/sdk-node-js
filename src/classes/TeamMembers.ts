@@ -4,7 +4,7 @@ import { ConstructorOptions } from '../types'
 
 export default class TeamMembers extends OneBlinkAPI {
   /**
-   * #### Example
+   * ## Example
    *
    * ```typescript
    * const OneBlink = require('@oneblink/sdk')
@@ -22,7 +22,7 @@ export default class TeamMembers extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const email = 'email@domain.io'
@@ -34,6 +34,11 @@ export default class TeamMembers extends OneBlinkAPI {
    * ```
    *
    * @param email The email address the team member uses to login
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   No Permissions Required
    */
   async getTeamMemberRole(email: string): Promise<TeamMemberTypes.Role | null> {
     if (typeof email !== 'string') {

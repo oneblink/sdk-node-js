@@ -8,7 +8,7 @@ import {
 
 export default class DataManager extends OneBlinkAPI {
   /**
-   * #### Example
+   * ## Example
    *
    * ```typescript
    * const OneBlink = require('@oneblink/sdk')
@@ -27,7 +27,7 @@ export default class DataManager extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const { formId, formElements } = await dataManager.getFormDefinition(2)
@@ -35,6 +35,10 @@ export default class DataManager extends OneBlinkAPI {
    *
    * @param id The form ID to get the definition for.
    * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager` or `Read Only`
    */
   async getFormDefinition(id: number): Promise<FormStoreDefinition> {
     if (typeof id !== 'number') {
@@ -46,7 +50,7 @@ export default class DataManager extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const { submissions, meta } = await dataManager.searchRecords({
@@ -57,6 +61,10 @@ export default class DataManager extends OneBlinkAPI {
    *
    * @param options The options for the Search Request
    * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager` or `Read Only`
    */
   async searchRecords(
     options: SearchDataManagerRecordsOptions,

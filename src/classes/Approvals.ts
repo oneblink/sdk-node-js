@@ -8,7 +8,7 @@ import {
 
 export default class Approvals extends OneBlinkAPI {
   /**
-   * #### Example
+   * ## Example
    *
    * ```typescript
    * const OneBlink = require('@oneblink/sdk')
@@ -27,7 +27,7 @@ export default class Approvals extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const { approvals, meta } =
@@ -41,6 +41,10 @@ export default class Approvals extends OneBlinkAPI {
    *
    * @param options Search options
    * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager` or `Read Only`
    */
   async searchFormSubmissionAdministrationApprovals({
     formsAppId,
@@ -96,7 +100,7 @@ export default class Approvals extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const formSubmissionApproval =
@@ -108,6 +112,10 @@ export default class Approvals extends OneBlinkAPI {
    *
    * @param id The id of the form submission approval
    * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager` or `Read Only`
    */
   async getFormSubmissionApproval(
     id: string,
@@ -119,7 +127,7 @@ export default class Approvals extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const formSubmissionApproval =
@@ -129,6 +137,10 @@ export default class Approvals extends OneBlinkAPI {
    *
    * @param id The id of the form approval flow instance
    * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager` or `Read Only`
    */
   async getFormApprovalFlowInstance(
     id: number,

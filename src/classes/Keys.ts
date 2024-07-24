@@ -4,7 +4,7 @@ import { ConstructorOptions } from '../types'
 
 export default class Keys extends OneBlinkAPI {
   /**
-   * #### Example
+   * ## Example
    *
    * ```typescript
    * const OneBlink = require('@oneblink/sdk')
@@ -22,7 +22,7 @@ export default class Keys extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const keyId = '123455678901ABCDEFGHIJKL'
@@ -33,6 +33,11 @@ export default class Keys extends OneBlinkAPI {
    *
    * @param keyId The exact id of the key you wish to get
    * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Calendar Bookings, Integrations & Development Keys: `Manager` or `Read
+   *   Only`
    */
   getKey(keyId: string): Promise<KeyTypes.Key> {
     if (typeof keyId !== 'string') {

@@ -8,7 +8,7 @@ import { ConstructorOptions } from '../types'
 
 export default class PDF extends OneBlinkAPI {
   /**
-   * #### Example
+   * ## Example
    *
    * ```typescript
    * const OneBlink = require('@oneblink/sdk')
@@ -26,7 +26,7 @@ export default class PDF extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const fs = require('fs')
@@ -49,6 +49,11 @@ export default class PDF extends OneBlinkAPI {
    *
    * @param options An object containing all parameters to be passed into the
    *   function.
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager` or `Read Only`
    */
   async generateFormSubmissionPDF(
     options: {
@@ -85,7 +90,7 @@ export default class PDF extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const fs = require('fs')
@@ -128,6 +133,12 @@ export default class PDF extends OneBlinkAPI {
    *   await writeFileAsync('./custom.pdf', buffer, 'binary')
    * }
    * ```
+   *
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   PDF Generation: `On`
    */
   async generatePDF(options: PDFTypes.GeneratePDFOptions): Promise<Buffer> {
     if (!options || !options.body || !options.body.html) {
@@ -149,7 +160,7 @@ export default class PDF extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const fs = require('fs')
@@ -178,6 +189,11 @@ export default class PDF extends OneBlinkAPI {
    *
    * @param options An object containing all parameters to be passed into the
    *   function.
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   PDF Generation: `On`
    */
   async generatePdfFromSubmissionData(options: {
     submissionData: SubmissionTypes.S3SubmissionData

@@ -4,7 +4,7 @@ import { ConstructorOptions, FormElementLookupSearchResult } from '../types'
 
 export default class FormElementLookups extends OneBlinkAPI {
   /**
-   * #### Example
+   * ## Example
    *
    * ```typescript
    * import { FormElementLookups } from '@oneblink/sdk'
@@ -22,7 +22,7 @@ export default class FormElementLookups extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```typescript
    * const lookupId = 1
@@ -32,6 +32,10 @@ export default class FormElementLookups extends OneBlinkAPI {
    *
    * @param id The exact id of the lookup you wish to get
    * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Lookups: `Manager` or `Read Only`
    */
   async getFormElementLookup(id: number): Promise<FormTypes.FormElementLookup> {
     if (typeof id !== 'number' || Number.isNaN(id)) {
@@ -42,7 +46,7 @@ export default class FormElementLookups extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```typescript
    * const organisationId = '2i4321a7n2389a2700065425'
@@ -56,6 +60,10 @@ export default class FormElementLookups extends OneBlinkAPI {
    *
    * @param options
    * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   No Permissions Required
    */
   async searchFormElementLookups(options: {
     /**
@@ -82,7 +90,7 @@ export default class FormElementLookups extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```typescript
    * const newLookup = {
@@ -102,6 +110,10 @@ export default class FormElementLookups extends OneBlinkAPI {
    *
    * @param newFormElementLookup
    * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Lookups: `Manager`
    */
   async createFormElementLookup(
     newFormElementLookup: FormTypes.NewFormElementLookup,
@@ -113,7 +125,7 @@ export default class FormElementLookups extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```typescript
    * const lookup = {
@@ -130,14 +142,17 @@ export default class FormElementLookups extends OneBlinkAPI {
    *   type: 'DATA',
    *   organisationId: '',
    * }
-   * const updatedLookup = await formElementLookups.updateFormElementLookup(
-   *   lookup,
-   * )
+   * const updatedLookup =
+   *   await formElementLookups.updateFormElementLookup(lookup)
    * // Use lookup here
    * ```
    *
    * @param formElementLookup
    * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Lookups: `Manager`
    */
   async updateFormElementLookup(
     formElementLookup: FormTypes.FormElementLookup,
@@ -152,7 +167,7 @@ export default class FormElementLookups extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```typescript
    * const lookupId = 7
@@ -161,6 +176,10 @@ export default class FormElementLookups extends OneBlinkAPI {
    *
    * @param id The id of the lookup to delete
    * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Lookups: `Manager`
    */
   async deleteFormElementLookup(id: number): Promise<void> {
     if (typeof id !== 'number' || Number.isNaN(id)) {

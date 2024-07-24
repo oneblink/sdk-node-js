@@ -31,7 +31,7 @@ import {
 
 export default class Forms extends OneBlinkAPI {
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const OneBlink = require('@oneblink/sdk')
@@ -48,7 +48,7 @@ export default class Forms extends OneBlinkAPI {
     super(options.accessKey, options.secretKey)
   }
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const parameters = {
@@ -73,6 +73,23 @@ export default class Forms extends OneBlinkAPI {
    *
    * @param parameters An object containing all parameters to be passed to the
    *   function
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   ### For Private Forms
+   *
+   *   Forms: `Manager` or `Read Only`
+   *
+   *   Apps: `Manager` or `Read Only`
+   *
+   *   ### For Public Forms
+   *
+   *   Apps: `Manager` or `Read Only`
+   *
+   *   ### For Form Submission and Pre-Fill Data
+   *
+   *   FaaS: `Developer`
    */
   async generateFormUrl(parameters: {
     /** The exact id of the form you wish to generate a URL for */
@@ -244,7 +261,7 @@ export default class Forms extends OneBlinkAPI {
     }
   }
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const formId = 1
@@ -264,6 +281,11 @@ export default class Forms extends OneBlinkAPI {
    *   submission via a callback URL
    * @param expiryInSeconds The number of seconds the signed URL should be valid
    *   for, must be greater than or equal to `900`
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager` or `Read Only`
    */
   async generateSubmissionDataUrl(
     formId: number,
@@ -294,7 +316,7 @@ export default class Forms extends OneBlinkAPI {
     )
   }
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const formId = 1
@@ -317,6 +339,11 @@ export default class Forms extends OneBlinkAPI {
    *   submission via a callback URL
    * @param isDraft `true` if the submission is a draft submission, otherwise
    *   `false`
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager` or `Read Only`
    */
   async getSubmissionData(
     formId: number,
@@ -364,7 +391,7 @@ export default class Forms extends OneBlinkAPI {
     return response
   }
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const formId = 1
@@ -381,6 +408,11 @@ export default class Forms extends OneBlinkAPI {
    *
    * @param formId The exact id of the form the attachment was uploaded on
    * @param attachmentId The attachment identifier from the form submission data
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager` or `Read Only`
    */
   async getSubmissionAttachmentMeta(formId: number, attachmentId: string) {
     return await this.getRequest<HeadObjectOutput>(
@@ -388,7 +420,7 @@ export default class Forms extends OneBlinkAPI {
     )
   }
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const fs = require('fs')
@@ -414,6 +446,11 @@ export default class Forms extends OneBlinkAPI {
    *
    * @param formId The exact id of the form the attachment was uploaded on
    * @param attachmentId The attachment identifier from the form submission data
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager` or `Read Only`
    */
   async getSubmissionAttachmentStream(
     formId: number,
@@ -426,7 +463,7 @@ export default class Forms extends OneBlinkAPI {
     return response.body
   }
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const fs = require('fs')
@@ -448,6 +485,11 @@ export default class Forms extends OneBlinkAPI {
    *
    * @param formId The exact id of the form the attachment was uploaded on
    * @param attachmentId The attachment identifier from the form submission data
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager` or `Read Only`
    */
   async getSubmissionAttachmentBuffer(
     formId: number,
@@ -460,7 +502,7 @@ export default class Forms extends OneBlinkAPI {
     return await response.buffer()
   }
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const fs = require('fs')
@@ -493,6 +535,12 @@ export default class Forms extends OneBlinkAPI {
    *   })
    * }
    * ```
+   *
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   FaaS: `Developer`
    */
   async createSubmissionAttachment({
     formId,
@@ -547,7 +595,7 @@ export default class Forms extends OneBlinkAPI {
    * require a URL that needs to last longer, consider using the
    * `generateWorkflowAttachmentLink()` function.
    *
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const formId = 1
@@ -570,6 +618,10 @@ export default class Forms extends OneBlinkAPI {
    * @param expiryInSeconds The number of seconds the signed URL should be valid
    *   for, must be greater than or equal to `900`
    * @returns An absolute URL that that can be used to download the attachment
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager` or `Read Only`
    */
   async generateSubmissionAttachmentUrl(
     formId: number,
@@ -604,7 +656,7 @@ export default class Forms extends OneBlinkAPI {
    * links. If you require a URL that should be short lived, consider using the
    * `generateSubmissionAttachmentUrl()` function.
    *
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const formId = 1
@@ -624,6 +676,10 @@ export default class Forms extends OneBlinkAPI {
    *
    * @param options The options required to generate a link
    * @returns An absolute URL that that can be used to download the attachment
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager` or `Read Only`
    */
   async generateWorkflowAttachmentLink(options: {
     /** The exact id of the form you wish to generate a URL for */
@@ -657,7 +713,7 @@ export default class Forms extends OneBlinkAPI {
    * Upload a file to use as an attachment for an email based form workflow
    * event.
    *
-   * ### Example
+   * ## Example
    *
    * ```javascript
    * export async function post(request) {
@@ -677,6 +733,10 @@ export default class Forms extends OneBlinkAPI {
    *
    * @param options Available options for uploading attachment.
    * @returns The configuration required to add custom attachments to an email.
+   *
+   *   ## Role Permissions Required
+   *
+   *   Email Attachments: `On`
    */
   async uploadEmailAttachment(options: {
     /** The attachment's file name */
@@ -704,7 +764,7 @@ export default class Forms extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const options = {
@@ -722,6 +782,11 @@ export default class Forms extends OneBlinkAPI {
    * ```
    *
    * @param searchParams Search options.
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Forms: `Manager` or `Read Only`
    */
   searchForms(searchParams?: FormsSearchOptions): Promise<FormsSearchResult> {
     return super.searchRequest(`/v2/forms`, searchParams)
@@ -731,7 +796,7 @@ export default class Forms extends OneBlinkAPI {
    * use the information to fetch the actual submission data, if it is still
    * available
    *
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const options = {
@@ -763,6 +828,11 @@ export default class Forms extends OneBlinkAPI {
    * ```
    *
    * @param options Search options.
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager` or `Read Only`
    */
   searchSubmissions(
     options: FormSubmissionHistorySearchParameters,
@@ -818,7 +888,7 @@ export default class Forms extends OneBlinkAPI {
     return super.searchRequest(`/form-submission-meta`, searchParams)
   }
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const formId = 1
@@ -831,6 +901,11 @@ export default class Forms extends OneBlinkAPI {
    * @param formId The exact id of the form you wish to get
    * @param injectForms Set to `true` to inject form elements from nested Form
    *   elements and Info Page elements.
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Forms: `Manager` or `Read Only`
    */
   getForm(formId: number, injectForms?: boolean): Promise<FormTypes.Form> {
     if (typeof formId !== 'number') {
@@ -842,7 +917,7 @@ export default class Forms extends OneBlinkAPI {
     })
   }
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * forms
@@ -867,6 +942,11 @@ export default class Forms extends OneBlinkAPI {
    * ```
    *
    * @param newForm The form object to create.
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Forms: `Manager`
    */
   async createForm(newForm: FormTypes.NewForm): Promise<FormTypes.Form> {
     const savedForm = await super.postRequest<
@@ -876,7 +956,7 @@ export default class Forms extends OneBlinkAPI {
     return savedForm
   }
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * forms
@@ -907,6 +987,11 @@ export default class Forms extends OneBlinkAPI {
    * @param form The form object to update
    * @param overrideLock Defaults to `false`. Set to true to force updating of
    *   the form if the form is locked via the form builder
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Forms: `Manager`
    */
   async updateForm(
     form: FormTypes.Form,
@@ -919,7 +1004,7 @@ export default class Forms extends OneBlinkAPI {
     return savedForm
   }
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const formId = 1
@@ -936,6 +1021,11 @@ export default class Forms extends OneBlinkAPI {
    * @param formId Id of the form.
    * @param overrideLock Defaults to `false`. Set to true to force deleting of
    *   the form if the form is locked via the form builder
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Forms: `Manager`
    */
   async deleteForm(formId: number, overrideLock?: boolean): Promise<void> {
     if (typeof formId !== 'number') {
@@ -947,7 +1037,7 @@ export default class Forms extends OneBlinkAPI {
     )
   }
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * forms
@@ -987,6 +1077,11 @@ export default class Forms extends OneBlinkAPI {
    * ```
    *
    * @param migrationOptions Migration options
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Forms: `Manager`
    */
   async migrateForm(
     migrationOptions: EnvironmentTypes.FormMigrationData,
@@ -998,7 +1093,7 @@ export default class Forms extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const submissionId = 'f1eadc2b-79c8-4f97-8d92-cde64b34911f'
@@ -1018,6 +1113,11 @@ export default class Forms extends OneBlinkAPI {
    *
    * @param submissionId The exact id of the submission you wish to get the meta
    *   result for
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager` or `Read Only`
    */
   getFormSubmissionMeta(
     submissionId: string,
@@ -1031,7 +1131,7 @@ export default class Forms extends OneBlinkAPI {
   }
 
   /**
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const parameters = {
@@ -1061,6 +1161,11 @@ export default class Forms extends OneBlinkAPI {
    *
    * @param params An object containing all parameters to be passed to the
    *   function
+   * @returns
+   *
+   *   ## Role Permissions Required
+   *
+   *   Submission Data: `Manager`
    */
   executeWorkflowEvent(params: {
     /** The submission identifier for the workflow event you want to replay */
@@ -1091,7 +1196,7 @@ export default class Forms extends OneBlinkAPI {
    * A static method available on the forms class, used for validating a
    * OneBlink compatible Forms Definition.
    *
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const form = {
@@ -1117,6 +1222,7 @@ export default class Forms extends OneBlinkAPI {
    * ```
    *
    * @param form The form object to validate.
+   * @returns
    */
   static validateForm(form: unknown) {
     return validateWithFormSchema(form)
@@ -1142,7 +1248,7 @@ export default class Forms extends OneBlinkAPI {
    * The method will set reasonable defaults for any values not passed to it,
    * and validate ones that are against our Element Schema.
    *
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const element = {
@@ -1153,6 +1259,8 @@ export default class Forms extends OneBlinkAPI {
    *
    * return generatedElement
    * ```
+   *
+   * @returns
    */
   static generateFormElement<T extends FormTypes._FormElementBase>(
     formElementGenerationData?: Record<string, unknown>,
@@ -1167,7 +1275,7 @@ export default class Forms extends OneBlinkAPI {
    * The method will set reasonable defaults for any values not passed to it,
    * and validate ones that are against our Element Schema.
    *
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const childElement = Forms.generateFormElement({
@@ -1183,6 +1291,8 @@ export default class Forms extends OneBlinkAPI {
    *
    * return generatedElement
    * ```
+   *
+   * @returns
    */
   static generatePageElement(
     formElementGenerationData?: Record<string, unknown>,
@@ -1227,7 +1337,7 @@ export default class Forms extends OneBlinkAPI {
    * A static method available on the forms class, used for validating a api
    * request configuration.
    *
-   * #### Example
+   * ## Example
    *
    * ```javascript
    * const endpointConfiguration = {
@@ -1247,6 +1357,8 @@ export default class Forms extends OneBlinkAPI {
    * const validatedEndpointConfiguration = result.data
    * return validatedEndpointConfiguration
    * ```
+   *
+   * @returns
    */
   static validateEndpointConfiguration = validateEndpointConfiguration
 }

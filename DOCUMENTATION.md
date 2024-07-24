@@ -50,3 +50,9 @@ Various Types used in this package can also be imported:
 ```ts
 import * as Types from '@oneblink/sdk/types'
 ```
+
+## OneBlink Role Permissions
+
+Certain actions in the OneBlink SDK require that your key has particular permissions.
+These permissions can be set in your tenant's console. If you do not have access to your tenant's console, you will need to work with your Administrator to associate the permissions that you require with your key.
+Without the associated permissions for a particular action, you will be prohibited from completing that action using the OneBlink SDK. The associated permissions for each function are detailed on the function definitions.
