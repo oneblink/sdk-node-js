@@ -285,7 +285,7 @@ export default class Forms extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Form Submissions: `Manager` or `Read Only`
+   *   Submission Data: `Manager` or `Read Only`
    */
   async generateSubmissionDataUrl(
     formId: number,
@@ -343,7 +343,7 @@ export default class Forms extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Form Submission: `Manager` or `Read Only`
+   *   Submission Data: `Manager` or `Read Only`
    */
   async getSubmissionData(
     formId: number,
@@ -412,7 +412,7 @@ export default class Forms extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Form Submission: `Manager` or `Read Only`
+   *   Submission Data: `Manager` or `Read Only`
    */
   async getSubmissionAttachmentMeta(formId: number, attachmentId: string) {
     return await this.getRequest<HeadObjectOutput>(
@@ -450,7 +450,7 @@ export default class Forms extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Form Submission: `Manager` or `Read Only`
+   *   Submission Data: `Manager` or `Read Only`
    */
   async getSubmissionAttachmentStream(
     formId: number,
@@ -489,7 +489,7 @@ export default class Forms extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Form Submission: `Manager` or `Read Only`
+   *   Submission Data: `Manager` or `Read Only`
    */
   async getSubmissionAttachmentBuffer(
     formId: number,

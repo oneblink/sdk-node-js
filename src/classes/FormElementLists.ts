@@ -100,7 +100,7 @@ export default class FormElementLists extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Form Element Lists: `Manager`
+   *   Lists: `Manager`
    */
   async createFormElementList(
     newFormElementList: FormTypes.NewFormElementOptionSet,
@@ -152,7 +152,7 @@ export default class FormElementLists extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Form Element Lists: `Manager`
+   *   Lists: `Manager`
    */
   async updateFormElementList(
     list: FormTypes.FormElementOptionSet,
@@ -183,7 +183,7 @@ export default class FormElementLists extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Form Element Lists: `Manager`
+   *   Lists: `Manager`
    */
   async deleteFormElementList(id: number): Promise<void> {
     if (typeof id !== 'number' || Number.isNaN(id)) {

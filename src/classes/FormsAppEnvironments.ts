@@ -43,7 +43,7 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Forms App Environments: `Manager` or `Read Only`
+   *   Environments: `Manager` or `Read Only`
    */
   searchFormsAppEnvironments(
     searchParams?: FormsAppEnvironmentsSearchOptions,
@@ -65,7 +65,7 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Forms App Environments: `Manager` or `Read Only`
+   *   Environments: `Manager` or `Read Only`
    */
   async getFormsAppEnvironment(
     formsAppEnvironmentId: number,
@@ -108,7 +108,7 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Forms App Environments: `Manager`
+   *   Environments: `Manager`
    */
   async createFormsAppEnvironment(
     newFormsAppEnvironment: EnvironmentTypes.NewFormsAppEnvironment,
@@ -138,7 +138,7 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Forms App Environments: `Manager`
+   *   Environments: `Manager`
    */
   async updateFormsAppEnvironment(
     formsAppEnvironment?: EnvironmentTypes.FormsAppEnvironment,
@@ -165,7 +165,7 @@ export default class FormsAppEnvironments extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Forms App Environments: `Manager`
+   *   Environments: `Manager`
    */
   async deleteFormsAppEnvironment(
     formsAppEnvironmentId: number,

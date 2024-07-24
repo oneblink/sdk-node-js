@@ -70,7 +70,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   For Apps: `Manager` or `Read Only`.
+   *   Apps: `Manager` or `Read Only`.
    */
   async getFormsApp(formsAppId: number): Promise<FormsAppsTypes.FormsApp> {
     if (typeof formsAppId !== 'number') {
@@ -138,7 +138,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   For Apps: `Manager`
+   *   Apps: `Manager`
    */
   async createFormsApp(
     formsApp: Omit<FormsAppsTypes.NewFormsApp, 'styles'>,
@@ -162,7 +162,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   For Apps: `Manager`
+   *   Apps: `Manager`
    */
   async updateFormsApp(
     formsApp: FormsAppsTypes.FormsApp,
@@ -193,7 +193,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   For Apps: `Manager`
+   *   Apps: `Manager`
    */
   async deleteFormsApp(formsAppId: number): Promise<void> {
     if (typeof formsAppId !== 'number') {
@@ -307,7 +307,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   For Apps: `Manager` or `Read Only`.
+   *   Apps: `Manager` or `Read Only`.
    */
   async getSendingAddress(
     formsAppId: number,
@@ -340,7 +340,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   For Apps: `Manager` or `Read Only`.
+   *   Apps: `Manager` or `Read Only`.
    */
   async setSendingAddress(
     formsAppId: number,
@@ -400,7 +400,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   For Apps: `Manager` or `Read Only`.
+   *   Apps: `Manager` or `Read Only`.
    */
   async deleteSendingAddress(formsAppId: number): Promise<void> {
     if (typeof formsAppId !== 'number') {

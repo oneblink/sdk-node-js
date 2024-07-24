@@ -53,7 +53,7 @@ export default class PDF extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   Form Submissions: `Manager` or `Read Only`
+   *   Submission Data: `Manager` or `Read Only`
    */
   async generateFormSubmissionPDF(
     options: {
