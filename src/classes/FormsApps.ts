@@ -287,7 +287,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    * **Minimum Role Permission**
    *
-   * Apps: _Manager_
+   * App Users: _Manager_
    *
    * @example
    *   const res = await formsAppsSDK.setSendingAddress(
@@ -348,7 +348,7 @@ export default class FormsApps extends OneBlinkAPI {
    *
    * **Minimum Role Permission**
    *
-   * Apps: _Manager_
+   * App Users: _Manager_
    *
    * @example
    *   const formsAppId = 1
