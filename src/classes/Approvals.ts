@@ -44,7 +44,7 @@ export default class Approvals extends OneBlinkAPI {
    *
    *   ## Role Permission Required
    *
-   *   FaaS: `Developer`
+   *   Form Submissions: `Manager` or `Read Only`
    */
   async searchFormSubmissionAdministrationApprovals({
     formsAppId,
@@ -115,7 +115,7 @@ export default class Approvals extends OneBlinkAPI {
    *
    *   ## Role Permission Required
    *
-   *   FaaS: `Developer`
+   *   Form Submissions: `Manager` or `Read Only`
    */
   async getFormSubmissionApproval(
     id: string,
@@ -140,7 +140,7 @@ export default class Approvals extends OneBlinkAPI {
    *
    *   ## Role Permission Required
    *
-   *   FaaS: `Developer`
+   *   Form Submissions: `Manager` or `Read Only`
    */
   async getFormApprovalFlowInstance(
     id: number,

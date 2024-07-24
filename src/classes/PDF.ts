@@ -138,7 +138,7 @@ export default class PDF extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   PDF: `Developer`
+   *   PDF Generation: `On`
    */
   async generatePDF(options: PDFTypes.GeneratePDFOptions): Promise<Buffer> {
     if (!options || !options.body || !options.body.html) {
@@ -193,7 +193,7 @@ export default class PDF extends OneBlinkAPI {
    *
    *   ## Role Permissions Required
    *
-   *   PDF: `Developer`
+   *   PDF Generation: `On`
    */
   async generatePdfFromSubmissionData(options: {
     submissionData: SubmissionTypes.S3SubmissionData
