@@ -8,17 +8,13 @@ import { ConstructorOptions } from '../types'
 
 export default class PDF extends OneBlinkAPI {
   /**
-   * ## Example
-   *
-   * ```typescript
-   * const OneBlink = require('@oneblink/sdk')
-   *
-   * const options = {
-   *   accessKey: '123455678901ABCDEFGHIJKL',
-   *   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-   * }
-   * const pdf = new OneBlink.PDF(options)
-   * ```
+   * @example
+   *   const OneBlink = require('@oneblink/sdk')
+   *   const options = {
+   *     accessKey: '123455678901ABCDEFGHIJKL',
+   *     secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+   *   }
+   *   const pdf = new OneBlink.PDF(options)
    */
   constructor(options: ConstructorOptions) {
     options = options || {}
@@ -26,34 +22,31 @@ export default class PDF extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const fs = require('fs')
-   * const util = require('util')
+   * Submission Data: _Read Only_
    *
-   * const writeFileAsync = util.promisify(fs.writeFile)
+   * @example
+   *   const fs = require('fs')
+   *   const util = require('util')
    *
-   * async function run() {
-   *   const buffer = await pdf.generateFormSubmissionPDF({
-   *     formId: 1,
-   *     submissionId: 'c63ec3ac-12ab-447c-951c-2815d0e6fc24',
-   *     isDraft: false,
-   *     includeSubmissionIdInPdf: false,
-   *     includeExternalIdInPdf: false,
-   *     excludedElementIds: ['1ae6d5f5-eade-411c-b85a-45fe40fe469e'],
-   *   })
-   *   await writeFileAsync('./submission.pdf', buffer, 'binary')
-   * }
-   * ```
+   *   const writeFileAsync = util.promisify(fs.writeFile)
+   *
+   *   async function run() {
+   *     const buffer = await pdf.generateFormSubmissionPDF({
+   *       formId: 1,
+   *       submissionId: 'c63ec3ac-12ab-447c-951c-2815d0e6fc24',
+   *       isDraft: false,
+   *       includeSubmissionIdInPdf: false,
+   *       includeExternalIdInPdf: false,
+   *       excludedElementIds: ['1ae6d5f5-eade-411c-b85a-45fe40fe469e'],
+   *     })
+   *     await writeFileAsync('./submission.pdf', buffer, 'binary')
+   *   }
    *
    * @param options An object containing all parameters to be passed into the
    *   function.
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager` or `Read Only`
    */
   async generateFormSubmissionPDF(
     options: {
@@ -90,55 +83,52 @@ export default class PDF extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const fs = require('fs')
-   * const util = require('util')
+   * PDF Generation: _On_
    *
-   * const writeFileAsync = util.promisify(fs.writeFile)
+   * @example
+   *   const fs = require('fs')
+   *   const util = require('util')
    *
-   * async function run() {
-   *   const buffer = await pdf.generatePDF({
-   *     body: {
-   *       html: `
-   *         <p>I will be in the middle</p>
-   *       `,
-   *     },
-   *     header: {
-   *       html: `
-   *       <div style="font-size: 9px; margin: 0 15px; width: 100%; text-align: center;">
-   *         I will be at the top of every page
-   *       </div>
-   *       `,
-   *     },
-   *     footer: {
-   *       html: `
-   *       <div style="font-size: 9px; margin: 0 15px; width: 100%; text-align: center;">
-   *         I will be at the bottom of every page ({_BLINK_PAGE_NO_}/{_BLINK_PAGES_})
-   *       </div>
-   *       `,
-   *     },
-   *     page: {
-   *       orientation: 'Portrait',
-   *       size: 'A4',
-   *       margins: {
-   *         top: '15mm',
-   *         right: '5mm',
-   *         bottom: '15mm',
-   *         left: '5mm',
+   *   const writeFileAsync = util.promisify(fs.writeFile)
+   *
+   *   async function run() {
+   *     const buffer = await pdf.generatePDF({
+   *       body: {
+   *         html: `
+   *           <p>I will be in the middle</p>
+   *         `,
    *       },
-   *     },
-   *   })
-   *   await writeFileAsync('./custom.pdf', buffer, 'binary')
-   * }
-   * ```
+   *       header: {
+   *         html: `
+   *         <div style="font-size: 9px; margin: 0 15px; width: 100%; text-align: center;">
+   *           I will be at the top of every page
+   *         </div>
+   *         `,
+   *       },
+   *       footer: {
+   *         html: `
+   *         <div style="font-size: 9px; margin: 0 15px; width: 100%; text-align: center;">
+   *           I will be at the bottom of every page ({_BLINK_PAGE_NO_}/{_BLINK_PAGES_})
+   *         </div>
+   *         `,
+   *       },
+   *       page: {
+   *         orientation: 'Portrait',
+   *         size: 'A4',
+   *         margins: {
+   *           top: '15mm',
+   *           right: '5mm',
+   *           bottom: '15mm',
+   *           left: '5mm',
+   *         },
+   *       },
+   *     })
+   *     await writeFileAsync('./custom.pdf', buffer, 'binary')
+   *   }
    *
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   PDF Generation: `On`
    */
   async generatePDF(options: PDFTypes.GeneratePDFOptions): Promise<Buffer> {
     if (!options || !options.body || !options.body.html) {
@@ -160,40 +150,37 @@ export default class PDF extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const fs = require('fs')
-   * const util = require('util')
+   * PDF Generation: _On_
    *
-   * const writeFileAsync = util.promisify(fs.writeFile)
+   * @example
+   *   const fs = require('fs')
+   *   const util = require('util')
    *
-   * async function run() {
-   *   const buffer = await pdf.generatePdfFromSubmissionData({
-   *     submissionData: {
-   *       submission: {
-   *         myElementName: 'text 123'
+   *   const writeFileAsync = util.promisify(fs.writeFile)
+   *
+   *   async function run() {
+   *     const buffer = await pdf.generatePdfFromSubmissionData({
+   *       submissionData: {
+   *         submission: {
+   *           myElementName: 'text 123',
+   *         },
+   *         definition: {}, // form definition
+   *         submissionTimestamp: new Date().toISOString(),
+   *         formsAppId: 1,
    *       },
-   *       definition: {} // form definition
-   *       submissionTimestamp: new Date().toISOString(),
-   *       formsAppId: 1
-   *     },
-   *     excludedElementIds: ['1ae6d5f5-eade-411c-b85a-45fe40fe469e'],
-   *     usePagesBreaks: true,
-   *     excludedCSSClasses: []
-   *     includeExternalIdInPdf: false,
-   *   })
-   *   await writeFileAsync('./submission.pdf', buffer, 'binary')
-   * }
-   * ```
+   *       excludedElementIds: ['1ae6d5f5-eade-411c-b85a-45fe40fe469e'],
+   *       usePagesBreaks: true,
+   *       excludedCSSClasses: [],
+   *       includeExternalIdInPdf: false,
+   *     })
+   *     await writeFileAsync('./submission.pdf', buffer, 'binary')
+   *   }
    *
    * @param options An object containing all parameters to be passed into the
    *   function.
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   PDF Generation: `On`
    */
   async generatePdfFromSubmissionData(options: {
     submissionData: SubmissionTypes.S3SubmissionData

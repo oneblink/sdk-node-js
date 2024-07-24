@@ -9,17 +9,13 @@ import {
 const basePath = `/email-templates`
 export default class EmailTemplates extends OneBlinkAPI {
   /**
-   * #### Example
-   *
-   * ```typescript
-   * const OneBlink = require('@oneblink/sdk')
-   *
-   * const options = {
-   *   accessKey: '123455678901ABCDEFGHIJKL',
-   *   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-   * }
-   * const emailTemplates = new OneBlink.EmailTemplates(options)
-   * ```
+   * @example
+   *   const OneBlink = require('@oneblink/sdk')
+   *   const options = {
+   *     accessKey: '123455678901ABCDEFGHIJKL',
+   *     secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+   *   }
+   *   const emailTemplates = new OneBlink.EmailTemplates(options)
    */
   constructor(options: ConstructorOptions) {
     options = options || {}
@@ -27,23 +23,20 @@ export default class EmailTemplates extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const searchParams = {
-   *   limit: 1,
-   *   offset: 0,
-   * }
-   * const { emailTemplates, meta } =
-   *   await emailTemplates.searchEmailTemplates(searchParams)
-   * ```
+   * Email Templates: _Read Only_
+   *
+   * @example
+   *   const searchParams = {
+   *     limit: 1,
+   *     offset: 0,
+   *   }
+   *   const { emailTemplates, meta } =
+   *     await emailTemplates.searchEmailTemplates(searchParams)
    *
    * @param searchParams Search options
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Email Templates: `Manager` or `Read Only`
    */
   searchEmailTemplates(
     searchParams: EmailTemplatesSearchOptions,
@@ -52,19 +45,16 @@ export default class EmailTemplates extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const emailTemplate = await emailTemplates.getEmailTemplate(1)
-   * // Use data here...
-   * ```
+   * Email Templates: _Read Only_
+   *
+   * @example
+   *   const emailTemplate = await emailTemplates.getEmailTemplate(1)
+   *   // Use data here...
    *
    * @param id The id of the email template
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Email Templates: `Manager` or `Read Only`
    */
   async getEmailTemplate(
     id: number,
@@ -77,30 +67,27 @@ export default class EmailTemplates extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const data = {
-   *   name: 'my template',
-   *   organisationId: 'abc123',
-   *   environments: [
-   *     {
-   *       template: 'My email template {{custom:my-custom-tag}}',
-   *       formsAppEnvironmentId: 1,
-   *     },
-   *   ],
-   *   type: 'FORM_SUBMISSION_EVENT_PDF',
-   * }
-   * const emailTemplate = await emailTemplates.createEmailTemplate(data)
-   * // Use emailTemplate here...
-   * ```
+   * Email Templates: _Manager_
+   *
+   * @example
+   *   const data = {
+   *     name: 'my template',
+   *     organisationId: 'abc123',
+   *     environments: [
+   *       {
+   *         template: 'My email template {{custom:my-custom-tag}}',
+   *         formsAppEnvironmentId: 1,
+   *       },
+   *     ],
+   *     type: 'FORM_SUBMISSION_EVENT_PDF',
+   *   }
+   *   const emailTemplate = await emailTemplates.createEmailTemplate(data)
+   *   // Use emailTemplate here...
    *
    * @param data The data for the new email template
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Email Templates: `Manager`
    */
   async createEmailTemplate(
     data: EmailTemplateTypes.NewEmailTemplate,
@@ -109,31 +96,28 @@ export default class EmailTemplates extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const data = {
-   *   id: 1,
-   *   name: 'my updated template',
-   *   organisationId: 'abc123',
-   *   environments: [
-   *     {
-   *       template: 'My email template {{custom:my-custom-tag}}',
-   *       formsAppEnvironmentId: 1,
-   *     },
-   *   ],
-   *   type: 'FORM_SUBMISSION_EVENT_PDF',
-   * }
-   * const emailTemplate = await emailTemplates.updateEmailTemplate(data)
-   * // Use emailTemplate here...
-   * ```
+   * Email Templates: _Manager_
+   *
+   * @example
+   *   const data = {
+   *     id: 1,
+   *     name: 'my updated template',
+   *     organisationId: 'abc123',
+   *     environments: [
+   *       {
+   *         template: 'My email template {{custom:my-custom-tag}}',
+   *         formsAppEnvironmentId: 1,
+   *       },
+   *     ],
+   *     type: 'FORM_SUBMISSION_EVENT_PDF',
+   *   }
+   *   const emailTemplate = await emailTemplates.updateEmailTemplate(data)
+   *   // Use emailTemplate here...
    *
    * @param data The data for the email template to update
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Email Templates: `Manager` or `Read Only`
    */
   async updateEmailTemplate(
     data: EmailTemplateTypes.EmailTemplate,
@@ -146,18 +130,15 @@ export default class EmailTemplates extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * await emailTemplates.deleteEmailTemplate(1)
-   * ```
+   * Email Templates: _Manager_
+   *
+   * @example
+   *   await emailTemplates.deleteEmailTemplate(1)
    *
    * @param id The id of the email template to delete
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Email Templates: `Manager` or `Read Only`
    */
   async deleteEmailTemplate(id: number): Promise<void> {
     if (typeof id !== 'number') {

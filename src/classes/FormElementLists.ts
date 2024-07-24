@@ -10,17 +10,13 @@ const basePath = `/form-element-options/dynamic`
 
 export default class FormElementLists extends OneBlinkAPI {
   /**
-   * ## Example
-   *
-   * ```typescript
-   * import { FormElementLists } from '@oneblink/sdk'
-   *
-   * const options = {
-   *   accessKey: '123455678901ABCDEFGHIJKL',
-   *   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-   * }
-   * const formElementListsClient = new FormElementLists(options)
-   * ```
+   * @example
+   *   import { FormElementLists } from '@oneblink/sdk'
+   *   const options = {
+   *     accessKey: '123455678901ABCDEFGHIJKL',
+   *     secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+   *   }
+   *   const formElementListsClient = new FormElementLists(options)
    */
   constructor(options: ConstructorOptions) {
     options = options || {}
@@ -28,23 +24,20 @@ export default class FormElementLists extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const searchParams = {
-   *   limit: 1,
-   *   offset: 0,
-   * }
-   * const { formElementLists, meta } =
-   *   await formElementListsClient.searchFormElementLists(searchParams)
-   * ```
+   * Lists: _Read Only_
+   *
+   * @example
+   *   const searchParams = {
+   *     limit: 1,
+   *     offset: 0,
+   *   }
+   *   const { formElementLists, meta } =
+   *     await formElementListsClient.searchFormElementLists(searchParams)
    *
    * @param searchParams Search options
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   No Permissions Required
    */
   async searchFormElementLists(
     searchParams: FormElementListSearchOptions,
@@ -68,39 +61,36 @@ export default class FormElementLists extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const data = {
-   *   name: 'my list',
-   *   organisationId: 'abc123',
-   *   environments: [
-   *     {
-   *       options: [
-   *          {
-   *            label: 'One'
-   *            value: '1'
-   *          },
-   *          {
-   *            label: 'Two'
-   *            value: '2'
-   *          }
-   *       ]
-   *       formsAppEnvironmentId: 1,
-   *     },
-   *   ],
-   *   type: 'STATIC',
-   * }
-   * const list = await formElementListsClient.createFormElementList(data)
-   * // Use list here...
-   * ```
+   * Lists: _Manager_
+   *
+   * @example
+   *   const data = {
+   *     name: 'my list',
+   *     organisationId: 'abc123',
+   *     environments: [
+   *       {
+   *         options: [
+   *           {
+   *             label: 'One',
+   *             value: '1',
+   *           },
+   *           {
+   *             label: 'Two',
+   *             value: '2',
+   *           },
+   *         ],
+   *         formsAppEnvironmentId: 1,
+   *       },
+   *     ],
+   *     type: 'STATIC',
+   *   }
+   *   const list = await formElementListsClient.createFormElementList(data)
+   *   // Use list here...
    *
    * @param newFormElementList The data for the new list
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Lists: `Manager`
    */
   async createFormElementList(
     newFormElementList: FormTypes.NewFormElementOptionSet,
@@ -115,44 +105,41 @@ export default class FormElementLists extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const data = {
-   *   id: 1,
-   *   name: 'my list',
-   *   organisationId: 'abc123',
-   *   environments: [
-   *     {
-   *       options: [
-   *          {
-   *            label: 'One'
-   *            value: '1'
-   *          },
-   *          {
-   *            label: 'Two'
-   *            value: '2'
-   *          },
-   *          {
-   *            label: 'Three'
-   *            value: '2'
-   *          },
-   *       ]
-   *       formsAppEnvironmentId: 1,
-   *     },
-   *   ],
-   *   type: 'STATIC',
-   * }
-   * const list = await formElementListsClient.updateFormElementList(data)
-   * // Use list here...
-   * ```
+   * Lists: _Manager_
+   *
+   * @example
+   *   const data = {
+   *     id: 1,
+   *     name: 'my list',
+   *     organisationId: 'abc123',
+   *     environments: [
+   *       {
+   *         options: [
+   *           {
+   *             label: 'One',
+   *             value: '1',
+   *           },
+   *           {
+   *             label: 'Two',
+   *             value: '2',
+   *           },
+   *           {
+   *             label: 'Three',
+   *             value: '2',
+   *           },
+   *         ],
+   *         formsAppEnvironmentId: 1,
+   *       },
+   *     ],
+   *     type: 'STATIC',
+   *   }
+   *   const list = await formElementListsClient.updateFormElementList(data)
+   *   // Use list here...
    *
    * @param list The data for the list to update
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Lists: `Manager`
    */
   async updateFormElementList(
     list: FormTypes.FormElementOptionSet,
@@ -172,18 +159,15 @@ export default class FormElementLists extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * await formElementListsClient.deleteFormElementList(1)
-   * ```
+   * Lists: _Manager_
+   *
+   * @example
+   *   await formElementListsClient.deleteFormElementList(1)
    *
    * @param id The id of the list to delete
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Lists: `Manager`
    */
   async deleteFormElementList(id: number): Promise<void> {
     if (typeof id !== 'number' || Number.isNaN(id)) {

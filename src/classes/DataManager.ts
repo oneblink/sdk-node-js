@@ -8,18 +8,13 @@ import {
 
 export default class DataManager extends OneBlinkAPI {
   /**
-   * ## Example
-   *
-   * ```typescript
-   * const OneBlink = require('@oneblink/sdk')
-   *
-   * const options = {
-   *   accessKey: '123455678901ABCDEFGHIJKL',
-   *   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-   * }
-   *
-   * const dataManager = new OneBlink.DataManager(options)
-   * ```
+   * @example
+   *   const OneBlink = require('@oneblink/sdk')
+   *   const options = {
+   *     accessKey: '123455678901ABCDEFGHIJKL',
+   *     secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+   *   }
+   *   const dataManager = new OneBlink.DataManager(options)
    */
   constructor(options: ConstructorOptions) {
     options = options || {}
@@ -27,18 +22,15 @@ export default class DataManager extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const { formId, formElements } = await dataManager.getFormDefinition(2)
-   * ```
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const { formId, formElements } = await dataManager.getFormDefinition(2)
    *
    * @param id The form ID to get the definition for.
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager` or `Read Only`
    */
   async getFormDefinition(id: number): Promise<FormStoreDefinition> {
     if (typeof id !== 'number') {
@@ -50,21 +42,18 @@ export default class DataManager extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
+   * **Minimum Role Permission**
    *
-   * ```javascript
-   * const { submissions, meta } = await dataManager.searchRecords({
-   *   formId: 1,
-   * })
-   * // Use data here...
-   * ```
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const { submissions, meta } = await dataManager.searchRecords({
+   *     formId: 1,
+   *   })
+   *   // Use data here...
    *
    * @param options The options for the Search Request
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   Submission Data: `Manager` or `Read Only`
    */
   async searchRecords(
     options: SearchDataManagerRecordsOptions,

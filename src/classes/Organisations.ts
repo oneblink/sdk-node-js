@@ -5,17 +5,13 @@ import { Readable } from 'stream'
 
 export default class Organisations extends OneBlinkAPI {
   /**
-   * ## Example
-   *
-   * ```typescript
-   * const OneBlink = require('@oneblink/sdk')
-   *
-   * const options = {
-   *   accessKey: '123455678901ABCDEFGHIJKL',
-   *   secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
-   * }
-   * const organisations = new OneBlink.Organisations(options)
-   * ```
+   * @example
+   *   const OneBlink = require('@oneblink/sdk')
+   *   const options = {
+   *     accessKey: '123455678901ABCDEFGHIJKL',
+   *     secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
+   *   }
+   *   const organisations = new OneBlink.Organisations(options)
    */
   constructor(options: ConstructorOptions) {
     options = options || {}
@@ -23,18 +19,11 @@ export default class Organisations extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
-   *
-   * ```javascript
-   * const organisation = await organisations.getOrganisation()
-   * // Use organisation here...
-   * ```
+   * @example
+   *   const organisation = await organisations.getOrganisation()
+   *   // Use organisation here...
    *
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   No Permissions Required
    */
   async getOrganisation(): Promise<OrganisationTypes.Organisation> {
     const searchResponse = await super.getRequest<{
@@ -48,24 +37,17 @@ export default class Organisations extends OneBlinkAPI {
   }
 
   /**
-   * ## Example
-   *
-   * ```javascript
-   * const asset = {
-   *   assetData: 'some kind of data',
-   *   assetFileName: 'myfile.png',
-   *   assetContentType: 'image/png',
-   * }
-   * const { location } = await organisations.uploadAsset(asset)
-   * // Use location here...
-   * ```
+   * @example
+   *   const asset = {
+   *     assetData: 'some kind of data',
+   *     assetFileName: 'myfile.png',
+   *     assetContentType: 'image/png',
+   *   }
+   *   const { location } = await organisations.uploadAsset(asset)
+   *   // Use location here...
    *
    * @param asset The properties of the asset to upload
    * @returns
-   *
-   *   ## Role Permissions Required
-   *
-   *   No Permissions Required
    */
   async uploadAsset(asset: {
     assetData: unknown
