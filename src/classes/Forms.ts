@@ -46,9 +46,9 @@ export default class Forms extends OneBlinkAPI {
   /**
    * **App Association Required**
    *
-   * **Minimum Role Permission** (only if using `preFillData`)
+   * **Minimum Role Permission**
    *
-   * Jobs: _Manager_
+   * Upload Form Prefill Data: _Manager_ (only if using `preFillData`)
    *
    * @example
    *   const parameters = {
@@ -470,7 +470,9 @@ export default class Forms extends OneBlinkAPI {
     return await response.buffer()
   }
   /**
-   * **App Association Required**
+   * **Minimum Role Permission**
+   *
+   * Upload Attachments: _On_
    *
    * @example
    *   const fs = require('fs')
@@ -673,7 +675,7 @@ export default class Forms extends OneBlinkAPI {
    *
    * **Minimum Role Permission**
    *
-   * Email Attachments: _On_
+   * Upload Attachments: _On_
    *
    * @example
    *   export async function post(request) {
