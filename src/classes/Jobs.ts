@@ -41,6 +41,8 @@ export default class Jobs extends OneBlinkAPI {
    *
    * Jobs: _Manager_
    *
+   * Upload Form Prefill Data: _On_ (only if using `preFillData`)
+   *
    * @example
    *   const newJob = {
    *     username: 'user@domain.io',
