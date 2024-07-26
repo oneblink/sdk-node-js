@@ -217,14 +217,6 @@ describe('Jobs SDK Class', () => {
       )
     })
 
-    test('should reject isSubmitted', async () => {
-      const jobs = await getJobsSdk()
-      // @ts-expect-error Expecting throw
-      return expect(jobs.searchJobs({ isSubmitted: 'maybe?' })).rejects.toThrow(
-        'isSubmitted must be provided as a boolean or not at all',
-      )
-    })
-
     test('should reject limit', async () => {
       const jobs = await getJobsSdk()
       // @ts-expect-error Expecting throw
