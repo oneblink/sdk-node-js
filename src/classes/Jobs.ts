@@ -184,12 +184,7 @@ export default class Jobs extends OneBlinkAPI {
         })
       }
 
-      if (options.isSubmitted) {
-        if (typeof options.isSubmitted !== 'boolean') {
-          throw new TypeError(
-            `isSubmitted must be provided as a boolean or not at all`,
-          )
-        }
+      if (typeof options.isSubmitted === 'boolean') {
         searchOptions = Object.assign(searchOptions, {
           isSubmitted: options.isSubmitted,
         })
