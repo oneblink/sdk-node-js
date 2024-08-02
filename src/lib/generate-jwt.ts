@@ -21,7 +21,7 @@ export default function generateJWT({
     {
       ...developerKeyJWTPayload,
       iss: accessKey,
-      username,
+      sub: username,
     },
     secretKey,
     {

@@ -109,11 +109,6 @@ export default class Forms extends OneBlinkAPI {
      * securely know the user that submitted the form in a webhook.
      */
     username?: string
-    /**
-     * A secret used to encrypt the `username` property which can be validated
-     * in a webhook.
-     */
-    secret?: string
   }): Promise<{ expiry: string; formUrl: string }> {
     if (!parameters || typeof parameters !== 'object') {
       throw new TypeError('Parameters not provided.')
@@ -196,7 +191,6 @@ export default class Forms extends OneBlinkAPI {
       }
     }
 
-    let userToken = undefined
     const username = parameters.username
     if (
       username !== undefined &&
@@ -204,17 +198,6 @@ export default class Forms extends OneBlinkAPI {
       typeof username !== 'string'
     ) {
       throw new TypeError('Must supply "username" as a string or not at all')
-    }
-
-    if (username) {
-      const secret = parameters.secret
-      if (typeof secret !== 'string') {
-        throw new TypeError(
-          'Must supply "secret" as a string if "username" is used',
-        )
-      }
-
-      userToken = encryptUserToken({ secret, username })
     }
 
     // Default expiry for token is 8 hours
@@ -234,7 +217,6 @@ export default class Forms extends OneBlinkAPI {
       externalId,
       preFillFormDataId,
       endpoint: `https://${formsApp.hostname}/forms`,
-      userToken,
       previousFormSubmissionApprovalId,
     })
 
@@ -1220,38 +1202,6 @@ export default class Forms extends OneBlinkAPI {
   ): FormTypes.PageElement {
     const pageElement = generatePageElement(formElementGenerationData)
     return pageElement
-  }
-  /**
-   * A static method available on the forms class for securely encrypting a user
-   * identifier (e.g. email address) when the OneBlink API is being called with
-   * a FaaS key and not a user JWT. This is automatically done for the user in
-   * [`generateFormUrl()`](#generateFormUrl) by passing the `username` and
-   * `secret` options.
-   *
-   * @returns The encrypted representation of the username
-   */
-  static encryptUserToken(details: {
-    /** The username to encrypt */
-    username: string
-    /** A string used to encrypt the username */
-    secret: string
-  }) {
-    return encryptUserToken(details)
-  }
-
-  /**
-   * A static method available on the forms class for decrypting a user token.
-   * This token is passed to OneBlink webhooks in the `userToken` property.
-   *
-   * @returns The decrypted username
-   */
-  static decryptUserToken(details: {
-    /** The user token to decrypt */
-    userToken: string
-    /** The secret used to encrypt the username */
-    secret: string
-  }) {
-    return decryptUserToken(details)
   }
 
   /**

@@ -6,7 +6,6 @@ export default function generateFormUrl({
   externalId,
   preFillFormDataId,
   endpoint,
-  userToken,
   previousFormSubmissionApprovalId,
 }: {
   endpoint: string
@@ -14,7 +13,6 @@ export default function generateFormUrl({
   token: string
   externalId?: unknown
   preFillFormDataId?: string
-  userToken?: string
   previousFormSubmissionApprovalId?: string
 }): string {
   if (!formId) {
@@ -30,9 +28,6 @@ export default function generateFormUrl({
   }
   if (preFillFormDataId) {
     searchParams = Object.assign({}, searchParams, { preFillFormDataId })
-  }
-  if (userToken) {
-    searchParams = Object.assign({}, searchParams, { userToken })
   }
   if (previousFormSubmissionApprovalId) {
     searchParams = Object.assign({}, searchParams, {
