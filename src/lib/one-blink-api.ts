@@ -60,7 +60,11 @@ export default class OneBlinkAPI {
       apiOrigin: OneBlinkAPI.tenant.apiOrigin,
       region: OneBlinkAPI.tenant.awsRegion,
       getBearerToken: async () =>
-        generateJWT(this.accessKey, this.secretKey, this.jwtExpiry),
+        generateJWT({
+          accessKey: this.accessKey,
+          secretKey: this.secretKey,
+          expiresInSeconds: this.jwtExpiry,
+        }),
     }
     this.oneBlinkUploader = new OneBlinkUploader(storageConstructorOptions)
     this.oneBlinkDownloader = new OneBlinkDownloader(storageConstructorOptions)
@@ -72,11 +76,11 @@ export default class OneBlinkAPI {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       'User-Agent': `Node.js ${pkg.name} / ${pkg.version}`,
-      Authorization: `Bearer ${generateJWT(
-        this.accessKey,
-        this.secretKey,
-        this.jwtExpiry,
-      )}`,
+      Authorization: `Bearer ${generateJWT({
+        accessKey: this.accessKey,
+        secretKey: this.secretKey,
+        expiresInSeconds: this.jwtExpiry,
+      })}`,
     }
   }
 

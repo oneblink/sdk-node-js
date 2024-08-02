@@ -5,7 +5,6 @@ import generateJWT from '../lib/generate-jwt'
 import OneBlinkAPI from '../lib/one-blink-api'
 import generateFormElement from '../lib/generate-form-element'
 import generatePageElement from '../lib/generate-page-element'
-import { encryptUserToken, decryptUserToken } from '../lib/user-token-helpers'
 import {
   AWSTypes,
   FormsAppsTypes,
@@ -104,15 +103,11 @@ export default class Forms extends OneBlinkAPI {
      */
     preFillData?: Record<string, unknown>
     /**
-     * An identifier for the user completing the form. Use this if you would
-     * like to securely know the user that submitted the form in a webhook.
+     * An identifier for the user completing the form. Including this property
+     * will add the username to the access token. Use this if you would like to
+     * securely know the user that submitted the form in a webhook.
      */
     username?: string
-    /**
-     * A secret used to encrypt the `username` property which can be validated
-     * in a webhook.
-     */
-    secret?: string
   }): Promise<{ expiry: string; formUrl: string }> {
     if (!parameters || typeof parameters !== 'object') {
       throw new TypeError('Parameters not provided.')
@@ -195,17 +190,6 @@ export default class Forms extends OneBlinkAPI {
       }
     }
 
-    // Default expiry for token is 8 hours
-    const jwtExpiry = expiryInSeconds || 28800
-
-    const token = generateJWT(
-      this.accessKey,
-      this.secretKey,
-      jwtExpiry,
-      developerKeyAccess,
-    )
-
-    let userToken = undefined
     const username = parameters.username
     if (
       username !== undefined &&
@@ -215,16 +199,16 @@ export default class Forms extends OneBlinkAPI {
       throw new TypeError('Must supply "username" as a string or not at all')
     }
 
-    if (username) {
-      const secret = parameters.secret
-      if (typeof secret !== 'string') {
-        throw new TypeError(
-          'Must supply "secret" as a string if "username" is used',
-        )
-      }
+    // Default expiry for token is 8 hours
+    const jwtExpiry = expiryInSeconds || 28800
 
-      userToken = encryptUserToken({ secret, username })
-    }
+    const token = generateJWT({
+      accessKey: this.accessKey,
+      secretKey: this.secretKey,
+      expiresInSeconds: jwtExpiry,
+      developerKeyAccess,
+      username,
+    })
 
     const formUrl = generateFormUrl({
       formId,
@@ -232,7 +216,6 @@ export default class Forms extends OneBlinkAPI {
       externalId,
       preFillFormDataId,
       endpoint: `https://${formsApp.hostname}/forms`,
-      userToken,
       previousFormSubmissionApprovalId,
     })
 
@@ -1218,38 +1201,6 @@ export default class Forms extends OneBlinkAPI {
   ): FormTypes.PageElement {
     const pageElement = generatePageElement(formElementGenerationData)
     return pageElement
-  }
-  /**
-   * A static method available on the forms class for securely encrypting a user
-   * identifier (e.g. email address) when the OneBlink API is being called with
-   * a FaaS key and not a user JWT. This is automatically done for the user in
-   * [`generateFormUrl()`](#generateFormUrl) by passing the `username` and
-   * `secret` options.
-   *
-   * @returns The encrypted representation of the username
-   */
-  static encryptUserToken(details: {
-    /** The username to encrypt */
-    username: string
-    /** A string used to encrypt the username */
-    secret: string
-  }) {
-    return encryptUserToken(details)
-  }
-
-  /**
-   * A static method available on the forms class for decrypting a user token.
-   * This token is passed to OneBlink webhooks in the `userToken` property.
-   *
-   * @returns The decrypted username
-   */
-  static decryptUserToken(details: {
-    /** The user token to decrypt */
-    userToken: string
-    /** The secret used to encrypt the username */
-    secret: string
-  }) {
-    return decryptUserToken(details)
   }
 
   /**
