@@ -5,7 +5,6 @@ import generateJWT from '../lib/generate-jwt'
 import OneBlinkAPI from '../lib/one-blink-api'
 import generateFormElement from '../lib/generate-form-element'
 import generatePageElement from '../lib/generate-page-element'
-import { encryptUserToken, decryptUserToken } from '../lib/user-token-helpers'
 import {
   AWSTypes,
   FormsAppsTypes,
