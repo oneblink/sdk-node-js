@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - allow `postSubmissionReceipt` if `postSubmissionAction` is `URL`
+- `generateFormUrl` function to include the `username` property into the JWT payload
 
 ### Fixed
 

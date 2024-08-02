@@ -104,8 +104,9 @@ export default class Forms extends OneBlinkAPI {
      */
     preFillData?: Record<string, unknown>
     /**
-     * An identifier for the user completing the form. Use this if you would
-     * like to securely know the user that submitted the form in a webhook.
+     * An identifier for the user completing the form. Including this property
+     * will add the username to the access token. Use this if you would like to
+     * securely know the user that submitted the form in a webhook.
      */
     username?: string
     /**
@@ -195,16 +196,6 @@ export default class Forms extends OneBlinkAPI {
       }
     }
 
-    // Default expiry for token is 8 hours
-    const jwtExpiry = expiryInSeconds || 28800
-
-    const token = generateJWT(
-      this.accessKey,
-      this.secretKey,
-      jwtExpiry,
-      developerKeyAccess,
-    )
-
     let userToken = undefined
     const username = parameters.username
     if (
@@ -225,6 +216,17 @@ export default class Forms extends OneBlinkAPI {
 
       userToken = encryptUserToken({ secret, username })
     }
+
+    // Default expiry for token is 8 hours
+    const jwtExpiry = expiryInSeconds || 28800
+
+    const token = generateJWT({
+      accessKey: this.accessKey,
+      secretKey: this.secretKey,
+      expiresInSeconds: jwtExpiry,
+      developerKeyAccess,
+      username,
+    })
 
     const formUrl = generateFormUrl({
       formId,

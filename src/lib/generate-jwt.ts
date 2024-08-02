@@ -1,12 +1,19 @@
 import { KeyTypes } from '@oneblink/types'
 import jwt from 'jsonwebtoken'
 
-export default function generateJWT(
-  accessKey: string,
-  secretKey: string,
-  expiresInSeconds: number,
-  developerKeyAccess?: KeyTypes.DeveloperKeyAccess,
-): string {
+export default function generateJWT({
+  accessKey,
+  secretKey,
+  expiresInSeconds,
+  developerKeyAccess,
+  username,
+}: {
+  accessKey: string
+  secretKey: string
+  expiresInSeconds: number
+  developerKeyAccess?: KeyTypes.DeveloperKeyAccess
+  username?: string
+}): string {
   const developerKeyJWTPayload: KeyTypes.DeveloperKeyJWTPayload = {
     'oneblink:access': developerKeyAccess,
   }
@@ -14,6 +21,7 @@ export default function generateJWT(
     {
       ...developerKeyJWTPayload,
       iss: accessKey,
+      username,
     },
     secretKey,
     {
