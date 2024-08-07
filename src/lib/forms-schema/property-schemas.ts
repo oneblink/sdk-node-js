@@ -23,6 +23,7 @@ export const meta = Joi.string().custom((value) => {
 export const baseSchemas = {
   id,
   meta,
+  isHidden: Joi.boolean(),
 }
 
 export const hint = htmlString
