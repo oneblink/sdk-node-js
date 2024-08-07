@@ -50,64 +50,6 @@ function validateFormEventData(
   }
 }
 
-function validateReferenceDate({
-  element,
-  referenceType,
-  elements,
-  propertyName,
-}: {
-  element: FormTypes.DateElement | FormTypes.DateTimeElement
-  referenceType: 'toDateElementId' | 'fromDateElementId'
-  elements: FormTypes.FormElement[]
-  propertyName: string
-}) {
-  if (element[referenceType]) {
-    // Ensure element exists and is the same type
-    const referencedElement = elements.find(
-      (el) => el.id === element[referenceType],
-    )
-    if (!referencedElement) {
-      throw new Error(
-        `"${propertyName}.${referenceType}" (${element[referenceType]}) references a form element that does not exist in the scope of this element`,
-      )
-    }
-    if (referencedElement.type !== element.type) {
-      throw new Error(
-        `"${propertyName}.${referenceType}" (${element[referenceType]}) references a form element type (${referencedElement.type}) that does not match it's type (${element.type})`,
-      )
-    }
-  }
-}
-
-function validateLocationReferenceElement({
-  formattedAddressElementId,
-  elements,
-  propertyName,
-}: {
-  formattedAddressElementId: string | undefined
-  elements: FormTypes.FormElement[]
-  propertyName: string
-}) {
-  // Ensure element exists and is a valid type
-  const referencedElement = elements.find(
-    (el) => el.id === formattedAddressElementId,
-  )
-  if (!referencedElement) {
-    throw new Error(
-      `"${propertyName}.formattedAddressElementId" (${formattedAddressElementId}) references a form element that does not exist in the scope of this element`,
-    )
-  }
-  const validReferenceTypes: FormTypes.FormElement['type'][] = [
-    'text',
-    'geoscapeAddress',
-  ]
-  if (!validReferenceTypes.includes(referencedElement.type)) {
-    throw new Error(
-      `"${propertyName}.formattedAddressElementId" (${formattedAddressElementId}) references a form element with an unsupported type (${referencedElement.type}). Supported types: ${validReferenceTypes.join(', ')}`,
-    )
-  }
-}
-
 function validateFormElementReferences({
   availableFormElements,
   formElements,
@@ -117,7 +59,6 @@ function validateFormElementReferences({
   formElements: FormTypes.FormElement[]
   propertyName: string
 }) {
-  const formElementsInScope = stripLayoutFormElements(availableFormElements)
   // Element References
   let formElementIndex = -1
   for (const element of formElements) {
@@ -133,26 +74,6 @@ function validateFormElementReferences({
         })
         break
       }
-      case 'date':
-      case 'datetime': {
-        if (element.toDateElementId) {
-          validateReferenceDate({
-            element,
-            referenceType: 'toDateElementId',
-            elements: formElementsInScope,
-            propertyName: currentPropertyName,
-          })
-        }
-        if (element.fromDateElementId) {
-          validateReferenceDate({
-            element,
-            referenceType: 'fromDateElementId',
-            elements: formElementsInScope,
-            propertyName: currentPropertyName,
-          })
-        }
-        break
-      }
       case 'repeatableSet': {
         const nextPropertyName = `${currentPropertyName}.elements`
         validateElementNamesAcrossNestedElements(
@@ -165,16 +86,6 @@ function validateFormElementReferences({
           propertyName: nextPropertyName,
         })
         break
-      }
-      case 'location': {
-        if (element.reverseGeocoding) {
-          validateLocationReferenceElement({
-            formattedAddressElementId:
-              element.reverseGeocoding.formattedAddressElementId,
-            elements: formElementsInScope,
-            propertyName: currentPropertyName,
-          })
-        }
       }
     }
   }
