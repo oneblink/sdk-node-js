@@ -12,6 +12,7 @@ function validateFormThrowError(data: unknown) {
 
 describe('Valid Form Schema with Pages', () => {
   const result = formSchema.validate({
+    slug: 'inspec',
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -451,6 +452,7 @@ describe('Valid Form Schema with Pages', () => {
 
 describe('Valid Form Schema', () => {
   const result = formSchema.validate({
+    slug: 'inspec',
     name: 'Inspection',
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
@@ -7902,6 +7904,39 @@ describe('external id generation and personalisation', () => {
       }),
     ).toThrow(
       '"elements" contains an element with a "name" (text) property that is not unique',
+    )
+  })
+})
+
+describe('Slug', () => {
+  const form = {
+    name: 'string',
+    description: 'string',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: 'ORGANISATION_00000000001',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    isMultiPage: false,
+    isAuthenticated: true,
+    elements: [
+      {
+        id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+        type: 'text',
+        name: 'text',
+        label: 'text',
+      },
+    ],
+    tags: [],
+  }
+
+  test('should have appropriate error message when slug is invalid', () => {
+    const fn = () =>
+      validateFormThrowError({
+        ...form,
+        slug: 'this is not valid',
+      })
+    expect(fn).toThrow(
+      '"slug" with value "this is not valid" fails to match the required pattern: /^[a-z0-9-]+$/',
     )
   })
 })
