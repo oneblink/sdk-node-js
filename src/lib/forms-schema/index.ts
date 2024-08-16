@@ -573,6 +573,9 @@ const formSchema = Joi.object().keys({
   customCssClasses,
   pointAddressEnvironmentId: Joi.string(),
   allowGeoscapeAddresses: Joi.boolean(),
+  slug: Joi.string()
+    .max(60)
+    .regex(/^[a-z0-9-]+$/),
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
