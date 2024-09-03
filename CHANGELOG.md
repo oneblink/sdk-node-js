@@ -7,9 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.1.1] - 2024-09-03
+
 ### Added
 
 - `slug` to form
+
+### Dependencies
+
+- update [@aws-sdk/client-sesv2](https://www.npmjs.com/package/@aws-sdk/client-sesv2) to [3.637.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.637.0) (from [3.606.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.606.0))
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [7.1.0-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [7.0.0-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update [@oneblink/storage](https://www.npmjs.com/package/@oneblink/storage) to [2.1.1-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [2.1.0-beta.3](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
 
 ## [8.1.0] - 2024-08-13
 
