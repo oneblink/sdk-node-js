@@ -6,7 +6,6 @@ import {
   conditionallyShowPredicates,
   ConditionalPredicatesItemSchema,
   customCssClasses,
-  autocompleteAttributes,
 } from './property-schemas'
 export const postSubmissionActions: FormTypes.FormPostSubmissionAction[] = [
   'BACK',
@@ -572,7 +571,6 @@ const formSchema = Joi.object().keys({
   submissionTitle: Joi.string(),
   continueWithAutosave: Joi.boolean(),
   customCssClasses,
-  autocompleteAttributes,
   pointAddressEnvironmentId: Joi.string(),
   allowGeoscapeAddresses: Joi.boolean(),
   slug: Joi.string()

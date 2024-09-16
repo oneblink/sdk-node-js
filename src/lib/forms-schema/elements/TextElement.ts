@@ -12,6 +12,7 @@ import {
   regexSchemas,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 
 export const textElementType = 'text'
@@ -51,4 +52,5 @@ export default Joi.object({
   }),
   ...regexSchemas,
   customCssClasses,
+  autocompleteAttributes,
 })

@@ -12,6 +12,7 @@ import {
   regexSchemas,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 
 export const type = 'telephone'
@@ -30,4 +31,5 @@ export default Joi.object({
   defaultValue: Joi.string(),
   ...regexSchemas,
   customCssClasses,
+  autocompleteAttributes,
 })

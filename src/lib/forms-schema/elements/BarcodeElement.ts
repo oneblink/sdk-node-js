@@ -12,6 +12,7 @@ import {
   regexSchemas,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 
 export const type = 'barcodeScanner'
@@ -36,4 +37,5 @@ export default Joi.object({
   }),
   ...regexSchemas,
   customCssClasses,
+  autocompleteAttributes,
 })
