@@ -346,6 +346,4 @@ export const customCssClasses = Joi.array().items(
   Joi.string().regex(/^-?[_a-z]+[_a-z0-9-]*$/i),
 )
 
-export const autocompleteAttributes = Joi.array().items(
-  Joi.string().regex(/^-?[_a-z0-9-]*$/i),
-)
+export const autocompleteAttributes = Joi.array().items(Joi.string())
