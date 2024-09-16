@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `autocompleteAttributes` to form elements
+
 ## [8.1.1] - 2024-09-03
 
 ### Added
