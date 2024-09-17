@@ -15,6 +15,7 @@ import {
   defaultValueOptionsMultiple,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 
 export const type = 'select'
@@ -43,4 +44,5 @@ export default Joi.object({
     otherwise: Joi.any().strip(),
   }),
   customCssClasses,
+  autocompleteAttributes,
 })
