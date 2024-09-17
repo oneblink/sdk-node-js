@@ -11,6 +11,7 @@ import {
   optionsSchemas,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 
 export const type = 'freshdeskDependentField'
@@ -36,4 +37,5 @@ export default Joi.object({
   }),
   ...optionsSchemas,
   customCssClasses,
+  autocompleteAttributes,
 })

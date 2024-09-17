@@ -11,6 +11,7 @@ import {
   lookupSchemas,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 
 export const type = 'apiNSWLiquorLicence'
@@ -27,4 +28,5 @@ export default Joi.object({
   ...lookupSchemas,
   placeholderValue,
   customCssClasses,
+  autocompleteAttributes,
 })

@@ -13,6 +13,7 @@ import {
   defaultValueOptionsSingle,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 import { SEARCH_OPTION_TYPE } from '../common'
 
@@ -42,4 +43,5 @@ export default Joi.object({
   }),
   ...optionsSchemas,
   customCssClasses,
+  autocompleteAttributes,
 })

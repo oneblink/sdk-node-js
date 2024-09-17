@@ -13,6 +13,7 @@ import {
   defaultValueOptionsSingle,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 
 export const type = 'compliance'
@@ -31,4 +32,5 @@ export default Joi.object({
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   customCssClasses,
+  autocompleteAttributes,
 })
