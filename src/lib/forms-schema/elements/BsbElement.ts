@@ -10,6 +10,7 @@ import {
   lookupSchemas,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 
 export const type = 'bsb'
@@ -26,4 +27,5 @@ export default Joi.object({
   ...lookupSchemas,
   defaultValue: Joi.string().regex(/\d{3}-\d{3}/),
   customCssClasses,
+  autocompleteAttributes,
 })

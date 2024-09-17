@@ -14,6 +14,7 @@ import {
   defaultValueOptionsMultiple,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 
 export const type = 'checkboxes'
@@ -33,5 +34,6 @@ export default Joi.object({
   ...optionsSchemas,
   canToggleAll,
   customCssClasses,
+  autocompleteAttributes,
   requiredAll: Joi.bool(),
 })

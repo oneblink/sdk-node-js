@@ -11,6 +11,7 @@ import {
   placeholderValue,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 
 const nowSchema = Joi.valid('NOW')
@@ -98,4 +99,5 @@ export default Joi.object({
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   customCssClasses,
+  autocompleteAttributes,
 })

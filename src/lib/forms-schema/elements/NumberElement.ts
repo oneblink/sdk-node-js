@@ -13,6 +13,7 @@ import {
   regexSchemas,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 
 export const type = 'number'
@@ -104,4 +105,5 @@ export default Joi.object({
     }),
   ...regexSchemas,
   customCssClasses,
+  autocompleteAttributes,
 })

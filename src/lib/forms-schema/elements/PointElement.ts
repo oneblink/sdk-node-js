@@ -11,6 +11,7 @@ import {
   lookupSchemas,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 
 export const type = 'pointAddress'
@@ -41,4 +42,5 @@ export default Joi.object({
   ),
   addressTypeFilter: Joi.array().items(Joi.string()),
   customCssClasses,
+  autocompleteAttributes,
 })

@@ -11,6 +11,7 @@ import {
   lookupSchemas,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 
 export const type = 'geoscapeAddress'
@@ -30,4 +31,5 @@ export default Joi.object({
     Joi.string().valid('NSW', 'QLD', 'VIC', 'ACT', 'TAS', 'SA', 'NT', 'WA'),
   ),
   customCssClasses,
+  autocompleteAttributes,
 })

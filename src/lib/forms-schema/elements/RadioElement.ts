@@ -13,6 +13,7 @@ import {
   defaultValueOptionsSingle,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 
 export const type = 'radio'
@@ -31,4 +32,5 @@ export default Joi.object({
   buttons,
   ...optionsSchemas,
   customCssClasses,
+  autocompleteAttributes,
 })

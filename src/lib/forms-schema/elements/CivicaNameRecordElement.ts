@@ -9,6 +9,7 @@ import {
   conditionallyShowSchemas,
   customCssClasses,
   hintPosition,
+  autocompleteAttributes,
 } from '../property-schemas'
 
 export const type = 'civicaNameRecord'
@@ -59,4 +60,5 @@ export default Joi.object({
   address2Label: textSchema,
   postcodeLabel: textSchema,
   customCssClasses,
+  autocompleteAttributes,
 })
