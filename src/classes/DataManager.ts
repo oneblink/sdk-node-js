@@ -24,7 +24,7 @@ export default class DataManager extends OneBlinkAPI {
   /**
    * **Submission Data Key Supported**
    *
-   * Key must be assigned to the form that is being requested.
+   * Key must be assigned to the form that submission data is being requested for.
    *
    * **Minimum Role Permission**
    *
