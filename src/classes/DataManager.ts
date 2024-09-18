@@ -22,6 +22,10 @@ export default class DataManager extends OneBlinkAPI {
   }
 
   /**
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that is being requested.
+   *
    * **Minimum Role Permission**
    *
    * Submission Data: _Read Only_
@@ -42,6 +46,10 @@ export default class DataManager extends OneBlinkAPI {
   }
 
   /**
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that is being requested.
+   *
    * **Minimum Role Permission**
    *
    * Submission Data: _Read Only_

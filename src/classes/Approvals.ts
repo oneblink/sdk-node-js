@@ -22,6 +22,11 @@ export default class Approvals extends OneBlinkAPI {
   }
 
   /**
+   * **Submission Data Key Supported**
+   *
+   * Results will be restricted to approvals associated with forms that have
+   * been assigned to the Key.
+   *
    * **Minimum Role Permission**
    *
    * Submission Data: _Read Only_
@@ -92,6 +97,10 @@ export default class Approvals extends OneBlinkAPI {
   }
 
   /**
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that was submitted for approval.
+   *
    * **Minimum Role Permission**
    *
    * Submission Data: _Read Only_
@@ -116,6 +125,10 @@ export default class Approvals extends OneBlinkAPI {
   }
 
   /**
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that was submitted for approval.
+   *
    * **Minimum Role Permission**
    *
    * Submission Data: _Read Only_

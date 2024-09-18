@@ -22,6 +22,10 @@ export default class PDF extends OneBlinkAPI {
   }
 
   /**
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that was submitted.
+   *
    * **Minimum Role Permission**
    *
    * Submission Data: _Read Only_

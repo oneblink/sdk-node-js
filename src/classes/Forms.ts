@@ -227,6 +227,10 @@ export default class Forms extends OneBlinkAPI {
     }
   }
   /**
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that was submitted.
+   *
    * **Minimum Role Permission**
    *
    * Submission Data: _Read Only_
@@ -279,6 +283,10 @@ export default class Forms extends OneBlinkAPI {
     )
   }
   /**
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that was submitted.
+   *
    * **Minimum Role Permission**
    *
    * Submission Data: _Read Only_
@@ -351,6 +359,10 @@ export default class Forms extends OneBlinkAPI {
     return response
   }
   /**
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that was submitted.
+   *
    * **Minimum Role Permission**
    *
    * Submission Data: _Read Only_
@@ -377,6 +389,10 @@ export default class Forms extends OneBlinkAPI {
     )
   }
   /**
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that the attachment was uploaded for.
+   *
    * **Minimum Role Permission**
    *
    * Submission Data: _Read Only_
@@ -417,6 +433,10 @@ export default class Forms extends OneBlinkAPI {
     return response.body
   }
   /**
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that the attachment was uploaded for.
+   *
    * **Minimum Role Permission**
    *
    * Submission Data: _Read Only_
@@ -544,6 +564,10 @@ export default class Forms extends OneBlinkAPI {
    * require a URL that needs to last longer, consider using the
    * `generateWorkflowAttachmentLink()` function.
    *
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that the attachment was uploaded for.
+   *
    * **Minimum Role Permission**
    *
    * Submission Data: _Read Only_
@@ -601,6 +625,10 @@ export default class Forms extends OneBlinkAPI {
    * the link is configured for the account and cannot be changed for generated
    * links. If you require a URL that should be short lived, consider using the
    * `generateSubmissionAttachmentUrl()` function.
+   *
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that the attachment was uploaded for.
    *
    * **Minimum Role Permission**
    *
@@ -732,6 +760,10 @@ export default class Forms extends OneBlinkAPI {
    * Search for details on submissions that match the search parameters. Then
    * use the information to fetch the actual submission data, if it is still
    * available
+   *
+   * **Submission Data Key Supported**
+   *
+   * Results will be restricted to forms that have been assigned to the Key.
    *
    * **Minimum Role Permission**
    *
@@ -1012,6 +1044,10 @@ export default class Forms extends OneBlinkAPI {
   }
 
   /**
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that was submitted.
+   *
    * **Minimum Role Permission**
    *
    * Submission Data: _Read Only_
