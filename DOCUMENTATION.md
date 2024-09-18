@@ -57,7 +57,7 @@ The majority of actions in this SDK require that your developer key has particul
 
 ### Developer Key & Role
 
-Actions that require a developer key with a minimum role permission will have the following in the function definition:
+Actions that allow a developer key with a minimum role permission will have the following in the function definition:
 
 **Minimum Role Permission**
 
@@ -75,3 +75,7 @@ In the case of any actions relating to forms, the assigned app must be associate
 - For _Tiles_ type apps, the form can be in a _Container_ menu item or added directly to the menu via a _Form_ menu item.
 - For _Tiles_ or _Forms List_ type apps, the form can be assigned to an action in a _Scheduled task_.
 - For _Approvals_ type apps, the form can be an _Approval form_.
+
+**Submission Data Key Supported**
+
+In the case of any actions relating to retrieving form submission data, a Submission Data developer key can be used so long as the developer key has been assigned to the form that is being actioned.
