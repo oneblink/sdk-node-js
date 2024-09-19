@@ -4,7 +4,6 @@ import FormsApps from './FormsApps'
 import Jobs from './Jobs'
 import Keys from './Keys'
 import Organisations from './Organisations'
-import TeamMembers from './TeamMembers'
 import PDF from './PDF'
 import Approvals from './Approvals'
 import FormsAppEnvironments from './FormsAppEnvironments'
@@ -21,7 +20,6 @@ export {
   Jobs,
   Keys,
   Organisations,
-  TeamMembers,
   PDF,
   Approvals,
   FormsAppEnvironments,
