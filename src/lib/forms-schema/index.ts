@@ -575,7 +575,7 @@ const formSchema = Joi.object().keys({
   allowGeoscapeAddresses: Joi.boolean(),
   slug: Joi.string()
     .max(60)
-    .regex(/^[a-z0-9-]+$/),
+    .regex(/^[a-z]+[a-z\d-]*$/),
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
