@@ -7936,7 +7936,7 @@ describe('Slug', () => {
         slug: 'this is not valid',
       })
     expect(fn).toThrow(
-      '"slug" with value "this is not valid" fails to match the required pattern: /^[a-z]+[a-z\\d-]*$/',
+      '"slug" with value "this is not valid" fails to match the required pattern: /^[a-z][a-z\\d-]*$/',
     )
   })
 })
