@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.0.1] - 2024-09-30
+
 ### Fixed
 
 - form slug validation allowing a number as the first character
