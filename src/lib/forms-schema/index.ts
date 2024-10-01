@@ -576,6 +576,13 @@ const formSchema = Joi.object().keys({
   slug: Joi.string()
     .max(60)
     .regex(/^[a-z][a-z\d-]*$/),
+  enableSubmission: Joi.object({
+    requiresAllConditionalPredicates: Joi.boolean().default(false),
+    conditionalPredicates: Joi.array()
+      .min(1)
+      .items(ConditionalPredicatesItemSchema)
+      .allow(null),
+  }),
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
