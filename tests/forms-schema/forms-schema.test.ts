@@ -423,6 +423,16 @@ describe('Valid Form Schema with Pages', () => {
         ],
       },
     ],
+    enableSubmission: {
+      conditionalPredicates: [
+        {
+          elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18ba',
+          type: 'NUMERIC',
+          operator: '<',
+          value: 5,
+        },
+      ],
+    },
   })
 
   test('should not return an error', () => {
