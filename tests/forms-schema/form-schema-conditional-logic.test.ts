@@ -1382,4 +1382,34 @@ describe('Conditional Predicates', () => {
       '"elements[1].conditionallyShowPredicates[0].definition.value" must be a boolean. "elements[2].conditionallyShowPredicates[0].definition.value" must be one of [NSW, VIC, QLD, SA, WA, TAS, ACT, NT, OT]. "elements[2].conditionallyShowPredicates[0].definition.value" must be a string',
     )
   })
+
+  test('Should throw error if `enableSubmission` is provided without the `conditionalPredicates` property', () => {
+    const result = formSchema.validate(
+      {
+        formsAppEnvironmentId: 1,
+        name: 'Inspection',
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        submissionEvents: [],
+        paymentEvents: [],
+        enableSubmission: {},
+        elements: [
+          {
+            id: '31042cfe-65e0-4a85-826b-ae6a2e48da10',
+            type: 'number',
+            name: 'payment_element',
+            label: 'Payment element',
+          },
+        ],
+      },
+
+      {
+        abortEarly: false,
+      },
+    )
+    expect(result.error?.message).toBe(
+      '"enableSubmission.conditionalPredicates" is required',
+    )
+  })
 })
