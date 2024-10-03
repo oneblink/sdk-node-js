@@ -580,7 +580,8 @@ const formSchema = Joi.object().keys({
     requiresAllConditionalPredicates: Joi.boolean().default(false),
     conditionalPredicates: Joi.array()
       .min(1)
-      .items(ConditionalPredicatesItemSchema),
+      .items(ConditionalPredicatesItemSchema)
+      .required(),
   }),
 })
 
