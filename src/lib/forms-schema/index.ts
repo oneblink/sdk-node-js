@@ -420,7 +420,9 @@ const externalIdGenerationSchema = Joi.object({
         .min(1)
         .items(
           Joi.object({
-            type: Joi.string().required().valid('text', 'date', 'random'),
+            type: Joi.string()
+              .required()
+              .valid('text', 'date', 'random', 'auto_increment'),
             value: Joi.when('type', {
               is: 'text',
               then: Joi.string().required(),
@@ -455,6 +457,7 @@ const externalIdGenerationSchema = Joi.object({
             }),
           }),
         ),
+      startingAutoIncrement: Joi.number(),
     }),
   }),
 })
