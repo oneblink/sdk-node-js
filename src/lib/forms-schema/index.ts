@@ -456,7 +456,19 @@ const externalIdGenerationSchema = Joi.object({
               otherwise: Joi.any().strip(),
             }),
           }),
-        ),
+        )
+        .unique(
+          (a, b) =>
+            a.type &&
+            b.type &&
+            a.type === 'sequentialNumber' &&
+            b.type === 'sequentialNumber',
+        )
+        .prefs({
+          messages: {
+            'array.unique': `"externalIdGenerationOnSubmit.configuration.receiptComponents" can only contain one "sequentialNumber" type.`,
+          },
+        }),
       startingSequentialNumber: Joi.number(),
     }),
   }),

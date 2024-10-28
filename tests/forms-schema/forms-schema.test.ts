@@ -7787,6 +7787,60 @@ describe('external id generation and personalisation', () => {
     ).toThrow('"personalisation.type" must be one of [CALLBACK, ONEBLINK_API]')
   })
 
+  test('should throw error when attempting to save a "RECEIPT_ID" with 2 "sequentialNumber" components', () => {
+    const configuration = {
+      receiptComponents: [
+        {
+          type: 'sequentialNumber',
+        },
+        {
+          type: 'text',
+          value: 'value',
+        },
+        {
+          type: 'sequentialNumber',
+        },
+      ],
+    }
+
+    expect(() =>
+      validateFormThrowError({
+        ...form,
+        externalIdGenerationOnSubmit: {
+          type: 'RECEIPT_ID',
+          configuration,
+        },
+      }),
+    ).toThrow(
+      '"externalIdGenerationOnSubmit.configuration.receiptComponents" can only contain one "sequentialNumber" type.',
+    )
+  })
+
+  test('should pass successfully for a "RECEIPT_ID" with a "sequentialNumber" component', () => {
+    const configuration = {
+      receiptComponents: [
+        {
+          type: 'text',
+          value: 'value',
+        },
+        {
+          type: 'sequentialNumber',
+        },
+      ],
+    }
+    const validatedForm = validateFormThrowError({
+      ...form,
+      externalIdGenerationOnSubmit: {
+        type: 'RECEIPT_ID',
+        configuration,
+      },
+    })
+    expect(validatedForm.externalIdGenerationOnSubmit?.type).toBe('RECEIPT_ID')
+    expect(validatedForm.externalIdGenerationOnSubmit?.configuration).toEqual(
+      configuration,
+    )
+  })
+
   test('should save "ONEBLINK_API" for personalisation', () => {
     const configuration = {
       apiId: 'customer-project.api.oneblink.io',
