@@ -7812,7 +7812,32 @@ describe('external id generation and personalisation', () => {
         },
       }),
     ).toThrow(
-      'Receipt Components can only contain one "Sequential Numbers" type.',
+      '"externalIdGenerationOnSubmit.configuration.receiptComponents" can only contain one "sequentialNumber" type.',
+    )
+  })
+
+  test('should pass successfully for a "RECEIPT_ID" with a "sequentialNumber" component', () => {
+    const configuration = {
+      receiptComponents: [
+        {
+          type: 'text',
+          value: 'value',
+        },
+        {
+          type: 'sequentialNumber',
+        },
+      ],
+    }
+    const validatedForm = validateFormThrowError({
+      ...form,
+      externalIdGenerationOnSubmit: {
+        type: 'RECEIPT_ID',
+        configuration,
+      },
+    })
+    expect(validatedForm.externalIdGenerationOnSubmit?.type).toBe('RECEIPT_ID')
+    expect(validatedForm.externalIdGenerationOnSubmit?.configuration).toEqual(
+      configuration,
     )
   })
 
