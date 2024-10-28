@@ -7787,6 +7787,35 @@ describe('external id generation and personalisation', () => {
     ).toThrow('"personalisation.type" must be one of [CALLBACK, ONEBLINK_API]')
   })
 
+  test('should throw error when attempting to save a "RECEIPT_ID" with 2 "sequentialNumber" components', () => {
+    const configuration = {
+      receiptComponents: [
+        {
+          type: 'sequentialNumber',
+        },
+        {
+          type: 'text',
+          value: 'value',
+        },
+        {
+          type: 'sequentialNumber',
+        },
+      ],
+    }
+
+    expect(() =>
+      validateFormThrowError({
+        ...form,
+        externalIdGenerationOnSubmit: {
+          type: 'RECEIPT_ID',
+          configuration,
+        },
+      }),
+    ).toThrow(
+      'Receipt Components can only contain one "Sequential Numbers" type.',
+    )
+  })
+
   test('should save "ONEBLINK_API" for personalisation', () => {
     const configuration = {
       apiId: 'customer-project.api.oneblink.io',
