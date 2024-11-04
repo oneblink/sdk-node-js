@@ -121,7 +121,7 @@ export default class FormsApps extends OneBlinkAPI {
    * @returns
    */
   async createFormsApp(
-    formsApp: Omit<FormsAppsTypes.NewFormsApp, 'styles'>,
+    formsApp: FormsAppsTypes.NewFormsApp,
   ): Promise<FormsAppsTypes.FormsApp> {
     return super.postRequest(basePath, formsApp)
   }
@@ -177,36 +177,6 @@ export default class FormsApps extends OneBlinkAPI {
     }
 
     return super.deleteRequest(`${basePath}/${formsAppId}`)
-  }
-
-  /**
-   * Update styles for Forms App
-   *
-   * **Minimum Role Permission**
-   *
-   * App Customisation: _Manager_
-   *
-   * @example
-   *   formsAppsSDK.updateStyles(formsAppId, styles).then(() => {
-   *     // Styles have been updated...
-   *   })
-   *
-   * @param formsAppId The exact identifier of the Forms App you wish to update
-   *   the styles
-   * @param styles Forms App styles properties
-   * @returns
-   */
-  async updateStyles(
-    formsAppId: number,
-    styles: FormsAppsTypes.BaseFormsAppStyles | FormsAppsTypes.FormsListStyles,
-  ): Promise<FormsAppsTypes.FormsListStyles> {
-    if (typeof formsAppId !== 'number') {
-      return Promise.reject(
-        new TypeError('Must supply "formsAppId" as a number'),
-      )
-    }
-
-    return super.putRequest(`${basePath}/${formsAppId}/styles`, styles)
   }
 
   /**

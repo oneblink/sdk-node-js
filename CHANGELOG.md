@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- **[BREAKING]** `FormsApps.updateStyles()` The `styles` property can be set using `FormsApps.createFormsApp()` and updated using `FormsApps.updateFormsApp()`
+
 ## [9.2.0] - 2024-10-29
 
 ### Added
