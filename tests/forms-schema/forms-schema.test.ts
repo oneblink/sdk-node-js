@@ -3880,10 +3880,10 @@ describe('SCHEDULING submission event', () => {
         submissionEvents: [],
         schedulingEvents: [
           {
-            type: 'SCHEDULING',
+            type: 'NYLAS',
             configuration: {
-              nylasAccountId: 'string',
-              nylasSchedulingPageId: 1,
+              nylasGrantId: 'string',
+              nylasConfigurationId: 'one',
               nameElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
               emailElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a10',
             },
@@ -3911,10 +3911,10 @@ describe('SCHEDULING submission event', () => {
         tags: [],
         schedulingEvents: [
           {
-            type: 'SCHEDULING',
+            type: 'NYLAS',
             configuration: {
-              nylasAccountId: 'string',
-              nylasSchedulingPageId: 1,
+              nylasGrantId: 'string',
+              nylasConfigurationId: 'one',
               nameElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
             },
           },
@@ -3946,10 +3946,10 @@ describe('SCHEDULING submission event', () => {
         tags: [],
         schedulingEvents: [
           {
-            type: 'SCHEDULING',
+            type: 'NYLAS',
             configuration: {
-              nylasAccountId: 'string',
-              nylasSchedulingPageId: 1,
+              nylasGrantId: 'string',
+              nylasConfigurationId: 'one',
               nameElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
             },
           },
@@ -3974,10 +3974,10 @@ describe('SCHEDULING submission event', () => {
         tags: [],
         schedulingEvents: [
           {
-            type: 'SCHEDULING',
+            type: 'NYLAS',
             configuration: {
-              nylasAccountId: 'string',
-              nylasSchedulingPageId: 1,
+              nylasGrantId: 'string',
+              nylasConfigurationId: 'one',
               emailElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
             },
           },
@@ -4009,10 +4009,10 @@ describe('SCHEDULING submission event', () => {
         tags: [],
         schedulingEvents: [
           {
-            type: 'SCHEDULING',
+            type: 'NYLAS',
             configuration: {
-              nylasAccountId: 'string',
-              nylasSchedulingPageId: 1,
+              nylasGrantId: 'string',
+              nylasConfigurationId: 'one',
               emailElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
             },
           },

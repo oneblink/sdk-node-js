@@ -61,7 +61,8 @@ export const validateFormEvent = ({
       }
       break
     }
-    case 'SCHEDULING': {
+    case 'SCHEDULING':
+    case 'NYLAS': {
       const nameElementId = formEvent.configuration.nameElementId
       if (nameElementId) {
         const formElement = rootFormElements.find(

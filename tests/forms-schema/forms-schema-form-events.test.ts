@@ -13,7 +13,7 @@ function validateFormThrowError(data: unknown) {
 // SCHEDULING Events
 describe('Scheduling events should throw errors when not passed to "schedulingEvents" property', () => {
   const schedulingEvent = {
-    type: 'SCHEDULING',
+    type: 'NYLAS',
     configuration: {
       nylasAccountId: 'string',
       nylasSchedulingPageId: 1,
@@ -115,7 +115,7 @@ describe('Payment events should throw errors when not passed to "paymentEvents" 
         ...form,
         schedulingEvents: [paymentEvent],
       }),
-    ).toThrow('"schedulingEvents[0].type" must be [SCHEDULING]')
+    ).toThrow('"schedulingEvents[0].type" must be one of [SCHEDULING, NYLAS]')
   })
 })
 
@@ -254,7 +254,7 @@ describe('Submission events should throw errors when not passed to "paymentEvent
         ...form,
         schedulingEvents: [submissionEvent],
       }),
-    ).toThrow('"schedulingEvents[0].type" must be [SCHEDULING]')
+    ).toThrow('"schedulingEvents[0].type" must be one of [SCHEDULING, NYLAS]')
   })
   test('Submission form event should error when being passed to "paymentEvents"', () => {
     expect(() =>
@@ -284,7 +284,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
     },
   }
   const schedulingEvent = {
-    type: 'SCHEDULING',
+    type: 'NYLAS',
     configuration: {
       nylasAccountId: 'string',
       nylasSchedulingPageId: 1,
