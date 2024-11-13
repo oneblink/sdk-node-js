@@ -498,6 +498,12 @@ const cannedResponsesSchema = Joi.array()
 
 const approvalStepCommonProps = {
   clarificationRequestEmailTemplateId: Joi.number(),
+}
+
+const approvalStepNodeProps = {
+  label: Joi.string().required(),
+  group: Joi.string().required(),
+  approvalFormId: Joi.number(),
   isConditional: Joi.boolean().default(false),
   requiresAllConditionalPredicates: Joi.boolean().default(false),
   conditionalPredicates: Joi.when('isConditional', {
@@ -537,22 +543,14 @@ const formSchema = Joi.object().keys({
     .items(
       Joi.alternatives([
         Joi.object({
-          label: Joi.string().required(),
           type: Joi.string().valid('STANDARD'),
-          group: Joi.string().required(),
-          approvalFormId: Joi.number(),
           ...approvalStepCommonProps,
+          ...approvalStepNodeProps,
         }).required(),
         Joi.object({
           type: Joi.string().valid('CONCURRENT').required(),
           nodes: Joi.array()
-            .items(
-              Joi.object({
-                label: Joi.string().required(),
-                group: Joi.string().required(),
-                approvalFormId: Joi.number(),
-              }).required(),
-            )
+            .items(Joi.object(approvalStepNodeProps).required())
             .min(1)
             .required(),
           ...approvalStepCommonProps,

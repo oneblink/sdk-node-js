@@ -8050,17 +8050,19 @@ describe('Approval Step Nodes', () => {
             label: 'Label 3',
             group: 'group 1',
             approvalFormId: 1,
+            conditionalPredicates: [],
+            isConditional: false,
+            requiresAllConditionalPredicates: false,
           },
           {
             label: 'Label 4',
             group: 'group 2',
             approvalFormId: 2,
+            conditionalPredicates: [],
+            isConditional: false,
+            requiresAllConditionalPredicates: false,
           },
         ],
-
-        conditionalPredicates: [],
-        isConditional: false,
-        requiresAllConditionalPredicates: false,
       },
     ],
   }
