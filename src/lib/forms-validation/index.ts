@@ -272,6 +272,25 @@ function validateWithFormSchema(form?: unknown):
       }
     }
 
+    const labels: string[] = []
+    for (const step of validatedForm.approvalSteps ?? []) {
+      if (step.type === 'CONCURRENT') {
+        for (const node of step.nodes) {
+          if (labels.includes(node.label)) {
+            throw new Error(
+              `"approvalSteps" contains a CONCURRENT step with a "label" (${node.label}) property that is not unique`,
+            )
+          }
+        }
+      } else {
+        if (labels.includes(step.label)) {
+          throw new Error(
+            `"approvalSteps" contains a STANDARD step with a "label" (${step.label}) property that is not unique`,
+          )
+        }
+      }
+    }
+
     return {
       success: true,
       data: validatedForm,

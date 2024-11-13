@@ -8004,3 +8004,107 @@ describe('Slug', () => {
     )
   })
 })
+
+describe('Approval Step Nodes', () => {
+  const form = {
+    name: 'string',
+    description: 'string',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: 'ORGANISATION_00000000001',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    isMultiPage: false,
+    isAuthenticated: true,
+    elements: [
+      {
+        id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+        type: 'text',
+        name: 'text',
+        label: 'text',
+      },
+    ],
+    tags: [],
+    approvalSteps: [
+      //  Existing step format
+      {
+        group: 'group 1',
+        label: 'Label 1',
+        approvalFormId: 1,
+        conditionalPredicates: [],
+        isConditional: false,
+        requiresAllConditionalPredicates: false,
+      },
+      {
+        type: 'STANDARD',
+        group: 'group 1',
+        label: 'Label 2',
+        approvalFormId: 1,
+        conditionalPredicates: [],
+        isConditional: false,
+        requiresAllConditionalPredicates: false,
+      },
+      {
+        type: 'CONCURRENT',
+        nodes: [
+          {
+            label: 'Label 3',
+            group: 'group 1',
+            approvalFormId: 1,
+          },
+          {
+            label: 'Label 4',
+            group: 'group 2',
+            approvalFormId: 2,
+          },
+        ],
+
+        conditionalPredicates: [],
+        isConditional: false,
+        requiresAllConditionalPredicates: false,
+      },
+    ],
+  }
+
+  it('should not throw an error for correctly typed data', () => {
+    expect(() => {
+      validateFormThrowError(form)
+    }).not.toThrow()
+  })
+
+  it('should throw an error when trying to pass an invalid `type`', () => {
+    expect(() => {
+      validateFormThrowError({
+        ...form,
+        approvalSteps: [
+          {
+            type: '123',
+            group: 'group 1',
+            label: 'Label 2',
+            approvalFormId: 1,
+            conditionalPredicates: [],
+            isConditional: false,
+            requiresAllConditionalPredicates: false,
+          },
+        ],
+      })
+    }).toThrow('"approvalSteps[0]" does not match any of the allowed types')
+  })
+  it('should throw an error when trying to pass mismatching properties', () => {
+    expect(() => {
+      validateFormThrowError({
+        ...form,
+        approvalSteps: [
+          {
+            type: 'CONCURRENT',
+            group: 'group 1',
+            label: 'Label 2',
+            approvalFormId: 1,
+            conditionalPredicates: [],
+            isConditional: false,
+            requiresAllConditionalPredicates: false,
+          },
+        ],
+      })
+    }).toThrow('"approvalSteps[0]" does not match any of the allowed types')
+  })
+})

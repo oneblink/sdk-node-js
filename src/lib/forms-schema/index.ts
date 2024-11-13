@@ -496,6 +496,17 @@ const cannedResponsesSchema = Joi.array()
   )
   .unique('key')
 
+const approvalStepCommonProps = {
+  clarificationRequestEmailTemplateId: Joi.number(),
+  isConditional: Joi.boolean().default(false),
+  requiresAllConditionalPredicates: Joi.boolean().default(false),
+  conditionalPredicates: Joi.when('isConditional', {
+    is: true,
+    then: Joi.array().min(1).items(ConditionalPredicatesItemSchema).required(),
+    otherwise: Joi.any().strip(),
+  }),
+}
+
 const formSchema = Joi.object().keys({
   formsAppEnvironmentId: Joi.number().required(),
   name: Joi.string().required(),
@@ -523,26 +534,30 @@ const formSchema = Joi.object().keys({
   approvalEvents: Joi.array().items(WorkflowEventSchema),
   approvalSteps: Joi.array()
     .min(1)
-    .unique('label')
     .items(
-      Joi.object()
-        .required()
-        .keys({
+      Joi.alternatives([
+        Joi.object({
           label: Joi.string().required(),
+          type: Joi.string().valid('STANDARD'),
           group: Joi.string().required(),
-          isConditional: Joi.boolean().default(false),
-          requiresAllConditionalPredicates: Joi.boolean().default(false),
-          conditionalPredicates: Joi.when('isConditional', {
-            is: true,
-            then: Joi.array()
-              .min(1)
-              .items(ConditionalPredicatesItemSchema)
-              .required(),
-            otherwise: Joi.any().strip(),
-          }),
           approvalFormId: Joi.number(),
-          clarificationRequestEmailTemplateId: Joi.number(),
-        }),
+          ...approvalStepCommonProps,
+        }).required(),
+        Joi.object({
+          type: Joi.string().valid('CONCURRENT').required(),
+          nodes: Joi.array()
+            .items(
+              Joi.object({
+                label: Joi.string().required(),
+                group: Joi.string().required(),
+                approvalFormId: Joi.number(),
+              }).required(),
+            )
+            .min(1)
+            .required(),
+          ...approvalStepCommonProps,
+        }).required(),
+      ]),
     ),
   approvalConfiguration: Joi.object({
     defaultNotificationEmailElementId: Joi.string().guid(),
