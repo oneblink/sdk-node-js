@@ -8109,4 +8109,66 @@ describe('Approval Step Nodes', () => {
       })
     }).toThrow('"approvalSteps[0]" does not match any of the allowed types')
   })
+  it('should throw an error when trying to pass duplicate labels (concurrent)', () => {
+    expect(() => {
+      validateFormThrowError({
+        ...form,
+        approvalSteps: [
+          //  Existing step format
+          {
+            group: 'group 1',
+            label: 'Label 1',
+            approvalFormId: 1,
+            conditionalPredicates: [],
+            isConditional: false,
+            requiresAllConditionalPredicates: false,
+          },
+          {
+            type: 'CONCURRENT',
+            nodes: [
+              {
+                label: 'Label 1',
+                group: 'group 1',
+                approvalFormId: 1,
+                conditionalPredicates: [],
+                isConditional: false,
+                requiresAllConditionalPredicates: false,
+              },
+            ],
+          },
+        ],
+      })
+    }).toThrow(
+      '"approvalSteps" contains a CONCURRENT step with a "label" (Label 1) property that is not unique',
+    )
+  })
+  it('should throw an error when trying to pass duplicate labels (standard)', () => {
+    expect(() => {
+      validateFormThrowError({
+        ...form,
+        approvalSteps: [
+          //  Existing step format
+          {
+            group: 'group 1',
+            label: 'Label 1',
+            approvalFormId: 1,
+            conditionalPredicates: [],
+            isConditional: false,
+            requiresAllConditionalPredicates: false,
+          },
+          {
+            type: 'STANDARD',
+            group: 'group 1',
+            label: 'Label 1',
+            approvalFormId: 1,
+            conditionalPredicates: [],
+            isConditional: false,
+            requiresAllConditionalPredicates: false,
+          },
+        ],
+      })
+    }).toThrow(
+      '"approvalSteps" contains a STANDARD step with a "label" (Label 1) property that is not unique',
+    )
+  })
 })

@@ -281,6 +281,7 @@ function validateWithFormSchema(form?: unknown):
               `"approvalSteps" contains a CONCURRENT step with a "label" (${node.label}) property that is not unique`,
             )
           }
+          labels.push(node.label)
         }
       } else {
         if (labels.includes(step.label)) {
@@ -288,6 +289,7 @@ function validateWithFormSchema(form?: unknown):
             `"approvalSteps" contains a STANDARD step with a "label" (${step.label}) property that is not unique`,
           )
         }
+        labels.push(step.label)
       }
     }
 
