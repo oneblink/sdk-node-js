@@ -90,6 +90,7 @@ const options = Joi.when('optionsType', {
           }),
         ),
         displayAlways: Joi.boolean().default(false),
+        imageUrl: Joi.string().uri(),
       }),
     )
     .required(),
