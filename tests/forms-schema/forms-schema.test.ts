@@ -433,6 +433,7 @@ describe('Valid Form Schema with Pages', () => {
         },
       ],
     },
+    disableAutosave: true,
   })
 
   test('should not return an error', () => {

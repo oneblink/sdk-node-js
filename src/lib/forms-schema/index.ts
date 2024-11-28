@@ -622,6 +622,7 @@ const formSchema = Joi.object().keys({
       .items(ConditionalPredicatesItemSchema)
       .required(),
   }),
+  disableAutosave: Joi.boolean(),
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
