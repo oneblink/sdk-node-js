@@ -115,7 +115,7 @@ describe('Payment events should throw errors when not passed to "paymentEvents" 
         ...form,
         schedulingEvents: [paymentEvent],
       }),
-    ).toThrow('"schedulingEvents[0].type" must be one of [SCHEDULING, NYLAS]')
+    ).toThrow('"schedulingEvents[0].type" must be [NYLAS]')
   })
 })
 
@@ -254,7 +254,7 @@ describe('Submission events should throw errors when not passed to "paymentEvent
         ...form,
         schedulingEvents: [submissionEvent],
       }),
-    ).toThrow('"schedulingEvents[0].type" must be one of [SCHEDULING, NYLAS]')
+    ).toThrow('"schedulingEvents[0].type" must be [NYLAS]')
   })
   test('Submission form event should error when being passed to "paymentEvents"', () => {
     expect(() =>

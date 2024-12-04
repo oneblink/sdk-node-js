@@ -173,24 +173,13 @@ export const PaymentEventSchema = Joi.object({
   ...formEventBaseSchema,
 })
 export const schedulingEventTypes: SubmissionEventTypes.FormSchedulingEventType[] =
-  ['SCHEDULING', 'NYLAS']
+  ['NYLAS']
 export const SchedulingEventSchema = Joi.object({
   type: Joi.string()
     .required()
     .valid(...schedulingEventTypes),
   configuration: Joi.object()
     .required()
-    .when('type', {
-      is: 'SCHEDULING',
-      then: Joi.object().keys({
-        nylasAccountId: Joi.string().required(),
-        nylasSchedulingPageId: Joi.number().required(),
-        nameElementId: Joi.string().guid(),
-        emailElementId: Joi.string().guid(),
-        emailDescription: Joi.string(),
-        ...pdfSubmissionEventConfiguration,
-      }),
-    })
     .when('type', {
       is: 'NYLAS',
       then: Joi.object().keys({

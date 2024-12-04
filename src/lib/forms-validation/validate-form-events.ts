@@ -61,7 +61,6 @@ export const validateFormEvent = ({
       }
       break
     }
-    case 'SCHEDULING':
     case 'NYLAS': {
       const nameElementId = formEvent.configuration.nameElementId
       if (nameElementId) {
