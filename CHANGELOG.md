@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `styles` to `FormsAppEnvironment`
+
+### Added
+
 - `imageUrl` to options
 - `disableAutosave` to Form schema
 
