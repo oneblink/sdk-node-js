@@ -11,10 +11,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - legacy nylas
 
+## [10.2.0] - 2024-12-09
+
 ### Added
 
 - `imageUrl` to options
 - `disableAutosave` to Form schema
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [7.3.2-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [7.3.1-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update [@oneblink/storage](https://www.npmjs.com/package/@oneblink/storage) to [2.1.2-beta.3](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [2.1.1-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
 
 ## [10.1.0] - 2024-11-27
 
