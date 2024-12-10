@@ -161,10 +161,10 @@ export type FormSubmissionMetaResult = {
   /** The workflow events containing a status for each */
   formSubmissionWorkflowEvents?: SubmissionTypes.FormSubmissionWorkflowEvent[]
   /**
-   * The bookings made after the submission if the form had a scheduling vent
+   * The bookings made after the submission if the form had a nylas event
    * configured at the time of submission
    */
-  formSubmissionSchedulingBooking?: SchedulingTypes.SchedulingBooking
+  formSubmissionNylasBooking?: SchedulingTypes.NylasBooking
 }
 
 export { SendMailOptions }
