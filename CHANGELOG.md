@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.3.1] - 2025-01-12
+
 ### Added
 
 - `styles` to `FormsAppEnvironment`
+
+### Dependencies
+
+- update [@oneblink/storage](https://www.npmjs.com/package/@oneblink/storage) to [3.0.0-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [2.1.2-beta.3](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
 
 ## [10.3.0] - 2024-12-11
 
