@@ -612,6 +612,7 @@ const formSchema = Joi.object().keys({
       .required(),
   }),
   disableAutosave: Joi.boolean(),
+  isArchived: Joi.boolean(),
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
