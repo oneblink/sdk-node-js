@@ -44,7 +44,7 @@ const schema: Joi.ObjectSchema = Joi.object({
   addSetEntryLabel: Joi.string(),
   removeSetEntryLabel: Joi.string(),
   layout: Joi.string()
-    .valid(['SINGLE_ADD_BUTTON', 'MULTIPLE_ADD_BUTTONS'])
+    .valid('SINGLE_ADD_BUTTON', 'MULTIPLE_ADD_BUTTONS')
     .optional(),
   elements: Joi.array()
     .items(
