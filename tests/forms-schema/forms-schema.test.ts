@@ -1754,6 +1754,107 @@ test('should error if repeatableSet element names not unique', () => {
   ).toThrow('"elements[0].elements[1]" contains a duplicate value')
 })
 
+test('should error if repeatableSet layout type invalid', () => {
+  const { error } = formSchema.validate({
+    name: 'Inspection',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: '59cc888b8969af000fb50ddb',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    submissionEvents: [],
+    tags: [],
+    elements: [
+      {
+        id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+        name: 'repeatableSet',
+        type: 'repeatableSet',
+        label: 'repeatableSet',
+        layout: 'INVALID_LAYOUT',
+        elements: [
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+            name: 'What_was_the_time',
+            label: 'What was the time',
+            type: 'time',
+            required: false,
+            defaultValue: '1970-01-01T05:28:26.448Z',
+          },
+        ],
+      },
+    ],
+  })
+
+  expect(error?.details[0].message).toContain(
+    '"elements[0].layout" must be one of [SINGLE_ADD_BUTTON, MULTIPLE_ADD_BUTTONS]',
+  )
+})
+
+test('should succeed if layout SINGLE_ADD_BUTTON', () => {
+  const { error } = formSchema.validate({
+    name: 'Inspection',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: '59cc888b8969af000fb50ddb',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    submissionEvents: [],
+    tags: [],
+    elements: [
+      {
+        id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+        name: 'repeatableSet',
+        type: 'repeatableSet',
+        label: 'repeatableSet',
+        layout: 'SINGLE_ADD_BUTTON',
+        elements: [
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+            name: 'What_was_the_time',
+            label: 'What was the time',
+            type: 'time',
+            required: false,
+            defaultValue: '1970-01-01T05:28:26.448Z',
+          },
+        ],
+      },
+    ],
+  })
+
+  expect(error).toBeUndefined()
+})
+
+test('should succeed if layout MULTIPLE_ADD_BUTTONS', () => {
+  const { error } = formSchema.validate({
+    name: 'Inspection',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: '59cc888b8969af000fb50ddb',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    submissionEvents: [],
+    tags: [],
+    elements: [
+      {
+        id: '84375ac0-9a0e-11e8-8fc5-63e99eca0edb',
+        name: 'repeatableSet',
+        type: 'repeatableSet',
+        label: 'repeatableSet',
+        layout: 'MULTIPLE_ADD_BUTTONS',
+        elements: [
+          {
+            id: '2424f4ea-35a0-47ee-9c22-ef8e16cb700e',
+            name: 'What_was_the_time',
+            label: 'What was the time',
+            type: 'time',
+            required: false,
+            defaultValue: '1970-01-01T05:28:26.448Z',
+          },
+        ],
+      },
+    ],
+  })
+
+  expect(error).toBeUndefined()
+})
+
 describe('summary form elements', () => {
   test('should error if repeatableSet summary element references element that is not valid', () => {
     expect(() =>
