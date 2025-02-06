@@ -402,8 +402,19 @@ export const WorkflowEventSchema = Joi.object().keys({
     .when('type', {
       is: 'SHAREPOINT_CREATE_LIST_ITEM',
       then: Joi.object().keys({
-        sharepointSiteId: Joi.string().required(),
-        sharepointListId: Joi.string().required(),
+        integrationEntraApplicationId: Joi.string().required(),
+        sharepointSite: Joi.object()
+          .keys({
+            id: Joi.string().required(),
+            displayName: Joi.string().required(),
+          })
+          .required(),
+        sharepointList: Joi.object()
+          .keys({
+            id: Joi.string().required(),
+            displayName: Joi.string().required(),
+          })
+          .required(),
         mapping: Joi.array().items(
           Joi.object({
             sharepointColumnDefinitionName: Joi.string().required(),
