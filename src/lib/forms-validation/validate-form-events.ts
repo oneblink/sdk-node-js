@@ -194,9 +194,11 @@ export const validateFormEvent = ({
       })
       break
     }
+    case 'SHAREPOINT_CREATE_LIST_ITEM':
     case 'FRESHDESK_CREATE_TICKET': {
-      validateFreshdeskCreateTicketMappingElements({
-        formEvent,
+      validateFormWorkflowMappingElements({
+        mappings: formEvent.configuration
+          .mapping as SubmissionEventTypes.FormWorkflowEventElementMapping<undefined>[],
         validatedFormElements,
         propertyName,
       })
@@ -261,21 +263,19 @@ function validateEmailTemplateMappingElements({
   }
 }
 
-function validateFreshdeskCreateTicketMappingElements({
-  formEvent,
+function validateFormWorkflowMappingElements({
+  mappings,
   validatedFormElements,
   propertyName,
 }: {
-  formEvent: SubmissionEventTypes.FreshdeskCreateTicketSubmissionEvent
+  mappings: SubmissionEventTypes.FormWorkflowEventElementMapping<
+    Record<string, unknown>
+  >[]
   validatedFormElements: FormTypes.FormElement[]
   propertyName?: string
 }) {
-  for (
-    let mappingIndex = 0;
-    mappingIndex < formEvent.configuration.mapping.length;
-    mappingIndex++
-  ) {
-    const mapping = formEvent.configuration.mapping[mappingIndex]
+  for (let mappingIndex = 0; mappingIndex < mappings.length; mappingIndex++) {
+    const mapping = mappings[mappingIndex]
     if (
       mapping.type === 'FORM_ELEMENT' ||
       mapping.type === 'FORM_FORM_ELEMENT'

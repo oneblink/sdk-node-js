@@ -8,7 +8,6 @@ import {
   readOnly,
   conditionallyShowSchemas,
   lookupSchemas,
-  buttons,
   optionsSchemas,
   canToggleAll,
   defaultValueOptionsSingle,
@@ -30,13 +29,12 @@ export default Joi.object({
   readOnly,
   ...conditionallyShowSchemas,
   ...lookupSchemas,
-  multi: Joi.boolean(),
+  multi: Joi.boolean().default(false),
   defaultValue: Joi.when('multi', {
     is: true,
     then: defaultValueOptionsMultiple,
     otherwise: defaultValueOptionsSingle,
   }),
-  buttons,
   ...optionsSchemas,
   canToggleAll: Joi.when('multi', {
     is: true,
