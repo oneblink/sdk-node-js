@@ -207,6 +207,38 @@ export const formWorkflowEventTypes: SubmissionEventTypes.FormWorkflowEventType[
     'FRESHDESK_CREATE_TICKET',
     'FRESHDESK_ADD_NOTE_TO_TICKET',
   ]
+
+const generateFormWorkflowEventElementMappingKeys = (
+  recursiveId: string,
+  extraTypes: string[],
+) => ({
+  type: Joi.string()
+    .valid(
+      'FORM_FORM_ELEMENT',
+      'FORM_ELEMENT',
+      'VALUE',
+      'SUBMISSION_ID',
+      'EXTERNAL_ID',
+      ...extraTypes,
+    )
+    .required(),
+  formElementId: Joi.when('type', {
+    is: Joi.valid('FORM_FORM_ELEMENT', 'FORM_ELEMENT'),
+    then: Joi.string().uuid().required(),
+    otherwise: Joi.any().strip(),
+  }),
+  mapping: Joi.when('type', {
+    is: 'FORM_FORM_ELEMENT',
+    then: Joi.link(`#${recursiveId}`).required(),
+    otherwise: Joi.any().strip(),
+  }),
+  value: Joi.when('type', {
+    is: 'VALUE',
+    then: Joi.alternatives().try(Joi.string(), Joi.number(), Joi.boolean()),
+    otherwise: Joi.any().strip(),
+  }),
+})
+
 export const WorkflowEventSchema = Joi.object().keys({
   type: Joi.string()
     .required()
@@ -343,26 +375,10 @@ export const WorkflowEventSchema = Joi.object().keys({
         mapping: Joi.array().items(
           Joi.object({
             freshdeskFieldName: Joi.string().required(),
-            type: Joi.string()
-              .valid(
-                'FORM_FORM_ELEMENT',
-                'FORM_ELEMENT',
-                'VALUE',
-                'DEPENDENT_FIELD_VALUE',
-                'SUBMISSION_ID',
-                'EXTERNAL_ID',
-              )
-              .required(),
-            formElementId: Joi.when('type', {
-              is: Joi.valid('FORM_FORM_ELEMENT', 'FORM_ELEMENT'),
-              then: Joi.string().uuid().required(),
-              otherwise: Joi.any().strip(),
-            }),
-            mapping: Joi.when('type', {
-              is: 'FORM_FORM_ELEMENT',
-              then: Joi.link('#FreshdeskMappingSchema').required(),
-              otherwise: Joi.any().strip(),
-            }),
+            ...generateFormWorkflowEventElementMappingKeys(
+              'FreshdeskMappingSchema',
+              ['DEPENDENT_FIELD_VALUE'],
+            ),
             dependentFieldValue: Joi.when('type', {
               is: 'DEPENDENT_FIELD_VALUE',
               then: Joi.object()
@@ -374,15 +390,6 @@ export const WorkflowEventSchema = Joi.object().keys({
                 .required(),
               otherwise: Joi.any().strip(),
             }),
-            value: Joi.when('type', {
-              is: 'VALUE',
-              then: Joi.alternatives().try(
-                Joi.string(),
-                Joi.number(),
-                Joi.boolean(),
-              ),
-              otherwise: Joi.any().strip(),
-            }),
           }).id('FreshdeskMappingSchema'),
         ),
         ...approvalFormsInclusionConfiguration,
@@ -391,6 +398,33 @@ export const WorkflowEventSchema = Joi.object().keys({
     .when('type', {
       is: 'FRESHDESK_ADD_NOTE_TO_TICKET',
       then: Joi.object().keys(approvalFormsInclusionConfiguration),
+    })
+    .when('type', {
+      is: 'SHAREPOINT_CREATE_LIST_ITEM',
+      then: Joi.object().keys({
+        integrationEntraApplicationId: Joi.string().required(),
+        sharepointSite: Joi.object()
+          .keys({
+            id: Joi.string().required(),
+            displayName: Joi.string().required(),
+          })
+          .required(),
+        sharepointList: Joi.object()
+          .keys({
+            id: Joi.string().required(),
+            displayName: Joi.string().required(),
+          })
+          .required(),
+        mapping: Joi.array().items(
+          Joi.object({
+            sharepointColumnDefinitionName: Joi.string().required(),
+            ...generateFormWorkflowEventElementMappingKeys(
+              'SharepointCreateListItemMapping',
+              [],
+            ),
+          }).id('SharepointCreateListItemMapping'),
+        ),
+      }),
     }),
   ...formEventBaseSchema,
 })
