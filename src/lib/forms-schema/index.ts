@@ -206,6 +206,7 @@ export const formWorkflowEventTypes: SubmissionEventTypes.FormWorkflowEventType[
     'CIVICA_CRM',
     'FRESHDESK_CREATE_TICKET',
     'FRESHDESK_ADD_NOTE_TO_TICKET',
+    'SHAREPOINT_CREATE_LIST_ITEM',
   ]
 
 const generateFormWorkflowEventElementMappingKeys = (
