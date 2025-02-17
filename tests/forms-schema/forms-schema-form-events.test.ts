@@ -1,5 +1,3 @@
-// TODO: Check draft strip
-
 import { validateWithFormSchema } from '../../src/lib/forms-validation'
 
 function validateFormThrowError(data: unknown) {
@@ -8,6 +6,17 @@ function validateFormThrowError(data: unknown) {
     throw result.error
   }
   return result.data
+}
+
+const defaultForm = {
+  id: 1,
+  formsAppEnvironmentId: 1,
+  name: 'Inspection',
+  organisationId: 'ORGANISATION_00000000001',
+  submissionEvents: [],
+  elements: [],
+  postSubmissionAction: 'BACK',
+  formsAppIds: [],
 }
 
 // SCHEDULING Events
@@ -54,7 +63,7 @@ describe('Scheduling events should throw errors when not passed to "schedulingEv
         submissionEvents: [schedulingEvent],
       }),
     ).toThrow(
-      '"submissionEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM]',
+      '"submissionEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES]',
     )
   })
   test('SCHEDULING form event should error when being passed to "paymentEvents"', () => {
@@ -106,7 +115,7 @@ describe('Payment events should throw errors when not passed to "paymentEvents" 
         submissionEvents: [paymentEvent],
       }),
     ).toThrow(
-      '"submissionEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM]',
+      '"submissionEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES]',
     )
   })
   test('Payment form event should error when being passed to "schedulingEvents"', () => {
@@ -333,7 +342,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         draftEvents: [paymentEvent],
       }),
     ).toThrow(
-      '"draftEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM]',
+      '"draftEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES]',
     )
   })
   test('SCHEDULING form event should error when being passed to "draftEvents"', () => {
@@ -343,7 +352,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         draftEvents: [schedulingEvent],
       }),
     ).toThrow(
-      '"draftEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM]',
+      '"draftEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES]',
     )
   })
   test('Should not error when passing submissionEvents to "draftEvents"', () => {
@@ -362,7 +371,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         approvalEvents: [paymentEvent],
       }),
     ).toThrow(
-      '"approvalEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM]',
+      '"approvalEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES]',
     )
   })
   test('SCHEDULING form event should error when being passed to "approvalEvents"', () => {
@@ -372,7 +381,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         approvalEvents: [schedulingEvent],
       }),
     ).toThrow(
-      '"approvalEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM]',
+      '"approvalEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES]',
     )
   })
   test('Should not error when passing submissionEvents to "approvalEvents"', () => {
@@ -382,5 +391,87 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         approvalEvents: [submissionEvent],
       }),
     ).not.toThrow()
+  })
+})
+
+describe('SHAREPOINT_STORE_FILES', () => {
+  const validSubmissionEvent = {
+    type: 'SHAREPOINT_STORE_FILES',
+    configuration: {
+      integrationEntraApplicationId: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+      sharepointSite: {
+        id: 'id',
+        displayName: 'displayName',
+      },
+      sharepointDrive: {
+        id: 'id',
+        displayName: 'displayName',
+      },
+      folderPath: '/form-submissions',
+      excludeAttachments: true,
+    },
+  }
+  test('allows valid sharepoint store files submission event', async () => {
+    const form = validateFormThrowError({
+      ...defaultForm,
+      submissionEvents: [validSubmissionEvent],
+    })
+
+    expect(form.submissionEvents[0]).toEqual({
+      ...validSubmissionEvent,
+      conditionallyExecute: false,
+      requiresAllConditionallyExecutePredicates: false,
+    })
+  })
+
+  test('fails when sharepoint store files "configuration" is not passed', async () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        submissionEvents: [
+          {
+            type: 'SHAREPOINT_STORE_FILES',
+          },
+        ],
+      }),
+    ).toThrow('"submissionEvents[0].configuration" is required')
+  })
+
+  test('fails when sharepoint store files "configuration.folderPath" does not start with a slash', async () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        submissionEvents: [
+          {
+            ...validSubmissionEvent,
+            configuration: {
+              ...validSubmissionEvent.configuration,
+              folderPath: 'i-am-invalid',
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      '"submissionEvents[0].configuration.folderPath" must start with a forward slash ("/")',
+    )
+  })
+
+  test('fails when sharepoint store files "configuration.folderPath" ends with a slash', async () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        submissionEvents: [
+          {
+            ...validSubmissionEvent,
+            configuration: {
+              ...validSubmissionEvent.configuration,
+              folderPath: '/i-am-invalid/',
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      '"submissionEvents[0].configuration.folderPath" must not end with a forward slash ("/")',
+    )
   })
 })

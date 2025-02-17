@@ -207,6 +207,7 @@ export const formWorkflowEventTypes: SubmissionEventTypes.FormWorkflowEventType[
     'FRESHDESK_CREATE_TICKET',
     'FRESHDESK_ADD_NOTE_TO_TICKET',
     'SHAREPOINT_CREATE_LIST_ITEM',
+    'SHAREPOINT_STORE_FILES',
   ]
 
 const generateFormWorkflowEventElementMappingKeys = (
@@ -425,6 +426,44 @@ export const WorkflowEventSchema = Joi.object().keys({
             ),
           }).id('SharepointCreateListItemMapping'),
         ),
+      }),
+    })
+    .when('type', {
+      is: 'SHAREPOINT_STORE_FILES',
+      then: Joi.object().keys({
+        integrationEntraApplicationId: Joi.string().required(),
+        sharepointSite: Joi.object()
+          .keys({
+            id: Joi.string().required(),
+            displayName: Joi.string().required(),
+          })
+          .required(),
+        sharepointDrive: Joi.object()
+          .keys({
+            id: Joi.string().required(),
+            displayName: Joi.string().required(),
+          })
+          .required(),
+        folderPath: Joi.string()
+          .custom((value, helpers) => {
+            if (typeof value === 'string') {
+              if (!value.startsWith('/')) {
+                return helpers.error('string.startsWithSlash')
+              }
+              if (value.endsWith('/')) {
+                return helpers.error('string.endsWithSlash')
+              }
+            }
+
+            return value
+          })
+          .messages({
+            'string.startsWithSlash':
+              '{{#label}} must start with a forward slash ("/")',
+            'string.endsWithSlash':
+              '{{#label}} must not end with a forward slash ("/")',
+          }),
+        excludeAttachments: Joi.boolean().default(false),
       }),
     }),
   ...formEventBaseSchema,
