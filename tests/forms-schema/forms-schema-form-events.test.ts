@@ -456,7 +456,7 @@ describe('SHAREPOINT_STORE_FILES', () => {
     )
   })
 
-  test('fails when sharepoint store files "configuration.folderPath" starts with a slash', async () => {
+  test('fails when sharepoint store files "configuration.folderPath" ends with a slash', async () => {
     expect(() =>
       validateFormThrowError({
         ...defaultForm,
