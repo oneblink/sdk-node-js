@@ -464,6 +464,7 @@ export const WorkflowEventSchema = Joi.object().keys({
               '{{#label}} must not end with a forward slash ("/")',
           }),
         excludeAttachments: Joi.boolean().default(false),
+        ...pdfSubmissionEventConfiguration,
       }),
     }),
   ...formEventBaseSchema,

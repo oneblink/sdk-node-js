@@ -421,6 +421,11 @@ describe('SHAREPOINT_STORE_FILES', () => {
       ...validSubmissionEvent,
       conditionallyExecute: false,
       requiresAllConditionallyExecutePredicates: false,
+      configuration: {
+        ...validSubmissionEvent.configuration,
+        excludedCSSClasses: [],
+        excludedElementIds: [],
+      },
     })
   })
 
