@@ -56,17 +56,19 @@ export const htmlString = Joi.string().regex(
   },
 )
 
+export const s3ConfigurationSchema = Joi.object()
+  .keys({
+    bucket: Joi.string().required(),
+    key: Joi.string().required(),
+    region: Joi.string().required(),
+  })
+  .required()
+
 export const attachment = Joi.object().keys({
   id: Joi.string().required(),
   url: Joi.string().required().uri(),
   contentType: Joi.string().required(),
   fileName: Joi.string().required(),
   isPrivate: Joi.boolean().required(),
-  s3: Joi.object()
-    .keys({
-      bucket: Joi.string().required(),
-      key: Joi.string().required(),
-      region: Joi.string().required(),
-    })
-    .required(),
+  s3: s3ConfigurationSchema,
 })

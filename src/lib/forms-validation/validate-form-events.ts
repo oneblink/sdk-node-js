@@ -1,16 +1,22 @@
 import { formElementsService } from '@oneblink/sdk-core'
 import { FormTypes, SubmissionEventTypes } from '@oneblink/types'
+import {
+  validateFormWorkflowMappingElements,
+  validatePDFConfiguration,
+} from './common'
 
 type BaseProps = {
   rootFormElements: FormTypes.FormElement[]
   validatedFormElements: FormTypes.FormElement[]
   propertyName: string
+  customPDFs: FormTypes.Form['customPDFs']
 }
 const validateFormEvents = ({
   rootFormElements,
   validatedFormElements,
   propertyName,
   formEvents,
+  customPDFs,
 }: BaseProps & {
   formEvents: SubmissionEventTypes.FormEvent[]
 }) => {
@@ -25,6 +31,7 @@ const validateFormEvents = ({
       propertyName: `${propertyName}[${formEventIndex}]`,
       rootFormElements,
       validatedFormElements,
+      customPDFs,
     })
   }
 }
@@ -34,12 +41,10 @@ export const validateFormEvent = ({
   formEvent,
   rootFormElements,
   validatedFormElements,
+  customPDFs,
   propertyName,
-}: {
+}: BaseProps & {
   formEvent: SubmissionEventTypes.FormEvent
-  rootFormElements: FormTypes.FormElement[]
-  validatedFormElements: FormTypes.FormElement[]
-  propertyName: string
 }) => {
   switch (formEvent.type) {
     case 'CP_PAY':
@@ -94,6 +99,12 @@ export const validateFormEvent = ({
           )
         }
       }
+      validatePDFConfiguration({
+        pdfConfiguration: formEvent.configuration,
+        validatedFormElements,
+        customPDFs,
+        propertyName: `${propertyName}.configuration`,
+      })
       break
     }
     case 'CIVICA_CRM': {
@@ -109,6 +120,12 @@ export const validateFormEvent = ({
           )
         }
       }
+      validatePDFConfiguration({
+        pdfConfiguration: formEvent.configuration,
+        validatedFormElements,
+        customPDFs,
+        propertyName: `${propertyName}.configuration`,
+      })
       break
     }
     case 'CP_HCMS': {
@@ -161,6 +178,12 @@ export const validateFormEvent = ({
           throw new Error('Notification element is not a boolean element')
         }
       }
+      validatePDFConfiguration({
+        pdfConfiguration: formEvent.configuration,
+        validatedFormElements,
+        customPDFs,
+        propertyName: `${propertyName}.configuration`,
+      })
       break
     }
     case 'PDF': {
@@ -170,19 +193,12 @@ export const validateFormEvent = ({
         validatedFormElements,
         propertyName,
       })
-      if (formEvent.configuration.excludedElementIds) {
-        for (const elementId of formEvent.configuration.excludedElementIds) {
-          const element = formElementsService.findFormElement(
-            validatedFormElements,
-            ({ id }) => id === elementId,
-          )
-          if (!element) {
-            throw new Error(
-              `You tried to reference an element ${elementId} that does not exist on the form, in a ${formEvent.type} form event.`,
-            )
-          }
-        }
-      }
+      validatePDFConfiguration({
+        pdfConfiguration: formEvent.configuration,
+        validatedFormElements,
+        customPDFs,
+        propertyName: `${propertyName}.configuration`,
+      })
       break
     }
     case 'EMAIL': {
@@ -200,7 +216,17 @@ export const validateFormEvent = ({
         mappings: formEvent.configuration
           .mapping as SubmissionEventTypes.FormWorkflowEventElementMapping<undefined>[],
         validatedFormElements,
-        propertyName,
+        propertyName: `${propertyName}.configuration.mapping`,
+      })
+      break
+    }
+    case 'TRIM':
+    case 'SHAREPOINT_STORE_FILES': {
+      validatePDFConfiguration({
+        pdfConfiguration: formEvent.configuration,
+        validatedFormElements,
+        customPDFs,
+        propertyName: `${propertyName}.configuration`,
       })
       break
     }
@@ -258,41 +284,6 @@ function validateEmailTemplateMappingElements({
             `"${propertyName}.configuration.mapping[${mappingIndex}].formElementId" (${mapping.formElementId}) does not exist in "elements".`,
           )
         }
-      }
-    }
-  }
-}
-
-function validateFormWorkflowMappingElements({
-  mappings,
-  validatedFormElements,
-  propertyName,
-}: {
-  mappings: SubmissionEventTypes.FormWorkflowEventElementMapping<
-    Record<string, unknown>
-  >[]
-  validatedFormElements: FormTypes.FormElement[]
-  propertyName?: string
-}) {
-  for (let mappingIndex = 0; mappingIndex < mappings.length; mappingIndex++) {
-    const mapping = mappings[mappingIndex]
-    if (
-      mapping.type === 'FORM_ELEMENT' ||
-      mapping.type === 'FORM_FORM_ELEMENT'
-    ) {
-      const element = formElementsService.findFormElement(
-        validatedFormElements,
-        ({ id }) => id === mapping.formElementId,
-      )
-      if (!element) {
-        throw new Error(
-          `"${propertyName}.configuration.mapping[${mappingIndex}].formElementId" (${mapping.formElementId}) does not exist in "elements".`,
-        )
-      }
-      if (mapping.type === 'FORM_FORM_ELEMENT' && element.type !== 'form') {
-        throw new Error(
-          `"${propertyName}.configuration.mapping[${mappingIndex}].formElementId" (${mapping.formElementId}) must be the "id" for a "form" type element.`,
-        )
       }
     }
   }

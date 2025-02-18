@@ -1,6 +1,6 @@
 import { FormTypes, SubmissionEventTypes } from '@oneblink/types'
 import Joi from 'joi'
-import { htmlString } from './common'
+import { htmlString, s3ConfigurationSchema } from './common'
 import elementSchema from './element-schema'
 import {
   conditionallyShowPredicates,
@@ -92,6 +92,37 @@ const approvalFormsInclusionConfiguration = {
   }),
 }
 
+const generateFormWorkflowEventElementMappingKeys = (
+  recursiveId: string,
+  extraTypes: string[],
+) => ({
+  type: Joi.string()
+    .valid(
+      'FORM_FORM_ELEMENT',
+      'FORM_ELEMENT',
+      'VALUE',
+      'SUBMISSION_ID',
+      'EXTERNAL_ID',
+      ...extraTypes,
+    )
+    .required(),
+  formElementId: Joi.when('type', {
+    is: Joi.valid('FORM_FORM_ELEMENT', 'FORM_ELEMENT'),
+    then: Joi.string().uuid().required(),
+    otherwise: Joi.any().strip(),
+  }),
+  mapping: Joi.when('type', {
+    is: 'FORM_FORM_ELEMENT',
+    then: Joi.link(`#${recursiveId}`).required(),
+    otherwise: Joi.any().strip(),
+  }),
+  value: Joi.when('type', {
+    is: 'VALUE',
+    then: Joi.alternatives().try(Joi.string(), Joi.number(), Joi.boolean()),
+    otherwise: Joi.any().strip(),
+  }),
+})
+
 const pdfSubmissionEventConfiguration = {
   pdfFileName: Joi.string().allow(null, ''),
   includeSubmissionIdInPdf: Joi.boolean(),
@@ -109,6 +140,18 @@ const pdfSubmissionEventConfiguration = {
     .allow(null)
     .default([]),
   pdfSize: Joi.valid('A4', 'Letter'),
+  customPDF: Joi.object().keys({
+    pdfId: Joi.string().uuid().required(),
+    mapping: Joi.array().items(
+      Joi.object({
+        replaceableField: Joi.string().required(),
+        ...generateFormWorkflowEventElementMappingKeys(
+          'CustomPDFMappingSchema',
+          [],
+        ),
+      }).id('CustomPDFMappingSchema'),
+    ),
+  }),
   ...approvalFormsInclusionConfiguration,
 }
 
@@ -209,37 +252,6 @@ export const formWorkflowEventTypes: SubmissionEventTypes.FormWorkflowEventType[
     'SHAREPOINT_CREATE_LIST_ITEM',
     'SHAREPOINT_STORE_FILES',
   ]
-
-const generateFormWorkflowEventElementMappingKeys = (
-  recursiveId: string,
-  extraTypes: string[],
-) => ({
-  type: Joi.string()
-    .valid(
-      'FORM_FORM_ELEMENT',
-      'FORM_ELEMENT',
-      'VALUE',
-      'SUBMISSION_ID',
-      'EXTERNAL_ID',
-      ...extraTypes,
-    )
-    .required(),
-  formElementId: Joi.when('type', {
-    is: Joi.valid('FORM_FORM_ELEMENT', 'FORM_ELEMENT'),
-    then: Joi.string().uuid().required(),
-    otherwise: Joi.any().strip(),
-  }),
-  mapping: Joi.when('type', {
-    is: 'FORM_FORM_ELEMENT',
-    then: Joi.link(`#${recursiveId}`).required(),
-    otherwise: Joi.any().strip(),
-  }),
-  value: Joi.when('type', {
-    is: 'VALUE',
-    then: Joi.alternatives().try(Joi.string(), Joi.number(), Joi.boolean()),
-    otherwise: Joi.any().strip(),
-  }),
-})
 
 export const WorkflowEventSchema = Joi.object().keys({
   type: Joi.string()
@@ -688,6 +700,15 @@ const formSchema = Joi.object().keys({
   }),
   disableAutosave: Joi.boolean(),
   isArchived: Joi.boolean(),
+  customPDFs: Joi.array()
+    .unique('id')
+    .items(
+      Joi.object().keys({
+        id: Joi.string().uuid().required(),
+        label: Joi.string().required(),
+        s3: s3ConfigurationSchema,
+      }),
+    ),
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [

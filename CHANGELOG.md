@@ -11,6 +11,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- custom pdf validation to form
+
+### Changed
+
+- **[BREAKING]** `Forms.validateFormEvent()` arguments. See diff below to migrate:
+  ```diff
+  - Forms.validateFormEvent(formElements, workflowEvent)
+  + Forms.validateFormEvent(workflowEvent, {
+  +   formElements,
+  +   customPDFs: []
+  + })
+  ```
+
+### Added
+
 - 10`SHAREPOINT_CREATE_LIST_ITEM` and `SHAREPOINT_STORE_FILES` form workflow event to validation
 
 ## [10.5.0] - 2025-01-29
