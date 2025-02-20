@@ -151,7 +151,7 @@ export function validatePDFConfiguration({
 
   const customPDF = pdfConfiguration.customPDF
   if (customPDF) {
-    if (customPDF && !customPDFs?.some(({ id }) => id === customPDF.pdfId)) {
+    if (!customPDFs?.some(({ id }) => id === customPDF.pdfId)) {
       throw new Error(
         `"${propertyName}.customPDF.pdfId" (${customPDF.pdfId}) must reference a "customPDFs[].id" property.`,
       )

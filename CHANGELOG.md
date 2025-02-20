@@ -7,8 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [10.5.1] - 2025-02-20
-
 ### Added
 
 - custom pdf validation to form
@@ -23,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   +   customPDFs: []
   + })
   ```
+
+## [10.5.1] - 2025-02-20
 
 ### Added
 
