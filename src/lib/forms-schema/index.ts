@@ -140,18 +140,7 @@ const pdfSubmissionEventConfiguration = {
     .allow(null)
     .default([]),
   pdfSize: Joi.valid('A4', 'Letter'),
-  customPDF: Joi.object().keys({
-    pdfId: Joi.string().uuid().required(),
-    mapping: Joi.array().items(
-      Joi.object({
-        replaceableField: Joi.string().required(),
-        ...generateFormWorkflowEventElementMappingKeys(
-          'CustomPDFMappingSchema',
-          [],
-        ),
-      }).id('CustomPDFMappingSchema'),
-    ),
-  }),
+  customPdfId: Joi.string().uuid(),
   ...approvalFormsInclusionConfiguration,
 }
 
@@ -707,6 +696,17 @@ const formSchema = Joi.object().keys({
         id: Joi.string().uuid().required(),
         label: Joi.string().required(),
         s3: s3ConfigurationSchema,
+        mapping: Joi.array()
+          .items(
+            Joi.object({
+              replaceableField: Joi.string().required(),
+              ...generateFormWorkflowEventElementMappingKeys(
+                'CustomPDFMappingSchema',
+                [],
+              ),
+            }).id('CustomPDFMappingSchema'),
+          )
+          .required(),
       }),
     ),
 })

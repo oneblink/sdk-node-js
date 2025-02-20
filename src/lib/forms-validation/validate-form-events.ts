@@ -1,9 +1,6 @@
 import { formElementsService } from '@oneblink/sdk-core'
 import { FormTypes, SubmissionEventTypes } from '@oneblink/types'
-import {
-  validateFormWorkflowMappingElements,
-  validatePDFConfiguration,
-} from './common'
+import { validateFormElementMappings, validatePDFConfiguration } from './common'
 
 type BaseProps = {
   rootFormElements: FormTypes.FormElement[]
@@ -212,9 +209,9 @@ export const validateFormEvent = ({
     }
     case 'SHAREPOINT_CREATE_LIST_ITEM':
     case 'FRESHDESK_CREATE_TICKET': {
-      validateFormWorkflowMappingElements({
+      validateFormElementMappings({
         mappings: formEvent.configuration
-          .mapping as SubmissionEventTypes.FormWorkflowEventElementMapping<undefined>[],
+          .mapping as SubmissionEventTypes.FormElementMapping<undefined>[],
         validatedFormElements,
         propertyName: `${propertyName}.configuration.mapping`,
       })
