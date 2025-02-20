@@ -1,5 +1,5 @@
-import { typeCastService } from '@oneblink/sdk-core'
-import { FormTypes } from '@oneblink/types'
+import { formElementsService, typeCastService } from '@oneblink/sdk-core'
+import { FormTypes, SubmissionEventTypes } from '@oneblink/types'
 import Joi from 'joi'
 
 export function validateJoiSchema<T>(
@@ -97,4 +97,89 @@ export function validateElementNamesAcrossNestedElements(
     }
   }
   return elementNames
+}
+
+export function validateFormWorkflowMappingElements({
+  mappings,
+  validatedFormElements,
+  propertyName,
+}: {
+  mappings: SubmissionEventTypes.FormWorkflowEventElementMapping<
+    Record<string, unknown>
+  >[]
+  validatedFormElements: FormTypes.FormElement[]
+  propertyName: string
+}) {
+  for (let mappingIndex = 0; mappingIndex < mappings.length; mappingIndex++) {
+    const mapping = mappings[mappingIndex]
+    if (
+      mapping.type === 'FORM_ELEMENT' ||
+      mapping.type === 'FORM_FORM_ELEMENT'
+    ) {
+      const element = formElementsService.findFormElement(
+        validatedFormElements,
+        ({ id }) => id === mapping.formElementId,
+      )
+      if (!element) {
+        throw new Error(
+          `"${propertyName}[${mappingIndex}].formElementId" (${mapping.formElementId}) does not exist in "elements".`,
+        )
+      }
+      if (mapping.type === 'FORM_FORM_ELEMENT' && element.type !== 'form') {
+        throw new Error(
+          `"${propertyName}[${mappingIndex}].formElementId" (${mapping.formElementId}) must be the "id" for a "form" type element.`,
+        )
+      }
+    }
+  }
+}
+
+export function validatePDFConfiguration({
+  pdfConfiguration,
+  propertyName,
+  customPDFs,
+  validatedFormElements,
+}: {
+  pdfConfiguration: SubmissionEventTypes.PDFConfiguration | undefined
+  propertyName: string
+  customPDFs: FormTypes.Form['customPDFs']
+  validatedFormElements: FormTypes.FormElement[]
+}) {
+  if (!pdfConfiguration) {
+    return
+  }
+
+  const customPDF = pdfConfiguration.customPDF
+  if (customPDF) {
+    if (!customPDFs?.some(({ id }) => id === customPDF.pdfId)) {
+      throw new Error(
+        `"${propertyName}.customPDF.pdfId" (${customPDF.pdfId}) must reference a "customPDFs[].id" property.`,
+      )
+    }
+    validateFormWorkflowMappingElements({
+      mappings:
+        customPDF.mapping as SubmissionEventTypes.FormWorkflowEventElementMapping<undefined>[],
+      validatedFormElements,
+      propertyName: `${propertyName}.customPDF.mapping`,
+    })
+  }
+
+  if (pdfConfiguration.excludedElementIds) {
+    for (
+      let elementIdIndex = 0;
+      elementIdIndex < pdfConfiguration.excludedElementIds.length;
+      elementIdIndex++
+    ) {
+      const elementId = pdfConfiguration.excludedElementIds[elementIdIndex]
+      const element = formElementsService.findFormElement(
+        validatedFormElements,
+        ({ id }) => id === elementId,
+      )
+      if (!element) {
+        throw new Error(
+          `"${propertyName}.excludedElementIds[${elementIdIndex}]" (${elementId}) does not exist in "elements".`,
+        )
+      }
+    }
+  }
 }

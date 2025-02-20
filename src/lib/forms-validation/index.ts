@@ -11,13 +11,20 @@ import {
   validateJoiSchema,
   stripLayoutFormElements,
   validateElementNamesAcrossNestedElements,
+  validatePDFConfiguration,
 } from './common'
 import validateFormEvents, { validateFormEvent } from './validate-form-events'
 import Joi from 'joi'
 
 function validateFormEventData(
-  formElements: FormTypes.FormElement[],
   workflowEvent: unknown,
+  {
+    formElements,
+    customPDFs,
+  }: {
+    formElements: FormTypes.FormElement[]
+    customPDFs: FormTypes.Form['customPDFs']
+  },
 ):
   | {
       success: false
@@ -40,6 +47,7 @@ function validateFormEventData(
       propertyName: 'formEvent',
       validatedFormElements: formElements,
       rootFormElements: stripLayoutFormElements(formElements),
+      customPDFs,
     })
     return result
   } catch (error) {
@@ -234,6 +242,7 @@ function validateWithFormSchema(form?: unknown):
         propertyName: formEventProp,
         rootFormElements,
         validatedFormElements: validatedForm.elements,
+        customPDFs: validatedForm.customPDFs,
       })
     }
 
@@ -255,22 +264,12 @@ function validateWithFormSchema(form?: unknown):
       }
     }
 
-    if (
-      validatedForm.postSubmissionReceipt?.allowPDFDownload?.excludedElementIds
-    ) {
-      for (const elementId of validatedForm.postSubmissionReceipt
-        .allowPDFDownload.excludedElementIds) {
-        const element = formElementsService.findFormElement(
-          validatedForm.elements,
-          ({ id }) => id === elementId,
-        )
-        if (!element) {
-          throw new Error(
-            `You tried to reference an element (${elementId}) in "postSubmissionReceipt.allowPDFDownload.excludedElementIds" that does not exist on the form.`,
-          )
-        }
-      }
-    }
+    validatePDFConfiguration({
+      pdfConfiguration: validatedForm.postSubmissionReceipt?.allowPDFDownload,
+      validatedFormElements: validatedForm.elements,
+      customPDFs: validatedForm.customPDFs,
+      propertyName: 'postSubmissionReceipt.allowPDFDownload',
+    })
 
     const labels: string[] = []
     for (const step of validatedForm.approvalSteps ?? []) {

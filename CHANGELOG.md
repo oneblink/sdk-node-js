@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- custom pdf validation to form
+
+### Changed
+
+- **[BREAKING]** `Forms.validateFormEvent()` arguments. See diff below to migrate:
+  ```diff
+  - Forms.validateFormEvent(formElements, workflowEvent)
+  + Forms.validateFormEvent(workflowEvent, {
+  +   formElements,
+  +   customPDFs: []
+  + })
+  ```
+
 ## [10.5.1] - 2025-02-20
 
 ### Added

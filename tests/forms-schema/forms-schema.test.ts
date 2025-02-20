@@ -5823,7 +5823,7 @@ describe('invalid property removal', () => {
         elements: [],
       })
     expect(run).toThrow(
-      'You tried to reference an element (a5289278-5cb4-4103-90b6-f67ffe84dee7) in "postSubmissionReceipt.allowPDFDownload.excludedElementIds" that does not exist on the form.',
+      '"postSubmissionReceipt.allowPDFDownload.excludedElementIds[0]" (a5289278-5cb4-4103-90b6-f67ffe84dee7) does not exist in "elements".',
     )
   })
 

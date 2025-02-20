@@ -1176,14 +1176,18 @@ export default class Forms extends OneBlinkAPI {
    * OneBlink Form Event.
    *
    * @param data The untrusted data to validate
-   * @param formElements The form elements to validate against the event
+   * @param options The form elements and custom PDFs to validate against the
+   *   event
    * @returns A trusted form event
    */
   static validateFormEvent(
-    formElements: FormTypes.FormElement[],
     data: unknown,
+    options: {
+      formElements: FormTypes.FormElement[]
+      customPDFs: FormTypes.Form['customPDFs']
+    },
   ) {
-    return validateFormEventData(formElements, data)
+    return validateFormEventData(data, options)
   }
   /**
    * A static method available on the forms class, used for both creating and

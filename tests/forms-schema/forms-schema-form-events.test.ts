@@ -480,3 +480,85 @@ describe('SHAREPOINT_STORE_FILES', () => {
     )
   })
 })
+
+describe('PDF configuration', () => {
+  const submissionEvent = {
+    type: 'PDF',
+    configuration: {
+      toEmail: ['dev@oneblink.io'],
+      customPDF: {
+        pdfId: '944344d8-91f3-462e-ab1f-fbfea3e5c416',
+        mapping: [
+          {
+            replaceableField: 'someName',
+            type: 'FORM_ELEMENT',
+            formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+          },
+        ],
+      },
+    },
+  }
+  const customPDFs = [
+    {
+      id: '944344d8-91f3-462e-ab1f-fbfea3e5c416',
+      label: 'My PDF',
+      s3: {
+        bucket: 'bucket',
+        key: 'key',
+        region: 'region',
+      },
+    },
+  ]
+  const elements = [
+    {
+      id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+      type: 'text',
+      name: 'firstName',
+      label: 'First Name',
+    },
+  ]
+  test('should allow valid PDF submission event custom PDF', () => {
+    const form = validateFormThrowError({
+      ...defaultForm,
+      customPDFs,
+      elements,
+      submissionEvents: [submissionEvent],
+    })
+    expect(form.submissionEvents[0]).toEqual({
+      ...submissionEvent,
+      conditionallyExecute: false,
+      requiresAllConditionallyExecutePredicates: false,
+      configuration: {
+        ...submissionEvent.configuration,
+        excludedAttachmentElementIds: [],
+        excludedCSSClasses: [],
+        excludedElementIds: [],
+      },
+    })
+  })
+
+  test('should not allow PDF submission event with pdfId that does not exist in customPDFs', () => {
+    const run = () =>
+      validateFormThrowError({
+        ...defaultForm,
+        customPDFs: [],
+        elements,
+        submissionEvents: [submissionEvent],
+      })
+    expect(run).toThrow(
+      '"submissionEvents[0].configuration.customPDF.pdfId" (944344d8-91f3-462e-ab1f-fbfea3e5c416) must reference a "customPDFs[].id" property.',
+    )
+  })
+
+  test('should not allow PDF submission event with wrong formElementId mapped to custom pdf', () => {
+    const run = () =>
+      validateFormThrowError({
+        ...defaultForm,
+        customPDFs,
+        submissionEvents: [submissionEvent],
+      })
+    expect(run).toThrow(
+      '"submissionEvents[0].configuration.customPDF.mapping[0].formElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) does not exist in "elements".',
+    )
+  })
+})
