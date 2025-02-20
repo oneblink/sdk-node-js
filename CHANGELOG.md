@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.5.1] - 2025-02-20
+
 ### Added
 
 - 10`SHAREPOINT_CREATE_LIST_ITEM` and `SHAREPOINT_STORE_FILES` form workflow event to validation
