@@ -12,6 +12,7 @@ import {
   stripLayoutFormElements,
   validateElementNamesAcrossNestedElements,
   validatePDFConfiguration,
+  validateFormElementMappings,
 } from './common'
 import validateFormEvents, { validateFormEvent } from './validate-form-events'
 import Joi from 'joi'
@@ -290,6 +291,17 @@ function validateWithFormSchema(form?: unknown):
         }
         labels.push(step.label)
       }
+    }
+
+    const customPDFs = validatedForm.customPDFs ?? []
+    for (const customPDF of customPDFs ?? []) {
+      const index = customPDFs.indexOf(customPDF)
+      validateFormElementMappings({
+        mappings:
+          customPDF.mapping as SubmissionEventTypes.FormElementMapping<undefined>[],
+        validatedFormElements: validatedForm.elements,
+        propertyName: `customPDFs[${index}].mappings`,
+      })
     }
 
     return {

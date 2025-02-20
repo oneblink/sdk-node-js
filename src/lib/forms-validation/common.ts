@@ -99,14 +99,12 @@ export function validateElementNamesAcrossNestedElements(
   return elementNames
 }
 
-export function validateFormWorkflowMappingElements({
+export function validateFormElementMappings({
   mappings,
   validatedFormElements,
   propertyName,
 }: {
-  mappings: SubmissionEventTypes.FormWorkflowEventElementMapping<
-    Record<string, unknown>
-  >[]
+  mappings: SubmissionEventTypes.FormElementMapping<Record<string, unknown>>[]
   validatedFormElements: FormTypes.FormElement[]
   propertyName: string
 }) {
@@ -149,19 +147,11 @@ export function validatePDFConfiguration({
     return
   }
 
-  const customPDF = pdfConfiguration.customPDF
-  if (customPDF) {
-    if (!customPDFs?.some(({ id }) => id === customPDF.pdfId)) {
-      throw new Error(
-        `"${propertyName}.customPDF.pdfId" (${customPDF.pdfId}) must reference a "customPDFs[].id" property.`,
-      )
-    }
-    validateFormWorkflowMappingElements({
-      mappings:
-        customPDF.mapping as SubmissionEventTypes.FormWorkflowEventElementMapping<undefined>[],
-      validatedFormElements,
-      propertyName: `${propertyName}.customPDF.mapping`,
-    })
+  const customPdfId = pdfConfiguration.customPdfId
+  if (customPdfId && !customPDFs?.some(({ id }) => id === customPdfId)) {
+    throw new Error(
+      `"${propertyName}.customPdfId" (${customPdfId}) must reference a "customPDFs[].id" property.`,
+    )
   }
 
   if (pdfConfiguration.excludedElementIds) {

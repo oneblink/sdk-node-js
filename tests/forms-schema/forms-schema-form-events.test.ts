@@ -1,3 +1,4 @@
+import { FormTypes } from '@oneblink/types'
 import { validateWithFormSchema } from '../../src/lib/forms-validation'
 
 function validateFormThrowError(data: unknown) {
@@ -486,35 +487,33 @@ describe('PDF configuration', () => {
     type: 'PDF',
     configuration: {
       toEmail: ['dev@oneblink.io'],
-      customPDF: {
-        pdfId: '944344d8-91f3-462e-ab1f-fbfea3e5c416',
-        mapping: [
-          {
-            replaceableField: 'someName',
-            type: 'FORM_ELEMENT',
-            formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
-          },
-        ],
-      },
+      customPdfId: '944344d8-91f3-462e-ab1f-fbfea3e5c416',
     },
   }
-  const customPDFs = [
-    {
-      id: '944344d8-91f3-462e-ab1f-fbfea3e5c416',
-      label: 'My PDF',
-      s3: {
-        bucket: 'bucket',
-        key: 'key',
-        region: 'region',
-      },
-    },
-  ]
   const elements = [
     {
       id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
       type: 'text',
       name: 'firstName',
       label: 'First Name',
+    },
+  ]
+  const customPDFs: FormTypes.FormCustomPDF[] = [
+    {
+      id: submissionEvent.configuration.customPdfId,
+      label: 'My PDF',
+      s3: {
+        bucket: 'bucket',
+        key: 'key',
+        region: 'region',
+      },
+      mapping: [
+        {
+          replaceableField: 'someName',
+          type: 'FORM_ELEMENT',
+          formElementId: elements[0].id,
+        },
+      ],
     },
   ]
   test('should allow valid PDF submission event custom PDF', () => {
@@ -546,7 +545,7 @@ describe('PDF configuration', () => {
         submissionEvents: [submissionEvent],
       })
     expect(run).toThrow(
-      '"submissionEvents[0].configuration.customPDF.pdfId" (944344d8-91f3-462e-ab1f-fbfea3e5c416) must reference a "customPDFs[].id" property.',
+      '"submissionEvents[0].configuration.customPdfId" (944344d8-91f3-462e-ab1f-fbfea3e5c416) must reference a "customPDFs[].id" property.',
     )
   })
 
@@ -558,7 +557,7 @@ describe('PDF configuration', () => {
         submissionEvents: [submissionEvent],
       })
     expect(run).toThrow(
-      '"submissionEvents[0].configuration.customPDF.mapping[0].formElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) does not exist in "elements".',
+      '"customPDFs[0].mappings[0].formElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a78) does not exist in "elements".',
     )
   })
 })
