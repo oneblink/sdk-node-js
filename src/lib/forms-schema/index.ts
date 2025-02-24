@@ -375,26 +375,28 @@ export const WorkflowEventSchema = Joi.object().keys({
     .when('type', {
       is: 'FRESHDESK_CREATE_TICKET',
       then: Joi.object().keys({
-        mapping: Joi.array().items(
-          Joi.object({
-            freshdeskFieldName: Joi.string().required(),
-            ...generateFormWorkflowEventElementMappingKeys(
-              'FreshdeskMappingSchema',
-              ['DEPENDENT_FIELD_VALUE'],
-            ),
-            dependentFieldValue: Joi.when('type', {
-              is: 'DEPENDENT_FIELD_VALUE',
-              then: Joi.object()
-                .keys({
-                  category: Joi.string().required(),
-                  subCategory: Joi.string().required(),
-                  item: Joi.string().required(),
-                })
-                .required(),
-              otherwise: Joi.any().strip(),
-            }),
-          }).id('FreshdeskMappingSchema'),
-        ),
+        mapping: Joi.array()
+          .items(
+            Joi.object({
+              freshdeskFieldName: Joi.string().required(),
+              ...generateFormWorkflowEventElementMappingKeys(
+                'FreshdeskMappingSchema',
+                ['DEPENDENT_FIELD_VALUE'],
+              ),
+              dependentFieldValue: Joi.when('type', {
+                is: 'DEPENDENT_FIELD_VALUE',
+                then: Joi.object()
+                  .keys({
+                    category: Joi.string().required(),
+                    subCategory: Joi.string().required(),
+                    item: Joi.string().required(),
+                  })
+                  .required(),
+                otherwise: Joi.any().strip(),
+              }),
+            }).id('FreshdeskMappingSchema'),
+          )
+          .default([]),
         ...approvalFormsInclusionConfiguration,
       }),
     })
@@ -418,15 +420,17 @@ export const WorkflowEventSchema = Joi.object().keys({
             displayName: Joi.string().required(),
           })
           .required(),
-        mapping: Joi.array().items(
-          Joi.object({
-            sharepointColumnDefinitionName: Joi.string().required(),
-            ...generateFormWorkflowEventElementMappingKeys(
-              'SharepointCreateListItemMapping',
-              [],
-            ),
-          }).id('SharepointCreateListItemMapping'),
-        ),
+        mapping: Joi.array()
+          .items(
+            Joi.object({
+              sharepointColumnDefinitionName: Joi.string().required(),
+              ...generateFormWorkflowEventElementMappingKeys(
+                'SharepointCreateListItemMapping',
+                [],
+              ),
+            }).id('SharepointCreateListItemMapping'),
+          )
+          .default([]),
       }),
     })
     .when('type', {
