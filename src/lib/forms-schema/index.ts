@@ -118,7 +118,14 @@ const generateFormWorkflowEventElementMappingKeys = (
   }),
   value: Joi.when('type', {
     is: 'VALUE',
-    then: Joi.alternatives().try(Joi.string(), Joi.number(), Joi.boolean()),
+    then: Joi.alternatives()
+      .try(
+        Joi.string(),
+        Joi.number(),
+        Joi.boolean(),
+        Joi.array().items(Joi.string()).min(1),
+      )
+      .required(),
     otherwise: Joi.any().strip(),
   }),
 })
