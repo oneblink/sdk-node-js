@@ -513,6 +513,11 @@ describe('PDF configuration', () => {
           type: 'FORM_ELEMENT',
           formElementId: elements[0].id,
         },
+        {
+          replaceableField: 'anotherName',
+          type: 'VALUE',
+          value: ['some choice'],
+        },
       ],
     },
   ]
