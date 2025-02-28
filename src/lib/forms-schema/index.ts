@@ -182,6 +182,7 @@ export const PaymentEventSchema = Joi.object({
         environmentId: Joi.string().uuid().required(),
         crn2: Joi.string(),
         crn3: Joi.string(),
+        allowPDFDownload: pdfSubmissionEventConfiguration,
       }),
     })
     .when('type', {
@@ -190,6 +191,7 @@ export const PaymentEventSchema = Joi.object({
         elementId: Joi.string().uuid().required(),
         environmentId: Joi.string().uuid().required(),
         customerReferenceNumber: Joi.string().required(),
+        allowPDFDownload: pdfSubmissionEventConfiguration,
       }),
     })
     .when('type', {
@@ -197,6 +199,7 @@ export const PaymentEventSchema = Joi.object({
       then: Joi.object().keys({
         elementId: Joi.string().uuid().required(),
         gatewayId: Joi.string().uuid().required(),
+        allowPDFDownload: pdfSubmissionEventConfiguration,
       }),
     })
     .when('type', {
@@ -207,6 +210,7 @@ export const PaymentEventSchema = Joi.object({
         productDescription: Joi.string().required().max(250),
         customerReference: Joi.string().max(250),
         subAgencyCode: Joi.string(),
+        allowPDFDownload: pdfSubmissionEventConfiguration,
       }),
     }),
   ...formEventBaseSchema,
