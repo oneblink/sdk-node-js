@@ -148,6 +148,7 @@ const pdfSubmissionEventConfiguration = {
     .default([]),
   pdfSize: Joi.valid('A4', 'Letter'),
   customPdfId: Joi.string().uuid(),
+  isCustomPdfEditable: Joi.bool().default(false),
   ...approvalFormsInclusionConfiguration,
 }
 
