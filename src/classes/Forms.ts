@@ -875,7 +875,7 @@ export default class Forms extends OneBlinkAPI {
       return Promise.reject(new TypeError('Must supply "formId" as a number'))
     }
 
-    return super.searchRequest(`/forms/${formId}`, {
+    return super.searchRequest(`/v2/forms/${formId}`, {
       injectForms: injectForms || false,
     })
   }
