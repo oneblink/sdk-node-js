@@ -483,7 +483,7 @@ export const WorkflowEventSchema = Joi.object().keys({
     })
     .when('type', {
       is: 'CIVIC_REC_COMPLETE_CHECKOUT',
-      then: Joi.any().strip(),
+      then: Joi.object().keys({}),
     }),
   ...formEventBaseSchema,
 })

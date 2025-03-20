@@ -482,6 +482,58 @@ describe('SHAREPOINT_STORE_FILES', () => {
   })
 })
 
+describe('CIVIC_REC_COMPLETE_CHECKOUT', () => {
+  const validSubmissionEvent = {
+    type: 'CIVIC_REC_COMPLETE_CHECKOUT',
+    configuration: {},
+  }
+  it('should allow empty object as the configuration', () => {
+    const form = validateFormThrowError({
+      ...defaultForm,
+      submissionEvents: [validSubmissionEvent],
+    })
+
+    expect(form.submissionEvents[0]).toEqual({
+      ...validSubmissionEvent,
+      conditionallyExecute: false,
+      requiresAllConditionallyExecutePredicates: false,
+      configuration: {},
+    })
+  })
+
+  it('should strip out any additional data in the configuration', () => {
+    const form = validateFormThrowError({
+      ...defaultForm,
+      submissionEvents: [
+        {
+          ...validSubmissionEvent,
+          configuration: { fakeVariable: "I'm fake!" },
+        },
+      ],
+    })
+
+    expect(form.submissionEvents[0]).toEqual({
+      ...validSubmissionEvent,
+      conditionallyExecute: false,
+      requiresAllConditionallyExecutePredicates: false,
+      configuration: {},
+    })
+  })
+
+  it('should fail without empty configuration on the submission event', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        submissionEvents: [
+          {
+            type: 'CIVIC_REC_COMPLETE_CHECKOUT',
+          },
+        ],
+      }),
+    ).toThrow('"submissionEvents[0].configuration" is required')
+  })
+})
+
 describe('PDF configuration', () => {
   const submissionEvent = {
     type: 'PDF',
