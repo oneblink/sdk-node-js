@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - custom pdf read only validation
+- Civic Rec Workflow Event validation
 
 ## [11.0.1] - 2025-03-19
 
