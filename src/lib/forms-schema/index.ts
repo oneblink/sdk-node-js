@@ -248,6 +248,7 @@ export const formWorkflowEventTypes: SubmissionEventTypes.FormWorkflowEventType[
     'FRESHDESK_ADD_NOTE_TO_TICKET',
     'SHAREPOINT_CREATE_LIST_ITEM',
     'SHAREPOINT_STORE_FILES',
+    'CIVIC_REC_COMPLETE_CHECKOUT',
   ]
 
 export const WorkflowEventSchema = Joi.object().keys({
@@ -479,6 +480,10 @@ export const WorkflowEventSchema = Joi.object().keys({
         excludeAttachments: Joi.boolean().default(false),
         ...pdfSubmissionEventConfiguration,
       }),
+    })
+    .when('type', {
+      is: 'CIVIC_REC_COMPLETE_CHECKOUT',
+      then: Joi.object().keys({}),
     }),
   ...formEventBaseSchema,
 })

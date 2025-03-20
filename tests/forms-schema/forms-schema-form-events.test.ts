@@ -64,7 +64,7 @@ describe('Scheduling events should throw errors when not passed to "schedulingEv
         submissionEvents: [schedulingEvent],
       }),
     ).toThrow(
-      '"submissionEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES]',
+      '"submissionEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT]',
     )
   })
   test('SCHEDULING form event should error when being passed to "paymentEvents"', () => {
@@ -116,7 +116,7 @@ describe('Payment events should throw errors when not passed to "paymentEvents" 
         submissionEvents: [paymentEvent],
       }),
     ).toThrow(
-      '"submissionEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES]',
+      '"submissionEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT]',
     )
   })
   test('Payment form event should error when being passed to "schedulingEvents"', () => {
@@ -343,7 +343,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         draftEvents: [paymentEvent],
       }),
     ).toThrow(
-      '"draftEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES]',
+      '"draftEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT]',
     )
   })
   test('SCHEDULING form event should error when being passed to "draftEvents"', () => {
@@ -353,7 +353,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         draftEvents: [schedulingEvent],
       }),
     ).toThrow(
-      '"draftEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES]',
+      '"draftEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT]',
     )
   })
   test('Should not error when passing submissionEvents to "draftEvents"', () => {
@@ -372,7 +372,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         approvalEvents: [paymentEvent],
       }),
     ).toThrow(
-      '"approvalEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES]',
+      '"approvalEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT]',
     )
   })
   test('SCHEDULING form event should error when being passed to "approvalEvents"', () => {
@@ -382,7 +382,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         approvalEvents: [schedulingEvent],
       }),
     ).toThrow(
-      '"approvalEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES]',
+      '"approvalEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT]',
     )
   })
   test('Should not error when passing submissionEvents to "approvalEvents"', () => {
@@ -479,6 +479,58 @@ describe('SHAREPOINT_STORE_FILES', () => {
     ).toThrow(
       '"submissionEvents[0].configuration.folderPath" must not end with a forward slash ("/")',
     )
+  })
+})
+
+describe('CIVIC_REC_COMPLETE_CHECKOUT', () => {
+  const validSubmissionEvent = {
+    type: 'CIVIC_REC_COMPLETE_CHECKOUT',
+    configuration: {},
+  }
+  it('should allow empty object as the configuration', () => {
+    const form = validateFormThrowError({
+      ...defaultForm,
+      submissionEvents: [validSubmissionEvent],
+    })
+
+    expect(form.submissionEvents[0]).toEqual({
+      ...validSubmissionEvent,
+      conditionallyExecute: false,
+      requiresAllConditionallyExecutePredicates: false,
+      configuration: {},
+    })
+  })
+
+  it('should strip out any additional data in the configuration', () => {
+    const form = validateFormThrowError({
+      ...defaultForm,
+      submissionEvents: [
+        {
+          ...validSubmissionEvent,
+          configuration: { fakeVariable: "I'm fake!" },
+        },
+      ],
+    })
+
+    expect(form.submissionEvents[0]).toEqual({
+      ...validSubmissionEvent,
+      conditionallyExecute: false,
+      requiresAllConditionallyExecutePredicates: false,
+      configuration: {},
+    })
+  })
+
+  it('should fail without empty configuration on the submission event', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        submissionEvents: [
+          {
+            type: 'CIVIC_REC_COMPLETE_CHECKOUT',
+          },
+        ],
+      }),
+    ).toThrow('"submissionEvents[0].configuration" is required')
   })
 })
 
