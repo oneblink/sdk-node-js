@@ -43,4 +43,5 @@ export default Joi.object({
   addressTypeFilter: Joi.array().items(Joi.string()),
   customCssClasses,
   autocompleteAttributes,
+  isDisplayingAddressInformation: Joi.boolean().default(false),
 })
