@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `sharepointIntegrationEntraApplicationId` to form validation
 - custom pdf read only validation
 - Civic Rec Workflow Event validation
 - `isDisplayingAddressInformation` to `pointAddress` form element
