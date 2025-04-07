@@ -25,7 +25,8 @@ export default Joi.object({
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   customCssClasses,
-  webMapId: Joi.string().required(),
+  webMapId: Joi.string(),
+  basemapId: Joi.string(),
   showLayerPanel: Joi.boolean().default(false),
   defaultValue: Joi.object({
     userInput: Joi.array().items(Joi.object<Record<string, unknown>>({})),
@@ -38,5 +39,10 @@ export default Joi.object({
           .required(),
       }),
     ),
+    view: Joi.object({
+      zoom: Joi.number().required(),
+      latitude: Joi.number().required(),
+      longitude: Joi.number().required(),
+    }),
   }),
 })
