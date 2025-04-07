@@ -44,4 +44,5 @@ export default Joi.object({
   customCssClasses,
   autocompleteAttributes,
   isDisplayingAddressInformation: Joi.boolean().default(false),
+  version: Joi.string().valid('v2', 'v3'),
 })
