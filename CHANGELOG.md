@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `version` to NSW Point address form element validation
 
+### Changed
+
+- `arcGISWebMap` element schema
+
 ## [11.1.0] - 2025-04-04
 
 ### Added
