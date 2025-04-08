@@ -28,6 +28,13 @@ export default Joi.object({
   webMapId: Joi.string(),
   basemapId: Joi.string(),
   showLayerPanel: Joi.boolean().default(false),
+  allowedDrawingWidgets: Joi.array().items(
+    Joi.object({
+      type: Joi.string().required(),
+    }),
+  ),
+  addressSearchWidgetEnabled: Joi.boolean().default(true),
+  homeWidgetEnabled: Joi.boolean().default(true),
   defaultValue: Joi.object({
     userInput: Joi.array().items(Joi.object<Record<string, unknown>>({})),
     drawingLayer: Joi.array().items(Joi.object<Record<string, unknown>>({})),
