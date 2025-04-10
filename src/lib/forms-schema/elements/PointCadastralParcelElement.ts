@@ -14,7 +14,7 @@ import {
   autocompleteAttributes,
 } from '../property-schemas'
 
-export const type = 'pointAddress'
+export const type = 'pointCadastralParcel'
 
 export default Joi.object({
   ...baseSchemas,
@@ -27,21 +27,6 @@ export default Joi.object({
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   placeholderValue,
-  stateTerritoryFilter: Joi.array().items(
-    Joi.string().valid(
-      'NSW',
-      'QLD',
-      'VIC',
-      'ACT',
-      'TAS',
-      'SA',
-      'NT',
-      'WA',
-      'OT',
-    ),
-  ),
-  addressTypeFilter: Joi.array().items(Joi.string()),
   customCssClasses,
   autocompleteAttributes,
-  isDisplayingAddressInformation: Joi.boolean().default(false),
 })

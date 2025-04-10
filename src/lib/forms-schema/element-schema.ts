@@ -73,6 +73,9 @@ import GeoscapeElement, {
   type as geoscapeElementType,
 } from './elements/GeoscapeElement'
 import PointElement, { type as pointElementType } from './elements/PointElement'
+import PointCadastralParcelElement, {
+  type as pointCadastralParcelType,
+} from './elements/PointCadastralParcelElement'
 import GoogleAddressElement, {
   type as googleAddressElementType,
 } from './elements/GoogleAddressElement'
@@ -141,6 +144,7 @@ const elementTypesMap: Record<
   [freshdeskDependentFieldType]: null,
   [liquorLicenceElementType]: null,
   [ArcGISWebMapElementType]: null,
+  [pointCadastralParcelType]: null,
 }
 
 const typeCase = (type: FormTypes.FormElementType) => {
@@ -241,6 +245,9 @@ const schema = Joi.object({
   })
   .when(typeCase('pointAddress'), {
     then: PointElement,
+  })
+  .when(typeCase('pointCadastralParcel'), {
+    then: PointCadastralParcelElement,
   })
   .when(typeCase('googleAddress'), {
     then: GoogleAddressElement,
