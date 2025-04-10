@@ -28,9 +28,15 @@ export default Joi.object({
   webMapId: Joi.string(),
   basemapId: Joi.string(),
   showLayerPanel: Joi.boolean().default(false),
-  allowedDrawingWidgets: Joi.array().items(
+  allowedDrawingTools: Joi.array().items(
     Joi.object({
       type: Joi.string().required(),
+      graphicTypes: Joi.array().items(
+        Joi.object({
+          label: Joi.string().required(),
+          value: Joi.string().required(),
+        }),
+      ),
     }),
   ),
   addressSearchWidgetEnabled: Joi.boolean().default(true),
