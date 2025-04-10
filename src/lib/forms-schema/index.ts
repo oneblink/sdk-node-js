@@ -693,7 +693,7 @@ const formSchema = Joi.object().keys({
   continueWithAutosave: Joi.boolean(),
   customCssClasses,
   pointAddressEnvironmentId: Joi.string(),
-  pointAddressV3EnvironmentId: Joi.string(),
+  pointAddressV3EnvironmentId: Joi.string().uuid(),
   sharepointIntegrationEntraApplicationId: Joi.string().uuid(),
   allowGeoscapeAddresses: Joi.boolean(),
   slug: Joi.string()
