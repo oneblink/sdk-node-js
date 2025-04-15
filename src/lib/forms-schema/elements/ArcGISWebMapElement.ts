@@ -33,6 +33,7 @@ export default Joi.object({
       type: Joi.string().required(),
       graphicTypes: Joi.array().items(
         Joi.object({
+          id: Joi.string().required(),
           label: Joi.string().required(),
           value: Joi.string().required(),
         }),
