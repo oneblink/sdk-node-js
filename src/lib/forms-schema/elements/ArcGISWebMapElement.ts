@@ -31,7 +31,7 @@ export default Joi.object({
   allowedDrawingTools: Joi.array().items(
     Joi.object({
       type: Joi.string().required(),
-      graphicTypes: Joi.array().items(
+      graphicAttributeOptions: Joi.array().items(
         Joi.object({
           id: Joi.string().required(),
           label: Joi.string().required(),
