@@ -43,13 +43,17 @@ export default Joi.object({
   addressSearchWidgetEnabled: Joi.boolean().default(false),
   homeWidgetEnabled: Joi.boolean().default(false),
   defaultValue: Joi.object({
-    userInput: Joi.array().items(Joi.object<Record<string, unknown>>({})),
-    drawingLayer: Joi.array().items(Joi.object<Record<string, unknown>>({})),
+    userInput: Joi.array().items(
+      Joi.object<Record<string, unknown>>().unknown(true),
+    ),
+    drawingLayer: Joi.array().items(
+      Joi.object<Record<string, unknown>>().unknown(true),
+    ),
     layers: Joi.array().items(
       Joi.object({
         title: Joi.string().required(),
         graphics: Joi.array()
-          .items(Joi.object<Record<string, unknown>>({}))
+          .items(Joi.object<Record<string, unknown>>().unknown(true))
           .required(),
       }),
     ),
