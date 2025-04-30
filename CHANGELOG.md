@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.2.0] - 2025-04-30
+
 ### Added
 
 - `pointCadastralParcel` form element type
@@ -14,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - `arcGISWebMap` element schema
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [8.1.0-beta.5](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [8.0.0-beta.3](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
 
 ## [11.1.0] - 2025-04-04
 
