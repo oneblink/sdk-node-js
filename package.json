@@ -1,7 +1,7 @@
 {
   "name": "@oneblink/sdk",
   "description": "OneBlink SDK to serve as an entry point for all OneBlink Services in NodeJS",
-  "version": "11.2.1-beta.1",
+  "version": "11.2.1-beta.2",
   "author": "OneBlink <developers@oneblink.io> (https://oneblink.io)",
   "bugs": {
     "url": "https://github.com/oneblink/sdk-node-js/issues"
@@ -20,7 +20,7 @@
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.637.0",
     "@microsoft/eslint-plugin-sdl": "^0.2.2",
-    "@oneblink/release-cli": "^3.3.1-beta.3",
+    "@oneblink/release-cli": "^3.3.1-beta.4",
     "@oneblink/types": "github:oneblink/types",
     "@types/content-disposition": "^0.5.8",
     "@types/jest": "^29.5.12",
