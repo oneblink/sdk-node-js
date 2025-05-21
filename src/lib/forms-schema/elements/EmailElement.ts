@@ -32,4 +32,5 @@ export default Joi.object({
   ...regexSchemas,
   customCssClasses,
   autocompleteAttributes,
+  requiresConfirmation: Joi.boolean().default(false),
 })
