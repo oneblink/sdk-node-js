@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 `requiresConfirmation` to Email Element
+`displayAsCheckbox` to `BooleanElement`
 
 ## [11.3.1] - 2025-05-22
 
