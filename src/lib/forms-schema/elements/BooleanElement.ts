@@ -25,5 +25,6 @@ export default Joi.object({
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   defaultValue: Joi.boolean().default(false),
+  displayAsCheckbox: Joi.boolean().allow(null),
   customCssClasses,
 })

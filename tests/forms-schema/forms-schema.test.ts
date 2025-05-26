@@ -4727,6 +4727,7 @@ describe('CP_HCMS submission event', () => {
           name: 'notification',
           label: 'Notification',
           type: 'boolean',
+          displayAsCheckbox: true,
         },
       ],
       submissionEvents: [
