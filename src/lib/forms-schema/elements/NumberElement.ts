@@ -78,6 +78,11 @@ export default Joi.object({
     then: Joi.boolean().default(false),
     otherwise: Joi.any().strip(),
   }),
+  displayAsCurrency: Joi.when('type', {
+    is: 'number',
+    then: Joi.boolean().default(false),
+    otherwise: Joi.any().strip(),
+  }),
   defaultValue: Joi.when('minNumber', {
     is: Joi.number().required(),
     then: Joi.when('isInteger', {
