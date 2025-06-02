@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 `requiresConfirmation` to Email Element
 `displayAsCheckbox` to `BooleanElement`
+`displayAsCurrency` to `NumberElement`
 
 ## [11.3.1] - 2025-05-22
 

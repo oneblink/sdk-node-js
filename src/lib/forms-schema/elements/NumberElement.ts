@@ -78,7 +78,7 @@ export default Joi.object({
     then: Joi.boolean().default(false),
     otherwise: Joi.any().strip(),
   }),
-  isCurrency: Joi.when('type', {
+  displayAsCurrency: Joi.when('type', {
     is: 'number',
     then: Joi.boolean().default(false),
     otherwise: Joi.any().strip(),
