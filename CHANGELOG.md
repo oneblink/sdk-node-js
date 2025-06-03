@@ -7,11 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.4.0] - 2025-06-03
+
 ### Added
 
 `requiresConfirmation` to Email Element
 `displayAsCheckbox` to `BooleanElement`
 `displayAsCurrency` to `NumberElement`
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [8.4.0-beta.2](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [8.3.0-beta.2](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
 
 ## [11.3.1] - 2025-05-22
 
