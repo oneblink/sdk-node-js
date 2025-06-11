@@ -1,6 +1,7 @@
 import querystring from 'querystring'
 
 import fetch, { Response, BodyInit } from 'node-fetch'
+import { KeyTypes } from '@oneblink/types'
 import {
   OneBlinkDownloader,
   OneBlinkUploader,
@@ -59,15 +60,25 @@ export default class OneBlinkAPI {
     const storageConstructorOptions: StorageConstructorOptions = {
       apiOrigin: OneBlinkAPI.tenant.apiOrigin,
       region: OneBlinkAPI.tenant.awsRegion,
-      getBearerToken: async () =>
-        generateJWT({
-          accessKey: this.accessKey,
-          secretKey: this.secretKey,
-          expiresInSeconds: this.jwtExpiry,
-        }),
+      getBearerToken: async () => this.generateBearerToken(),
     }
     this.oneBlinkUploader = new OneBlinkUploader(storageConstructorOptions)
     this.oneBlinkDownloader = new OneBlinkDownloader(storageConstructorOptions)
+  }
+
+  /** @internal */
+  generateBearerToken(options?: {
+    expiresInSeconds?: number
+    developerKeyAccess?: KeyTypes.DeveloperKeyAccess
+    username?: string
+  }): string {
+    return generateJWT({
+      accessKey: this.accessKey,
+      secretKey: this.secretKey,
+      expiresInSeconds: options?.expiresInSeconds || this.jwtExpiry,
+      username: options?.username,
+      developerKeyAccess: options?.developerKeyAccess,
+    })
   }
 
   /** @internal */
@@ -76,11 +87,7 @@ export default class OneBlinkAPI {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       'User-Agent': `Node.js ${pkg.name} / ${pkg.version}`,
-      Authorization: `Bearer ${generateJWT({
-        accessKey: this.accessKey,
-        secretKey: this.secretKey,
-        expiresInSeconds: this.jwtExpiry,
-      })}`,
+      Authorization: `Bearer ${this.generateBearerToken()}`,
     }
   }
 

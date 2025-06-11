@@ -21,6 +21,10 @@ describe('Forms SDK Class', () => {
             this.secretKey = secretKey
           }
 
+          generateBearerToken() {
+            return ''
+          }
+
           getRequest(path: string) {
             if (path === '/forms/1') {
               return Promise.resolve({

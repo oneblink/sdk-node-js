@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `description` to `ArcGISWebMapElement.allowedDrawingTools.graphicAttributeOptions`
+- `generateBearerToken()` function to `OneBlinkAPI` class
 
 ## [11.4.0] - 2025-06-03
 
