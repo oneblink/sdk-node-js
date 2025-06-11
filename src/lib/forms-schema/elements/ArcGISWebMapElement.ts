@@ -36,7 +36,7 @@ export default Joi.object({
           id: Joi.string().required(),
           label: Joi.string().required(),
           value: Joi.string().required(),
-          description: Joi.string().optional(),
+          description: Joi.string(),
         }),
       ),
     }),
