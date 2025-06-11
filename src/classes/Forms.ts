@@ -1,7 +1,6 @@
 import { HeadObjectOutput } from '@aws-sdk/client-s3'
 import { Readable } from 'stream'
 import generateFormUrl from '../lib/generate-form-url'
-import generateJWT from '../lib/generate-jwt'
 import OneBlinkAPI from '../lib/one-blink-api'
 import generateFormElement from '../lib/generate-form-element'
 import generatePageElement from '../lib/generate-page-element'
@@ -202,9 +201,7 @@ export default class Forms extends OneBlinkAPI {
     // Default expiry for token is 8 hours
     const jwtExpiry = expiryInSeconds || 28800
 
-    const token = generateJWT({
-      accessKey: this.accessKey,
-      secretKey: this.secretKey,
+    const token = this.generateBearerToken({
       expiresInSeconds: jwtExpiry,
       developerKeyAccess,
       username,
