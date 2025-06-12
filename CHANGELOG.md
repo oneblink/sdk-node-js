@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `description` to `ArcGISWebMapElement.allowedDrawingTools.graphicAttributeOptions`
 - `generateBearerToken()` function to `OneBlinkAPI` class
+- `id` to `ArcGISWebMapElement.defaultValue.layers`
 
 ## [11.4.0] - 2025-06-03
 
