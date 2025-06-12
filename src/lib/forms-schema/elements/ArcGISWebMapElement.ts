@@ -52,6 +52,7 @@ export default Joi.object({
     ),
     layers: Joi.array().items(
       Joi.object({
+        id: Joi.string().required(),
         title: Joi.string().required(),
         graphics: Joi.array()
           .items(Joi.object<Record<string, unknown>>().unknown(true))
