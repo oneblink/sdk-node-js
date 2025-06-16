@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.5.0] - 2025-06-16
+
 ### Added
 
 - `description` to `ArcGISWebMapElement.allowedDrawingTools.graphicAttributeOptions`
