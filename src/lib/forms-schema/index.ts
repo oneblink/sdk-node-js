@@ -17,6 +17,7 @@ export const postSubmissionActions: FormTypes.FormPostSubmissionAction[] = [
 const emailSchema = Joi.alternatives([
   Joi.string().email(),
   Joi.string().regex(/^{ELEMENT:\S+}$/),
+  Joi.string().regex(/^{ELEMENT_VALUE:\S+}$/),
   Joi.string().regex(/^{USER:email}$/),
 ])
 

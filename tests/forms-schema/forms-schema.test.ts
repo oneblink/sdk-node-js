@@ -3571,6 +3571,12 @@ describe('PDF submission event', () => {
               email: '{USER:email}',
             },
           },
+          {
+            type: 'PDF',
+            configuration: {
+              email: '{ELEMENT_VALUE:abc}',
+            },
+          },
         ],
       },
 
