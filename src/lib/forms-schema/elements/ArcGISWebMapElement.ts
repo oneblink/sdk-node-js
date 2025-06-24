@@ -54,6 +54,7 @@ export default Joi.object({
       Joi.object({
         id: Joi.string().required(),
         title: Joi.string().required(),
+        visible: Joi.boolean().required(),
         graphics: Joi.array()
           .items(Joi.object<Record<string, unknown>>().unknown(true))
           .required(),
