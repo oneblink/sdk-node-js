@@ -21,7 +21,7 @@
     "@aws-sdk/client-s3": "^3.637.0",
     "@microsoft/eslint-plugin-sdl": "^0.2.2",
     "@oneblink/release-cli": "^3.3.1-beta.4",
-    "@oneblink/types": "github:oneblink/types",
+    "@oneblink/types": "github:oneblink/types#3be01d41cf90b151e948e40e424321b4596e5fb1",
     "@types/content-disposition": "^0.5.8",
     "@types/jest": "^29.5.12",
     "@types/joi": "^17.2.3",
