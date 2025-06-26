@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `ELEMENT_VALUE:` to `emailSchema`
+- `maxFilesSize` to `FilesElement`
 
 ## [11.5.0] - 2025-06-16
 
