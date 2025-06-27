@@ -729,6 +729,9 @@ const formSchema = Joi.object().keys({
           .required(),
       }),
     ),
+  footer: Joi.object({
+    html: htmlString.required(),
+  }),
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
