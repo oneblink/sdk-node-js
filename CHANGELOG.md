@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `restrictFileSize` and `maxFilesSize` to `FilesElement`
+- `lookupButton` form element to validation
 
 ## [11.6.0] - 2025-07-01
 
