@@ -7,12 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `restrictFileSize` and `maxFilesSize` to `FilesElement`
+
 ## [11.6.0] - 2025-07-01
 
 ### Added
 
 - `ELEMENT_VALUE:` to `emailSchema`
-- `restrictFileSize` and `maxFilesSize` to `FilesElement`
 
 ### Dependencies
 
