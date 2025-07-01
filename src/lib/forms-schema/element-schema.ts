@@ -99,6 +99,9 @@ import LiquorLicenceElement, {
 import ArcGISWebMapElement, {
   type as ArcGISWebMapElementType,
 } from './elements/ArcGISWebMapElement'
+import LookupButtonElement, {
+  type as lookupButtonElementType,
+} from './elements/LookupButtonElement'
 // Creating an object here so we get a Typescript error when adding a
 // new element type and forgetting to add to the array of allowed types
 const elementTypesMap: Record<
@@ -145,6 +148,7 @@ const elementTypesMap: Record<
   [liquorLicenceElementType]: null,
   [ArcGISWebMapElementType]: null,
   [pointCadastralParcelType]: null,
+  [lookupButtonElementType]: null,
 }
 
 const typeCase = (type: FormTypes.FormElementType) => {
@@ -273,7 +277,14 @@ const schema = Joi.object({
   .when(typeCase(freshdeskDependentFieldType), {
     then: FreshdeskDependentFieldElement,
   })
-  .when(typeCase(liquorLicenceElementType), { then: LiquorLicenceElement })
-  .when(typeCase(ArcGISWebMapElementType), { then: ArcGISWebMapElement })
+  .when(typeCase(liquorLicenceElementType), {
+    then: LiquorLicenceElement,
+  })
+  .when(typeCase(ArcGISWebMapElementType), {
+    then: ArcGISWebMapElement,
+  })
+  .when(typeCase(lookupButtonElementType), {
+    then: LookupButtonElement,
+  })
 
 export default schema

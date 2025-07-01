@@ -420,6 +420,22 @@ describe('Valid Form Schema with Pages', () => {
             isDataLookup: true,
             dataLookupId: 1,
           },
+          {
+            id: '9014e80c-3c68-4adb-a338-1be04ebc9511',
+            name: 'My_Lookup_Button',
+            label: 'My Lookup Button',
+            type: 'lookupButton',
+            elementDependencies: [
+              {
+                type: 'FORM_ELEMENT',
+                elementId: '0729643a-5ffe-416d-8d4b-337e73e96714',
+              },
+              {
+                type: 'FORM_ELEMENT',
+                elementId: '9014e80c-3c68-4adb-a338-1be04ebc95ef',
+              },
+            ],
+          },
         ],
       },
     ],
@@ -448,7 +464,8 @@ describe('Valid Form Schema with Pages', () => {
           element.type === 'infoPage' ||
           element.type === 'image' ||
           element.type === 'html' ||
-          element.type === 'heading'
+          element.type === 'heading' ||
+          element.type === 'lookupButton'
         ) {
           // @ts-expect-error "readyOnly" should be here, hence the check
           expect(element.readOnly).toBeUndefined()
@@ -814,6 +831,22 @@ describe('Valid Form Schema', () => {
         required: false,
         defaultValue: '923-100',
       },
+      {
+        id: '9014e80c-3c68-4adb-a338-1be04ebc9511',
+        name: 'My_Lookup_Button',
+        label: 'My Lookup Button',
+        type: 'lookupButton',
+        elementDependencies: [
+          {
+            type: 'FORM_ELEMENT',
+            elementId: '0729643a-5ffe-416d-8d4b-337e73e96714',
+          },
+          {
+            type: 'FORM_ELEMENT',
+            elementId: '9014e80c-3c68-4adb-a338-1be04ebc95ef',
+          },
+        ],
+      },
     ],
   })
 
@@ -828,7 +861,8 @@ describe('Valid Form Schema', () => {
         element.type === 'infoPage' ||
         element.type === 'image' ||
         element.type === 'html' ||
-        element.type === 'heading'
+        element.type === 'heading' ||
+        element.type === 'lookupButton'
       ) {
         // @ts-expect-error "readyOnly" should be here, hence the check
         expect(element.readOnly).toBeUndefined()
@@ -2408,7 +2442,7 @@ test('should error if page element has child page element', () => {
   )
 
   expect(error?.details[0].message).toContain(
-    '"elements[0].elements[0].type" must be one of [abn, apiNSWLiquorLicence, arcGISWebMap, autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, files, form, freshdeskDependentField, geoscapeAddress, googleAddress, heading, html, image, infoPage, location, number, pointAddress, pointCadastralParcel, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
+    '"elements[0].elements[0].type" must be one of [abn, apiNSWLiquorLicence, arcGISWebMap, autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, files, form, freshdeskDependentField, geoscapeAddress, googleAddress, heading, html, image, infoPage, location, lookupButton, number, pointAddress, pointCadastralParcel, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -2489,7 +2523,7 @@ test('should error if isMultiPage is set to false', () => {
   )
 
   expect(error?.details[0].message).toContain(
-    '"elements[0].type" must be one of [abn, apiNSWLiquorLicence, arcGISWebMap, autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, files, form, freshdeskDependentField, geoscapeAddress, googleAddress, heading, html, image, infoPage, location, number, pointAddress, pointCadastralParcel, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
+    '"elements[0].type" must be one of [abn, apiNSWLiquorLicence, arcGISWebMap, autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, files, form, freshdeskDependentField, geoscapeAddress, googleAddress, heading, html, image, infoPage, location, lookupButton, number, pointAddress, pointCadastralParcel, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -2643,7 +2677,7 @@ test('should error if isMultiPage is false even if all root elements are pages',
   )
 
   expect(error?.details[0].message).toBe(
-    '"elements[0].type" must be one of [abn, apiNSWLiquorLicence, arcGISWebMap, autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, files, form, freshdeskDependentField, geoscapeAddress, googleAddress, heading, html, image, infoPage, location, number, pointAddress, pointCadastralParcel, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
+    '"elements[0].type" must be one of [abn, apiNSWLiquorLicence, arcGISWebMap, autocomplete, barcodeScanner, boolean, bsb, calculation, camera, captcha, checkboxes, civicaNameRecord, civicaStreetName, compliance, date, datetime, draw, email, files, form, freshdeskDependentField, geoscapeAddress, googleAddress, heading, html, image, infoPage, location, lookupButton, number, pointAddress, pointCadastralParcel, radio, repeatableSet, section, select, summary, telephone, text, textarea, time]',
   )
 })
 
@@ -8280,6 +8314,53 @@ describe('Approval Step Nodes', () => {
       })
     }).toThrow(
       '"approvalSteps" contains a STANDARD step with a "label" (Label 1) property that is not unique',
+    )
+  })
+})
+
+describe('lookupButton form element', () => {
+  const form = {
+    name: 'string',
+    description: 'string',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: 'ORGANISATION_00000000001',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    isMultiPage: false,
+    isAuthenticated: true,
+    elements: [],
+    tags: [],
+  }
+
+  const lookupButtonElement = {
+    id: '9014e80c-3c68-4adb-a338-1be04ebc9511',
+    name: 'My_Lookup_Button',
+    label: 'My Lookup Button',
+    type: 'lookupButton',
+  }
+
+  test('should have appropriate error message when missing "elementDependencies"', () => {
+    const fn = () =>
+      validateFormThrowError({
+        ...form,
+        elements: [lookupButtonElement],
+      })
+    expect(fn).toThrow('"elements[0].elementDependencies" is required')
+  })
+
+  test('should have appropriate error message when "elementDependencies" is empty', () => {
+    const fn = () =>
+      validateFormThrowError({
+        ...form,
+        elements: [
+          {
+            ...lookupButtonElement,
+            elementDependencies: [],
+          },
+        ],
+      })
+    expect(fn).toThrow(
+      '"elements[0].elementDependencies" must contain at least 1 items',
     )
   })
 })
