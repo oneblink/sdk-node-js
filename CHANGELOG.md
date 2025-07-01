@@ -7,9 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.6.0] - 2025-07-01
+
 ### Added
 
 - `ELEMENT_VALUE:` to `emailSchema`
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [8.5.0-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [8.4.0-beta.2](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update [@oneblink/storage](https://www.npmjs.com/package/@oneblink/storage) to [3.1.0-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [3.0.0-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
 
 ## [11.5.0] - 2025-06-16
 
