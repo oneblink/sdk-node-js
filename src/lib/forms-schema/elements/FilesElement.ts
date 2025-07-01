@@ -37,6 +37,12 @@ export default Joi.object({
     then: Joi.number().min(Joi.ref('minEntries', { render: true })),
     otherwise: Joi.number().min(0),
   }),
+  restrictFileSize: Joi.boolean().default(false),
+  maxFileSize: Joi.when('restrictFileSize', {
+    is: Joi.valid(true),
+    then: Joi.number().min(1).required(),
+    otherwise: Joi.any().strip(),
+  }),
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   customCssClasses,
