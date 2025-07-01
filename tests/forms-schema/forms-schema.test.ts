@@ -425,6 +425,8 @@ describe('Valid Form Schema with Pages', () => {
             name: 'My_Lookup_Button',
             label: 'My Lookup Button',
             type: 'lookupButton',
+            isDataLookup: true,
+            dataLookupId: 1,
             elementDependencies: [
               {
                 type: 'FORM_ELEMENT',
@@ -836,6 +838,8 @@ describe('Valid Form Schema', () => {
         name: 'My_Lookup_Button',
         label: 'My Lookup Button',
         type: 'lookupButton',
+        isDataLookup: true,
+        dataLookupId: 1,
         elementDependencies: [
           {
             type: 'FORM_ELEMENT',
@@ -8337,30 +8341,40 @@ describe('lookupButton form element', () => {
     name: 'My_Lookup_Button',
     label: 'My Lookup Button',
     type: 'lookupButton',
+    isDataLookup: true,
+    dataLookupId: 1,
   }
 
-  test('should have appropriate error message when missing "elementDependencies"', () => {
-    const fn = () =>
-      validateFormThrowError({
-        ...form,
-        elements: [lookupButtonElement],
-      })
-    expect(fn).toThrow('"elements[0].elementDependencies" is required')
+  test('should default "elementDependencies" to empty array', () => {
+    const result = validateFormThrowError({
+      ...form,
+      elements: [lookupButtonElement],
+    })
+    expect(result.elements[0]).toEqual({
+      ...lookupButtonElement,
+      conditionallyShow: false,
+      isElementLookup: false,
+      elementDependencies: [],
+    })
   })
 
-  test('should have appropriate error message when "elementDependencies" is empty', () => {
+  test('should have appropriate error message when no lookup configration has been set', () => {
     const fn = () =>
       validateFormThrowError({
         ...form,
         elements: [
           {
             ...lookupButtonElement,
+            isDataLookup: false,
+            isElementLookup: false,
+            dataLookupId: undefined,
+            elementLookupId: undefined,
             elementDependencies: [],
           },
         ],
       })
     expect(fn).toThrow(
-      '"elements[0].elementDependencies" must contain at least 1 items',
+      '"elements[0]" must contain at least one of [isDataLookup, isElementLookup]',
     )
   })
 })

@@ -34,7 +34,8 @@ export default Joi.object({
   ...lookupSchemas,
   customCssClasses,
   elementDependencies: Joi.array()
-    .min(1)
     .items(lookupButtonFormElementDependencySchema)
-    .required(),
+    .default([]),
+}).or('isDataLookup', 'isElementLookup', {
+  isPresent: (resolved) => resolved === true,
 })
