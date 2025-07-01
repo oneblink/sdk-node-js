@@ -20,7 +20,7 @@
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.637.0",
     "@microsoft/eslint-plugin-sdl": "^0.2.2",
-    "@oneblink/release-cli": "^3.3.1-beta.4",
+    "@oneblink/release-cli": "^3.4.0",
     "@oneblink/types": "github:oneblink/types",
     "@types/content-disposition": "^0.5.8",
     "@types/jest": "^29.5.12",
@@ -78,6 +78,6 @@
     "test": "npm run jest",
     "types": "npm i -D github:oneblink/types",
     "typescript": "tsc --noEmit",
-    "update-dependents": "oneblink-release update-dependents"
+    "update-dependents": "oneblink-release update-dependents --force"
   }
 }
