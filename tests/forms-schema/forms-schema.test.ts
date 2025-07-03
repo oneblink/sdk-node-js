@@ -8377,4 +8377,209 @@ describe('lookupButton form element', () => {
       '"elements[0]" must contain at least one of [isDataLookup, isElementLookup]',
     )
   })
+
+  test('should handle "REPEATABLE_SET_FORM_ELEMENT" type', () => {
+    const result = validateFormThrowError({
+      ...form,
+      elements: [
+        {
+          type: 'repeatableSet',
+          id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+          name: 'My_Repeatable_Set',
+          label: 'My Repeatable Set',
+          addSetEntryLabel: 'Add an entry',
+          removeSetEntryLabel: 'Remove this entry',
+          elements: [
+            {
+              id: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+              type: 'text',
+              name: 'text',
+              label: 'Text',
+              conditionallyShow: false,
+              isDataLookup: false,
+              isElementLookup: false,
+            },
+          ],
+        },
+        {
+          ...lookupButtonElement,
+          isDataLookup: true,
+          dataLookupId: 1,
+          isElementLookup: false,
+          elementDependencies: [
+            {
+              elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+              type: 'REPEATABLE_SET_FORM_ELEMENT',
+              elementDependency: {
+                elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+                type: 'FORM_ELEMENT',
+              },
+            },
+          ],
+        },
+      ],
+    })
+    expect(result.elements).toEqual([
+      {
+        type: 'repeatableSet',
+        id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+        name: 'My_Repeatable_Set',
+        label: 'My Repeatable Set',
+        addSetEntryLabel: 'Add an entry',
+        removeSetEntryLabel: 'Remove this entry',
+        conditionallyShow: false,
+        readOnly: false,
+        elements: [
+          {
+            id: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+            type: 'text',
+            name: 'text',
+            label: 'Text',
+            conditionallyShow: false,
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            required: false,
+          },
+        ],
+      },
+      {
+        ...lookupButtonElement,
+        isDataLookup: true,
+        dataLookupId: 1,
+        isElementLookup: false,
+        conditionallyShow: false,
+        elementDependencies: [
+          {
+            elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+            type: 'REPEATABLE_SET_FORM_ELEMENT',
+            elementDependency: {
+              elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+              type: 'FORM_ELEMENT',
+            },
+          },
+        ],
+      },
+    ])
+  })
+
+  test('should handle "FORM_FORM_ELEMENT" type', () => {
+    const result = validateFormThrowError({
+      ...form,
+      elements: [
+        {
+          type: 'form',
+          id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+          name: 'My_Form',
+          formId: 1,
+        },
+        {
+          ...lookupButtonElement,
+          isDataLookup: true,
+          dataLookupId: 1,
+          isElementLookup: false,
+          elementDependencies: [
+            {
+              elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+              type: 'FORM_FORM_ELEMENT',
+              elementDependency: {
+                elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+                type: 'FORM_ELEMENT',
+              },
+            },
+          ],
+        },
+      ],
+    })
+    expect(result.elements).toEqual([
+      {
+        type: 'form',
+        id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+        name: 'My_Form',
+        formId: 1,
+        conditionallyShow: false,
+      },
+      {
+        ...lookupButtonElement,
+        isDataLookup: true,
+        dataLookupId: 1,
+        isElementLookup: false,
+        conditionallyShow: false,
+        elementDependencies: [
+          {
+            elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+            type: 'FORM_FORM_ELEMENT',
+            elementDependency: {
+              elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+              type: 'FORM_ELEMENT',
+            },
+          },
+        ],
+      },
+    ])
+  })
+
+  test('should handle nesting of all types', () => {
+    const result = validateFormThrowError({
+      ...form,
+      elements: [
+        {
+          type: 'form',
+          id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+          name: 'My_Form',
+          formId: 1,
+        },
+        {
+          ...lookupButtonElement,
+          isDataLookup: true,
+          dataLookupId: 1,
+          isElementLookup: false,
+          elementDependencies: [
+            {
+              elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+              type: 'FORM_FORM_ELEMENT',
+              elementDependency: {
+                elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+                type: 'REPEATABLE_SET_FORM_ELEMENT',
+                elementDependency: {
+                  elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+                  type: 'FORM_ELEMENT',
+                },
+              },
+            },
+          ],
+        },
+      ],
+    })
+    expect(result.elements).toEqual([
+      {
+        type: 'form',
+        id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+        name: 'My_Form',
+        formId: 1,
+        conditionallyShow: false,
+      },
+      {
+        ...lookupButtonElement,
+        isDataLookup: true,
+        dataLookupId: 1,
+        isElementLookup: false,
+        conditionallyShow: false,
+        elementDependencies: [
+          {
+            elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+            type: 'FORM_FORM_ELEMENT',
+            elementDependency: {
+              elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+              type: 'REPEATABLE_SET_FORM_ELEMENT',
+              elementDependency: {
+                elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+                type: 'FORM_ELEMENT',
+              },
+            },
+          },
+        ],
+      },
+    ])
+  })
 })
