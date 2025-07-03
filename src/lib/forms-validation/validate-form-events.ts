@@ -227,6 +227,23 @@ export const validateFormEvent = ({
       })
       break
     }
+    case 'GOOD_TO_GO_UPDATE_ASSET': {
+      const formElement = rootFormElements.find(
+        ({ id }) => id === formEvent.configuration.elementId,
+      )
+      if (!formElement) {
+        throw new Error(
+          `"${propertyName}.configuration.elementId" (${formEvent.configuration.elementId}) does not exist in "elements"`,
+        )
+      }
+
+      validateFormElementMappings({
+        mappings: formEvent.configuration.mapping,
+        validatedFormElements,
+        propertyName: `${propertyName}.configuration.mapping`,
+      })
+      break
+    }
     default: {
       break
     }
