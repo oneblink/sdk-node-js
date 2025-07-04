@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Dependencies
+
+- update [@oneblink/storage](https://www.npmjs.com/package/@oneblink/storage) to [3.1.1-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [3.1.0-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
+
 ## [11.6.0] - 2025-07-01
 
 ### Added
