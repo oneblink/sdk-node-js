@@ -462,7 +462,6 @@ describe('Valid Form Schema with Pages', () => {
     result.value.elements[0].elements.forEach(
       (element: FormTypes.FormElement) => {
         if (
-          element.type === 'form' ||
           element.type === 'infoPage' ||
           element.type === 'image' ||
           element.type === 'html' ||
@@ -5885,6 +5884,7 @@ describe('invalid property removal', () => {
       id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
       type: 'form',
       name: 'name',
+      readOnly: false,
       formId: 1,
       conditionallyShow: false,
     })
