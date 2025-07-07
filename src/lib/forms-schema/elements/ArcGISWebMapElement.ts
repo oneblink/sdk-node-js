@@ -43,6 +43,7 @@ export default Joi.object({
   ),
   addressSearchWidgetEnabled: Joi.boolean().default(false),
   homeWidgetEnabled: Joi.boolean().default(false),
+  measurementDimensionsEnabled: Joi.boolean().default(false),
   defaultValue: Joi.object({
     userInput: Joi.array().items(
       Joi.object<Record<string, unknown>>().unknown(true),
