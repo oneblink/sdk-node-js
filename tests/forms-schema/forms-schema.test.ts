@@ -3450,6 +3450,145 @@ describe('Freshdesk add note Submission Event', () => {
   })
 })
 
+describe('GoodToGo Update Asset Submission Event', () => {
+  test('should allow GoodToGo Update Asset submission event', () => {
+    const submissionEvents = [
+      {
+        type: 'GOOD_TO_GO_UPDATE_ASSET',
+        conditionallyExecute: false,
+        requiresAllConditionallyExecutePredicates: false,
+        configuration: {
+          elementId: '4e4b41e9-6fac-44f2-8b42-dacc8b29d048',
+          integrationKeyId: 'de76a922-5ae4-45e8-8bdc-c3c8d5fce1ec',
+          mapping: [
+            {
+              goodToGoFieldName: 'customNameNested',
+              type: 'FORM_FORM_ELEMENT',
+              formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+              mapping: {
+                goodToGoFieldName: 'customNameNested',
+                type: 'FORM_FORM_ELEMENT',
+                formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a90',
+                mapping: {
+                  goodToGoFieldName: 'customNameNested',
+                  type: 'FORM_ELEMENT',
+                  formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a90',
+                },
+              },
+            },
+            {
+              goodToGoFieldName: 'customName',
+              type: 'FORM_ELEMENT',
+              formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            },
+            {
+              goodToGoFieldName: 'customNameTwo',
+              type: 'VALUE',
+              value: true,
+            },
+            {
+              goodToGoFieldName: 'customNameThree',
+              type: 'SUBMISSION_ID',
+            },
+            {
+              goodToGoFieldName: 'customNameFour',
+              type: 'EXTERNAL_ID',
+            },
+          ],
+        },
+      },
+    ]
+    const { error, value } = formSchema.validate(
+      {
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: '4e4b41e9-6fac-44f2-8b42-dacc8b29d048',
+            type: 'text',
+            name: 'assetId',
+            label: 'Asset ID',
+          },
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            type: 'text',
+            name: 'assetName',
+            label: 'Asset Name',
+          },
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+            type: 'form',
+            name: 'nested',
+            formId: 1,
+          },
+        ],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents,
+      },
+
+      {
+        abortEarly: false,
+        stripUnknown: true,
+      },
+    )
+    expect(error).toBe(undefined)
+    expect(value.submissionEvents).toEqual(submissionEvents)
+  })
+  test('should not allow GoodToGo Update Asset submission event with wrong formElementId', () => {
+    const run = () =>
+      validateFormThrowError({
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        elements: [
+          {
+            id: '4e4b41e9-6fac-44f2-8b42-dacc8b29d048',
+            type: 'text',
+            name: 'assetId',
+            label: 'Asset ID',
+          },
+          {
+            id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
+            type: 'text',
+            name: 'assetName',
+            label: 'Asset Name',
+          },
+        ],
+        isAuthenticated: true,
+        tags: [],
+        submissionEvents: [
+          {
+            type: 'GOOD_TO_GO_UPDATE_ASSET',
+            configuration: {
+              elementId: '4e4b41e9-6fac-44f2-8b42-dacc8b29d048',
+              integrationKeyId: 'de76a922-5ae4-45e8-8bdc-c3c8d5fce1ec',
+              mapping: [
+                {
+                  goodToGoFieldName: 'someName',
+                  type: 'FORM_ELEMENT',
+                  formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a80',
+                },
+              ],
+            },
+          },
+        ],
+      })
+    expect(run).toThrow(
+      '"submissionEvents[0].configuration.mapping[0].formElementId" (ff9b04c3-f2ad-4994-a525-e7189eb67a80) does not exist in "elements".',
+    )
+  })
+})
+
 describe('PDF submission event', () => {
   test('should allow Email submission event', () => {
     const submissionEvents = [
