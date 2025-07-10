@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `GOOD_TO_GO_UPDATE_ASSET` form worklow event
+
 ## [11.7.0] - 2025-07-10
 
 ### Added

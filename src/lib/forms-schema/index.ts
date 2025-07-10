@@ -250,6 +250,7 @@ export const formWorkflowEventTypes: SubmissionEventTypes.FormWorkflowEventType[
     'SHAREPOINT_CREATE_LIST_ITEM',
     'SHAREPOINT_STORE_FILES',
     'CIVIC_REC_COMPLETE_CHECKOUT',
+    'GOOD_TO_GO_UPDATE_ASSET',
   ]
 
 export const WorkflowEventSchema = Joi.object().keys({
@@ -485,6 +486,22 @@ export const WorkflowEventSchema = Joi.object().keys({
     .when('type', {
       is: 'CIVIC_REC_COMPLETE_CHECKOUT',
       then: Joi.object().keys({}),
+    })
+    .when('type', {
+      is: 'GOOD_TO_GO_UPDATE_ASSET',
+      then: Joi.object().keys({
+        elementId: Joi.string().uuid().required(),
+        integrationKeyId: Joi.string().required(),
+        mapping: Joi.array().items(
+          Joi.object({
+            goodToGoFieldName: Joi.string().required(),
+            ...generateFormWorkflowEventElementMappingKeys(
+              'GoodToGoUpdateAssetMappingSchema',
+              [],
+            ),
+          }).id('GoodToGoUpdateAssetMappingSchema'),
+        ),
+      }),
     }),
   ...formEventBaseSchema,
 })
