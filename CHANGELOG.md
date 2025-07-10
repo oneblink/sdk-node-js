@@ -7,12 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.7.0] - 2025-07-10
+
 ### Added
 
 - `restrictFileSize` and `maxFilesSize` to `FilesElement`
 - `lookupButton` form element to validation
 - `visible` to `ArcGISWebMapElement.defaultValue.layers`
 - `measurementDimensionsEnabled` to `ArcGISWebMapElement`
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [8.5.1-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [8.5.0-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update [@oneblink/storage](https://www.npmjs.com/package/@oneblink/storage) to [3.2.0-beta.4](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [3.1.0-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
 
 ## [11.6.0] - 2025-07-01
 
