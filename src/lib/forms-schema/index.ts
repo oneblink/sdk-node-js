@@ -659,6 +659,7 @@ const formSchema = Joi.object().keys({
     ),
   approvalConfiguration: Joi.object({
     defaultNotificationEmailElementId: Joi.string().guid(),
+    sendNotificationEmailOptionDefaultUnchecked: Joi.boolean(),
     approveCannedResponses: cannedResponsesSchema,
     clarificationRequestCannedResponses: cannedResponsesSchema,
     denyCannedResponses: cannedResponsesSchema,
