@@ -3462,36 +3462,36 @@ describe('GoodToGo Update Asset Submission Event', () => {
           integrationKeyId: 'de76a922-5ae4-45e8-8bdc-c3c8d5fce1ec',
           mapping: [
             {
-              goodToGoFieldName: 'customNameNested',
+              goodToGoCustomFieldName: 'customNameNested',
               type: 'FORM_FORM_ELEMENT',
               formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
               mapping: {
-                goodToGoFieldName: 'customNameNested',
+                goodToGoCustomFieldName: 'customNameNested',
                 type: 'FORM_FORM_ELEMENT',
                 formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a90',
                 mapping: {
-                  goodToGoFieldName: 'customNameNested',
+                  goodToGoCustomFieldName: 'customNameNested',
                   type: 'FORM_ELEMENT',
                   formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a90',
                 },
               },
             },
             {
-              goodToGoFieldName: 'customName',
+              goodToGoCustomFieldName: 'customName',
               type: 'FORM_ELEMENT',
               formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a78',
             },
             {
-              goodToGoFieldName: 'customNameTwo',
+              goodToGoCustomFieldName: 'customNameTwo',
               type: 'VALUE',
               value: true,
             },
             {
-              goodToGoFieldName: 'customNameThree',
+              goodToGoCustomFieldName: 'customNameThree',
               type: 'SUBMISSION_ID',
             },
             {
-              goodToGoFieldName: 'customNameFour',
+              goodToGoCustomFieldName: 'customNameFour',
               type: 'EXTERNAL_ID',
             },
           ],
@@ -3574,7 +3574,7 @@ describe('GoodToGo Update Asset Submission Event', () => {
               integrationKeyId: 'de76a922-5ae4-45e8-8bdc-c3c8d5fce1ec',
               mapping: [
                 {
-                  goodToGoFieldName: 'someName',
+                  goodToGoCustomFieldName: 'someName',
                   type: 'FORM_ELEMENT',
                   formElementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a80',
                 },
