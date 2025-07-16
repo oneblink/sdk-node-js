@@ -492,15 +492,17 @@ export const WorkflowEventSchema = Joi.object().keys({
       then: Joi.object().keys({
         elementId: Joi.string().uuid().required(),
         integrationKeyId: Joi.string().required(),
-        mapping: Joi.array().items(
-          Joi.object({
-            goodToGoCustomFieldName: Joi.string().required(),
-            ...generateFormWorkflowEventElementMappingKeys(
-              'GoodToGoUpdateAssetMappingSchema',
-              [],
-            ),
-          }).id('GoodToGoUpdateAssetMappingSchema'),
-        ),
+        mapping: Joi.array()
+          .items(
+            Joi.object({
+              goodToGoCustomFieldName: Joi.string().required(),
+              ...generateFormWorkflowEventElementMappingKeys(
+                'GoodToGoUpdateAssetMappingSchema',
+                [],
+              ),
+            }).id('GoodToGoUpdateAssetMappingSchema'),
+          )
+          .default([]),
       }),
     }),
   ...formEventBaseSchema,
