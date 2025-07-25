@@ -7,10 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.8.0] - 2025-07-25
+
 ### Added
 
 - `GOOD_TO_GO_UPDATE_ASSET` form worklow event
 - `sendNotificationEmailOptionDefaultUnchecked` to `approvalConfiguration`
+
+### Dependencies
+
+- update [@oneblink/sdk-core](https://www.npmjs.com/package/@oneblink/sdk-core) to [8.6.0-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [8.5.1-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update [@oneblink/storage](https://www.npmjs.com/package/@oneblink/storage) to [3.2.1-beta.2](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [3.2.0-beta.4](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
 
 ## [11.7.0] - 2025-07-10
 
