@@ -67,4 +67,25 @@ export default Joi.object({
       longitude: Joi.number().required(),
     }),
   }),
+  snapshotImagesEnabled: Joi.boolean().default(false),
+  minSnapshotImages: Joi.alternatives([
+    Joi.number().min(0),
+    Joi.object({
+      type: Joi.string().valid('FORM_ELEMENT').required(),
+      elementId: Joi.string().uuid().required(),
+    }),
+  ]),
+  maxSnapshotImages: Joi.alternatives([
+    Joi.number().when('minSnapshotImages', {
+      is: Joi.number().required().min(0),
+      then: Joi.number().min(Joi.ref('minSnapshotImages', { render: true })),
+      otherwise: Joi.number().min(0),
+    }),
+    Joi.object({
+      type: Joi.string().valid('FORM_ELEMENT').required(),
+      elementId: Joi.string().uuid().required(),
+    }),
+  ]),
+  snapshotImageButtonText: Joi.string(),
+  snapshotImageButtonIcon: Joi.string(),
 })
