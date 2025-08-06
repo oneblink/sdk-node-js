@@ -30,7 +30,9 @@ export default Joi.object({
   showLayerPanel: Joi.boolean().default(false),
   allowedDrawingTools: Joi.array().items(
     Joi.object({
-      type: Joi.string().required(),
+      type: Joi.string()
+        .required()
+        .valid('point', 'polyline', 'polygon', 'rectangle', 'circle'),
       graphicAttributeOptions: Joi.array().items(
         Joi.object({
           id: Joi.string().required(),
@@ -68,24 +70,28 @@ export default Joi.object({
     }),
   }),
   snapshotImagesEnabled: Joi.boolean().default(false),
-  minSnapshotImages: Joi.alternatives([
-    Joi.number().min(0),
-    Joi.object({
-      type: Joi.string().valid('FORM_ELEMENT').required(),
-      elementId: Joi.string().uuid().required(),
-    }),
-  ]),
-  maxSnapshotImages: Joi.alternatives([
-    Joi.number().when('minSnapshotImages', {
-      is: Joi.number().required().min(0),
+  minSnapshotImages: Joi.number().when('snapshotImagesEnabled', {
+    is: true,
+    then: Joi.number().integer().positive(),
+    otherwise: Joi.any().strip(),
+  }),
+  maxSnapshotImages: Joi.number().when('snapshotImagesEnabled', {
+    is: true,
+    then: Joi.number().when('minSnapshotImages', {
+      is: Joi.number().required(),
       then: Joi.number().min(Joi.ref('minSnapshotImages', { render: true })),
-      otherwise: Joi.number().min(0),
+      otherwise: Joi.number().integer().positive(),
     }),
-    Joi.object({
-      type: Joi.string().valid('FORM_ELEMENT').required(),
-      elementId: Joi.string().uuid().required(),
-    }),
-  ]),
-  snapshotImageButtonText: Joi.string(),
-  snapshotImageButtonIcon: Joi.string(),
+    otherwise: Joi.any().strip(),
+  }),
+  snapshotImageButtonText: Joi.string().when('snapshotImagesEnabled', {
+    is: true,
+    then: Joi.string(),
+    otherwise: Joi.any().strip(),
+  }),
+  snapshotImageButtonIcon: Joi.string().when('snapshotImagesEnabled', {
+    is: true,
+    then: Joi.string(),
+    otherwise: Joi.any().strip(),
+  }),
 })

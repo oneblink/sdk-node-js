@@ -7724,6 +7724,397 @@ describe('Location Element', () => {
   })
 })
 
+describe('lookupButton form element', () => {
+  const form = {
+    name: 'string',
+    description: 'string',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: 'ORGANISATION_00000000001',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    isMultiPage: false,
+    isAuthenticated: true,
+    elements: [],
+    tags: [],
+  }
+
+  const lookupButtonElement = {
+    id: '9014e80c-3c68-4adb-a338-1be04ebc9511',
+    name: 'My_Lookup_Button',
+    label: 'My Lookup Button',
+    type: 'lookupButton',
+    isDataLookup: true,
+    dataLookupId: 1,
+  }
+
+  test('should default "elementDependencies" to empty array', () => {
+    const result = validateFormThrowError({
+      ...form,
+      elements: [lookupButtonElement],
+    })
+    expect(result.elements[0]).toEqual({
+      ...lookupButtonElement,
+      conditionallyShow: false,
+      isElementLookup: false,
+      elementDependencies: [],
+    })
+  })
+
+  test('should have appropriate error message when no lookup configration has been set', () => {
+    const fn = () =>
+      validateFormThrowError({
+        ...form,
+        elements: [
+          {
+            ...lookupButtonElement,
+            isDataLookup: false,
+            isElementLookup: false,
+            dataLookupId: undefined,
+            elementLookupId: undefined,
+            elementDependencies: [],
+          },
+        ],
+      })
+    expect(fn).toThrow(
+      '"elements[0]" must contain at least one of [isDataLookup, isElementLookup]',
+    )
+  })
+
+  test('should handle "REPEATABLE_SET_FORM_ELEMENT" type', () => {
+    const result = validateFormThrowError({
+      ...form,
+      elements: [
+        {
+          type: 'repeatableSet',
+          id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+          name: 'My_Repeatable_Set',
+          label: 'My Repeatable Set',
+          addSetEntryLabel: 'Add an entry',
+          removeSetEntryLabel: 'Remove this entry',
+          elements: [
+            {
+              id: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+              type: 'text',
+              name: 'text',
+              label: 'Text',
+              conditionallyShow: false,
+              isDataLookup: false,
+              isElementLookup: false,
+            },
+          ],
+        },
+        {
+          ...lookupButtonElement,
+          isDataLookup: true,
+          dataLookupId: 1,
+          isElementLookup: false,
+          elementDependencies: [
+            {
+              elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+              type: 'REPEATABLE_SET_FORM_ELEMENT',
+              elementDependency: {
+                elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+                type: 'FORM_ELEMENT',
+              },
+            },
+          ],
+        },
+      ],
+    })
+    expect(result.elements).toEqual([
+      {
+        type: 'repeatableSet',
+        id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+        name: 'My_Repeatable_Set',
+        label: 'My Repeatable Set',
+        addSetEntryLabel: 'Add an entry',
+        removeSetEntryLabel: 'Remove this entry',
+        conditionallyShow: false,
+        readOnly: false,
+        elements: [
+          {
+            id: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+            type: 'text',
+            name: 'text',
+            label: 'Text',
+            conditionallyShow: false,
+            isDataLookup: false,
+            isElementLookup: false,
+            readOnly: false,
+            required: false,
+          },
+        ],
+      },
+      {
+        ...lookupButtonElement,
+        isDataLookup: true,
+        dataLookupId: 1,
+        isElementLookup: false,
+        conditionallyShow: false,
+        elementDependencies: [
+          {
+            elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+            type: 'REPEATABLE_SET_FORM_ELEMENT',
+            elementDependency: {
+              elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+              type: 'FORM_ELEMENT',
+            },
+          },
+        ],
+      },
+    ])
+  })
+
+  test('should handle "FORM_FORM_ELEMENT" type', () => {
+    const result = validateFormThrowError({
+      ...form,
+      elements: [
+        {
+          type: 'form',
+          id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+          name: 'My_Form',
+          formId: 1,
+        },
+        {
+          ...lookupButtonElement,
+          isDataLookup: true,
+          dataLookupId: 1,
+          isElementLookup: false,
+          elementDependencies: [
+            {
+              elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+              type: 'FORM_FORM_ELEMENT',
+              elementDependency: {
+                elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+                type: 'FORM_ELEMENT',
+              },
+            },
+          ],
+        },
+      ],
+    })
+    expect(result.elements).toEqual([
+      {
+        type: 'form',
+        id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+        name: 'My_Form',
+        readOnly: false,
+        formId: 1,
+        conditionallyShow: false,
+      },
+      {
+        ...lookupButtonElement,
+        isDataLookup: true,
+        dataLookupId: 1,
+        isElementLookup: false,
+        conditionallyShow: false,
+        elementDependencies: [
+          {
+            elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+            type: 'FORM_FORM_ELEMENT',
+            elementDependency: {
+              elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+              type: 'FORM_ELEMENT',
+            },
+          },
+        ],
+      },
+    ])
+  })
+
+  test('should handle nesting of all types', () => {
+    const result = validateFormThrowError({
+      ...form,
+      elements: [
+        {
+          type: 'form',
+          id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+          name: 'My_Form',
+          formId: 1,
+        },
+        {
+          ...lookupButtonElement,
+          isDataLookup: true,
+          dataLookupId: 1,
+          isElementLookup: false,
+          elementDependencies: [
+            {
+              elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+              type: 'FORM_FORM_ELEMENT',
+              elementDependency: {
+                elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+                type: 'REPEATABLE_SET_FORM_ELEMENT',
+                elementDependency: {
+                  elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+                  type: 'FORM_ELEMENT',
+                },
+              },
+            },
+          ],
+        },
+      ],
+    })
+    expect(result.elements).toEqual([
+      {
+        type: 'form',
+        id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+        name: 'My_Form',
+        readOnly: false,
+        formId: 1,
+        conditionallyShow: false,
+      },
+      {
+        ...lookupButtonElement,
+        isDataLookup: true,
+        dataLookupId: 1,
+        isElementLookup: false,
+        conditionallyShow: false,
+        elementDependencies: [
+          {
+            elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+            type: 'FORM_FORM_ELEMENT',
+            elementDependency: {
+              elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
+              type: 'REPEATABLE_SET_FORM_ELEMENT',
+              elementDependency: {
+                elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
+                type: 'FORM_ELEMENT',
+              },
+            },
+          },
+        ],
+      },
+    ])
+  })
+})
+
+describe('ArcGISWebMapElement', () => {
+  const form: FormTypes.Form = {
+    id: 1,
+    createdAt: '2021-01-01',
+    updatedAt: '2025-01-01',
+    name: 'string',
+    description: 'string',
+    formsAppEnvironmentId: 1,
+    formsAppIds: [1],
+    organisationId: 'ORGANISATION_00000000001',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    isMultiPage: false,
+    isAuthenticated: true,
+    elements: [],
+    tags: [],
+    cancelAction: 'FORMS_LIBRARY',
+    submissionEvents: [],
+  }
+
+  const arcGISWebMapElement: FormTypes.ArcGISWebMapElement = {
+    id: '9014e80c-3c68-4adb-a338-1be04ebc9511',
+    name: 'My_ArcGIS_Web_Map',
+    label: 'My ArcGIS Web Map',
+    type: 'arcGISWebMap',
+    webMapId: '1234567890',
+    basemapId: '1234567890',
+    showLayerPanel: false,
+    allowedDrawingTools: [],
+    conditionallyShow: false,
+    isDataLookup: false,
+    isElementLookup: false,
+    required: true,
+  }
+
+  test('should pass validation', () => {
+    expect(() =>
+      formSchema.validate({
+        ...form,
+        elements: [arcGISWebMapElement],
+      }),
+    ).not.toThrow()
+  })
+
+  test('should have appropriate error message when allowedDrawingTools is misconfigured', () => {
+    const { error } = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            ...arcGISWebMapElement,
+            allowedDrawingTools: [
+              // missing label
+              {
+                type: 'point',
+                graphicAttributeOptions: [{ id: 'ga1', value: 'point' }],
+              },
+              // unknown type
+              {
+                type: 'triangle',
+                graphicAttributeOptions: [
+                  { id: 'ga2', value: 'triangle', label: 'Triangle' },
+                ],
+              },
+              // incorrect graphic attribute type
+              {
+                type: 'rectangle',
+                graphicAttributeOptions: [
+                  { id: 'ga3', value: 4, label: 'Four sided figure' },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      { abortEarly: false },
+    )
+    expect(error?.details[0].message).toBe(
+      '"elements[0].allowedDrawingTools[0].graphicAttributeOptions[0].label" is required',
+    )
+    expect(error?.details[1].message).toBe(
+      '"elements[0].allowedDrawingTools[1].type" must be one of [point, polyline, polygon, rectangle, circle]',
+    )
+    expect(error?.details[2].message).toBe(
+      '"elements[0].allowedDrawingTools[2].graphicAttributeOptions[0].value" must be a string',
+    )
+  })
+
+  test('should fail if max is less than min', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...form,
+        elements: [
+          {
+            ...arcGISWebMapElement,
+            snapshotImagesEnabled: true,
+            minSnapshotImages: 5,
+            maxSnapshotImages: 4,
+          },
+        ],
+      }),
+    ).toThrow(
+      '"elements[0].maxSnapshotImages" must be greater than or equal to 5',
+    )
+  })
+
+  test('should strip snapshot props if snapshotImagesEnabled is false', () => {
+    const { value } = formSchema.validate({
+      ...form,
+      elements: [
+        {
+          ...arcGISWebMapElement,
+          minSnapshotImages: 5,
+          maxSnapshotImages: 4,
+          snapshotImageButtonText: 'Take a snapshot',
+          snapshotImageButtonIcon: 'camera',
+        },
+      ],
+    })
+
+    expect(value.elements[0].snapshotImagesEnabled).toBe(false)
+    expect(value.elements[0].minSnapshotImages).toBe(undefined)
+    expect(value.elements[0].maxSnapshotImages).toBe(undefined)
+    expect(value.elements[0].snapshotImageButtonText).toBe(undefined)
+    expect(value.elements[0].snapshotImageButtonIcon).toBe(undefined)
+  })
+})
+
 describe('approvalConfiguration', () => {
   const form = {
     name: 'string',
@@ -8458,269 +8849,5 @@ describe('Approval Step Nodes', () => {
     }).toThrow(
       '"approvalSteps" contains a STANDARD step with a "label" (Label 1) property that is not unique',
     )
-  })
-})
-
-describe('lookupButton form element', () => {
-  const form = {
-    name: 'string',
-    description: 'string',
-    formsAppEnvironmentId: 1,
-    formsAppIds: [1],
-    organisationId: 'ORGANISATION_00000000001',
-    postSubmissionAction: 'FORMS_LIBRARY',
-    isMultiPage: false,
-    isAuthenticated: true,
-    elements: [],
-    tags: [],
-  }
-
-  const lookupButtonElement = {
-    id: '9014e80c-3c68-4adb-a338-1be04ebc9511',
-    name: 'My_Lookup_Button',
-    label: 'My Lookup Button',
-    type: 'lookupButton',
-    isDataLookup: true,
-    dataLookupId: 1,
-  }
-
-  test('should default "elementDependencies" to empty array', () => {
-    const result = validateFormThrowError({
-      ...form,
-      elements: [lookupButtonElement],
-    })
-    expect(result.elements[0]).toEqual({
-      ...lookupButtonElement,
-      conditionallyShow: false,
-      isElementLookup: false,
-      elementDependencies: [],
-    })
-  })
-
-  test('should have appropriate error message when no lookup configration has been set', () => {
-    const fn = () =>
-      validateFormThrowError({
-        ...form,
-        elements: [
-          {
-            ...lookupButtonElement,
-            isDataLookup: false,
-            isElementLookup: false,
-            dataLookupId: undefined,
-            elementLookupId: undefined,
-            elementDependencies: [],
-          },
-        ],
-      })
-    expect(fn).toThrow(
-      '"elements[0]" must contain at least one of [isDataLookup, isElementLookup]',
-    )
-  })
-
-  test('should handle "REPEATABLE_SET_FORM_ELEMENT" type', () => {
-    const result = validateFormThrowError({
-      ...form,
-      elements: [
-        {
-          type: 'repeatableSet',
-          id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
-          name: 'My_Repeatable_Set',
-          label: 'My Repeatable Set',
-          addSetEntryLabel: 'Add an entry',
-          removeSetEntryLabel: 'Remove this entry',
-          elements: [
-            {
-              id: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
-              type: 'text',
-              name: 'text',
-              label: 'Text',
-              conditionallyShow: false,
-              isDataLookup: false,
-              isElementLookup: false,
-            },
-          ],
-        },
-        {
-          ...lookupButtonElement,
-          isDataLookup: true,
-          dataLookupId: 1,
-          isElementLookup: false,
-          elementDependencies: [
-            {
-              elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
-              type: 'REPEATABLE_SET_FORM_ELEMENT',
-              elementDependency: {
-                elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
-                type: 'FORM_ELEMENT',
-              },
-            },
-          ],
-        },
-      ],
-    })
-    expect(result.elements).toEqual([
-      {
-        type: 'repeatableSet',
-        id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
-        name: 'My_Repeatable_Set',
-        label: 'My Repeatable Set',
-        addSetEntryLabel: 'Add an entry',
-        removeSetEntryLabel: 'Remove this entry',
-        conditionallyShow: false,
-        readOnly: false,
-        elements: [
-          {
-            id: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
-            type: 'text',
-            name: 'text',
-            label: 'Text',
-            conditionallyShow: false,
-            isDataLookup: false,
-            isElementLookup: false,
-            readOnly: false,
-            required: false,
-          },
-        ],
-      },
-      {
-        ...lookupButtonElement,
-        isDataLookup: true,
-        dataLookupId: 1,
-        isElementLookup: false,
-        conditionallyShow: false,
-        elementDependencies: [
-          {
-            elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
-            type: 'REPEATABLE_SET_FORM_ELEMENT',
-            elementDependency: {
-              elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
-              type: 'FORM_ELEMENT',
-            },
-          },
-        ],
-      },
-    ])
-  })
-
-  test('should handle "FORM_FORM_ELEMENT" type', () => {
-    const result = validateFormThrowError({
-      ...form,
-      elements: [
-        {
-          type: 'form',
-          id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
-          name: 'My_Form',
-          formId: 1,
-        },
-        {
-          ...lookupButtonElement,
-          isDataLookup: true,
-          dataLookupId: 1,
-          isElementLookup: false,
-          elementDependencies: [
-            {
-              elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
-              type: 'FORM_FORM_ELEMENT',
-              elementDependency: {
-                elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
-                type: 'FORM_ELEMENT',
-              },
-            },
-          ],
-        },
-      ],
-    })
-    expect(result.elements).toEqual([
-      {
-        type: 'form',
-        id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
-        name: 'My_Form',
-        readOnly: false,
-        formId: 1,
-        conditionallyShow: false,
-      },
-      {
-        ...lookupButtonElement,
-        isDataLookup: true,
-        dataLookupId: 1,
-        isElementLookup: false,
-        conditionallyShow: false,
-        elementDependencies: [
-          {
-            elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
-            type: 'FORM_FORM_ELEMENT',
-            elementDependency: {
-              elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
-              type: 'FORM_ELEMENT',
-            },
-          },
-        ],
-      },
-    ])
-  })
-
-  test('should handle nesting of all types', () => {
-    const result = validateFormThrowError({
-      ...form,
-      elements: [
-        {
-          type: 'form',
-          id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
-          name: 'My_Form',
-          formId: 1,
-        },
-        {
-          ...lookupButtonElement,
-          isDataLookup: true,
-          dataLookupId: 1,
-          isElementLookup: false,
-          elementDependencies: [
-            {
-              elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
-              type: 'FORM_FORM_ELEMENT',
-              elementDependency: {
-                elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
-                type: 'REPEATABLE_SET_FORM_ELEMENT',
-                elementDependency: {
-                  elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
-                  type: 'FORM_ELEMENT',
-                },
-              },
-            },
-          ],
-        },
-      ],
-    })
-    expect(result.elements).toEqual([
-      {
-        type: 'form',
-        id: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
-        name: 'My_Form',
-        readOnly: false,
-        formId: 1,
-        conditionallyShow: false,
-      },
-      {
-        ...lookupButtonElement,
-        isDataLookup: true,
-        dataLookupId: 1,
-        isElementLookup: false,
-        conditionallyShow: false,
-        elementDependencies: [
-          {
-            elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
-            type: 'FORM_FORM_ELEMENT',
-            elementDependency: {
-              elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
-              type: 'REPEATABLE_SET_FORM_ELEMENT',
-              elementDependency: {
-                elementId: '1F07BBED-2709-44F7-AC91-2FFCBD803B6D',
-                type: 'FORM_ELEMENT',
-              },
-            },
-          },
-        ],
-      },
-    ])
   })
 })
