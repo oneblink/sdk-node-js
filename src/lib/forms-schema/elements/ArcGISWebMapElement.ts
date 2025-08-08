@@ -14,6 +14,17 @@ import {
 
 export const type = 'arcGISWebMap'
 
+const viewSchema = Joi.object({
+  zoom: Joi.number().required(),
+  latitude: Joi.number().required(),
+  longitude: Joi.number().required(),
+})
+
+const buttonConfigurationSchema = Joi.object({
+  icon: Joi.string(),
+  label: Joi.string(),
+})
+
 export default Joi.object({
   ...baseSchemas,
   name,
@@ -63,35 +74,32 @@ export default Joi.object({
           .required(),
       }),
     ),
-    view: Joi.object({
-      zoom: Joi.number().required(),
-      latitude: Joi.number().required(),
-      longitude: Joi.number().required(),
-    }),
+    view: viewSchema,
   }),
-  snapshotImagesEnabled: Joi.boolean().default(false),
-  minSnapshotImages: Joi.number().when('snapshotImagesEnabled', {
+  autoSnapshotViews: Joi.array().items(viewSchema),
+  autoSnapshotButton: Joi.any().when('autoSnapshotViews', {
+    is: Joi.array().required(),
+    then: buttonConfigurationSchema,
+    otherwise: Joi.any().strip(),
+  }),
+  manualSnapshotsEnabled: Joi.boolean().default(false),
+  minManualSnapshots: Joi.number().when('manualSnapshotsEnabled', {
     is: true,
     then: Joi.number().integer().positive(),
     otherwise: Joi.any().strip(),
   }),
-  maxSnapshotImages: Joi.number().when('snapshotImagesEnabled', {
+  maxManualSnapshots: Joi.number().when('manualSnapshotsEnabled', {
     is: true,
-    then: Joi.number().when('minSnapshotImages', {
+    then: Joi.number().when('minManualSnapshots', {
       is: Joi.number().required(),
-      then: Joi.number().min(Joi.ref('minSnapshotImages', { render: true })),
+      then: Joi.number().min(Joi.ref('minManualSnapshots', { render: true })),
       otherwise: Joi.number().integer().positive(),
     }),
     otherwise: Joi.any().strip(),
   }),
-  snapshotImageButtonText: Joi.string().when('snapshotImagesEnabled', {
+  manualSnapshotButton: Joi.any().when('manualSnapshotsEnabled', {
     is: true,
-    then: Joi.string(),
-    otherwise: Joi.any().strip(),
-  }),
-  snapshotImageButtonIcon: Joi.string().when('snapshotImagesEnabled', {
-    is: true,
-    then: Joi.string(),
+    then: buttonConfigurationSchema,
     otherwise: Joi.any().strip(),
   }),
 })
