@@ -8075,6 +8075,30 @@ describe('ArcGISWebMapElement', () => {
     )
   })
 
+  test('should fail if autoSnapshotViews is not an array', () => {
+    const { error } = formSchema.validate(
+      {
+        ...form,
+        elements: [
+          {
+            ...arcGISWebMapElement,
+            autoSnapshotViews: [
+              { zoom: 'ten', latitude: 10, longitude: 10 },
+              { zoom: 10, latitude: 10, langitude: 10 },
+            ],
+          },
+        ],
+      },
+      { abortEarly: false },
+    )
+    expect(error?.details[0].message).toBe(
+      '"elements[0].autoSnapshotViews[0].zoom" must be a number',
+    )
+    expect(error?.details[1].message).toBe(
+      '"elements[0].autoSnapshotViews[1].longitude" is required',
+    )
+  })
+
   test('should fail if max is less than min', () => {
     expect(() =>
       validateFormThrowError({
@@ -8082,18 +8106,18 @@ describe('ArcGISWebMapElement', () => {
         elements: [
           {
             ...arcGISWebMapElement,
-            snapshotImagesEnabled: true,
-            minSnapshotImages: 5,
-            maxSnapshotImages: 4,
+            manualSnapshotsEnabled: true,
+            minManualSnapshots: 5,
+            maxManualSnapshots: 4,
           },
         ],
       }),
     ).toThrow(
-      '"elements[0].maxSnapshotImages" must be greater than or equal to 5',
+      '"elements[0].maxManualSnapshots" must be greater than or equal to 5',
     )
   })
 
-  test('should strip snapshot props if snapshotImagesEnabled is false', () => {
+  test('should strip snapshot props if manualSnapshotsEnabled is false', () => {
     const { value } = formSchema.validate({
       ...form,
       elements: [
@@ -8107,11 +8131,10 @@ describe('ArcGISWebMapElement', () => {
       ],
     })
 
-    expect(value.elements[0].snapshotImagesEnabled).toBe(false)
-    expect(value.elements[0].minSnapshotImages).toBe(undefined)
-    expect(value.elements[0].maxSnapshotImages).toBe(undefined)
-    expect(value.elements[0].snapshotImageButtonText).toBe(undefined)
-    expect(value.elements[0].snapshotImageButtonIcon).toBe(undefined)
+    expect(value.elements[0].manualSnapshotsEnabled).toBe(false)
+    expect(value.elements[0].minManualSnapshots).toBe(undefined)
+    expect(value.elements[0].maxManualSnapshots).toBe(undefined)
+    expect(value.elements[0].manualSnapshotButton).toBe(undefined)
   })
 })
 
