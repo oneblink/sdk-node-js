@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `requiresAllConditionallyShowOptionsPredicates` to optionSchemas
+
 ## [11.8.1] - 2025-08-11
 
 - add snapshot properties to `ArcGISWebMapElement`

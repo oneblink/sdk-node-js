@@ -116,6 +116,14 @@ const conditionallyShowOptionsElementIds = Joi.when('optionsType', {
   then: Joi.array().items(Joi.string().guid().required()),
   otherwise: Joi.any().strip(),
 })
+const requiresAllConditionallyShowOptionsPredicates = Joi.when(
+  'conditionallyShowOptions',
+  {
+    is: true,
+    then: Joi.boolean().default(false),
+    otherwise: Joi.any().strip(),
+  },
+)
 const freshdeskFieldName = Joi.when('optionsType', {
   is: FRESHDESK_FIELD_OPTION_TYPE,
   then: Joi.string().required(),
@@ -139,6 +147,7 @@ export const optionsSchemas = {
   attributesMapping,
   conditionallyShowOptions,
   conditionallyShowOptionsElementIds,
+  requiresAllConditionallyShowOptionsPredicates,
   freshdeskFieldName,
 }
 
