@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `requiresAllConditionallyShowOptionsPredicates` to optionSchemas
+- `allowAttachmentsDownload` to form validation
 
 ## [11.8.1] - 2025-08-11
 
