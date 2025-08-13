@@ -106,6 +106,7 @@ function validateFormElementReferences({
  *
  * @param form
  * @param formElements
+ * @param propertyName
  */
 function validateSummaryFormElements(
   form: FormTypes.NewForm,
@@ -184,14 +185,13 @@ function validateSummaryFormElements(
 }
 
 /**
- * Validate each summary form element's references to other form elements. A
- * summary form element can reference form elements from anywhere in the form.
+ * Validate elements with conditionally shown options to ensure the attributes
+ * array is the same length as the conditionallyShowOptionsElementIds array.
  *
- * @param form
  * @param formElements
+ * @param propertyName
  */
 function validateConditionallyShowOptions(
-  form: FormTypes.NewForm,
   formElements: FormTypes.FormElement[],
   propertyName: string,
 ) {
@@ -206,7 +206,6 @@ function validateConditionallyShowOptions(
       case 'page':
       case 'repeatableSet': {
         validateConditionallyShowOptions(
-          form,
           element.elements,
           `${propertyName}[${formElementIndex}].elements`,
         )
@@ -277,11 +276,7 @@ function validateWithFormSchema(form?: unknown):
       'elements',
     )
 
-    validateConditionallyShowOptions(
-      validatedForm,
-      validatedForm.elements,
-      'elements',
-    )
+    validateConditionallyShowOptions(validatedForm.elements, 'elements')
 
     validateFormElementReferences({
       availableFormElements: validatedForm.elements,
