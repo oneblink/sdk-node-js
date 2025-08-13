@@ -236,11 +236,10 @@ describe('Valid Form Schema with Pages', () => {
                 attributes: [
                   {
                     elementId: 'dc070d4b-2577-4c49-b682-dafa482b334a',
-                    optionIds: ['33633fe8-10a8-478b-a24b-49c029c4292c'],
-                  },
-                  {
-                    elementId: 'dc070d4b-2577-4c49-b682-dafa482b334a',
-                    optionIds: ['7e7dd403-baad-4a63-8482-8b0f9dc6c4e7'],
+                    optionIds: [
+                      '33633fe8-10a8-478b-a24b-49c029c4292c',
+                      '7e7dd403-baad-4a63-8482-8b0f9dc6c4e7',
+                    ],
                   },
                 ],
                 id: 'fa0f2864-d812-4610-a6e7-a48666ef5c2f',
@@ -8123,10 +8122,9 @@ describe('ArcGISWebMapElement', () => {
       elements: [
         {
           ...arcGISWebMapElement,
-          minSnapshotImages: 5,
-          maxSnapshotImages: 4,
-          snapshotImageButtonText: 'Take a snapshot',
-          snapshotImageButtonIcon: 'camera',
+          minManualSnapshots: 5,
+          maxManualSnapshots: 4,
+          manualSnapshotButton: { label: 'Take a snapshot', icon: 'camera' },
         },
       ],
     })
@@ -8135,6 +8133,423 @@ describe('ArcGISWebMapElement', () => {
     expect(value.elements[0].minManualSnapshots).toBe(undefined)
     expect(value.elements[0].maxManualSnapshots).toBe(undefined)
     expect(value.elements[0].manualSnapshotButton).toBe(undefined)
+  })
+})
+
+describe('conditionallyShowOptions', () => {
+  const form: FormTypes.NewForm = {
+    name: 'OneBlink Employee Chair Chooser',
+    description: 'What chair would you like to sit on?',
+    organisationId: '5b0cbeb76f2ed50f00000001',
+    formsAppEnvironmentId: 1,
+    elements: [
+      {
+        name: 'softness',
+        label: 'Seat Softness',
+        type: 'radio',
+        required: false,
+        id: '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+        conditionallyShow: false,
+        options: [
+          {
+            id: 'c2ec3d53-3c5c-43b7-bbb1-834bf2ea215b',
+            label: 'Soft',
+            value: 'Soft',
+            displayAlways: false,
+          },
+          {
+            id: '00514d4e-8e8c-4639-876e-3fc6a68e4b2b',
+            label: 'Medium',
+            value: 'Medium',
+            displayAlways: false,
+          },
+          {
+            id: '470b711d-cdc6-4c0f-b3dd-6e4b8a0bf825',
+            label: 'Hard',
+            value: 'Hard',
+            displayAlways: false,
+          },
+          {
+            id: '14fc3ba5-eac7-4d00-a701-ce5881411501',
+            label: 'Very Hard',
+            value: 'Very Hard',
+            displayAlways: false,
+          },
+        ],
+        readOnly: false,
+        isDataLookup: false,
+        isElementLookup: false,
+        optionsType: 'CUSTOM',
+        conditionallyShowOptions: false,
+        buttons: false,
+      },
+      {
+        name: 'features',
+        label: 'Features',
+        type: 'checkboxes',
+        required: false,
+        id: '5f122b37-e748-4f9f-99a9-32876666289d',
+        conditionallyShow: false,
+        options: [
+          {
+            id: 'fe1f2af2-9cec-4367-ad8a-e80c167b20a7',
+            label: 'Armrests',
+            value: 'Armrests',
+            displayAlways: false,
+          },
+          {
+            id: '0767d49b-1d3b-4579-8b63-8fc65a970493',
+            label: 'Headrest',
+            value: 'Headrest',
+            displayAlways: false,
+          },
+          {
+            id: '3f1a0ef3-91bd-47ed-adcd-c1b9f3eb9fbb',
+            label: 'Footrest',
+            value: 'Footrest',
+            displayAlways: false,
+          },
+          {
+            id: '695b0e2d-1100-48a8-b5e7-2ec0e6cb57e9',
+            label: 'Height Control',
+            value: 'Height Control',
+            displayAlways: false,
+          },
+          {
+            id: '9c3e33dc-d3b6-4eae-ae76-a90a9b364627',
+            label: 'Tilt Control',
+            value: 'Tilt Control',
+            displayAlways: false,
+          },
+        ],
+        readOnly: false,
+        isDataLookup: false,
+        isElementLookup: false,
+        buttons: false,
+        optionsType: 'CUSTOM',
+        conditionallyShowOptions: false,
+        canToggleAll: false,
+      },
+      {
+        name: 'chair',
+        label: 'Chair',
+        type: 'select',
+        required: false,
+        id: '7d8aa095-6f74-499e-99e3-118dc99aad71',
+        conditionallyShow: false,
+        options: [
+          {
+            id: 'ad974630-1ee5-44c7-891c-9fd3b6ef93a1',
+            label: 'Chair Deluxe',
+            value: 'Chair Deluxe',
+            displayAlways: false,
+            attributes: [
+              {
+                elementId: '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+                optionIds: ['00514d4e-8e8c-4639-876e-3fc6a68e4b2b'],
+              },
+              {
+                elementId: '5f122b37-e748-4f9f-99a9-32876666289d',
+                optionIds: [
+                  'fe1f2af2-9cec-4367-ad8a-e80c167b20a7',
+                  '695b0e2d-1100-48a8-b5e7-2ec0e6cb57e9',
+                ],
+              },
+            ],
+          },
+          {
+            id: 'f41a3a6c-3103-4dbd-9aed-7d04ecba171a',
+            label: 'Wow Chair',
+            value: 'Wow Chair',
+            displayAlways: false,
+            attributes: [
+              {
+                elementId: '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+                optionIds: ['c2ec3d53-3c5c-43b7-bbb1-834bf2ea215b'],
+              },
+              {
+                elementId: '5f122b37-e748-4f9f-99a9-32876666289d',
+                optionIds: [
+                  '9c3e33dc-d3b6-4eae-ae76-a90a9b364627',
+                  '695b0e2d-1100-48a8-b5e7-2ec0e6cb57e9',
+                ],
+              },
+            ],
+          },
+          {
+            id: 'c42dced1-e24c-4bff-a03e-8f4ac59e8653',
+            label: 'Is it really a chair',
+            value: 'Is it really a chair',
+            displayAlways: false,
+            attributes: [
+              {
+                elementId: '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+                optionIds: ['c2ec3d53-3c5c-43b7-bbb1-834bf2ea215b'],
+              },
+              {
+                elementId: '5f122b37-e748-4f9f-99a9-32876666289d',
+                optionIds: [
+                  '3f1a0ef3-91bd-47ed-adcd-c1b9f3eb9fbb',
+                  'fe1f2af2-9cec-4367-ad8a-e80c167b20a7',
+                  '0767d49b-1d3b-4579-8b63-8fc65a970493',
+                ],
+              },
+            ],
+          },
+          {
+            id: 'fc081f62-6e0f-4f7b-aef6-d1c9a41e543d',
+            label: 'CloudChair9',
+            value: 'CloudChair9',
+            displayAlways: false,
+            attributes: [
+              {
+                elementId: '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+                optionIds: ['c2ec3d53-3c5c-43b7-bbb1-834bf2ea215b'],
+              },
+              {
+                elementId: '5f122b37-e748-4f9f-99a9-32876666289d',
+                optionIds: [
+                  'fe1f2af2-9cec-4367-ad8a-e80c167b20a7',
+                  '0767d49b-1d3b-4579-8b63-8fc65a970493',
+                  '3f1a0ef3-91bd-47ed-adcd-c1b9f3eb9fbb',
+                  '695b0e2d-1100-48a8-b5e7-2ec0e6cb57e9',
+                  '9c3e33dc-d3b6-4eae-ae76-a90a9b364627',
+                ],
+              },
+            ],
+          },
+          {
+            id: '1798f53e-320b-4f15-85ee-ed784294886d',
+            label: 'Lazy Boy',
+            value: 'Lazy Boy',
+            displayAlways: false,
+            attributes: [
+              {
+                elementId: '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+                optionIds: ['00514d4e-8e8c-4639-876e-3fc6a68e4b2b'],
+              },
+              {
+                elementId: '5f122b37-e748-4f9f-99a9-32876666289d',
+                optionIds: [
+                  'fe1f2af2-9cec-4367-ad8a-e80c167b20a7',
+                  '3f1a0ef3-91bd-47ed-adcd-c1b9f3eb9fbb',
+                ],
+              },
+            ],
+          },
+          {
+            id: '003d8876-3fed-4b20-b6de-a406b1b0e31e',
+            label: 'Google Chair',
+            value: 'Google Chair',
+            displayAlways: false,
+            attributes: [
+              {
+                elementId: '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+                optionIds: ['00514d4e-8e8c-4639-876e-3fc6a68e4b2b'],
+              },
+              {
+                elementId: '5f122b37-e748-4f9f-99a9-32876666289d',
+                optionIds: [
+                  '0767d49b-1d3b-4579-8b63-8fc65a970493',
+                  '695b0e2d-1100-48a8-b5e7-2ec0e6cb57e9',
+                  '9c3e33dc-d3b6-4eae-ae76-a90a9b364627',
+                ],
+              },
+            ],
+          },
+          {
+            id: '951e4f91-a631-4454-8cd7-c01061dfb296',
+            label: 'iChair',
+            value: 'iChair',
+            displayAlways: false,
+            attributes: [
+              {
+                elementId: '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+                optionIds: ['470b711d-cdc6-4c0f-b3dd-6e4b8a0bf825'],
+              },
+              {
+                elementId: '5f122b37-e748-4f9f-99a9-32876666289d',
+                optionIds: ['695b0e2d-1100-48a8-b5e7-2ec0e6cb57e9'],
+              },
+            ],
+          },
+          {
+            id: '150ff8ef-f6ca-498a-bd4f-6791035b53e4',
+            label: 'Aphrodite',
+            value: 'Aphrodite',
+            displayAlways: false,
+            attributes: [
+              {
+                elementId: '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+                optionIds: ['c2ec3d53-3c5c-43b7-bbb1-834bf2ea215b'],
+              },
+              {
+                elementId: '5f122b37-e748-4f9f-99a9-32876666289d',
+                optionIds: [
+                  '3f1a0ef3-91bd-47ed-adcd-c1b9f3eb9fbb',
+                  '0767d49b-1d3b-4579-8b63-8fc65a970493',
+                  'fe1f2af2-9cec-4367-ad8a-e80c167b20a7',
+                  '9c3e33dc-d3b6-4eae-ae76-a90a9b364627',
+                ],
+              },
+            ],
+          },
+          {
+            id: '5ccaf55b-9fc5-4e36-ac67-6a9de1a4e137',
+            label: 'Hercules',
+            value: 'Hercules',
+            displayAlways: false,
+            attributes: [
+              {
+                elementId: '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+                optionIds: ['14fc3ba5-eac7-4d00-a701-ce5881411501'],
+              },
+              {
+                elementId: '5f122b37-e748-4f9f-99a9-32876666289d',
+                optionIds: ['695b0e2d-1100-48a8-b5e7-2ec0e6cb57e9'],
+              },
+            ],
+          },
+          {
+            id: 'b724ffdb-12d4-4788-adc7-5bc511582c64',
+            label: 'Banana',
+            value: 'Banana',
+            displayAlways: false,
+            attributes: [
+              {
+                elementId: '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+                optionIds: ['c2ec3d53-3c5c-43b7-bbb1-834bf2ea215b'],
+              },
+              {
+                elementId: '5f122b37-e748-4f9f-99a9-32876666289d',
+                optionIds: [
+                  '9c3e33dc-d3b6-4eae-ae76-a90a9b364627',
+                  '3f1a0ef3-91bd-47ed-adcd-c1b9f3eb9fbb',
+                  '0767d49b-1d3b-4579-8b63-8fc65a970493',
+                ],
+              },
+            ],
+          },
+          {
+            id: 'be86f791-a828-4c34-9eb0-f266d5345e14',
+            label: 'Hammock',
+            value: 'Hammock',
+            displayAlways: false,
+            attributes: [
+              {
+                elementId: '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+                optionIds: ['c2ec3d53-3c5c-43b7-bbb1-834bf2ea215b'],
+              },
+              {
+                elementId: '5f122b37-e748-4f9f-99a9-32876666289d',
+                optionIds: [
+                  '695b0e2d-1100-48a8-b5e7-2ec0e6cb57e9',
+                  '3f1a0ef3-91bd-47ed-adcd-c1b9f3eb9fbb',
+                  '0767d49b-1d3b-4579-8b63-8fc65a970493',
+                ],
+              },
+            ],
+          },
+          {
+            id: '0a57717f-44c6-4e33-a8e5-c54f438e77c0',
+            label: 'Stone',
+            value: 'Stone',
+            displayAlways: false,
+            attributes: [
+              {
+                elementId: '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+                optionIds: ['14fc3ba5-eac7-4d00-a701-ce5881411501'],
+              },
+              {
+                elementId: '5f122b37-e748-4f9f-99a9-32876666289d',
+                optionIds: ['fe1f2af2-9cec-4367-ad8a-e80c167b20a7'],
+              },
+            ],
+          },
+          {
+            id: 'aded87c9-d558-4b8b-8a82-8a7026614501',
+            label: 'Throne',
+            value: 'Throne',
+            displayAlways: false,
+            attributes: [
+              {
+                elementId: '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+                optionIds: ['470b711d-cdc6-4c0f-b3dd-6e4b8a0bf825'],
+              },
+              {
+                elementId: '5f122b37-e748-4f9f-99a9-32876666289d',
+                optionIds: ['fe1f2af2-9cec-4367-ad8a-e80c167b20a7'],
+              },
+            ],
+          },
+        ],
+        readOnly: false,
+        isDataLookup: false,
+        isElementLookup: false,
+        multi: false,
+        optionsType: 'CUSTOM',
+        conditionallyShowOptions: true,
+        conditionallyShowOptionsElementIds: [
+          '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+          '5f122b37-e748-4f9f-99a9-32876666289d',
+        ],
+        requiresAllConditionallyShowOptionsPredicates: false,
+      },
+    ],
+    isAuthenticated: false,
+    isMultiPage: false,
+    postSubmissionAction: 'FORMS_LIBRARY',
+    formsAppIds: [],
+    cancelAction: 'FORMS_LIBRARY',
+    submissionEvents: [],
+    tags: [],
+  }
+
+  test('should fail when the number of attributes is less than the number of conditional elements', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...form,
+        elements: form.elements.map((element) => {
+          if (element.type === 'select') {
+            return {
+              ...element,
+              options: element.options?.map((option) => ({
+                ...option,
+                attributes: [
+                  {
+                    elementId: '2b6fa0d4-2a04-4077-b57b-10a87f0b4d37',
+                    optionIds: ['c2ec3d53-3c5c-43b7-bbb1-834bf2ea215b'],
+                  },
+                ],
+              })),
+            }
+          }
+          return element
+        }),
+      }),
+    ).toThrow('"elements[2].options[0].attributes" must contain 2 items')
+  })
+
+  test('should fail when the number of attributes is more than the number of conditional elements', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...form,
+        elements: form.elements.map((element) => {
+          if (element.type === 'select') {
+            return {
+              ...element,
+              conditionallyShowOptionsElementIds:
+                element.conditionallyShowOptionsElementIds?.slice(0, 1),
+            }
+          }
+          return element
+        }),
+      }),
+    ).toThrow('"elements[2].options[0].attributes" must contain 1 items')
+  })
+
+  test('should pass when the number of attributes is equal to the number of conditional elements', () => {
+    expect(() => validateFormThrowError(form)).not.toThrow()
   })
 })
 

@@ -1,4 +1,4 @@
-import { formElementsService } from '@oneblink/sdk-core'
+import { formElementsService, typeCastService } from '@oneblink/sdk-core'
 import { FormTypes, SubmissionEventTypes } from '@oneblink/types'
 import {
   elementSchema,
@@ -106,6 +106,7 @@ function validateFormElementReferences({
  *
  * @param form
  * @param formElements
+ * @param propertyName
  */
 function validateSummaryFormElements(
   form: FormTypes.NewForm,
@@ -183,6 +184,59 @@ function validateSummaryFormElements(
   }
 }
 
+/**
+ * Validate elements with conditionally shown options to ensure the attributes
+ * array is the same length as the conditionallyShowOptionsElementIds array.
+ *
+ * @param formElements
+ * @param propertyName
+ */
+function validateConditionallyShowOptions(
+  formElements: FormTypes.FormElement[],
+  propertyName: string,
+) {
+  for (
+    let formElementIndex = 0;
+    formElementIndex < formElements.length;
+    formElementIndex++
+  ) {
+    const element = formElements[formElementIndex]
+    switch (element.type) {
+      case 'section':
+      case 'page':
+      case 'repeatableSet': {
+        validateConditionallyShowOptions(
+          element.elements,
+          `${propertyName}[${formElementIndex}].elements`,
+        )
+        break
+      }
+      default: {
+        const optionsElement =
+          typeCastService.formElements.toOptionsElement(element)
+        if (optionsElement && optionsElement.conditionallyShowOptions) {
+          const options = optionsElement.options ?? []
+          if (!optionsElement.conditionallyShowOptionsElementIds?.length) {
+            throw new Error(
+              `"${propertyName}[${formElementIndex}].conditionallyShowOptionsElementIds" must contain at least 1 item`,
+            )
+          }
+          for (let i = 0; i < options.length; i++) {
+            if (
+              options[i].attributes?.length !==
+              optionsElement.conditionallyShowOptionsElementIds?.length
+            ) {
+              throw new Error(
+                `"${propertyName}[${formElementIndex}].options[${i}].attributes" must contain ${optionsElement.conditionallyShowOptionsElementIds?.length} items"`,
+              )
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 function validateWithFormSchema(form?: unknown):
   | {
       success: false
@@ -221,6 +275,9 @@ function validateWithFormSchema(form?: unknown):
       validatedForm.elements,
       'elements',
     )
+
+    validateConditionallyShowOptions(validatedForm.elements, 'elements')
+
     validateFormElementReferences({
       availableFormElements: validatedForm.elements,
       formElements: validatedForm.elements,
