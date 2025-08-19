@@ -1,7 +1,7 @@
 {
   "name": "@oneblink/sdk",
   "description": "OneBlink SDK to serve as an entry point for all OneBlink Services in NodeJS",
-  "version": "11.8.2-beta.3",
+  "version": "11.8.2-beta.4",
   "author": "OneBlink <developers@oneblink.io> (https://oneblink.io)",
   "bugs": {
     "url": "https://github.com/oneblink/sdk-node-js/issues"
