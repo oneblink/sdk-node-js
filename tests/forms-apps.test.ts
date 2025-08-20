@@ -17,14 +17,13 @@ describe('FormsApps SDK Class', () => {
     test('should reject with correct validation errors for "sendingAddressConfig"', () => {
       // @ts-expect-error Expecting throw
       return expect(formsAppsSDK.setSendingAddress(1)).rejects.toThrow(
-        'Must supply an object containing "emailAddress" & "emailName" properties',
+        'Must supply an object containing "emailAddress" or "emailName" properties',
       )
     })
 
     test('should reject with correct validation errors for "emailAddress"', () => {
-      // @ts-expect-error Expecting throw
       return expect(formsAppsSDK.setSendingAddress(1, {})).rejects.toThrow(
-        'Must supply "emailAddress" as a string',
+        'Must supply at least one of "emailAddress" or "emailName"',
       )
     })
 

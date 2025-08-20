@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - validate that an option attributes length matches conditionallyShowOptionsElementIds length
+- **[BREAKING]** `getSendingAddress()` result
+- **[BREAKING]** `setSendingAddress()` to optionally allow `emailAddress` and result
 
 ### Added
 
