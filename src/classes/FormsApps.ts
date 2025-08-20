@@ -274,7 +274,7 @@ export default class FormsApps extends OneBlinkAPI {
   async setSendingAddress(
     formsAppId: number,
     sendingAddressConfig: {
-      emailAddress: string
+      emailAddress?: string
       emailName?: string
     },
   ): Promise<FormsAppsTypes.FormsAppSendingAddressResponse> {
@@ -287,14 +287,17 @@ export default class FormsApps extends OneBlinkAPI {
     if (!sendingAddressConfig) {
       return Promise.reject(
         new TypeError(
-          'Must supply an object containing "emailAddress" & "emailName" properties',
+          'Must supply an object containing "emailAddress" or "emailName" properties',
         ),
       )
     }
 
-    if (typeof sendingAddressConfig.emailAddress !== 'string') {
+    if (
+      sendingAddressConfig.emailName &&
+      typeof sendingAddressConfig.emailAddress !== 'string'
+    ) {
       return Promise.reject(
-        new TypeError('Must supply "emailAddress" as a string'),
+        new TypeError('Must supply "emailName" as a string or not at all'),
       )
     }
 
@@ -304,6 +307,14 @@ export default class FormsApps extends OneBlinkAPI {
     ) {
       return Promise.reject(
         new TypeError('Must supply "emailName" as a string or not at all'),
+      )
+    }
+
+    if (!sendingAddressConfig.emailAddress && !sendingAddressConfig.emailName) {
+      return Promise.reject(
+        new TypeError(
+          'Must supply at least one of "emailAddress" or "emailName"',
+        ),
       )
     }
 
