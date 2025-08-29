@@ -214,7 +214,11 @@ function validateConditionallyShowOptions(
       default: {
         const optionsElement =
           typeCastService.formElements.toOptionsElement(element)
-        if (optionsElement && optionsElement.conditionallyShowOptions) {
+        if (
+          optionsElement &&
+          optionsElement.conditionallyShowOptions &&
+          optionsElement.optionsType === 'CUSTOM'
+        ) {
           const options = optionsElement.options ?? []
           if (!optionsElement.conditionallyShowOptionsElementIds?.length) {
             throw new Error(
