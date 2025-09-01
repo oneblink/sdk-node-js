@@ -104,6 +104,8 @@ const generateFormWorkflowEventElementMappingKeys = (
       'VALUE',
       'SUBMISSION_ID',
       'EXTERNAL_ID',
+      'SUBMISSION_TIMESTAMP',
+      'COMPLETION_TIMESTAMP',
       ...extraTypes,
     )
     .required(),
