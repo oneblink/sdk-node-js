@@ -544,14 +544,12 @@ export default class Forms extends OneBlinkAPI {
       username,
     })
 
-    const url = new URL(result.url)
     return {
       id: result.attachmentDataId,
       contentType,
       fileName,
       isPrivate,
       url: result.url,
-      path: url.pathname + url.search,
       s3: result.s3,
       uploadedAt: result.uploadedAt,
     }
