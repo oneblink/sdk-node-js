@@ -106,6 +106,7 @@ const generateFormWorkflowEventElementMappingKeys = (
       'EXTERNAL_ID',
       'SUBMISSION_TIMESTAMP',
       'COMPLETION_TIMESTAMP',
+      'PAYMENT_DETAIL',
       ...extraTypes,
     )
     .required(),
@@ -129,6 +130,47 @@ const generateFormWorkflowEventElementMappingKeys = (
         Joi.array().items(Joi.string()).min(1),
       )
       .required(),
+    otherwise: Joi.any().strip(),
+  }),
+  key: Joi.when('type', {
+    is: 'PAYMENT_DETAIL',
+    then: Joi.valid(
+      // NSW_GOV_PAY
+      'NSW_GOV_PAY_COMPLETION_REFERENCE',
+      'NSW_GOV_PAY_PAYMENT_REFERENCE',
+      'NSW_GOV_PAY_BANK_REFERENCE',
+      'NSW_GOV_PAY_PAYMENT_METHOD',
+      'NSW_GOV_PAY_BPAY_BILLER_CODE',
+      'NSW_GOV_PAY_CREDIT_CARD_NUMBER',
+      'NSW_GOV_PAY_AMOUNT',
+      'NSW_GOV_PAY_SURCHARGE_AMOUNT',
+      'NSW_GOV_PAY_SURCHARGE_GST',
+      'NSW_GOV_PAY_CREATED_DATE_TIME',
+      // BPOINT
+      'BPOINT_RECEIPT_NUMBER',
+      'BPOINT_CRN1',
+      'BPOINT_CRN2',
+      'BPOINT_CRN3',
+      'BPOINT_BILLER_CODE',
+      'BPOINT_CREDIT_CARD_MASK',
+      'BPOINT_AMOUNT',
+      'BPOINT_SURCHARGE_AMOUNT',
+      'BPOINT_PROCESSED_DATE_TIME',
+      // CP_PAY
+      'CP_PAY_TRANSACTION_ID',
+      'CP_PAY_ORDER_NUMBER',
+      'CP_PAY_PAYMENT_TYPE',
+      'CP_PAY_CREDIT_CARD_MASK',
+      'CP_PAY_AMOUNT',
+      'CP_PAY_CREATED_DATE_TIME',
+      // WESTPAC_QUICK_STREAM
+      'WESTPAC_QUICK_STREAM_RECEIPT_NUMBER',
+      'WESTPAC_QUICK_STREAM_PAYMENT_REFERENCE_NUMBER',
+      'WESTPAC_QUICK_STREAM_CUSTOMER_REFERENCE_NUMBER',
+      'WESTPAC_QUICK_STREAM_AMOUNT',
+      'WESTPAC_QUICK_STREAM_SURCHARGE_AMOUNT',
+      'WESTPAC_QUICK_STREAM_SETTLEMENT_DATE',
+    ).required(),
     otherwise: Joi.any().strip(),
   }),
 })
