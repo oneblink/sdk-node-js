@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - support for `SUBMISSION_TIMESTAMP` and `COMPLETION_TIMESTAMP` in workflow event mappings
+- `PAYMENT_DETAIL` to form workflow validation
 
 ### Removed
 
