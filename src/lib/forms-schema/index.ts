@@ -175,7 +175,7 @@ const generateFormWorkflowEventElementMappingKeys = (
   }),
 })
 
-const pdfSubmissionEventConfiguration = {
+const pdfConfiguration = {
   pdfFileName: Joi.string().allow(null, ''),
   includeSubmissionIdInPdf: Joi.boolean(),
   includeExternalIdInPdf: Joi.boolean(),
@@ -194,6 +194,10 @@ const pdfSubmissionEventConfiguration = {
   pdfSize: Joi.valid('A4', 'Letter'),
   customPdfId: Joi.string().uuid(),
   isCustomPdfEditable: Joi.bool(),
+}
+
+const pdfSubmissionEventConfiguration = {
+  ...pdfConfiguration,
   ...approvalFormsInclusionConfiguration,
 }
 
@@ -322,6 +326,9 @@ export const WorkflowEventSchema = Joi.object().keys({
       then: Joi.object().keys({
         ...emailSubmissionEventConfiguration,
         ...approvalFormsInclusionConfiguration,
+        pdfConfigurations: Joi.array().items(
+          Joi.object().keys(pdfConfiguration),
+        ),
       }),
     })
     .when('type', {
