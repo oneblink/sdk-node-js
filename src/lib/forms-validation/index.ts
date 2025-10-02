@@ -191,24 +191,30 @@ function validateSummaryFormElements(
  * @param formElements
  * @param propertyName
  */
-function validateConditionallyShowOptions(
-  formElements: FormTypes.FormElement[],
-  propertyName: string,
-) {
+function validateConditionallyShowOptions({
+  formElements,
+  siblingFormElements,
+  propertyName,
+}: {
+  formElements: FormTypes.FormElement[]
+  siblingFormElements: FormTypes.FormElement[]
+  propertyName: string
+}) {
   for (
     let formElementIndex = 0;
-    formElementIndex < formElements.length;
+    formElementIndex < siblingFormElements.length;
     formElementIndex++
   ) {
-    const element = formElements[formElementIndex]
+    const element = siblingFormElements[formElementIndex]
     switch (element.type) {
       case 'section':
       case 'page':
       case 'repeatableSet': {
-        validateConditionallyShowOptions(
-          element.elements,
-          `${propertyName}[${formElementIndex}].elements`,
-        )
+        validateConditionallyShowOptions({
+          siblingFormElements: element.elements,
+          formElements,
+          propertyName: `${propertyName}[${formElementIndex}].elements`,
+        })
         break
       }
       default: {
@@ -225,15 +231,46 @@ function validateConditionallyShowOptions(
               `"${propertyName}[${formElementIndex}].conditionallyShowOptionsElementIds" must contain at least 1 item`,
             )
           }
-          for (let i = 0; i < options.length; i++) {
+          for (const [i, option] of options.entries()) {
             if (
-              options[i].attributes?.length !==
+              option.attributes?.length !==
               optionsElement.conditionallyShowOptionsElementIds?.length
             ) {
               throw new Error(
                 `"${propertyName}[${formElementIndex}].options[${i}].attributes" must contain ${optionsElement.conditionallyShowOptionsElementIds?.length} items"`,
               )
             }
+            for (const [j, attribute] of option.attributes?.entries() ?? []) {
+              const attributeElement = formElementsService.findFormElement(
+                formElements,
+                (formElement) => formElement.id === attribute.elementId,
+              )
+              if (!attributeElement) {
+                throw new Error(
+                  `"${propertyName}[${formElementIndex}].options[${i}].attributes[${j}].elementId" (${attribute.elementId}) does not exist in "elements"`,
+                )
+              }
+              const attributeOptionsElement =
+                typeCastService.formElements.toOptionsElement(attributeElement)
+              if (!attributeOptionsElement) {
+                throw new Error(
+                  `"${propertyName}[${formElementIndex}].options[${i}].attributes[${j}].elementId" (${attribute.elementId}) references an element that is not a supported type (${attributeElement.type})`,
+                )
+              }
+              // remove option ids that don't exist in the attribute options element
+              // we remove instead of throwing errors because invalid forms already exist in the wild
+              option.attributes[j].optionIds = option.attributes[
+                j
+              ].optionIds.filter((optionId) =>
+                attributeOptionsElement.options?.some(
+                  (option) => option.id === optionId,
+                ),
+              )
+            }
+          }
+          // we know this is true thanks to the typecast service, however typescript can't be sure
+          if ('options' in element) {
+            element.options = options
           }
         }
       }
@@ -280,7 +317,12 @@ function validateWithFormSchema(form?: unknown):
       'elements',
     )
 
-    validateConditionallyShowOptions(validatedForm.elements, 'elements')
+    // mutates validatedForm.elements
+    validateConditionallyShowOptions({
+      formElements: validatedForm.elements,
+      siblingFormElements: validatedForm.elements,
+      propertyName: 'elements',
+    })
 
     validateFormElementReferences({
       availableFormElements: validatedForm.elements,
