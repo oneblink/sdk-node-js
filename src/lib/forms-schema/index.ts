@@ -536,7 +536,9 @@ export const WorkflowEventSchema = Joi.object().keys({
     })
     .when('type', {
       is: 'CIVIC_REC_COMPLETE_CHECKOUT',
-      then: Joi.object().keys({}),
+      then: Joi.object().keys({
+        environmentId: Joi.string().uuid().required(),
+      }),
     })
     .when('type', {
       is: 'GOOD_TO_GO_UPDATE_ASSET',
