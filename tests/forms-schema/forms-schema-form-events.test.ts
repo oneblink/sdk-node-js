@@ -485,21 +485,10 @@ describe('SHAREPOINT_STORE_FILES', () => {
 describe('CIVIC_REC_COMPLETE_CHECKOUT', () => {
   const validSubmissionEvent = {
     type: 'CIVIC_REC_COMPLETE_CHECKOUT',
-    configuration: {},
+    configuration: {
+      environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+    },
   }
-  it('should allow empty object as the configuration', () => {
-    const form = validateFormThrowError({
-      ...defaultForm,
-      submissionEvents: [validSubmissionEvent],
-    })
-
-    expect(form.submissionEvents[0]).toEqual({
-      ...validSubmissionEvent,
-      conditionallyExecute: false,
-      requiresAllConditionallyExecutePredicates: false,
-      configuration: {},
-    })
-  })
 
   it('should strip out any additional data in the configuration', () => {
     const form = validateFormThrowError({
@@ -507,7 +496,10 @@ describe('CIVIC_REC_COMPLETE_CHECKOUT', () => {
       submissionEvents: [
         {
           ...validSubmissionEvent,
-          configuration: { fakeVariable: "I'm fake!" },
+          configuration: {
+            environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            fakeVariable: "I'm fake!",
+          },
         },
       ],
     })
@@ -516,11 +508,11 @@ describe('CIVIC_REC_COMPLETE_CHECKOUT', () => {
       ...validSubmissionEvent,
       conditionallyExecute: false,
       requiresAllConditionallyExecutePredicates: false,
-      configuration: {},
+      configuration: { environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1' },
     })
   })
 
-  it('should fail without empty configuration on the submission event', () => {
+  it('should fail with empty configuration on the submission event', () => {
     expect(() =>
       validateFormThrowError({
         ...defaultForm,
