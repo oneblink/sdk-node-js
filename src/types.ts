@@ -1,3 +1,4 @@
+// @ts-types="@oneblink/types/index.d.ts"
 import {
   ApprovalTypes,
   EmailTemplateTypes,
@@ -13,6 +14,7 @@ import { HeadObjectOutput } from '@aws-sdk/client-s3'
 import jwksClient from 'jwks-rsa'
 import { SendMailOptions } from 'nodemailer'
 import { SendEmailCommandOutput } from '@aws-sdk/client-sesv2'
+// @ts-types="@oneblink/types/index.d.ts"
 export * from '@oneblink/types'
 
 export { HeadObjectOutput }
