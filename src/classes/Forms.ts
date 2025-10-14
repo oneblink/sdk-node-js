@@ -5,13 +5,13 @@ import OneBlinkAPI from '../lib/one-blink-api'
 import generateFormElement from '../lib/generate-form-element'
 import generatePageElement from '../lib/generate-page-element'
 import {
-  AWSTypes,
-  FormsAppsTypes,
-  FormTypes,
-  SubmissionTypes,
-  EnvironmentTypes,
-  KeyTypes,
-  SubmissionEventTypes,
+  type AWSTypes,
+  type FormsAppsTypes,
+  type FormTypes,
+  type SubmissionTypes,
+  type EnvironmentTypes,
+  type KeyTypes,
+  type SubmissionEventTypes,
 } from '@oneblink/types'
 import {
   validateWithFormSchema,
@@ -19,12 +19,12 @@ import {
   validateEndpointConfiguration,
 } from '../lib/forms-validation'
 import {
-  ConstructorOptions,
-  FormsSearchOptions,
-  FormsSearchResult,
-  FormSubmissionHistorySearchParameters,
-  FormSubmissionHistorySearchResults,
-  FormSubmissionMetaResult,
+  type ConstructorOptions,
+  type FormsSearchOptions,
+  type FormsSearchResult,
+  type FormSubmissionHistorySearchParameters,
+  type FormSubmissionHistorySearchResults,
+  type FormSubmissionMetaResult,
 } from '../types'
 
 export default class Forms extends OneBlinkAPI {

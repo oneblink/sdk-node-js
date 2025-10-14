@@ -327,7 +327,7 @@ export const WorkflowEventSchema = Joi.object().keys({
         ...emailSubmissionEventConfiguration,
         ...approvalFormsInclusionConfiguration,
         pdfConfigurations: Joi.array().items(
-          Joi.object().keys(pdfConfiguration),
+          Joi.object().keys(pdfSubmissionEventConfiguration),
         ),
       }),
     })

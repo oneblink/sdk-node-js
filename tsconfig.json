@@ -72,7 +72,7 @@
     "skipLibCheck": true /* Skip type checking of declaration files. */,
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   },
-  "exclude": ["tests", "tenants", "local-tests"],
+  "exclude": ["tests", "tenants", "local-tests", "scripts"],
   "typedocOptions": {
     "entryPoints": ["src/oneblink.ts", "src/civicplus.ts", "src/types.ts"],
     "entryPointStrategy": "resolve",
