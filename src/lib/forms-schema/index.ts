@@ -794,6 +794,23 @@ const formSchema = Joi.object().keys({
           .items(
             Joi.object({
               replaceableField: Joi.string().required(),
+              font: Joi.string().valid(
+                'Courier',
+                'Courier-Bold',
+                'Courier-Oblique',
+                'Courier-BoldOblique',
+                'Helvetica',
+                'Helvetica-Bold',
+                'Helvetica-Oblique',
+                'Helvetica-BoldOblique',
+                'Times-Roman',
+                'Times-Bold',
+                'Times-Italic',
+                'Times-BoldItalic',
+                'Symbol',
+                'ZapfDingbats',
+                'Brush Script MT Italic',
+              ),
               ...generateFormWorkflowEventElementMappingKeys(
                 'CustomPDFMappingSchema',
                 [],
