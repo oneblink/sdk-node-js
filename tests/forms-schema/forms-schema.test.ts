@@ -5898,6 +5898,7 @@ describe('invalid property removal', () => {
       elements: [],
       isAuthenticated: false,
       isMultiPage: false,
+      isAIBuilderSupported: false,
     })
   })
 
@@ -5932,6 +5933,7 @@ describe('invalid property removal', () => {
       elements: [],
       isAuthenticated: false,
       isMultiPage: false,
+      isAIBuilderSupported: false,
     })
   })
   test('should allow `postSubmissionReceipt.allowPDFDownload` if `postSubmissionAction` is not "URL"', () => {
@@ -5984,6 +5986,7 @@ describe('invalid property removal', () => {
       elements: [],
       isAuthenticated: false,
       isMultiPage: false,
+      isAIBuilderSupported: false,
     })
   })
   test('should throw error for `postSubmissionReceipt.allowPdfDownload.excludedElementIds` contains element ids that do not exist on the form', () => {
