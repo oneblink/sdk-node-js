@@ -820,6 +820,7 @@ const formSchema = Joi.object().keys({
           .required(),
       }),
     ),
+  isAIBuilderSupported: Joi.boolean().default(false),
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
