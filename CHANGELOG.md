@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [12.3.0] - 2025-10-26
+
 ### Added
 
 - `font` to custom pdf mapping
@@ -14,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - `CIVIC_REC_COMPLETE_CHECKOUT` schema to include `environmentId`
+
+### Dependencies
+
+- update @oneblink/sdk-core to [8.9.0-beta.2](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [8.8.1-beta.3](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
 
 ## [12.2.1] - 2025-10-08
 
