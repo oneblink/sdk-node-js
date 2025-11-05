@@ -736,6 +736,7 @@ const formSchema = Joi.object().keys({
     pendingApprovalsReminder: Joi.object({
       daysInterval: Joi.number().integer().required(),
     }),
+    hideApprovalDenyButton: Joi.boolean(),
   }),
   postSubmissionAction: Joi.string()
     .required()
