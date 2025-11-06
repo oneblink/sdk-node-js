@@ -76,7 +76,7 @@
     "pretest": "npm run eslint && tsc --noEmit && npm run fixpack",
     "release": "oneblink-release repository --no-name",
     "test": "npm run jest",
-    "types": "npm i -D github:oneblink/types",
+    "types": "npm i -D github:oneblink/types#MS-1517",
     "typescript": "tsc --noEmit",
     "update-dependents": "oneblink-release update-dependents --force"
   }

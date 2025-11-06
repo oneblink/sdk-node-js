@@ -666,6 +666,7 @@ const approvalStepNodeProps = {
     then: Joi.array().min(1).items(ConditionalPredicatesItemSchema).required(),
     otherwise: Joi.any().strip(),
   }),
+  hideApprovalDenyButton: Joi.boolean(),
 }
 
 const formSchema = Joi.object().keys({
@@ -736,7 +737,6 @@ const formSchema = Joi.object().keys({
     pendingApprovalsReminder: Joi.object({
       daysInterval: Joi.number().integer().required(),
     }),
-    hideApprovalDenyButton: Joi.boolean(),
   }),
   postSubmissionAction: Joi.string()
     .required()
