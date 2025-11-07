@@ -666,6 +666,7 @@ const approvalStepNodeProps = {
     then: Joi.array().min(1).items(ConditionalPredicatesItemSchema).required(),
     otherwise: Joi.any().strip(),
   }),
+  hideApprovalDenyButton: Joi.boolean(),
 }
 
 const formSchema = Joi.object().keys({
