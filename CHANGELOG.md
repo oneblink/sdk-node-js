@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [12.3.1] - 2025-11-07
-
 ### Added
 
 - `hideApprovalDenyButton` to `approvalStepNodeProps`
+
+## [12.3.1] - 2025-11-07
 
 ### Added
 
