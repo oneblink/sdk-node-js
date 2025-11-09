@@ -299,7 +299,37 @@ export const formWorkflowEventTypes: SubmissionEventTypes.FormWorkflowEventType[
     'SHAREPOINT_STORE_FILES',
     'CIVIC_REC_COMPLETE_CHECKOUT',
     'GOOD_TO_GO_UPDATE_ASSET',
+    'EXCEL_ADD_ROW',
   ]
+
+const entraApplicationKeys = {
+  integrationEntraApplicationId: Joi.string().required(),
+}
+
+const entraApplicationEntitySchema = Joi.object().keys({
+  id: Joi.string().required(),
+  displayName: Joi.string().required(),
+})
+
+const entraApplicationFolderPathSchema = Joi.string()
+  .custom((value, helpers) => {
+    if (typeof value === 'string') {
+      if (!value.startsWith('/')) {
+        return helpers.error('string.startsWithSlash')
+      }
+      if (value.endsWith('/')) {
+        return helpers.error('string.endsWithSlash')
+      }
+    }
+
+    return value
+  })
+  .messages({
+    'string.startsWithSlash':
+      '{{#label}} must start with a forward slash ("/")',
+    'string.endsWithSlash':
+      '{{#label}} must not end with a forward slash ("/")',
+  })
 
 export const WorkflowEventSchema = Joi.object().keys({
   type: Joi.string()
@@ -469,19 +499,9 @@ export const WorkflowEventSchema = Joi.object().keys({
     .when('type', {
       is: 'SHAREPOINT_CREATE_LIST_ITEM',
       then: Joi.object().keys({
-        integrationEntraApplicationId: Joi.string().required(),
-        sharepointSite: Joi.object()
-          .keys({
-            id: Joi.string().required(),
-            displayName: Joi.string().required(),
-          })
-          .required(),
-        sharepointList: Joi.object()
-          .keys({
-            id: Joi.string().required(),
-            displayName: Joi.string().required(),
-          })
-          .required(),
+        ...entraApplicationKeys,
+        sharepointSite: entraApplicationEntitySchema.required(),
+        sharepointList: entraApplicationEntitySchema.required(),
         mapping: Joi.array()
           .items(
             Joi.object({
@@ -498,40 +518,34 @@ export const WorkflowEventSchema = Joi.object().keys({
     .when('type', {
       is: 'SHAREPOINT_STORE_FILES',
       then: Joi.object().keys({
-        integrationEntraApplicationId: Joi.string().required(),
-        sharepointSite: Joi.object()
-          .keys({
-            id: Joi.string().required(),
-            displayName: Joi.string().required(),
-          })
-          .required(),
-        sharepointDrive: Joi.object()
-          .keys({
-            id: Joi.string().required(),
-            displayName: Joi.string().required(),
-          })
-          .required(),
-        folderPath: Joi.string()
-          .custom((value, helpers) => {
-            if (typeof value === 'string') {
-              if (!value.startsWith('/')) {
-                return helpers.error('string.startsWithSlash')
-              }
-              if (value.endsWith('/')) {
-                return helpers.error('string.endsWithSlash')
-              }
-            }
-
-            return value
-          })
-          .messages({
-            'string.startsWithSlash':
-              '{{#label}} must start with a forward slash ("/")',
-            'string.endsWithSlash':
-              '{{#label}} must not end with a forward slash ("/")',
-          }),
+        ...entraApplicationKeys,
+        sharepointSite: entraApplicationEntitySchema.required(),
+        sharepointDrive: entraApplicationEntitySchema.required(),
+        folderPath: entraApplicationFolderPathSchema,
         excludeAttachments: Joi.boolean().default(false),
         ...pdfSubmissionEventConfiguration,
+      }),
+    })
+    .when('type', {
+      is: 'EXCEL_ADD_ROW',
+      then: Joi.object().keys({
+        ...entraApplicationKeys,
+        site: entraApplicationFolderPathSchema.required(),
+        drive: entraApplicationFolderPathSchema.required(),
+        folderPath: entraApplicationFolderPathSchema.required(),
+        excelFile: entraApplicationEntitySchema.required(),
+        table: entraApplicationEntitySchema.required(),
+        mapping: Joi.array()
+          .items(
+            Joi.object({
+              columnName: Joi.string().required(),
+              ...generateFormWorkflowEventElementMappingKeys(
+                'ExcelAddRowMapping',
+                [],
+              ),
+            }).id('ExcelAddRowMapping'),
+          )
+          .default([]),
       }),
     })
     .when('type', {
