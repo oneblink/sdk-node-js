@@ -545,7 +545,8 @@ export const WorkflowEventSchema = Joi.object().keys({
               ),
             }).id('ExcelAddRowMapping'),
           )
-          .default([]),
+          .min(1)
+          .required(),
       }),
     })
     .when('type', {
