@@ -311,26 +311,6 @@ const entraApplicationEntitySchema = Joi.object().keys({
   displayName: Joi.string().required(),
 })
 
-const entraApplicationFolderPathSchema = Joi.string()
-  .custom((value, helpers) => {
-    if (typeof value === 'string') {
-      if (!value.startsWith('/')) {
-        return helpers.error('string.startsWithSlash')
-      }
-      if (value.endsWith('/')) {
-        return helpers.error('string.endsWithSlash')
-      }
-    }
-
-    return value
-  })
-  .messages({
-    'string.startsWithSlash':
-      '{{#label}} must start with a forward slash ("/")',
-    'string.endsWithSlash':
-      '{{#label}} must not end with a forward slash ("/")',
-  })
-
 export const WorkflowEventSchema = Joi.object().keys({
   type: Joi.string()
     .required()
@@ -521,7 +501,25 @@ export const WorkflowEventSchema = Joi.object().keys({
         ...entraApplicationKeys,
         sharepointSite: entraApplicationEntitySchema.required(),
         sharepointDrive: entraApplicationEntitySchema.required(),
-        folderPath: entraApplicationFolderPathSchema,
+        folderPath: Joi.string()
+          .custom((value, helpers) => {
+            if (typeof value === 'string') {
+              if (!value.startsWith('/')) {
+                return helpers.error('string.startsWithSlash')
+              }
+              if (value.endsWith('/')) {
+                return helpers.error('string.endsWithSlash')
+              }
+            }
+
+            return value
+          })
+          .messages({
+            'string.startsWithSlash':
+              '{{#label}} must start with a forward slash ("/")',
+            'string.endsWithSlash':
+              '{{#label}} must not end with a forward slash ("/")',
+          }),
         excludeAttachments: Joi.boolean().default(false),
         ...pdfSubmissionEventConfiguration,
       }),
@@ -530,9 +528,8 @@ export const WorkflowEventSchema = Joi.object().keys({
       is: 'EXCEL_ADD_ROW',
       then: Joi.object().keys({
         ...entraApplicationKeys,
-        site: entraApplicationFolderPathSchema.required(),
-        drive: entraApplicationFolderPathSchema.required(),
-        folderPath: entraApplicationFolderPathSchema.required(),
+        site: entraApplicationEntitySchema.required(),
+        drive: entraApplicationEntitySchema.required(),
         excelFile: entraApplicationEntitySchema.required(),
         table: entraApplicationEntitySchema.required(),
         mapping: Joi.array()
