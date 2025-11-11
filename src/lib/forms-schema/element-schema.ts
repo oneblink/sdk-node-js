@@ -73,6 +73,9 @@ import GeoscapeElement, {
   type as geoscapeElementType,
 } from './elements/GeoscapeElement'
 import PointElement, { type as pointElementType } from './elements/PointElement'
+import PointV3Element, {
+  type as pointV3ElementType,
+} from './elements/pointV3Element'
 import PointCadastralParcelElement, {
   type as pointCadastralParcelType,
 } from './elements/PointCadastralParcelElement'
@@ -138,6 +141,7 @@ const elementTypesMap: Record<
   [complianceElementType]: null,
   [geoscapeElementType]: null,
   [pointElementType]: null,
+  [pointV3ElementType]: null,
   [googleAddressElementType]: null,
   [civicaStreetNameElementType]: null,
   [civicaNameRecordElementType]: null,
@@ -249,6 +253,9 @@ const schema = Joi.object({
   })
   .when(typeCase('pointAddress'), {
     then: PointElement,
+  })
+   .when(typeCase('pointAddressV3'), {
+    then: PointV3Element,
   })
   .when(typeCase('pointCadastralParcel'), {
     then: PointCadastralParcelElement,
