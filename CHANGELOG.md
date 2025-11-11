@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `hideApprovalDenyButton` to `approvalStepNodeProps`
 - `EXCEL_ADD_ROW` form workflow event to validation
+- `pointAddressV3` element
 
 ## [12.3.1] - 2025-11-07
 
