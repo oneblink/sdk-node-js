@@ -43,4 +43,5 @@ export default Joi.object({
   customCssClasses,
   autocompleteAttributes,
   isDisplayingAddressInformation: Joi.boolean().default(false),
+  excludeAliases: Joi.boolean().default(false),
 })
