@@ -75,7 +75,7 @@ import GeoscapeElement, {
 import PointElement, { type as pointElementType } from './elements/PointElement'
 import PointV3Element, {
   type as pointV3ElementType,
-} from './elements/pointV3Element'
+} from './elements/PointV3Element'
 import PointCadastralParcelElement, {
   type as pointCadastralParcelType,
 } from './elements/PointCadastralParcelElement'
@@ -254,7 +254,7 @@ const schema = Joi.object({
   .when(typeCase('pointAddress'), {
     then: PointElement,
   })
-   .when(typeCase('pointAddressV3'), {
+  .when(typeCase('pointAddressV3'), {
     then: PointV3Element,
   })
   .when(typeCase('pointCadastralParcel'), {

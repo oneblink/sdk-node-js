@@ -27,7 +27,7 @@ export default Joi.object({
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   placeholderValue,
-  stateFilter: Joi.array().items(
+  stateTerritoryFilter: Joi.array().items(
     Joi.string().valid(
       'NSW',
       'QLD',
@@ -39,6 +39,12 @@ export default Joi.object({
       'WA',
       'OT',
     ),
+  ),
+  addressTypeFilter: Joi.array().items(
+    Joi.string().valid('physical', 'mailing'),
+  ),
+  datasetFilter: Joi.array().items(
+    Joi.string().valid('gnaf', 'gnaflive', 'mailAddress'),
   ),
   customCssClasses,
   autocompleteAttributes,
