@@ -138,12 +138,28 @@ export function validatePDFConfiguration({
   customPDFs,
   validatedFormElements,
 }: {
-  pdfConfiguration: SubmissionEventTypes.PDFConfiguration | undefined
+  pdfConfiguration:
+    | SubmissionEventTypes.PDFConfiguration
+    | SubmissionEventTypes.PDFConfiguration[]
+    | undefined
   propertyName: string
   customPDFs: FormTypes.Form['customPDFs']
   validatedFormElements: FormTypes.FormElement[]
 }) {
   if (!pdfConfiguration) {
+    return
+  }
+
+  if (Array.isArray(pdfConfiguration)) {
+    pdfConfiguration.forEach((pdfConfig, index) => {
+      validatePDFConfiguration({
+        pdfConfiguration: pdfConfig,
+        propertyName: `${propertyName}[${index}]`,
+        customPDFs,
+        validatedFormElements,
+      })
+    })
+
     return
   }
 
