@@ -760,7 +760,7 @@ const formSchema = Joi.object().keys({
   }),
   postSubmissionReceipt: Joi.object({
     html: htmlString,
-    allowPDFDownload: Joi.valid(
+    allowPDFDownload: Joi.alternatives(
       Joi.object(pdfSubmissionEventConfiguration),
       Joi.array().items(Joi.object(pdfSubmissionEventConfiguration)),
     ),
