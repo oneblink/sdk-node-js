@@ -7,11 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [12.4.0] - 2025-11-19
+
 ### Added
 
 - `hideApprovalDenyButton` to `approvalStepNodeProps`
 - `EXCEL_ADD_ROW` form workflow event to validation
 - `pointAddressV3` element
+
+### Dependencies
+
+- update @oneblink/sdk-core to [8.10.0-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [8.9.0-beta.2](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
 
 ## [12.3.1] - 2025-11-07
 
