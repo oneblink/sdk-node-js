@@ -138,12 +138,27 @@ export function validatePDFConfiguration({
   customPDFs,
   validatedFormElements,
 }: {
-  pdfConfiguration: SubmissionEventTypes.PDFConfiguration | undefined
+  pdfConfiguration: NonNullable<
+    FormTypes.Form['postSubmissionReceipt']
+  >['allowPDFDownload']
   propertyName: string
   customPDFs: FormTypes.Form['customPDFs']
   validatedFormElements: FormTypes.FormElement[]
 }) {
   if (!pdfConfiguration) {
+    return
+  }
+
+  if (Array.isArray(pdfConfiguration)) {
+    pdfConfiguration.forEach(({ configuration }, index) => {
+      validatePDFConfiguration({
+        pdfConfiguration: configuration,
+        propertyName: `${propertyName}[${index}]`,
+        customPDFs,
+        validatedFormElements,
+      })
+    })
+
     return
   }
 
