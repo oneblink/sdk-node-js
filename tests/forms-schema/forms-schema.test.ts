@@ -5902,93 +5902,6 @@ describe('invalid property removal', () => {
     })
   })
 
-  test('should allow `postSubmissionReceipt.html` if `postSubmissionAction` is not "URL"', () => {
-    const { error, value } = formSchema.validate({
-      name: 'Inspection',
-      formsAppEnvironmentId: 1,
-      formsAppIds: [1],
-      organisationId: '59cc888b8969af000fb50ddb',
-      postSubmissionAction: 'BACK',
-      postSubmissionReceipt: {
-        html: '<p>test</p>',
-      },
-      cancelAction: 'BACK',
-      submissionEvents: [],
-      tags: [],
-      elements: [],
-    })
-    expect(error).toBeFalsy()
-    expect(value).toEqual({
-      name: 'Inspection',
-      formsAppEnvironmentId: 1,
-      formsAppIds: [1],
-      organisationId: '59cc888b8969af000fb50ddb',
-      postSubmissionAction: 'BACK',
-      postSubmissionReceipt: {
-        html: '<p>test</p>',
-      },
-      cancelAction: 'BACK',
-      submissionEvents: [],
-      tags: [],
-      elements: [],
-      isAuthenticated: false,
-      isMultiPage: false,
-      isAIBuilderSupported: false,
-    })
-  })
-  test('should allow `postSubmissionReceipt.allowPDFDownload` if `postSubmissionAction` is not "URL"', () => {
-    const { error, value } = formSchema.validate({
-      name: 'Inspection',
-      formsAppEnvironmentId: 1,
-      formsAppIds: [1],
-      organisationId: '59cc888b8969af000fb50ddb',
-      postSubmissionAction: 'BACK',
-      postSubmissionReceipt: {
-        allowPDFDownload: {
-          pdfFileName: 'my.pdf',
-          includeSubmissionIdInPdf: true,
-          includePaymentInPdf: true,
-          excludedElementIds: [],
-          usePagesAsBreaks: true,
-          approvalFormsInclusion: {
-            value: 'ALL',
-          },
-        },
-      },
-      cancelAction: 'BACK',
-      submissionEvents: [],
-      tags: [],
-      elements: [],
-    })
-    expect(error).toBeFalsy()
-    expect(value).toEqual({
-      name: 'Inspection',
-      formsAppEnvironmentId: 1,
-      formsAppIds: [1],
-      organisationId: '59cc888b8969af000fb50ddb',
-      postSubmissionAction: 'BACK',
-      postSubmissionReceipt: {
-        allowPDFDownload: {
-          pdfFileName: 'my.pdf',
-          includeSubmissionIdInPdf: true,
-          includePaymentInPdf: true,
-          excludedElementIds: [],
-          excludedCSSClasses: [],
-          usePagesAsBreaks: true,
-          approvalFormsInclusion: {
-            value: 'ALL',
-          },
-        },
-      },
-      cancelAction: 'BACK',
-      submissionEvents: [],
-      tags: [],
-      elements: [],
-      isAuthenticated: false,
-      isMultiPage: false,
-      isAIBuilderSupported: false,
-    })
-  })
   test('should throw error for `postSubmissionReceipt.allowPdfDownload.excludedElementIds` contains element ids that do not exist on the form', () => {
     const run = () =>
       validateFormThrowError({
@@ -9290,5 +9203,186 @@ describe('Approval Step Nodes', () => {
     }).toThrow(
       '"approvalSteps" contains a STANDARD step with a "label" (Label 1) property that is not unique',
     )
+  })
+})
+
+describe('Post Submission Receipt', () => {
+  test('should allow `postSubmissionReceipt.html`', () => {
+    const { error, value } = formSchema.validate({
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'URL',
+      redirectUrl: 'https://www.oneblink.io',
+      postSubmissionReceipt: {
+        html: '<p>test</p>',
+      },
+      cancelAction: 'BACK',
+      submissionEvents: [],
+      tags: [],
+      elements: [],
+    })
+    expect(error).toBeFalsy()
+    expect(value).toEqual({
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'URL',
+      redirectUrl: 'https://www.oneblink.io',
+      postSubmissionReceipt: {
+        html: '<p>test</p>',
+      },
+      cancelAction: 'BACK',
+      submissionEvents: [],
+      tags: [],
+      elements: [],
+      isAuthenticated: false,
+      isMultiPage: false,
+      isAIBuilderSupported: false,
+    })
+  })
+  test('should allow `postSubmissionReceipt.allowPDFDownload` as an object', () => {
+    const { error, value } = formSchema.validate({
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'URL',
+      redirectUrl: 'https://www.oneblink.io',
+      postSubmissionReceipt: {
+        allowPDFDownload: {
+          pdfFileName: 'my.pdf',
+          includeSubmissionIdInPdf: true,
+          includePaymentInPdf: true,
+          excludedElementIds: [],
+          usePagesAsBreaks: true,
+          approvalFormsInclusion: {
+            value: 'ALL',
+          },
+        },
+      },
+      cancelAction: 'BACK',
+      submissionEvents: [],
+      tags: [],
+      elements: [],
+    })
+    expect(error).toBeFalsy()
+    expect(value).toEqual({
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'URL',
+      redirectUrl: 'https://www.oneblink.io',
+      postSubmissionReceipt: {
+        allowPDFDownload: {
+          pdfFileName: 'my.pdf',
+          includeSubmissionIdInPdf: true,
+          includePaymentInPdf: true,
+          excludedElementIds: [],
+          excludedCSSClasses: [],
+          usePagesAsBreaks: true,
+          approvalFormsInclusion: {
+            value: 'ALL',
+          },
+        },
+      },
+      cancelAction: 'BACK',
+      submissionEvents: [],
+      tags: [],
+      elements: [],
+      isAuthenticated: false,
+      isMultiPage: false,
+      isAIBuilderSupported: false,
+    })
+  })
+
+  test('should allow `postSubmissionReceipt.allowPDFDownload` as an array of configurations', () => {
+    const { error, value } = formSchema.validate({
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'URL',
+      redirectUrl: 'https://www.oneblink.io',
+      postSubmissionReceipt: {
+        allowPDFDownload: [
+          {
+            configuration: {
+              pdfFileName: 'my.pdf',
+              includeSubmissionIdInPdf: true,
+              includePaymentInPdf: true,
+              excludedElementIds: [],
+              usePagesAsBreaks: true,
+              approvalFormsInclusion: {
+                value: 'ALL',
+              },
+            },
+            id: '3ec57eb4-56d8-495b-aa28-5c085588c3c6',
+          },
+          {
+            configuration: {
+              pdfFileName: 'opposite.pdf',
+              includeSubmissionIdInPdf: false,
+              includePaymentInPdf: false,
+              excludedElementIds: [],
+              usePagesAsBreaks: false,
+            },
+            id: '415aec26-f7bf-44c2-91f4-579944341661',
+          },
+        ],
+      },
+      cancelAction: 'BACK',
+      submissionEvents: [],
+      tags: [],
+      elements: [],
+    })
+    expect(error).toBeFalsy()
+    expect(value).toEqual({
+      name: 'Inspection',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'URL',
+      redirectUrl: 'https://www.oneblink.io',
+      postSubmissionReceipt: {
+        allowPDFDownload: [
+          {
+            configuration: {
+              pdfFileName: 'my.pdf',
+              includeSubmissionIdInPdf: true,
+              includePaymentInPdf: true,
+              excludedCSSClasses: [],
+              excludedElementIds: [],
+              usePagesAsBreaks: true,
+              approvalFormsInclusion: {
+                value: 'ALL',
+              },
+            },
+            id: '3ec57eb4-56d8-495b-aa28-5c085588c3c6',
+          },
+          {
+            configuration: {
+              pdfFileName: 'opposite.pdf',
+              includeSubmissionIdInPdf: false,
+              includePaymentInPdf: false,
+              excludedCSSClasses: [],
+              excludedElementIds: [],
+              usePagesAsBreaks: false,
+            },
+            id: '415aec26-f7bf-44c2-91f4-579944341661',
+          },
+        ],
+      },
+      cancelAction: 'BACK',
+      submissionEvents: [],
+      tags: [],
+      elements: [],
+      isAuthenticated: false,
+      isMultiPage: false,
+      isAIBuilderSupported: false,
+    })
   })
 })
