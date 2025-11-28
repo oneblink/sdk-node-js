@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `postSubmissionReceipt.allowPDFDownload` to an accept an array of configurations or an object
 
+### Removed
+
+- `isAIBuilderSupported` from form schema
+
 ## [12.4.0] - 2025-11-19
 
 ### Added

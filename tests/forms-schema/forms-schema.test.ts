@@ -5898,7 +5898,6 @@ describe('invalid property removal', () => {
       elements: [],
       isAuthenticated: false,
       isMultiPage: false,
-      isAIBuilderSupported: false,
     })
   })
 
@@ -9240,7 +9239,6 @@ describe('Post Submission Receipt', () => {
       elements: [],
       isAuthenticated: false,
       isMultiPage: false,
-      isAIBuilderSupported: false,
     })
   })
   test('should allow `postSubmissionReceipt.allowPDFDownload` as an object', () => {
@@ -9295,7 +9293,6 @@ describe('Post Submission Receipt', () => {
       elements: [],
       isAuthenticated: false,
       isMultiPage: false,
-      isAIBuilderSupported: false,
     })
   })
 
@@ -9382,7 +9379,6 @@ describe('Post Submission Receipt', () => {
       elements: [],
       isAuthenticated: false,
       isMultiPage: false,
-      isAIBuilderSupported: false,
     })
   })
 })
