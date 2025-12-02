@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `maxWidthPixels` to Image element
+
 ### Changed
 
 - `postSubmissionReceipt.allowPDFDownload` to an accept an array of configurations or an object
