@@ -835,6 +835,7 @@ const formSchema = Joi.object().keys({
                 'Symbol',
                 'ZapfDingbats',
                 'Brush Script MT Italic',
+                'Public Sans',
               ),
               ...generateFormWorkflowEventElementMappingKeys(
                 'CustomPDFMappingSchema',

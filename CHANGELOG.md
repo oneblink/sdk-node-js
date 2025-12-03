@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `Public Sans` to custom PDF fonts
+
 ### Changed
 
 - `postSubmissionReceipt.allowPDFDownload` to an accept an array of configurations or an object
