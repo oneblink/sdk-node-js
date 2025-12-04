@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [12.5.0] - 2025-12-04
+
 ### Added
 
 - `Public Sans` to custom PDF fonts
@@ -18,6 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - `isAIBuilderSupported` from form schema
+
+### Dependencies
+
+- update @oneblink/storage to [3.3.0-beta.2](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [3.2.3-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
 
 ## [12.4.0] - 2025-11-19
 
