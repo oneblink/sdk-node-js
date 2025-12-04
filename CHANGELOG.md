@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `maxWidthPixels` to Image element
+
 ## [12.5.0] - 2025-12-04
 
 ### Added
