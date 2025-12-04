@@ -835,6 +835,10 @@ const formSchema = Joi.object().keys({
                 'Symbol',
                 'ZapfDingbats',
                 'Brush Script MT Italic',
+                'PublicSans',
+                'PublicSans-Bold',
+                'PublicSans-Italic',
+                'PublicSans-BoldItalic',
               ),
               ...generateFormWorkflowEventElementMappingKeys(
                 'CustomPDFMappingSchema',
@@ -845,7 +849,6 @@ const formSchema = Joi.object().keys({
           .required(),
       }),
     ),
-  isAIBuilderSupported: Joi.boolean().default(false),
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [

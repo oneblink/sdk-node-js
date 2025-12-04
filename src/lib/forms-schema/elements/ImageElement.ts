@@ -16,5 +16,6 @@ export default Joi.object({
   ...conditionallyShowSchemas,
   defaultValue: Joi.string().required().uri(),
   decorativeImage: Joi.boolean(),
+  maxWidthPixels: Joi.number().integer(),
   customCssClasses,
 })
