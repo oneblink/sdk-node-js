@@ -7,9 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [12.6.0] - 2025-12-17
+
 ### Added
 
 - `maxWidthPixels` to Image element
+
+### Dependencies
+
+- update @oneblink/sdk-core to [8.11.1-beta.4](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [8.10.0-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update @oneblink/storage to [3.4.0-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [3.3.0-beta.2](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
 
 ## [12.5.0] - 2025-12-04
 
