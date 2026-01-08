@@ -23,6 +23,12 @@ This SDK is the entry point for all OneBlink Productivity instances. The default
   const OneBlink = require('@oneblink/sdk/tenants/oneblink')
   ```
 
+- [OneBlink Console (US)](https://console.us.oneblink.io)
+
+  ```js
+  const OneBlink = require('@oneblink/sdk/tenants/oneblink-us')
+  ```
+
 - [CivicOptimize Productivity](https://console.transform.civicplus.com)
 
   ```js

@@ -14,6 +14,20 @@ export const ONEBLINK: TenantConfiguration = {
   },
 }
 
+export const ONEBLINK_US: TenantConfiguration = {
+  awsRegion: 'us-east-1',
+  test: {
+    jwtIssuer:
+      'https://cognito-idp.us-east-1.amazonaws.com/us-east-1_x2AYHCleu',
+    apiOrigin: 'https://auth-api.test.us.oneblink.io',
+  },
+  prod: {
+    jwtIssuer:
+      'https://cognito-idp.us-east-1.amazonaws.com/us-east-1_ZzZdgJR4F',
+    apiOrigin: 'https://auth-api.us.oneblink.io',
+  },
+}
+
 export const CIVICPLUS: TenantConfiguration = {
   awsRegion: 'us-east-2',
   test: {
