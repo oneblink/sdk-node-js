@@ -422,7 +422,7 @@ export default class Forms extends OneBlinkAPI {
   async getSubmissionAttachmentStream(
     formId: number,
     attachmentId: string,
-  ): Promise<ReadableStream> {
+  ): Promise<NodeJS.ReadableStream> {
     const response = await this._getSubmissionAttachmentResponse(
       formId,
       attachmentId,

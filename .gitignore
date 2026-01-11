@@ -5,3 +5,4 @@ local-tests
 scripts
 tenants
 docs-dist
+tsconfig.tsbuildinfo

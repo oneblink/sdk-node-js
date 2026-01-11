@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { FormTypes } from '@oneblink/types'
 import * as OneBlinkSDK from '../src/oneblink'
 

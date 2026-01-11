@@ -1,3 +1,5 @@
+import { describe, test, expect, vi, beforeEach, afterAll } from 'vitest'
+
 const constructorOptions = {
   accessKey: '123',
   secretKey: 'abc',
@@ -12,17 +14,23 @@ describe('Jobs SDK Class', () => {
     describe('validation', () => {
       test('should reject with correct validation errors for "options"', async () => {
         const jobs = await getJobsSdk()
-        // @ts-expect-error Expecting throw
-        return expect(jobs.createJob()).rejects.toThrow('"value" is required')
+
+        return expect(
+          // @ts-expect-error Expecting throw
+          jobs.createJob(),
+        ).rejects.toThrow('"value" is required')
       })
 
       describe('should reject with correct validation errors for "username"', () => {
         test('required', async () => {
           const jobs = await getJobsSdk()
-          // @ts-expect-error Expecting throw
-          return expect(jobs.createJob({})).rejects.toThrow(
-            '"username" is required',
-          )
+
+          return expect(
+            jobs.createJob(
+              // @ts-expect-error Expecting throw
+              {},
+            ),
+          ).rejects.toThrow('"username" is required')
         })
         test('string', async () => {
           const jobs = await getJobsSdk()
@@ -91,28 +99,26 @@ describe('Jobs SDK Class', () => {
 
     describe('API Calls', () => {
       const reset = () => {
-        jest.resetModules()
-        jest.clearAllMocks()
+        vi.resetModules()
+        vi.clearAllMocks()
       }
       beforeEach(reset)
       afterAll(reset)
 
       test('should not call pre-fill data endpoints', async () => {
-        const mockPostRequest = jest
+        const mockPostRequest = vi
           .fn()
           .mockImplementation(() => Promise.resolve({}))
-        jest.mock(
-          '../src/lib/one-blink-api',
-          () =>
-            class {
-              postRequest() {
-                return mockPostRequest()
-              }
-              postEmptyRequest() {
-                return mockPostRequest()
-              }
-            },
-        )
+        vi.doMock('../src/lib/one-blink-api', () => ({
+          default: class {
+            postRequest() {
+              return mockPostRequest()
+            }
+            postEmptyRequest() {
+              return mockPostRequest()
+            }
+          },
+        }))
 
         const jobs = await getJobsSdk()
         await jobs.createJob({
@@ -127,11 +133,11 @@ describe('Jobs SDK Class', () => {
       })
 
       test('should call pre-fill data endpoints', async () => {
-        const mockSetPreFillData = jest
+        const mockSetPreFillData = vi
           .fn()
           .mockImplementation(() => Promise.resolve({}))
 
-        jest.mock('@oneblink/storage', () => ({
+        vi.doMock('@oneblink/storage', () => ({
           OneBlinkUploader: class {
             uploadPrefillData() {
               return mockSetPreFillData()
@@ -139,21 +145,19 @@ describe('Jobs SDK Class', () => {
           },
         }))
 
-        const mockPostRequest = jest
+        const mockPostRequest = vi
           .fn()
           .mockImplementation(() => Promise.resolve({}))
-        jest.mock(
-          '../src/lib/one-blink-api',
-          () =>
-            class {
-              oneBlinkUploader = {
-                uploadPrefillData: mockSetPreFillData,
-              }
-              postRequest() {
-                return mockPostRequest()
-              }
-            },
-        )
+        vi.doMock('../src/lib/one-blink-api', () => ({
+          default: class {
+            oneBlinkUploader = {
+              uploadPrefillData: mockSetPreFillData,
+            }
+            postRequest() {
+              return mockPostRequest()
+            }
+          },
+        }))
 
         const jobs = await getJobsSdk()
         const options = {
@@ -187,65 +191,74 @@ describe('Jobs SDK Class', () => {
 
   describe('search()', () => {
     const reset = () => {
-      jest.resetModules()
-      jest.clearAllMocks()
+      vi.resetModules()
+      vi.clearAllMocks()
     }
     beforeEach(reset)
     afterAll(reset)
 
     test('should reject form id', async () => {
       const jobs = await getJobsSdk()
-      // @ts-expect-error Expecting throw
-      return expect(jobs.searchJobs({ formId: 'ten' })).rejects.toThrow(
-        'formId must be provided as a number or not at all',
-      )
+      return expect(
+        jobs.searchJobs({
+          // @ts-expect-error Expecting throw
+          formId: 'ten',
+        }),
+      ).rejects.toThrow('formId must be provided as a number or not at all')
     })
 
     test('should reject externalId', async () => {
       const jobs = await getJobsSdk()
-      // @ts-expect-error Expecting throw
-      return expect(jobs.searchJobs({ externalId: 12345 })).rejects.toThrow(
-        'externalId must be provided as a string or not at all',
-      )
+
+      return expect(
+        jobs.searchJobs({
+          // @ts-expect-error Expecting throw
+          externalId: 12345,
+        }),
+      ).rejects.toThrow('externalId must be provided as a string or not at all')
     })
 
     test('should reject username', async () => {
       const jobs = await getJobsSdk()
-      // @ts-expect-error Expecting throw
-      return expect(jobs.searchJobs({ username: 12345 })).rejects.toThrow(
-        'username must be provided as a string or not at all',
-      )
+      return expect(
+        jobs.searchJobs({
+          // @ts-expect-error Expecting throw
+          username: 12345,
+        }),
+      ).rejects.toThrow('username must be provided as a string or not at all')
     })
 
     test('should reject limit', async () => {
       const jobs = await getJobsSdk()
-      // @ts-expect-error Expecting throw
-      return expect(jobs.searchJobs({ limit: 'infinite' })).rejects.toThrow(
-        'limit must be provided as a number or not at all',
-      )
+      return expect(
+        jobs.searchJobs({
+          // @ts-expect-error Expecting throw
+          limit: 'infinite',
+        }),
+      ).rejects.toThrow('limit must be provided as a number or not at all')
     })
 
     test('should reject offset', async () => {
       const jobs = await getJobsSdk()
       return expect(
-        // @ts-expect-error Expecting throw
-        jobs.searchJobs({ offset: 'a little bit' }),
+        jobs.searchJobs({
+          // @ts-expect-error Expecting throw
+          offset: 'a little bit',
+        }),
       ).rejects.toThrow('offset must be provided as a number or not at all')
     })
 
     test('should make search call successfully', async () => {
-      const mockSearchRequest = jest
+      const mockSearchRequest = vi
         .fn()
         .mockImplementation(() => Promise.resolve({}))
-      jest.mock(
-        '../src/lib/one-blink-api',
-        () =>
-          class {
-            searchRequest() {
-              return mockSearchRequest()
-            }
-          },
-      )
+      vi.doMock('../src/lib/one-blink-api', () => ({
+        default: class {
+          searchRequest() {
+            return mockSearchRequest()
+          }
+        },
+      }))
       const jobs = await getJobsSdk()
 
       await jobs.searchJobs({

@@ -47,9 +47,6 @@ export default async function sendEmail(
 ): Promise<SendEmailResult> {
   const mailComposer = new MailComposer(options)
   const mimeNode = mailComposer.compile()
-  //@ts-expect-error This exists but not on the type. Additionally, this
-  //needs to be included so that the BCC won't be stripped from the email.
-  //Link to related docs: https://nodemailer.com/extras/mailcomposer/#bcc
   mimeNode.keepBcc = true
   const rawMailData = await mimeNode.build()
 

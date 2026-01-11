@@ -1,3 +1,4 @@
+import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest'
 import querystring from 'querystring'
 import { URL } from 'url'
 
@@ -12,8 +13,8 @@ describe('Forms SDK Class', () => {
 
   describe('generateFormUrl()', () => {
     beforeEach(() => {
-      jest.mock('../src/lib/one-blink-api', () => {
-        return class {
+      vi.doMock('../src/lib/one-blink-api', () => ({
+        default: class {
           accessKey: string
           secretKey: string
           constructor(accessKey: string, secretKey: string) {
@@ -41,13 +42,13 @@ describe('Forms SDK Class', () => {
               })
             }
           }
-        }
-      })
+        },
+      }))
     })
 
     afterEach(() => {
-      jest.clearAllMocks()
-      jest.resetModules()
+      vi.clearAllMocks()
+      vi.resetModules()
     })
 
     test('should reject with correct validation errors for "formId"', async () => {
