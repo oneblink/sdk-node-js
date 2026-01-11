@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import * as OneBlinkSDK from '../src/oneblink'
 
 describe('Organisations SDK Class', () => {

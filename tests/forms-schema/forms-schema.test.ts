@@ -1,3 +1,4 @@
+import { describe, test, it, expect } from 'vitest'
 import { formSchema, elementSchema } from '../../src/lib/forms-schema'
 import { validateWithFormSchema } from '../../src/lib/forms-validation'
 import { FormTypes } from '@oneblink/types'
@@ -8945,7 +8946,7 @@ describe('external id generation and personalisation', () => {
     )
   })
 
-  describe('should reject with correct validation errors for non unique element names', () => {
+  test('should reject with correct validation errors for non unique element names', () => {
     expect(() =>
       validateFormThrowError({
         name: 'Form',

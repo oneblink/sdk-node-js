@@ -328,7 +328,7 @@ const regexPattern = Joi.string().custom((value) => {
   try {
     new RegExp(value)
     return value
-  } catch (err) {
+  } catch {
     throw new Error('it was an invalid regex pattern')
   }
 })

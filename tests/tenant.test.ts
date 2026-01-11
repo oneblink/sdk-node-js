@@ -1,12 +1,11 @@
-// @flow
-'use strict'
+import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('Region URL selecting', () => {
   beforeEach(() => {
     process.env.ONEBLINK_SDK_ENVIRONMENT = undefined
   })
   afterEach(() => {
-    jest.resetModules()
+    vi.resetModules()
   })
   test('should use the CIVICPLUS apiOrigin for the api', async () => {
     const { Forms } = await import('../src/civicplus')
@@ -18,6 +17,13 @@ describe('Region URL selecting', () => {
   test('should use the ONEBLINK apiOrigin for the api', async () => {
     const { Forms } = await import('../src/oneblink')
     return expect(Forms.tenant.apiOrigin).toBe('https://auth-api.blinkm.io')
+  })
+
+  test('should use the ONEBLINK_US apiOrigin for the api', async () => {
+    const { Forms } = await import('../src/oneblink-us')
+    return expect(Forms.tenant.apiOrigin).toBe(
+      'https://auth-api.us.oneblink.io',
+    )
   })
 
   test('should use the ONEBLINK test apiOrigin for the api', async () => {
@@ -33,6 +39,14 @@ describe('Region URL selecting', () => {
     const { Forms } = await import('../src/civicplus')
     return expect(Forms.tenant.apiOrigin).toBe(
       'https://auth-api.test.transform.civicplus.com',
+    )
+  })
+
+  test('should use the ONEBLINK_US test apiOrigin for the api', async () => {
+    process.env.ONEBLINK_SDK_ENVIRONMENT = 'test'
+    const { Forms } = await import('../src/oneblink-us')
+    return expect(Forms.tenant.apiOrigin).toBe(
+      'https://auth-api.test.us.oneblink.io',
     )
   })
 })
