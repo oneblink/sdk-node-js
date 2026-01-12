@@ -17,7 +17,12 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ['**/node_modules', '**/tenants', '**/docs', '**/local-tests'],
+    ignores: [
+      './node_modules/**',
+      './tenants/**',
+      './docs/**',
+      './local-tests/**',
+    ],
   },
   ...pluginMicrosoftSdl.configs.recommended,
   ...compat.extends(
