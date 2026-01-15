@@ -1,7 +1,7 @@
 import { FormTypes } from '@oneblink/types'
 import { v4 as uuid } from 'uuid'
-import { validateWithPageElementSchema } from './forms-validation'
-import generateFormElement from './generate-form-element'
+import { validateWithPageElementSchema } from './forms-validation/index.js'
+import generateFormElement from './generate-form-element.js'
 
 export default function generatePageElement(
   formElementGenerationData?: Record<string, unknown>,

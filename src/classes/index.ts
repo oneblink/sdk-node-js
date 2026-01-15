@@ -1,18 +1,18 @@
 // Classes
-import Forms from './Forms'
-import FormsApps from './FormsApps'
-import Jobs from './Jobs'
-import Keys from './Keys'
-import Organisations from './Organisations'
-import PDF from './PDF'
-import Approvals from './Approvals'
-import FormsAppEnvironments from './FormsAppEnvironments'
-import EmailTemplates from './EmailTemplates'
-import DataManager from './DataManager'
-import FormElementLookups from './FormElementLookups'
-import FormElementLists from './FormElementLists'
+import Forms from './Forms.js'
+import FormsApps from './FormsApps.js'
+import Jobs from './Jobs.js'
+import Keys from './Keys.js'
+import Organisations from './Organisations.js'
+import PDF from './PDF.js'
+import Approvals from './Approvals.js'
+import FormsAppEnvironments from './FormsAppEnvironments.js'
+import EmailTemplates from './EmailTemplates.js'
+import DataManager from './DataManager.js'
+import FormElementLookups from './FormElementLookups.js'
+import FormElementLists from './FormElementLists.js'
 // Functions
-import sendEmail from './sendEmail'
+import sendEmail from './sendEmail.js'
 
 export {
   Forms,

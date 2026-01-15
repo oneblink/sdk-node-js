@@ -9,7 +9,6 @@ import {
   AWSTypes,
   SchedulingTypes,
 } from '@oneblink/types'
-import { FormStoreRecord } from '@oneblink/types/typescript/submissions'
 import { HeadObjectOutput } from '@aws-sdk/client-s3'
 import jwksClient from 'jwks-rsa'
 import { SendMailOptions } from 'nodemailer'
@@ -369,7 +368,7 @@ export type SearchDataManagerRecordsResponse = {
     offset: number
     nextOffset?: number
   }
-  submissions: Array<FormStoreRecord>
+  submissions: Array<SubmissionTypes.FormStoreRecord>
 }
 
 export type FormElementLookupSearchResult = {

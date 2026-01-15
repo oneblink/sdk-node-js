@@ -1,12 +1,12 @@
 import { FormTypes, SubmissionEventTypes } from '@oneblink/types'
 import Joi from 'joi'
-import { htmlString, s3ConfigurationSchema } from './common'
-import elementSchema from './element-schema'
+import { htmlString, s3ConfigurationSchema } from './common.js'
+import elementSchema from './element-schema.js'
 import {
   conditionallyShowPredicates,
   ConditionalPredicatesItemSchema,
   customCssClasses,
-} from './property-schemas'
+} from './property-schemas.js'
 export const postSubmissionActions: FormTypes.FormPostSubmissionAction[] = [
   'BACK',
   'URL',

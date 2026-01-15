@@ -1,10 +1,10 @@
-import OneBlinkAPI from '../lib/one-blink-api'
+import OneBlinkAPI from '../lib/one-blink-api.js'
 import {
   ConstructorOptions,
   FormApprovalFlowInstanceResponse,
   FormSubmissionApprovalResponse,
   FormSubmissionsAdministrationApprovalsResponse,
-} from '../types'
+} from '../types.js'
 
 export default class Approvals extends OneBlinkAPI {
   /**

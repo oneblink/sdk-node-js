@@ -8,12 +8,11 @@
   },
   "dependencies": {
     "@aws-sdk/client-sesv2": "^3.965.0",
-    "@oneblink/sdk-core": "^8.11.1",
-    "@oneblink/storage": "^3.4.1-beta.1",
+    "@oneblink/sdk-core": "^9.0.0-beta.1",
+    "@oneblink/storage": "^4.0.0-beta.1",
     "joi": "^17.12.2",
     "jsonwebtoken": "^9.0.3",
     "jwks-rsa": "^3.2.0",
-    "node-fetch": "^2.7.0",
     "nodemailer": "^7.0.12",
     "uuid": "^11.1.0"
   },
@@ -26,7 +25,6 @@
     "@oneblink/types": "github:oneblink/types",
     "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^9.0.6",
-    "@types/node-fetch": "^2.6.13",
     "@types/nodemailer": "^7.0.5",
     "@typescript-eslint/eslint-plugin": "^8.52.0",
     "@typescript-eslint/parser": "^8.52.0",
@@ -46,8 +44,8 @@
     "test": "test"
   },
   "engines": {
-    "node": ">=18",
-    "npm": ">=10"
+    "node": ">=24",
+    "npm": ">=11"
   },
   "files": [
     "tenants"
@@ -75,5 +73,6 @@
     "types": "npm i -D github:oneblink/types",
     "typescript": "tsc --noEmit",
     "update-dependents": "oneblink-release update-dependents --force"
-  }
+  },
+  "type": "module"
 }

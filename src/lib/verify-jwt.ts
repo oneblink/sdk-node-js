@@ -1,5 +1,5 @@
 import jwt, { JwtHeader, SigningKeyCallback } from 'jsonwebtoken'
-import { Tenant } from '../types'
+import { Tenant } from '../types.js'
 
 export default async function verifyJwt<T extends Record<string, unknown>>(
   token: string,

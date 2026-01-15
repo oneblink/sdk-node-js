@@ -10,7 +10,7 @@ import {
   requiredSchemas,
   readOnly,
   lookupSchemas,
-} from '../property-schemas'
+} from '../property-schemas.js'
 
 export const type = 'arcGISWebMap'
 

@@ -5,106 +5,118 @@ import { FormTypes } from '@oneblink/types'
 import TextElement, {
   textElementType,
   textareaElementType,
-} from './elements/TextElement'
+} from './elements/TextElement.js'
 import NumberElement, {
   type as numberElementType,
-} from './elements/NumberElement'
-import EmailElement, { type as emailElementType } from './elements/EmailElement'
-import PhoneElement, { type as phoneElementType } from './elements/PhoneElement'
+} from './elements/NumberElement.js'
+import EmailElement, {
+  type as emailElementType,
+} from './elements/EmailElement.js'
+import PhoneElement, {
+  type as phoneElementType,
+} from './elements/PhoneElement.js'
 import BarcodeElement, {
   type as barcodeElementType,
-} from './elements/BarcodeElement'
+} from './elements/BarcodeElement.js'
 // User Selection
-import RadioElement, { type as radioElementType } from './elements/RadioElement'
+import RadioElement, {
+  type as radioElementType,
+} from './elements/RadioElement.js'
 import CheckboxElement, {
   type as checkboxElementType,
-} from './elements/CheckboxElement'
+} from './elements/CheckboxElement.js'
 import SelectElement, {
   type as selectElementType,
-} from './elements/SelectElement'
+} from './elements/SelectElement.js'
 import AutocompleteElement, {
   type as autocompleteElementType,
-} from './elements/AutocompleteElement'
+} from './elements/AutocompleteElement.js'
 import BooleanElement, {
   type as booleanElementType,
-} from './elements/BooleanElement'
+} from './elements/BooleanElement.js'
 // Date and Time
 import DateElement, {
   dateElementType,
   datetimeElementType,
-} from './elements/DateElement'
-import TimeElement, { type as timeElementType } from './elements/TimeElement'
+} from './elements/DateElement.js'
+import TimeElement, { type as timeElementType } from './elements/TimeElement.js'
 // Informational
 import HeadingElement, {
   type as headingElementType,
-} from './elements/HeadingElement'
-import HTMLElement, { type as hTMLElementType } from './elements/HTMLElement'
-import ImageElement, { type as imageElementType } from './elements/ImageElement'
+} from './elements/HeadingElement.js'
+import HTMLElement, { type as hTMLElementType } from './elements/HTMLElement.js'
+import ImageElement, {
+  type as imageElementType,
+} from './elements/ImageElement.js'
 import InfoPageElement, {
   type as infoPageElementType,
-} from './elements/InfoPageElement'
+} from './elements/InfoPageElement.js'
 // Advanced
 import CameraElement, {
   type as cameraElementType,
-} from './elements/CameraElement'
+} from './elements/CameraElement.js'
 import RepeatableSetElement, {
   type as repeatableSetElementType,
-} from './elements/RepeatableSetElement'
-import DrawElement, { type as drawElementType } from './elements/DrawElement'
+} from './elements/RepeatableSetElement.js'
+import DrawElement, { type as drawElementType } from './elements/DrawElement.js'
 import CalculationElement, {
   type as calculationElementType,
-} from './elements/CalculationElement'
+} from './elements/CalculationElement.js'
 import LocationElement, {
   type as locationElementType,
-} from './elements/LocationElement'
-import FilesElement, { type as filesElementType } from './elements/FilesElement'
+} from './elements/LocationElement.js'
+import FilesElement, {
+  type as filesElementType,
+} from './elements/FilesElement.js'
 import CaptchaElement, {
   type as captchaElementType,
-} from './elements/CaptchaElement'
-import FormElement, { type as formElementType } from './elements/FormElement'
+} from './elements/CaptchaElement.js'
+import FormElement, { type as formElementType } from './elements/FormElement.js'
 import SummaryElement, {
   type as summaryElementType,
-} from './elements/SummaryElement'
+} from './elements/SummaryElement.js'
 import ComplianceElement, {
   type as complianceElementType,
-} from './elements/ComplianceElement'
+} from './elements/ComplianceElement.js'
 // Integration
 import GeoscapeElement, {
   type as geoscapeElementType,
-} from './elements/GeoscapeElement'
-import PointElement, { type as pointElementType } from './elements/PointElement'
+} from './elements/GeoscapeElement.js'
+import PointElement, {
+  type as pointElementType,
+} from './elements/PointElement.js'
 import PointV3Element, {
   type as pointV3ElementType,
-} from './elements/PointV3Element'
+} from './elements/PointV3Element.js'
 import PointCadastralParcelElement, {
   type as pointCadastralParcelType,
-} from './elements/PointCadastralParcelElement'
+} from './elements/PointCadastralParcelElement.js'
 import GoogleAddressElement, {
   type as googleAddressElementType,
-} from './elements/GoogleAddressElement'
+} from './elements/GoogleAddressElement.js'
 import CivicaStreetNameElement, {
   type as civicaStreetNameElementType,
-} from './elements/CivicaStreetNameElement'
+} from './elements/CivicaStreetNameElement.js'
 import CivicaNameRecordElement, {
   type as civicaNameRecordElementType,
-} from './elements/CivicaNameRecordElement'
+} from './elements/CivicaNameRecordElement.js'
 import SectionElement, {
   type as sectionElementType,
-} from './elements/SectionElement'
-import BsbElement, { type as bsbElementType } from './elements/BsbElement'
-import AbnElement, { type as abnElementType } from './elements/AbnElement'
+} from './elements/SectionElement.js'
+import BsbElement, { type as bsbElementType } from './elements/BsbElement.js'
+import AbnElement, { type as abnElementType } from './elements/AbnElement.js'
 import FreshdeskDependentFieldElement, {
   type as freshdeskDependentFieldType,
-} from './elements/FreshdeskDependentFieldElement'
+} from './elements/FreshdeskDependentFieldElement.js'
 import LiquorLicenceElement, {
   type as liquorLicenceElementType,
-} from './elements/LiquorLicenceElement'
+} from './elements/LiquorLicenceElement.js'
 import ArcGISWebMapElement, {
   type as ArcGISWebMapElementType,
-} from './elements/ArcGISWebMapElement'
+} from './elements/ArcGISWebMapElement.js'
 import LookupButtonElement, {
   type as lookupButtonElementType,
-} from './elements/LookupButtonElement'
+} from './elements/LookupButtonElement.js'
 // Creating an object here so we get a Typescript error when adding a
 // new element type and forgetting to add to the array of allowed types
 const elementTypesMap: Record<

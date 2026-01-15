@@ -1,7 +1,7 @@
-import { CIVICPLUS } from './lib/tenant-configuration'
-import generateTenant from './lib/generate-tenant'
-import OneBlinkAPI from './lib/one-blink-api'
+import { CIVICPLUS } from './lib/tenant-configuration.js'
+import generateTenant from './lib/generate-tenant.js'
+import OneBlinkAPI from './lib/one-blink-api.js'
 
 const tenant = generateTenant(CIVICPLUS)
 OneBlinkAPI.tenant = tenant
-export * from './classes'
+export * from './classes/index.js'

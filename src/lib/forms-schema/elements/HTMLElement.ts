@@ -5,8 +5,8 @@ import {
   label,
   conditionallyShowSchemas,
   customCssClasses,
-} from '../property-schemas'
-import { htmlString } from '../common'
+} from '../property-schemas.js'
+import { htmlString } from '../common.js'
 
 export const type = 'html'
 

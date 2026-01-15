@@ -6,7 +6,7 @@ import {
   optionTypes,
   DYNAMIC_OPTION_TYPE,
   FRESHDESK_FIELD_OPTION_TYPE,
-} from './common'
+} from './common.js'
 
 export const id = Joi.string().guid().required()
 export const name = Joi.string().required().trim()

@@ -6,15 +6,17 @@ import {
   pageElementSchema,
   endpointConfigurationSchema,
   WorkflowEventSchema,
-} from '../forms-schema'
+} from '../forms-schema/index.js'
 import {
   validateJoiSchema,
   stripLayoutFormElements,
   validateElementNamesAcrossNestedElements,
   validatePDFConfiguration,
   validateFormElementMappings,
-} from './common'
-import validateFormEvents, { validateFormEvent } from './validate-form-events'
+} from './common.js'
+import validateFormEvents, {
+  validateFormEvent,
+} from './validate-form-events.js'
 import Joi from 'joi'
 
 function validateFormEventData(

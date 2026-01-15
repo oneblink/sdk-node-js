@@ -8,7 +8,7 @@ import {
   lookupSchemas,
   customCssClasses,
   hintPosition,
-} from '../property-schemas'
+} from '../property-schemas.js'
 
 export const type = 'lookupButton'
 

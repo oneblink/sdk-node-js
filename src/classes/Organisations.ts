@@ -1,6 +1,6 @@
 import { OrganisationTypes } from '@oneblink/types'
-import OneBlinkAPI from '../lib/one-blink-api'
-import { ConstructorOptions } from '../types'
+import OneBlinkAPI from '../lib/one-blink-api.js'
+import { ConstructorOptions } from '../types.js'
 import { Readable } from 'stream'
 
 export default class Organisations extends OneBlinkAPI {

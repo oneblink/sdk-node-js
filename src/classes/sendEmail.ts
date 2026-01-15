@@ -1,9 +1,9 @@
 import { SESv2Client, SendEmailCommand } from '@aws-sdk/client-sesv2'
 // Have to use nodemailer as aws-sdk can not send attachments
-import MailComposer from 'nodemailer/lib/mail-composer'
-import OneBlinkAPI from '../lib/one-blink-api'
+import MailComposer from 'nodemailer/lib/mail-composer/index.js'
+import OneBlinkAPI from '../lib/one-blink-api.js'
 
-import { SendMailOptions, SendEmailResult } from '../types'
+import { SendMailOptions, SendEmailResult } from '../types.js'
 /**
  * **Permissions**
  *

@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { JoiRange } from '../common'
+import { JoiRange } from '../common.js'
 import {
   baseSchemas,
   name,
@@ -14,7 +14,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
-} from '../property-schemas'
+} from '../property-schemas.js'
 
 export const type = 'number'
 

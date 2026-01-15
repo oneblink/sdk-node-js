@@ -1,4 +1,4 @@
-import { TenantConfiguration } from '../types'
+import { TenantConfiguration } from '../types.js'
 
 export const ONEBLINK: TenantConfiguration = {
   awsRegion: 'ap-southeast-2',

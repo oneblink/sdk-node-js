@@ -1,5 +1,5 @@
 import jwksClient from 'jwks-rsa'
-import { Tenant, TenantConfiguration } from '../types'
+import { Tenant, TenantConfiguration } from '../types.js'
 
 export default function generateTenant(
   tenantConfiguration: TenantConfiguration,
