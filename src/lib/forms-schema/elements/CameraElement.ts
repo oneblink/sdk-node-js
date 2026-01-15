@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { attachment } from '../common'
+import { attachment } from '../common.js'
 import {
   baseSchemas,
   name,
@@ -11,7 +11,7 @@ import {
   storageType,
   customCssClasses,
   hintPosition,
-} from '../property-schemas'
+} from '../property-schemas.js'
 
 export const type = 'camera'
 

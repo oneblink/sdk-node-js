@@ -12,7 +12,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
-} from '../property-schemas'
+} from '../property-schemas.js'
 
 export const type = 'time'
 

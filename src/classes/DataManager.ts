@@ -1,10 +1,10 @@
-import { FormStoreDefinition } from '@oneblink/types/typescript/submissions'
-import OneBlinkAPI from '../lib/one-blink-api'
+import OneBlinkAPI from '../lib/one-blink-api.js'
 import {
   ConstructorOptions,
   SearchDataManagerRecordsOptions,
   SearchDataManagerRecordsResponse,
-} from '../types'
+  SubmissionTypes,
+} from '../types.js'
 
 export default class DataManager extends OneBlinkAPI {
   /**
@@ -24,7 +24,8 @@ export default class DataManager extends OneBlinkAPI {
   /**
    * **Submission Data Key Supported**
    *
-   * Key must be assigned to the form that submission data is being requested for.
+   * Key must be assigned to the form that submission data is being requested
+   * for.
    *
    * **Minimum Role Permission**
    *
@@ -36,7 +37,9 @@ export default class DataManager extends OneBlinkAPI {
    * @param id The form ID to get the definition for.
    * @returns
    */
-  async getFormDefinition(id: number): Promise<FormStoreDefinition> {
+  async getFormDefinition(
+    id: number,
+  ): Promise<SubmissionTypes.FormStoreDefinition> {
     if (typeof id !== 'number') {
       throw new Error('"id" must be a number and is required')
     }

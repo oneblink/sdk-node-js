@@ -1,7 +1,7 @@
 import { FormsAppsTypes } from '@oneblink/types'
-import OneBlinkAPI from '../lib/one-blink-api'
-import { ConstructorOptions } from '../types'
-import verifyJWT from '../lib/verify-jwt'
+import OneBlinkAPI from '../lib/one-blink-api.js'
+import { ConstructorOptions } from '../types.js'
+import verifyJWT from '../lib/verify-jwt.js'
 
 const basePath = `/forms-apps`
 
@@ -102,7 +102,7 @@ export default class FormsApps extends OneBlinkAPI {
         Authorization: `Bearer ${formsAppUserToken}`,
       },
     })
-    return await response.json()
+    return (await response.json()) as FormsAppsTypes.FormsApp
   }
 
   /**

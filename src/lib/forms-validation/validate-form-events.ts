@@ -1,6 +1,9 @@
 import { formElementsService } from '@oneblink/sdk-core'
 import { FormTypes, SubmissionEventTypes } from '@oneblink/types'
-import { validateFormElementMappings, validatePDFConfiguration } from './common'
+import {
+  validateFormElementMappings,
+  validatePDFConfiguration,
+} from './common.js'
 
 type BaseProps = {
   rootFormElements: FormTypes.FormElement[]

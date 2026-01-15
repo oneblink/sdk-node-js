@@ -1,9 +1,9 @@
 import { HeadObjectOutput } from '@aws-sdk/client-s3'
 import { Readable } from 'stream'
-import generateFormUrl from '../lib/generate-form-url'
-import OneBlinkAPI from '../lib/one-blink-api'
-import generateFormElement from '../lib/generate-form-element'
-import generatePageElement from '../lib/generate-page-element'
+import generateFormUrl from '../lib/generate-form-url.js'
+import OneBlinkAPI from '../lib/one-blink-api.js'
+import generateFormElement from '../lib/generate-form-element.js'
+import generatePageElement from '../lib/generate-page-element.js'
 import {
   type AWSTypes,
   type FormsAppsTypes,
@@ -17,7 +17,7 @@ import {
   validateWithFormSchema,
   validateFormEventData,
   validateEndpointConfiguration,
-} from '../lib/forms-validation'
+} from '../lib/forms-validation/index.js'
 import {
   type ConstructorOptions,
   type FormsSearchOptions,
@@ -25,7 +25,7 @@ import {
   type FormSubmissionHistorySearchParameters,
   type FormSubmissionHistorySearchResults,
   type FormSubmissionMetaResult,
-} from '../types'
+} from '../types.js'
 
 export default class Forms extends OneBlinkAPI {
   /**
@@ -419,14 +419,14 @@ export default class Forms extends OneBlinkAPI {
    * @param attachmentId The attachment identifier from the form submission data
    * @returns
    */
-  async getSubmissionAttachmentStream(
-    formId: number,
-    attachmentId: string,
-  ): Promise<NodeJS.ReadableStream> {
+  async getSubmissionAttachmentStream(formId: number, attachmentId: string) {
     const response = await this._getSubmissionAttachmentResponse(
       formId,
       attachmentId,
     )
+    if (!response.body) {
+      throw new Error('ReadableStream unsupported')
+    }
     return response.body
   }
   /**
@@ -467,7 +467,8 @@ export default class Forms extends OneBlinkAPI {
       formId,
       attachmentId,
     )
-    return await response.buffer()
+    const arrayBuffer = await response.arrayBuffer()
+    return Buffer.from(arrayBuffer)
   }
   /**
    * **Minimum Role Permission**

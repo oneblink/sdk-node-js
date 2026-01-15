@@ -3,8 +3,8 @@ import {
   SubmissionEventTypes,
   SubmissionTypes,
 } from '@oneblink/types'
-import OneBlinkAPI from '../lib/one-blink-api'
-import { ConstructorOptions } from '../types'
+import OneBlinkAPI from '../lib/one-blink-api.js'
+import { ConstructorOptions } from '../types.js'
 
 export default class PDF extends OneBlinkAPI {
   /**
@@ -83,7 +83,8 @@ export default class PDF extends OneBlinkAPI {
       body: JSON.stringify(body),
     })
 
-    return response.buffer()
+    const arrayBuffer = await response.arrayBuffer()
+    return Buffer.from(arrayBuffer)
   }
 
   /**
@@ -150,7 +151,8 @@ export default class PDF extends OneBlinkAPI {
       },
     })
 
-    return response.buffer()
+    const arrayBuffer = await response.arrayBuffer()
+    return Buffer.from(arrayBuffer)
   }
 
   /**
@@ -204,6 +206,7 @@ export default class PDF extends OneBlinkAPI {
       },
     })
 
-    return response.buffer()
+    const arrayBuffer = await response.arrayBuffer()
+    return Buffer.from(arrayBuffer)
   }
 }

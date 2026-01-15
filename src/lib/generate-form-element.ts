@@ -1,7 +1,7 @@
 import { FormTypes } from '@oneblink/types'
 import { v4 as uuid } from 'uuid'
 
-import { validateWithElementSchema } from './forms-validation'
+import { validateWithElementSchema } from './forms-validation/index.js'
 
 export default function generateFormElement<
   T extends FormTypes._FormElementBase,

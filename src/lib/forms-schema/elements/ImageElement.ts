@@ -5,7 +5,7 @@ import {
   label,
   conditionallyShowSchemas,
   customCssClasses,
-} from '../property-schemas'
+} from '../property-schemas.js'
 
 export const type = 'image'
 

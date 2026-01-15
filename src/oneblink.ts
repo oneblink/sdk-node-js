@@ -1,7 +1,7 @@
-import { ONEBLINK } from './lib/tenant-configuration'
-import generateTenant from './lib/generate-tenant'
-import OneBlinkAPI from './lib/one-blink-api'
+import { ONEBLINK } from './lib/tenant-configuration.js'
+import generateTenant from './lib/generate-tenant.js'
+import OneBlinkAPI from './lib/one-blink-api.js'
 
 const tenant = generateTenant(ONEBLINK)
 OneBlinkAPI.tenant = tenant
-export * from './classes'
+export * from './classes/index.js'

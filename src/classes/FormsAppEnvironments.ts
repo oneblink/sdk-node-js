@@ -1,10 +1,10 @@
-import OneBlinkAPI from '../lib/one-blink-api'
+import OneBlinkAPI from '../lib/one-blink-api.js'
 import { EnvironmentTypes } from '@oneblink/types'
 import {
   ConstructorOptions,
   FormsAppEnvironmentsSearchOptions,
   FormsAppEnvironmentsSearchResult,
-} from '../types'
+} from '../types.js'
 
 const basePath = `/forms-app-environments`
 export default class FormsAppEnvironments extends OneBlinkAPI {

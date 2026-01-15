@@ -14,8 +14,8 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
-} from '../property-schemas'
-import { SEARCH_OPTION_TYPE } from '../common'
+} from '../property-schemas.js'
+import { SEARCH_OPTION_TYPE } from '../common.js'
 
 export const type = 'autocomplete'
 

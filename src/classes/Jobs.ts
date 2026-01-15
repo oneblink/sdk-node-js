@@ -1,8 +1,8 @@
 import { SubmissionTypes } from '@oneblink/types'
 import Joi from 'joi'
 
-import OneBlinkAPI from '../lib/one-blink-api'
-import { ConstructorOptions, JobsSearchResult } from '../types'
+import OneBlinkAPI from '../lib/one-blink-api.js'
+import { ConstructorOptions, JobsSearchResult } from '../types.js'
 
 const newJobSchema = Joi.object()
   .required()

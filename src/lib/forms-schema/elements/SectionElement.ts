@@ -6,8 +6,8 @@ import {
   conditionallyShowSchemas,
   customCssClasses,
   hintPosition,
-} from '../property-schemas'
-import elementSchema from '../element-schema'
+} from '../property-schemas.js'
+import elementSchema from '../element-schema.js'
 
 export const type = 'section'
 

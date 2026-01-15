@@ -12,7 +12,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
-} from '../property-schemas'
+} from '../property-schemas.js'
 
 const nowSchema = Joi.valid('NOW')
 const dateSchema = Joi.date().iso().raw()

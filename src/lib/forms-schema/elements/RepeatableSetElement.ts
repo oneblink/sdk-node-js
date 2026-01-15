@@ -8,8 +8,8 @@ import {
   conditionallyShowSchemas,
   customCssClasses,
   hintPosition,
-} from '../property-schemas'
-import elementSchema from '../element-schema'
+} from '../property-schemas.js'
+import elementSchema from '../element-schema.js'
 
 // Think this needs to be a variable because of recursive dependency
 

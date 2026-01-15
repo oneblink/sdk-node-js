@@ -1,6 +1,5 @@
 import querystring from 'querystring'
 
-import fetch, { Response, BodyInit } from 'node-fetch'
 import { KeyTypes } from '@oneblink/types'
 import {
   OneBlinkDownloader,
@@ -8,11 +7,11 @@ import {
   StorageConstructorOptions,
 } from '@oneblink/storage'
 
-import pkg from './package'
-import generateJWT from './generate-jwt'
-import { Tenant } from '../types'
-import generateTenant from './generate-tenant'
-import { ONEBLINK } from './tenant-configuration'
+import pkg from './package.js'
+import generateJWT from './generate-jwt.js'
+import { Tenant } from '../types.js'
+import generateTenant from './generate-tenant.js'
+import { ONEBLINK } from './tenant-configuration.js'
 
 async function getResponseErrorMessage(response: Response): Promise<string> {
   // The request was made and the server responded with
@@ -23,7 +22,12 @@ async function getResponseErrorMessage(response: Response): Promise<string> {
   }
 
   const body = await response.json()
-  if (body && body.message) {
+  if (
+    body &&
+    typeof body === 'object' &&
+    'message' in body &&
+    typeof body.message === 'string'
+  ) {
     return body.message
   }
 
@@ -102,7 +106,7 @@ export default class OneBlinkAPI {
     origin: string
     method: 'GET' | 'POST' | 'PUT' | 'DELETE'
     path: string
-    body?: BodyInit
+    body?: RequestInit['body']
     headers?: Record<string, string>
   }): Promise<Response> {
     const response = await fetch(`${origin}${path}`, {
@@ -133,7 +137,7 @@ export default class OneBlinkAPI {
       method: 'GET',
       path,
     })
-    return await response.json()
+    return (await response.json()) as TOut
   }
 
   /** @internal */
@@ -154,7 +158,7 @@ export default class OneBlinkAPI {
       path,
       body: JSON.stringify(payload),
     })
-    return await response.json()
+    return (await response.json()) as TOut
   }
 
   /** @internal */
@@ -165,7 +169,7 @@ export default class OneBlinkAPI {
       path,
       body: JSON.stringify(payload),
     })
-    return await response.json()
+    return (await response.json()) as TOut
   }
 
   /** @internal */
@@ -175,7 +179,7 @@ export default class OneBlinkAPI {
       method: 'POST',
       path,
     })
-    return await response.json()
+    return (await response.json()) as T
   }
 
   /** @internal */

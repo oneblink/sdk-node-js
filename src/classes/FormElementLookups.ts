@@ -1,6 +1,6 @@
 import { FormTypes } from '@oneblink/types'
-import OneBlinkAPI from '../lib/one-blink-api'
-import { ConstructorOptions, FormElementLookupSearchResult } from '../types'
+import OneBlinkAPI from '../lib/one-blink-api.js'
+import { ConstructorOptions, FormElementLookupSearchResult } from '../types.js'
 
 export default class FormElementLookups extends OneBlinkAPI {
   /**

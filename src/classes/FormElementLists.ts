@@ -1,10 +1,10 @@
 import { FormTypes } from '@oneblink/types'
-import OneBlinkAPI from '../lib/one-blink-api'
+import OneBlinkAPI from '../lib/one-blink-api.js'
 import {
   ConstructorOptions,
   FormElementListSearchOptions,
   FormElementListSearchResult,
-} from '../types'
+} from '../types.js'
 
 const basePath = `/form-element-options/dynamic`
 

@@ -1,10 +1,10 @@
-import OneBlinkAPI from '../lib/one-blink-api'
+import OneBlinkAPI from '../lib/one-blink-api.js'
 import { EmailTemplateTypes } from '@oneblink/types'
 import {
   ConstructorOptions,
   EmailTemplatesSearchOptions,
   EmailTemplatesSearchResult,
-} from '../types'
+} from '../types.js'
 
 const basePath = `/email-templates`
 export default class EmailTemplates extends OneBlinkAPI {

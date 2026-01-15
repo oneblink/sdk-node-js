@@ -5,7 +5,7 @@ import {
   conditionallyShowSchemas,
   customCssClasses,
   readOnly,
-} from '../property-schemas'
+} from '../property-schemas.js'
 
 export const type = 'form'
 
