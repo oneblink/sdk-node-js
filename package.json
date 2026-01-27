@@ -1,15 +1,15 @@
 {
   "name": "@oneblink/sdk",
   "description": "OneBlink SDK to serve as an entry point for all OneBlink Services in NodeJS",
-  "version": "13.0.0-beta.1",
+  "version": "13.0.0-beta.2",
   "author": "OneBlink <developers@oneblink.io> (https://oneblink.io)",
   "bugs": {
     "url": "https://github.com/oneblink/sdk-node-js/issues"
   },
   "dependencies": {
     "@aws-sdk/client-sesv2": "^3.965.0",
-    "@oneblink/sdk-core": "^9.0.0-beta.1",
-    "@oneblink/storage": "^4.0.0-beta.1",
+    "@oneblink/sdk-core": "^9.0.0-beta.2",
+    "@oneblink/storage": "^4.0.0-beta.2",
     "joi": "^17.12.2",
     "jsonwebtoken": "^9.0.3",
     "jwks-rsa": "^3.2.0",
@@ -21,7 +21,7 @@
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.2",
     "@microsoft/eslint-plugin-sdl": "^1.1.0",
-    "@oneblink/release-cli": "^3.4.0",
+    "@oneblink/release-cli": "^4.0.0-beta.2",
     "@oneblink/types": "github:oneblink/types",
     "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^9.0.6",
