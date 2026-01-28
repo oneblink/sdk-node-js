@@ -14,7 +14,7 @@ import { SendMailOptions, SendEmailResult } from '../types.js'
  * - `SendRawEmail`
  *
  * @example
- *   const OneBlink = require('@oneblink/sdk')
+ *   import * as OneBlink from '@oneblink/sdk'
  *
  *   await OneBlink.sendEmail({
  *     subject: 'Message title',

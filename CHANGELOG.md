@@ -13,7 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **[BREAKING]** This package is now pure ESM. Please [read this](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
+- **[BREAKING]** This package is now pure ESM. Please [read this](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c). See diff below to migrate `require` statements to `import` statements:
+  ```diff
+  - const OneBlink = require('@oneblink/sdk')
+  + import * as OneBlink from '@oneblink/sdk'
+  ```
 - **[BREAKING]** Require Node.js 24
 
 ## [12.6.0] - 2025-12-17

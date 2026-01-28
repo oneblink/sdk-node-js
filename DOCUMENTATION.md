@@ -13,34 +13,34 @@ npm install @oneblink/sdk --save
 
 ## Tenants
 
-This SDK is the entry point for all OneBlink Productivity instances. The default instance is the [OneBlink Console](https://console.oneblink.io). To use a different tenant to the default, change the require path to include the desired tenant. The available tenants are:
+This SDK is the entry point for all OneBlink Productivity instances. The default instance is the [OneBlink Console](https://console.oneblink.io). To use a different tenant to the default, change the import path to include the desired tenant. The available tenants are:
 
 - [OneBlink Console](https://console.oneblink.io)
 
   ```js
-  const OneBlink = require('@oneblink/sdk')
+  import * as OneBlink from '@oneblink/sdk'
   // or
-  const OneBlink = require('@oneblink/sdk/tenants/oneblink')
+  import * as OneBlink from '@oneblink/sdk/tenants/oneblink'
   ```
 
 - [OneBlink Console (US)](https://console.us.oneblink.io)
 
   ```js
-  const OneBlink = require('@oneblink/sdk/tenants/oneblink-us')
+  import * as OneBlink from '@oneblink/sdk/tenants/oneblink-us'
   ```
 
 - [CivicOptimize Productivity](https://console.transform.civicplus.com)
 
   ```js
-  const CivicPlus = require('@oneblink/sdk/tenants/civicplus')
+  import * as CivicPlus from '@oneblink/sdk/tenants/civicplus'
   ```
 
-Once the SDK has been `required`, all class documentation below applies to all tenants. However, all of the examples use the default tenant. If you copy and paste from the examples, please don't forget to change (replacing `my-tenant` with a valid tenant path):
+Once the SDK has been `imported`, all class documentation below applies to all tenants. However, all of the examples use the default tenant. If you copy and paste from the examples, please don't forget to change (replacing `my-tenant` with a valid tenant path):
 
 ```js
-const OneBlink = require('@oneblink/sdk')
+import * as OneBlink from '@oneblink/sdk'
 // to
-const MyTenant = require('@oneblink/sdk/tenants/my-tenant')
+import * as MyTenant from '@oneblink/sdk/tenants/my-tenant'
 ```
 
 ## Typescript

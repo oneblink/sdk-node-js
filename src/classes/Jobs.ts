@@ -22,7 +22,7 @@ const newJobSchema = Joi.object()
 export default class Jobs extends OneBlinkAPI {
   /**
    * @example
-   *   const OneBlink = require('@oneblink/sdk')
+   *   import * as OneBlink from '@oneblink/sdk'
    *   const options = {
    *     accessKey: '123455678901ABCDEFGHIJKL',
    *     secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',

@@ -18,7 +18,7 @@ If you currently have more than 200 forms returned from this function, or expect
 If you do need to account for this, accessing all forms as you previously could now requires that you make multiple calls to this function. This could look something like:
 
 ```javascript
-const { Forms } = require('@oneblink/sdk')
+import { Forms } from '@oneblink/sdk'
 
 const options = {
   accessKey: '123455678901ABCDEFGHIJKL',
