@@ -20,19 +20,19 @@ This SDK is the entry point for all OneBlink Productivity instances. The default
   ```js
   import * as OneBlink from '@oneblink/sdk'
   // or
-  import * as OneBlink from '@oneblink/sdk/tenants/oneblink'
+  import * as OneBlink from '@oneblink/sdk/tenants/oneblink.js'
   ```
 
 - [OneBlink Console (US)](https://console.us.oneblink.io)
 
   ```js
-  import * as OneBlink from '@oneblink/sdk/tenants/oneblink-us'
+  import * as OneBlink from '@oneblink/sdk/tenants/oneblink-us.js'
   ```
 
 - [CivicOptimize Productivity](https://console.transform.civicplus.com)
 
   ```js
-  import * as CivicPlus from '@oneblink/sdk/tenants/civicplus'
+  import * as CivicPlus from '@oneblink/sdk/tenants/civicplus.js'
   ```
 
 Once the SDK has been `imported`, all class documentation below applies to all tenants. However, all of the examples use the default tenant. If you copy and paste from the examples, please don't forget to change (replacing `my-tenant` with a valid tenant path):
@@ -40,16 +40,10 @@ Once the SDK has been `imported`, all class documentation below applies to all t
 ```js
 import * as OneBlink from '@oneblink/sdk'
 // to
-import * as MyTenant from '@oneblink/sdk/tenants/my-tenant'
+import * as MyTenant from '@oneblink/sdk/tenants/my-tenant.js'
 ```
 
 ## Typescript
-
-This SDK also supports [Typescript Modules](https://www.typescriptlang.org/docs/handbook/modules.html):
-
-```ts
-import * as OneBlink from '@oneblink/sdk'
-```
 
 Various Types used in this package can also be imported:
 
