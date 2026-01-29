@@ -30,7 +30,7 @@ import {
 export default class Forms extends OneBlinkAPI {
   /**
    * @example
-   *   const OneBlink = require('@oneblink/sdk')
+   *   import * as OneBlink from '@oneblink/sdk'
    *   const options = {
    *     accessKey: '123455678901ABCDEFGHIJKL',
    *     secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
@@ -395,9 +395,9 @@ export default class Forms extends OneBlinkAPI {
    * Submission Data: _Read Only_
    *
    * @example
-   *   const fs = require('fs')
-   *   const util = require('util')
-   *   const stream = require('stream')
+   *   import fs from 'fs'
+   *   import util from 'util'
+   *   import stream from 'stream'
    *
    *   const finishedAsync = util.promisify(stream.finished)
    *
@@ -439,8 +439,8 @@ export default class Forms extends OneBlinkAPI {
    * Submission Data: _Read Only_
    *
    * @example
-   *   const fs = require('fs')
-   *   const util = require('util')
+   *   import fs from 'fs'
+   *   import util from 'util'
    *
    *   const writeFileAsync = util.promisify(fs.writeFile)
    *
@@ -476,8 +476,8 @@ export default class Forms extends OneBlinkAPI {
    * Upload Attachments: _On_
    *
    * @example
-   *   const fs = require('fs')
-   *   const util = require('util')
+   *   import fs from 'fs'
+   *   import util from 'util'
    *
    *   const readFileAsync = util.promisify(fs.readFile)
    *

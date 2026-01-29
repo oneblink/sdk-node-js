@@ -9,7 +9,7 @@ import { ConstructorOptions } from '../types.js'
 export default class PDF extends OneBlinkAPI {
   /**
    * @example
-   *   const OneBlink = require('@oneblink/sdk')
+   *   import * as OneBlink from '@oneblink/sdk'
    *   const options = {
    *     accessKey: '123455678901ABCDEFGHIJKL',
    *     secretKey: '123455678901ABCDEFGHIJKL123455678901ABCDEFGHIJKL',
@@ -31,8 +31,8 @@ export default class PDF extends OneBlinkAPI {
    * Submission Data: _Read Only_
    *
    * @example
-   *   const fs = require('fs')
-   *   const util = require('util')
+   *   import fs from 'fs'
+   *   import util from 'util'
    *
    *   const writeFileAsync = util.promisify(fs.writeFile)
    *
@@ -93,8 +93,8 @@ export default class PDF extends OneBlinkAPI {
    * PDF Generation: _On_
    *
    * @example
-   *   const fs = require('fs')
-   *   const util = require('util')
+   *   import fs from 'fs'
+   *   import util from 'util'
    *
    *   const writeFileAsync = util.promisify(fs.writeFile)
    *
@@ -161,8 +161,8 @@ export default class PDF extends OneBlinkAPI {
    * PDF Generation: _On_
    *
    * @example
-   *   const fs = require('fs')
-   *   const util = require('util')
+   *   import fs from 'fs'
+   *   import util from 'util'
    *
    *   const writeFileAsync = util.promisify(fs.writeFile)
    *
