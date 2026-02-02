@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.0.0] - 2026-02-02
+
 ### Added
 
 - OneBlink US tenant
@@ -19,6 +21,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   + import * as OneBlink from '@oneblink/sdk'
   ```
 - **[BREAKING]** Require Node.js 24
+
+### Dependencies
+
+- update @aws-sdk/client-sesv2 to [3.965.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.965.0) (from [3.637.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.637.0))
+
+- update @oneblink/sdk-core to [9.0.0-beta.2](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [8.11.1-beta.4](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update @oneblink/storage to [4.0.0-beta.3](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [3.4.0-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
+
+- update jsonwebtoken to [9.0.3](https://github.com/auth0/node-jsonwebtoken/blob/master/CHANGELOG.md) (from [9.0.2](https://github.com/auth0/node-jsonwebtoken/blob/master/CHANGELOG.md))
+
+- update jwks-rsa to [3.2.0](https://github.com/auth0/node-jwks-rsa/releases/tag/v3.2.0) (from [3.1.0](https://github.com/auth0/node-jwks-rsa/releases/tag/v3.1.0))
+
+- no longer depend upon node-fetch
+
+- update nodemailer to [7.0.12](https://github.com/nodemailer/nodemailer/releases/tag/v7.0.12) (from [6.9.10](https://github.com/nodemailer/nodemailer/releases/tag/v6.9.10))
+
+- update uuid to [11.1.0](https://github.com/uuidjs/uuid/releases/tag/v11.1.0) (from [9.0.1](https://github.com/uuidjs/uuid/blob/master/CHANGELOG.md))
 
 ## [12.6.0] - 2025-12-17
 
