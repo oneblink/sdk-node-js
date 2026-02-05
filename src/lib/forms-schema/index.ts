@@ -336,7 +336,7 @@ export const WorkflowEventSchema = Joi.object().keys({
       is: 'SYMPHONY_3_SMART_GLUE',
       then: Joi.object().keys({
         url: Joi.string().uri().required(),
-        keyId: Joi.number(),
+        keyId: Joi.string().required(),
       }),
     })
     .when('type', {
