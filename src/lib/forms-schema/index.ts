@@ -300,6 +300,7 @@ export const formWorkflowEventTypes: SubmissionEventTypes.FormWorkflowEventType[
     'CIVIC_REC_COMPLETE_CHECKOUT',
     'GOOD_TO_GO_UPDATE_ASSET',
     'EXCEL_ADD_ROW',
+    'SYMPHONY_3_SMART_GLUE'
   ]
 
 const entraApplicationKeys = {
@@ -329,6 +330,13 @@ export const WorkflowEventSchema = Joi.object().keys({
       then: Joi.object().keys({
         url: Joi.string().uri().required(),
         formId: Joi.number(),
+      }),
+    })
+    .when('type', {
+      is: 'SYMPHONY_3_SMART_GLUE',
+      then: Joi.object().keys({
+        url: Joi.string().uri().required(),
+        keyId: Joi.string().required(),
       }),
     })
     .when('type', {
