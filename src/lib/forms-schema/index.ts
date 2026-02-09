@@ -300,7 +300,7 @@ export const formWorkflowEventTypes: SubmissionEventTypes.FormWorkflowEventType[
     'CIVIC_REC_COMPLETE_CHECKOUT',
     'GOOD_TO_GO_UPDATE_ASSET',
     'EXCEL_ADD_ROW',
-    'SYMPHONY_3_SMART_GLUE'
+    'SYMPHONY_3_SMART_GLUE',
   ]
 
 const entraApplicationKeys = {
@@ -828,20 +828,10 @@ const formSchema = Joi.object().keys({
             Joi.object({
               replaceableField: Joi.string().required(),
               font: Joi.string().valid(
-                'Courier',
-                'Courier-Bold',
-                'Courier-Oblique',
-                'Courier-BoldOblique',
                 'Helvetica',
                 'Helvetica-Bold',
                 'Helvetica-Oblique',
                 'Helvetica-BoldOblique',
-                'Times-Roman',
-                'Times-Bold',
-                'Times-Italic',
-                'Times-BoldItalic',
-                'Symbol',
-                'ZapfDingbats',
                 'Brush Script MT Italic',
                 'PublicSans',
                 'PublicSans-Bold',
