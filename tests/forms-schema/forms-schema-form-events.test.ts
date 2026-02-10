@@ -556,7 +556,6 @@ describe('PDF configuration', () => {
         {
           replaceableField: 'someName',
           type: 'FORM_ELEMENT',
-          font: 'Courier',
           formElementId: elements[0].id,
         },
         {
