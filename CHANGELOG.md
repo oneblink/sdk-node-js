@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-- Courier, Times New Roman, Symbol and ZapfDingbats from supported fonts
+- Courier, Times New Roman, Symbol and ZapfDingbats from supported fonts (unused)
 
 ### Added
 
