@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `SALESFORCE_CREATE_OBJECT_RECORD` submission event
+
 ### Removed
 
 - Courier, Times New Roman, Symbol and ZapfDingbats from supported fonts (unused)
