@@ -583,7 +583,10 @@ export const WorkflowEventSchema = Joi.object().keys({
       is: 'SALESFORCE_CREATE_OBJECT_RECORD',
       then: Joi.object().keys({
         environmentId: Joi.string().uuid().required(),
-        object: entraApplicationEntitySchema.required(),
+        object: Joi.object({
+          name: Joi.string().required(),
+          label: Joi.string().required(),
+        }).required(),
         mapping: Joi.array()
           .items(
             Joi.object({
