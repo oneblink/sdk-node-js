@@ -301,6 +301,7 @@ export const formWorkflowEventTypes: SubmissionEventTypes.FormWorkflowEventType[
     'GOOD_TO_GO_UPDATE_ASSET',
     'EXCEL_ADD_ROW',
     'SYMPHONY_3_SMART_GLUE',
+    'SALESFORCE_CREATE_OBJECT_RECORD',
   ]
 
 const entraApplicationKeys = {
@@ -574,6 +575,27 @@ export const WorkflowEventSchema = Joi.object().keys({
                 [],
               ),
             }).id('GoodToGoUpdateAssetMappingSchema'),
+          )
+          .default([]),
+      }),
+    })
+    .when('type', {
+      is: 'SALESFORCE_CREATE_OBJECT_RECORD',
+      then: Joi.object().keys({
+        environmentId: Joi.string().uuid().required(),
+        object: Joi.object({
+          name: Joi.string().required(),
+          label: Joi.string().required(),
+        }).required(),
+        mapping: Joi.array()
+          .items(
+            Joi.object({
+              salesforceObjectRecordFieldName: Joi.string().required(),
+              ...generateFormWorkflowEventElementMappingKeys(
+                'SalesforceCreateObjectRecordMapping',
+                [],
+              ),
+            }).id('SalesforceCreateObjectRecordMapping'),
           )
           .default([]),
       }),
