@@ -10,14 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `SALESFORCE_CREATE_OBJECT_RECORD` submission event
+- `SYMPHONY_3_SMART_GLUE` submission event
 
 ### Removed
 
 - Courier, Times New Roman, Symbol and ZapfDingbats from supported fonts (unused)
-
-### Added
-
-- `SYMPHONY_3_SMART_GLUE` submission event
 
 ### Fixed
 
