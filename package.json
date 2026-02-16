@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-sesv2": "^3.987.0",
-    "@oneblink/sdk-core": "^9.0.0",
+    "@oneblink/sdk-core": "^9.1.0-beta.2",
     "@oneblink/storage": "^5.0.0-beta.2",
     "joi": "^18.0.2",
     "jsonwebtoken": "^9.0.3",
