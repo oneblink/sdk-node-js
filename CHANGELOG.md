@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.1.0] - 2026-02-23
+
 ### Added
 
 - `SALESFORCE_CREATE_OBJECT_RECORD` submission event
@@ -19,6 +21,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - github action permissions to allow docs and github release jobs
+
+### Dependencies
+
+- update @aws-sdk/client-sesv2 to [3.987.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md) (from [3.965.0](https://github.com/aws/aws-sdk-js-v3/blob/master/CHANGELOG.md))
+
+- update @oneblink/sdk-core to [9.1.0-beta.3](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [9.0.0-beta.2](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update @oneblink/storage to [5.0.0-beta.2](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [4.0.0-beta.3](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
+
+- update joi to 18.0.2 (from 17.12.2)
+
+- update jwks-rsa to [3.2.2](https://github.com/auth0/node-jwks-rsa/blob/master/CHANGELOG.md) (from [3.2.0](https://github.com/auth0/node-jwks-rsa/blob/master/CHANGELOG.md))
+
+- update nodemailer to [8.0.1](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md) (from [7.0.12](https://github.com/nodemailer/nodemailer/blob/master/CHANGELOG.md))
+
+- update uuid to [13.0.0](https://github.com/uuidjs/uuid/blob/master/CHANGELOG.md) (from [11.1.0](https://github.com/uuidjs/uuid/blob/master/CHANGELOG.md))
 
 ## [13.0.0] - 2026-02-02
 
