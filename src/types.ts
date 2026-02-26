@@ -111,6 +111,11 @@ export type FormsSearchOptions = BaseSearchOptions & {
    * match of a `formsAppEnvironmentId`.
    */
   formsAppEnvironmentId?: number
+  /**
+   * Search on the `workspaceId` property of a form. Must be the exact match of
+   * a `workspaceId`.
+   */
+  workspaceId?: number
 }
 
 export type FormSubmissionHistorySearchParameters = BaseSearchOptions & {
@@ -139,7 +144,13 @@ export type EmailTemplatesSearchResult = {
   emailTemplates: EmailTemplateTypes.EmailTemplate[]
 } & MiscTypes.BaseSearchResult
 
-export type EmailTemplatesSearchOptions = BaseSearchOptions
+export type EmailTemplatesSearchOptions = BaseSearchOptions & {
+  /**
+   * Search on the `workspaceId` property of an email template. Must be the
+   * exact match of a `workspaceId`.
+   */
+  workspaceId?: number
+}
 
 export type FormSubmissionMetaResult = {
   /** The meta record for the submission */
@@ -176,7 +187,13 @@ export type FormsAppEnvironmentsSearchResult = {
   formsAppEnvironments: EnvironmentTypes.FormsAppEnvironment[]
 } & MiscTypes.BaseSearchResult
 
-export type FormsAppEnvironmentsSearchOptions = BaseSearchOptions
+export type FormsAppEnvironmentsSearchOptions = BaseSearchOptions & {
+  /**
+   * Search on the `workspaceId` property of a forms app environment. Must be
+   * the exact match of a `workspaceId`.
+   */
+  workspaceId?: number
+}
 
 export type JobsSearchResult = MiscTypes.BaseSearchResult & {
   jobs: SubmissionTypes.FormsAppJob[]
