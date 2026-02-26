@@ -63,6 +63,11 @@ export default class FormElementLookups extends OneBlinkAPI {
     organisationId: string
     limit?: number
     offset?: number
+    /**
+     * Search on the `workspaceId` property of a form element lookup. Must be
+     * the exact match of a `workspaceId`.
+     */
+    workspaceId?: number
   }): Promise<FormElementLookupSearchResult> {
     if (
       !options ||
@@ -76,6 +81,7 @@ export default class FormElementLookups extends OneBlinkAPI {
       limit: options.limit,
       offset: options.offset,
       organisationId: options.organisationId,
+      workspaceId: options.workspaceId,
     })
   }
 
