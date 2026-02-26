@@ -398,4 +398,9 @@ export type FormElementListSearchResult = {
 
 export type FormElementListSearchOptions = BaseSearchOptions & {
   organisationId: string
+  /**
+   * Search on the `workspaceId` property of a form element list. Must be the
+   * exact match of a `workspaceId`.
+   */
+  workspaceId?: number
 }
