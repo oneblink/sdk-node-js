@@ -22,7 +22,7 @@
     "@eslint/js": "^9.39.2",
     "@microsoft/eslint-plugin-sdl": "^1.1.0",
     "@oneblink/release-cli": "^4.0.0",
-    "@oneblink/types": "github:oneblink/types",
+    "@oneblink/types": "github:oneblink/types#ap-7222",
     "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/nodemailer": "^7.0.9",
@@ -70,7 +70,7 @@
     "pretest": "npm run eslint && tsc --noEmit && npm run fixpack",
     "release": "oneblink-release repository --no-name",
     "test": "vitest run",
-    "types": "npm i -D github:oneblink/types",
+    "types": "npm i -D github:oneblink/types#ap-7222",
     "typescript": "tsc --noEmit",
     "update-dependents": "oneblink-release update-dependents --force"
   },

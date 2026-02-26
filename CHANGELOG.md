@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `workspaceId` to `formSchema`
+
 ## [13.1.0] - 2026-02-23
 
 ### Added
