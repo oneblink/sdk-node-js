@@ -7,6 +7,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'conditionally execute event via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -81,6 +82,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'conditionally show via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -138,6 +140,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'conditionally show element via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -190,6 +193,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'conditionally show element via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -244,6 +248,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'conditionally show element via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -299,6 +304,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'min & max text element length',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -339,6 +345,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'min & max text element length',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -377,6 +384,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'min & max text element length',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -417,6 +425,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'min & max text element length',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -457,6 +466,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'min & max text element length',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -495,6 +505,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'min & max text element length',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -534,6 +545,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'min & max text element length',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -572,6 +584,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'conditionally show element via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -606,6 +619,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'conditionally show element via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -636,6 +650,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'conditionally show element via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -666,6 +681,7 @@ describe('submission event conditional logic', () => {
       {
         name: 'conditionally show element via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -700,6 +716,7 @@ describe('Conditional Predicates', () => {
       {
         name: 'conditionally show via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -782,6 +799,7 @@ describe('Conditional Predicates', () => {
       {
         name: 'conditionally show via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -870,6 +888,7 @@ describe('Conditional Predicates', () => {
       {
         name: 'conditionally show via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -925,6 +944,7 @@ describe('Conditional Predicates', () => {
       {
         name: 'conditionally show via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -999,6 +1019,7 @@ describe('Conditional Predicates', () => {
       {
         name: 'conditionally show element via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -1065,6 +1086,7 @@ describe('Conditional Predicates', () => {
       {
         name: 'conditionally show element via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -1131,6 +1153,7 @@ describe('Conditional Predicates', () => {
       {
         name: 'conditionally show element via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -1184,6 +1207,7 @@ describe('Conditional Predicates', () => {
       {
         name: 'conditionally show element via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -1237,6 +1261,7 @@ describe('Conditional Predicates', () => {
       {
         name: 'conditionally show element via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -1312,6 +1337,7 @@ describe('Conditional Predicates', () => {
       {
         name: 'conditionally show element via number input',
         description: 'string',
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -1387,6 +1413,7 @@ describe('Conditional Predicates', () => {
   test('Should throw error if `enableSubmission` is provided without the `conditionalPredicates` property', () => {
     const result = formSchema.validate(
       {
+        workspaceId: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
         formsAppIds: [1],

@@ -712,7 +712,7 @@ const approvalStepNodeProps = {
 }
 
 const formSchema = Joi.object().keys({
-  workspaceId: Joi.number(),
+  workspaceId: Joi.number().required(),
   formsAppEnvironmentId: Joi.number().required(),
   name: Joi.string().required(),
   description: Joi.string().allow('', null),
