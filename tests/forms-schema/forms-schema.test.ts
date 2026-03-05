@@ -15,7 +15,6 @@ describe('Valid Form Schema with Pages', () => {
   const result = formSchema.validate({
     slug: 'inspec',
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -484,7 +483,6 @@ describe('Valid Form Schema', () => {
   const result = formSchema.validate({
     slug: 'inspec',
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -883,7 +881,6 @@ test('should set default for radio "buttons" property', () => {
   const { error, value } = formSchema.validate(
     {
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -931,7 +928,6 @@ test('should error if "buttons" is not a boolean', () => {
   const { error } = formSchema.validate(
     {
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       organisationId: '59cc888b8969af000fb50ddb',
       postSubmissionAction: 'FORMS_LIBRARY',
@@ -977,7 +973,6 @@ test('should error if element "id" is not supplied', () => {
   const { error } = formSchema.validate(
     {
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -1004,7 +999,6 @@ test('should error if element "id" is not a guid', () => {
   const { error } = formSchema.validate(
     {
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -1032,7 +1026,6 @@ test('should error if element "id" is not unique', () => {
   const { error } = formSchema.validate(
     {
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -1067,7 +1060,6 @@ test('should not error if number min is the same as max', () => {
   const { error } = formSchema.validate(
     {
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -1100,7 +1092,6 @@ test('should error if number min is greater than max', () => {
   const { error } = formSchema.validate(
     {
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -1135,7 +1126,6 @@ test('should throw error if minNumber is not provided for number element with is
   const { error } = formSchema.validate(
     {
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -1167,7 +1157,6 @@ test('should throw error if minNumber is not provided for number element with is
 test('should error if number min is not an integer when number isInteger', () => {
   const { error } = formSchema.validate({
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -1194,7 +1183,6 @@ test('should error if number min is not an integer when number isInteger', () =>
 test('should error if number max is not an integer when number isInteger', () => {
   const { error } = formSchema.validate({
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -1221,7 +1209,6 @@ test('should error if number max is not an integer when number isInteger', () =>
 test('should throw error if maxNumber is not provided for number element with isSlider as true', () => {
   const { error } = formSchema.validate({
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -1248,7 +1235,6 @@ test('should throw error if maxNumber is not provided for number element with is
 test('should error if "toDate" is greater than "fromDate"', () => {
   const { error } = formSchema.validate({
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -1276,7 +1262,6 @@ test('should error if "defaultValue" does not match what is valid for each type'
   const { error } = formSchema.validate(
     {
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -1512,7 +1497,6 @@ test('should error if "defaultValue" does not match what is valid for each type'
 test('should not error if number type element has a "defaultValue" but does not have a "minNumber" or "maxNumber"', () => {
   const { error } = formSchema.validate({
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -1536,7 +1520,6 @@ test('should not error if number type element has a "defaultValue" but does not 
 test('should error if number type element has a "defaultValue" less than "minNumber"', () => {
   const { error } = formSchema.validate({
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -1563,7 +1546,6 @@ test('should error if number type element has a "defaultValue" less than "minNum
 test('should error if number type element has a "defaultValue" more than "maxNumber"', () => {
   const { error } = formSchema.validate({
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -1590,7 +1572,6 @@ test('should error if number type element has a "defaultValue" more than "maxNum
 test('should not error if date type element has a "defaultValue" but does not have a "fromDate" or "toDate"', () => {
   const { error } = formSchema.validate({
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -1614,7 +1595,6 @@ test('should not error if date type element has a "defaultValue" but does not ha
 test('should error if date type element has a "defaultValue" less than "fromDate"', () => {
   const { error } = formSchema.validate({
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -1641,7 +1621,6 @@ test('should error if date type element has a "defaultValue" less than "fromDate
 test('should error if date type element has a "defaultValue" more than "toDate"', () => {
   const { error } = formSchema.validate({
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -1668,7 +1647,6 @@ test('should error if date type element has a "defaultValue" more than "toDate"'
 test('should error if repeatableSet type element has no elements', () => {
   const { error } = formSchema.validate({
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -1693,7 +1671,6 @@ test('should error if repeatableSet type element has no elements', () => {
 test('should error if repeatableSet type element min entries is more than max entries', () => {
   const { error } = formSchema.validate({
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -1731,7 +1708,6 @@ test('should error if repeatableSet type element min or max entries is less than
   const { error } = formSchema.validate(
     {
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -1777,7 +1753,6 @@ test('should error if repeatableSet element names not unique', () => {
   expect(() =>
     validateFormThrowError({
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -1819,7 +1794,6 @@ test('should error if repeatableSet element names not unique', () => {
 test('should error if repeatableSet layout type invalid', () => {
   const { error } = formSchema.validate({
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -1855,7 +1829,6 @@ test('should error if repeatableSet layout type invalid', () => {
 test('should succeed if layout SINGLE_ADD_BUTTON', () => {
   const { error } = formSchema.validate({
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -1889,7 +1862,6 @@ test('should succeed if layout SINGLE_ADD_BUTTON', () => {
 test('should succeed if layout MULTIPLE_ADD_BUTTONS', () => {
   const { error } = formSchema.validate({
     name: 'Inspection',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -1925,7 +1897,6 @@ describe('summary form elements', () => {
     expect(() =>
       validateFormThrowError({
         name: 'Inspection',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: '59cc888b8969af000fb50ddb',
@@ -1975,7 +1946,6 @@ describe('summary form elements', () => {
     expect(() =>
       validateFormThrowError({
         name: 'Inspection',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: '59cc888b8969af000fb50ddb',
@@ -2047,7 +2017,6 @@ describe('summary form elements', () => {
     expect(() =>
       validateFormThrowError({
         name: 'Inspection',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: '59cc888b8969af000fb50ddb',
@@ -2090,7 +2059,6 @@ describe('summary form elements', () => {
   test('fails when summary elementIds contains a invalidId', () => {
     expect(() =>
       validateFormThrowError({
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
         formsAppIds: [1],
@@ -2122,7 +2090,6 @@ describe('summary form elements', () => {
   test('fails when summary elementIds contains a invalid type', () => {
     expect(() =>
       validateFormThrowError({
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
         formsAppIds: [1],
@@ -2155,7 +2122,6 @@ describe('summary form elements', () => {
   test('fails when summary elementIds references self', () => {
     expect(() =>
       validateFormThrowError({
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
         formsAppIds: [1],
@@ -2187,7 +2153,6 @@ describe('summary form elements', () => {
 
   test('succeeds when summary elementIds are valid', () => {
     validateFormThrowError({
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       name: 'Inspection',
       formsAppIds: [1],
@@ -2216,7 +2181,6 @@ describe('summary form elements', () => {
   test('succeeds when repeatable set summary elementIds are referencing elements in root elements', () => {
     validateFormThrowError({
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -2265,7 +2229,6 @@ describe('summary form elements', () => {
   test('succeeds when repeatable set summary elementIds are referencing elements in root elements on another page', () => {
     validateFormThrowError({
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -2329,7 +2292,6 @@ describe('summary form elements', () => {
   test('succeeds when summary elementIds are referencing elements in a repeatable set in root elements', () => {
     validateFormThrowError({
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -2378,7 +2340,6 @@ describe('summary form elements', () => {
   test('succeeds when summary elementIds are referencing elements in a repeatable set on another page', () => {
     validateFormThrowError({
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -2445,7 +2406,6 @@ test('should error if page element has child page element', () => {
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -2495,7 +2455,6 @@ test('should error if page element has no elements', () => {
       isMultiPage: true,
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -2528,7 +2487,6 @@ test('should error if isMultiPage is set to false', () => {
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -2577,7 +2535,6 @@ test('should allow multiple pages', () => {
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -2631,7 +2588,6 @@ test('should error if root elements arent all page elements', () => {
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -2678,7 +2634,6 @@ test('should error if isMultiPage is false even if all root elements are pages',
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -2734,7 +2689,6 @@ test('should error if image element does not have a default value', () => {
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -2771,7 +2725,6 @@ test('should error if HTML element does not have a default value', () => {
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -2808,7 +2761,6 @@ test('should error if calculation element does not have a default value', () => 
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -2848,7 +2800,6 @@ test('should allow array of restricted barcode types', () => {
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -2886,7 +2837,6 @@ test('should require restricted barcode types if restrictBarcodeTypes boolean is
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -2925,7 +2875,6 @@ test('should throw error if postSubmissionAction is an invalid type', () => {
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -2952,7 +2901,6 @@ test('should throw error if cancelAction is an invalid type', () => {
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -2980,7 +2928,6 @@ test('should throw error if postSubmissionAction is missing', () => {
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -3004,7 +2951,6 @@ test('should throw error if postSubmissionAction is URL but no URL is present', 
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -3029,7 +2975,6 @@ test('should throw error if defaultValue for email is not valid', () => {
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -3066,7 +3011,6 @@ test('should throw error if defaultValue contains src="data:', () => {
     {
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -3101,7 +3045,6 @@ describe('optionTypes', () => {
     test('valid when freshdeskFieldName is provided', () => {
       const result = formSchema.validate({
         name: 'Inspection',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: '59cc888b8969af000fb50ddb',
@@ -3126,7 +3069,6 @@ describe('optionTypes', () => {
     test('invalid when freshdeskFieldName is NOT provided', () => {
       const { error } = formSchema.validate({
         name: 'Inspection',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: '59cc888b8969af000fb50ddb',
@@ -3154,7 +3096,6 @@ describe('optionTypes', () => {
     test('valid when dynamicOptionSetId is provided', () => {
       const result = formSchema.validate({
         name: 'Inspection',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: '59cc888b8969af000fb50ddb',
@@ -3179,7 +3120,6 @@ describe('optionTypes', () => {
     test('invalid when dynamicOptionSetId is NOT provided', () => {
       const { error } = formSchema.validate({
         name: 'Inspection',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: '59cc888b8969af000fb50ddb',
@@ -3207,7 +3147,6 @@ describe('optionTypes', () => {
     test('valid when options are provided', () => {
       const result = formSchema.validate({
         name: 'Inspection',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: '59cc888b8969af000fb50ddb',
@@ -3238,7 +3177,6 @@ describe('optionTypes', () => {
     test('invalid when options are NOT provided', () => {
       const { error } = formSchema.validate({
         name: 'Inspection',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: '59cc888b8969af000fb50ddb',
@@ -3264,7 +3202,6 @@ describe('optionTypes', () => {
     test('defaults to custom', () => {
       const { error, value } = formSchema.validate({
         name: 'Inspection',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: '59cc888b8969af000fb50ddb',
@@ -3297,7 +3234,6 @@ describe('optionTypes', () => {
     test('valid when options are provided', () => {
       const result = formSchema.validate({
         name: 'Inspection',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: '59cc888b8969af000fb50ddb',
@@ -3327,7 +3263,6 @@ describe('optionTypes', () => {
     test('invalid when options are NOT provided', () => {
       const { error } = formSchema.validate({
         name: 'Inspection',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: '59cc888b8969af000fb50ddb',
@@ -3400,7 +3335,6 @@ describe('Freshdesk Submission Event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -3438,7 +3372,6 @@ describe('Freshdesk Submission Event', () => {
       validateFormThrowError({
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -3489,7 +3422,6 @@ describe('Freshdesk add note Submission Event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -3570,7 +3502,6 @@ describe('GoodToGo Update Asset Submission Event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -3614,7 +3545,6 @@ describe('GoodToGo Update Asset Submission Event', () => {
       validateFormThrowError({
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -3700,7 +3630,6 @@ describe('PDF submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -3766,7 +3695,6 @@ describe('PDF submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -3797,7 +3725,6 @@ describe('PDF submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -3840,7 +3767,6 @@ describe('PDF submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -3878,7 +3804,6 @@ describe('PDF submission event', () => {
       validateFormThrowError({
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -3925,7 +3850,6 @@ describe('CALLBACK submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -3958,7 +3882,6 @@ describe('CALLBACK submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -3991,7 +3914,6 @@ describe('TRIM submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4041,7 +3963,6 @@ describe('TRIM submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4089,7 +4010,6 @@ describe('TRIM submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4130,7 +4050,6 @@ describe('TRIM submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4175,7 +4094,6 @@ describe('TRIM submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4222,7 +4140,6 @@ describe('SCHEDULING submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4268,7 +4185,6 @@ describe('SCHEDULING submission event', () => {
       validateFormThrowError({
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4297,7 +4213,6 @@ describe('SCHEDULING submission event', () => {
       validateFormThrowError({
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4333,7 +4248,6 @@ describe('SCHEDULING submission event', () => {
       validateFormThrowError({
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4362,7 +4276,6 @@ describe('SCHEDULING submission event', () => {
       validateFormThrowError({
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4400,7 +4313,6 @@ describe('CIVICA_CRM submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4453,7 +4365,6 @@ describe('CIVICA_CRM submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4490,7 +4401,6 @@ describe('CIVICA_CRM submission event', () => {
       validateFormThrowError({
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4540,7 +4450,6 @@ describe('BPOINT submission event', () => {
     const { error } = formSchema.validate({
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -4565,7 +4474,6 @@ describe('BPOINT submission event', () => {
     const { error } = formSchema.validate({
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -4593,7 +4501,6 @@ describe('BPOINT submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4635,7 +4542,6 @@ describe('WESTPAC_QUICK_STREAM submission event', () => {
     const { error } = formSchema.validate({
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -4659,7 +4565,6 @@ describe('WESTPAC_QUICK_STREAM submission event', () => {
     const { error } = formSchema.validate({
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -4686,7 +4591,6 @@ describe('WESTPAC_QUICK_STREAM submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4729,7 +4633,6 @@ describe('CP_PAY submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4771,7 +4674,6 @@ describe('NSW_GOV_PAY submission event', () => {
     const { error } = formSchema.validate({
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -4796,7 +4698,6 @@ describe('NSW_GOV_PAY submission event', () => {
     const { error } = formSchema.validate({
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -4823,7 +4724,6 @@ describe('NSW_GOV_PAY submission event', () => {
     const { error } = formSchema.validate({
       name: 'string',
       description: 'string',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: 'ORGANISATION_00000000001',
@@ -4852,7 +4752,6 @@ describe('NSW_GOV_PAY submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4894,7 +4793,6 @@ describe('NSW_GOV_PAY submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4940,7 +4838,6 @@ describe('NSW_GOV_PAY submission event', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -4985,7 +4882,6 @@ describe('CP_HCMS submission event', () => {
   const form = {
     name: 'string',
     description: 'string',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: 'ORGANISATION_00000000001',
@@ -5276,7 +5172,6 @@ describe('Data Lookup enabled', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -5315,7 +5210,6 @@ describe('Data Lookup enabled', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -5355,7 +5249,6 @@ describe('Data Lookup enabled', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: 'ORGANISATION_00000000001',
@@ -5395,7 +5288,6 @@ describe('invalid property removal', () => {
   const createForm = (props: Record<string, unknown>) => {
     return {
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -5955,7 +5847,6 @@ describe('invalid property removal', () => {
 
     const { error, value } = formSchema.validate({
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -5986,7 +5877,6 @@ describe('invalid property removal', () => {
   test('should strip out `redirectUrl` if `postSubmissionAction` is not "URL" and set default cancelAction', () => {
     const { error, value } = formSchema.validate({
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -5999,7 +5889,6 @@ describe('invalid property removal', () => {
     expect(error).toBeFalsy()
     expect(value).toEqual({
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -6017,7 +5906,6 @@ describe('invalid property removal', () => {
     const run = () =>
       validateFormThrowError({
         name: 'Inspection',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: '59cc888b8969af000fb50ddb',
@@ -6552,7 +6440,6 @@ test('should allow defaultValue in "private" format for draw element with no sto
 test('should allow placeholderValue property for these elements', () => {
   const result = formSchema.validate({
     name: 'Placeholders Form',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -6662,7 +6549,6 @@ test('should allow placeholderValue property for these elements', () => {
 test('should allow forms without tags', () => {
   const result = formSchema.validate({
     name: 'Tags Form',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -6679,7 +6565,6 @@ test('should not allow publish start date after publish end date', () => {
   expect(() =>
     validateFormThrowError({
       name: 'Tags Form',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -6701,7 +6586,6 @@ describe('submission event configuration', () => {
       {
         name: 'string',
         description: 'string',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [],
         organisationId: 'ORGANISATION_00000000001',
@@ -6730,7 +6614,6 @@ describe('submission event configuration', () => {
 describe('Date and Time `NOW` option', () => {
   const form = {
     name: 'Form',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -7275,7 +7158,6 @@ describe('Date and Time `NOW` option', () => {
 describe('Regex Custom Validation Properties', () => {
   const form = {
     name: 'Form',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -7403,7 +7285,6 @@ describe('Regex Custom Validation Properties', () => {
 describe('canToggleAll property', () => {
   const form = {
     name: 'Form',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -7470,7 +7351,6 @@ describe('canToggleAll property', () => {
 describe('Section Element', () => {
   const form = {
     name: 'Form',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -7631,7 +7511,6 @@ describe('Section Element', () => {
 describe('Location Element', () => {
   const form = {
     name: 'Form',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: '59cc888b8969af000fb50ddb',
@@ -7764,7 +7643,6 @@ describe('lookupButton form element', () => {
   const form = {
     name: 'string',
     description: 'string',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: 'ORGANISATION_00000000001',
@@ -8032,7 +7910,6 @@ describe('ArcGISWebMapElement', () => {
     updatedAt: '2025-01-01',
     name: 'string',
     description: 'string',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: 'ORGANISATION_00000000001',
@@ -8180,7 +8057,6 @@ describe('conditionallyShowOptions', () => {
     name: 'OneBlink Employee Chair Chooser',
     description: 'What chair would you like to sit on?',
     organisationId: '5b0cbeb76f2ed50f00000001',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     elements: [
       {
@@ -8597,7 +8473,6 @@ describe('approvalConfiguration', () => {
   const form = {
     name: 'string',
     description: 'string',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: 'ORGANISATION_00000000001',
@@ -8693,7 +8568,6 @@ describe('Approval Forms Inclusion Configuration', () => {
   const form = {
     name: 'string',
     description: 'string',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: 'ORGANISATION_00000000001',
@@ -8769,7 +8643,6 @@ describe('server validation', () => {
   const form = {
     name: 'string',
     description: 'string',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: 'ORGANISATION_00000000001',
@@ -8839,7 +8712,6 @@ describe('external id generation and personalisation', () => {
   const form = {
     name: 'string',
     description: 'string',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: 'ORGANISATION_00000000001',
@@ -9078,7 +8950,6 @@ describe('external id generation and personalisation', () => {
     expect(() =>
       validateFormThrowError({
         name: 'Form',
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         formsAppIds: [1],
         organisationId: '59cc888b8969af000fb50ddb',
@@ -9138,7 +9009,6 @@ describe('Slug', () => {
   const form = {
     name: 'string',
     description: 'string',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: 'ORGANISATION_00000000001',
@@ -9172,7 +9042,6 @@ describe('Approval Step Nodes', () => {
   const form = {
     name: 'string',
     description: 'string',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: 'ORGANISATION_00000000001',
@@ -9341,7 +9210,6 @@ describe('Post Submission Receipt', () => {
   test('should allow `postSubmissionReceipt.html`', () => {
     const { error, value } = formSchema.validate({
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -9358,7 +9226,6 @@ describe('Post Submission Receipt', () => {
     expect(error).toBeFalsy()
     expect(value).toEqual({
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -9378,7 +9245,6 @@ describe('Post Submission Receipt', () => {
   test('should allow `postSubmissionReceipt.allowPDFDownload` as an object', () => {
     const { error, value } = formSchema.validate({
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -9404,7 +9270,6 @@ describe('Post Submission Receipt', () => {
     expect(error).toBeFalsy()
     expect(value).toEqual({
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -9435,7 +9300,6 @@ describe('Post Submission Receipt', () => {
   test('should allow `postSubmissionReceipt.allowPDFDownload` as an array of configurations', () => {
     const { error, value } = formSchema.validate({
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
@@ -9476,7 +9340,6 @@ describe('Post Submission Receipt', () => {
     expect(error).toBeFalsy()
     expect(value).toEqual({
       name: 'Inspection',
-      workspaceId: 1,
       formsAppEnvironmentId: 1,
       formsAppIds: [1],
       organisationId: '59cc888b8969af000fb50ddb',
