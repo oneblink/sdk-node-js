@@ -12,7 +12,6 @@ function validateFormThrowError(data: unknown) {
 
 const defaultForm = {
   id: 1,
-  workspaceId: 1,
   formsAppEnvironmentId: 1,
   name: 'Inspection',
   organisationId: 'ORGANISATION_00000000001',
@@ -37,7 +36,6 @@ describe('Scheduling events should throw errors when not passed to "schedulingEv
     id: 1,
     name: 'string',
     description: 'string',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: 'ORGANISATION_00000000001',
@@ -95,7 +93,6 @@ describe('Payment events should throw errors when not passed to "paymentEvents" 
     id: 1,
     name: 'string',
     description: 'string',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: 'ORGANISATION_00000000001',
@@ -138,7 +135,6 @@ describe('CP Pay', () => {
     expect(() =>
       validateFormThrowError({
         id: 1,
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
         formsAppIds: [1],
@@ -171,7 +167,6 @@ describe('CP Pay', () => {
     expect(() =>
       validateFormThrowError({
         id: 1,
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
         formsAppIds: [1],
@@ -204,7 +199,6 @@ describe('CP Pay', () => {
     expect(() =>
       validateFormThrowError({
         id: 1,
-        workspaceId: 1,
         formsAppEnvironmentId: 1,
         name: 'Inspection',
         formsAppIds: [1],
@@ -256,7 +250,6 @@ describe('Submission events should throw errors when not passed to "paymentEvent
     id: 1,
     name: 'string',
     description: 'string',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: 'ORGANISATION_00000000001',
@@ -315,7 +308,6 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
     id: 1,
     name: 'string',
     description: 'string',
-    workspaceId: 1,
     formsAppEnvironmentId: 1,
     formsAppIds: [1],
     organisationId: 'ORGANISATION_00000000001',
