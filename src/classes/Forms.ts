@@ -140,6 +140,15 @@ export default class Forms extends OneBlinkAPI {
       )
     }
 
+    const username = parameters.username
+    if (
+      username !== undefined &&
+      username !== null &&
+      typeof username !== 'string'
+    ) {
+      throw new TypeError('Must supply "username" as a string or not at all')
+    }
+
     let formsAppId = parameters.formsAppId
     if (
       typeof formsAppId !== 'number' &&
@@ -157,7 +166,6 @@ export default class Forms extends OneBlinkAPI {
     if (typeof formsAppId !== 'number') {
       throw new Error('This form has not been added to a forms app yet.')
     }
-
     const formsApp = await super.getRequest<FormsAppsTypes.FormsApp>(
       `/forms-apps/${formsAppId}`,
     )
@@ -174,11 +182,13 @@ export default class Forms extends OneBlinkAPI {
         },
       },
     }
+
     let preFillFormDataId
     if (parameters.preFillData) {
       const result = await this.oneBlinkUploader.uploadPrefillData({
         formId,
         prefillData: parameters.preFillData,
+        username,
       })
       preFillFormDataId = result.preFillFormDataId
 
@@ -187,15 +197,6 @@ export default class Forms extends OneBlinkAPI {
           ids: [preFillFormDataId],
         },
       }
-    }
-
-    const username = parameters.username
-    if (
-      username !== undefined &&
-      username !== null &&
-      typeof username !== 'string'
-    ) {
-      throw new TypeError('Must supply "username" as a string or not at all')
     }
 
     // Default expiry for token is 8 hours
