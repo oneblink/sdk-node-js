@@ -87,6 +87,7 @@ export default class Jobs extends OneBlinkAPI {
         await this.oneBlinkUploader.uploadPrefillData({
           formId: data.formId,
           prefillData: preFillData,
+          username: data.username,
         })
       newJob.preFillFormDataId = preFillFormDataId
     }
