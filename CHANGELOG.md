@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.1.1] - 2026-03-31
+
 ### Added
 
 - `workspaceId` to search options
+
+### Dependencies
+
+- update @oneblink/storage to [6.0.0-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [5.0.0-beta.2](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
 
 ## [13.1.0] - 2026-02-23
 
