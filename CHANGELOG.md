@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.1.3] - 2026-04-23
+
+### Dependencies
+
+- update @oneblink/storage to [7.0.0-beta.4](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [6.1.0-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
+
 ## [13.1.2] - 2026-04-10
 
 ### Added
