@@ -112,7 +112,8 @@ export function validateFormElementMappings({
     const mapping = mappings[mappingIndex]
     if (
       mapping.type === 'FORM_ELEMENT' ||
-      mapping.type === 'FORM_FORM_ELEMENT'
+      mapping.type === 'FORM_FORM_ELEMENT' ||
+      mapping.type === 'REPEATABLE_SET_FORM_ELEMENT'
     ) {
       const element = formElementsService.findFormElement(
         validatedFormElements,
@@ -127,6 +128,20 @@ export function validateFormElementMappings({
         throw new Error(
           `"${propertyName}[${mappingIndex}].formElementId" (${mapping.formElementId}) must be the "id" for a "form" type element.`,
         )
+      }
+      if (mapping.type === 'REPEATABLE_SET_FORM_ELEMENT') {
+        if (element.type !== 'repeatableSet') {
+          throw new Error(
+            `"${propertyName}[${mappingIndex}].formElementId" (${mapping.formElementId}) must be the "id" for a "repeatableSet" type element.`,
+          )
+        }
+
+        // recursively validate the mapping of the repeatable set element
+        validateFormElementMappings({
+          mappings: [mapping.mapping],
+          validatedFormElements: element.elements,
+          propertyName: `${propertyName}[${mappingIndex}].mapping`,
+        })
       }
     }
   }
