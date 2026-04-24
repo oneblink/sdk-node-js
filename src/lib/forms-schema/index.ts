@@ -99,6 +99,7 @@ const generateFormWorkflowEventElementMappingKeys = (
 ) => ({
   type: Joi.string()
     .valid(
+      'REPEATABLE_SET_FORM_ELEMENT',
       'FORM_FORM_ELEMENT',
       'FORM_ELEMENT',
       'VALUE',
@@ -110,6 +111,11 @@ const generateFormWorkflowEventElementMappingKeys = (
       ...extraTypes,
     )
     .required(),
+  entryNumber: Joi.when('type', {
+    is: Joi.valid('REPEATABLE_SET_FORM_ELEMENT'),
+    then: Joi.number().integer().min(1).required(),
+    otherwise: Joi.any().strip(),
+  }),
   formElementId: Joi.when('type', {
     is: Joi.valid('FORM_FORM_ELEMENT', 'FORM_ELEMENT'),
     then: Joi.string().uuid().required(),
