@@ -527,6 +527,267 @@ describe('CIVIC_REC_COMPLETE_CHECKOUT', () => {
   })
 })
 
+describe('SALESFORCE_CREATE_OBJECT_RECORD', () => {
+  const validSubmissionEvent = {
+    type: 'SALESFORCE_CREATE_OBJECT_RECORD',
+    configuration: {
+      environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+      object: {
+        name: 'Account',
+        label: 'Account',
+      },
+    },
+  }
+
+  it('should fail with empty configuration on the submission event', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        submissionEvents: [
+          {
+            type: 'SALESFORCE_CREATE_OBJECT_RECORD',
+          },
+        ],
+      }),
+    ).toThrow('"submissionEvents[0].configuration" is required')
+  })
+
+  it('should fail when environmentId is not a valid UUID', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        submissionEvents: [
+          {
+            ...validSubmissionEvent,
+            configuration: {
+              environmentId: 'not-a-uuid',
+              object: {
+                name: 'Account',
+                label: 'Account',
+              },
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      '"submissionEvents[0].configuration.environmentId" must be a valid GUID',
+    )
+  })
+
+  it('should fail when object is missing', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        submissionEvents: [
+          {
+            ...validSubmissionEvent,
+            configuration: {
+              environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            },
+          },
+        ],
+      }),
+    ).toThrow('"submissionEvents[0].configuration.object" is required')
+  })
+
+  const formElementId = 'ff9b04c3-f2ad-4994-a525-e7189eb67a78'
+  const salesforceElements = [
+    {
+      id: formElementId,
+      type: 'text',
+      name: 'firstName',
+      label: 'First Name',
+    },
+  ]
+
+  const customPdfId = '944344d8-91f3-462e-ab1f-fbfea3e5c416'
+  const customPDFs: FormTypes.FormCustomPDF[] = [
+    {
+      id: customPdfId,
+      label: 'My PDF',
+      s3: { bucket: 'bucket', key: 'key', region: 'region' },
+      mapping: [
+        {
+          replaceableField: 'x',
+          type: 'FORM_ELEMENT',
+          formElementId,
+        },
+      ],
+    },
+  ]
+
+  it('should allow valid configuration mapping entries', () => {
+    const mapping = [
+      {
+        salesforceObjectRecordFieldName: 'Name',
+        type: 'FORM_ELEMENT' as const,
+        formElementId,
+      },
+      {
+        salesforceObjectRecordFieldName: 'Description',
+        type: 'VALUE' as const,
+        value: 'Fixed value',
+      },
+    ]
+    const form = validateFormThrowError({
+      ...defaultForm,
+      elements: salesforceElements,
+      submissionEvents: [
+        {
+          ...validSubmissionEvent,
+          configuration: {
+            ...validSubmissionEvent.configuration,
+            mapping,
+          },
+        },
+      ],
+    })
+
+    expect(form.submissionEvents[0]).toEqual({
+      ...validSubmissionEvent,
+      conditionallyExecute: false,
+      requiresAllConditionallyExecutePredicates: false,
+      configuration: {
+        ...validSubmissionEvent.configuration,
+        mapping,
+      },
+    })
+  })
+
+  it('should fail when mapping entry is missing salesforceObjectRecordFieldName', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        elements: salesforceElements,
+        submissionEvents: [
+          {
+            ...validSubmissionEvent,
+            configuration: {
+              ...validSubmissionEvent.configuration,
+              mapping: [
+                {
+                  type: 'VALUE',
+                  value: 'x',
+                },
+              ],
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      '"submissionEvents[0].configuration.mapping[0].salesforceObjectRecordFieldName" is required',
+    )
+  })
+
+  it('should fail when mapping entry with type FORM_ELEMENT is missing formElementId', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        elements: salesforceElements,
+        submissionEvents: [
+          {
+            ...validSubmissionEvent,
+            configuration: {
+              ...validSubmissionEvent.configuration,
+              mapping: [
+                {
+                  salesforceObjectRecordFieldName: 'Name',
+                  type: 'FORM_ELEMENT',
+                },
+              ],
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      '"submissionEvents[0].configuration.mapping[0].formElementId" is required',
+    )
+  })
+
+  it('should allow valid pdfConfigurations entries', () => {
+    const pdfConfigurations = [
+      {
+        customPdfId,
+        excludedElementIds: [formElementId],
+        excludedCSSClasses: [],
+      },
+    ]
+    const form = validateFormThrowError({
+      ...defaultForm,
+      elements: salesforceElements,
+      customPDFs,
+      submissionEvents: [
+        {
+          ...validSubmissionEvent,
+          configuration: {
+            ...validSubmissionEvent.configuration,
+            pdfConfigurations,
+          },
+        },
+      ],
+    })
+
+    expect(form.submissionEvents[0]).toEqual({
+      ...validSubmissionEvent,
+      conditionallyExecute: false,
+      requiresAllConditionallyExecutePredicates: false,
+      configuration: {
+        ...validSubmissionEvent.configuration,
+        mapping: [],
+        pdfConfigurations: [
+          {
+            customPdfId,
+            excludedElementIds: [formElementId],
+            excludedCSSClasses: [],
+          },
+        ],
+      },
+    })
+  })
+
+  it('should allow empty pdfConfigurations', () => {
+    const form = validateFormThrowError({
+      ...defaultForm,
+      submissionEvents: [
+        {
+          ...validSubmissionEvent,
+          configuration: {
+            ...validSubmissionEvent.configuration,
+            pdfConfigurations: [],
+          },
+        },
+      ],
+    })
+
+    expect(form.submissionEvents[0]).toMatchObject({
+      configuration: {
+        ...validSubmissionEvent.configuration,
+        mapping: [],
+        pdfConfigurations: [],
+      },
+    })
+  })
+
+  it('should fail when pdfConfigurations entry has an invalid customPdfId', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        submissionEvents: [
+          {
+            ...validSubmissionEvent,
+            configuration: {
+              ...validSubmissionEvent.configuration,
+              pdfConfigurations: [{ customPdfId: 'not-a-uuid' }],
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      '"submissionEvents[0].configuration.pdfConfigurations[0].customPdfId" must be a valid GUID',
+    )
+  })
+})
+
 describe('PDF configuration', () => {
   const submissionEvent = {
     type: 'PDF',

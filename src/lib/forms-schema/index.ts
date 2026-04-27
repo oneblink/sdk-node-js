@@ -604,6 +604,9 @@ export const WorkflowEventSchema = Joi.object().keys({
             }).id('SalesforceCreateObjectRecordMapping'),
           )
           .default([]),
+        pdfConfigurations: Joi.array().items(
+          Joi.object().keys(pdfSubmissionEventConfiguration),
+        ),
       }),
     }),
   ...formEventBaseSchema,
