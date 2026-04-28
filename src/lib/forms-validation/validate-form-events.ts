@@ -230,6 +230,24 @@ export const validateFormEvent = ({
       })
       break
     }
+    case 'SALESFORCE_CREATE_OBJECT_RECORD': {
+      validateFormElementMappings({
+        mappings: formEvent.configuration.mapping,
+        validatedFormElements,
+        propertyName: `${propertyName}.configuration.mapping`,
+      })
+      for (const [pdfConfigurationIndex, pdfConfiguration] of Object.entries(
+        formEvent.configuration.pdfConfigurations ?? [],
+      )) {
+        validatePDFConfiguration({
+          pdfConfiguration,
+          validatedFormElements,
+          customPDFs,
+          propertyName: `${propertyName}.configuration.pdfConfigurations[${pdfConfigurationIndex}]`,
+        })
+      }
+      break
+    }
     case 'GOOD_TO_GO_UPDATE_ASSET': {
       const formElement = rootFormElements.find(
         ({ id }) => id === formEvent.configuration.elementId,
