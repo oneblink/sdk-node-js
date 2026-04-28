@@ -117,12 +117,16 @@ const generateFormWorkflowEventElementMappingKeys = (
     otherwise: Joi.any().strip(),
   }),
   formElementId: Joi.when('type', {
-    is: Joi.valid('FORM_FORM_ELEMENT', 'FORM_ELEMENT'),
+    is: Joi.valid(
+      'FORM_FORM_ELEMENT',
+      'FORM_ELEMENT',
+      'REPEATABLE_SET_FORM_ELEMENT',
+    ),
     then: Joi.string().uuid().required(),
     otherwise: Joi.any().strip(),
   }),
   mapping: Joi.when('type', {
-    is: 'FORM_FORM_ELEMENT',
+    is: Joi.valid('FORM_FORM_ELEMENT', 'REPEATABLE_SET_FORM_ELEMENT'),
     then: Joi.link(`#${recursiveId}`).required(),
     otherwise: Joi.any().strip(),
   }),
