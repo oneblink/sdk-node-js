@@ -654,6 +654,107 @@ describe('SALESFORCE_CREATE_OBJECT_RECORD', () => {
     })
   })
 
+  const repeatableSetId = 'aa1b04c3-f2ad-4994-a525-e7189eb67a01'
+  const repeatableChildTextId = 'aa1b04c3-f2ad-4994-a525-e7189eb67a02'
+  const elementsWithRepeatableSet = [
+    {
+      id: repeatableSetId,
+      type: 'repeatableSet',
+      name: 'lineItems',
+      label: 'Line Items',
+      addSetEntryLabel: 'Add',
+      removeSetEntryLabel: 'Remove',
+      elements: [
+        {
+          id: repeatableChildTextId,
+          type: 'text',
+          name: 'itemName',
+          label: 'Item name',
+        },
+      ],
+    },
+  ]
+
+  it('should allow mapping with REPEATABLE_SET_FORM_ELEMENT and nested Salesforce field mapping', () => {
+    const mapping = [
+      {
+        salesforceObjectRecordFieldName: 'LineItems',
+        type: 'REPEATABLE_SET_FORM_ELEMENT' as const,
+        formElementId: repeatableSetId,
+        entryNumber: 1,
+        mapping: {
+          salesforceObjectRecordFieldName: 'ItemName',
+          type: 'FORM_ELEMENT' as const,
+          formElementId: repeatableChildTextId,
+        },
+      },
+    ]
+    const form = validateFormThrowError({
+      ...defaultForm,
+      elements: elementsWithRepeatableSet,
+      submissionEvents: [
+        {
+          ...validSubmissionEvent,
+          configuration: {
+            ...validSubmissionEvent.configuration,
+            mapping,
+          },
+        },
+      ],
+    })
+
+    expect(form.submissionEvents[0]).toEqual({
+      ...validSubmissionEvent,
+      conditionallyExecute: false,
+      requiresAllConditionallyExecutePredicates: false,
+      configuration: {
+        ...validSubmissionEvent.configuration,
+        mapping,
+      },
+    })
+  })
+
+  it('should fail when REPEATABLE_SET_FORM_ELEMENT nested mapping references an element outside the repeatable set', () => {
+    const siblingTextId = 'bb1b04c3-f2ad-4994-a525-e7189eb67a03'
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        elements: [
+          {
+            id: siblingTextId,
+            type: 'text',
+            name: 'sibling',
+            label: 'Sibling',
+          },
+          ...elementsWithRepeatableSet,
+        ],
+        submissionEvents: [
+          {
+            ...validSubmissionEvent,
+            configuration: {
+              ...validSubmissionEvent.configuration,
+              mapping: [
+                {
+                  salesforceObjectRecordFieldName: 'LineItems',
+                  type: 'REPEATABLE_SET_FORM_ELEMENT',
+                  formElementId: repeatableSetId,
+                  entryNumber: 1,
+                  mapping: {
+                    salesforceObjectRecordFieldName: 'BadRef',
+                    type: 'FORM_ELEMENT',
+                    formElementId: siblingTextId,
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      `"submissionEvents[0].configuration.mapping[0].mapping[0].formElementId" (${siblingTextId}) does not exist in "elements".`,
+    )
+  })
+
   it('should fail when mapping entry is missing salesforceObjectRecordFieldName', () => {
     expect(() =>
       validateFormThrowError({
