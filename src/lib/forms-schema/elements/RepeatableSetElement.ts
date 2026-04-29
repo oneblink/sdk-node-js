@@ -10,6 +10,7 @@ import {
   hintPosition,
 } from '../property-schemas.js'
 import elementSchema from '../element-schema.js'
+import { htmlString } from '../common.js'
 
 // Think this needs to be a variable because of recursive dependency
 
@@ -46,7 +47,7 @@ const schema: Joi.ObjectSchema = Joi.object({
   layout: Joi.string()
     .valid('SINGLE_ADD_BUTTON', 'MULTIPLE_ADD_BUTTONS')
     .optional(),
-  entrySummary: Joi.string().optional(),
+  entrySummary: htmlString.optional(),
   elements: Joi.array()
     .items(
       Joi.custom((value) => {
