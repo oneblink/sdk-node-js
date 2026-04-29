@@ -46,6 +46,7 @@ const schema: Joi.ObjectSchema = Joi.object({
   layout: Joi.string()
     .valid('SINGLE_ADD_BUTTON', 'MULTIPLE_ADD_BUTTONS')
     .optional(),
+  entrySummary: Joi.string().optional(),
   elements: Joi.array()
     .items(
       Joi.custom((value) => {
