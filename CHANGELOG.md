@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - repeatable set form elements to form element mappings
 - `pdfConfigurations` to `SALESFORCE_CREATE_OBJECT_RECORD` form workflow events
+- `entrySummary` to `repeatableSet`
 
 ## [13.1.3] - 2026-04-23
 
