@@ -7,11 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.1.4] - 2026-05-07
+
 ### Added
 
 - repeatable set form elements to form element mappings
 - `pdfConfigurations` to `SALESFORCE_CREATE_OBJECT_RECORD` form workflow events
 - `entrySummary` to `repeatableSet`
+
+### Dependencies
+
+- update @oneblink/sdk-core to [9.2.0-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [9.1.0-beta.3](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update @oneblink/storage to [7.1.0-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [7.0.0-beta.4](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
+
+- update jwks-rsa to [4.0.1](https://github.com/auth0/node-jwks-rsa/blob/master/CHANGELOG.md) (from [3.2.2](https://github.com/auth0/node-jwks-rsa/blob/master/CHANGELOG.md))
+
+- update uuid to [14.0.0](https://github.com/uuidjs/uuid/blob/master/CHANGELOG.md) (from [13.0.0](https://github.com/uuidjs/uuid/blob/master/CHANGELOG.md))
 
 ## [13.1.3] - 2026-04-23
 
