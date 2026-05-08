@@ -7672,6 +7672,7 @@ describe('lookupButton form element', () => {
       conditionallyShow: false,
       isElementLookup: false,
       elementDependencies: [],
+      required: false,
     })
   })
 
@@ -7766,6 +7767,7 @@ describe('lookupButton form element', () => {
         dataLookupId: 1,
         isElementLookup: false,
         conditionallyShow: false,
+        required: false,
         elementDependencies: [
           {
             elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
@@ -7823,6 +7825,7 @@ describe('lookupButton form element', () => {
         dataLookupId: 1,
         isElementLookup: false,
         conditionallyShow: false,
+        required: false,
         elementDependencies: [
           {
             elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
@@ -7884,6 +7887,7 @@ describe('lookupButton form element', () => {
         dataLookupId: 1,
         isElementLookup: false,
         conditionallyShow: false,
+        required: false,
         elementDependencies: [
           {
             elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
@@ -7900,6 +7904,27 @@ describe('lookupButton form element', () => {
         ],
       },
     ])
+  })
+
+  test('should accept "required" and "requiredMessage"', () => {
+    const result = validateFormThrowError({
+      ...form,
+      elements: [
+        {
+          ...lookupButtonElement,
+          required: true,
+          requiredMessage: 'Run the lookup before continuing',
+        },
+      ],
+    })
+    expect(result.elements[0]).toEqual({
+      ...lookupButtonElement,
+      conditionallyShow: false,
+      isElementLookup: false,
+      elementDependencies: [],
+      required: true,
+      requiredMessage: 'Run the lookup before continuing',
+    })
   })
 })
 

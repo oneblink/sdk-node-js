@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- required properties to lookupButton form element
+
 ## [13.1.4] - 2026-05-07
 
 ### Added
