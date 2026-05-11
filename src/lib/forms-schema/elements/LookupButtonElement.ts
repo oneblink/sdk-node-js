@@ -33,7 +33,9 @@ export default Joi.object({
   label,
   hint,
   hintPosition,
-  ...requiredSchemas,
+  // should not default to false because `undefined` is valid to support calculating required status based on the dependencies
+  required: Joi.bool(),
+  requiredMessage: requiredSchemas.requiredMessage,
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   customCssClasses,

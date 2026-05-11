@@ -7662,17 +7662,71 @@ describe('lookupButton form element', () => {
     dataLookupId: 1,
   }
 
-  test('should default "elementDependencies" to empty array', () => {
-    const result = validateFormThrowError({
-      ...form,
-      elements: [lookupButtonElement],
-    })
-    expect(result.elements[0]).toEqual({
+  describe('"required" and "requiredMessage"', () => {
+    const expectedBase = {
       ...lookupButtonElement,
       conditionallyShow: false,
       isElementLookup: false,
       elementDependencies: [],
-      required: false,
+    }
+
+    test.each([
+      {
+        label: 'omitted',
+        element: lookupButtonElement,
+        assert: (el: Record<string, unknown>) => {
+          expect(el).toEqual(expectedBase)
+          expect(el).not.toHaveProperty('required')
+        },
+      },
+      {
+        label: 'false',
+        element: { ...lookupButtonElement, required: false },
+        assert: (el: Record<string, unknown>) => {
+          expect(el).toEqual({ ...expectedBase, required: false })
+        },
+      },
+      {
+        label: 'undefined',
+        element: { ...lookupButtonElement, required: undefined },
+        assert: (el: Record<string, unknown>) => {
+          expect(el).toEqual({ ...expectedBase, required: undefined })
+        },
+      },
+      {
+        label: 'true',
+        element: { ...lookupButtonElement, required: true },
+        assert: (el: Record<string, unknown>) => {
+          expect(el).toEqual({ ...expectedBase, required: true })
+        },
+      },
+    ])(
+      'should preserve "required" semantics when required is $label',
+      ({ element, assert }) => {
+        const result = validateFormThrowError({
+          ...form,
+          elements: [element],
+        })
+        assert(result.elements[0] as Record<string, unknown>)
+      },
+    )
+
+    test('should accept "required": true with "requiredMessage"', () => {
+      const result = validateFormThrowError({
+        ...form,
+        elements: [
+          {
+            ...lookupButtonElement,
+            required: true,
+            requiredMessage: 'Run the lookup before continuing',
+          },
+        ],
+      })
+      expect(result.elements[0]).toEqual({
+        ...expectedBase,
+        required: true,
+        requiredMessage: 'Run the lookup before continuing',
+      })
     })
   })
 
@@ -7767,7 +7821,6 @@ describe('lookupButton form element', () => {
         dataLookupId: 1,
         isElementLookup: false,
         conditionallyShow: false,
-        required: false,
         elementDependencies: [
           {
             elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
@@ -7825,7 +7878,6 @@ describe('lookupButton form element', () => {
         dataLookupId: 1,
         isElementLookup: false,
         conditionallyShow: false,
-        required: false,
         elementDependencies: [
           {
             elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
@@ -7887,7 +7939,6 @@ describe('lookupButton form element', () => {
         dataLookupId: 1,
         isElementLookup: false,
         conditionallyShow: false,
-        required: false,
         elementDependencies: [
           {
             elementId: '3A1916B9-B05A-46B5-A128-93639DE2D8ED',
@@ -7906,26 +7957,6 @@ describe('lookupButton form element', () => {
     ])
   })
 
-  test('should accept "required" and "requiredMessage"', () => {
-    const result = validateFormThrowError({
-      ...form,
-      elements: [
-        {
-          ...lookupButtonElement,
-          required: true,
-          requiredMessage: 'Run the lookup before continuing',
-        },
-      ],
-    })
-    expect(result.elements[0]).toEqual({
-      ...lookupButtonElement,
-      conditionallyShow: false,
-      isElementLookup: false,
-      elementDependencies: [],
-      required: true,
-      requiredMessage: 'Run the lookup before continuing',
-    })
-  })
 })
 
 describe('ArcGISWebMapElement', () => {
