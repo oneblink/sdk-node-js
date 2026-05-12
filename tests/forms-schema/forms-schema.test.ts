@@ -7662,6 +7662,19 @@ describe('lookupButton form element', () => {
     dataLookupId: 1,
   }
 
+  test('should default "elementDependencies" to empty array', () => {
+    const result = validateFormThrowError({
+      ...form,
+      elements: [lookupButtonElement],
+    })
+    expect(result.elements[0]).toEqual({
+      ...lookupButtonElement,
+      conditionallyShow: false,
+      isElementLookup: false,
+      elementDependencies: [],
+    })
+  })
+
   describe('"required" and "requiredMessage"', () => {
     const expectedBase = {
       ...lookupButtonElement,
@@ -7956,7 +7969,6 @@ describe('lookupButton form element', () => {
       },
     ])
   })
-
 })
 
 describe('ArcGISWebMapElement', () => {
