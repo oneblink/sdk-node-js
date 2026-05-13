@@ -710,10 +710,28 @@ const approvalStepCommonProps = {
   clarificationRequestEmailTemplateId: Joi.number(),
 }
 
+const approvalFormPrefillPathSegmentSchema = Joi.object({
+  kind: Joi.string().valid('repeatableSet', 'form').required(),
+  formElementId: Joi.string().guid().required(),
+})
+
+const approvalFormPrefillElementPathSchema = Joi.object({
+  containers: Joi.array().items(approvalFormPrefillPathSegmentSchema).default([]),
+  formElementId: Joi.string().guid().required(),
+})
+
+const approvalFormPrefillMappingRowSchema = Joi.object({
+  sourcePath: approvalFormPrefillElementPathSchema.required(),
+  approvalPath: approvalFormPrefillElementPathSchema.required(),
+})
+
 const approvalStepNodeProps = {
   label: Joi.string().required(),
   group: Joi.string().required(),
   approvalFormId: Joi.number(),
+  approvalFormPrefillMappings: Joi.array()
+    .items(approvalFormPrefillMappingRowSchema)
+    .optional(),
   isConditional: Joi.boolean().default(false),
   requiresAllConditionalPredicates: Joi.boolean().default(false),
   conditionalPredicates: Joi.when('isConditional', {
