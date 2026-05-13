@@ -4,14 +4,13 @@ each entry is based on the form elements in the <code>elements</code> array.</p>
 identifier (UUID). The identifier must be a Version 4 (V4) UUID and must
 conform to the formatting requirements defined in this RFC 9562
 specification: <a href="https://www.rfc-editor.org/rfc/rfc9562.html">https://www.rfc-editor.org/rfc/rfc9562.html</a></p>
-</div><div class="tsd-type-declaration"><h4>Type Declaration</h4><ul class="tsd-parameters"><li class="tsd-parameter"><h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">addSetEntryLabel</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li><li class="tsd-parameter"><h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">entrySummary</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5><div class="tsd-comment tsd-typography"><p>HTML to display a summary of elements within the repeatable set entry.
-*
+</div><div class="tsd-type-declaration"><h4>Type Declaration</h4><ul class="tsd-parameters"><li class="tsd-parameter"><h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">addSetEntryLabel</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li><li class="tsd-parameter"><h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">entrySummary</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5><div class="tsd-comment tsd-typography"><p>HTML to display a summary of elements within the repeatable set entry. *
 This value should be valid <a href="https://html.spec.whatwg.org/">HTML</a>. It will
 be displayed to users when completing the form.</p>
 <ul>
-<li>Repeatable set entry element's values can be injected into the HTML using the
-following syntax: <code>{ELEMENT:elementName}</code>. The <code>elementName</code> part must
-match the <code>name</code> property of an element within the repeatable set entry.</li>
+<li>Repeatable set entry element's values can be injected into the HTML using
+the following syntax: <code>{ELEMENT:elementName}</code>. The <code>elementName</code> part
+must match the <code>name</code> property of an element within the repeatable set entry.</li>
 </ul>
 </div></li><li class="tsd-parameter"><h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">layout</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;SINGLE_ADD_BUTTON&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;MULTIPLE_ADD_BUTTONS&quot;</span></h5><div class="tsd-comment tsd-typography"><p>Select how the repeatable set buttons render. SINGLE_ADD_BUTTON will
 include a single button at the end of the repeatable set to add a new
