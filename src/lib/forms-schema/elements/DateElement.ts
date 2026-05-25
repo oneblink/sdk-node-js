@@ -29,8 +29,8 @@ const toDate = Joi.when('fromDate', {
   otherwise: Joi.alternatives([dateSchema, nowSchema]),
 }).allow(null)
 
-const toDateElementId = Joi.string().uuid()
-const fromDateElementId = Joi.string().uuid()
+const toDateElementId = Joi.string()
+const fromDateElementId = Joi.string()
 
 const fromDateDaysOffset = Joi.when('fromDate', {
   is: nowSchema.required(),

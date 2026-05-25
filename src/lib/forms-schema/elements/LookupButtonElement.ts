@@ -15,7 +15,7 @@ export const type = 'lookupButton'
 
 const lookupButtonFormElementDependencySchema = Joi.object()
   .keys({
-    elementId: Joi.string().guid().required(),
+    elementId: Joi.string().required(),
     type: Joi.string()
       .valid('FORM_ELEMENT', 'REPEATABLE_SET_FORM_ELEMENT', 'FORM_FORM_ELEMENT')
       .required(),

@@ -16,7 +16,7 @@ export default function generateFormElement<
   const formElement: Record<string, unknown> = { ...formElementGenerationData }
 
   // element property: id
-  if (typeof formElement.id !== 'string') {
+  if (typeof formElement.id !== 'string' || !formElement.id) {
     formElement.id = uuid()
   }
 
@@ -26,7 +26,7 @@ export default function generateFormElement<
       const option = o || {}
       return {
         ...option,
-        id: uuid(),
+        id: typeof option.id === 'string' && option.id ? option.id : uuid(),
         label: option.label || option.value || `Option ${index + 1}`,
         value: option.value || index.toString(),
       }

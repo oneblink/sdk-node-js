@@ -19,7 +19,7 @@ export default Joi.object({
     .required()
 
     .min(1)
-    .items(Joi.string().uuid().required()),
+    .items(Joi.string().required()),
   ...conditionallyShowSchemas,
   customCssClasses,
 })

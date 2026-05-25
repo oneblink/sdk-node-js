@@ -62,7 +62,7 @@ const emailSubmissionEventConfiguration = {
           type: Joi.string().valid('FORM_ELEMENT', 'TEXT').required(),
           formElementId: Joi.when('type', {
             is: 'FORM_ELEMENT',
-            then: Joi.string().uuid().required(),
+            then: Joi.string().required(),
             otherwise: Joi.any().strip(),
           }),
           text: Joi.when('type', {
@@ -76,7 +76,7 @@ const emailSubmissionEventConfiguration = {
   }),
   emailAttachmentsEndpoint: endpointConfigurationSchema,
   excludedAttachmentElementIds: Joi.array()
-    .items(Joi.string().guid())
+    .items(Joi.string())
     .unique()
     .allow(null)
     .default([]),
@@ -122,7 +122,7 @@ const generateFormWorkflowEventElementMappingKeys = (
       'FORM_ELEMENT',
       'REPEATABLE_SET_FORM_ELEMENT',
     ),
-    then: Joi.string().uuid().required(),
+    then: Joi.string().required(),
     otherwise: Joi.any().strip(),
   }),
   mapping: Joi.when('type', {
@@ -192,7 +192,7 @@ const pdfConfiguration = {
   includePaymentInPdf: Joi.boolean(),
   includeCalendarBookingInPdf: Joi.boolean(),
   excludedElementIds: Joi.array()
-    .items(Joi.string().guid())
+    .items(Joi.string())
     .unique()
     .allow(null)
     .default([]),
@@ -238,7 +238,7 @@ export const PaymentEventSchema = Joi.object({
     .when('type', {
       is: 'BPOINT',
       then: Joi.object().keys({
-        elementId: Joi.string().uuid().required(),
+        elementId: Joi.string().required(),
         environmentId: Joi.string().uuid().required(),
         crn2: Joi.string(),
         crn3: Joi.string(),
@@ -247,7 +247,7 @@ export const PaymentEventSchema = Joi.object({
     .when('type', {
       is: Joi.valid('WESTPAC_QUICK_STREAM'),
       then: Joi.object().keys({
-        elementId: Joi.string().uuid().required(),
+        elementId: Joi.string().required(),
         environmentId: Joi.string().uuid().required(),
         customerReferenceNumber: Joi.string().required(),
       }),
@@ -255,14 +255,14 @@ export const PaymentEventSchema = Joi.object({
     .when('type', {
       is: 'CP_PAY',
       then: Joi.object().keys({
-        elementId: Joi.string().uuid().required(),
+        elementId: Joi.string().required(),
         gatewayId: Joi.string().uuid().required(),
       }),
     })
     .when('type', {
       is: 'NSW_GOV_PAY',
       then: Joi.object().keys({
-        elementId: Joi.string().uuid().required(),
+        elementId: Joi.string().required(),
         primaryAgencyId: Joi.string().uuid().required(),
         productDescription: Joi.string().required().max(250),
         customerReference: Joi.string().max(250),
@@ -284,8 +284,8 @@ export const SchedulingEventSchema = Joi.object({
       then: Joi.object().keys({
         nylasGrantId: Joi.string().required(),
         nylasConfigurationId: Joi.string().required(),
-        nameElementId: Joi.string().guid(),
-        emailElementId: Joi.string().guid(),
+        nameElementId: Joi.string(),
+        emailElementId: Joi.string(),
         emailDescription: Joi.string(),
         ...pdfSubmissionEventConfiguration,
       }),
@@ -430,7 +430,7 @@ export const WorkflowEventSchema = Joi.object().keys({
           .items(
             Joi.object({
               civicaCategoryItemNumber: Joi.number().required(),
-              formElementId: Joi.string().uuid().required(),
+              formElementId: Joi.string().required(),
               isDescription: Joi.boolean().default(false),
             }),
           ),
@@ -445,7 +445,7 @@ export const WorkflowEventSchema = Joi.object().keys({
           .required()
           .max(40),
         encryptedElementIds: Joi.array()
-          .items(Joi.string().guid())
+          .items(Joi.string())
           .unique()
           .allow(null),
         tags: Joi.array().min(1).items(Joi.string()).unique(),
@@ -459,7 +459,7 @@ export const WorkflowEventSchema = Joi.object().keys({
           )
           .unique('id'),
         encryptPdf: Joi.boolean().default(false),
-        notificationElementId: Joi.string().uuid(),
+        notificationElementId: Joi.string(),
         ...pdfSubmissionEventConfiguration,
       }),
     })
@@ -574,7 +574,7 @@ export const WorkflowEventSchema = Joi.object().keys({
     .when('type', {
       is: 'GOOD_TO_GO_UPDATE_ASSET',
       then: Joi.object().keys({
-        elementId: Joi.string().uuid().required(),
+        elementId: Joi.string().required(),
         integrationKeyId: Joi.string().required(),
         mapping: Joi.array()
           .items(
@@ -617,7 +617,7 @@ export const WorkflowEventSchema = Joi.object().keys({
 })
 
 const pageElementSchema = Joi.object().keys({
-  id: Joi.string().guid().required(),
+  id: Joi.string().required(),
   label: Joi.string().required(),
   type: Joi.valid('page'),
   conditionallyShow: Joi.bool().default(false),
@@ -712,12 +712,14 @@ const approvalStepCommonProps = {
 
 const approvalFormPrefillPathSegmentSchema = Joi.object({
   kind: Joi.string().valid('repeatableSet', 'form').required(),
-  formElementId: Joi.string().guid().required(),
+  formElementId: Joi.string().required(),
 })
 
 const approvalFormPrefillElementPathSchema = Joi.object({
-  containers: Joi.array().items(approvalFormPrefillPathSegmentSchema).default([]),
-  formElementId: Joi.string().guid().required(),
+  containers: Joi.array()
+    .items(approvalFormPrefillPathSegmentSchema)
+    .default([]),
+  formElementId: Joi.string().required(),
 })
 
 const approvalFormPrefillMappingRowSchema = Joi.object({
@@ -787,7 +789,7 @@ const formSchema = Joi.object().keys({
       ]),
     ),
   approvalConfiguration: Joi.object({
-    defaultNotificationEmailElementId: Joi.string().guid(),
+    defaultNotificationEmailElementId: Joi.string(),
     sendNotificationEmailOptionDefaultUnchecked: Joi.boolean(),
     approveCannedResponses: cannedResponsesSchema,
     clarificationRequestCannedResponses: cannedResponsesSchema,

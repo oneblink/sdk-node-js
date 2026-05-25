@@ -17,7 +17,10 @@ export default function generatePageElement(
   }
 
   // element property: id
-  if (typeof formElementGenerationData.id !== 'string') {
+  if (
+    typeof formElementGenerationData.id !== 'string' ||
+    !formElementGenerationData.id
+  ) {
     formElement.id = uuid()
   }
   // element property: label || default to: {type}

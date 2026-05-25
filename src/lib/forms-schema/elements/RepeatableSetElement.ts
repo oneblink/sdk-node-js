@@ -28,7 +28,7 @@ const schema: Joi.ObjectSchema = Joi.object({
     Joi.number().min(0),
     Joi.object({
       type: Joi.string().valid('FORM_ELEMENT').required(),
-      elementId: Joi.string().uuid().required(),
+      elementId: Joi.string().required(),
     }),
   ]),
   maxSetEntries: Joi.alternatives([
@@ -39,7 +39,7 @@ const schema: Joi.ObjectSchema = Joi.object({
     }),
     Joi.object({
       type: Joi.string().valid('FORM_ELEMENT').required(),
-      elementId: Joi.string().uuid().required(),
+      elementId: Joi.string().required(),
     }),
   ]),
   addSetEntryLabel: Joi.string(),

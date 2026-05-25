@@ -995,7 +995,7 @@ test('should error if element "id" is not supplied', () => {
   expect(error?.message).toContain('"elements[0].id" is required')
 })
 
-test('should error if element "id" is not a guid', () => {
+test('should error if element "id" is not a string', () => {
   const { error } = formSchema.validate(
     {
       name: 'Inspection',
@@ -1007,7 +1007,7 @@ test('should error if element "id" is not a guid', () => {
       tags: [],
       elements: [
         {
-          id: '123',
+          id: 123,
           name: 'text',
           label: 'Text',
           type: 'text',
@@ -1019,7 +1019,7 @@ test('should error if element "id" is not a guid', () => {
     },
   )
 
-  expect(error?.message).toContain('"elements[0].id" must be a valid GUID')
+  expect(error?.message).toContain('"elements[0].id" must be a string')
 })
 
 test('should error if element "id" is not unique', () => {
@@ -1316,7 +1316,7 @@ test('should error if "defaultValue" does not match what is valid for each type'
           name: 'radio',
           type: 'radio',
           label: 'test',
-          defaultValue: '123',
+          defaultValue: 123,
           options: [
             {
               id: '35049223-dde2-405c-970a-5c2961a85504',
@@ -1354,7 +1354,7 @@ test('should error if "defaultValue" does not match what is valid for each type'
           name: 'checkboxes-two',
           type: 'checkboxes',
           label: 'test',
-          defaultValue: ['123'],
+          defaultValue: [123],
           options: [
             {
               id: '35049223-dde2-405c-970a-5c2961a85504',
@@ -1373,7 +1373,7 @@ test('should error if "defaultValue" does not match what is valid for each type'
           name: 'select',
           type: 'select',
           label: 'test',
-          defaultValue: '123',
+          defaultValue: 123,
           options: [
             {
               id: '35049223-dde2-405c-970a-5c2961a85504',
@@ -1413,7 +1413,7 @@ test('should error if "defaultValue" does not match what is valid for each type'
           type: 'select',
           label: 'test',
           multi: true,
-          defaultValue: ['123'],
+          defaultValue: [123],
           options: [
             {
               id: '35049223-dde2-405c-970a-5c2961a85504',
@@ -1469,22 +1469,22 @@ test('should error if "defaultValue" does not match what is valid for each type'
     '"elements[5].defaultValue" must be in ISO 8601 date format',
   )
   expect(error?.details[6].message).toBe(
-    '"elements[6].defaultValue" must be a valid GUID',
+    '"elements[6].defaultValue" must be a string',
   )
   expect(error?.details[7].message).toBe(
     '"elements[7].defaultValue" must be an array',
   )
   expect(error?.details[8].message).toBe(
-    '"elements[8].defaultValue[0]" must be a valid GUID',
+    '"elements[8].defaultValue[0]" must be a string',
   )
   expect(error?.details[9].message).toBe(
-    '"elements[9].defaultValue" must be a valid GUID',
+    '"elements[9].defaultValue" must be a string',
   )
   expect(error?.details[10].message).toBe(
     '"elements[10].defaultValue" must be an array',
   )
   expect(error?.details[11].message).toBe(
-    '"elements[11].defaultValue[0]" must be a valid GUID',
+    '"elements[11].defaultValue[0]" must be a string',
   )
   expect(error?.details[12].message).toBe(
     '"elements[12].defaultValue" must be a string',
@@ -7040,7 +7040,7 @@ describe('Date and Time `NOW` option', () => {
     expect(result.value.elements[1].toDateDaysOffset).toBe(2)
   })
 
-  test('Should not allow invalid guid', () => {
+  test('Should validate toDateElementId is a string', () => {
     const result = formSchema.validate(
       {
         ...form,
@@ -7053,7 +7053,7 @@ describe('Date and Time `NOW` option', () => {
             required: false,
             defaultValue: 'NOW',
             toDate: 'NOW',
-            toDateElementId: '123',
+            toDateElementId: 123,
             toDateDaysOffset: 8,
           },
         ],
@@ -7065,11 +7065,11 @@ describe('Date and Time `NOW` option', () => {
     )
 
     expect(result.error?.details[0].message).toBe(
-      '"elements[0].toDateElementId" must be a valid GUID',
+      '"elements[0].toDateElementId" must be a string',
     )
   })
 
-  test('Should not allow if one guid is invalid', () => {
+  test('Should validate fromDateElementId is a string', () => {
     const result = formSchema.validate(
       {
         ...form,
@@ -7081,7 +7081,7 @@ describe('Date and Time `NOW` option', () => {
             type: 'date',
             required: false,
             defaultValue: 'NOW',
-            fromDateElementId: '123',
+            fromDateElementId: 123,
             toDateElementId: '2424f4ea-35a0-47ee-9c22-ef8e16cb12e3',
           },
         ],
@@ -7093,7 +7093,7 @@ describe('Date and Time `NOW` option', () => {
     )
 
     expect(result.error?.details[0].message).toBe(
-      '"elements[0].fromDateElementId" must be a valid GUID',
+      '"elements[0].fromDateElementId" must be a string',
     )
   })
 
@@ -8587,19 +8587,6 @@ describe('approvalConfiguration', () => {
       }),
     ).toThrow(
       '"approvalConfiguration.defaultNotificationEmailElementId" must be a string',
-    )
-  })
-
-  test('Should throw error if elementId is not a guid', () => {
-    expect(() =>
-      validateFormThrowError({
-        ...form,
-        approvalConfiguration: {
-          defaultNotificationEmailElementId: 'not a guid',
-        },
-      }),
-    ).toThrow(
-      '"approvalConfiguration.defaultNotificationEmailElementId" must be a valid GUID',
     )
   })
 
