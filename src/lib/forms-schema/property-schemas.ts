@@ -8,7 +8,7 @@ import {
   FRESHDESK_FIELD_OPTION_TYPE,
 } from './common.js'
 
-export const id = Joi.string().guid().required()
+export const id = Joi.string().required()
 export const name = Joi.string().required().trim()
 export const label = Joi.string().required()
 export const meta = Joi.string().custom((value) => {
@@ -77,7 +77,7 @@ const options = Joi.when('optionsType', {
     .unique('id')
     .items(
       Joi.object().keys({
-        id: Joi.string().guid().required(),
+        id: Joi.string().required(),
         value: Joi.string().required().trim(),
         label: Joi.string().required(),
         colour: Joi.string()
@@ -86,7 +86,7 @@ const options = Joi.when('optionsType', {
         attributes: Joi.array().items(
           Joi.object().keys({
             optionIds: Joi.array().required().items(Joi.string()),
-            elementId: Joi.string().guid().required(),
+            elementId: Joi.string().required(),
           }),
         ),
         displayAlways: Joi.boolean().default(false),
@@ -100,7 +100,7 @@ const attributesMapping = Joi.when('optionsType', {
   is: DYNAMIC_OPTION_TYPE,
   then: Joi.array().items(
     Joi.object().keys({
-      elementId: Joi.string().guid().required(),
+      elementId: Joi.string().required(),
       attribute: Joi.string().required(),
     }),
   ),
@@ -113,7 +113,7 @@ const conditionallyShowOptions = Joi.when('type', {
 })
 const conditionallyShowOptionsElementIds = Joi.when('optionsType', {
   is: CUSTOM_OPTION_TYPE,
-  then: Joi.array().items(Joi.string().guid().required()),
+  then: Joi.array().items(Joi.string().required()),
   otherwise: Joi.any().strip(),
 })
 const requiresAllConditionallyShowOptionsPredicates = Joi.when(
@@ -131,12 +131,12 @@ const freshdeskFieldName = Joi.when('optionsType', {
 })
 export const defaultValueOptionsSingle = Joi.when('optionsType', {
   is: Joi.invalid(DYNAMIC_OPTION_TYPE, FRESHDESK_FIELD_OPTION_TYPE),
-  then: Joi.string().guid(),
+  then: Joi.string(),
   otherwise: Joi.string(),
 })
 export const defaultValueOptionsMultiple = Joi.when('optionsType', {
   is: Joi.invalid(DYNAMIC_OPTION_TYPE, FRESHDESK_FIELD_OPTION_TYPE),
-  then: Joi.array().items(Joi.string().guid()),
+  then: Joi.array().items(Joi.string()),
   otherwise: Joi.array().items(Joi.string()),
 })
 
@@ -160,7 +160,7 @@ const requiresAllConditionallyShowPredicates = Joi.when('conditionallyShow', {
 })
 
 const ConditionalPredicatesItemBaseSchema = Joi.object().keys({
-  elementId: Joi.string().guid().required(),
+  elementId: Joi.string().required(),
   type: Joi.string()
     .default('OPTIONS')
     .valid(
@@ -190,7 +190,7 @@ const ConditionalPredicatesItemBaseSchema = Joi.object().keys({
     is: Joi.valid('NUMERIC'),
     then: Joi.when('compareWith', {
       is: Joi.valid('ELEMENT').required(),
-      then: Joi.string().guid().required(),
+      then: Joi.string().required(),
       otherwise: Joi.number().required(),
     }),
     otherwise: Joi.any().strip(),

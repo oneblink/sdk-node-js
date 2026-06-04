@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- UUID/GUID validation from form element and option ids
+
 ## [13.1.6] - 2026-05-22
 
 ### Added
