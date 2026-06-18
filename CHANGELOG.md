@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `sortBy` and `sortDirection` to `FormSearchOptions`
+
 ## [13.1.7] - 2026-06-18
 
 ### Removed
