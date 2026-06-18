@@ -116,6 +116,13 @@ export type FormsSearchOptions = BaseSearchOptions & {
    * a `workspaceId`.
    */
   workspaceId?: number
+  /** Select a property to sort the results by. */
+  sortBy?: 'name' | 'createdAt' | 'updatedAt'
+  /**
+   * Select the direction to sort the results by. `sortDirection` is ignored if
+   * `sortBy` is not specified.
+   */
+  sortDirection?: 'asc' | 'desc'
 }
 
 export type FormSubmissionHistorySearchParameters = BaseSearchOptions & {
