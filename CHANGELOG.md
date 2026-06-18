@@ -7,9 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.1.7] - 2026-06-18
+
 ### Removed
 
 - UUID/GUID validation from form element and option ids
+
+### Dependencies
+
+- update @oneblink/sdk-core to [9.2.1-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [9.2.0-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update @oneblink/storage to [7.1.1-beta.2](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [7.1.0-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
+
+- rollback jwks-rsa to [3.2.2](https://github.com/auth0/node-jwks-rsa/blob/master/CHANGELOG.md) (from [4.0.1](https://github.com/auth0/node-jwks-rsa/blob/master/CHANGELOG.md))
 
 ## [13.1.6] - 2026-05-22
 
