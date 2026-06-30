@@ -902,6 +902,7 @@ const formSchema = Joi.object().keys({
           .required(),
       }),
     ),
+  emailClassificationId: Joi.number().integer().min(1),
 })
 
 export const formEventTypes: SubmissionEventTypes.FormEventType[] = [
