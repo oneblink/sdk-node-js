@@ -95,6 +95,36 @@ describe('Jobs SDK Class', () => {
           ).rejects.toThrow('"details.priority" must be a number')
         })
       })
+
+      describe('should reject with correct validation errors for "details.emailAddress"', () => {
+        test('string', async () => {
+          const jobs = await getJobsSdk()
+          return expect(
+            jobs.createJob({
+              username: 'username',
+              formId: 1,
+              details: {
+                title: 'job title',
+                // @ts-expect-error Expecting throw
+                emailAddress: 123,
+              },
+            }),
+          ).rejects.toThrow('"details.emailAddress" must be a string')
+        })
+        test('invalid email', async () => {
+          const jobs = await getJobsSdk()
+          return expect(
+            jobs.createJob({
+              username: 'username',
+              formId: 1,
+              details: {
+                title: 'job title',
+                emailAddress: 'not-an-email',
+              },
+            }),
+          ).rejects.toThrow('"details.emailAddress" must be a valid email')
+        })
+      })
     })
 
     describe('API Calls', () => {
