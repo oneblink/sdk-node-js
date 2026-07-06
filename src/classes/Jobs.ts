@@ -16,6 +16,7 @@ const newJobSchema = Joi.object()
       description: Joi.string(),
       type: Joi.string(),
       priority: Joi.number(),
+      emailAddress: Joi.string().email(),
     }),
   })
 
@@ -54,6 +55,7 @@ export default class Jobs extends OneBlinkAPI {
    *       description: 'Job description',
    *       type: 'Type',
    *       priority: 3,
+   *       emailAddress: 'user@domain.io',
    *     },
    *   }
    *

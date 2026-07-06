@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `sortBy` and `sortDirection` to `FormSearchOptions`
 - `emailClassificationId` to form schema
+- optional `emailAddress` property to `createJob()` job `details` for sending job notification emails
 
 ## [13.1.7] - 2026-06-18
 
