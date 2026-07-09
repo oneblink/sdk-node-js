@@ -7,11 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.2.0] - 2026-07-09
+
 ### Added
 
 - `sortBy` and `sortDirection` to `FormSearchOptions`
 - `emailClassificationId` to form schema
 - optional `emailAddress` property to `createJob()` job `details` for sending job notification emails
+
+### Dependencies
+
+- update @oneblink/sdk-core to [9.2.2-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [9.2.1-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update @oneblink/storage to [7.1.2-beta.2](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [7.1.1-beta.2](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
+
+- update nodemailer to [9.0.3](https://github.com/nodemailer/nodemailer/releases/tag/v9.0.3) (from [8.0.1](https://github.com/nodemailer/nodemailer/releases/tag/v8.0.1))
 
 ## [13.1.7] - 2026-06-18
 
