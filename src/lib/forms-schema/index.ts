@@ -202,6 +202,7 @@ const pdfConfiguration = {
     .allow(null)
     .default([]),
   pdfSize: Joi.valid('A4', 'Letter'),
+  combineWithPdfAttachments: Joi.boolean(),
   customPdfId: Joi.string().uuid(),
   isCustomPdfEditable: Joi.bool(),
 }
