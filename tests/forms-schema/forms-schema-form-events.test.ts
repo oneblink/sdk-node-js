@@ -811,6 +811,7 @@ describe('SALESFORCE_CREATE_OBJECT_RECORD', () => {
         customPdfId,
         excludedElementIds: [formElementId],
         excludedCSSClasses: [],
+        combineWithPdfAttachments: true,
       },
     ]
     const form = validateFormThrowError({
@@ -840,6 +841,7 @@ describe('SALESFORCE_CREATE_OBJECT_RECORD', () => {
             customPdfId,
             excludedElementIds: [formElementId],
             excludedCSSClasses: [],
+            combineWithPdfAttachments: true,
           },
         ],
       },
