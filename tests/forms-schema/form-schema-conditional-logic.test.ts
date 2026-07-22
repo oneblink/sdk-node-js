@@ -1413,4 +1413,222 @@ describe('Conditional Predicates', () => {
       '"enableSubmission.conditionalPredicates" is required',
     )
   })
+
+  test('should allow SUBMISSION_TIMESTAMP predicates on workflow events', () => {
+    const result = formSchema.validate(
+      {
+        name: 'submission timestamp workflow',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Agm_Date',
+            label: 'AGM Date',
+            type: 'date',
+          },
+        ],
+        submissionEvents: [
+          {
+            type: 'PDF',
+            configuration: {
+              email: 'developers@oneblink.io',
+            },
+            conditionallyExecute: true,
+            conditionallyExecutePredicates: [
+              {
+                type: 'SUBMISSION_TIMESTAMP',
+                operator: 'BEFORE',
+                compareWith: 'ELEMENT',
+                formElementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+                daysOffset: 30,
+              },
+              {
+                type: 'SUBMISSION_TIMESTAMP',
+                operator: 'AFTER',
+                compareWith: 'VALUE',
+                value: '2026-07-01',
+              },
+              {
+                type: 'SUBMISSION_TIMESTAMP',
+                operator: 'BETWEEN',
+                min: {
+                  compareWith: 'VALUE',
+                  value: '2026-01-01',
+                },
+                max: {
+                  compareWith: 'ELEMENT',
+                  formElementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+                  daysOffset: -1,
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        abortEarly: false,
+      },
+    )
+    expect(result.error).toBe(undefined)
+  })
+
+  test('should allow SUBMISSION_TIMESTAMP predicates on approval steps', () => {
+    const result = formSchema.validate(
+      {
+        name: 'submission timestamp approval',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Agm_Date',
+            label: 'AGM Date',
+            type: 'date',
+          },
+        ],
+        approvalSteps: [
+          {
+            type: 'STANDARD',
+            label: 'Manager',
+            group: 'managers',
+            isConditional: true,
+            conditionalPredicates: [
+              {
+                type: 'SUBMISSION_TIMESTAMP',
+                operator: 'BEFORE',
+                value: '2026-12-31',
+                daysOffset: 0,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        abortEarly: false,
+      },
+    )
+    expect(result.error).toBe(undefined)
+  })
+
+  test('should reject SUBMISSION_TIMESTAMP predicates on form elements', () => {
+    const result = formSchema.validate(
+      {
+        name: 'submission timestamp element',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+          },
+          {
+            id: '8e4d819b-97fa-438d-b613-a092d38c3b23',
+            name: 'Text',
+            label: 'Text',
+            type: 'text',
+            conditionallyShow: true,
+            conditionallyShowPredicates: [
+              {
+                type: 'SUBMISSION_TIMESTAMP',
+                operator: 'AFTER',
+                value: '2026-07-01',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        abortEarly: false,
+      },
+    )
+    expect(result.error?.message).toContain(
+      'conditionallyShowPredicates[0].type',
+    )
+  })
+
+  test('should reject SUBMISSION_TIMESTAMP predicates on page elements', () => {
+    const result = formSchema.validate(
+      {
+        name: 'submission timestamp page',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: true,
+        elements: [
+          {
+            id: 'page-1',
+            label: 'Page 1',
+            type: 'page',
+            conditionallyShow: true,
+            conditionallyShowPredicates: [
+              {
+                type: 'SUBMISSION_TIMESTAMP',
+                operator: 'AFTER',
+                value: '2026-07-01',
+              },
+            ],
+            elements: [
+              {
+                id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+                name: 'Numbers',
+                label: 'Numbers',
+                type: 'number',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        abortEarly: false,
+      },
+    )
+    expect(result.error?.message).toContain(
+      'conditionallyShowPredicates[0].type',
+    )
+  })
+
+  test('should reject SUBMISSION_TIMESTAMP predicates on enableSubmission', () => {
+    const result = formSchema.validate(
+      {
+        name: 'submission timestamp enable submission',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        elements: [
+          {
+            id: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+          },
+        ],
+        enableSubmission: {
+          conditionalPredicates: [
+            {
+              type: 'SUBMISSION_TIMESTAMP',
+              operator: 'AFTER',
+              value: '2026-07-01',
+            },
+          ],
+        },
+      },
+      {
+        abortEarly: false,
+      },
+    )
+    expect(result.error?.message).toContain(
+      'enableSubmission.conditionalPredicates[0].type',
+    )
+  })
 })

@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `combineWithPdfAttachments` to PDF configuration form validation
+- `SUBMISSION_TIMESTAMP` type to workflow event and approval step conditional predicates schema
 
 ## [13.2.0] - 2026-07-09
 

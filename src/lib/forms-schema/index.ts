@@ -4,7 +4,8 @@ import { htmlString, s3ConfigurationSchema } from './common.js'
 import elementSchema from './element-schema.js'
 import {
   conditionallyShowPredicates,
-  ConditionalPredicatesItemSchema,
+  ConditionalPredicateFormElementSchema,
+  ConditionalPredicateSchema,
   customCssClasses,
 } from './property-schemas.js'
 export const postSubmissionActions: FormTypes.FormPostSubmissionAction[] = [
@@ -219,7 +220,7 @@ const formEventBaseSchema = {
   requiresAllConditionallyExecutePredicates: Joi.bool().default(false),
   conditionallyExecutePredicates: Joi.when('conditionallyExecute', {
     is: true,
-    then: Joi.array().min(1).items(ConditionalPredicatesItemSchema).required(),
+    then: Joi.array().min(1).items(ConditionalPredicateSchema).required(),
     otherwise: Joi.any().strip(),
   }),
 }
@@ -739,7 +740,7 @@ const approvalStepNodeProps = {
   requiresAllConditionalPredicates: Joi.boolean().default(false),
   conditionalPredicates: Joi.when('isConditional', {
     is: true,
-    then: Joi.array().min(1).items(ConditionalPredicatesItemSchema).required(),
+    then: Joi.array().min(1).items(ConditionalPredicateSchema).required(),
     otherwise: Joi.any().strip(),
   }),
   hideApprovalDenyButton: Joi.boolean(),
@@ -867,7 +868,7 @@ const formSchema = Joi.object().keys({
     requiresAllConditionalPredicates: Joi.boolean().default(false),
     conditionalPredicates: Joi.array()
       .min(1)
-      .items(ConditionalPredicatesItemSchema)
+      .items(ConditionalPredicateFormElementSchema)
       .required(),
   }),
   disableAutosave: Joi.boolean(),
