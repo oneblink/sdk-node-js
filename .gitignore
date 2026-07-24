@@ -6,3 +6,4 @@ scripts
 tenants
 docs-dist
 tsconfig.tsbuildinfo
+.DS_Store
