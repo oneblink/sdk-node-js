@@ -269,7 +269,7 @@ export const ConditionalPredicateFormElementSchema = Joi.object()
   .id('ConditionalPredicateFormElementSchema')
 
 const ConditionalPredicateDateValueSchema = Joi.object({
-  compareWith: Joi.string().valid('VALUE', 'ELEMENT'),
+  compareWith: Joi.string().valid('VALUE', 'ELEMENT').required(),
   value: Joi.when('compareWith', {
     is: 'VALUE',
     then: Joi.string().isoDate().required(),

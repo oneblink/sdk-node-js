@@ -1500,6 +1500,7 @@ describe('Conditional Predicates', () => {
             conditionalPredicates: [
               {
                 type: 'SUBMISSION_TIMESTAMP',
+                compareWith: 'VALUE',
                 operator: 'BEFORE',
                 value: '2026-12-31',
                 daysOffset: 0,
