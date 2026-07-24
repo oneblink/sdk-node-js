@@ -159,7 +159,7 @@ const requiresAllConditionallyShowPredicates = Joi.when('conditionallyShow', {
   otherwise: Joi.any().strip(),
 })
 
-const ConditionalPredicatesItemBaseSchema = Joi.object().keys({
+const ConditionalPredicateFormElementBaseSchema = Joi.object().keys({
   elementId: Joi.string().required(),
   type: Joi.string()
     .default('OPTIONS')
@@ -214,7 +214,7 @@ const ConditionalPredicatesItemBaseSchema = Joi.object().keys({
   }),
   predicate: Joi.when('type', {
     is: Joi.valid('FORM'),
-    then: Joi.link('#ConditionalPredicatesItemSchema'),
+    then: Joi.link('#ConditionalPredicateFormElementSchema'),
     otherwise: Joi.any().strip(),
   }),
   definition: Joi.when('type', {
@@ -251,21 +251,70 @@ const ConditionalPredicatesItemBaseSchema = Joi.object().keys({
   }),
 })
 
-export const ConditionalPredicatesItemSchema = Joi.object()
+/**
+ * Form element / page / enableSubmission predicates. Does not allow
+ * `SUBMISSION_TIMESTAMP` (see `@oneblink/types`
+ * `FormElementConditionalPredicate`).
+ */
+export const ConditionalPredicateFormElementSchema = Joi.object()
   .keys({
     type: Joi.string().valid('REPEATABLESET'),
     repeatableSetPredicate: Joi.when('type', {
       is: Joi.valid('REPEATABLESET'),
-      then: ConditionalPredicatesItemBaseSchema,
+      then: ConditionalPredicateFormElementBaseSchema,
       otherwise: Joi.any().strip(),
     }),
   })
-  .concat(ConditionalPredicatesItemBaseSchema)
-  .id('ConditionalPredicatesItemSchema')
+  .concat(ConditionalPredicateFormElementBaseSchema)
+  .id('ConditionalPredicateFormElementSchema')
+
+const ConditionalPredicateDateValueSchema = Joi.object({
+  compareWith: Joi.string().valid('VALUE', 'ELEMENT').required(),
+  value: Joi.when('compareWith', {
+    is: 'VALUE',
+    then: Joi.string().isoDate().required(),
+    otherwise: Joi.any().strip(),
+  }),
+  formElementId: Joi.when('compareWith', {
+    is: 'ELEMENT',
+    then: Joi.string().required(),
+    otherwise: Joi.any().strip(),
+  }),
+  daysOffset: Joi.number().integer(),
+})
+
+/**
+ * Evaluate against the form submission timestamp. Allowed on workflow events
+ * and approval steps only (`ConditionalPredicate` in `@oneblink/types`).
+ */
+export const ConditionalPredicateSubmissionTimestampSchema = Joi.alternatives([
+  ConditionalPredicateDateValueSchema.keys({
+    type: Joi.string().valid('SUBMISSION_TIMESTAMP').required(),
+    operator: Joi.string().valid('AFTER', 'BEFORE').required(),
+  }),
+  Joi.object({
+    type: Joi.string().valid('SUBMISSION_TIMESTAMP').required(),
+    operator: Joi.string().valid('BETWEEN').required(),
+    min: ConditionalPredicateDateValueSchema.required(),
+    max: ConditionalPredicateDateValueSchema.required(),
+  }),
+])
+
+/**
+ * Full conditional predicate schema including `SUBMISSION_TIMESTAMP`. Matches
+ * `ConditionalPredicate` in `@oneblink/types`.
+ */
+export const ConditionalPredicateSchema = Joi.alternatives([
+  ConditionalPredicateSubmissionTimestampSchema,
+  ConditionalPredicateFormElementSchema,
+])
 
 export const conditionallyShowPredicates = Joi.when('conditionallyShow', {
   is: true,
-  then: Joi.array().min(1).items(ConditionalPredicatesItemSchema).required(),
+  then: Joi.array()
+    .min(1)
+    .items(ConditionalPredicateFormElementSchema)
+    .required(),
   otherwise: Joi.any().strip(),
 })
 
