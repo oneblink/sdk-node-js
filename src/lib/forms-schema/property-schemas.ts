@@ -275,7 +275,7 @@ const ConditionalPredicateDateValueSchema = Joi.object({
     then: Joi.string().isoDate().required(),
     otherwise: Joi.any().strip(),
   }),
-  formElementId: Joi.when('compareWith', {
+  elementId: Joi.when('compareWith', {
     is: 'ELEMENT',
     then: Joi.string().required(),
     otherwise: Joi.any().strip(),
