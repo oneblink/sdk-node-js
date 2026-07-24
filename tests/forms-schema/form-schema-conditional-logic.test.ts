@@ -1442,7 +1442,7 @@ describe('Conditional Predicates', () => {
                 type: 'SUBMISSION_TIMESTAMP',
                 operator: 'BEFORE',
                 compareWith: 'ELEMENT',
-                formElementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+                elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
                 daysOffset: 30,
               },
               {
@@ -1460,7 +1460,7 @@ describe('Conditional Predicates', () => {
                 },
                 max: {
                   compareWith: 'ELEMENT',
-                  formElementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+                  elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
                   daysOffset: -1,
                 },
               },
