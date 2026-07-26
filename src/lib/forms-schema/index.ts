@@ -231,6 +231,13 @@ export const paymentEventTypes: SubmissionEventTypes.FormPaymentEventType[] = [
   'WESTPAC_QUICK_STREAM',
   'NSW_GOV_PAY',
 ]
+
+const formPaymentEventAmountConfiguration = {
+  elementId: Joi.string(),
+  paymentAmount: Joi.number(),
+  paymentCalculation: Joi.string(),
+}
+
 export const PaymentEventSchema = Joi.object({
   type: Joi.string()
     .required()
@@ -239,37 +246,45 @@ export const PaymentEventSchema = Joi.object({
     .required()
     .when('type', {
       is: 'BPOINT',
-      then: Joi.object().keys({
-        elementId: Joi.string().required(),
-        environmentId: Joi.string().uuid().required(),
-        crn2: Joi.string(),
-        crn3: Joi.string(),
-      }),
+      then: Joi.object()
+        .keys({
+          ...formPaymentEventAmountConfiguration,
+          environmentId: Joi.string().uuid().required(),
+          crn2: Joi.string(),
+          crn3: Joi.string(),
+        })
+        .xor('elementId', 'paymentAmount', 'paymentCalculation'),
     })
     .when('type', {
       is: Joi.valid('WESTPAC_QUICK_STREAM'),
-      then: Joi.object().keys({
-        elementId: Joi.string().required(),
-        environmentId: Joi.string().uuid().required(),
-        customerReferenceNumber: Joi.string().required(),
-      }),
+      then: Joi.object()
+        .keys({
+          ...formPaymentEventAmountConfiguration,
+          environmentId: Joi.string().uuid().required(),
+          customerReferenceNumber: Joi.string().required(),
+        })
+        .xor('elementId', 'paymentAmount', 'paymentCalculation'),
     })
     .when('type', {
       is: 'CP_PAY',
-      then: Joi.object().keys({
-        elementId: Joi.string().required(),
-        gatewayId: Joi.string().uuid().required(),
-      }),
+      then: Joi.object()
+        .keys({
+          ...formPaymentEventAmountConfiguration,
+          gatewayId: Joi.string().uuid().required(),
+        })
+        .xor('elementId', 'paymentAmount', 'paymentCalculation'),
     })
     .when('type', {
       is: 'NSW_GOV_PAY',
-      then: Joi.object().keys({
-        elementId: Joi.string().required(),
-        primaryAgencyId: Joi.string().uuid().required(),
-        productDescription: Joi.string().required().max(250),
-        customerReference: Joi.string().max(250),
-        subAgencyCode: Joi.string(),
-      }),
+      then: Joi.object()
+        .keys({
+          ...formPaymentEventAmountConfiguration,
+          primaryAgencyId: Joi.string().uuid().required(),
+          productDescription: Joi.string().required().max(250),
+          customerReference: Joi.string().max(250),
+          subAgencyCode: Joi.string(),
+        })
+        .xor('elementId', 'paymentAmount', 'paymentCalculation'),
     }),
   ...formEventBaseSchema,
 })

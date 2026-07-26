@@ -4446,7 +4446,7 @@ describe('CIVICA_CRM submission event', () => {
 })
 
 describe('BPOINT submission event', () => {
-  test('should error for BPOINT submission event not passing "elementId"', () => {
+  test('should error for BPOINT submission event not passing a payment amount configuration', () => {
     const { error } = formSchema.validate({
       name: 'string',
       description: 'string',
@@ -4462,12 +4462,14 @@ describe('BPOINT submission event', () => {
       paymentEvents: [
         {
           type: 'BPOINT',
-          configuration: {},
+          configuration: {
+            environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+          },
         },
       ],
     })
     expect(error?.message).toContain(
-      '"paymentEvents[0].configuration.elementId" is required',
+      '"paymentEvents[0].configuration" must contain at least one of [elementId, paymentAmount, paymentCalculation]',
     )
   })
   test('should error for BPOINT submission event not passing "environmentId"', () => {
@@ -4535,10 +4537,95 @@ describe('BPOINT submission event', () => {
     )
     expect(error).toBe(undefined)
   })
+  test('should allow BPOINT submission event with paymentAmount', () => {
+    const { error } = formSchema.validate(
+      {
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        tags: [],
+        elements: [],
+        isAuthenticated: true,
+        paymentEvents: [
+          {
+            type: 'BPOINT',
+            configuration: {
+              paymentAmount: 25.5,
+              environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            },
+          },
+        ],
+      },
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBe(undefined)
+  })
+  test('should allow BPOINT submission event with paymentCalculation', () => {
+    const { error } = formSchema.validate(
+      {
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        tags: [],
+        elements: [],
+        isAuthenticated: true,
+        paymentEvents: [
+          {
+            type: 'BPOINT',
+            configuration: {
+              paymentCalculation: '{ELEMENT:Numbers} * 2',
+              environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            },
+          },
+        ],
+      },
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBe(undefined)
+  })
+  test('should error for BPOINT submission event with multiple payment amount configurations', () => {
+    const { error } = formSchema.validate({
+      name: 'string',
+      description: 'string',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: 'ORGANISATION_00000000001',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      elements: [],
+      isAuthenticated: true,
+      tags: [],
+      paymentEvents: [
+        {
+          type: 'BPOINT',
+          configuration: {
+            elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            paymentAmount: 25.5,
+            environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+          },
+        },
+      ],
+    })
+    expect(error?.message).toContain(
+      '"paymentEvents[0].configuration" contains a conflict between exclusive peers [elementId, paymentAmount, paymentCalculation]',
+    )
+  })
 })
 
 describe('WESTPAC_QUICK_STREAM submission event', () => {
-  test('should error for WESTPAC_QUICK_STREAM submission event not passing "elementId"', () => {
+  test('should error for WESTPAC_QUICK_STREAM submission event not passing a payment amount configuration', () => {
     const { error } = formSchema.validate({
       name: 'string',
       description: 'string',
@@ -4553,12 +4640,15 @@ describe('WESTPAC_QUICK_STREAM submission event', () => {
       paymentEvents: [
         {
           type: 'WESTPAC_QUICK_STREAM',
-          configuration: {},
+          configuration: {
+            environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            customerReferenceNumber: 'abc',
+          },
         },
       ],
     })
     expect(error?.message).toContain(
-      '"paymentEvents[0].configuration.elementId" is required',
+      '"paymentEvents[0].configuration" must contain at least one of [elementId, paymentAmount, paymentCalculation]',
     )
   })
   test('should error for WESTPAC_QUICK_STREAM submission event not passing "environmentId"', () => {
@@ -4667,10 +4757,68 @@ describe('CP_PAY submission event', () => {
     )
     expect(error).toBe(undefined)
   })
+  test('should allow CP_PAY submission event with paymentAmount', () => {
+    const { error } = formSchema.validate(
+      {
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        tags: [],
+        elements: [],
+        isAuthenticated: true,
+        paymentEvents: [
+          {
+            type: 'CP_PAY',
+            configuration: {
+              paymentAmount: 10,
+              gatewayId: '056f58b6-95bd-4df3-b6b4-f5bcc5e5ae8e',
+            },
+          },
+        ],
+      },
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBe(undefined)
+  })
+  test('should allow CP_PAY submission event with paymentCalculation', () => {
+    const { error } = formSchema.validate(
+      {
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        tags: [],
+        elements: [],
+        isAuthenticated: true,
+        paymentEvents: [
+          {
+            type: 'CP_PAY',
+            configuration: {
+              paymentCalculation: '{ELEMENT:Numbers} + 5',
+              gatewayId: '056f58b6-95bd-4df3-b6b4-f5bcc5e5ae8e',
+            },
+          },
+        ],
+      },
+      {
+        abortEarly: false,
+      },
+    )
+    expect(error).toBe(undefined)
+  })
 })
 
 describe('NSW_GOV_PAY submission event', () => {
-  test('should error for NSW_GOV_PAY submission event not passing "elementId"', () => {
+  test('should error for NSW_GOV_PAY submission event not passing a payment amount configuration', () => {
     const { error } = formSchema.validate({
       name: 'string',
       description: 'string',
@@ -4686,12 +4834,15 @@ describe('NSW_GOV_PAY submission event', () => {
       paymentEvents: [
         {
           type: 'NSW_GOV_PAY',
-          configuration: {},
+          configuration: {
+            primaryAgencyId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+            productDescription: 'Product description',
+          },
         },
       ],
     })
     expect(error?.message).toContain(
-      '"paymentEvents[0].configuration.elementId" is required',
+      '"paymentEvents[0].configuration" must contain at least one of [elementId, paymentAmount, paymentCalculation]',
     )
   })
   test('should error for NSW_GOV_PAY submission event not passing "primaryAgencyId"', () => {

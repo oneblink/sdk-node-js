@@ -51,18 +51,24 @@ export const validateFormEvent = ({
     case 'WESTPAC_QUICK_STREAM':
     case 'BPOINT':
     case 'NSW_GOV_PAY': {
-      const formElement = rootFormElements.find(
-        ({ id }) => id === formEvent.configuration.elementId,
-      )
-      if (!formElement) {
-        throw new Error(
-          `"${propertyName}.configuration.elementId" (${formEvent.configuration.elementId}) does not exist in "elements"`,
-        )
-      }
-      if (formElement.type !== 'number' && formElement.type !== 'calculation') {
-        throw new Error(
-          `"${propertyName}.configuration.elementId" (${formEvent.configuration.elementId}) references a form element that is not a "number" or "calculation" element.`,
-        )
+      const paymentAmountConfiguration: SubmissionEventTypes.FormPaymentEventAmountConfiguration =
+        formEvent.configuration
+      if ('elementId' in paymentAmountConfiguration) {
+        const { elementId } = paymentAmountConfiguration
+        const formElement = rootFormElements.find(({ id }) => id === elementId)
+        if (!formElement) {
+          throw new Error(
+            `"${propertyName}.configuration.elementId" (${elementId}) does not exist in "elements"`,
+          )
+        }
+        if (
+          formElement.type !== 'number' &&
+          formElement.type !== 'calculation'
+        ) {
+          throw new Error(
+            `"${propertyName}.configuration.elementId" (${elementId}) references a form element that is not a "number" or "calculation" element.`,
+          )
+        }
       }
       break
     }
