@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.2.2] - 2026-07-28
+
 ### Added
 
 - `SUBMISSION_TIMESTAMP` type to workflow event and approval step conditional predicates schema
+
+### Dependencies
+
+- update @oneblink/sdk-core to [10.0.0-beta.3](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [9.2.2-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
 
 ## [13.2.1] - 2026-07-23
 
