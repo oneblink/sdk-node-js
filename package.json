@@ -22,7 +22,7 @@
     "@eslint/js": "^9.39.2",
     "@microsoft/eslint-plugin-sdl": "^1.1.0",
     "@oneblink/release-cli": "^4.0.0",
-    "@oneblink/types": "github:oneblink/types#32cbf6639a76c5da455d6236b0d29e888c8b8173",
+    "@oneblink/types": "github:oneblink/types",
     "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/nodemailer": "^7.0.9",
