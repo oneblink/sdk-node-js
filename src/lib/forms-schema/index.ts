@@ -233,8 +233,8 @@ export const paymentEventTypes: SubmissionEventTypes.FormPaymentEventType[] = [
 ]
 
 const formPaymentEventAmountConfiguration = {
-  type: Joi.string().valid('FORM_ELEMENT', 'NUMBER', 'EXPRESSION'),
-  elementId: Joi.when('type', {
+  amountType: Joi.string().valid('FORM_ELEMENT', 'NUMBER', 'EXPRESSION'),
+  elementId: Joi.when('amountType', {
     switch: [
       {
         is: 'NUMBER',
@@ -247,12 +247,12 @@ const formPaymentEventAmountConfiguration = {
     ],
     otherwise: Joi.string().required(),
   }),
-  paymentAmount: Joi.when('type', {
+  paymentAmount: Joi.when('amountType', {
     is: 'NUMBER',
     then: Joi.number().required(),
     otherwise: Joi.any().strip(),
   }),
-  paymentCalculation: Joi.when('type', {
+  paymentCalculation: Joi.when('amountType', {
     is: 'EXPRESSION',
     then: Joi.string().required(),
     otherwise: Joi.any().strip(),

@@ -4554,7 +4554,7 @@ describe('BPOINT submission event', () => {
           {
             type: 'BPOINT',
             configuration: {
-              type: 'NUMBER',
+              amountType: 'NUMBER',
               paymentAmount: 25.5,
               environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
             },
@@ -4584,7 +4584,7 @@ describe('BPOINT submission event', () => {
           {
             type: 'BPOINT',
             configuration: {
-              type: 'EXPRESSION',
+              amountType: 'EXPRESSION',
               paymentCalculation: '{ELEMENT:Numbers} * 2',
               environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
             },
@@ -4613,7 +4613,7 @@ describe('BPOINT submission event', () => {
         {
           type: 'BPOINT',
           configuration: {
-            type: 'NUMBER',
+            amountType: 'NUMBER',
             environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
           },
         },
@@ -4775,7 +4775,7 @@ describe('CP_PAY submission event', () => {
           {
             type: 'CP_PAY',
             configuration: {
-              type: 'NUMBER',
+              amountType: 'NUMBER',
               paymentAmount: 10,
               gatewayId: '056f58b6-95bd-4df3-b6b4-f5bcc5e5ae8e',
             },
@@ -4805,7 +4805,7 @@ describe('CP_PAY submission event', () => {
           {
             type: 'CP_PAY',
             configuration: {
-              type: 'EXPRESSION',
+              amountType: 'EXPRESSION',
               paymentCalculation: '{ELEMENT:Numbers} + 5',
               gatewayId: '056f58b6-95bd-4df3-b6b4-f5bcc5e5ae8e',
             },
