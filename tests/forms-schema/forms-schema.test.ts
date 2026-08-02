@@ -4469,7 +4469,7 @@ describe('BPOINT submission event', () => {
       ],
     })
     expect(error?.message).toContain(
-      '"paymentEvents[0].configuration" must contain at least one of [elementId, paymentAmount, paymentCalculation]',
+      '"paymentEvents[0].configuration.elementId" is required',
     )
   })
   test('should error for BPOINT submission event not passing "environmentId"', () => {
@@ -4554,6 +4554,7 @@ describe('BPOINT submission event', () => {
           {
             type: 'BPOINT',
             configuration: {
+              type: 'NUMBER',
               paymentAmount: 25.5,
               environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
             },
@@ -4583,6 +4584,7 @@ describe('BPOINT submission event', () => {
           {
             type: 'BPOINT',
             configuration: {
+              type: 'EXPRESSION',
               paymentCalculation: '{ELEMENT:Numbers} * 2',
               environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
             },
@@ -4595,7 +4597,7 @@ describe('BPOINT submission event', () => {
     )
     expect(error).toBe(undefined)
   })
-  test('should error for BPOINT submission event with multiple payment amount configurations', () => {
+  test('should error for BPOINT submission event with NUMBER type missing paymentAmount', () => {
     const { error } = formSchema.validate({
       name: 'string',
       description: 'string',
@@ -4611,15 +4613,14 @@ describe('BPOINT submission event', () => {
         {
           type: 'BPOINT',
           configuration: {
-            elementId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
-            paymentAmount: 25.5,
+            type: 'NUMBER',
             environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
           },
         },
       ],
     })
     expect(error?.message).toContain(
-      '"paymentEvents[0].configuration" contains a conflict between exclusive peers [elementId, paymentAmount, paymentCalculation]',
+      '"paymentEvents[0].configuration.paymentAmount" is required',
     )
   })
 })
@@ -4648,7 +4649,7 @@ describe('WESTPAC_QUICK_STREAM submission event', () => {
       ],
     })
     expect(error?.message).toContain(
-      '"paymentEvents[0].configuration" must contain at least one of [elementId, paymentAmount, paymentCalculation]',
+      '"paymentEvents[0].configuration.elementId" is required',
     )
   })
   test('should error for WESTPAC_QUICK_STREAM submission event not passing "environmentId"', () => {
@@ -4774,6 +4775,7 @@ describe('CP_PAY submission event', () => {
           {
             type: 'CP_PAY',
             configuration: {
+              type: 'NUMBER',
               paymentAmount: 10,
               gatewayId: '056f58b6-95bd-4df3-b6b4-f5bcc5e5ae8e',
             },
@@ -4803,6 +4805,7 @@ describe('CP_PAY submission event', () => {
           {
             type: 'CP_PAY',
             configuration: {
+              type: 'EXPRESSION',
               paymentCalculation: '{ELEMENT:Numbers} + 5',
               gatewayId: '056f58b6-95bd-4df3-b6b4-f5bcc5e5ae8e',
             },
@@ -4842,7 +4845,7 @@ describe('NSW_GOV_PAY submission event', () => {
       ],
     })
     expect(error?.message).toContain(
-      '"paymentEvents[0].configuration" must contain at least one of [elementId, paymentAmount, paymentCalculation]',
+      '"paymentEvents[0].configuration.elementId" is required',
     )
   })
   test('should error for NSW_GOV_PAY submission event not passing "primaryAgencyId"', () => {

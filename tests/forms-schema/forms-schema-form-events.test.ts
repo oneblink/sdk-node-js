@@ -250,6 +250,7 @@ describe('CP Pay', () => {
             type: 'CP_PAY',
             configuration: {
               gatewayId: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+              type: 'NUMBER',
               paymentAmount: 42,
             },
           },
@@ -273,6 +274,7 @@ describe('CP Pay', () => {
             type: 'CP_PAY',
             configuration: {
               gatewayId: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+              type: 'EXPRESSION',
               paymentCalculation: '{ELEMENT:Numbers} * 2',
             },
           },
