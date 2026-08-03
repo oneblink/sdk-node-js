@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `SUBMISSION_TIMESTAMP` type to workflow event and approval step conditional predicates schema
+- `amountType`, `paymentAmount` and `paymentCalculation` to payment event amount configuration
 
 ### Dependencies
 

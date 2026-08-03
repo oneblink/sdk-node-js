@@ -235,6 +235,54 @@ describe('CP Pay', () => {
       'paymentEvents[0].configuration.elementId" (31042cfe-65e0-4a85-826b-ae6a2e48da10) does not exist in "elements"',
     )
   })
+  test('succeeds when cp pay uses paymentAmount instead of elementId', () => {
+    expect(() =>
+      validateFormThrowError({
+        id: 1,
+        formsAppEnvironmentId: 1,
+        name: 'Inspection',
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        submissionEvents: [],
+        paymentEvents: [
+          {
+            type: 'CP_PAY',
+            configuration: {
+              gatewayId: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+              amountType: 'NUMBER',
+              paymentAmount: 42,
+            },
+          },
+        ],
+        elements: [],
+      }),
+    ).not.toThrow()
+  })
+  test('succeeds when cp pay uses paymentCalculation instead of elementId', () => {
+    expect(() =>
+      validateFormThrowError({
+        id: 1,
+        formsAppEnvironmentId: 1,
+        name: 'Inspection',
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        submissionEvents: [],
+        paymentEvents: [
+          {
+            type: 'CP_PAY',
+            configuration: {
+              gatewayId: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+              amountType: 'EXPRESSION',
+              paymentCalculation: '{ELEMENT:Numbers} * 2',
+            },
+          },
+        ],
+        elements: [],
+      }),
+    ).not.toThrow()
+  })
 })
 
 // Submission Events
