@@ -16,5 +16,6 @@ export default Joi.object({
   label,
   ...conditionallyShowSchemas,
   defaultValue: htmlString.required(),
+  screenReaderAlert: Joi.boolean(),
   customCssClasses,
 })
