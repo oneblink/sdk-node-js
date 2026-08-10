@@ -11,6 +11,7 @@ import {
   optionsSchemas,
   customCssClasses,
   hintPosition,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'freshdeskDependentField'
@@ -36,4 +37,5 @@ export default Joi.object({
   }),
   ...optionsSchemas,
   customCssClasses,
+  editableByApprover,
 })

@@ -11,6 +11,7 @@ import {
   lookupSchemas,
   customCssClasses,
   hintPosition,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'files'
@@ -46,4 +47,5 @@ export default Joi.object({
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   customCssClasses,
+  editableByApprover,
 })

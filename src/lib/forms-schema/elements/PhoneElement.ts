@@ -13,6 +13,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'telephone'
@@ -32,4 +33,5 @@ export default Joi.object({
   ...regexSchemas,
   customCssClasses,
   autocompleteAttributes,
+  editableByApprover,
 })

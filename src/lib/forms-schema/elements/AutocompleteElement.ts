@@ -14,6 +14,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
+  editableByApprover,
 } from '../property-schemas.js'
 import { SEARCH_OPTION_TYPE } from '../common.js'
 
@@ -44,4 +45,5 @@ export default Joi.object({
   ...optionsSchemas,
   customCssClasses,
   autocompleteAttributes,
+  editableByApprover,
 })

@@ -8,6 +8,7 @@ import {
   conditionallyShowSchemas,
   customCssClasses,
   hintPosition,
+  editableByApprover,
 } from '../property-schemas.js'
 import elementSchema from '../element-schema.js'
 import { htmlString } from '../common.js'
@@ -64,5 +65,6 @@ const schema: Joi.ObjectSchema = Joi.object({
     .unique('name', { ignoreUndefined: true })
     .unique('id'),
   customCssClasses,
+  editableByApprover,
 })
 export default schema

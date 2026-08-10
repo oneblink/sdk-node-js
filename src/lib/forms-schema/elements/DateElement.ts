@@ -12,6 +12,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
+  editableByApprover,
 } from '../property-schemas.js'
 
 const nowSchema = Joi.valid('NOW')
@@ -100,4 +101,5 @@ export default Joi.object({
   ...lookupSchemas,
   customCssClasses,
   autocompleteAttributes,
+  editableByApprover,
 })

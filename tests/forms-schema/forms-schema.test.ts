@@ -9592,3 +9592,45 @@ describe('Post Submission Receipt', () => {
     })
   })
 })
+
+describe('Approver element properties', () => {
+  test('should allow "editableByApprover" and "isHiddenFromApprover"', () => {
+    const { error, value } = elementSchema.validate({
+      id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
+      type: 'text',
+      name: 'text',
+      label: 'Text',
+      editableByApprover: true,
+      isHiddenFromApprover: true,
+    })
+    expect(error).toBeFalsy()
+    expect(value.editableByApprover).toBe(true)
+    expect(value.isHiddenFromApprover).toBe(true)
+  })
+
+  test('should strip out "editableByApprover" for elements that cannot be edited', () => {
+    const { error, value } = elementSchema.validate({
+      id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
+      type: 'heading',
+      name: 'heading',
+      label: 'Heading',
+      headingType: 1,
+      editableByApprover: true,
+    })
+    expect(error).toBeFalsy()
+    expect(value.editableByApprover).toBeUndefined()
+  })
+
+  test('should allow "isHiddenFromApprover" for elements that cannot be edited', () => {
+    const { error, value } = elementSchema.validate({
+      id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
+      type: 'heading',
+      name: 'heading',
+      label: 'Heading',
+      headingType: 1,
+      isHiddenFromApprover: true,
+    })
+    expect(error).toBeFalsy()
+    expect(value.isHiddenFromApprover).toBe(true)
+  })
+})

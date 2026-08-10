@@ -13,6 +13,7 @@ import {
   defaultValueOptionsSingle,
   customCssClasses,
   hintPosition,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'radio'
@@ -31,4 +32,5 @@ export default Joi.object({
   buttons,
   ...optionsSchemas,
   customCssClasses,
+  editableByApprover,
 })

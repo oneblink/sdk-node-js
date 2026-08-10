@@ -12,6 +12,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'time'
@@ -30,4 +31,5 @@ export default Joi.object({
   ...lookupSchemas,
   customCssClasses,
   autocompleteAttributes,
+  editableByApprover,
 })

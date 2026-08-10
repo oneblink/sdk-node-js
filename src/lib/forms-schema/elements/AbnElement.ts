@@ -12,6 +12,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'abn'
@@ -29,4 +30,5 @@ export default Joi.object({
   ...lookupSchemas,
   customCssClasses,
   autocompleteAttributes,
+  editableByApprover,
 })

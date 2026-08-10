@@ -13,6 +13,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const textElementType = 'text'
@@ -53,4 +54,5 @@ export default Joi.object({
   ...regexSchemas,
   customCssClasses,
   autocompleteAttributes,
+  editableByApprover,
 })

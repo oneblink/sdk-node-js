@@ -24,6 +24,7 @@ export const baseSchemas = {
   id,
   meta,
   isHidden: Joi.boolean(),
+  isHiddenFromApprover: Joi.boolean(),
 }
 
 export const hint = htmlString
@@ -53,6 +54,8 @@ export const requiredSchemas = {
 }
 
 export const readOnly = Joi.bool().default(false)
+
+export const editableByApprover = Joi.bool()
 
 export const placeholderValue = Joi.string()
 
