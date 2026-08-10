@@ -9,6 +9,7 @@ import {
   conditionallyShowSchemas,
   customCssClasses,
   hintPosition,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'civicaNameRecord'
@@ -26,6 +27,7 @@ export default Joi.object({
   readOnly,
   ...conditionallyShowSchemas,
   useGeoscapeAddressing: Joi.boolean().default(false),
+  editableByApprover,
 
   titleLabel: textSchema,
   familyNameLabel: textSchema,

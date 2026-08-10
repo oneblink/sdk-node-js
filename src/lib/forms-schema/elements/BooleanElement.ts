@@ -10,6 +10,7 @@ import {
   lookupSchemas,
   customCssClasses,
   hintPosition,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'boolean'
@@ -27,4 +28,5 @@ export default Joi.object({
   defaultValue: Joi.boolean().default(false),
   displayAsCheckbox: Joi.boolean().allow(null),
   customCssClasses,
+  editableByApprover,
 })

@@ -15,6 +15,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'select'
@@ -43,4 +44,5 @@ export default Joi.object({
   }),
   customCssClasses,
   autocompleteAttributes,
+  editableByApprover,
 })

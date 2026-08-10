@@ -12,6 +12,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'pointCadastralParcel'
@@ -29,4 +30,5 @@ export default Joi.object({
   placeholderValue,
   customCssClasses,
   autocompleteAttributes,
+  editableByApprover,
 })

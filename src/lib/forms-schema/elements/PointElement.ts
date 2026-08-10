@@ -12,6 +12,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'pointAddress'
@@ -44,4 +45,5 @@ export default Joi.object({
   customCssClasses,
   autocompleteAttributes,
   isDisplayingAddressInformation: Joi.boolean().default(false),
+  editableByApprover,
 })

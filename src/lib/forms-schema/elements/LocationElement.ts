@@ -10,6 +10,7 @@ import {
   lookupSchemas,
   customCssClasses,
   hintPosition,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'location'
@@ -29,4 +30,5 @@ export default Joi.object({
     formattedAddressElementId: Joi.string().required(),
     integrationType: Joi.string().allow('GEOSCAPE').required(),
   }),
+  editableByApprover,
 })

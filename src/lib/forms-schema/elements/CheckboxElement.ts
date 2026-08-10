@@ -14,6 +14,7 @@ import {
   defaultValueOptionsMultiple,
   customCssClasses,
   hintPosition,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'checkboxes'
@@ -34,4 +35,5 @@ export default Joi.object({
   canToggleAll,
   customCssClasses,
   requiredAll: Joi.bool(),
+  editableByApprover,
 })

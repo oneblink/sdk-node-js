@@ -12,6 +12,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'geoscapeAddress'
@@ -32,4 +33,5 @@ export default Joi.object({
   ),
   customCssClasses,
   autocompleteAttributes,
+  editableByApprover,
 })

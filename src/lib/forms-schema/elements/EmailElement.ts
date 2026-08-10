@@ -13,6 +13,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'email'
@@ -33,4 +34,5 @@ export default Joi.object({
   customCssClasses,
   autocompleteAttributes,
   requiresConfirmation: Joi.boolean().default(false),
+  editableByApprover,
 })

@@ -10,6 +10,7 @@ import {
   requiredSchemas,
   readOnly,
   lookupSchemas,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'arcGISWebMap'
@@ -36,6 +37,7 @@ export default Joi.object({
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   customCssClasses,
+  editableByApprover,
   webMapId: Joi.string(),
   basemapId: Joi.string(),
   showLayerPanel: Joi.boolean().default(false),

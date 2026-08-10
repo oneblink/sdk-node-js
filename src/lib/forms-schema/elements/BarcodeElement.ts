@@ -13,6 +13,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'barcodeScanner'
@@ -38,4 +39,5 @@ export default Joi.object({
   ...regexSchemas,
   customCssClasses,
   autocompleteAttributes,
+  editableByApprover,
 })

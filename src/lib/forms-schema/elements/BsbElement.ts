@@ -11,6 +11,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'bsb'
@@ -28,4 +29,5 @@ export default Joi.object({
   defaultValue: Joi.string().regex(/\d{3}-\d{3}/),
   customCssClasses,
   autocompleteAttributes,
+  editableByApprover,
 })

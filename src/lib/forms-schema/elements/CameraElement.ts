@@ -11,6 +11,7 @@ import {
   storageType,
   customCssClasses,
   hintPosition,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'camera'
@@ -28,4 +29,5 @@ export default Joi.object({
   storageType,
   defaultValue: attachment,
   customCssClasses,
+  editableByApprover,
 })

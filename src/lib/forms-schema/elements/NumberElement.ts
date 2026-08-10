@@ -14,6 +14,7 @@ import {
   customCssClasses,
   hintPosition,
   autocompleteAttributes,
+  editableByApprover,
 } from '../property-schemas.js'
 
 export const type = 'number'
@@ -111,4 +112,5 @@ export default Joi.object({
   ...regexSchemas,
   customCssClasses,
   autocompleteAttributes,
+  editableByApprover,
 })
