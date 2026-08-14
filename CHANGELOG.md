@@ -9,11 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `screenReaderAlert` to html element validation
-
-### Added
-
 - `amountType`, `paymentAmount` and `paymentCalculation` to payment event amount configuration
+- `screenReaderAlert` to html element validation
 
 ## [13.2.2] - 2026-07-28
 
