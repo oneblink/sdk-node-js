@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `amountType`, `paymentAmount` and `paymentCalculation` to payment event amount configuration
 - `screenReaderAlert` to html element validation
-- `hiddenFrom` on form elements so they can be hidden from form completers, approvers, or both
+- `hiddenFrom` on form elements so they can be hidden from submitters, approvers, or both
 
 ## [13.2.2] - 2026-07-28
 

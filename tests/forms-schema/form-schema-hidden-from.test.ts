@@ -23,10 +23,10 @@ describe('hiddenFrom form element property', () => {
     const { error, value } = elementSchema.validate({
       ...baseTextElement,
       isHidden: true,
-      hiddenFrom: ['FORM_COMPLETER', 'APPROVER'],
+      hiddenFrom: ['SUBMITTER', 'APPROVER'],
     })
     expect(error).toBeFalsy()
-    expect(value.hiddenFrom).toEqual(['FORM_COMPLETER', 'APPROVER'])
+    expect(value.hiddenFrom).toEqual(['SUBMITTER', 'APPROVER'])
   })
 
   test('should strip hiddenFrom when isHidden is not true', () => {
@@ -43,10 +43,10 @@ describe('hiddenFrom form element property', () => {
     const { error } = elementSchema.validate({
       ...baseTextElement,
       isHidden: true,
-      hiddenFrom: ['SUBMITTER'],
+      hiddenFrom: ['FORM_COMPLETER'],
     })
     expect(error?.message).toContain(
-      '"hiddenFrom[0]" must be one of [FORM_COMPLETER, APPROVER]',
+      '"hiddenFrom[0]" must be one of [SUBMITTER, APPROVER]',
     )
   })
 
