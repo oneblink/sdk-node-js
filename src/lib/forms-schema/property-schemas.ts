@@ -27,7 +27,7 @@ export const baseSchemas = {
   hiddenFrom: Joi.when('isHidden', {
     is: true,
     then: Joi.array()
-      .items(Joi.string().valid('FORM_COMPLETER', 'APPROVER'))
+      .items(Joi.string().valid('SUBMITTER', 'APPROVER'))
       .unique()
       .min(1),
     otherwise: Joi.any().strip(),
