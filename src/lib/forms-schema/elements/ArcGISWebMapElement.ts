@@ -8,7 +8,7 @@ import {
   hint,
   hintPosition,
   requiredSchemas,
-  readOnly,
+  readOnlySchemas,
   lookupSchemas,
 } from '../property-schemas.js'
 
@@ -32,7 +32,7 @@ export default Joi.object({
   hint,
   hintPosition,
   ...requiredSchemas,
-  readOnly,
+  ...readOnlySchemas,
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   customCssClasses,

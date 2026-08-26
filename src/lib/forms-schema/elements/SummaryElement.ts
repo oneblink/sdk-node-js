@@ -3,7 +3,6 @@ import {
   baseSchemas,
   name,
   label,
-  readOnly,
   conditionallyShowSchemas,
   customCssClasses,
 } from '../property-schemas.js'
@@ -14,7 +13,6 @@ export default Joi.object({
   ...baseSchemas,
   name,
   label,
-  readOnly,
   elementIds: Joi.array()
     .required()
 

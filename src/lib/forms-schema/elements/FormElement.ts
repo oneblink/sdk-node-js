@@ -4,7 +4,7 @@ import {
   name,
   conditionallyShowSchemas,
   customCssClasses,
-  readOnly,
+  readOnlySchemas,
 } from '../property-schemas.js'
 
 export const type = 'form'
@@ -12,7 +12,7 @@ export const type = 'form'
 export default Joi.object({
   ...baseSchemas,
   name,
-  readOnly,
+  ...readOnlySchemas,
   formId: Joi.number().required(),
   ...conditionallyShowSchemas,
   customCssClasses,
