@@ -5,7 +5,7 @@ import {
   label,
   hint,
   requiredSchemas,
-  readOnly,
+  readOnlySchemas,
   conditionallyShowSchemas,
   customCssClasses,
   hintPosition,
@@ -23,7 +23,7 @@ export default Joi.object({
   hint,
   hintPosition,
   ...requiredSchemas,
-  readOnly,
+  ...readOnlySchemas,
   ...conditionallyShowSchemas,
   useGeoscapeAddressing: Joi.boolean().default(false),
 

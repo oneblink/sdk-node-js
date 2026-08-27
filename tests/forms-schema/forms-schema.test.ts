@@ -466,7 +466,10 @@ describe('Valid Form Schema with Pages', () => {
           element.type === 'image' ||
           element.type === 'html' ||
           element.type === 'heading' ||
-          element.type === 'lookupButton'
+          element.type === 'lookupButton' ||
+          element.type === 'summary' ||
+          element.type === 'calculation' ||
+          element.type === 'captcha'
         ) {
           // @ts-expect-error "readyOnly" should be here, hence the check
           expect(element.readOnly).toBeUndefined()
@@ -865,7 +868,10 @@ describe('Valid Form Schema', () => {
         element.type === 'image' ||
         element.type === 'html' ||
         element.type === 'heading' ||
-        element.type === 'lookupButton'
+        element.type === 'lookupButton' ||
+        element.type === 'summary' ||
+        element.type === 'calculation' ||
+        element.type === 'captcha'
       ) {
         // @ts-expect-error "readyOnly" should be here, hence the check
         expect(element.readOnly).toBeUndefined()
@@ -9590,5 +9596,92 @@ describe('Post Submission Receipt', () => {
       isAuthenticated: false,
       isMultiPage: false,
     })
+  })
+})
+
+describe('Approver element properties', () => {
+  test('should allow "approverEditability"', () => {
+    const { error, value } = elementSchema.validate({
+      id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
+      type: 'text',
+      name: 'text',
+      label: 'Text',
+      approverEditability: {
+        type: 'ALL_STEPS',
+      },
+    })
+    expect(error).toBeFalsy()
+    expect(value.approverEditability).toEqual({
+      type: 'ALL_STEPS',
+    })
+  })
+
+  test('should not allow "approverEditability" without a type', () => {
+    const { error } = elementSchema.validate({
+      id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
+      type: 'text',
+      name: 'text',
+      label: 'Text',
+      approverEditability: {},
+    })
+    expect(error?.message).toBe('"approverEditability.type" is required')
+  })
+
+  test('should allow "approverEditability" on nested form elements', () => {
+    const { error, value } = elementSchema.validate({
+      id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
+      type: 'form',
+      name: 'nestedForm',
+      formId: 1,
+      approverEditability: {
+        type: 'ALL_STEPS',
+      },
+    })
+    expect(error).toBeFalsy()
+    expect(value.approverEditability).toEqual({
+      type: 'ALL_STEPS',
+    })
+  })
+
+  test('should not allow an unknown "approverEditability.type"', () => {
+    const { error } = elementSchema.validate({
+      id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
+      type: 'text',
+      name: 'text',
+      label: 'Text',
+      approverEditability: {
+        type: 'SOME_STEPS',
+      },
+    })
+    expect(error?.message).toBe(
+      '"approverEditability.type" must be [ALL_STEPS]',
+    )
+  })
+
+  test('should strip out "approverEditability" for elements that cannot be edited', () => {
+    const { error, value } = elementSchema.validate({
+      id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
+      type: 'heading',
+      name: 'heading',
+      label: 'Heading',
+      headingType: 1,
+      approverEditability: {
+        type: 'ALL_STEPS',
+      },
+    })
+    expect(error).toBeFalsy()
+    expect(value.approverEditability).toBeUndefined()
+  })
+
+  test('should strip out "isHiddenFromApprover"', () => {
+    const { error, value } = elementSchema.validate({
+      id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
+      type: 'text',
+      name: 'text',
+      label: 'Text',
+      isHiddenFromApprover: true,
+    })
+    expect(error).toBeFalsy()
+    expect(value.isHiddenFromApprover).toBeUndefined()
   })
 })

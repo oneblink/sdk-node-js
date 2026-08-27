@@ -5,7 +5,7 @@ import {
   label,
   hint,
   requiredSchemas,
-  readOnly,
+  readOnlySchemas,
   conditionallyShowSchemas,
   lookupSchemas,
   optionsSchemas,
@@ -26,7 +26,7 @@ export default Joi.object({
   itemLabel: label,
   itemHint: hint,
   ...requiredSchemas,
-  readOnly,
+  ...readOnlySchemas,
   ...conditionallyShowSchemas,
   ...lookupSchemas,
   defaultValue: Joi.object().keys({

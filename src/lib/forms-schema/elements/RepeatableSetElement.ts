@@ -4,7 +4,7 @@ import {
   name,
   label,
   hint,
-  readOnly,
+  readOnlySchemas,
   conditionallyShowSchemas,
   customCssClasses,
   hintPosition,
@@ -22,7 +22,7 @@ const schema: Joi.ObjectSchema = Joi.object({
   label,
   hint,
   hintPosition,
-  readOnly,
+  ...readOnlySchemas,
   ...conditionallyShowSchemas,
   minSetEntries: Joi.alternatives([
     Joi.number().min(0),

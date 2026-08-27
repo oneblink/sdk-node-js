@@ -4,7 +4,6 @@ import {
   name,
   label,
   requiredSchemas,
-  readOnly,
   conditionallyShowSchemas,
   customCssClasses,
 } from '../property-schemas.js'
@@ -17,7 +16,6 @@ export default Joi.object({
   name,
   label,
   ...requiredSchemas,
-  readOnly,
   ...conditionallyShowSchemas,
   defaultValue: htmlString.required(),
   calculation: Joi.string().required(),
