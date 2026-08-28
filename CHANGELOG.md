@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `approverEditability` on form elements so they can be edited by approvers
+- optional `s3ObjectVersionId` to `Forms.getSubmissionData()`
+- `formSubmissionMetaEdits`, `formSubmissionSchedulingBooking` and `taskCompletion` to `Forms.getFormSubmissionMeta()` result
 
 ## [13.2.3] - 2026-08-26
 

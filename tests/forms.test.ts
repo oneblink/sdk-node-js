@@ -138,6 +138,23 @@ describe('Forms SDK Class', () => {
           forms.getSubmissionData(1),
         ).rejects.toThrow('Must supply "submissionId" as a string')
       })
+
+      test('"s3ObjectVersionId"', async () => {
+        const forms = await getFormsSdk()
+        return expect(
+          // @ts-expect-error test invalid values
+          forms.getSubmissionData(1, '123', false, 1),
+        ).rejects.toThrow('Must supply "s3ObjectVersionId" as a string')
+      })
+
+      test('"s3ObjectVersionId" with draft submissions', async () => {
+        const forms = await getFormsSdk()
+        return expect(
+          forms.getSubmissionData(1, '123', true, 'version-1'),
+        ).rejects.toThrow(
+          '"s3ObjectVersionId" is only supported when downloading a submitted form submission',
+        )
+      })
     })
   })
 

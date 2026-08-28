@@ -8,6 +8,7 @@ import {
   MiscTypes,
   AWSTypes,
   SchedulingTypes,
+  ScheduledTasksTypes,
 } from '@oneblink/types'
 import { HeadObjectOutput } from '@aws-sdk/client-s3'
 import jwksClient from 'jwks-rsa'
@@ -180,10 +181,31 @@ export type FormSubmissionMetaResult = {
   /** The workflow events containing a status for each */
   formSubmissionWorkflowEvents?: SubmissionTypes.FormSubmissionWorkflowEvent[]
   /**
+   * The bookings made after the submission if the form had a scheduling event
+   * configured at the time of submission
+   */
+  formSubmissionSchedulingBooking?: SchedulingTypes.SchedulingBooking
+  /**
    * The bookings made after the submission if the form had a nylas event
    * configured at the time of submission
    */
   formSubmissionNylasBooking?: SchedulingTypes.NylasBooking
+  /**
+   * The edits applied to this submission, newest first. Omitted when the
+   * submission has never been edited.
+   */
+  formSubmissionMetaEdits?: SubmissionTypes.FormSubmissionMetaEdit[]
+  /**
+   * The scheduled task that was completed by this submission, when the
+   * submission completed a task
+   */
+  taskCompletion?: {
+    completedTask: ScheduledTasksTypes.CompletedTask
+    task: ScheduledTasksTypes.Task
+    taskAction?: ScheduledTasksTypes.TaskAction
+    taskGroup?: ScheduledTasksTypes.TaskGroup
+    taskGroupInstance?: ScheduledTasksTypes.TaskGroupInstance
+  }
 }
 
 export { SendMailOptions }
