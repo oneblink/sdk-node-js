@@ -309,12 +309,16 @@ export default class Forms extends OneBlinkAPI {
    *   submission via a callback URL
    * @param isDraft `true` if the submission is a draft submission, otherwise
    *   `false`
+   * @param s3ObjectVersionId The S3 VersionId of the canonical submission
+   *   object to download. Only valid when `isDraft` is `false`. When omitted,
+   *   the latest version is downloaded.
    * @returns
    */
   async getSubmissionData(
     formId: number,
     submissionId: string,
     isDraft: boolean,
+    s3ObjectVersionId?: string,
   ): Promise<SubmissionTypes.S3SubmissionData | undefined> {
     if (typeof formId !== 'number') {
       return Promise.reject(new TypeError('Must supply "formId" as a number'))
@@ -324,17 +328,34 @@ export default class Forms extends OneBlinkAPI {
         new TypeError('Must supply "submissionId" as a string'),
       )
     }
+    if (
+      s3ObjectVersionId !== undefined &&
+      typeof s3ObjectVersionId !== 'string'
+    ) {
+      return Promise.reject(
+        new TypeError('Must supply "s3ObjectVersionId" as a string'),
+      )
+    }
+    if (isDraft && s3ObjectVersionId) {
+      return Promise.reject(
+        new TypeError(
+          '"s3ObjectVersionId" is only supported when downloading a submitted form submission',
+        ),
+      )
+    }
 
     if (isDraft) {
       return await this.oneBlinkDownloader.downloadDraftSubmission({
         formSubmissionDraftVersionId: submissionId,
       })
-    } else {
-      return await this.oneBlinkDownloader.downloadSubmission({
-        submissionId,
-        formId,
-      })
     }
+
+    const result = await this.oneBlinkDownloader.downloadSubmission({
+      submissionId,
+      formId,
+      versionId: s3ObjectVersionId,
+    })
+    return result?.data
   }
 
   /** @internal */
@@ -1061,6 +1082,7 @@ export default class Forms extends OneBlinkAPI {
    *         formApprovalFlowInstance,
    *         formSubmissionApprovals,
    *         formSubmissionPayments,
+   *         formSubmissionMetaEdits,
    *       }) => {
    *         // Use results here...
    *       },
