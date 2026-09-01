@@ -11,6 +11,32 @@ export const optionTypes = [
   FRESHDESK_FIELD_OPTION_TYPE,
 ]
 
+const MINIMUM_MYSQL_DATETIME_YEAR = 1000
+const MAXIMUM_MYSQL_DATETIME_YEAR = 9999
+
+/**
+ * An ISO date-time string that can be persisted in a MySQL `DATETIME` column.
+ */
+export const mysqlDateTimeSchema = Joi.string()
+  .isoDate()
+  .custom((value: string, helpers) => {
+    const date = new Date(value)
+    // The mysql driver writes Date values in local time, so the year must be
+    // read in local time as well to match what is stored.
+    const year = Number.isNaN(date.getTime()) ? undefined : date.getFullYear()
+    if (
+      year === undefined ||
+      year < MINIMUM_MYSQL_DATETIME_YEAR ||
+      year > MAXIMUM_MYSQL_DATETIME_YEAR
+    ) {
+      return helpers.error('date.mysqlDateTimeRange', { date: value })
+    }
+    return value
+  })
+  .messages({
+    'date.mysqlDateTimeRange': `{{#label}} ({{#date}}) must be a date between the years ${MINIMUM_MYSQL_DATETIME_YEAR} and ${MAXIMUM_MYSQL_DATETIME_YEAR}`,
+  })
+
 export const JoiRange = Joi.extend((joi: typeof Joi) => ({
   type: 'range',
   base: joi.number(),

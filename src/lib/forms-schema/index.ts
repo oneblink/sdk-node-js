@@ -1,6 +1,10 @@
 import { FormTypes, SubmissionEventTypes } from '@oneblink/types'
 import Joi from 'joi'
-import { htmlString, s3ConfigurationSchema } from './common.js'
+import {
+  htmlString,
+  mysqlDateTimeSchema,
+  s3ConfigurationSchema,
+} from './common.js'
 import elementSchema from './element-schema.js'
 import {
   conditionallyShowPredicates,
@@ -790,8 +794,8 @@ const formSchema = Joi.object().keys({
   }),
   isMultiPage: Joi.bool().default(false),
   isAuthenticated: Joi.bool().default(false),
-  publishStartDate: Joi.string().isoDate(),
-  publishEndDate: Joi.string().isoDate(),
+  publishStartDate: mysqlDateTimeSchema,
+  publishEndDate: mysqlDateTimeSchema,
   unpublishedUserMessage: Joi.string(),
   // Form Events and Workflow
   draftEvents: Joi.array().items(WorkflowEventSchema),
