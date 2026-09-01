@@ -6740,6 +6740,41 @@ test('should not allow publish start date after publish end date', () => {
   )
 })
 
+test('should allow publish dates outside the range supported by MySQL TIMESTAMP', () => {
+  expect(() =>
+    validateFormThrowError({
+      name: 'Publish Date Form',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      submissionEvents: [],
+      elements: [],
+      publishStartDate: '1950-01-01T00:00:00.000Z',
+      publishEndDate: '2100-01-01T00:00:00.000Z',
+    }),
+  ).not.toThrow()
+})
+
+test('should not allow publish dates outside the range supported by MySQL DATETIME', () => {
+  expect(() =>
+    validateFormThrowError({
+      name: 'Publish Date Form',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: '59cc888b8969af000fb50ddb',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      submissionEvents: [],
+      elements: [],
+      publishStartDate: '+010000-01-01T00:00:00.000Z',
+    }),
+  ).toThrow(
+    '"publishStartDate" (+010000-01-01T00:00:00.000Z) must be a date between the years 1000 and 9999',
+  )
+})
+
 describe('submission event configuration', () => {
   test('should reject if configuration is not supplied', () => {
     const { error } = formSchema.validate(
