@@ -776,6 +776,7 @@ const approvalStepNodeProps = {
     otherwise: Joi.any().strip(),
   }),
   hideApprovalDenyButton: Joi.boolean(),
+  editableFormElementIds: Joi.array().items(Joi.string().required()).min(1),
 }
 
 const formSchema = Joi.object().keys({

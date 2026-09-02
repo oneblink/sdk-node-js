@@ -62,13 +62,8 @@ export const requiredSchemas = {
 
 const readOnly = Joi.bool().default(false)
 
-const approverEditability = Joi.object({
-  type: Joi.valid('ALL_STEPS').required(),
-})
-
 export const readOnlySchemas = {
   readOnly,
-  approverEditability,
 }
 
 export const placeholderValue = Joi.string()

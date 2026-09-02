@@ -9356,6 +9356,112 @@ describe('Approval Step Nodes', () => {
     }).not.toThrow()
   })
 
+  it('should allow "editableFormElementIds" on standard and concurrent steps', () => {
+    const result = validateFormThrowError({
+      ...form,
+      approvalSteps: [
+        {
+          group: 'group 1',
+          label: 'Label 1',
+          editableFormElementIds: ['ff9b04c3-f2ad-4994-a525-e7189eb67a79'],
+        },
+        {
+          type: 'CONCURRENT',
+          nodes: [
+            {
+              label: 'Label 2',
+              group: 'group 1',
+              editableFormElementIds: ['ff9b04c3-f2ad-4994-a525-e7189eb67a79'],
+            },
+            {
+              label: 'Label 3',
+              group: 'group 2',
+            },
+          ],
+        },
+      ],
+    })
+    expect(result.approvalSteps).toEqual([
+      {
+        group: 'group 1',
+        label: 'Label 1',
+        isConditional: false,
+        requiresAllConditionalPredicates: false,
+        editableFormElementIds: ['ff9b04c3-f2ad-4994-a525-e7189eb67a79'],
+      },
+      {
+        type: 'CONCURRENT',
+        nodes: [
+          {
+            label: 'Label 2',
+            group: 'group 1',
+            isConditional: false,
+            requiresAllConditionalPredicates: false,
+            editableFormElementIds: ['ff9b04c3-f2ad-4994-a525-e7189eb67a79'],
+          },
+          {
+            label: 'Label 3',
+            group: 'group 2',
+            isConditional: false,
+            requiresAllConditionalPredicates: false,
+          },
+        ],
+      },
+    ])
+  })
+
+  it('should throw an error when "editableFormElementIds" contains a duplicate id', () => {
+    expect(() => {
+      validateFormThrowError({
+        ...form,
+        approvalSteps: [
+          {
+            group: 'group 1',
+            label: 'Label 1',
+            editableFormElementIds: [
+              'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+              'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+            ],
+          },
+        ],
+      })
+    }).toThrow(
+      '"approvalSteps[0].editableFormElementIds[1]" contains a duplicate value',
+    )
+  })
+
+  it('should throw an error when "editableFormElementIds" is empty', () => {
+    expect(() => {
+      validateFormThrowError({
+        ...form,
+        approvalSteps: [
+          {
+            group: 'group 1',
+            label: 'Label 1',
+            editableFormElementIds: [],
+          },
+        ],
+      })
+    }).toThrow('"approvalSteps[0]" does not match any of the allowed types')
+  })
+
+  it('should throw an error when "editableFormElementIds" references an unknown element', () => {
+    expect(() => {
+      validateFormThrowError({
+        ...form,
+        approvalSteps: [
+          {
+            group: 'group 1',
+            label: 'Label 1',
+            editableFormElementIds: ['00000000-0000-0000-0000-000000000000'],
+          },
+        ],
+      })
+    }).toThrow(
+      '"approvalSteps[0].editableFormElementIds[0]" (00000000-0000-0000-0000-000000000000) does not exist in "elements"',
+    )
+  })
+
   it('should throw an error when trying to pass an invalid `type`', () => {
     expect(() => {
       validateFormThrowError({
@@ -9635,71 +9741,12 @@ describe('Post Submission Receipt', () => {
 })
 
 describe('Approver element properties', () => {
-  test('should allow "approverEditability"', () => {
+  test('should strip out "approverEditability"', () => {
     const { error, value } = elementSchema.validate({
       id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
       type: 'text',
       name: 'text',
       label: 'Text',
-      approverEditability: {
-        type: 'ALL_STEPS',
-      },
-    })
-    expect(error).toBeFalsy()
-    expect(value.approverEditability).toEqual({
-      type: 'ALL_STEPS',
-    })
-  })
-
-  test('should not allow "approverEditability" without a type', () => {
-    const { error } = elementSchema.validate({
-      id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
-      type: 'text',
-      name: 'text',
-      label: 'Text',
-      approverEditability: {},
-    })
-    expect(error?.message).toBe('"approverEditability.type" is required')
-  })
-
-  test('should allow "approverEditability" on nested form elements', () => {
-    const { error, value } = elementSchema.validate({
-      id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
-      type: 'form',
-      name: 'nestedForm',
-      formId: 1,
-      approverEditability: {
-        type: 'ALL_STEPS',
-      },
-    })
-    expect(error).toBeFalsy()
-    expect(value.approverEditability).toEqual({
-      type: 'ALL_STEPS',
-    })
-  })
-
-  test('should not allow an unknown "approverEditability.type"', () => {
-    const { error } = elementSchema.validate({
-      id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
-      type: 'text',
-      name: 'text',
-      label: 'Text',
-      approverEditability: {
-        type: 'SOME_STEPS',
-      },
-    })
-    expect(error?.message).toBe(
-      '"approverEditability.type" must be [ALL_STEPS]',
-    )
-  })
-
-  test('should strip out "approverEditability" for elements that cannot be edited', () => {
-    const { error, value } = elementSchema.validate({
-      id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
-      type: 'heading',
-      name: 'heading',
-      label: 'Heading',
-      headingType: 1,
       approverEditability: {
         type: 'ALL_STEPS',
       },
