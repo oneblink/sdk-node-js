@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `approverEditability` on form elements so they can be edited by approvers
+- `editableFormElementIds` to approval step nodes so approvers can edit selected form elements
 - optional `s3ObjectVersionId` to `Forms.getSubmissionData()`
 - `formSubmissionMetaEdits`, `formSubmissionSchedulingBooking` and `taskCompletion` to `Forms.getFormSubmissionMeta()` result
 - validation for min and max years for MySQL DATETIME columns to form properties: `publishStartDate` and `publishEndDate`

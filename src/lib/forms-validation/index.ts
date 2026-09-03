@@ -19,6 +19,33 @@ import validateFormEvents, {
 } from './validate-form-events.js'
 import Joi from 'joi'
 
+function validateEditableFormElementIds({
+  editableFormElementIds,
+  propertyName,
+  formElements,
+}: {
+  editableFormElementIds?: string[]
+  propertyName: string
+  formElements: FormTypes.FormElement[]
+}) {
+  for (const [index, elementId] of (editableFormElementIds ?? []).entries()) {
+    if (editableFormElementIds?.indexOf(elementId) !== index) {
+      throw new Error(
+        `"${propertyName}.editableFormElementIds[${index}]" contains a duplicate value`,
+      )
+    }
+    const element = formElementsService.findFormElement(
+      formElements,
+      (formElement) => formElement.id === elementId,
+    )
+    if (!element) {
+      throw new Error(
+        `"${propertyName}.editableFormElementIds[${index}]" (${elementId}) does not exist in "elements"`,
+      )
+    }
+  }
+}
+
 function validateFormEventData(
   workflowEvent: unknown,
   {
@@ -336,15 +363,22 @@ function validateWithFormSchema(form?: unknown):
     })
 
     const labels: string[] = []
-    for (const step of validatedForm.approvalSteps ?? []) {
+    for (const [stepIndex, step] of (
+      validatedForm.approvalSteps ?? []
+    ).entries()) {
       if (step.type === 'CONCURRENT') {
-        for (const node of step.nodes) {
+        for (const [nodeIndex, node] of step.nodes.entries()) {
           if (labels.includes(node.label)) {
             throw new Error(
               `"approvalSteps" contains a CONCURRENT step with a "label" (${node.label}) property that is not unique`,
             )
           }
           labels.push(node.label)
+          validateEditableFormElementIds({
+            editableFormElementIds: node.editableFormElementIds,
+            propertyName: `approvalSteps[${stepIndex}].nodes[${nodeIndex}]`,
+            formElements: validatedForm.elements,
+          })
         }
       } else {
         if (labels.includes(step.label)) {
@@ -353,6 +387,11 @@ function validateWithFormSchema(form?: unknown):
           )
         }
         labels.push(step.label)
+        validateEditableFormElementIds({
+          editableFormElementIds: step.editableFormElementIds,
+          propertyName: `approvalSteps[${stepIndex}]`,
+          formElements: validatedForm.elements,
+        })
       }
     }
 
