@@ -292,9 +292,8 @@ export default class Forms extends OneBlinkAPI {
    * @example
    *   const formId = 1
    *   const submissionId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
-   *   const isDraft = false
    *   forms
-   *     .getSubmissionData(formId, submissionId, isDraft)
+   *     .getSubmissionData({ formId, submissionId })
    *     .then((result) => {
    *       const definition = result?.definition
    *       const submission = result?.submission
@@ -303,57 +302,133 @@ export default class Forms extends OneBlinkAPI {
    *       // Handle error here
    *     })
    *
+   * @param options
+   * @param options.formId The exact id of the form you wish to get submission
+   *   data for
+   * @param options.submissionId The submission identifier generated after a
+   *   successful form submission, this will be return to you after a successful
+   *   forms submission via a callback URL
+   * @param options.versionId The S3 VersionId of the canonical submission
+   *   object to download. When omitted, the latest version is downloaded.
+   * @returns
+   */
+  async getSubmissionData(options: {
+    formId: number
+    submissionId: string
+    versionId?: string
+  }): Promise<SubmissionTypes.S3SubmissionData | undefined> {
+    if (typeof options?.formId !== 'number') {
+      throw new TypeError('Must supply "formId" as a number')
+    }
+    if (typeof options.submissionId !== 'string') {
+      throw new TypeError('Must supply "submissionId" as a string')
+    }
+    if (
+      options.versionId !== undefined &&
+      typeof options.versionId !== 'string'
+    ) {
+      throw new TypeError('Must supply "versionId" as a string')
+    }
+
+    return await this.downloadSubmittedFormSubmission(options)
+  }
+
+  /**
+   * Download the version originally submitted, before any edits.
+   *
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that was submitted.
+   *
+   * **Minimum Role Permission**
+   *
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const formId = 1
+   *   const submissionId = 'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+   *   const result = await forms.getSubmissionDataAsSubmitted(
+   *     formId,
+   *     submissionId,
+   *   )
+   *
    * @param formId The exact id of the form you wish to get submission data for
    * @param submissionId The submission identifier generated after a successful
    *   form submission, this will be return to you after a successful forms
    *   submission via a callback URL
-   * @param isDraft `true` if the submission is a draft submission, otherwise
-   *   `false`
-   * @param s3ObjectVersionId The S3 VersionId of the canonical submission
-   *   object to download. Only valid when `isDraft` is `false`. When omitted,
-   *   the latest version is downloaded.
    * @returns
    */
-  async getSubmissionData(
+  async getSubmissionDataAsSubmitted(
     formId: number,
     submissionId: string,
-    isDraft: boolean,
-    s3ObjectVersionId?: string,
   ): Promise<SubmissionTypes.S3SubmissionData | undefined> {
     if (typeof formId !== 'number') {
-      return Promise.reject(new TypeError('Must supply "formId" as a number'))
+      throw new TypeError('Must supply "formId" as a number')
     }
     if (typeof submissionId !== 'string') {
-      return Promise.reject(
-        new TypeError('Must supply "submissionId" as a string'),
-      )
+      throw new TypeError('Must supply "submissionId" as a string')
     }
-    if (
-      s3ObjectVersionId !== undefined &&
-      typeof s3ObjectVersionId !== 'string'
-    ) {
-      return Promise.reject(
-        new TypeError('Must supply "s3ObjectVersionId" as a string'),
-      )
-    }
-    if (isDraft && s3ObjectVersionId) {
-      return Promise.reject(
-        new TypeError(
-          '"s3ObjectVersionId" is only supported when downloading a submitted form submission',
-        ),
+
+    return await this.downloadSubmittedFormSubmission({
+      formId,
+      submissionId,
+      asSubmitted: true,
+    })
+  }
+
+  /**
+   * Download a draft form submission.
+   *
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that was submitted.
+   *
+   * **Minimum Role Permission**
+   *
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const formSubmissionDraftVersionId =
+   *     'c1f0f27b-4289-4ce5-9807-bf84971991aa'
+   *   const result = await forms.getSubmissionDataDraft(
+   *     formSubmissionDraftVersionId,
+   *   )
+   *
+   * @param formSubmissionDraftVersionId The identifier of the draft form
+   *   submission version
+   * @returns
+   */
+  async getSubmissionDataDraft(
+    formSubmissionDraftVersionId: string,
+  ): Promise<SubmissionTypes.S3SubmissionData | undefined> {
+    if (typeof formSubmissionDraftVersionId !== 'string') {
+      throw new TypeError(
+        'Must supply "formSubmissionDraftVersionId" as a string',
       )
     }
 
-    if (isDraft) {
-      return await this.oneBlinkDownloader.downloadDraftSubmission({
-        formSubmissionDraftVersionId: submissionId,
-      })
-    }
+    return await this.oneBlinkDownloader.downloadDraftSubmission({
+      formSubmissionDraftVersionId,
+    })
+  }
 
+  /** @internal */
+  private async downloadSubmittedFormSubmission({
+    formId,
+    submissionId,
+    versionId,
+    asSubmitted,
+  }: {
+    formId: number
+    submissionId: string
+    versionId?: string
+    asSubmitted?: boolean
+  }): Promise<SubmissionTypes.S3SubmissionData | undefined> {
     const result = await this.oneBlinkDownloader.downloadSubmission({
       submissionId,
       formId,
-      versionId: s3ObjectVersionId,
+      versionId,
+      asSubmitted,
     })
     return result?.data
   }
@@ -803,10 +878,10 @@ export default class Forms extends OneBlinkAPI {
    *       const submissionDetails = result.formSubmissionMeta
    *       return Promise.all(
    *         submissionDetails.map((metaData) =>
-   *           forms.getSubmissionData(
-   *             metaData.formId,
-   *             metaData.submissionId,
-   *           ),
+   *           forms.getSubmissionData({
+   *             formId: metaData.formId,
+   *             submissionId: metaData.submissionId,
+   *           }),
    *         ),
    *       )
    *     })
