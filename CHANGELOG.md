@@ -10,9 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `editableFormElementIds` to approval step nodes so approvers can edit selected form elements
-- optional `s3ObjectVersionId` to `Forms.getSubmissionData()`
+- optional `versionId` to `Forms.getSubmissionData()`
+- `Forms.getSubmissionDataAsSubmitted()` to download the originally submitted version
+- `Forms.getSubmissionDataDraft()` to download a draft form submission
 - `formSubmissionMetaEdits`, `formSubmissionSchedulingBooking` and `taskCompletion` to `Forms.getFormSubmissionMeta()` result
 - validation for min and max years for MySQL DATETIME columns to form properties: `publishStartDate` and `publishEndDate`
+
+### Changed
+
+- **[BREAKING]** `Forms.getSubmissionData()` now takes `{ formId, submissionId, versionId? }` instead of positional arguments. The `isDraft` option has been removed; use `Forms.getSubmissionDataDraft()` for drafts.
 
 ## [13.2.3] - 2026-08-26
 

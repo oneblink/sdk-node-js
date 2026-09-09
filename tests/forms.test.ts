@@ -135,24 +135,53 @@ describe('Forms SDK Class', () => {
         const forms = await getFormsSdk()
         return expect(
           // @ts-expect-error test invalid values
-          forms.getSubmissionData(1),
+          forms.getSubmissionData({ formId: 1 }),
         ).rejects.toThrow('Must supply "submissionId" as a string')
       })
 
-      test('"s3ObjectVersionId"', async () => {
+      test('"versionId"', async () => {
+        const forms = await getFormsSdk()
+        return expect(
+          forms.getSubmissionData({
+            formId: 1,
+            submissionId: '123',
+            // @ts-expect-error test invalid values
+            versionId: 1,
+          }),
+        ).rejects.toThrow('Must supply "versionId" as a string')
+      })
+    })
+  })
+
+  describe('getSubmissionDataAsSubmitted()', () => {
+    describe('should reject with correct validation errors for', () => {
+      test('"formId"', async () => {
         const forms = await getFormsSdk()
         return expect(
           // @ts-expect-error test invalid values
-          forms.getSubmissionData(1, '123', false, 1),
-        ).rejects.toThrow('Must supply "s3ObjectVersionId" as a string')
+          forms.getSubmissionDataAsSubmitted(),
+        ).rejects.toThrow('Must supply "formId" as a number')
       })
 
-      test('"s3ObjectVersionId" with draft submissions', async () => {
+      test('"submissionId"', async () => {
         const forms = await getFormsSdk()
         return expect(
-          forms.getSubmissionData(1, '123', true, 'version-1'),
+          // @ts-expect-error test invalid values
+          forms.getSubmissionDataAsSubmitted(1),
+        ).rejects.toThrow('Must supply "submissionId" as a string')
+      })
+    })
+  })
+
+  describe('getSubmissionDataDraft()', () => {
+    describe('should reject with correct validation errors for', () => {
+      test('"formSubmissionDraftVersionId"', async () => {
+        const forms = await getFormsSdk()
+        return expect(
+          // @ts-expect-error test invalid values
+          forms.getSubmissionDataDraft(),
         ).rejects.toThrow(
-          '"s3ObjectVersionId" is only supported when downloading a submitted form submission',
+          'Must supply "formSubmissionDraftVersionId" as a string',
         )
       })
     })
