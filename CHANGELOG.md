@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.2.4] - 2026-09-15
+
 ### Added
 
 - `editableFormElementIds` to approval step nodes so approvers can edit selected form elements
@@ -19,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **[BREAKING]** `Forms.getSubmissionData()` now takes `{ formId, submissionId, versionId? }` instead of positional arguments. The `isDraft` option has been removed; use `Forms.getSubmissionDataDraft()` for drafts.
+
+### Dependencies
+
+- update @oneblink/storage to [9.0.0-beta.4](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [8.0.0-beta.2](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
 
 ## [13.2.3] - 2026-08-26
 
