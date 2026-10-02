@@ -6241,6 +6241,7 @@ test('should allow restrictFileTypes and restrictedFileTypes properties for File
     isDataLookup: false,
     isElementLookup: false,
     allowExtensionlessAttachments: false,
+    hideImagePreview: false,
   })
 })
 
@@ -6266,7 +6267,71 @@ test('should strip restrictedFileTypes if restrictFileTypes is false', () => {
     isDataLookup: false,
     isElementLookup: false,
     allowExtensionlessAttachments: false,
+    hideImagePreview: false,
   })
+})
+
+test('should default hideImagePreview to false and allow true for files and camera elements', () => {
+  const files = elementSchema.validate({
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'files',
+    label: 'Files',
+    type: 'files',
+  })
+  expect(files.error).toBeUndefined()
+  expect(files.value.hideImagePreview).toBe(false)
+
+  const filesHidden = elementSchema.validate({
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'files',
+    label: 'Files',
+    type: 'files',
+    hideImagePreview: true,
+  })
+  expect(filesHidden.error).toBeUndefined()
+  expect(filesHidden.value.hideImagePreview).toBe(true)
+
+  const camera = elementSchema.validate({
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'camera',
+    label: 'Camera',
+    type: 'camera',
+  })
+  expect(camera.error).toBeUndefined()
+  expect(camera.value.hideImagePreview).toBe(false)
+
+  const cameraHidden = elementSchema.validate({
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'camera',
+    label: 'Camera',
+    type: 'camera',
+    hideImagePreview: true,
+  })
+  expect(cameraHidden.error).toBeUndefined()
+  expect(cameraHidden.value.hideImagePreview).toBe(true)
+})
+
+test('should strip hideImagePreview for elements that are not files or camera', () => {
+  const { error, value } = elementSchema.validate({
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'text',
+    label: 'Text',
+    type: 'text',
+    hideImagePreview: true,
+  })
+  expect(error).toBeFalsy()
+  expect(value.hideImagePreview).toBeUndefined()
+})
+
+test('should reject hideImagePreview when it is not a boolean', () => {
+  const { error } = elementSchema.validate({
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'files',
+    label: 'Files',
+    type: 'files',
+    hideImagePreview: 'true1',
+  })
+  expect(error?.message).toContain('"hideImagePreview" must be a boolean')
 })
 
 test('should only allow strings in restrictedFileTypes', () => {

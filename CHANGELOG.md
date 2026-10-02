@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `hideImagePreview` to files and camera element validation
+
 ## [13.2.5] - 2026-10-01
 
 ## [13.2.4] - 2026-09-15
