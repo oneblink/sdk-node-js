@@ -25,6 +25,7 @@ export default Joi.object({
   ...readOnlySchemas,
   ...conditionallyShowSchemas,
   includeTimestampWatermark: Joi.boolean().default(false),
+  hideImagePreview: Joi.boolean().default(false),
   storageType,
   defaultValue: attachment,
   customCssClasses,
