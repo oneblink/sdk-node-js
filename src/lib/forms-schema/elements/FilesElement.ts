@@ -30,6 +30,7 @@ export default Joi.object({
     otherwise: Joi.any().strip(),
   }),
   allowExtensionlessAttachments: Joi.boolean().default(false),
+  hideImagePreview: Joi.boolean().default(false),
   defaultValue: Joi.array().items(attachment),
   minEntries: Joi.number().min(0),
   maxEntries: Joi.number().when('minEntries', {
