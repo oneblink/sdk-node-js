@@ -6271,7 +6271,7 @@ test('should strip restrictedFileTypes if restrictFileTypes is false', () => {
   })
 })
 
-test('should default hideImagePreview to false and allow true for files and camera elements', () => {
+test('should default hideImagePreview to false and allow true for files, camera, and compliance elements', () => {
   const files = elementSchema.validate({
     id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
     name: 'files',
@@ -6309,6 +6309,39 @@ test('should default hideImagePreview to false and allow true for files and came
   })
   expect(cameraHidden.error).toBeUndefined()
   expect(cameraHidden.value.hideImagePreview).toBe(true)
+
+  const compliance = elementSchema.validate({
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'compliance',
+    label: 'Compliance',
+    type: 'compliance',
+    options: [
+      {
+        id: '8be1f1dd-ec3f-4537-bb70-f0f1c7c31b26',
+        value: 'pass',
+        label: 'Pass',
+      },
+    ],
+  })
+  expect(compliance.error).toBeUndefined()
+  expect(compliance.value.hideImagePreview).toBe(false)
+
+  const complianceHidden = elementSchema.validate({
+    id: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+    name: 'compliance',
+    label: 'Compliance',
+    type: 'compliance',
+    hideImagePreview: true,
+    options: [
+      {
+        id: '8be1f1dd-ec3f-4537-bb70-f0f1c7c31b26',
+        value: 'pass',
+        label: 'Pass',
+      },
+    ],
+  })
+  expect(complianceHidden.error).toBeUndefined()
+  expect(complianceHidden.value.hideImagePreview).toBe(true)
 })
 
 test('should strip hideImagePreview for elements that are not files or camera', () => {

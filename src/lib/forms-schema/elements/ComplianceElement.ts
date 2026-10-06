@@ -33,4 +33,5 @@ export default Joi.object({
   ...lookupSchemas,
   customCssClasses,
   autocompleteAttributes,
+  hideImagePreview: Joi.boolean().default(false),
 })

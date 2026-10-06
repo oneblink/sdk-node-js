@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `hideImagePreview` to files and camera element validation
+- `hideImagePreview` to files, camera, and compliance element validation
 
 ## [13.2.5] - 2026-10-01
 
