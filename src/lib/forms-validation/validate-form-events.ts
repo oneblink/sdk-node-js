@@ -271,6 +271,66 @@ export const validateFormEvent = ({
       })
       break
     }
+    case 'LUMIN_SIGN_REQUEST_SIGNATURE': {
+      const { lumin } = formEvent.configuration
+
+      validateFormElementMappings({
+        mappings: [lumin.title],
+        validatedFormElements,
+        propertyName: `${propertyName}.configuration.lumin.title`,
+      })
+      validateFormElementMappings({
+        mappings: [lumin.expiresAt],
+        validatedFormElements,
+        propertyName: `${propertyName}.configuration.lumin.expiresAt`,
+      })
+
+      if (lumin.emailSubject) {
+        validateFormElementMappings({
+          mappings: [lumin.emailSubject],
+          validatedFormElements,
+          propertyName: `${propertyName}.configuration.lumin.emailSubject`,
+        })
+      }
+
+      if (lumin.emailTitle) {
+        validateFormElementMappings({
+          mappings: [lumin.emailTitle],
+          validatedFormElements,
+          propertyName: `${propertyName}.configuration.lumin.emailTitle`,
+        })
+      }
+
+      for (const [index, signer] of lumin.signers.entries()) {
+        validateFormElementMappings({
+          mappings: [signer.name],
+          validatedFormElements,
+          propertyName: `${propertyName}.configuration.lumin.signers[${index}].name`,
+        })
+        validateFormElementMappings({
+          mappings: [signer.emailAddress],
+          validatedFormElements,
+          propertyName: `${propertyName}.configuration.lumin.signers[${index}].emailAddress`,
+        })
+      }
+
+      validateFormElementMappings({
+        mappings: lumin.mergeTagMapping ?? [],
+        validatedFormElements,
+        propertyName: `${propertyName}.configuration.lumin.mergeTagMapping`,
+      })
+      validateFormElementMappings({
+        mappings: lumin.fieldMapping ?? [],
+        validatedFormElements,
+        propertyName: `${propertyName}.configuration.lumin.fieldMapping`,
+      })
+      validateFormElementMappings({
+        mappings: lumin.variableMapping ?? [],
+        validatedFormElements,
+        propertyName: `${propertyName}.configuration.lumin.variableMapping`,
+      })
+      break
+    }
     default: {
       break
     }

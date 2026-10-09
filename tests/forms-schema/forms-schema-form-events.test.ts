@@ -65,7 +65,7 @@ describe('Scheduling events should throw errors when not passed to "schedulingEv
         submissionEvents: [schedulingEvent],
       }),
     ).toThrow(
-      '"submissionEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT, GOOD_TO_GO_UPDATE_ASSET, EXCEL_ADD_ROW, SYMPHONY_3_SMART_GLUE, SALESFORCE_CREATE_OBJECT_RECORD]',
+      '"submissionEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT, GOOD_TO_GO_UPDATE_ASSET, EXCEL_ADD_ROW, SYMPHONY_3_SMART_GLUE, SALESFORCE_CREATE_OBJECT_RECORD, LUMIN_SIGN_REQUEST_SIGNATURE]',
     )
   })
   test('SCHEDULING form event should error when being passed to "paymentEvents"', () => {
@@ -117,7 +117,7 @@ describe('Payment events should throw errors when not passed to "paymentEvents" 
         submissionEvents: [paymentEvent],
       }),
     ).toThrow(
-      '"submissionEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT, GOOD_TO_GO_UPDATE_ASSET, EXCEL_ADD_ROW, SYMPHONY_3_SMART_GLUE, SALESFORCE_CREATE_OBJECT_RECORD]',
+      '"submissionEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT, GOOD_TO_GO_UPDATE_ASSET, EXCEL_ADD_ROW, SYMPHONY_3_SMART_GLUE, SALESFORCE_CREATE_OBJECT_RECORD, LUMIN_SIGN_REQUEST_SIGNATURE]',
     )
   })
   test('Payment form event should error when being passed to "schedulingEvents"', () => {
@@ -392,7 +392,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         draftEvents: [paymentEvent],
       }),
     ).toThrow(
-      '"draftEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT, GOOD_TO_GO_UPDATE_ASSET, EXCEL_ADD_ROW, SYMPHONY_3_SMART_GLUE, SALESFORCE_CREATE_OBJECT_RECORD]',
+      '"draftEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT, GOOD_TO_GO_UPDATE_ASSET, EXCEL_ADD_ROW, SYMPHONY_3_SMART_GLUE, SALESFORCE_CREATE_OBJECT_RECORD, LUMIN_SIGN_REQUEST_SIGNATURE]',
     )
   })
   test('SCHEDULING form event should error when being passed to "draftEvents"', () => {
@@ -402,7 +402,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         draftEvents: [schedulingEvent],
       }),
     ).toThrow(
-      '"draftEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT, GOOD_TO_GO_UPDATE_ASSET, EXCEL_ADD_ROW, SYMPHONY_3_SMART_GLUE, SALESFORCE_CREATE_OBJECT_RECORD]',
+      '"draftEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT, GOOD_TO_GO_UPDATE_ASSET, EXCEL_ADD_ROW, SYMPHONY_3_SMART_GLUE, SALESFORCE_CREATE_OBJECT_RECORD, LUMIN_SIGN_REQUEST_SIGNATURE]',
     )
   })
   test('Should not error when passing submissionEvents to "draftEvents"', () => {
@@ -421,7 +421,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         approvalEvents: [paymentEvent],
       }),
     ).toThrow(
-      '"approvalEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT, GOOD_TO_GO_UPDATE_ASSET, EXCEL_ADD_ROW, SYMPHONY_3_SMART_GLUE, SALESFORCE_CREATE_OBJECT_RECORD]',
+      '"approvalEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT, GOOD_TO_GO_UPDATE_ASSET, EXCEL_ADD_ROW, SYMPHONY_3_SMART_GLUE, SALESFORCE_CREATE_OBJECT_RECORD, LUMIN_SIGN_REQUEST_SIGNATURE]',
     )
   })
   test('SCHEDULING form event should error when being passed to "approvalEvents"', () => {
@@ -431,7 +431,7 @@ describe('"draftEvents" and "approvalEvents" should allow only submission events
         approvalEvents: [schedulingEvent],
       }),
     ).toThrow(
-      '"approvalEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT, GOOD_TO_GO_UPDATE_ASSET, EXCEL_ADD_ROW, SYMPHONY_3_SMART_GLUE, SALESFORCE_CREATE_OBJECT_RECORD]',
+      '"approvalEvents[0].type" must be one of [CALLBACK, POWER_AUTOMATE_FLOW, CP_INTEGRATION_HUB_WEBHOOK, PDF, EMAIL, ONEBLINK_API, TRIM, CP_HCMS, CIVICA_CRM, FRESHDESK_CREATE_TICKET, FRESHDESK_ADD_NOTE_TO_TICKET, SHAREPOINT_CREATE_LIST_ITEM, SHAREPOINT_STORE_FILES, CIVIC_REC_COMPLETE_CHECKOUT, GOOD_TO_GO_UPDATE_ASSET, EXCEL_ADD_ROW, SYMPHONY_3_SMART_GLUE, SALESFORCE_CREATE_OBJECT_RECORD, LUMIN_SIGN_REQUEST_SIGNATURE]',
     )
   })
   test('Should not error when passing submissionEvents to "approvalEvents"', () => {
@@ -936,6 +936,306 @@ describe('SALESFORCE_CREATE_OBJECT_RECORD', () => {
     ).toThrow(
       '"submissionEvents[0].configuration.pdfConfigurations[0].customPdfId" must be a valid GUID',
     )
+  })
+})
+
+describe('LUMIN_SIGN_REQUEST_SIGNATURE', () => {
+  const formElementId = 'ff9b04c3-f2ad-4994-a525-e7189eb67a78'
+  const luminElements = [
+    {
+      id: formElementId,
+      type: 'text',
+      name: 'employeeName',
+      label: 'Employee Name',
+    },
+  ]
+
+  const validSubmissionEvent = {
+    type: 'LUMIN_SIGN_REQUEST_SIGNATURE',
+    configuration: {
+      integrationKeyId: 'lumin-key-one',
+      lumin: {
+        template: {
+          id: 'sign_emp_agreement_001',
+          name: 'Employment Agreement',
+        },
+        signers: [
+          {
+            signerRole: 'Employee',
+            name: {
+              type: 'FORM_ELEMENT' as const,
+              formElementId,
+            },
+            emailAddress: {
+              type: 'FORM_ELEMENT' as const,
+              formElementId,
+            },
+          },
+        ],
+        title: {
+          type: 'VALUE' as const,
+          value: 'Agreement title',
+        },
+        expiresAt: {
+          type: 'VALUE' as const,
+          value: '2030-01-01T00:00:00.000Z',
+        },
+      },
+    },
+  }
+
+  it('should fail with empty configuration on the submission event', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        submissionEvents: [
+          {
+            type: 'LUMIN_SIGN_REQUEST_SIGNATURE',
+          },
+        ],
+      }),
+    ).toThrow('"submissionEvents[0].configuration" is required')
+  })
+
+  it('should fail when integrationKeyId is missing', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        elements: luminElements,
+        submissionEvents: [
+          {
+            type: 'LUMIN_SIGN_REQUEST_SIGNATURE',
+            configuration: {
+              lumin: validSubmissionEvent.configuration.lumin,
+            },
+          },
+        ],
+      }),
+    ).toThrow('"submissionEvents[0].configuration.integrationKeyId" is required')
+  })
+
+  it('should fail when lumin.template.id is missing', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        elements: luminElements,
+        submissionEvents: [
+          {
+            ...validSubmissionEvent,
+            configuration: {
+              ...validSubmissionEvent.configuration,
+              lumin: {
+                ...validSubmissionEvent.configuration.lumin,
+                template: {
+                  name: 'Employment Agreement',
+                },
+              },
+            },
+          },
+        ],
+      }),
+    ).toThrow('"submissionEvents[0].configuration.lumin.template.id" is required')
+  })
+
+  it('should fail when signers is empty', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        elements: luminElements,
+        submissionEvents: [
+          {
+            ...validSubmissionEvent,
+            configuration: {
+              ...validSubmissionEvent.configuration,
+              lumin: {
+                ...validSubmissionEvent.configuration.lumin,
+                signers: [],
+              },
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      '"submissionEvents[0].configuration.lumin.signers" must contain at least 1 items',
+    )
+  })
+
+  it('should allow valid configuration without optional email mappings', () => {
+    const form = validateFormThrowError({
+      ...defaultForm,
+      elements: luminElements,
+      submissionEvents: [validSubmissionEvent],
+    })
+
+    expect(form.submissionEvents[0]).toEqual({
+      ...validSubmissionEvent,
+      conditionallyExecute: false,
+      requiresAllConditionallyExecutePredicates: false,
+      configuration: {
+        ...validSubmissionEvent.configuration,
+        lumin: {
+          ...validSubmissionEvent.configuration.lumin,
+          mergeTagMapping: [],
+          fieldMapping: [],
+          variableMapping: [],
+        },
+      },
+    })
+  })
+
+  it('should fail when title mapping references an unknown form element', () => {
+    const unknownFormElementId = '00000000-0000-0000-0000-000000000099'
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        elements: luminElements,
+        submissionEvents: [
+          {
+            ...validSubmissionEvent,
+            configuration: {
+              ...validSubmissionEvent.configuration,
+              lumin: {
+                ...validSubmissionEvent.configuration.lumin,
+                title: {
+                  type: 'FORM_ELEMENT',
+                  formElementId: unknownFormElementId,
+                },
+              },
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      `"submissionEvents[0].configuration.lumin.title[0].formElementId" (${unknownFormElementId}) does not exist in "elements".`,
+    )
+  })
+
+  it('should fail when optional emailTitle mapping references an unknown form element', () => {
+    const unknownFormElementId = '00000000-0000-0000-0000-000000000098'
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        elements: luminElements,
+        submissionEvents: [
+          {
+            ...validSubmissionEvent,
+            configuration: {
+              ...validSubmissionEvent.configuration,
+              lumin: {
+                ...validSubmissionEvent.configuration.lumin,
+                emailTitle: {
+                  type: 'FORM_ELEMENT',
+                  formElementId: unknownFormElementId,
+                },
+              },
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      `"submissionEvents[0].configuration.lumin.emailTitle[0].formElementId" (${unknownFormElementId}) does not exist in "elements".`,
+    )
+  })
+
+  it('should fail when mergeTagMapping entry is missing luminMergeTagName', () => {
+    expect(() =>
+      validateFormThrowError({
+        ...defaultForm,
+        elements: luminElements,
+        submissionEvents: [
+          {
+            ...validSubmissionEvent,
+            configuration: {
+              ...validSubmissionEvent.configuration,
+              lumin: {
+                ...validSubmissionEvent.configuration.lumin,
+                mergeTagMapping: [
+                  {
+                    type: 'FORM_ELEMENT',
+                    formElementId,
+                  },
+                ],
+              },
+            },
+          },
+        ],
+      }),
+    ).toThrow(
+      '"submissionEvents[0].configuration.lumin.mergeTagMapping[0].luminMergeTagName" is required',
+    )
+  })
+
+  it('should allow valid merge tag, field, and variable mappings', () => {
+    const mergeTagMapping = [
+      {
+        luminMergeTagName: 'EmployeeFullName',
+        type: 'FORM_ELEMENT' as const,
+        formElementId,
+      },
+    ]
+    const fieldMapping = [
+      {
+        luminFieldName: 'EmployeeSignature',
+        type: 'VALUE' as const,
+        value: 'signed',
+      },
+    ]
+    const variableMapping = [
+      {
+        luminVariableName: 'ClientLegalName',
+        type: 'SUBMISSION_ID' as const,
+      },
+    ]
+
+    const form = validateFormThrowError({
+      ...defaultForm,
+      elements: luminElements,
+      submissionEvents: [
+        {
+          ...validSubmissionEvent,
+          configuration: {
+            ...validSubmissionEvent.configuration,
+            lumin: {
+              ...validSubmissionEvent.configuration.lumin,
+              emailSubject: {
+                type: 'VALUE' as const,
+                value: 'Please sign',
+              },
+              emailTitle: {
+                type: 'VALUE' as const,
+                value: 'Employment agreement',
+              },
+              mergeTagMapping,
+              fieldMapping,
+              variableMapping,
+            },
+          },
+        },
+      ],
+    })
+
+    expect(form.submissionEvents[0]).toEqual({
+      ...validSubmissionEvent,
+      conditionallyExecute: false,
+      requiresAllConditionallyExecutePredicates: false,
+      configuration: {
+        ...validSubmissionEvent.configuration,
+        lumin: {
+          ...validSubmissionEvent.configuration.lumin,
+          emailSubject: {
+            type: 'VALUE',
+            value: 'Please sign',
+          },
+          emailTitle: {
+            type: 'VALUE',
+            value: 'Employment agreement',
+          },
+          mergeTagMapping,
+          fieldMapping,
+          variableMapping,
+        },
+      },
+    })
   })
 })
 

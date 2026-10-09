@@ -346,6 +346,7 @@ export const formWorkflowEventTypes: SubmissionEventTypes.FormWorkflowEventType[
     'EXCEL_ADD_ROW',
     'SYMPHONY_3_SMART_GLUE',
     'SALESFORCE_CREATE_OBJECT_RECORD',
+    'LUMIN_SIGN_REQUEST_SIGNATURE',
   ]
 
 const entraApplicationKeys = {
@@ -645,6 +646,113 @@ export const WorkflowEventSchema = Joi.object().keys({
         pdfConfigurations: Joi.array().items(
           Joi.object().keys(pdfSubmissionEventConfiguration),
         ),
+      }),
+    })
+    .when('type', {
+      is: 'LUMIN_SIGN_REQUEST_SIGNATURE',
+      then: Joi.object().keys({
+        integrationKeyId: Joi.string().required(),
+        lumin: Joi.object()
+          .keys({
+            template: Joi.object({
+              id: Joi.string().required(),
+              name: Joi.string().required(),
+            }).required(),
+            signers: Joi.array()
+              .items(
+                Joi.object({
+                  signerRole: Joi.string().required(),
+                  name: Joi.object()
+                    .keys(
+                      generateFormWorkflowEventElementMappingKeys(
+                        'LuminSignSignerNameMapping',
+                        [],
+                      ),
+                    )
+                    .id('LuminSignSignerNameMapping')
+                    .required(),
+                  emailAddress: Joi.object()
+                    .keys(
+                      generateFormWorkflowEventElementMappingKeys(
+                        'LuminSignSignerEmailMapping',
+                        [],
+                      ),
+                    )
+                    .id('LuminSignSignerEmailMapping')
+                    .required(),
+                }),
+              )
+              .min(1)
+              .required(),
+            title: Joi.object()
+              .keys(
+                generateFormWorkflowEventElementMappingKeys(
+                  'LuminSignTitleMapping',
+                  [],
+                ),
+              )
+              .id('LuminSignTitleMapping')
+              .required(),
+            expiresAt: Joi.object()
+              .keys(
+                generateFormWorkflowEventElementMappingKeys(
+                  'LuminSignExpiresAtMapping',
+                  [],
+                ),
+              )
+              .id('LuminSignExpiresAtMapping')
+              .required(),
+            emailSubject: Joi.object()
+              .keys(
+                generateFormWorkflowEventElementMappingKeys(
+                  'LuminSignEmailSubjectMapping',
+                  [],
+                ),
+              )
+              .id('LuminSignEmailSubjectMapping'),
+            emailTitle: Joi.object()
+              .keys(
+                generateFormWorkflowEventElementMappingKeys(
+                  'LuminSignEmailTitleMapping',
+                  [],
+                ),
+              )
+              .id('LuminSignEmailTitleMapping'),
+            mergeTagMapping: Joi.array()
+              .items(
+                Joi.object({
+                  luminMergeTagName: Joi.string().required(),
+                  ...generateFormWorkflowEventElementMappingKeys(
+                    'LuminSignMergeTagMapping',
+                    [],
+                  ),
+                }).id('LuminSignMergeTagMapping'),
+              )
+              .default([]),
+            fieldMapping: Joi.array()
+              .items(
+                Joi.object({
+                  luminFieldName: Joi.string().required(),
+                  ...generateFormWorkflowEventElementMappingKeys(
+                    'LuminSignFieldMapping',
+                    [],
+                  ),
+                }).id('LuminSignFieldMapping'),
+              )
+              .default([]),
+            variableMapping: Joi.array()
+              .items(
+                Joi.object({
+                  luminVariableName: Joi.string().required(),
+                  ...generateFormWorkflowEventElementMappingKeys(
+                    'LuminSignVariableMapping',
+                    [],
+                  ),
+                }).id('LuminSignVariableMapping'),
+              )
+              .default([]),
+          })
+          .required(),
       }),
     }),
   ...formEventBaseSchema,
