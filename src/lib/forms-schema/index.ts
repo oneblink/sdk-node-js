@@ -346,7 +346,7 @@ export const formWorkflowEventTypes: SubmissionEventTypes.FormWorkflowEventType[
     'EXCEL_ADD_ROW',
     'SYMPHONY_3_SMART_GLUE',
     'SALESFORCE_CREATE_OBJECT_RECORD',
-    'LUMIN_SIGN_REQUEST_SIGNATURE',
+    'LUMIN_REQUEST_SIGNATURE',
   ]
 
 const entraApplicationKeys = {
@@ -649,7 +649,7 @@ export const WorkflowEventSchema = Joi.object().keys({
       }),
     })
     .when('type', {
-      is: 'LUMIN_SIGN_REQUEST_SIGNATURE',
+      is: 'LUMIN_REQUEST_SIGNATURE',
       then: Joi.object().keys({
         integrationKeyId: Joi.string().required(),
         lumin: Joi.object()
@@ -665,20 +665,20 @@ export const WorkflowEventSchema = Joi.object().keys({
                   name: Joi.object()
                     .keys(
                       generateFormWorkflowEventElementMappingKeys(
-                        'LuminSignSignerNameMapping',
+                        'LuminSignerNameMapping',
                         [],
                       ),
                     )
-                    .id('LuminSignSignerNameMapping')
+                    .id('LuminSignerNameMapping')
                     .required(),
                   emailAddress: Joi.object()
                     .keys(
                       generateFormWorkflowEventElementMappingKeys(
-                        'LuminSignSignerEmailMapping',
+                        'LuminSignerEmailMapping',
                         [],
                       ),
                     )
-                    .id('LuminSignSignerEmailMapping')
+                    .id('LuminSignerEmailMapping')
                     .required(),
                 }),
               )
@@ -687,46 +687,46 @@ export const WorkflowEventSchema = Joi.object().keys({
             title: Joi.object()
               .keys(
                 generateFormWorkflowEventElementMappingKeys(
-                  'LuminSignTitleMapping',
+                  'LuminTitleMapping',
                   [],
                 ),
               )
-              .id('LuminSignTitleMapping')
+              .id('LuminTitleMapping')
               .required(),
             expiresAt: Joi.object()
               .keys(
                 generateFormWorkflowEventElementMappingKeys(
-                  'LuminSignExpiresAtMapping',
+                  'LuminExpiresAtMapping',
                   [],
                 ),
               )
-              .id('LuminSignExpiresAtMapping')
+              .id('LuminExpiresAtMapping')
               .required(),
             emailSubject: Joi.object()
               .keys(
                 generateFormWorkflowEventElementMappingKeys(
-                  'LuminSignEmailSubjectMapping',
+                  'LuminEmailSubjectMapping',
                   [],
                 ),
               )
-              .id('LuminSignEmailSubjectMapping'),
+              .id('LuminEmailSubjectMapping'),
             emailTitle: Joi.object()
               .keys(
                 generateFormWorkflowEventElementMappingKeys(
-                  'LuminSignEmailTitleMapping',
+                  'LuminEmailTitleMapping',
                   [],
                 ),
               )
-              .id('LuminSignEmailTitleMapping'),
+              .id('LuminEmailTitleMapping'),
             mergeTagMapping: Joi.array()
               .items(
                 Joi.object({
                   luminMergeTagName: Joi.string().required(),
                   ...generateFormWorkflowEventElementMappingKeys(
-                    'LuminSignMergeTagMapping',
+                    'LuminMergeTagMapping',
                     [],
                   ),
-                }).id('LuminSignMergeTagMapping'),
+                }).id('LuminMergeTagMapping'),
               )
               .default([]),
             fieldMapping: Joi.array()
@@ -734,10 +734,10 @@ export const WorkflowEventSchema = Joi.object().keys({
                 Joi.object({
                   luminFieldName: Joi.string().required(),
                   ...generateFormWorkflowEventElementMappingKeys(
-                    'LuminSignFieldMapping',
+                    'LuminFieldMapping',
                     [],
                   ),
-                }).id('LuminSignFieldMapping'),
+                }).id('LuminFieldMapping'),
               )
               .default([]),
             variableMapping: Joi.array()
@@ -745,10 +745,10 @@ export const WorkflowEventSchema = Joi.object().keys({
                 Joi.object({
                   luminVariableName: Joi.string().required(),
                   ...generateFormWorkflowEventElementMappingKeys(
-                    'LuminSignVariableMapping',
+                    'LuminVariableMapping',
                     [],
                   ),
-                }).id('LuminSignVariableMapping'),
+                }).id('LuminVariableMapping'),
               )
               .default([]),
           })
