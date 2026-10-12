@@ -271,7 +271,7 @@ export const validateFormEvent = ({
       })
       break
     }
-    case 'LUMIN_SIGN_REQUEST_SIGNATURE': {
+    case 'LUMIN_REQUEST_SIGNATURE': {
       const { lumin } = formEvent.configuration
 
       validateFormElementMappings({
