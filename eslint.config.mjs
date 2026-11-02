@@ -15,6 +15,16 @@ const compat = new FlatCompat({
   allConfig: js.configs.all,
 })
 
+const pluginSecurityStrict = {
+  ...pluginSecurity.configs.recommended,
+  rules: Object.fromEntries(
+    Object.keys(pluginSecurity.configs.recommended.rules).map((rule) => [
+      rule,
+      'error',
+    ]),
+  ),
+}
+
 export default [
   {
     ignores: [
@@ -29,7 +39,7 @@ export default [
     'plugin:@typescript-eslint/recommended',
     'prettier',
   ),
-  pluginSecurity.configs.recommended,
+  pluginSecurityStrict,
   {
     plugins: {
       prettier,
