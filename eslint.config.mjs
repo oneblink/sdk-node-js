@@ -5,7 +5,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import js from '@eslint/js'
 import { FlatCompat } from '@eslint/eslintrc'
-import pluginMicrosoftSdl from '@microsoft/eslint-plugin-sdl'
+import pluginSecurity from 'eslint-plugin-security'
 
 const _filename = fileURLToPath(import.meta.url)
 const _dirname = path.dirname(_filename)
@@ -24,12 +24,12 @@ export default [
       './local-tests/**',
     ],
   },
-  ...pluginMicrosoftSdl.configs.recommended,
   ...compat.extends(
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
   ),
+  pluginSecurity.configs.recommended,
   {
     plugins: {
       prettier,
