@@ -108,8 +108,7 @@ export function validateFormElementMappings({
   validatedFormElements: FormTypes.FormElement[]
   propertyName: string
 }) {
-  for (let mappingIndex = 0; mappingIndex < mappings.length; mappingIndex++) {
-    const mapping = mappings[mappingIndex]
+  for (const [mappingIndex, mapping] of mappings.entries()) {
     if (
       mapping.type === 'FORM_ELEMENT' ||
       mapping.type === 'FORM_FORM_ELEMENT' ||
@@ -185,12 +184,10 @@ export function validatePDFConfiguration({
   }
 
   if (pdfConfiguration.excludedElementIds) {
-    for (
-      let elementIdIndex = 0;
-      elementIdIndex < pdfConfiguration.excludedElementIds.length;
-      elementIdIndex++
-    ) {
-      const elementId = pdfConfiguration.excludedElementIds[elementIdIndex]
+    for (const [
+      elementIdIndex,
+      elementId,
+    ] of pdfConfiguration.excludedElementIds.entries()) {
       const element = formElementsService.findFormElement(
         validatedFormElements,
         ({ id }) => id === elementId,

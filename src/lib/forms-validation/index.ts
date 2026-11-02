@@ -142,12 +142,7 @@ function validateSummaryFormElements(
   formElements: FormTypes.FormElement[],
   propertyName: string,
 ) {
-  for (
-    let formElementIndex = 0;
-    formElementIndex < formElements.length;
-    formElementIndex++
-  ) {
-    const element = formElements[formElementIndex]
+  for (const [formElementIndex, element] of formElements.entries()) {
     switch (element.type) {
       case 'section':
       case 'page':
@@ -160,12 +155,10 @@ function validateSummaryFormElements(
         break
       }
       case 'summary': {
-        for (
-          let elementIdIndex = 0;
-          elementIdIndex < element.elementIds.length;
-          elementIdIndex++
-        ) {
-          const elementId = element.elementIds[elementIdIndex]
+        for (const [
+          elementIdIndex,
+          elementId,
+        ] of element.elementIds.entries()) {
           if (elementId === element.id) {
             throw new Error(
               `"${propertyName}[${formElementIndex}].elementIds" cannot contain a reference to itself`,
@@ -224,12 +217,7 @@ function validateConditionallyShowOptions(
   formElements: FormTypes.FormElement[],
   propertyName: string,
 ) {
-  for (
-    let formElementIndex = 0;
-    formElementIndex < formElements.length;
-    formElementIndex++
-  ) {
-    const element = formElements[formElementIndex]
+  for (const [formElementIndex, element] of formElements.entries()) {
     switch (element.type) {
       case 'section':
       case 'page':
@@ -254,9 +242,9 @@ function validateConditionallyShowOptions(
               `"${propertyName}[${formElementIndex}].conditionallyShowOptionsElementIds" must contain at least 1 item`,
             )
           }
-          for (let i = 0; i < options.length; i++) {
+          for (const [i, option] of options.entries()) {
             if (
-              options[i].attributes?.length !==
+              option.attributes?.length !==
               optionsElement.conditionallyShowOptionsElementIds?.length
             ) {
               throw new Error(
@@ -320,16 +308,18 @@ function validateWithFormSchema(form?: unknown):
     const rootFormElements = stripLayoutFormElements(validatedForm.elements)
 
     // Form Event References
-    const formEventPropsToValidate = [
-      'draftEvents',
-      'schedulingEvents',
-      'paymentEvents',
-      'submissionEvents',
-      'approvalEvents',
-    ] as const
-    for (const formEventProp of formEventPropsToValidate) {
+    const formEventsToValidate = {
+      draftEvents: validatedForm.draftEvents,
+      schedulingEvents: validatedForm.schedulingEvents,
+      paymentEvents: validatedForm.paymentEvents,
+      submissionEvents: validatedForm.submissionEvents,
+      approvalEvents: validatedForm.approvalEvents,
+    }
+    for (const [formEventProp, formEvents] of Object.entries(
+      formEventsToValidate,
+    )) {
       validateFormEvents({
-        formEvents: validatedForm[formEventProp] || [],
+        formEvents: formEvents || [],
         propertyName: formEventProp,
         rootFormElements,
         validatedFormElements: validatedForm.elements,
