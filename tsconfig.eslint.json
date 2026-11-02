@@ -2,6 +2,7 @@
   "extends": "./tsconfig.json",
   "include": ["./src", "./tests", "eslint.config.mjs"],
   "compilerOptions": {
-    "rootDir": "./"
+    "rootDir": "./",
+    "allowJs": true
   }
 }

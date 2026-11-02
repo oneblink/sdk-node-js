@@ -94,7 +94,7 @@ const options = Joi.when('optionsType', {
         label: Joi.string().required(),
         colour: Joi.string()
           .allow(null, '')
-          .regex(/^#[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$/),
+          .regex(/^#(?:[A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$/),
         attributes: Joi.array().items(
           Joi.object().keys({
             optionIds: Joi.array().required().items(Joi.string()),
@@ -387,6 +387,7 @@ export const storageType = Joi.string()
 const regexPattern = Joi.string().custom((value) => {
   if (!value) return
   try {
+    // eslint-disable-next-line security/detect-non-literal-regexp -- compiling the user's pattern is how it is validated
     new RegExp(value)
     return value
   } catch {

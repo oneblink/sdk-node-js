@@ -20,12 +20,7 @@ const validateFormEvents = ({
 }: BaseProps & {
   formEvents: SubmissionEventTypes.FormEvent[]
 }) => {
-  for (
-    let formEventIndex = 0;
-    formEventIndex < formEvents.length;
-    formEventIndex++
-  ) {
-    const formEvent = formEvents[formEventIndex]
+  for (const [formEventIndex, formEvent] of formEvents.entries()) {
     validateFormEvent({
       formEvent,
       propertyName: `${propertyName}[${formEventIndex}]`,
@@ -114,12 +109,10 @@ export const validateFormEvent = ({
       break
     }
     case 'CIVICA_CRM': {
-      for (
-        let mappingIndex = 0;
-        mappingIndex < formEvent.configuration.mapping.length;
-        mappingIndex++
-      ) {
-        const { formElementId } = formEvent.configuration.mapping[mappingIndex]
+      for (const [
+        mappingIndex,
+        { formElementId },
+      ] of formEvent.configuration.mapping.entries()) {
         if (!rootFormElements.some(({ id }) => id === formElementId)) {
           throw new Error(
             `"${propertyName}.configuration.mapping[${mappingIndex}].formElementId" (${formElementId}) does not exist in "elements"`,
@@ -367,14 +360,10 @@ function validateEmailTemplateMappingElements({
   propertyName?: string
 }) {
   if (formEvent.configuration.emailTemplate) {
-    for (
-      let mappingIndex = 0;
-      mappingIndex < formEvent.configuration.emailTemplate.mapping.length;
-      mappingIndex++
-    ) {
-      const mapping =
-        formEvent.configuration.emailTemplate.mapping[mappingIndex]
-
+    for (const [
+      mappingIndex,
+      mapping,
+    ] of formEvent.configuration.emailTemplate.mapping.entries()) {
       if (mapping.type === 'FORM_ELEMENT') {
         const element = formElementsService.findFormElement(
           validatedFormElements,
