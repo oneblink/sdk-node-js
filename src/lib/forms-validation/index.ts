@@ -370,6 +370,20 @@ function validateWithFormSchema(form?: unknown):
             formElements: validatedForm.elements,
           })
         }
+      } else if (step.type === 'PAYMENT') {
+        if (labels.includes(step.label)) {
+          throw new Error(
+            `"approvalSteps" contains a PAYMENT step with a "label" (${step.label}) property that is not unique`,
+          )
+        }
+        labels.push(step.label)
+        validateFormEvent({
+          formEvent: step.paymentEvent,
+          propertyName: `approvalSteps[${stepIndex}].paymentEvent`,
+          rootFormElements,
+          validatedFormElements: validatedForm.elements,
+          customPDFs: validatedForm.customPDFs,
+        })
       } else {
         if (labels.includes(step.label)) {
           throw new Error(

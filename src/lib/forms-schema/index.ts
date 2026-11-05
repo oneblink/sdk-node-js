@@ -305,6 +305,13 @@ export const PaymentEventSchema = Joi.object({
     }),
   ...formEventBaseSchema,
 })
+
+/** Payment step configuration. The step owns the label and conditional logic. */
+const approvalStepPaymentEventSchema = PaymentEventSchema.fork(
+  Object.keys(formEventBaseSchema),
+  () => Joi.any().strip(),
+)
+
 export const schedulingEventTypes: SubmissionEventTypes.FormSchedulingEventType[] =
   ['NYLAS']
 export const SchedulingEventSchema = Joi.object({
@@ -869,13 +876,7 @@ const approvalFormPrefillMappingRowSchema = Joi.object({
   approvalPath: approvalFormPrefillElementPathSchema.required(),
 })
 
-const approvalStepNodeProps = {
-  label: Joi.string().required(),
-  group: Joi.string().required(),
-  approvalFormId: Joi.number(),
-  approvalFormPrefillMappings: Joi.array()
-    .items(approvalFormPrefillMappingRowSchema)
-    .optional(),
+const approvalStepConditionalProps = {
   isConditional: Joi.boolean().default(false),
   requiresAllConditionalPredicates: Joi.boolean().default(false),
   conditionalPredicates: Joi.when('isConditional', {
@@ -883,6 +884,16 @@ const approvalStepNodeProps = {
     then: Joi.array().min(1).items(ConditionalPredicateSchema).required(),
     otherwise: Joi.any().strip(),
   }),
+}
+
+const approvalStepNodeProps = {
+  label: Joi.string().required(),
+  group: Joi.string().required(),
+  approvalFormId: Joi.number(),
+  approvalFormPrefillMappings: Joi.array()
+    .items(approvalFormPrefillMappingRowSchema)
+    .optional(),
+  ...approvalStepConditionalProps,
   hideApprovalDenyButton: Joi.boolean(),
   editableFormElementIds: Joi.array().items(Joi.string().required()).min(1),
 }
@@ -928,6 +939,13 @@ const formSchema = Joi.object().keys({
             .min(1)
             .required(),
           ...approvalStepCommonProps,
+        }).required(),
+        Joi.object({
+          type: Joi.string().valid('PAYMENT').required(),
+          label: Joi.string().required(),
+          group: Joi.string().required(),
+          paymentEvent: approvalStepPaymentEventSchema.required(),
+          ...approvalStepConditionalProps,
         }).required(),
       ]),
     ),

@@ -9629,6 +9629,110 @@ describe('Approval Step Nodes', () => {
       '"approvalSteps" contains a CONCURRENT step with a "label" (Label 1) property that is not unique',
     )
   })
+  it('should strip form event base properties from a payment step payment event', () => {
+    const paymentEventConfiguration = {
+      amountType: 'NUMBER',
+      paymentAmount: 25.5,
+      environmentId: 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1',
+    }
+    const formEventBaseProperties = {
+      label: 'Card payment',
+      isRetryable: true,
+      conditionallyExecute: true,
+      requiresAllConditionallyExecutePredicates: true,
+      conditionallyExecutePredicates: [{ not: 'a predicate' }],
+    }
+    const { error, value } = formSchema.validate({
+      ...form,
+      paymentEvents: [
+        {
+          type: 'BPOINT',
+          ...formEventBaseProperties,
+          conditionallyExecute: false,
+          conditionallyExecutePredicates: [{ not: 'a predicate' }],
+          configuration: paymentEventConfiguration,
+        },
+      ],
+      approvalSteps: [
+        {
+          type: 'PAYMENT',
+          label: 'Pay',
+          group: 'Finance',
+          isConditional: true,
+          requiresAllConditionalPredicates: true,
+          conditionalPredicates: [
+            {
+              elementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+              type: 'VALUE',
+              hasValue: true,
+            },
+          ],
+          paymentEvent: {
+            type: 'BPOINT',
+            ...formEventBaseProperties,
+            configuration: paymentEventConfiguration,
+          },
+        },
+      ],
+    })
+
+    expect(error).toBe(undefined)
+    expect(value.paymentEvents).toEqual([
+      {
+        type: 'BPOINT',
+        label: 'Card payment',
+        isRetryable: true,
+        conditionallyExecute: false,
+        requiresAllConditionallyExecutePredicates: true,
+        configuration: paymentEventConfiguration,
+      },
+    ])
+    expect(value.approvalSteps).toEqual([
+      {
+        type: 'PAYMENT',
+        label: 'Pay',
+        group: 'Finance',
+        isConditional: true,
+        requiresAllConditionalPredicates: true,
+        conditionalPredicates: [
+          {
+            elementId: 'ff9b04c3-f2ad-4994-a525-e7189eb67a79',
+            type: 'VALUE',
+            hasValue: true,
+          },
+        ],
+        paymentEvent: {
+          type: 'BPOINT',
+          configuration: paymentEventConfiguration,
+        },
+      },
+    ])
+  })
+
+  it('should still reject an incomplete payment step payment event', () => {
+    const { error } = formSchema.validate({
+      ...form,
+      approvalSteps: [
+        {
+          type: 'PAYMENT',
+          label: 'Pay',
+          group: 'Finance',
+          paymentEvent: {
+            type: 'BPOINT',
+            configuration: {
+              amountType: 'NUMBER',
+              paymentAmount: 25.5,
+            },
+          },
+        },
+      ],
+    })
+
+    expect(error?.details[0]?.context?.message).toContain(
+      '"approvalSteps[0].paymentEvent.configuration.environmentId" is required',
+    )
+  })
+
   it('should throw an error when trying to pass duplicate labels (standard)', () => {
     expect(() => {
       validateFormThrowError({
