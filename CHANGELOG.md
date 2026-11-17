@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.2.7] - 2026-11-17
+
 ### Added
 
 - `isHidden` and `hiddenFrom` to page element validation schema
@@ -14,6 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - approval payment steps to form validation schema
+
+### Dependencies
+
+- update @oneblink/sdk-core to [10.3.0-beta.1](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md) (from [10.1.0-beta.9](https://github.com/oneblink/sdk-core-js/blob/master/CHANGELOG.md))
+
+- update @oneblink/storage to [9.0.2-beta.1](https://github.com/oneblink/storage/blob/master/CHANGELOG.md) (from [9.0.0-beta.4](https://github.com/oneblink/storage/blob/master/CHANGELOG.md))
+
+- update nodemailer to [10.3.1](https://github.com/nodemailer/nodemailer/releases/tag/v10.3.1) (from [9.0.3](https://github.com/nodemailer/nodemailer/releases/tag/v9.0.3))
 
 ## [13.2.6] - 2026-10-15
 
