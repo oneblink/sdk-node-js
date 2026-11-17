@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { elementSchema } from '../../src/lib/forms-schema'
+import { elementSchema, pageElementSchema } from '../../src/lib/forms-schema'
 
 const baseTextElement = {
   id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
@@ -69,6 +69,74 @@ describe('hiddenFrom form element property', () => {
     })
     expect(error?.message).toContain(
       '"hiddenFrom[1]" contains a duplicate value',
+    )
+  })
+})
+
+const basePageElement = {
+  id: '6d8f0a4e-1c2b-4a55-9e10-0a1b2c3d4e5f',
+  type: 'page',
+  label: 'Approver',
+  elements: [
+    {
+      id: 'a5289278-5cb4-4103-90b6-f67ffe84dee7',
+      type: 'text',
+      name: 'notes',
+      label: 'Notes',
+    },
+  ],
+}
+
+describe('hiddenFrom page property', () => {
+  test('should allow a page hidden from submitters', () => {
+    const { error, value } = pageElementSchema.validate({
+      ...basePageElement,
+      isHidden: true,
+      hiddenFrom: ['SUBMITTER'],
+    })
+    expect(error).toBeFalsy()
+    expect(value.isHidden).toBe(true)
+    expect(value.hiddenFrom).toEqual(['SUBMITTER'])
+  })
+
+  test('should allow a page hidden from approvers', () => {
+    const { error, value } = pageElementSchema.validate({
+      ...basePageElement,
+      isHidden: true,
+      hiddenFrom: ['APPROVER'],
+    })
+    expect(error).toBeFalsy()
+    expect(value.hiddenFrom).toEqual(['APPROVER'])
+  })
+
+  test('should allow a page hidden from both audiences', () => {
+    const { error, value } = pageElementSchema.validate({
+      ...basePageElement,
+      isHidden: true,
+      hiddenFrom: ['SUBMITTER', 'APPROVER'],
+    })
+    expect(error).toBeFalsy()
+    expect(value.hiddenFrom).toEqual(['SUBMITTER', 'APPROVER'])
+  })
+
+  test('should strip hiddenFrom on a page when isHidden is not true', () => {
+    const { error, value } = pageElementSchema.validate({
+      ...basePageElement,
+      isHidden: false,
+      hiddenFrom: ['SUBMITTER'],
+    })
+    expect(error).toBeFalsy()
+    expect(value.hiddenFrom).toBeUndefined()
+  })
+
+  test('should reject an invalid page hiddenFrom audience', () => {
+    const { error } = pageElementSchema.validate({
+      ...basePageElement,
+      isHidden: true,
+      hiddenFrom: ['REVIEWER'],
+    })
+    expect(error?.message).toContain(
+      '"hiddenFrom[0]" must be one of [SUBMITTER, APPROVER]',
     )
   })
 })

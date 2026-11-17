@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `isHidden` and `hiddenFrom` to page element validation schema
+
+### Added
+
 - approval payment steps to form validation schema
 
 ## [13.2.6] - 2026-10-15
