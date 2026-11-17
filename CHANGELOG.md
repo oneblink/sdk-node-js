@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `Forms.getCPPayPayment()`
+- `Forms.getNSWGovPayPayment()`
+- `Approvals.getCPPayPayment()`
+- `Approvals.getNSWGovPayPayment()`
+
 ## [13.2.7] - 2026-11-17
 
 ### Added
