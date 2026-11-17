@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - approval payment steps to form validation schema
+- `Forms.getCPPayPayment()`
+- `Forms.getNSWGovPayPayment()`
+- `Approvals.getCPPayPayment()`
+- `Approvals.getNSWGovPayPayment()`
 
 ### Dependencies
 

@@ -1,4 +1,5 @@
 import OneBlinkAPI from '../lib/one-blink-api.js'
+import { SubmissionTypes } from '@oneblink/types'
 import {
   ConstructorOptions,
   FormApprovalFlowInstanceResponse,
@@ -122,6 +123,62 @@ export default class Approvals extends OneBlinkAPI {
       throw new Error('"id" must be a string and is required')
     }
     return await super.getRequest(`/form-submission-approvals/${id}`)
+  }
+
+  /**
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that was submitted.
+   *
+   * **Minimum Role Permission**
+   *
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const payment = await approvals.getCPPayPayment(
+   *     'aaaaaaaa-bbbb-4543-cccc-addddd543454',
+   *   )
+   *
+   * @param id The id of the form submission approval
+   * @returns The successful CP Pay payment for the approval step
+   */
+  async getCPPayPayment(
+    id: string,
+  ): Promise<SubmissionTypes.FormSubmissionPayment> {
+    if (!id) {
+      throw new Error('"id" must be a string and is required')
+    }
+    return await super.getRequest(
+      `/form-submission-approvals/${id}/payments/cp-pay`,
+    )
+  }
+
+  /**
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that was submitted.
+   *
+   * **Minimum Role Permission**
+   *
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const payment = await approvals.getNSWGovPayPayment(
+   *     'aaaaaaaa-bbbb-4543-cccc-addddd543454',
+   *   )
+   *
+   * @param id The id of the form submission approval
+   * @returns The successful NSW Gov Pay payment for the approval step
+   */
+  async getNSWGovPayPayment(
+    id: string,
+  ): Promise<SubmissionTypes.FormSubmissionPayment> {
+    if (!id) {
+      throw new Error('"id" must be a string and is required')
+    }
+    return await super.getRequest(
+      `/form-submission-approvals/${id}/payments/nsw-gov-pay`,
+    )
   }
 
   /**
