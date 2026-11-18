@@ -44,16 +44,16 @@ function validatePagesVisibleToAudiences(form: FormTypes.NewForm) {
   if (!pages.length) {
     return
   }
-  const audiences = PAGE_AUDIENCES.filter((audience) =>
+  const missingAudiences = PAGE_AUDIENCES.filter((audience) =>
     pages.every((page) => isPageHiddenFromAudience(page, audience)),
   )
-  if (!audiences.length) {
+  if (!missingAudiences.length) {
     return
   }
   const audienceLabel =
-    audiences.length === 2
+    missingAudiences.length === 2
       ? 'submitters and approvers'
-      : audiences[0] === 'SUBMITTER'
+      : missingAudiences[0] === 'SUBMITTER'
         ? 'submitters'
         : 'approvers'
   throw new Error(`At least one page must stay visible to ${audienceLabel}.`)
