@@ -7,6 +7,7 @@ import {
 } from './common.js'
 import elementSchema from './element-schema.js'
 import {
+  baseSchemas,
   conditionallyShowPredicates,
   ConditionalPredicateFormElementSchema,
   ConditionalPredicateSchema,
@@ -772,6 +773,8 @@ const pageElementSchema = Joi.object().keys({
   conditionallyShow: Joi.bool().default(false),
   conditionallyShowPredicates: conditionallyShowPredicates,
   requiresAllConditionallyShowPredicates: Joi.bool().default(false),
+  isHidden: baseSchemas.isHidden,
+  hiddenFrom: baseSchemas.hiddenFrom,
   elements: Joi.array()
     .required()
     .items(elementSchema)

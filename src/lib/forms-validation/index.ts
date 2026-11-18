@@ -19,6 +19,46 @@ import validateFormEvents, {
 } from './validate-form-events.js'
 import Joi from 'joi'
 
+const PAGE_AUDIENCES = ['SUBMITTER', 'APPROVER'] as const
+
+function isPageHiddenFromAudience(
+  page: FormTypes.PageElement,
+  audience: (typeof PAGE_AUDIENCES)[number],
+): boolean {
+  if (!page.isHidden) {
+    return false
+  }
+  if (!page.hiddenFrom?.length) {
+    return true
+  }
+  return page.hiddenFrom.includes(audience)
+}
+
+function validatePagesVisibleToAudiences(form: FormTypes.NewForm) {
+  if (!form.isMultiPage) {
+    return
+  }
+  const pages = form.elements.filter(
+    (element): element is FormTypes.PageElement => element.type === 'page',
+  )
+  if (!pages.length) {
+    return
+  }
+  const missingAudiences = PAGE_AUDIENCES.filter((audience) =>
+    pages.every((page) => isPageHiddenFromAudience(page, audience)),
+  )
+  if (!missingAudiences.length) {
+    return
+  }
+  const audienceLabel =
+    missingAudiences.length === 2
+      ? 'submitters and approvers'
+      : missingAudiences[0] === 'SUBMITTER'
+        ? 'submitters'
+        : 'approvers'
+  throw new Error(`At least one page must stay visible to ${audienceLabel}.`)
+}
+
 function validateEditableFormElementIds({
   editableFormElementIds,
   propertyName,
@@ -276,6 +316,8 @@ function validateWithFormSchema(form?: unknown):
   try {
     // validate element names are unique (including elements without a name with children)
     validateElementNamesAcrossNestedElements(validatedForm.elements, 'elements')
+
+    validatePagesVisibleToAudiences(validatedForm)
 
     const { publishStartDate, publishEndDate } = validatedForm
     if (!!publishStartDate && !!publishEndDate) {
