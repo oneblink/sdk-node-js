@@ -11,7 +11,7 @@
 <li><a href="../modules/oneblink.html">oneblink</a></li>
 <li><a href="" aria-current="page">Approvals</a></li></ul>
 <h1>Class Approvals</h1></div>
-<section class="tsd-panel tsd-hierarchy" data-refl="791">
+<section class="tsd-panel tsd-hierarchy" data-refl="797">
 <h4>Hierarchy</h4>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><span class="tsd-signature-type">default</span>
@@ -28,8 +28,10 @@
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading tsd-anchor-link" id="methods">Methods<a href="#methods" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-index-list"><a href="#getformapprovalflowinstance" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Form<wbr/>Approval<wbr/>Flow<wbr/>Instance</span></a>
+<div class="tsd-index-list"><a href="#getcppaypayment" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>CP<wbr/>Pay<wbr/>Payment</span></a>
+<a href="#getformapprovalflowinstance" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Form<wbr/>Approval<wbr/>Flow<wbr/>Instance</span></a>
 <a href="#getformsubmissionapproval" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Form<wbr/>Submission<wbr/>Approval</span></a>
+<a href="#getnswgovpaypayment" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>NSW<wbr/>Gov<wbr/>Pay<wbr/>Payment</span></a>
 <a href="#searchformsubmissionadministrationapprovals" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>search<wbr/>Form<wbr/>Submission<wbr/>Administration<wbr/>Approvals</span></a>
 </div></section></div></details></section></section>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Constructors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -57,6 +59,31 @@
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
 <section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="getcppaypayment"><span>get<wbr/>CP<wbr/>Pay<wbr/>Payment</span><a href="#getcppaypayment" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="getcppaypayment-1"><span class="tsd-kind-call-signature">getCPPayPayment</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/types.SubmissionTypes.FormSubmissionPayment.html" class="tsd-signature-type tsd-kind-type-alias">FormSubmissionPayment</a><span class="tsd-signature-symbol">&gt;</span><a href="#getcppaypayment-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p><strong>Submission Data Key Supported</strong></p>
+<p>Key must be assigned to the form that was submitted.</p>
+<p><strong>Minimum Role Permission</strong></p>
+<p>Submission Data: <em>Read Only</em></p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">id</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>The id of the form submission approval</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/types.SubmissionTypes.FormSubmissionPayment.html" class="tsd-signature-type tsd-kind-type-alias">FormSubmissionPayment</a><span class="tsd-signature-symbol">&gt;</span></h4><p>The successful CP Pay payment for the approval step</p>
+
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-example">
+<h4 class="tsd-anchor-link" id="example-1">Example<a href="#example-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-7">payment</span><span class="hl-1"> = </span><span class="hl-4">await</span><span class="hl-1"> </span><span class="hl-5">approvals</span><span class="hl-1">.</span><span class="hl-0">getCPPayPayment</span><span class="hl-1">(</span><br/><span class="hl-1">    </span><span class="hl-2">&#39;aaaaaaaa-bbbb-4543-cccc-addddd543454&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  )</span>
+</code><button type="button">Copy</button></pre>
+
+</div></div></div></li></ul></section>
+<section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="getformapprovalflowinstance"><span>get<wbr/>Form<wbr/>Approval<wbr/>Flow<wbr/>Instance</span><a href="#getformapprovalflowinstance" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
@@ -76,7 +103,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/types.FormApprovalFlowInstanceResponse.html" class="tsd-signature-type tsd-kind-type-alias">FormApprovalFlowInstanceResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-example">
-<h4 class="tsd-anchor-link" id="example-1">Example<a href="#example-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-7">formSubmissionApproval</span><span class="hl-1"> =</span><br/><span class="hl-1">    </span><span class="hl-4">await</span><span class="hl-1"> </span><span class="hl-5">approvals</span><span class="hl-1">.</span><span class="hl-0">getFormApprovalFlowInstance</span><span class="hl-1">(</span><span class="hl-8">1</span><span class="hl-1">)</span><br/><span class="hl-1">  </span><span class="hl-6">// Use data here...</span>
+<h4 class="tsd-anchor-link" id="example-2">Example<a href="#example-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-7">formSubmissionApproval</span><span class="hl-1"> =</span><br/><span class="hl-1">    </span><span class="hl-4">await</span><span class="hl-1"> </span><span class="hl-5">approvals</span><span class="hl-1">.</span><span class="hl-0">getFormApprovalFlowInstance</span><span class="hl-1">(</span><span class="hl-8">1</span><span class="hl-1">)</span><br/><span class="hl-1">  </span><span class="hl-6">// Use data here...</span>
 </code><button type="button">Copy</button></pre>
 
 </div></div></div></li></ul></section>
@@ -100,7 +127,32 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/types.FormSubmissionApprovalResponse.html" class="tsd-signature-type tsd-kind-type-alias">FormSubmissionApprovalResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-example">
-<h4 class="tsd-anchor-link" id="example-2">Example<a href="#example-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-7">formSubmissionApproval</span><span class="hl-1"> =</span><br/><span class="hl-1">    </span><span class="hl-4">await</span><span class="hl-1"> </span><span class="hl-5">approvals</span><span class="hl-1">.</span><span class="hl-0">getFormSubmissionApproval</span><span class="hl-1">(</span><br/><span class="hl-1">      </span><span class="hl-2">&#39;aaaaaaaa-bbbb-4543-cccc-addddd543454&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    )</span><br/><span class="hl-1">  </span><span class="hl-6">// Use data here...</span>
+<h4 class="tsd-anchor-link" id="example-3">Example<a href="#example-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-7">formSubmissionApproval</span><span class="hl-1"> =</span><br/><span class="hl-1">    </span><span class="hl-4">await</span><span class="hl-1"> </span><span class="hl-5">approvals</span><span class="hl-1">.</span><span class="hl-0">getFormSubmissionApproval</span><span class="hl-1">(</span><br/><span class="hl-1">      </span><span class="hl-2">&#39;aaaaaaaa-bbbb-4543-cccc-addddd543454&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    )</span><br/><span class="hl-1">  </span><span class="hl-6">// Use data here...</span>
+</code><button type="button">Copy</button></pre>
+
+</div></div></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="getnswgovpaypayment"><span>get<wbr/>NSW<wbr/>Gov<wbr/>Pay<wbr/>Payment</span><a href="#getnswgovpaypayment" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="getnswgovpaypayment-1"><span class="tsd-kind-call-signature">getNSWGovPayPayment</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/types.SubmissionTypes.FormSubmissionPayment.html" class="tsd-signature-type tsd-kind-type-alias">FormSubmissionPayment</a><span class="tsd-signature-symbol">&gt;</span><a href="#getnswgovpaypayment-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p><strong>Submission Data Key Supported</strong></p>
+<p>Key must be assigned to the form that was submitted.</p>
+<p><strong>Minimum Role Permission</strong></p>
+<p>Submission Data: <em>Read Only</em></p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">id</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>The id of the form submission approval</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/types.SubmissionTypes.FormSubmissionPayment.html" class="tsd-signature-type tsd-kind-type-alias">FormSubmissionPayment</a><span class="tsd-signature-symbol">&gt;</span></h4><p>The successful NSW Gov Pay payment for the approval step</p>
+
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-example">
+<h4 class="tsd-anchor-link" id="example-4">Example<a href="#example-4" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-7">payment</span><span class="hl-1"> = </span><span class="hl-4">await</span><span class="hl-1"> </span><span class="hl-5">approvals</span><span class="hl-1">.</span><span class="hl-0">getNSWGovPayPayment</span><span class="hl-1">(</span><br/><span class="hl-1">    </span><span class="hl-2">&#39;aaaaaaaa-bbbb-4543-cccc-addddd543454&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  )</span>
 </code><button type="button">Copy</button></pre>
 
 </div></div></div></li></ul></section>
@@ -181,7 +233,7 @@ for pagination</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/types.FormSubmissionsAdministrationApprovalsResponse.html" class="tsd-signature-type tsd-kind-type-alias">FormSubmissionsAdministrationApprovalsResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-example">
-<h4 class="tsd-anchor-link" id="example-3">Example<a href="#example-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-3">const</span><span class="hl-1"> { </span><span class="hl-7">approvals</span><span class="hl-1">, </span><span class="hl-7">meta</span><span class="hl-1"> } =</span><br/><span class="hl-1">    </span><span class="hl-4">await</span><span class="hl-1"> </span><span class="hl-5">approvals</span><span class="hl-1">.</span><span class="hl-0">searchFormSubmissionAdministrationApprovals</span><span class="hl-1">({</span><br/><span class="hl-1">      </span><span class="hl-5">formsAppId:</span><span class="hl-1"> </span><span class="hl-8">1</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-5">formId:</span><span class="hl-1"> </span><span class="hl-8">2</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-5">limit:</span><span class="hl-1"> </span><span class="hl-8">50</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-5">offset:</span><span class="hl-1"> </span><span class="hl-8">0</span><span class="hl-1">,</span><br/><span class="hl-1">    })</span>
+<h4 class="tsd-anchor-link" id="example-5">Example<a href="#example-5" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-3">const</span><span class="hl-1"> { </span><span class="hl-7">approvals</span><span class="hl-1">, </span><span class="hl-7">meta</span><span class="hl-1"> } =</span><br/><span class="hl-1">    </span><span class="hl-4">await</span><span class="hl-1"> </span><span class="hl-5">approvals</span><span class="hl-1">.</span><span class="hl-0">searchFormSubmissionAdministrationApprovals</span><span class="hl-1">({</span><br/><span class="hl-1">      </span><span class="hl-5">formsAppId:</span><span class="hl-1"> </span><span class="hl-8">1</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-5">formId:</span><span class="hl-1"> </span><span class="hl-8">2</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-5">limit:</span><span class="hl-1"> </span><span class="hl-8">50</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-5">offset:</span><span class="hl-1"> </span><span class="hl-8">0</span><span class="hl-1">,</span><br/><span class="hl-1">    })</span>
 </code><button type="button">Copy</button></pre>
 
 </div></div></div></li></ul></section></section></details></div>
@@ -203,7 +255,7 @@ for pagination</p>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Constructors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Constructors</summary>
 <div><a href="#constructor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Constructor"><use href="../assets/icons.svg#icon-512"></use></svg><span>constructor</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Methods</summary>
-<div><a href="#getformapprovalflowinstance"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Form<wbr/>Approval<wbr/>Flow<wbr/>Instance</span></a><a href="#getformsubmissionapproval"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Form<wbr/>Submission<wbr/>Approval</span></a><a href="#searchformsubmissionadministrationapprovals"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>search<wbr/>Form<wbr/>Submission<wbr/>Administration<wbr/>Approvals</span></a></div></details></div></details></div>
+<div><a href="#getcppaypayment"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>CP<wbr/>Pay<wbr/>Payment</span></a><a href="#getformapprovalflowinstance"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Form<wbr/>Approval<wbr/>Flow<wbr/>Instance</span></a><a href="#getformsubmissionapproval"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Form<wbr/>Submission<wbr/>Approval</span></a><a href="#getnswgovpaypayment"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>NSW<wbr/>Gov<wbr/>Pay<wbr/>Payment</span></a><a href="#searchformsubmissionadministrationapprovals"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>search<wbr/>Form<wbr/>Submission<wbr/>Administration<wbr/>Approvals</span></a></div></details></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../modules.html">@oneblink/sdk</a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container">
