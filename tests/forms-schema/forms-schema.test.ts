@@ -5038,6 +5038,170 @@ describe('NSW_GOV_PAY submission event', () => {
   })
 })
 
+describe('STRIPE submission event', () => {
+  const elementId = 'b941ea2d-965c-4d40-8c1d-e5a231fc18b1'
+  const environmentId = '31042cfe-65e0-4a85-826b-ae6a2e48da11'
+  const validateWithStripeConfiguration = (configuration: unknown) =>
+    formSchema.validate(
+      {
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        tags: [],
+        elements: [
+          {
+            id: elementId,
+            name: 'Numbers',
+            label: 'Numbers',
+            type: 'number',
+            required: false,
+          },
+        ],
+        isAuthenticated: true,
+        paymentEvents: [{ type: 'STRIPE', configuration }],
+      },
+      { abortEarly: false },
+    )
+
+  test('should error for STRIPE submission event not passing a payment amount configuration', () => {
+    const { error } = validateWithStripeConfiguration({
+      environmentId,
+      productName: 'Product name',
+    })
+    expect(error?.message).toContain(
+      '"paymentEvents[0].configuration.elementId" is required',
+    )
+  })
+  test('should error for STRIPE submission event not passing "environmentId"', () => {
+    const { error } = validateWithStripeConfiguration({
+      elementId,
+      productName: 'Product name',
+    })
+    expect(error?.message).toContain(
+      '"paymentEvents[0].configuration.environmentId" is required',
+    )
+  })
+  test('should error for STRIPE submission event passing an "environmentId" that is not a uuid', () => {
+    const { error } = validateWithStripeConfiguration({
+      elementId,
+      environmentId: 'not-a-uuid',
+      productName: 'Product name',
+    })
+    expect(error?.message).toContain(
+      '"paymentEvents[0].configuration.environmentId" must be a valid GUID',
+    )
+  })
+  test('should error for STRIPE submission event not passing "productName"', () => {
+    const { error } = validateWithStripeConfiguration({
+      elementId,
+      environmentId,
+    })
+    expect(error?.message).toContain(
+      '"paymentEvents[0].configuration.productName" is required',
+    )
+  })
+  test('should error for STRIPE submission event passing unknown configuration', () => {
+    const { error } = validateWithStripeConfiguration({
+      elementId,
+      environmentId,
+      productName: 'Product name',
+      primaryAgencyId: environmentId,
+    })
+    expect(error?.message).toContain(
+      '"paymentEvents[0].configuration.primaryAgencyId" is not allowed',
+    )
+  })
+  test('should allow STRIPE submission event', () => {
+    const { error } = validateWithStripeConfiguration({
+      elementId,
+      environmentId,
+      productName: 'Product name',
+    })
+    expect(error).toBe(undefined)
+  })
+  test('should allow STRIPE submission event with a fixed payment amount', () => {
+    const { error } = validateWithStripeConfiguration({
+      amountType: 'NUMBER',
+      paymentAmount: 42,
+      environmentId,
+      productName: 'Product name',
+    })
+    expect(error).toBe(undefined)
+  })
+  test('should allow STRIPE payment display detail keys in element mappings', () => {
+    for (const key of [
+      'STRIPE_CHECKOUT_SESSION_ID',
+      'STRIPE_PAYMENT_INTENT_ID',
+      'STRIPE_CUSTOMER_EMAIL',
+      'STRIPE_CARD_BRAND',
+      'STRIPE_CREDIT_CARD_MASK',
+      'STRIPE_AMOUNT',
+      'STRIPE_CREATED_DATE_TIME',
+    ]) {
+      const { error } = formSchema.validate({
+        name: 'string',
+        description: 'string',
+        formsAppEnvironmentId: 1,
+        formsAppIds: [1],
+        organisationId: 'ORGANISATION_00000000001',
+        postSubmissionAction: 'FORMS_LIBRARY',
+        isMultiPage: false,
+        tags: [],
+        elements: [],
+        isAuthenticated: true,
+        submissionEvents: [
+          {
+            type: 'FRESHDESK_CREATE_TICKET',
+            configuration: {
+              mapping: [
+                {
+                  freshdeskFieldName: 'payment',
+                  type: 'PAYMENT_DETAIL',
+                  key,
+                },
+              ],
+            },
+          },
+        ],
+      })
+      expect(error).toBe(undefined)
+    }
+  })
+  test('should error for an unknown payment display detail key in element mappings', () => {
+    const { error } = formSchema.validate({
+      name: 'string',
+      description: 'string',
+      formsAppEnvironmentId: 1,
+      formsAppIds: [1],
+      organisationId: 'ORGANISATION_00000000001',
+      postSubmissionAction: 'FORMS_LIBRARY',
+      isMultiPage: false,
+      tags: [],
+      elements: [],
+      isAuthenticated: true,
+      submissionEvents: [
+        {
+          type: 'FRESHDESK_CREATE_TICKET',
+          configuration: {
+            mapping: [
+              {
+                freshdeskFieldName: 'payment',
+                type: 'PAYMENT_DETAIL',
+                key: 'STRIPE_UNKNOWN',
+              },
+            ],
+          },
+        },
+      ],
+    })
+    expect(error?.message).toContain('must be one of')
+  })
+})
+
 describe('CP_HCMS submission event', () => {
   const form = {
     name: 'string',

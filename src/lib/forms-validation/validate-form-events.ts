@@ -45,7 +45,8 @@ export const validateFormEvent = ({
     case 'CP_PAY':
     case 'WESTPAC_QUICK_STREAM':
     case 'BPOINT':
-    case 'NSW_GOV_PAY': {
+    case 'NSW_GOV_PAY':
+    case 'STRIPE': {
       const paymentAmountConfiguration: SubmissionEventTypes.FormPaymentEventAmountConfiguration =
         formEvent.configuration
       if ('elementId' in paymentAmountConfiguration) {

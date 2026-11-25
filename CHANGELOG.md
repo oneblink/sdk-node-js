@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `paymentStepEmailTemplateId` to form validation
+- `STRIPE` payment form event and Stripe payment display detail keys to form validation
+- `Forms.getStripePayment()`
+- `Approvals.getStripePayment()`
 
 ## [13.3.0] - 2026-11-19
 

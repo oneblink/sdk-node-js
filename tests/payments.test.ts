@@ -23,12 +23,16 @@ describe('payment retrieval', () => {
 
     await forms.getCPPayPayment(submissionId)
     await forms.getNSWGovPayPayment(submissionId)
+    await forms.getStripePayment(submissionId)
 
     expect(String(fetchMock.mock.calls[0][0])).toContain(
       `/form-submission-meta/${submissionId}/payments/cp-pay`,
     )
     expect(String(fetchMock.mock.calls[1][0])).toContain(
       `/form-submission-meta/${submissionId}/payments/nsw-gov-pay`,
+    )
+    expect(String(fetchMock.mock.calls[2][0])).toContain(
+      `/form-submission-meta/${submissionId}/payments/stripe`,
     )
   })
 
@@ -41,6 +45,9 @@ describe('payment retrieval', () => {
     await expect(forms.getNSWGovPayPayment('')).rejects.toThrow(
       'Must supply "submissionId" as a string',
     )
+    await expect(forms.getStripePayment('')).rejects.toThrow(
+      'Must supply "submissionId" as a string',
+    )
   })
 
   test('Approvals requests the successful approval payment', async () => {
@@ -50,12 +57,16 @@ describe('payment retrieval', () => {
 
     await approvals.getCPPayPayment(approvalId)
     await approvals.getNSWGovPayPayment(approvalId)
+    await approvals.getStripePayment(approvalId)
 
     expect(String(fetchMock.mock.calls[0][0])).toContain(
       `/form-submission-approvals/${approvalId}/payments/cp-pay`,
     )
     expect(String(fetchMock.mock.calls[1][0])).toContain(
       `/form-submission-approvals/${approvalId}/payments/nsw-gov-pay`,
+    )
+    expect(String(fetchMock.mock.calls[2][0])).toContain(
+      `/form-submission-approvals/${approvalId}/payments/stripe`,
     )
   })
 
@@ -66,6 +77,9 @@ describe('payment retrieval', () => {
       '"id" must be a string and is required',
     )
     await expect(approvals.getNSWGovPayPayment('')).rejects.toThrow(
+      '"id" must be a string and is required',
+    )
+    await expect(approvals.getStripePayment('')).rejects.toThrow(
       '"id" must be a string and is required',
     )
   })

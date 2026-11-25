@@ -184,6 +184,34 @@ export default class Approvals extends OneBlinkAPI {
   /**
    * **Submission Data Key Supported**
    *
+   * Key must be assigned to the form that was submitted.
+   *
+   * **Minimum Role Permission**
+   *
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const payment = await approvals.getStripePayment(
+   *     'aaaaaaaa-bbbb-4543-cccc-addddd543454',
+   *   )
+   *
+   * @param id The id of the form submission approval
+   * @returns The successful Stripe payment for the approval step
+   */
+  async getStripePayment(
+    id: string,
+  ): Promise<SubmissionTypes.FormSubmissionPayment> {
+    if (!id) {
+      throw new Error('"id" must be a string and is required')
+    }
+    return await super.getRequest(
+      `/form-submission-approvals/${id}/payments/stripe`,
+    )
+  }
+
+  /**
+   * **Submission Data Key Supported**
+   *
    * Key must be assigned to the form that was submitted for approval.
    *
    * **Minimum Role Permission**
