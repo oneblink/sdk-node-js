@@ -1237,6 +1237,35 @@ export default class Forms extends OneBlinkAPI {
   }
 
   /**
+   * **Submission Data Key Supported**
+   *
+   * Key must be assigned to the form that was submitted.
+   *
+   * **Minimum Role Permission**
+   *
+   * Submission Data: _Read Only_
+   *
+   * @example
+   *   const submissionId = 'f1eadc2b-79c8-4f97-8d92-cde64b34911f'
+   *   const payment = await forms.getStripePayment(submissionId)
+   *
+   * @param submissionId The id of the submission
+   * @returns The successful Stripe payment for the submission
+   */
+  getStripePayment(
+    submissionId: string,
+  ): Promise<SubmissionTypes.FormSubmissionPayment> {
+    if (!submissionId || typeof submissionId !== 'string') {
+      return Promise.reject(
+        new TypeError('Must supply "submissionId" as a string'),
+      )
+    }
+    return super.getRequest(
+      `/form-submission-meta/${submissionId}/payments/stripe`,
+    )
+  }
+
+  /**
    * **Minimum Role Permission**
    *
    * Submission Data: _Manager_

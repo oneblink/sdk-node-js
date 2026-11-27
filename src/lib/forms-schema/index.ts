@@ -186,6 +186,14 @@ const generateFormWorkflowEventElementMappingKeys = (
       'WESTPAC_QUICK_STREAM_AMOUNT',
       'WESTPAC_QUICK_STREAM_SURCHARGE_AMOUNT',
       'WESTPAC_QUICK_STREAM_SETTLEMENT_DATE',
+      // STRIPE
+      'STRIPE_CHECKOUT_SESSION_ID',
+      'STRIPE_PAYMENT_INTENT_ID',
+      'STRIPE_CUSTOMER_EMAIL',
+      'STRIPE_CARD_BRAND',
+      'STRIPE_CREDIT_CARD_MASK',
+      'STRIPE_AMOUNT',
+      'STRIPE_CREATED_DATE_TIME',
     ).required(),
     otherwise: Joi.any().strip(),
   }),
@@ -235,6 +243,7 @@ export const paymentEventTypes: SubmissionEventTypes.FormPaymentEventType[] = [
   'BPOINT',
   'WESTPAC_QUICK_STREAM',
   'NSW_GOV_PAY',
+  'STRIPE',
 ]
 
 const formPaymentEventAmountConfiguration = {
@@ -302,6 +311,14 @@ export const PaymentEventSchema = Joi.object({
         productDescription: Joi.string().required().max(250),
         customerReference: Joi.string().max(250),
         subAgencyCode: Joi.string(),
+      }),
+    })
+    .when('type', {
+      is: 'STRIPE',
+      then: Joi.object().keys({
+        ...formPaymentEventAmountConfiguration,
+        environmentId: Joi.string().uuid().required(),
+        productName: Joi.string().required(),
       }),
     }),
   ...formEventBaseSchema,

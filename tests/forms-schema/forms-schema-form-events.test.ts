@@ -75,7 +75,7 @@ describe('Scheduling events should throw errors when not passed to "schedulingEv
         paymentEvents: [schedulingEvent],
       }),
     ).toThrow(
-      '"paymentEvents[0].type" must be one of [CP_PAY, BPOINT, WESTPAC_QUICK_STREAM, NSW_GOV_PAY]',
+      '"paymentEvents[0].type" must be one of [CP_PAY, BPOINT, WESTPAC_QUICK_STREAM, NSW_GOV_PAY, STRIPE]',
     )
   })
 })
@@ -127,6 +127,92 @@ describe('Payment events should throw errors when not passed to "paymentEvents" 
         schedulingEvents: [paymentEvent],
       }),
     ).toThrow('"schedulingEvents[0].type" must be [NYLAS]')
+  })
+})
+
+describe('Stripe', () => {
+  const stripeForm = (
+    configuration: Record<string, unknown>,
+    elements: unknown[],
+  ) => ({
+    id: 1,
+    formsAppEnvironmentId: 1,
+    name: 'Inspection',
+    formsAppIds: [1],
+    organisationId: 'ORGANISATION_00000000001',
+    postSubmissionAction: 'FORMS_LIBRARY',
+    submissionEvents: [],
+    paymentEvents: [
+      {
+        type: 'STRIPE',
+        configuration: {
+          environmentId: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+          productName: 'Product',
+          ...configuration,
+        },
+      },
+    ],
+    elements,
+  })
+  const numberElement = {
+    id: '31042cfe-65e0-4a85-826b-ae6a2e48da10',
+    type: 'number',
+    name: 'payment_element',
+    label: 'Payment element',
+  }
+
+  test('succeeds when stripe payment elementId is a number element', () => {
+    expect(() =>
+      validateFormThrowError(
+        stripeForm({ elementId: numberElement.id }, [numberElement]),
+      ),
+    ).not.toThrow()
+  })
+  test('succeeds when stripe uses paymentAmount instead of elementId', () => {
+    expect(() =>
+      validateFormThrowError(
+        stripeForm({ amountType: 'NUMBER', paymentAmount: 42 }, []),
+      ),
+    ).not.toThrow()
+  })
+  test('fails when stripe payment elementId is not found', () => {
+    expect(() =>
+      validateFormThrowError(
+        stripeForm({ elementId: '31042cfe-65e0-4a85-826b-ae6a2e48da11' }, [
+          numberElement,
+        ]),
+      ),
+    ).toThrow(
+      '"paymentEvents[0].configuration.elementId" (31042cfe-65e0-4a85-826b-ae6a2e48da11) does not exist in "elements"',
+    )
+  })
+  test('fails when stripe payment elementId is not a valid type', () => {
+    expect(() =>
+      validateFormThrowError(
+        stripeForm({ elementId: numberElement.id }, [
+          { ...numberElement, type: 'text' },
+        ]),
+      ),
+    ).toThrow(
+      '"paymentEvents[0].configuration.elementId" (31042cfe-65e0-4a85-826b-ae6a2e48da10) references a form element that is not a "number" or "calculation" element.',
+    )
+  })
+  test('fails when stripe payment elementId is a child of a repeatableSet', () => {
+    expect(() =>
+      validateFormThrowError(
+        stripeForm({ elementId: numberElement.id }, [
+          {
+            id: '31042cfe-65e0-4a85-826b-ae6a2e48da11',
+            type: 'repeatableSet',
+            name: 'rs_element',
+            label: 'RS element',
+            elements: [numberElement],
+          },
+        ]),
+      ),
+    ).toThrow(
+      'paymentEvents[0].configuration.elementId" (31042cfe-65e0-4a85-826b-ae6a2e48da10) does not exist in "elements"',
+    )
   })
 })
 
@@ -322,7 +408,7 @@ describe('Submission events should throw errors when not passed to "paymentEvent
         paymentEvents: [submissionEvent],
       }),
     ).toThrow(
-      '"paymentEvents[0].type" must be one of [CP_PAY, BPOINT, WESTPAC_QUICK_STREAM, NSW_GOV_PAY]',
+      '"paymentEvents[0].type" must be one of [CP_PAY, BPOINT, WESTPAC_QUICK_STREAM, NSW_GOV_PAY, STRIPE]',
     )
   })
 })
@@ -1011,7 +1097,9 @@ describe('LUMIN_REQUEST_SIGNATURE', () => {
           },
         ],
       }),
-    ).toThrow('"submissionEvents[0].configuration.integrationKeyId" is required')
+    ).toThrow(
+      '"submissionEvents[0].configuration.integrationKeyId" is required',
+    )
   })
 
   it('should fail when lumin.template.id is missing', () => {
@@ -1034,7 +1122,9 @@ describe('LUMIN_REQUEST_SIGNATURE', () => {
           },
         ],
       }),
-    ).toThrow('"submissionEvents[0].configuration.lumin.template.id" is required')
+    ).toThrow(
+      '"submissionEvents[0].configuration.lumin.template.id" is required',
+    )
   })
 
   it('should fail when signers is empty', () => {
